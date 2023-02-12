@@ -17,11 +17,11 @@ A chrome extension to improve the look and feel of Schoolbox. [Download the late
 ## Versioning:
 This project uses [Semantic Versioning](https://semver.org)
 
-**X**.y.z = Major or backwards incompatible updates. (Resets y & z when changed.)
+**X**.y.z = Major updates. (Resets y & z when changed.)
 
-x.**Y**.z = New backwards compatible features. (Resets z when changed.)
+x.**Y**.z = New features. (Resets z when changed.)
 
-x.y.**Z** = New backwards compatible bug fixes.
+x.y.**Z** = New bug fixes.
 ## How to install:
 ### Google Chrome: <a name="google_chrome"></a>
 1) Download your preferred release from the [releases page](https://github.com/schooltape/schooltape/releases).
