@@ -43,16 +43,16 @@ nav {
     top: 0;
     z-index: 1;
 }
-nav a {
+.navbar-links a {
     color: black;
     text-align: center;
     padding: 12px 16px;
     margin-left: 10px;
     font-size: 17px;
     text-decoration: none;
-    
     transition: all 0.4s ease-in-out;
 }
+
 
 body.home a.navbar-link.home, body.settings a.navbar-link.settings, body.plugins a.navbar-link.plugins, body.themes a.navbar-link.themes {
     background-color: #e4e5f1;
@@ -233,7 +233,7 @@ span { /* for the Google Icons */
 }
 
 /* ---------------------------------- Hover Effects ---------------------------------- */
-nav a:hover {
+nav a:hover:not(nav>a) {
     background-color: #e4e5f1;
     border-radius: 5px;
     transform: scale(1.05);
