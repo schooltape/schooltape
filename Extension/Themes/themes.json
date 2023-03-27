@@ -1,0 +1,18 @@
+{
+    "dark-modern": {
+        "name": "Dark modern",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Dark modern theme",
+        "path": "dark-modern.css",
+        "tags": "dark, modern"
+    },
+    "light-modern": {
+        "name": "Light modern",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Light modern theme",
+        "path": "light-modern.css",
+        "tags": "light, modern"
+    }
+}
