@@ -53,5 +53,17 @@
                 "path": "/Plugins/legacy-timetable/legacy-timetable.js"
             }
         ]
+    },
+    "sticky-nav": {
+        "name": "Sticky Nav",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Makes the navigation bar sticky.",
+        "scripts": [
+            {
+                "execute": "doc-end",
+                "path": "/Plugins/sticky-nav/sticky-nav.js"
+            }
+        ]
     }
 }

@@ -1,0 +1,5 @@
+#hybrid-bar {
+    position: sticky !important;
+    top: 0px !important;
+    z-index: 9999 !important;
+}
