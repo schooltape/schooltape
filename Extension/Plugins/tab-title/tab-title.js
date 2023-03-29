@@ -1,11 +1,14 @@
 const tabTitleConsoleStyle = "color: lime; font-weight: bold;";
 console.log(`%c[tab-title.js]`, tabTitleConsoleStyle, "Injected tab-title.js!");
 
-
-if (document.getElementById("heading")) {
-    // change the title of the tab to the value attribute of #heading
-    document.title = document.getElementById("heading").getAttribute("value");
-} else if (window.location.pathname === "/") { // check if the current page is the homepage
+try {
+    if (document.getElementById("heading")) {
+        // change the title of the tab to the value attribute of #heading
+        document.title = document.getElementById("heading").getAttribute("value");
+    }
+} catch (error) {
+}
+if (window.location.pathname === "/") { // check if the current page is the homepage
     // change the title of the tab to "Homepage"
     document.title = "Homepage";
 } else if (window.location.pathname === "/timetable") { // check if the current page is the timetable page
