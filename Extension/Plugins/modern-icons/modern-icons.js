@@ -40,23 +40,23 @@ injectCSS();
 function insertIcon(className, iconName, assignRefreshClass) {
   try {
     const ICON_MAIN = document.querySelector(`nav.tab-bar .top-menu .${className}`);
-    console.log(ICON_MAIN);
+    // console.log(ICON_MAIN);
     const iconElement = document.createElement("i");
     iconElement.innerHTML = iconName;
     iconElement.classList.add("material-icons-round");
     ICON_MAIN.insertBefore(iconElement, ICON_MAIN.firstChild);
   } catch (e) {
-    console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
+    // console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
   }
   try {
     const ICON_MAIN = document.querySelector(`#overflow-nav .${className}`);
-    console.log(ICON_MAIN);
+    // console.log(ICON_MAIN);
     const iconElement = document.createElement("i");
     iconElement.innerHTML = iconName;
     iconElement.classList.add("material-icons-round");
     ICON_MAIN.insertBefore(iconElement, ICON_MAIN.firstChild);
   } catch (e) {
-    console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
+    // console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
   }
 }
 
