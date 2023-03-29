@@ -54,15 +54,15 @@
             }
         ]
     },
-    "sticky-nav": {
-        "name": "Sticky Nav",
+    "scroll-segments": {
+        "name": "Scroll Segments",
         "version": "1.0",
         "author": "Schooltape",
-        "description": "Makes the navigation bar sticky.",
+        "description": "Segments Schoolbox's scrolling into sections.",
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/sticky-nav/sticky-nav.js"
+                "path": "/Plugins/scroll-segments/scroll-segments.js"
             }
         ]
     }

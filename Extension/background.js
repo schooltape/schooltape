@@ -15,7 +15,8 @@ const defaultSettings = {
       "subheader",
       "modern-icons",
       "hide-pfp",
-      "legacy-timetable"
+      "legacy-timetable",
+      "scroll-segments",
   ],
   "urls": ["https://help.schoolbox.com.au"]
 }
