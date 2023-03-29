@@ -17,6 +17,7 @@ const defaultSettings = {
       "hide-pfp",
       "legacy-timetable",
       "scroll-segments",
+      "tab-title",
   ],
   "urls": ["https://help.schoolbox.com.au"]
 }

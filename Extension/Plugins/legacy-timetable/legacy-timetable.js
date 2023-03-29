@@ -3,8 +3,8 @@ For developers:
 Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
 */
 
-var consoleStyle = "color: brown; font-weight: bold;";
-console.log(`%c[legacy-timetable.js]`, consoleStyle, "Injected legacy-timetable.js!");
+const timetablConsoleStyle = "color: brown; font-weight: bold;";
+console.log(`%c[legacy-timetable.js]`, timetablConsoleStyle, "Injected legacy-timetable.js!");
 
 // If window pathname is "/" and the element with the class "timetable" exists, run the code
 if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {

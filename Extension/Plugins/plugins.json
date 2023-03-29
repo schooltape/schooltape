@@ -65,5 +65,17 @@
                 "path": "/Plugins/scroll-segments/scroll-segments.js"
             }
         ]
+    },
+    "tab-title": {
+        "name": "Tab Title",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Adds the current page to the tab title.",
+        "scripts": [
+            {
+                "execute": "doc-end",
+                "path": "/Plugins/tab-title/tab-title.js"
+            }
+        ]
     }
 }
