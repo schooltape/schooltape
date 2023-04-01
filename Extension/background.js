@@ -81,6 +81,8 @@ chrome.runtime.onInstalled.addListener(function(details){
 // ----------------- Listeners ----------------- //
 chrome.runtime.onMessage.addListener (
   function(request, sender, sendResponse) {
+    sendResponse({status: 'ok'});
+
     console.log("Message received: ")
     console.log(request);
 
@@ -90,7 +92,6 @@ chrome.runtime.onMessage.addListener (
         path: request.icon,
         tabId: sender.tab.id
       })
-      return true;
     }
     // INJECT JS
     if (request.inject) {
@@ -99,7 +100,6 @@ chrome.runtime.onMessage.addListener (
         target: { tabId: sender.tab.id },
         files: [request.inject]
       })
-      return true;
     }
     // Check for updates
     if (!navigator.onLine) { // check if online
