@@ -1,22 +1,17 @@
-const docEndConsole = "color: lightblue; font-weight: bold;";
-console.log(`%c[doc-end.js]`, docEndConsole, "Injected doc-end.js!");
+// const docEndConsole = "color: lightblue; font-weight: bold;";
+// console.log(`%c[doc-end.js]`, docEndConsole, "Injected doc-end.js!");
 
 // check if the current url is saved in the storage and extension is enabled
 chrome.storage.local.get(["settings"], function (data) {
     if (data.settings.global) {
         if (data.settings.urls.includes(window.location.origin)) {
-            console.log(`%c[doc-end.js]`, docEndConsole, "Schoolbox detected, running Schooltape");
-            // Inject all enabled plugins
             for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
                 injectPlugin(data.settings.enabledPlugins[i]);
             }
-        } else {
-            console.log(`%c[doc-end.js]`, docEndConsole, "Schoolbox not detected");
         }
-    } else {
-        console.log(`%c[doc-end.js]`, docEndConsole, "Extension disabled");
     }
 });
+
 
 schoolboxChecker(); // Check if the page is Schoolbox
 
@@ -52,7 +47,6 @@ function injectPlugin(pluginName) {
             for (let i = 0; i < scripts.length; i++) {
                 if (scripts[i].execute == "doc-end") {
                     injectJS(scripts[i].path);
-                    console.log(`%c[doc-end.js]`, docEndConsole, `Injected ${scripts[i].path}`);
                 }
             }
         }
@@ -81,7 +75,7 @@ function schoolboxChecker() {
                     let settings = data.settings;
                     settings.urls.push(window.location.origin);
                     chrome.storage.local.set({"settings": settings}, function () {
-                        console.log(`%c[doc-end.js]`, docEndConsole, "Added URL to storage");
+                        // console.log(`%c[doc-end.js]`, docEndConsole, "Added URL to storage");
                     });
                     // reload page
                     window.location.reload();

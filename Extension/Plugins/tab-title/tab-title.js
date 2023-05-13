@@ -1,5 +1,5 @@
 const tabTitleConsoleStyle = "color: lime; font-weight: bold;";
-console.log(`%c[tab-title.js]`, tabTitleConsoleStyle, "Injected tab-title.js!");
+// console.log(`%c[tab-title.js]`, tabTitleConsoleStyle, "Injected tab-title.js!");
 
 try {
     if (document.getElementById("heading")) {

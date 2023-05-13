@@ -1,5 +1,5 @@
 const scrollSegmentsConsole = "color: brown; font-weight: bold;";
-console.log(`%cscroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.js!");
+// console.log(`%cscroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.js!");
 
 
 // append a new div with the class "row" to the element with the id "content"
@@ -31,5 +31,5 @@ function injectCSS() {
     link.rel = "stylesheet";
     link.className = "schooltape-css";
     document.head.appendChild(link);
-    console.log(`%c[scroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.css");
+    // console.log(`%c[scroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.css");
   }

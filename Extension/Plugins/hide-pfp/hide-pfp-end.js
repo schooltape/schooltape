@@ -1,5 +1,3 @@
-console.log(`%c[hide-pfp-end.js]`, hidePfpConsole, "Showing profile pictures...");
-
 // get the id "profile-drop"
 let profileDrop = document.getElementById("profile-drop");
 let profileImage = getChildNode(profileDrop, 1, "IMG");

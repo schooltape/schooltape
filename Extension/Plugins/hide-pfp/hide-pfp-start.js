@@ -1,6 +1,3 @@
-const hidePfpConsole = "color: red; font-weight: bold;";
-console.log(`%c[hide-pfp-start.js]`, hidePfpConsole, "Injecting CSS...");
-
 let css = document.createElement("link");
 css.rel = "stylesheet";
 css.href = chrome.runtime.getURL("/Plugins/hide-pfp/hide-pfp.css");

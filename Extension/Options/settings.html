@@ -27,10 +27,30 @@
         </ul>
     </nav>
 
-    <div class="container">
+    <div class="container options">
         <h1>Settings</h1>
         <p>Here you can change the settings of Schooltape.</p>
+
+        <!-- Global toggle -->
+        <p>This will disable all features of Schooltape. Tip: You can also use the extension icon in your browser toolbar to toggle Schooltape.</p>
+        <input type="checkbox" class="toggle" name="global-toggle" id="global-toggle"/>
+        <label for="global-toggle"><strong>Global Toggle</strong></label>
+
+        <br>
+
+        <!-- Update notifications toggle -->
+        <p>Toggle notifications when there is a new update available <a href="https://github.com/schooltape-community/schooltape/releases" target="_blank">here</a>.</p>
+        <input type="checkbox" class="toggle" name="update-notifs" id="update-notifs"/>
+        <label for="update-notifs"><strong>Update Notifications</strong></label>
+
+        <br>
+
+        <!-- Theme toggle -->
+        <p>Toggle themes for Schooltape.</p>
+        <input type="checkbox" class="toggle" name="theme-toggle" id="theme-toggle"/>
+        <label for="theme-toggle"><strong>Themes Toggle</strong></label>
+
     </div>
-    <script src="script.js"></script>
+    <script src="settings-script.js"></script>
 </body>
 </html>

@@ -3,16 +3,32 @@
         "name": "Dark modern",
         "version": "1.0",
         "author": "Schooltape",
-        "description": "Dark modern theme",
+        "description": "A dark modern theme with rounded corners",
         "path": "dark-modern.css",
+        "tags": "dark, modern"
+    },
+    "dark-modern-v2": {
+        "name": "Dark modern v2",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "A more stable dark modern theme with rounded corners",
+        "path": "dark-modern-v2.css",
         "tags": "dark, modern"
     },
     "light-modern": {
         "name": "Light modern",
         "version": "1.0",
         "author": "Schooltape",
-        "description": "Light modern theme",
+        "description": "A light modern theme with rounded corners",
         "path": "light-modern.css",
         "tags": "light, modern"
+    },
+    "everforest": {
+        "name": "Everforest Medium Dark",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "A dark theme with green accents",
+        "path": "everforest.css",
+        "tags": "dark, green, modern"
     }
 }

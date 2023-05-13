@@ -13,24 +13,18 @@ const defaultSettings = {
   "currentTheme": "light-modern",
   "enabledPlugins": [
       "subheader",
-      "modern-icons",
-      "hide-pfp",
-      "legacy-timetable",
+      // "modern-icons",
+      // "hide-pfp",
+      // "legacy-timetable",
       "scroll-segments",
       "tab-title",
   ],
   "urls": ["https://help.schoolbox.com.au"]
 }
 
-// ----------------- Set Badge Text ----------------- //
+// ----------------- Update Badge Text () ----------------- //
 chrome.tabs.onActivated.addListener(function() {
-  chrome.storage.local.get(['settings'], function(data) { 
-      if (data.settings.global) {
-          chrome.action.setBadgeText({text:'ON'});
-      } else {
-          chrome.action.setBadgeText({text:'OFF'});
-      }
-  });
+  updateBadge();
 });
 
 // ----------------- Install/Update ----------------- //
@@ -93,6 +87,11 @@ chrome.runtime.onMessage.addListener (
         tabId: sender.tab.id
       })
     }
+    // UPDATE BADGE TEXT
+    if (request.badgeText) {
+      updateBadge();
+      console.log("Running update badge text function");
+    }
     // INJECT JS
     if (request.inject) {
       console.log("Injecting " + request.inject)
@@ -105,40 +104,198 @@ chrome.runtime.onMessage.addListener (
     if (!navigator.onLine) { // check if online
       console.error("You are currently offline. Please check your internet connection and try again.");
     } else {
-      if (request.checkForUpdates) {
-        // Get latest and pre-release information from github
-        fetch('https://api.github.com/repos/schooltape-community/schooltape/releases/latest')
-        .then(response => response.json())
-        .then(data => {
-          // Get latest version without the "v" in front
-          var latestVersion = data.tag_name.replace("v", "");
-          console.log("Latest version is " + latestVersion);
+      chrome.storage.local.get("settings", function(result) {
+        if (request.checkForUpdates && result.settings.updateReminder) {
+          // Get latest and pre-release information from github
+          fetch('https://api.github.com/repos/schooltape-community/schooltape/releases/latest')
+          .then(response => response.json())
+          .then(data => {
+            // Get latest version without the "v" in front
+            var latestVersion = data.tag_name.replace("v", "");
+            console.log("Latest version is " + latestVersion);
 
-          // Get current version
-          var currentVersion = chrome.runtime.getManifest().version;
-          console.log("Current version is " + currentVersion);
+            // Get current version
+            var currentVersion = chrome.runtime.getManifest().version;
+            console.log("Current version is " + currentVersion);
 
-          // Compare versions
-          if (latestVersion > currentVersion) {
-            console.log("Update available");
-            // Send notification
-            chrome.notifications.create("update", {
-              type: 'basic',
-              iconUrl: 'logo.png',
-              title: "Update available!",
-              message: `New version: ${latestVersion}\n(Currently installed: ${currentVersion})\nClick here to look at the release notes.`,
-              priority: 2
-            });
-          } else {
-            console.log("No update available");
-          }
-        })
-        .catch((error) => {
-          console.error("Error occurred while fetching latest release", error);
-        });
-      }
+            // Compare versions
+            if (latestVersion > currentVersion) {
+              console.log("Update available");
+              // Send notification
+              chrome.notifications.create("update", {
+                type: 'basic',
+                iconUrl: 'logo.png',
+                title: "Update available!",
+                message: `New version: ${latestVersion}\n(Currently installed: ${currentVersion})\nClick here to look at the release notes.`,
+                priority: 2
+              });
+            } else {
+              console.log("No update available");
+            }
+          })
+          .catch((error) => {
+            console.error("Error occurred while fetching latest release", error);
+          });
+        }
+      });
     }
   }
 );
 
-// ----------------- Context Menus ----------------- //
+
+/*
+--------------------------------CONTEXT MENUS--------------------------------
+*/
+// Context menus
+console.log("created context menu")
+chrome.contextMenus.removeAll(function() {
+  // Github
+  let github = chrome.contextMenus.create({
+    id: 'github',
+    title: 'GitHub',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubRepo',
+    parentId: github,
+    title: 'Repository',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubIssues',
+    parentId: github,
+    title: 'Issues',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubPRs',
+    parentId: github,
+    title: 'Pull Requests',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubDiscussions',
+    parentId: github,
+    title: 'Discussions',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubProjects',
+    parentId: github,
+    title: 'Projects',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'githubWiki',
+    parentId: github,
+    title: 'Wiki',
+    contexts: ['action']
+  })
+  
+  chrome.contextMenus.create({
+    id: 'extRefresh',
+    title: 'Refresh Extension',
+    contexts: ['action']
+  })
+  chrome.contextMenus.create({
+    id: 'extErrors',
+    title: 'Schooltape Errors',
+    contexts: ['action']
+  })
+});
+
+// Check which context menu button was clicked
+function contextClick(info, tab) {
+  const { menuItemId } = info
+  if (menuItemId === 'githubRepo') {
+    var newURL = "https://github.com/schooltape-community/schooltape";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'githubIssues') {
+    var newURL = "https://github.com/schooltape-community/schooltape/issues";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'githubPRs') {
+    var newURL = "https://github.com/schooltape-community/schooltape/pulls";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'githubDiscussions') {
+    var newURL = "https://github.com/schooltape-community/schooltape/discussions";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'githubProjects') {
+    var newURL = "https://github.com/schooltape-community/schooltape/projects";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'githubWiki') {
+    var newURL = "https://github.com/schooltape-community/schooltape/wiki";
+    chrome.tabs.create({ url: newURL });
+  } else if (menuItemId === 'extRefresh') {
+    console.log("Refreshing extension...");
+    chrome.runtime.reload()
+  } else if (menuItemId === 'extErrors') {
+    var newURL = "chrome://extensions/?errors="+chrome.runtime.id;
+    chrome.tabs.create({ url: newURL });
+  }
+}
+chrome.contextMenus.onClicked.addListener(contextClick);
+
+/*
+// --------------------------------UPDATE NOTIFICATION CLICKED LISTERNER--------------------------------
+// */
+chrome.notifications.onClicked.addListener(function(notifID) {
+  if (notifID === "update") {
+    chrome.tabs.create({url: "https://github.com/schooltape-community/schooltape/releases/latest"});
+  }
+  if (notifID === "tutorial") {
+    chrome.tabs.create({url: "https://github.com/schooltape-community/schooltape/wiki/tutorial"});
+  }
+  if (notifID === "updated") {
+    var thisVersion = chrome.runtime.getManifest().version;
+    var newURL = "https://github.com/schooltape-community/schooltape/releases/tag/v"+thisVersion;
+    chrome.tabs.create({ url: newURL });
+  }
+});
+
+// /*
+// --------------------------------EXTENSION BUTTON CLICKED--------------------------------
+// */
+// On extension clicked
+chrome.action.onClicked.addListener((tab) => {
+    console.log("Button clicked!");
+
+    // TOGGLE EXTENSION
+    chrome.storage.local.get(['settings'], function(result) {
+      if (result.settings.global === true) {
+        let newSettings = result.settings;
+        newSettings.global = false;
+        chrome.storage.local.set({"settings": newSettings}, function() {
+        });
+        chrome.action.setBadgeText({text:'OFF'});
+        // Reload current tab
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.reload(tabs[0].id);
+        });
+
+      } else if (result.settings.global === false) {
+        let newSettings = result.settings;
+        newSettings.global = true;
+        chrome.storage.local.set({"settings": newSettings}, function() {
+        });
+        chrome.action.setBadgeText({text:'ON'});
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.reload(tabs[0].id);
+        });
+      }
+    });
+});
+
+// /*
+// --------------------------------UPDATE BADGE--------------------------------
+// */
+function updateBadge() {
+  console.log("Updating badge...");
+  chrome.storage.local.get(['settings'], function(data) { 
+    console.log(data);
+    if (data.settings.global) {
+      chrome.action.setBadgeText({text:'ON'});
+    } else {
+      chrome.action.setBadgeText({text:'OFF'});
+    }
+  });
+}
