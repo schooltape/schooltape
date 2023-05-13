@@ -14,7 +14,7 @@ if (window.location.pathname === "/") { // check if the current page is the home
 } else if (window.location.pathname === "/timetable") { // check if the current page is the timetable page
     // change the title of the tab to "Timetable"
     document.title = "Timetable";
-} else if (window.location.pathname === "/calendar") { // check if the current page is the calendar page
+} else if (window.location.pathname.includes("/calendar")) { // check if the current page is the calendar page
     // change the title of the tab to "Calendar"
     document.title = "Calendar";
 } else if (window.location.pathname === "/news") { // check if the current page is the news page
@@ -23,7 +23,7 @@ if (window.location.pathname === "/") { // check if the current page is the home
 } else if (window.location.pathname === "/learning/classes") { // check if the current page is the classes page
     // change the title of the tab to "Classes"
     document.title = "Classes";
-} else if (window.location.pathname.includes("/grades/")) {
+} else if (window.location.pathname.includes("/grades/")) { // check if the current page is the grades page
     // change the title of the tab to "Grades"
     document.title = "Grades";
 } else if (window.location.pathname.includes("/news/")) { // check if the current page is a news page

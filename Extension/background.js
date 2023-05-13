@@ -18,6 +18,7 @@ const defaultSettings = {
       // "legacy-timetable",
       "scroll-segments",
       "tab-title",
+      "tab-titles-specific",
   ],
   "urls": ["https://help.schoolbox.com.au"]
 }
