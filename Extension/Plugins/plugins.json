@@ -89,5 +89,17 @@
                 "path": "/Plugins/homepage-switcher/homepage-switcher.js"
             }
         ]
+    },
+    "scroll-period": {
+        "name": "Scroll Period",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Scrolls to the current period on the timetable.",
+        "scripts": [
+            {
+                "execute": "doc-end",
+                "path": "/Plugins/scroll-period/scroll-period.js"
+            }
+        ]
     }
 }

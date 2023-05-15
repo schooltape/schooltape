@@ -81,8 +81,6 @@ function getListOfPeriods() {
     }
     return periodList;
 }
-let periodList = getListOfPeriods();
-// console.log("PERIOD LIST", periodList);
 
 
 function getPeriodData(periodNum) {
