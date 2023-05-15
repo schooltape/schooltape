@@ -47,12 +47,16 @@ chrome.runtime.onInstalled.addListener(function(details){
     });
     chrome.tabs.create({url: "https://schooltape-community.github.io/installed"}); // Open tutorial page
 
-  } else if(details.reason === "update") {
-    // set default settings
-    chrome.storage.local.set({"settings": defaultSettings}, function() {
-      console.log('Set default settings');
-    });
-    // set "gloabl" to true without overwriting existing settings
+  } else if (details.reason === "update") {
+    var thisVersion = chrome.runtime.getManifest().version;
+    // set default settings, if major number is increased
+    if (details.previousVersion.split(".")[0] > thisVersion.split(".")[0]) {
+      chrome.storage.local.set({"settings": defaultSettings}, function() {
+        console.log("New major version, refreshed settings");
+      });
+    }
+
+    // set "global" to true without overwriting existing settings
     chrome.storage.local.get("settings", function(result) {
       var settings = result.settings;
       settings.global = true;
@@ -61,12 +65,11 @@ chrome.runtime.onInstalled.addListener(function(details){
       });
     });
     // Sends a notification to the user with the changelog
-    var thisVersion = chrome.runtime.getManifest().version;
-    console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+    console.log(`Updated from ${details.previousVersion} to ${thisVersion}!`);
     chrome.notifications.create("updated", {
       type: 'basic',
       iconUrl: 'logo.png',
-      title: "Updated from " + details.previousVersion + " to " + thisVersion + "!",
+      title: `Updated from ${details.previousVersion} to ${thisVersion}!`,
       message: 'Click here to look at the release notes.',
       priority: 2
     });
