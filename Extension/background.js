@@ -79,10 +79,10 @@ chrome.runtime.onInstalled.addListener(function(details){
 // ----------------- Listeners ----------------- //
 chrome.runtime.onMessage.addListener (
   function(request, sender, sendResponse) {
-    sendResponse({status: 'ok'});
-
     console.log("Message received: ")
     console.log(request);
+
+    sendResponse({messageReceived: true});
 
     // CHANGE ICON
     if (request.icon) {
@@ -104,6 +104,19 @@ chrome.runtime.onMessage.addListener (
         files: [request.inject]
       })
     }
+    // Switch to homepage
+    if (request.toHomepage) {
+      console.log("Changing tab to " + request.toHomepage);
+      chrome.tabs.query({ url: request.toHomepage }, function(tabs) {
+        console.log(tabs);
+        if (tabs.length > 0) {
+          chrome.tabs.update(tabs[0].id, { active: true });
+        } else {
+          chrome.tabs.update(sender.tab.id, { url: request.toHomepage });
+        }
+      });
+    }
+
     // Check for updates
     if (!navigator.onLine) { // check if online
       console.error("You are currently offline. Please check your internet connection and try again.");
