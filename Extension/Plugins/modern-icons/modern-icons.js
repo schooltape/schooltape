@@ -31,7 +31,6 @@ const icons = [ // [className, iconName] (material icons)
 ];
 
 const modernIconsConsole = "color: green; font-weight: bold;";
-console.log(`%c[modern-icons.js]`, modernIconsConsole, "Injected modern-icons.js!");
 
 icons.forEach(([className, iconName, assignRefreshClass]) => insertIcon(className, iconName, assignRefreshClass));
 // setInterval(autoInsertIcons, 1000);
@@ -67,5 +66,4 @@ function injectCSS() {
   link.rel = "stylesheet";
   link.className = "schooltape-css";
   document.head.appendChild(link);
-  console.log(`%c[modern-icons.js]`, modernIconsConsole, "Injected modern-icons.css");
 }

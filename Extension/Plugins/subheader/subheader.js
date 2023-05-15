@@ -34,22 +34,20 @@ function updateSubheader() {
 
 function getCurrentPeriod() {
     let periodList = getListOfPeriods();
-    // console.log(periodList);
     for (let i = 0; i < periodList.length; i++) {
         if (periodList[i] !== null && periodList[i].topPeriodTime !== undefined) {
             let times = extractTimes(periodList[i].topPeriodTime);
             let currentTime = new Date().getTime();
             let startTimestamp = times[0].getTime();
             let endTimestamp = times[1].getTime();
-
             if (startTimestamp <= currentTime && currentTime <= endTimestamp) { // Found a current period
                 return i;
-            } else { // No current school
-                return null;
             }
         }
     }
+    return null;
 }
+
 function extractTimes(periodTime) {
     let times = periodTime.split("–");
     let startTime = times[0].split(":");
@@ -94,7 +92,7 @@ function getPeriodData(periodNum) {
         periodData.missingData = false;
         try {
             periodData.topPeriodTime = document.querySelector(`.timetable thead tr th:nth-child(${periodNum}) time`).textContent.trim()
-            periodData.topPeriodName = document.querySelector(`.timetable thead tr th:nth-child(${1})`).childNodes[0].textContent.trim(); // 
+            periodData.topPeriodName = document.querySelector(`.timetable thead tr th:nth-child(${periodNum})`).childNodes[0].textContent.trim(); // 
         } catch {
             return null;
         }
