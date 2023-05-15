@@ -1,6 +1,6 @@
 ---
 name: New Plugin
-about: Suggest an plugin for Schooltape
+about: Suggest a new plugin for Schooltape
 title: ''
 labels: enhancement, plugin
 assignees: ''
