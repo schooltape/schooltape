@@ -13,7 +13,7 @@ function updateScrollbar() {
                 left: currentData.offsetLeft - 55, // 16 for perfect alignment
                 behavior: 'smooth' // or 'auto' to scroll instantly
             });
-            console.log("Scrolling "+currentData.offsetLeft);
+            // console.log("Scrolling "+currentData.offsetLeft);
         } catch {}
     }
 }
