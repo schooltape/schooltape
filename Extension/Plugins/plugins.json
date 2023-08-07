@@ -101,5 +101,17 @@
                 "path": "/Plugins/scroll-period/scroll-period.js"
             }
         ]
+    },
+    "timetable-labels": {
+        "name": "Timetable Labels",
+        "version": "1.0",
+        "author": "Schooltape",
+        "description": "Labels the day of the week from numbers to the actual day",
+        "scripts": [
+            {
+                "execute": "doc-end",
+                "path": "/Plugins/timetable-labels/timetable-labels.js"
+            }
+        ]
     }
 }
