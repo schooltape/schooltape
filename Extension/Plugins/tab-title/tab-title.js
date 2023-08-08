@@ -26,5 +26,9 @@ if (window.location.pathname === "/") {
 } else if (window.location.pathname.includes("/mail/create")) { 
     document.title = "Compose Email";
 } else if (window.location.pathname.includes("/search/user")) { 
-    document.title = `User Profile - ${document.getElementsByTagName("h1")[0].innerText}`
+    document.title = `User Profile - ${document.getElementsByTagName("h1")[0].innerText}`;
+} else if (window.location.pathname === "/feedback") {
+    document.title = "Support and Feedback";
+} else if (window.location.pathname === "/policy") {
+    document.title = "Guidelines of Use and Privacy Policy"
 }
