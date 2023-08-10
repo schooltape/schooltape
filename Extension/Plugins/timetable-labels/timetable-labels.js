@@ -4,4 +4,4 @@ if (window.location.pathname === "/timetable" && document.getElementsByClassName
         document.querySelector(`#content > div:nth-child(5) > div:nth-child(2) > div > table > thead > tr > th:nth-child(${i})`).innerHTML = days[i-2]
         // console.log(i)
     }
-}   
+}
