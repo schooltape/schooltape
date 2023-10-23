@@ -28,7 +28,7 @@
       }
     ],
     "options_ui": {
-      "page": "options/settings.html",
+      "page": "Options/settings.html",
       "open_in_tab": true
     },
     "host_permissions": [
