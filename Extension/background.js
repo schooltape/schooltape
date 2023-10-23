@@ -124,7 +124,7 @@ chrome.runtime.onMessage.addListener (
       chrome.storage.local.get("settings", function(result) {
         if (request.checkForUpdates && result.settings.updateReminder) {
           // Get latest and pre-release information from github
-          fetch('https://api.github.com/repos/schooltape-community/schooltape/releases/latest')
+          fetch('https://api.github.com/repos/42willow/schooltape/releases/latest')
           .then(response => response.json())
           .then(data => {
             // Get latest version without the "v" in front
