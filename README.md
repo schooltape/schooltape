@@ -1,8 +1,8 @@
 # Schooltape
-### About:
+### About
 A chrome extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/schooltape-community/schooltape/releases/latest)
 
-### Supported Browsers:
+### Supported Browsers
 - [Google Chrome](#google_chrome) | [Download](https://www.google.com.au/chrome/ "Download Google Chrome") (Mac/Win/Linux)
 - [Microsoft Edge](#edge) | [Download](https://www.microsoft.com/en-us/edge "Download Microsoft Edge") (Mac/Win/Linux Beta)
 - [Opera](#opera) | [Download](https://www.opera.com/download "Download Opera") (Mac/Win/Linux)
@@ -10,11 +10,11 @@ A chrome extension to improve the look and feel of Schoolbox. [Download the late
 - [Brave Browser](#brave) | [Download](https://brave.com/download/ "Download Brave Browser") (Mac/Win/Linux)
 - [All other chromium based browsers](#chromium)
 
-#### Partial support:
+#### Partial support
 - Safari
 - Firefox
 
-## Versioning:
+## Versioning
 This project uses [Semantic Versioning](https://semver.org)
 
 **X**.y.z = Major updates. (Resets y & z when changed.)
@@ -22,8 +22,8 @@ This project uses [Semantic Versioning](https://semver.org)
 x.**Y**.z = New features. (Resets z when changed.)
 
 x.y.**Z** = New bug fixes.
-## How to install:
-### Google Chrome: <a name="google_chrome"></a>
+## How to install
+### Google Chrome <a name="google_chrome"></a>
 1) Download your preferred release from the [releases page](https://github.com/schooltape-community/schooltape/releases).
 2) Unzip the file.
 3) Navigate to __chrome://extensions__.
