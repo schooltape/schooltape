@@ -225,22 +225,22 @@ chrome.contextMenus.removeAll(function() {
 function contextClick(info, tab) {
   const { menuItemId } = info
   if (menuItemId === 'githubRepo') {
-    var newURL = "https://github.com/schooltape-community/schooltape";
+    var newURL = "https://github.com/42willow/schooltape";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubIssues') {
-    var newURL = "https://github.com/schooltape-community/schooltape/issues";
+    var newURL = "https://github.com/42willow/schooltape/issues";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubPRs') {
-    var newURL = "https://github.com/schooltape-community/schooltape/pulls";
+    var newURL = "https://github.com/42willow/schooltape/pulls";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubDiscussions') {
-    var newURL = "https://github.com/schooltape-community/schooltape/discussions";
+    var newURL = "https://github.com/42willow/schooltape/discussions";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubProjects') {
-    var newURL = "https://github.com/schooltape-community/schooltape/projects";
+    var newURL = "https://github.com/42willow/schooltape/projects";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubWiki') {
-    var newURL = "https://github.com/schooltape-community/schooltape/wiki";
+    var newURL = "https://github.com/42willow/schooltape/wiki";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'extRefresh') {
     console.log("Refreshing extension...");
@@ -257,14 +257,14 @@ chrome.contextMenus.onClicked.addListener(contextClick);
 // */
 chrome.notifications.onClicked.addListener(function(notifID) {
   if (notifID === "update") {
-    chrome.tabs.create({url: "https://github.com/schooltape-community/schooltape/releases/latest"});
+    chrome.tabs.create({url: "https://github.com/42willow/schooltape/releases/latest"});
   }
   if (notifID === "tutorial") {
-    chrome.tabs.create({url: "https://github.com/schooltape-community/schooltape/wiki/tutorial"});
+    chrome.tabs.create({url: "https://github.com/42willow/schooltape/wiki/tutorial"});
   }
   if (notifID === "updated") {
     var thisVersion = chrome.runtime.getManifest().version;
-    var newURL = "https://github.com/schooltape-community/schooltape/releases/tag/v"+thisVersion;
+    var newURL = "https://github.com/42willow/schooltape/releases/tag/v"+thisVersion;
     chrome.tabs.create({ url: newURL });
   }
 });
