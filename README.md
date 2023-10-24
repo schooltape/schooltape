@@ -1,6 +1,6 @@
 # Schooltape
 ### About
-A chrome extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/42willow/schooltape/releases/latest)
+A browser extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/42willow/schooltape/releases/latest)
 
 ### Supported Browsers
 - [Google Chrome](#google_chrome) | [Download](https://www.google.com.au/chrome/ "Download Google Chrome") (Mac/Win/Linux)
@@ -10,7 +10,7 @@ A chrome extension to improve the look and feel of Schoolbox. [Download the late
 - [Brave Browser](#brave) | [Download](https://brave.com/download/ "Download Brave Browser") (Mac/Win/Linux)
 - [All other chromium based browsers](#chromium)
 
-#### Partial support
+#### Upcoming support
 - Firefox
 
 ## Versioning
