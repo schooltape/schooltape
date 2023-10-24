@@ -1,6 +1,6 @@
 # Schooltape
 ### About
-A chrome extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/schooltape-community/schooltape/releases/latest)
+A chrome extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/42willow/schooltape/releases/latest)
 
 ### Supported Browsers
 - [Google Chrome](#google_chrome) | [Download](https://www.google.com.au/chrome/ "Download Google Chrome") (Mac/Win/Linux)
@@ -23,7 +23,7 @@ x.**Y**.z = New features. (Resets z when changed.)
 x.y.**Z** = New bug fixes.
 ## How to install
 ### Google Chrome <a name="google_chrome"></a>
-1) Download your preferred release from the [releases page](https://github.com/schooltape-community/schooltape/releases).
+1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
 2) Unzip the file.
 3) Navigate to __chrome://extensions__.
 4) Turn on __Developer Mode__ at the top right.
@@ -32,7 +32,7 @@ x.y.**Z** = New bug fixes.
 
 
 ### Microsoft Edge <a name="edge"></a>
-1) Download your preferred release from the [releases page](https://github.com/schooltape-community/schooltape/releases).
+1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
 2) Unzip the file.
 3) Navigate to __edge://extensions__.
 4) Turn on __Developer Mode__ near the bottom left.
