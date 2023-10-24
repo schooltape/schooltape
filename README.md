@@ -11,7 +11,6 @@ A chrome extension to improve the look and feel of Schoolbox. [Download the late
 - [All other chromium based browsers](#chromium)
 
 #### Partial support
-- Safari
 - Firefox
 
 ## Versioning
