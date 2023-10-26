@@ -13,12 +13,13 @@ A browser extension to improve the look and feel of Schoolbox. [Download the lat
 
 
 ## How to install
+⚠️ Note: There are two `manifest.json` files. This is due to Mozilla and Google [not liking each other](https://github.com/mozilla/web-ext/issues/2532). For all chromium based browsers, please use the `manifest.json` file at `/schooltape/extension/manifest.json`. For Firefox, please use the `manifest.json` file at `/schooltape/manifest.json`
 
 ### Firefox <a name="firefox"></a>
 1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
 2) Unzip the file.
 3) Navigate to `about:debugging#/runtime/this-firefox`
-4) Click the __Load Temporary Add-on...__ button near the top right, select the folder you downloaded and select `/schooltape/extension/manifest-firefox.json` and click ok.
+4) Click the __Load Temporary Add-on...__ button near the top right, select the folder you downloaded and select `/schooltape/manifest.json` and click ok.
 5) Done! Options can be found in the right click context menu, and use left click to toggle.
 
 ### Google Chrome <a name="chrome"></a>
