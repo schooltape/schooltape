@@ -2,12 +2,12 @@
 let profileDrop = document.getElementById("profile-drop");
 let profileImage = getChildNode(profileDrop, 1, "IMG");
 // change image source to /Assets/guest.png
-profileImage.src = chrome.runtime.getURL("Assets/guest.png");
+profileImage.src = chrome.runtime.getURL("assets/guest.png");
 
 // do again for the class "profile-drop"
 profileDrop = document.getElementsByClassName("profile-drop")[0];
 profileImage = getChildNode(profileDrop, 1, "IMG");
-profileImage.src = chrome.runtime.getURL("Assets/guest.png");
+profileImage.src = chrome.runtime.getURL("assets/guest.png");
 
 // Delete the stylesheet that hides the profile pictures
 css = document.getElementsByClassName("profile-picture")[0];

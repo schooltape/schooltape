@@ -3,7 +3,7 @@ For developers:
 Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
 */
 
-/* This file is loaded after /../Content Scripts/doc-end.js is loaded */
+/* This file is loaded after scripts/doc-end.js is loaded */
 
 /* fallback */
 @font-face {

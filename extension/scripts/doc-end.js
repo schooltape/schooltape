@@ -38,7 +38,7 @@ function getChildNode(node, childNum, nodeName = null) {
 function injectPlugin(pluginName) {
     // inject plugins
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", chrome.runtime.getURL("/Plugins/plugins.json"), true);
+    xhr.open("GET", chrome.runtime.getURL("/plugins/plugins.json"), true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             let resp = JSON.parse(xhr.responseText);

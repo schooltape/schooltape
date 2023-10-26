@@ -10,7 +10,7 @@ injectPlugins();
 // Get plugins from plugins.json
 function injectPlugins() {
     console.log("getPlugins() called");
-    fetch("/Plugins/plugins.json")
+    fetch("/plugins/plugins.json")
         .then(response => response.json())
         .then(data => {
             console.log(data);

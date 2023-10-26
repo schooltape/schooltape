@@ -36,7 +36,7 @@ chrome.storage.local.get(["settings"], function (result) {
 // Get themes from themes.json
 function injectThemes() {
     console.log("getThemes() called");
-    fetch("/Themes/themes.json")
+    fetch("/themes/themes.json")
         .then(response => response.json())
         .then(data => {
             console.log(data);

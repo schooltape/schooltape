@@ -61,7 +61,7 @@ function insertIcon(className, iconName, assignRefreshClass) {
 
 function injectCSS() {
   const link = document.createElement("link");
-  link.href = chrome.runtime.getURL("/Plugins/modern-icons/modern-icons.css");
+  link.href = chrome.runtime.getURL("/plugins/modern-icons/modern-icons.css");
   link.type = "text/css";
   link.rel = "stylesheet";
   link.className = "schooltape-css";

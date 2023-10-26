@@ -10,7 +10,7 @@
         "48": "logo.png"
     },
     "background": {
-      "scripts": ["background.js"]
+      "service_worker": "background.js"
     },
     "permissions": [
       "storage",
@@ -28,7 +28,7 @@
       }
     ],
     "options_ui": {
-      "page": "Options/settings.html",
+      "page": "options/settings.html",
       "open_in_tab": true
     },
     "host_permissions": [
@@ -37,17 +37,17 @@
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["Content Scripts/doc-end.js"],
+        "js": ["scripts/doc-end.js"],
         "run_at": "document_end"
       },
       {
         "matches": ["<all_urls>"],
-        "js": ["Content Scripts/doc-start.js"],
+        "js": ["scripts/doc-start.js"],
         "run_at": "document_start"
       },
       {
         "matches": ["*://schooltape-community.github.io/*"],
-        "js": ["Options/option-links.js"],
+        "js": ["options/option-links.js"],
         "run_at": "document_end"
       }
     ],

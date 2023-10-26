@@ -7,11 +7,11 @@
         "scripts": [
             {
                 "execute": "doc-start",
-                "path": "/Plugins/hide-pfp/hide-pfp-start.js"
+                "path": "/plugins/hide-pfp/hide-pfp-start.js"
             },
             {
                 "execute": "doc-end",
-                "path": "/Plugins/hide-pfp/hide-pfp-end.js"
+                "path": "/plugins/hide-pfp/hide-pfp-end.js"
             }
         ],
         "path": "hide-pfp.js"
@@ -24,7 +24,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/modern-icons/modern-icons.js"
+                "path": "/plugins/modern-icons/modern-icons.js"
             }
         ],
         "tags": ["beta", "broken"]
@@ -37,7 +37,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/subheader/subheader.js"
+                "path": "/plugins/subheader/subheader.js"
             }
         ],
         "tags": ["beta"]
@@ -50,7 +50,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/legacy-timetable/legacy-timetable.js"
+                "path": "/plugins/legacy-timetable/legacy-timetable.js"
             }
         ]
     },
@@ -62,7 +62,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/scroll-segments/scroll-segments.js"
+                "path": "/plugins/scroll-segments/scroll-segments.js"
             }
         ]
     },
@@ -74,7 +74,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/tab-title/tab-title.js"
+                "path": "/plugins/tab-title/tab-title.js"
             }
         ]
     },
@@ -86,7 +86,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/homepage-switcher/homepage-switcher.js"
+                "path": "/plugins/homepage-switcher/homepage-switcher.js"
             }
         ]
     },
@@ -98,7 +98,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/scroll-period/scroll-period.js"
+                "path": "/plugins/scroll-period/scroll-period.js"
             }
         ]
     },
@@ -110,7 +110,7 @@
         "scripts": [
             {
                 "execute": "doc-end",
-                "path": "/Plugins/timetable-labels/timetable-labels.js"
+                "path": "/plugins/timetable-labels/timetable-labels.js"
             }
         ]
     }
