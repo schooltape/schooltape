@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Schooltape",
+    "name": "Schooltape Chrome",
     "version": "1.2.0",
     "description": "Schooltape is a free, open-source, chrome extension that allows you to customise the look, feel, and functionality of Schoolbox!",
     "homepage_url": "https://schooltape-community.github.io",
@@ -10,7 +10,7 @@
         "48": "logo.png"
     },
     "background": {
-      "service_worker": "background.js"
+      "scripts": ["background.js"]
     },
     "permissions": [
       "storage",

@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Schooltape",
+    "name": "Schooltape Firefox",
     "version": "1.2.0",
     "description": "Schooltape is a free, open-source, chrome extension that allows you to customise the look, feel, and functionality of Schoolbox!",
     "homepage_url": "https://schooltape-community.github.io",
@@ -10,7 +10,7 @@
         "48": "logo.png"
     },
     "background": {
-      "scripts": "background.js"
+      "scripts": ["Extension/background.js"]
     },
     "permissions": [
       "storage",
@@ -28,7 +28,7 @@
       }
     ],
     "options_ui": {
-      "page": "Options/settings.html",
+      "page": "Extension/Options/settings.html",
       "open_in_tab": true
     },
     "host_permissions": [
@@ -37,17 +37,17 @@
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["Content Scripts/doc-end.js"],
+        "js": ["Extension/Content Scripts/doc-end.js"],
         "run_at": "document_end"
       },
       {
         "matches": ["<all_urls>"],
-        "js": ["Content Scripts/doc-start.js"],
+        "js": ["Extension/Content Scripts/doc-start.js"],
         "run_at": "document_start"
       },
       {
         "matches": ["*://schooltape-community.github.io/*"],
-        "js": ["Options/option-links.js"],
+        "js": ["Extension/Options/option-links.js"],
         "run_at": "document_end"
       }
     ],
