@@ -3,15 +3,43 @@
 A browser extension to improve the look and feel of Schoolbox. [Download the latest stable release here!](https://github.com/42willow/schooltape/releases/latest)
 
 ### Supported Browsers
-- [Google Chrome](#google_chrome) | [Download](https://www.google.com.au/chrome/ "Download Google Chrome") (Mac/Win/Linux)
-- [Microsoft Edge](#edge) | [Download](https://www.microsoft.com/en-us/edge "Download Microsoft Edge") (Mac/Win/Linux Beta)
-- [Opera](#opera) | [Download](https://www.opera.com/download "Download Opera") (Mac/Win/Linux)
-- [Vivaldi Browser](#vivaldi) | [Download](https://vivaldi.com/download/ "Download Vivaldi Browser") (Mac/Win/Linux)
-- [Brave Browser](#brave) | [Download](https://brave.com/download/ "Download Brave Browser") (Mac/Win/Linux)
+- [Firefox](#firefox) | [Download](https://www.mozilla.org/en-US/firefox/ "Download Firefox") (Mac/Win/Linux)
+- [Google Chrome](#chrome) | [Download](https://www.google.com.au/chrome/ "Download Google Chrome") (Mac/Win/Linux)
+- [Microsoft Edge](#edge) | [Download](https://www.microsoft.com/en-us/edge "Download Microsoft Edge") (Mac/Win/Linux)
+- [Opera](#chromium) | [Download](https://www.opera.com/download "Download Opera") (Mac/Win/Linux)
+- [Vivaldi Browser](#chromium) | [Download](https://vivaldi.com/download/ "Download Vivaldi Browser") (Mac/Win/Linux)
+- [Brave Browser](#chromium) | [Download](https://brave.com/download/ "Download Brave Browser") (Mac/Win/Linux)
 - [All other chromium based browsers](#chromium)
 
-#### Upcoming support
-- Firefox
+
+## How to install
+
+### Firefox <a name="firefox"></a>
+1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
+2) Unzip the file.
+3) Navigate to `about:debugging#/runtime/this-firefox`
+4) Click the __Load Temporary Add-on...__ button near the top right, select the folder you downloaded and select `/schooltape/extension/manifest-firefox.json` and click ok.
+5) Done! Options can be found in the right click context menu, and use left click to toggle.
+
+### Google Chrome <a name="chrome"></a>
+1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
+2) Unzip the file.
+3) Navigate to `chrome://extensions`
+4) Turn on __Developer Mode__ at the top right.
+5) Click the __Load Unpacked__ button near the top left, select the folder you downloaded and navigate to `/schooltape/extension` and click ok.
+6) Done! Options can be found in the right click context menu, and use left click to toggle.
+
+### Microsoft Edge <a name="edge"></a>
+1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
+2) Unzip the file.
+3) Navigate to `edge://extensions`
+4) Turn on __Developer Mode__ near the bottom left.
+5) Click the __Load Unpacked__ button near the top right, select the folder you downloaded and navigate to `/schooltape/extension` and click ok.
+6) Scroll down until you find a heading that says __From other sources__.
+8) Done! Options can be found in the right click context menu, and use left click to toggle.
+
+### All other chromium based browsers <a name="chromium"></a>
+Follow the [Google Chrome](#google_chrome) instructions.
 
 ## Versioning
 This project uses [Semantic Versioning](https://semver.org)
@@ -21,33 +49,3 @@ This project uses [Semantic Versioning](https://semver.org)
 x.**Y**.z = New features. (Resets z when changed.)
 
 x.y.**Z** = New bug fixes.
-## How to install
-### Google Chrome <a name="google_chrome"></a>
-1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
-2) Unzip the file.
-3) Navigate to __chrome://extensions__.
-4) Turn on __Developer Mode__ at the top right.
-5) Click the __Load Unpacked__ button near the top left, select the folder you downloaded and navigate to _/schooltape/extension_ and click ok.
-6) When __Extension Loaded__ pops up near the bottom left, refresh the Schoolbox website.
-
-
-### Microsoft Edge <a name="edge"></a>
-1) Download your preferred release from the [releases page](https://github.com/42willow/schooltape/releases).
-2) Unzip the file.
-3) Navigate to __edge://extensions__.
-4) Turn on __Developer Mode__ near the bottom left.
-5) Click the __Load Unpacked__ button near the top right, select the folder you downloaded and navigate to _/schooltape/extension_ and click ok.
-6) Scroll down until you find a heading that says __From other sources__.
-8) When __Schooltape__ appears below the heading, refresh the Schoolbox website.
-
-### Opera <a name="opera"></a>
-Follow the [Google Chrome](#google_chrome) instructions.
-
-### Vivaldi Browser <a name="vivaldi"></a>
-Follow the [Google Chrome](#google_chrome) instructions.
-
-### Brave Browser <a name="brave"></a>
-Follow the [Google Chrome](#google_chrome) instructions.
-
-### All other chromium based browsers <a name="chromium"></a>
-Follow the [Google Chrome](#google_chrome) instructions.
