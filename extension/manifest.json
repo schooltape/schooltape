@@ -5,9 +5,7 @@
     "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
     "homepage_url": "https://schooltape-community.github.io",
     "icons": {
-        "128": "logo.png",
-        "16": "logo.png",
-        "48": "logo.png"
+        "100": "logo.png"
     },
     "background": {
       "service_worker": "background.js",
@@ -54,7 +52,12 @@
     ],
     "action": {
       "default_title": "Toggle Schooltape"
+    },
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "schooltape@schooltape-community.github.io",
+        "strict_min_version": "115.0"
+      }
     }
-  
   }
   
