@@ -215,8 +215,8 @@ chrome.contextMenus.removeAll(function() {
     contexts: ['action']
   })
   chrome.contextMenus.create({
-    id: 'extErrors',
-    title: 'Schooltape Errors',
+    id: 'extOptions',
+    title: 'Schooltape Settings',
     contexts: ['action']
   })
 });
@@ -244,10 +244,9 @@ function contextClick(info, tab) {
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'extRefresh') {
     console.log("Refreshing extension...");
-    chrome.runtime.reload()
-  } else if (menuItemId === 'extErrors') {
-    var newURL = "chrome://extensions/?errors="+chrome.runtime.id;
-    chrome.tabs.create({ url: newURL });
+    chrome.runtime.reload();
+  } else if (menuItemId === 'extOptions') {
+    chrome.runtime.openOptionsPage();
   }
 }
 chrome.contextMenus.onClicked.addListener(contextClick);
