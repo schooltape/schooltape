@@ -16,7 +16,7 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          source: src
+          source: extension
 
       - name: "web-ext sign"
         id: web-ext-sign
