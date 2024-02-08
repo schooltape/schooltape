@@ -86,7 +86,7 @@ chrome.runtime.onMessage.addListener (
 
     // CHANGE ICON
     if (request.icon) {
-      chrome.action.setIcon({
+      chrome.browserAction.setIcon({
         path: request.icon,
         tabId: sender.tab.id
       })
@@ -272,7 +272,7 @@ chrome.notifications.onClicked.addListener(function(notifID) {
 // --------------------------------EXTENSION BUTTON CLICKED--------------------------------
 // */
 // On extension clicked
-chrome.action.onClicked.addListener((tab) => {
+chrome.browserAction.onClicked.addListener((tab) => {
     console.log("Button clicked!");
 
     // TOGGLE EXTENSION
@@ -282,7 +282,7 @@ chrome.action.onClicked.addListener((tab) => {
         newSettings.global = false;
         chrome.storage.local.set({"settings": newSettings}, function() {
         });
-        chrome.action.setBadgeText({text:'OFF'});
+        chrome.browserAction.setBadgeText({text:'OFF'});
         // Reload current tab
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           chrome.tabs.reload(tabs[0].id);
@@ -293,7 +293,7 @@ chrome.action.onClicked.addListener((tab) => {
         newSettings.global = true;
         chrome.storage.local.set({"settings": newSettings}, function() {
         });
-        chrome.action.setBadgeText({text:'ON'});
+        chrome.browserAction.setBadgeText({text:'ON'});
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           chrome.tabs.reload(tabs[0].id);
         });
@@ -309,9 +309,9 @@ function updateBadge() {
   chrome.storage.local.get(['settings'], function(data) { 
     console.log(data);
     if (data.settings.global) {
-      chrome.action.setBadgeText({text:'ON'});
+      chrome.browserAction.setBadgeText({text:'ON'});
     } else {
-      chrome.action.setBadgeText({text:'OFF'});
+      chrome.browserAction.setBadgeText({text:'OFF'});
     }
   });
 }
