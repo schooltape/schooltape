@@ -171,54 +171,54 @@ chrome.contextMenus.removeAll(function() {
   let github = chrome.contextMenus.create({
     id: 'github',
     title: 'GitHub',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubRepo',
     parentId: github,
     title: 'Repository',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubIssues',
     parentId: github,
     title: 'Issues',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubPRs',
     parentId: github,
     title: 'Pull Requests',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubDiscussions',
     parentId: github,
     title: 'Discussions',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubProjects',
     parentId: github,
     title: 'Projects',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'githubWiki',
     parentId: github,
     title: 'Wiki',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   
   chrome.contextMenus.create({
     id: 'extRefresh',
     title: 'Refresh Extension',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
   chrome.contextMenus.create({
     id: 'extOptions',
     title: 'Schooltape Settings',
-    contexts: ['action']
+    contexts: ['browser_action']
   })
 });
 
