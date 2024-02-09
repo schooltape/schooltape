@@ -52,7 +52,7 @@ function injectThemes() {
         if (data.settings.themes) {
             let theme = data.settings.currentTheme;
             // inject the theme
-            injectCSS(`/Themes/${theme}.css`);
+            injectCSS(`/themes/${theme}.css`);
             // console.log(`%c[doc-start.js]`, docStartConsole, `Injected theme ${theme}`);
         }
     });
