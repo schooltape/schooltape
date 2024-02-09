@@ -99,10 +99,11 @@ chrome.runtime.onMessage.addListener (
     // INJECT JS
     if (request.inject) {
       console.log("Injecting " + request.inject)
-      chrome.scripting.executeScript({
-        target: { tabId: sender.tab.id },
-        files: [request.inject]
-      })
+      console.log(`tabid: ${sender.tab.id}`)
+      chrome.tabs.executeScript(
+        sender.tab.id,
+        { file: request.inject }
+      )
     }
     // Switch to homepage
     if (request.toHomepage) {
