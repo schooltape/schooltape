@@ -4,11 +4,8 @@ A web extension to improve the look and feel of Schoolbox. [Download the latest 
 
 ## Installation
 
-### Firefox
+### Firefox <kbd>Recommended</kbd>
 
-Coming soon! https://github.com/42Willow/schooltape/issues/25 and https://github.com/42Willow/schooltape/issues/28
-
-⚠️ In Beta
 1) Download the `schooltape-X.X.X.xpi` from the [releases page](https://github.com/42willow/schooltape/releases/latest).
 2) Click install
 3) Done! Options can be found in the right click context menu, and use left click to toggle.
