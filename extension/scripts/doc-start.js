@@ -46,14 +46,19 @@ function injectPlugin(pluginName) {
     xhr.send();
 }
 function injectThemes() {
-    // inject themes
-    // get current theme from local storage
     chrome.storage.local.get(["settings"], function (data) {
         if (data.settings.themes) {
             let theme = data.settings.currentTheme;
-            // inject the theme
-            injectCSS(`/themes/${theme}.css`);
-            // console.log(`%c[doc-start.js]`, docStartConsole, `Injected theme ${theme}`);
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", chrome.runtime.getURL("/themes/themes.json"), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    let path = `/themes/${JSON.parse(xhr.responseText)[theme].path}`;
+                    injectCSS(path);
+                    console.log(path);
+                }
+            }
+            xhr.send();
         }
     });
 }
