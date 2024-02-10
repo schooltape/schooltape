@@ -4,11 +4,11 @@ chrome.runtime.sendMessage({checkForUpdates: true}, function() {});
 chrome.storage.local.get(["settings"], function (data) {
     if (data.settings.global) {
         if (data.settings.urls.includes(window.location.origin)) {
-            // Inject all enabled plugins
             for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
                 injectPlugin(data.settings.enabledPlugins[i]);
             }
             injectThemes();
+            injectCSS("/themes/custom.css");
         }
     }
 });
@@ -55,7 +55,6 @@ function injectThemes() {
                 if (xhr.readyState == 4) {
                     let path = `/themes/${JSON.parse(xhr.responseText)[theme].path}`;
                     injectCSS(path);
-                    console.log(path);
                 }
             }
             xhr.send();
@@ -69,6 +68,7 @@ function injectCSS(css) {
     link.href = chrome.runtime.getURL(css);
     document.head.appendChild(link);
 }
+
 function injectJS(js) {
     chrome.runtime.sendMessage({inject: js}, function() {
     });
