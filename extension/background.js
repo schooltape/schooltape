@@ -299,6 +299,8 @@ chrome.browserAction.onClicked.addListener((tab) => {
           chrome.tabs.reload(tabs[0].id);
         });
       }
+      chrome.browserAction.setBadgeBackgroundColor({color:"#94DBF9"});
+      chrome.browserAction.setBadgeTextColor({color:"black"});
     });
 });
 
@@ -314,5 +316,7 @@ function updateBadge() {
     } else {
       chrome.browserAction.setBadgeText({text:'OFF'});
     }
+    chrome.browserAction.setBadgeBackgroundColor({color:"#94DBF9"});
+    chrome.browserAction.setBadgeTextColor({color:"black"});
   });
 }
