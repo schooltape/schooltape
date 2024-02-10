@@ -1,0 +1,301 @@
+a.logo > img {
+    content:url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
+    max-width: 30%;
+}
+
+.material-icons-round {
+    color: hsl(227, 68%, 88%) !important;
+}
+
+p, h1, h2, h3, h4 {
+    color: hsl(227, 68%, 88%);
+}
+
+#component-layout {
+    --right-head-bg: hsl(316, 74%, 85%) !important;
+    --right-head-font: hsl(232, 24%, 18%) !important;
+    --left-head-bg: hsl(316, 74%, 85%) !important;
+    --left-head-font: hsl(232, 24%, 18%) !important;
+    --top-bg-primary: hsl(232, 24%, 18%) !important;
+    --left-bg-primary: hsl(231, 16%, 34%) !important;
+    --right-bg-primary: hsl(230, 19%, 26%) !important;
+}
+
+#tab-control .separator {
+    background-color: hsl(231, 16%, 34%);
+}
+
+input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=month]:focus, input[type=week]:focus, input[type=email]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=color]:focus, textarea:focus {
+    border-color: hsl(316, 74%, 85%);
+}
+
+[type=submit]:hover, .flex-list.buttons a.submit:hover, .flex-list.buttons button.submit:hover, a.submit:hover, button.submit:hover, [type=submit]:focus, .flex-list.buttons a.submit:focus, .flex-list.buttons button.submit:focus, a.submit:focus, button.submit:focus {
+    background-color: hsla(316, 74%, 85%, 0.80);
+}
+
+.editPanel.socialstream-new-post, .content, .information-list {
+    background-color: hsl(230, 19%, 26%);
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=email], input[type=number], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=color], textarea, input:hover, textarea:hover, select:hover {
+    background-color: hsl(232, 24%, 18%);
+    color: hsl(227, 68%, 88%);
+}
+
+label.error {
+    color: hsl(351, 74%, 73%);
+}
+
+:root {
+        --navigation-foreground-r: 202;
+    --navigation-foreground-g: 211;
+    --navigation-foreground-b: 245;
+    --navigation-foreground: hsl(227, 68%, 88%);
+        --navigation-foreground-contrast-r: 24;
+    --navigation-foreground-contrast-g: 25;
+    --navigation-foreground-contrast-b: 38;
+    --navigation-foreground-contrast: hsl(236, 23%, 12%);
+        --navigation-background-r: 30;
+    --navigation-background-g: 32;
+    --navigation-background-b: 48;
+    --navigation-background: hsla(233, 23%, 15%, 1.00);
+        --navigation-background-contrast-r: 24;
+    --navigation-background-contrast-g: 25;
+    --navigation-background-contrast-b: 38;
+    --navigation-background-contrast: hsl(236, 23%, 12%);
+        --navigation-hover-r: 245;
+    --navigation-hover-g: 189;
+    --navigation-hover-b: 230;
+    --navigation-hover: hsl(316, 74%, 85%);
+        --navigation-hover-contrast-r: 24;
+    --navigation-hover-contrast-g: 25;
+    --navigation-hover-contrast-b: 38;
+    --navigation-hover-contrast: hsl(236, 23%, 12%);
+        --off-canvas-foreground: hsl(227, 68%, 88%);
+    .left-off-canvas-menu ul.off-canvas-list li h3, .left-off-canvas-menu ul.off-canvas-list li label .unit-heading, label .left-off-canvas-menu ul.off-canvas-list li .unit-heading, .left-off-canvas-menu ul.off-canvas-list li h4 {
+        color: hsl(227, 68%, 88%);
+    }
+    --off-canvas-background: hsl(233, 23%, 15%);
+        --off-canvas-hover-r: 241;
+    --off-canvas-hover-g: 249;
+    --off-canvas-hover-b: 255;
+    --off-canvas-hover-h: 205.71;
+    --off-canvas-hover-s: 100%;
+    --off-canvas-hover-l: 97.25%;
+    --off-canvas-hover-a: 1;
+    --off-canvas-hover:   hsla(
+        var(--off-canvas-hover-h),
+        var(--off-canvas-hover-s),
+        var(--off-canvas-hover-l),
+        var(--off-canvas-hover-a)
+    );
+        --off-canvas-hover-contrast-r: 0;
+    --off-canvas-hover-contrast-g: 0;
+    --off-canvas-hover-contrast-b: 0;
+    --off-canvas-hover-contrast-h: 0;
+    --off-canvas-hover-contrast-s: 0%;
+    --off-canvas-hover-contrast-l: 0%;
+    --off-canvas-hover-contrast-a: 1;
+    --off-canvas-hover-contrast:   hsla(
+        var(--off-canvas-hover-contrast-h),
+        var(--off-canvas-hover-contrast-s),
+        var(--off-canvas-hover-contrast-l),
+        var(--off-canvas-hover-contrast-a)
+    );
+        --accounts-menu-foreground-r: 0;
+    --accounts-menu-foreground-g: 102;
+    --accounts-menu-foreground-b: 176;
+    --accounts-menu-foreground-h: 205.23;
+    --accounts-menu-foreground-s: 100%;
+    --accounts-menu-foreground-l: 34.51%;
+    --accounts-menu-foreground-a: 1;
+    --accounts-menu-foreground:   hsla(
+        var(--accounts-menu-foreground-h),
+        var(--accounts-menu-foreground-s),
+        var(--accounts-menu-foreground-l),
+        var(--accounts-menu-foreground-a)
+    );
+        --accounts-menu-foreground-contrast-r: 255;
+    --accounts-menu-foreground-contrast-g: 255;
+    --accounts-menu-foreground-contrast-b: 255;
+    --accounts-menu-foreground-contrast-h: 0;
+    --accounts-menu-foreground-contrast-s: 0%;
+    --accounts-menu-foreground-contrast-l: 100%;
+    --accounts-menu-foreground-contrast-a: 1;
+    --accounts-menu-foreground-contrast:   hsla(
+        var(--accounts-menu-foreground-contrast-h),
+        var(--accounts-menu-foreground-contrast-s),
+        var(--accounts-menu-foreground-contrast-l),
+        var(--accounts-menu-foreground-contrast-a)
+    );
+        --accounts-menu-background-r: 229;
+    --accounts-menu-background-g: 244;
+    --accounts-menu-background-b: 255;
+    --accounts-menu-background-h: 205.38;
+    --accounts-menu-background-s: 100%;
+    --accounts-menu-background-l: 94.9%;
+    --accounts-menu-background-a: 1;
+    --accounts-menu-background:   hsla(
+        var(--accounts-menu-background-h),
+        var(--accounts-menu-background-s),
+        var(--accounts-menu-background-l),
+        var(--accounts-menu-background-a)
+    );
+        --accounts-menu-background-contrast-r: 0;
+    --accounts-menu-background-contrast-g: 0;
+    --accounts-menu-background-contrast-b: 0;
+    --accounts-menu-background-contrast-h: 0;
+    --accounts-menu-background-contrast-s: 0%;
+    --accounts-menu-background-contrast-l: 0%;
+    --accounts-menu-background-contrast-a: 1;
+    --accounts-menu-background-contrast:   hsla(
+        var(--accounts-menu-background-contrast-h),
+        var(--accounts-menu-background-contrast-s),
+        var(--accounts-menu-background-contrast-l),
+        var(--accounts-menu-background-contrast-a)
+    );
+        --accounts-menu-hover-r: 229;
+    --accounts-menu-hover-g: 244;
+    --accounts-menu-hover-b: 255;
+    --accounts-menu-hover-h: 205.38;
+    --accounts-menu-hover-s: 100%;
+    --accounts-menu-hover-l: 94.9%;
+    --accounts-menu-hover-a: 1;
+    --accounts-menu-hover:   hsla(
+        var(--accounts-menu-hover-h),
+        var(--accounts-menu-hover-s),
+        var(--accounts-menu-hover-l),
+        var(--accounts-menu-hover-a)
+    );
+        --accounts-menu-hover-contrast-r: 0;
+    --accounts-menu-hover-contrast-g: 0;
+    --accounts-menu-hover-contrast-b: 0;
+    --accounts-menu-hover-contrast-h: 0;
+    --accounts-menu-hover-contrast-s: 0%;
+    --accounts-menu-hover-contrast-l: 0%;
+    --accounts-menu-hover-contrast-a: 1;
+    --accounts-menu-hover-contrast:   hsla(
+        var(--accounts-menu-hover-contrast-h),
+        var(--accounts-menu-hover-contrast-s),
+        var(--accounts-menu-hover-contrast-l),
+        var(--accounts-menu-hover-contrast-a)
+    );
+    --content-ui-foreground: hsl(316, 74%, 85%);
+    --content-ui-background: hsl(230, 19%, 26%);
+        --content-ui-background-contrast-r: 0;
+    --content-ui-background-contrast-g: 0;
+    --content-ui-background-contrast-b: 0;
+    --content-ui-background-contrast-h: 0;
+    --content-ui-background-contrast-s: 0%;
+    --content-ui-background-contrast-l: 0%;
+    --content-ui-background-contrast-a: 1;
+    --content-ui-background-contrast:   hsla(
+        var(--content-ui-background-contrast-h),
+        var(--content-ui-background-contrast-s),
+        var(--content-ui-background-contrast-l),
+        var(--content-ui-background-contrast-a)
+    );
+    --content-ui-hover: hsl(232, 24%, 18%);
+        --content-ui-hover-contrast-r: 0;
+    --content-ui-hover-contrast-g: 0;
+    --content-ui-hover-contrast-b: 0;
+    --content-ui-hover-contrast-h: 0;
+    --content-ui-hover-contrast-s: 0%;
+    --content-ui-hover-contrast-l: 0%;
+    --content-ui-hover-contrast-a: 1;
+    --content-ui-hover-contrast:   hsla(
+        var(--content-ui-hover-contrast-h),
+        var(--content-ui-hover-contrast-s),
+        var(--content-ui-hover-contrast-l),
+        var(--content-ui-hover-contrast-a)
+    );
+        --content-ui-selected-r: 229;
+    --content-ui-selected-g: 244;
+    --content-ui-selected-b: 255;
+    --content-ui-selected-h: 205.38;
+    --content-ui-selected-s: 100%;
+    --content-ui-selected-l: 94.9%;
+    --content-ui-selected-a: 1;
+    --content-ui-selected:   hsla(
+        var(--content-ui-selected-h),
+        var(--content-ui-selected-s),
+        var(--content-ui-selected-l),
+        var(--content-ui-selected-a)
+    );
+        --content-ui-selected-contrast-r: 0;
+    --content-ui-selected-contrast-g: 0;
+    --content-ui-selected-contrast-b: 0;
+    --content-ui-selected-contrast-h: 0;
+    --content-ui-selected-contrast-s: 0%;
+    --content-ui-selected-contrast-l: 0%;
+    --content-ui-selected-contrast-a: 1;
+    --content-ui-selected-contrast:   hsla(
+        var(--content-ui-selected-contrast-h),
+        var(--content-ui-selected-contrast-s),
+        var(--content-ui-selected-contrast-l),
+        var(--content-ui-selected-contrast-a)
+    );
+    --content-ui-submit-foreground: hsl(232, 24%, 18%);
+    --content-ui-submit-background: hsl(316, 74%, 85%);
+        --content-ui-submit-background-contrast-r: 255;
+    --content-ui-submit-background-contrast-g: 255;
+    --content-ui-submit-background-contrast-b: 255;
+    --content-ui-submit-background-contrast-h: 0;
+    --content-ui-submit-background-contrast-s: 0%;
+    --content-ui-submit-background-contrast-l: 100%;
+    --content-ui-submit-background-contrast-a: 1;
+    --content-ui-submit-background-contrast:   hsla(
+        var(--content-ui-submit-background-contrast-h),
+        var(--content-ui-submit-background-contrast-s),
+        var(--content-ui-submit-background-contrast-l),
+        var(--content-ui-submit-background-contrast-a)
+    );
+    --accent-foreground: hsl(232, 24%, 18%);
+    --accent-background: hsl(316, 74%, 85%);
+        --accent-background-contrast-r: 0;
+    --accent-background-contrast-g: 0;
+    --accent-background-contrast-b: 0;
+    --accent-background-contrast-h: 0;
+    --accent-background-contrast-s: 0%;
+    --accent-background-contrast-l: 0%;
+    --accent-background-contrast-a: 1;
+    --accent-background-contrast:   hsla(
+        var(--accent-background-contrast-h),
+        var(--accent-background-contrast-s),
+        var(--accent-background-contrast-l),
+        var(--accent-background-contrast-a)
+    );
+        --accent-hover-r: 255;
+    --accent-hover-g: 255;
+    --accent-hover-b: 255;
+    --accent-hover-h: 0;
+    --accent-hover-s: 0%;
+    --accent-hover-l: 100%;
+    --accent-hover-a: 1;
+    --accent-hover:   hsla(
+        var(--accent-hover-h),
+        var(--accent-hover-s),
+        var(--accent-hover-l),
+        var(--accent-hover-a)
+    );
+        --accent-hover-contrast-r: 0;
+    --accent-hover-contrast-g: 0;
+    --accent-hover-contrast-b: 0;
+    --accent-hover-contrast-h: 0;
+    --accent-hover-contrast-s: 0%;
+    --accent-hover-contrast-l: 0%;
+    --accent-hover-contrast-a: 1;
+    --accent-hover-contrast:   hsla(
+        var(--accent-hover-contrast-h),
+        var(--accent-hover-contrast-s),
+        var(--accent-hover-contrast-l),
+        var(--accent-hover-contrast-a)
+    );
+    --logo-background: 24273a;
+    --body-background: hsl(232, 24%, 18%);
+    --form-border-color: hsla(316, 74%, 85%, 0.40);
+    --form-bg-hover-color: hsla(316, 74%, 85%, 0.30);
+    --form-bg-hover-color-contrast: hsl(227, 68%, 88%);
+    --body-foreground: hsl(227, 68%, 88%);
+    --body-foreground-h1: hsl(227, 68%, 88%);
+}

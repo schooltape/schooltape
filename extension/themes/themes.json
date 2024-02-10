@@ -30,5 +30,13 @@
         "description": "A dark theme with green accents",
         "path": "everforest.css",
         "tags": "dark, green, modern"
+    },
+    "catppuccin": {
+        "name": "Catppuccin Macchiato Pink",
+        "version": "1.0",
+        "author": "42Willow",
+        "description": "A soothing pastel theme for the high spirited!",
+        "path": "catppuccin/macchiato-pink.css",
+        "tags": "pastel, dark, default"
     }
 }
