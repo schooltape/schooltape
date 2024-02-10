@@ -33,8 +33,40 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
     background-color: hsla(316, 74%, 85%, 0.80);
 }
 
-.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card {
     background-color: hsl(230, 19%, 26%);
+}
+
+.island span {
+    color: hsl(227, 68%, 88%) !important;
+}
+.island section {
+    background-color: hsl(232, 24%, 18%) !important;
+}
+
+.timetable th, .timetable-small th {
+    background-color: hsl(230, 19%, 26%);
+}
+
+.breadcrumb li.active span:not([href]) {
+    color: hsl(316, 74%, 85%);
+}
+
+body {
+    overflow-y: hidden;
+}
+#container::-webkit-scrollbar, .left-off-canvas-menu::-webkit-scrollbar, .right-off-canvas-menu::-webkit-scrollbar, .hybrid-bar .account-drop::-webkit-scrollbar {
+    background-color: hsl(236, 23%, 12%);
+    width: 8px;
+}
+#container::-webkit-scrollbar-thumb, .left-off-canvas-menu::-webkit-scrollbar-thumb, .right-off-canvas-menu::-webkit-scrollbar-thumb, .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
+    background: hsla(316, 74%, 85%, 0.50);
+}
+#container:hover::-webkit-scrollbar-thumb, .left-off-canvas-menu:hover::-webkit-scrollbar-thumb, .right-off-canvas-menu:hover::-webkit-scrollbar-thumb, .hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
+    background: hsl(316, 74%, 85%);
+}
+#container::-webkit-scrollbar-track, .left-off-canvas-menu::-webkit-scrollbar-track, .right-off-canvas-menu::-webkit-scrollbar-track, .hybrid-bar .account-drop::-webkit-scrollbar-track {
+    background: hsl(236, 23%, 12%);
 }
 
 .icon-news::before {
@@ -213,19 +245,7 @@ label.error {
         var(--content-ui-hover-contrast-l),
         var(--content-ui-hover-contrast-a)
     );
-        --content-ui-selected-r: 229;
-    --content-ui-selected-g: 244;
-    --content-ui-selected-b: 255;
-    --content-ui-selected-h: 205.38;
-    --content-ui-selected-s: 100%;
-    --content-ui-selected-l: 94.9%;
-    --content-ui-selected-a: 1;
-    --content-ui-selected:   hsla(
-        var(--content-ui-selected-h),
-        var(--content-ui-selected-s),
-        var(--content-ui-selected-l),
-        var(--content-ui-selected-a)
-    );
+    --content-ui-selected: hsl(231, 16%, 34%);
         --content-ui-selected-contrast-r: 0;
     --content-ui-selected-contrast-g: 0;
     --content-ui-selected-contrast-b: 0;

@@ -47,8 +47,41 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 }
 
 {{!-- boxes --}}
-.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card {
     background-color: {{hsl surface0}};
+}
+
+{{!-- news articles --}}
+.island span {
+    color: {{hsl text}} !important;
+}
+.island section {
+    background-color: {{hsl base}} !important;
+}
+
+{{!-- timetable --}}
+.timetable th, .timetable-small th {
+    background-color: {{hsl surface0}};
+}
+
+{{!-- breadcrumbs --}}
+.breadcrumb li.active span:not([href]) {
+    color: {{hsl accent}};
+}
+
+{{!-- scrollbars --}}
+#container::-webkit-scrollbar, .left-off-canvas-menu::-webkit-scrollbar, .right-off-canvas-menu::-webkit-scrollbar, .hybrid-bar .account-drop::-webkit-scrollbar {
+    background-color: {{hsl crust}};
+    width: 8px;
+}
+#container::-webkit-scrollbar-thumb, .left-off-canvas-menu::-webkit-scrollbar-thumb, .right-off-canvas-menu::-webkit-scrollbar-thumb, .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
+    background: {{hsla (opacity accent 0.5)}};
+}
+#container:hover::-webkit-scrollbar-thumb, .left-off-canvas-menu:hover::-webkit-scrollbar-thumb, .right-off-canvas-menu:hover::-webkit-scrollbar-thumb, .hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
+    background: {{hsl accent}};
+}
+#container::-webkit-scrollbar-track, .left-off-canvas-menu::-webkit-scrollbar-track, .right-off-canvas-menu::-webkit-scrollbar-track, .hybrid-bar .account-drop::-webkit-scrollbar-track {
+    background: {{hsl crust}};
 }
 
 {{!-- news icon --}}
@@ -395,7 +428,8 @@ label.error {
         var(--content-ui-hover-contrast-l),
         var(--content-ui-hover-contrast-a)
     );
-        --content-ui-selected-r: 229;
+    --content-ui-selected: {{hsl surface1}};
+        {{!-- --content-ui-selected-r: 229;
     --content-ui-selected-g: 244;
     --content-ui-selected-b: 255;
     --content-ui-selected-h: 205.38;
@@ -407,7 +441,7 @@ label.error {
         var(--content-ui-selected-s),
         var(--content-ui-selected-l),
         var(--content-ui-selected-a)
-    );
+    ); --}}
         --content-ui-selected-contrast-r: 0;
     --content-ui-selected-contrast-g: 0;
     --content-ui-selected-contrast-b: 0;
