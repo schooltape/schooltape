@@ -47,8 +47,13 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 }
 
 {{!-- boxes --}}
-.editPanel.socialstream-new-post, .content, .information-list {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered {
     background-color: {{hsl surface0}};
+}
+
+{{!-- news icon --}}
+.icon-news::before {
+    color: {{hsl text}};
 }
 
 {{!-- text inputs --}}

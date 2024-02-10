@@ -33,8 +33,12 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
     background-color: hsla(316, 74%, 85%, 0.80);
 }
 
-.editPanel.socialstream-new-post, .content, .information-list {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered {
     background-color: hsl(230, 19%, 26%);
+}
+
+.icon-news::before {
+    color: hsl(227, 68%, 88%);
 }
 
 input:not([type]), input[type=text], input[type=password], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=email], input[type=number], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=color], textarea, input:hover, textarea:hover, select:hover {
