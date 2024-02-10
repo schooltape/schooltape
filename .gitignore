@@ -2,3 +2,4 @@ build.sh
 *.DS_Store
 extension/web-ext-artifacts
 whiskers*
+extension/themes/custom.css
