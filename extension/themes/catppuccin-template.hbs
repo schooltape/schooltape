@@ -16,6 +16,10 @@ a.logo > img {
     color: {{hsl text}} !important;
 }
 
+body {
+    color: {{hsl text}};
+}
+
 p, h1, h2, h3, h4 {
     color: {{hsl text}};
 }
@@ -37,8 +41,8 @@ p, h1, h2, h3, h4 {
 }
 
 {{!-- form borders --}}
-input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=month]:focus, input[type=week]:focus, input[type=email]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=color]:focus, textarea:focus {
-    border-color: {{hsl accent}};
+input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=month]:focus, input[type=week]:focus, input[type=email]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=color]:focus, textarea:focus, .ck.ck-content.ck-editor__editable.ck-focused, .ck.ck-editor__main .ck-source-editing-area textarea:focus {
+    border-color: {{hsl accent}} !important;
 }
 
 {{!-- submit buttons --}}
@@ -47,13 +51,18 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 }
 
 {{!-- boxes --}}
-.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card, .show-ckeditor-button {
     background-color: {{hsl surface0}};
 }
 
 {{!-- news articles --}}
-.island span {
+.island span[style]:not(a > span[style]) {
     color: {{hsl text}} !important;
+    background-color: rgba(0,0,0,0) !important;
+}
+.island a > span[style] {
+    color: {{hsl accent}} !important;
+    background-color: rgba(0,0,0,0) !important;
 }
 .island section {
     background-color: {{hsl base}} !important;
@@ -100,7 +109,21 @@ label.error {
     color: {{hsl red}};
 }
 
+{{!-- CKEditor --}}
 :root {
+    --sb-ck-active: {{hsl accent}};
+    --sb-ck-active-grey: {{hsl base}};
+    --sb-ck-active-highlight: #daedff;
+    --sb-ck-button-grid-border: #bbbbbb;
+    --sb-ck-disabled: #dddddd;
+    --sb-ck-icon-colour: rgb(51, 51, 51);
+
+    /* Overrides of default CK colours */
+    --ck-color-base-background: {{hsl surface0}} !important;
+    --ck-color-text: {{hsl text}} !important;
+
+    {{!-- skin.css.php --}}
+
         --navigation-foreground-r: {{red_i text}};
     --navigation-foreground-g: {{green_i text}};
     --navigation-foreground-b: {{blue_i text}};
