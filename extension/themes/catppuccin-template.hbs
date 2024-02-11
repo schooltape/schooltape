@@ -55,6 +55,26 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
     background-color: {{hsl surface0}};
 }
 
+{{!-- iframes --}}
+{{!-- since iframes can't be styled, due to cross-origin restrictions - we must force a light background --}}
+{{!-- table tr {
+    color: {{hsl text}} !important;
+} --}}
+
+{{!-- calendar --}}
+.fc-list-table {
+    background-color: {{hsl surface0}} !important;
+}
+table tr th, table tr td {
+    color: {{hsl text}} !important;
+}
+.fc .fc-cell-shaded {
+    background-color: {{hsl surface1}} !important;
+}
+.fc-theme-standard tbody {
+    border: none !important;
+}
+
 {{!-- news articles --}}
 .island span[style]:not(a > span[style]) {
     color: {{hsl text}} !important;
@@ -66,6 +86,20 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 }
 .island section {
     background-color: {{hsl base}} !important;
+}
+
+{{!-- home -> news --}}
+.tabs {
+    background: {{hsl surface1}};
+    border-bottom: none;
+}
+.tabs dd > a, .tabs .tab-title > a {
+    color: {{hsl text}};
+}
+
+
+.information-list > .actions-small-1, .action-list > .actions-small-1, .actions-small-2 {
+    background-color: {{hsl surface0}} !important;
 }
 
 {{!-- timetable --}}
@@ -533,7 +567,7 @@ label.error {
         var(--content-ui-submit-background-contrast-a)
     );
     {{!-- highlighting --}}
-    --accent-foreground: {{hsl base}};
+    --accent-foreground: {{hsl accent}};
         {{!-- --accent-foreground-r: 0;
     --accent-foreground-g: 102;
     --accent-foreground-b: 176;

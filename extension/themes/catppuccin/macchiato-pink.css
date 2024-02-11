@@ -41,6 +41,20 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
     background-color: hsl(230, 19%, 26%);
 }
 
+
+.fc-list-table {
+    background-color: hsl(230, 19%, 26%) !important;
+}
+table tr th, table tr td {
+    color: hsl(227, 68%, 88%) !important;
+}
+.fc .fc-cell-shaded {
+    background-color: hsl(231, 16%, 34%) !important;
+}
+.fc-theme-standard tbody {
+    border: none !important;
+}
+
 .island span[style]:not(a > span[style]) {
     color: hsl(227, 68%, 88%) !important;
     background-color: rgba(0,0,0,0) !important;
@@ -51,6 +65,19 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 }
 .island section {
     background-color: hsl(232, 24%, 18%) !important;
+}
+
+.tabs {
+    background: hsl(231, 16%, 34%);
+    border-bottom: none;
+}
+.tabs dd > a, .tabs .tab-title > a {
+    color: hsl(227, 68%, 88%);
+}
+
+
+.information-list > .actions-small-1, .action-list > .actions-small-1, .actions-small-2 {
+    background-color: hsl(230, 19%, 26%) !important;
 }
 
 .timetable th, .timetable-small th {
@@ -292,7 +319,7 @@ label.error {
         var(--content-ui-submit-background-contrast-l),
         var(--content-ui-submit-background-contrast-a)
     );
-    --accent-foreground: hsl(232, 24%, 18%);
+    --accent-foreground: hsl(316, 74%, 85%);
     --accent-background: hsl(316, 74%, 85%);
         --accent-background-contrast-r: 0;
     --accent-background-contrast-g: 0;
