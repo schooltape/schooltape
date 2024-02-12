@@ -1,0 +1,274 @@
+a.logo > img {
+    content:url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
+    max-width: 30%;
+}
+
+.material-icons-round, ::placeholder {
+    color: hsl(227, 68%, 88%) !important;
+}
+
+body, p, h1, h2, h3, h4, .tab-bar {
+    color: hsl(227, 68%, 88%);
+}
+
+.adtp .flatpickr-calendar, .adtp .flatpickr-innerContainer {
+    border: none;
+}
+
+.flatpickr-calendar, .flatpickr-day, span.flatpickr-weekday {
+    background: hsl(232, 24%, 18%);
+    color: hsl(227, 68%, 88%);
+}
+.adtp .flatpickr-day.selected, .adtp .flatpickr-day.selected:focus, .adtp .flatpickr-day.selected:hover, .adtp .flatpickr-day.selected.prevMonthDay, .adtp .flatpickr-day.selected.nextMonthDay {
+    color: hsl(232, 24%, 18%);
+}
+.adtp .flatpickr-day.inRange, .adtp .flatpickr-day.prevMonthDay.inRange, .adtp .flatpickr-day.nextMonthDay.inRange, .adtp .flatpickr-day.today.inRange, .adtp .flatpickr-day.prevMonthDay.today.inRange, .adtp .flatpickr-day.nextMonthDay.today.inRange, .adtp .flatpickr-day:hover, .adtp .flatpickr-day:hover, .adtp .flatpickr-day.nextMonthDay:hover, .adtp .flatpickr-day:focus, .adtp .flatpickr-day.prevMonthDay:focus, .adtp .flatpickr-day.nextMonthDay:focus {
+    background: hsl(230, 19%, 26%);
+}
+.flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+    fill: hsl(199, 65%, 69%);
+    color: hsl(199, 65%, 69%);
+}
+.flatpickr-months .flatpickr-month {
+    color: hsl(199, 65%, 69%);
+}
+.flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay, .flatpickr-day.notAllowed, .flatpickr-day.notAllowed.prevMonthDay, .flatpickr-day.notAllowed.nextMonthDay {
+    color: rgb(128, 135, 162);
+}
+
+.alert-box, .eotc-status, .alert-box-icon {
+    background-color: hsl(230, 19%, 26%);
+}
+
+.group-actions[data-v-2e9f597c] {
+    background: hsl(230, 19%, 26%) !important;
+}
+
+.reveal-modal {
+    background-color: hsl(232, 24%, 18%);
+}
+.reveal-modal .close-reveal-modal {
+    color: hsl(199, 65%, 69%);
+}
+.component-action section {
+    background-color: hsl(230, 19%, 26%);
+}
+
+table {
+    background: hsl(230, 19%, 26%);
+}
+table thead {
+    background: hsl(231, 16%, 34%);
+}
+.fc .fc-col-header-cell a {
+    color: hsl(227, 68%, 88%) !important;
+}
+table * {
+    border: none !important;
+}
+.fc-toolbar {
+    border-bottom: none !important;
+}
+.fc .fc-col-header-cell.fc-day-today>div, .fc .fc-daygrid-day.fc-day-today {
+    background-color: hsl(231, 16%, 34%) !important;
+}
+
+#account-content {
+    overflow: hidden;
+}
+.account-menu-mobile .separator, .account-drop .separator {
+    color: hsl(199, 65%, 69%);
+}
+
+.side-nav {
+    background-color: hsl(230, 19%, 26%);
+}
+.side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):hover, .side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):focus {
+    color: hsla(199, 65%, 69%, 0.70);
+}
+
+.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock {
+    background-color: hsl(351, 74%, 73%);
+    color: hsl(232, 24%, 18%);
+}
+
+#component-layout {
+    --left-head-bg: hsl(199, 65%, 69%) !important;
+    --right-head-bg: hsl(199, 65%, 69%) !important;
+    --top-head-bg: hsl(199, 65%, 69%) !important;
+    --top-head-font: hsl(232, 24%, 18%) !important;
+    --left-head-font: hsl(232, 24%, 18%) !important;
+    --right-head-font: hsl(232, 24%, 18%) !important;
+    --top-bg-primary: hsl(232, 24%, 18%) !important;
+    --left-bg-primary: hsl(231, 16%, 34%) !important;
+    --right-bg-primary: hsl(230, 19%, 26%) !important;
+    --left-font-primary: hsl(227, 68%, 88%) !important;
+}
+
+#tab-control .separator {
+    background-color: hsl(231, 16%, 34%);
+}
+
+input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=month]:focus, input[type=week]:focus, input[type=email]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=color]:focus, textarea:focus, .ck.ck-content.ck-editor__editable.ck-focused, .ck.ck-editor__main .ck-source-editing-area textarea:focus {
+    border-color: hsl(199, 65%, 69%) !important;
+}
+
+[type=submit]:hover, .flex-list.buttons a.submit:hover, .flex-list.buttons button.submit:hover, a.submit:hover, button.submit:hover, [type=submit]:focus, .flex-list.buttons a.submit:focus, .flex-list.buttons button.submit:focus, a.submit:focus, button.submit:focus {
+    background-color: hsla(199, 65%, 69%, 0.80);
+}
+
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: hsl(230, 19%, 26%);
+}
+
+.selectize-dropdown {
+    background: hsl(231, 16%, 34%);
+    color: hsl(227, 68%, 88%);
+}
+select {
+    background-color: hsl(232, 24%, 18%);
+    color: hsl(227, 68%, 88%);
+}
+
+.dzone {
+    background: none !important;
+}
+
+label {
+    color: hsl(227, 68%, 88%);
+}
+
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card, .show-ckeditor-button, .v-card {
+    background-color: hsl(230, 19%, 26%);
+}
+
+
+.fc-list-table {
+    background-color: hsl(230, 19%, 26%) !important;
+}
+table tr th, table tr td {
+    color: hsl(227, 68%, 88%) !important;
+}
+.fc .fc-cell-shaded {
+    background-color: hsl(231, 16%, 34%) !important;
+}
+.fc-theme-standard tbody {
+    border: none !important;
+}
+
+.island span[style]:not(a > span[style]):not(.tile > span[style]):not(.event-container > span[style]) {
+    color: hsl(227, 68%, 88%) !important;
+    background-color: rgba(0,0,0,0) !important;
+}
+.island a > span[style] {
+    color: hsl(199, 65%, 69%) !important;
+    background-color: rgba(0,0,0,0) !important;
+}
+.island section {
+    background-color: hsl(232, 24%, 18%) !important;
+}
+
+.tabs {
+    background: hsl(231, 16%, 34%);
+    border-bottom: none;
+}
+.tabs dd > a, .tabs .tab-title > a {
+    color: hsl(227, 68%, 88%);
+}
+
+
+.information-list, .action-list > .actions-small-1 {
+    background-color: hsl(230, 19%, 26%) !important;
+}
+
+.timetable th, .timetable-small th, .timetable td, .timetable-small td {
+    background-color: hsl(230, 19%, 26%);
+}
+.timetable a, .timetable-small a {
+    color: #0066b0;
+}
+.timetable div.timetable-subject > div, .timetable-small div.timetable-subject > div {
+    color: hsl(232, 24%, 18%);
+}
+.timetable-day-active {
+    background-color: hsl(231, 16%, 34%) !important;
+}
+
+.breadcrumb li.active span:not([href]) {
+    color: hsl(199, 65%, 69%);
+}
+
+.scrollable::-webkit-scrollbar, #container::-webkit-scrollbar, .left-off-canvas-menu::-webkit-scrollbar, .right-off-canvas-menu::-webkit-scrollbar, .hybrid-bar .account-drop::-webkit-scrollbar {
+    background-color: hsl(236, 23%, 12%);
+    width: 8px;
+    height: 8px;
+}
+.scrollable::-webkit-scrollbar-thumb, #container::-webkit-scrollbar-thumb, .left-off-canvas-menu::-webkit-scrollbar-thumb, .right-off-canvas-menu::-webkit-scrollbar-thumb, .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
+    background: hsla(199, 65%, 69%, 0.50);
+}
+.scrollable:hover::-webkit-scrollbar-thumb, #container:hover::-webkit-scrollbar-thumb, .left-off-canvas-menu:hover::-webkit-scrollbar-thumb, .right-off-canvas-menu:hover::-webkit-scrollbar-thumb, .hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
+    background: hsl(199, 65%, 69%);
+}
+.scrollable::-webkit-scrollbar-track, #container::-webkit-scrollbar-track, .left-off-canvas-menu::-webkit-scrollbar-track, .right-off-canvas-menu::-webkit-scrollbar-track, .hybrid-bar .account-drop::-webkit-scrollbar-track {
+    background: hsl(236, 23%, 12%);
+}
+
+.icon-news::before {
+    color: hsl(227, 68%, 88%);
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=email], input[type=number], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=color], textarea, input:hover, textarea:hover, select:hover {
+    background-color: hsl(232, 24%, 18%);
+    color: hsl(227, 68%, 88%);
+}
+
+label.error {
+    color: hsl(351, 74%, 73%);
+}
+
+:root {
+    --sb-ck-active: hsl(199, 65%, 69%);
+    --sb-ck-active-grey: hsl(232, 24%, 18%);
+    --sb-ck-active-highlight: #daedff;
+    --sb-ck-button-grid-border: #bbbbbb;
+    --sb-ck-disabled: #dddddd;
+    --sb-ck-icon-colour: rgb(51, 51, 51);
+
+    /* Overrides of default CK colours */
+    --ck-color-base-background: hsl(230, 19%, 26%) !important;
+    --ck-color-text: hsl(227, 68%, 88%) !important;
+
+
+    --foreground-colour: hsl(230, 19%, 26%) !important;
+    --primary-text-colour: hsl(227, 68%, 88%) !important;
+    --navigation-foreground: hsl(227, 68%, 88%);
+    --navigation-foreground-contrast: hsl(236, 23%, 12%);
+    --navigation-background: hsla(233, 23%, 15%, 1.00);
+    --navigation-background-contrast: hsl(236, 23%, 12%);
+    --navigation-hover: hsl(230, 19%, 26%);
+    --navigation-hover-contrast: hsl(236, 23%, 12%);
+        --off-canvas-foreground: hsl(227, 68%, 88%);
+    .left-off-canvas-menu ul.off-canvas-list li h3, .left-off-canvas-menu ul.off-canvas-list li label .unit-heading, label .left-off-canvas-menu ul.off-canvas-list li .unit-heading, .left-off-canvas-menu ul.off-canvas-list li h4 {
+        color: hsl(227, 68%, 88%);
+    }
+    --off-canvas-background: hsl(233, 23%, 15%);
+    --off-canvas-hover: hsl(230, 19%, 26%);
+    --accounts-menu-foreground: hsl(227, 68%, 88%);
+    --accounts-menu-background: hsl(230, 14%, 42%);
+    --accounts-menu-hover: hsl(228, 15%, 57%);
+    --content-ui-foreground: hsl(199, 65%, 69%);
+    --content-ui-background: hsl(230, 19%, 26%);
+    --content-ui-hover: hsl(231, 16%, 34%);
+    --content-ui-selected: hsl(230, 19%, 26%);
+    --content-ui-submit-foreground: hsl(232, 24%, 18%);
+    --content-ui-submit-background: hsl(199, 65%, 69%);
+    --accent-foreground: hsl(199, 65%, 69%);
+    --accent-background: hsl(232, 24%, 18%);
+    --logo-background: 24273a;
+    --body-background: hsl(232, 24%, 18%);
+    --form-border-color: hsla(199, 65%, 69%, 0.40);
+    --form-bg-hover-color: hsla(199, 65%, 69%, 0.30);
+    --form-bg-hover-color-contrast: hsl(227, 68%, 88%);
+    --body-foreground: hsl(227, 68%, 88%);
+    --body-foreground-h1: hsl(227, 68%, 88%);
+}
