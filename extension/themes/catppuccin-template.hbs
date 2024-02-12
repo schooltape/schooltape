@@ -24,15 +24,24 @@ p, h1, h2, h3, h4 {
     color: {{hsl text}};
 }
 
+{{!-- notifications --}}
+.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #right-menu-dock {
+    background-color: {{hsl red}};
+    color: {{hsl base}};
+}
+
 {{!-- drop down menus --}}
 #component-layout {
-    --right-head-bg: {{hsl accent}} !important;
-    --right-head-font: {{hsl base}} !important;
     --left-head-bg: {{hsl accent}} !important;
+    --right-head-bg: {{hsl accent}} !important;
+    --top-head-bg: {{hsl accent}} !important;
+    --top-head-font: {{hsl base}} !important;
     --left-head-font: {{hsl base}} !important;
+    --right-head-font: {{hsl base}} !important;
     --top-bg-primary: {{hsl base}} !important;
     --left-bg-primary: {{hsl surface1}} !important;
     --right-bg-primary: {{hsl surface0}} !important;
+    --left-font-primary: {{hsl text}} !important;
 }
 
 {{!-- three dot menu --}}
@@ -76,7 +85,7 @@ table tr th, table tr td {
 }
 
 {{!-- news articles --}}
-.island span[style]:not(a > span[style]) {
+.island span[style]:not(a > span[style]):not(.tile > span[style]) {
     color: {{hsl text}} !important;
     background-color: rgba(0,0,0,0) !important;
 }
@@ -98,7 +107,7 @@ table tr th, table tr td {
 }
 
 
-.information-list > .actions-small-1, .action-list > .actions-small-1, .actions-small-2 {
+.information-list, .action-list > .actions-small-1 {
     background-color: {{hsl surface0}} !important;
 }
 
@@ -300,7 +309,8 @@ label.error {
         var(--off-canvas-background-contrast-l),
         var(--off-canvas-background-contrast-a)
     ); --}}
-        --off-canvas-hover-r: 241;
+    --off-canvas-hover: {{hsl surface0}};
+        {{!-- --off-canvas-hover-r: 241;
     --off-canvas-hover-g: 249;
     --off-canvas-hover-b: 255;
     --off-canvas-hover-h: 205.71;
@@ -325,7 +335,7 @@ label.error {
         var(--off-canvas-hover-contrast-s),
         var(--off-canvas-hover-contrast-l),
         var(--off-canvas-hover-contrast-a)
-    );
+    ); --}}
         --accounts-menu-foreground-r: 0;
     --accounts-menu-foreground-g: 102;
     --accounts-menu-foreground-b: 176;
@@ -485,7 +495,7 @@ label.error {
         var(--content-ui-hover-contrast-l),
         var(--content-ui-hover-contrast-a)
     );
-    --content-ui-selected: {{hsl surface1}};
+    --content-ui-selected: {{hsl surface0}};
         {{!-- --content-ui-selected-r: 229;
     --content-ui-selected-g: 244;
     --content-ui-selected-b: 255;

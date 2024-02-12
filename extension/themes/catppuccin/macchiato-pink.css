@@ -15,14 +15,22 @@ p, h1, h2, h3, h4 {
     color: hsl(227, 68%, 88%);
 }
 
+.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #right-menu-dock {
+    background-color: hsl(351, 74%, 73%);
+    color: hsl(232, 24%, 18%);
+}
+
 #component-layout {
-    --right-head-bg: hsl(316, 74%, 85%) !important;
-    --right-head-font: hsl(232, 24%, 18%) !important;
     --left-head-bg: hsl(316, 74%, 85%) !important;
+    --right-head-bg: hsl(316, 74%, 85%) !important;
+    --top-head-bg: hsl(316, 74%, 85%) !important;
+    --top-head-font: hsl(232, 24%, 18%) !important;
     --left-head-font: hsl(232, 24%, 18%) !important;
+    --right-head-font: hsl(232, 24%, 18%) !important;
     --top-bg-primary: hsl(232, 24%, 18%) !important;
     --left-bg-primary: hsl(231, 16%, 34%) !important;
     --right-bg-primary: hsl(230, 19%, 26%) !important;
+    --left-font-primary: hsl(227, 68%, 88%) !important;
 }
 
 #tab-control .separator {
@@ -55,7 +63,7 @@ table tr th, table tr td {
     border: none !important;
 }
 
-.island span[style]:not(a > span[style]) {
+.island span[style]:not(a > span[style]):not(.tile > span[style]) {
     color: hsl(227, 68%, 88%) !important;
     background-color: rgba(0,0,0,0) !important;
 }
@@ -76,7 +84,7 @@ table tr th, table tr td {
 }
 
 
-.information-list > .actions-small-1, .action-list > .actions-small-1, .actions-small-2 {
+.information-list, .action-list > .actions-small-1 {
     background-color: hsl(230, 19%, 26%) !important;
 }
 
@@ -157,32 +165,7 @@ label.error {
         color: hsl(227, 68%, 88%);
     }
     --off-canvas-background: hsl(233, 23%, 15%);
-        --off-canvas-hover-r: 241;
-    --off-canvas-hover-g: 249;
-    --off-canvas-hover-b: 255;
-    --off-canvas-hover-h: 205.71;
-    --off-canvas-hover-s: 100%;
-    --off-canvas-hover-l: 97.25%;
-    --off-canvas-hover-a: 1;
-    --off-canvas-hover:   hsla(
-        var(--off-canvas-hover-h),
-        var(--off-canvas-hover-s),
-        var(--off-canvas-hover-l),
-        var(--off-canvas-hover-a)
-    );
-        --off-canvas-hover-contrast-r: 0;
-    --off-canvas-hover-contrast-g: 0;
-    --off-canvas-hover-contrast-b: 0;
-    --off-canvas-hover-contrast-h: 0;
-    --off-canvas-hover-contrast-s: 0%;
-    --off-canvas-hover-contrast-l: 0%;
-    --off-canvas-hover-contrast-a: 1;
-    --off-canvas-hover-contrast:   hsla(
-        var(--off-canvas-hover-contrast-h),
-        var(--off-canvas-hover-contrast-s),
-        var(--off-canvas-hover-contrast-l),
-        var(--off-canvas-hover-contrast-a)
-    );
+    --off-canvas-hover: hsl(230, 19%, 26%);
         --accounts-menu-foreground-r: 0;
     --accounts-menu-foreground-g: 102;
     --accounts-menu-foreground-b: 176;
@@ -290,7 +273,7 @@ label.error {
         var(--content-ui-hover-contrast-l),
         var(--content-ui-hover-contrast-a)
     );
-    --content-ui-selected: hsl(231, 16%, 34%);
+    --content-ui-selected: hsl(230, 19%, 26%);
         --content-ui-selected-contrast-r: 0;
     --content-ui-selected-contrast-g: 0;
     --content-ui-selected-contrast-b: 0;
