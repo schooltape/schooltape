@@ -24,8 +24,24 @@ p, h1, h2, h3, h4 {
     color: {{hsl text}};
 }
 
+{{!-- account menu --}}
+#account-content {
+    overflow: hidden;
+}
+.account-menu-mobile .separator, .account-drop .separator {
+    color: {{hsl accent}};
+}
+
+{{!-- side nav / news -> right hand side --}}
+.side-nav {
+    background-color: {{hsl surface0}};
+}
+.side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):hover, .side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):focus {
+    color: {{hsla (opacity accent 0.7)}};
+}
+
 {{!-- notifications --}}
-.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #right-menu-dock {
+.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock {
     background-color: {{hsl red}};
     color: {{hsl base}};
 }
@@ -57,6 +73,27 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 {{!-- submit buttons --}}
 [type=submit]:hover, .flex-list.buttons a.submit:hover, .flex-list.buttons button.submit:hover, a.submit:hover, button.submit:hover, [type=submit]:focus, .flex-list.buttons a.submit:focus, .flex-list.buttons button.submit:focus, a.submit:focus, button.submit:focus {
     background-color: {{hsla (opacity accent 0.8)}};
+}
+
+{{!-- form inputs --}}
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: {{hsl surface0}};
+}
+
+{{!-- form dropdowns --}}
+.selectize-dropdown {
+    background: {{hsl surface1}};
+    color: {{hsl text}};
+}
+
+{{!-- attach buttons --}}
+.dzone {
+    background: none !important;
+}
+
+{{!-- labels --}}
+label {
+    color: {{hsl text}};
 }
 
 {{!-- boxes --}}
@@ -112,8 +149,17 @@ table tr th, table tr td {
 }
 
 {{!-- timetable --}}
-.timetable th, .timetable-small th {
+.timetable th, .timetable-small th, .timetable td, .timetable-small td {
     background-color: {{hsl surface0}};
+}
+.timetable a {
+    color: #0066b0;
+}
+.timetable div.timetable-subject > div {
+    color: {{hsl base}};
+}
+.timetable-day-active {
+    background-color: {{hsl surface1}} !important;
 }
 
 {{!-- breadcrumbs --}}
@@ -336,7 +382,8 @@ label.error {
         var(--off-canvas-hover-contrast-l),
         var(--off-canvas-hover-contrast-a)
     ); --}}
-        --accounts-menu-foreground-r: 0;
+    --accounts-menu-foreground: {{hsl text}};
+        {{!-- --accounts-menu-foreground-r: 0;
     --accounts-menu-foreground-g: 102;
     --accounts-menu-foreground-b: 176;
     --accounts-menu-foreground-h: 205.23;
@@ -361,8 +408,9 @@ label.error {
         var(--accounts-menu-foreground-contrast-s),
         var(--accounts-menu-foreground-contrast-l),
         var(--accounts-menu-foreground-contrast-a)
-    );
-        --accounts-menu-background-r: 229;
+    ); --}}
+    --accounts-menu-background: {{hsl surface2}};
+        {{!-- --accounts-menu-background-r: 229;
     --accounts-menu-background-g: 244;
     --accounts-menu-background-b: 255;
     --accounts-menu-background-h: 205.38;
@@ -387,7 +435,7 @@ label.error {
         var(--accounts-menu-background-contrast-s),
         var(--accounts-menu-background-contrast-l),
         var(--accounts-menu-background-contrast-a)
-    );
+    ); --}}
         --accounts-menu-hover-r: 229;
     --accounts-menu-hover-g: 244;
     --accounts-menu-hover-b: 255;
@@ -468,7 +516,7 @@ label.error {
         var(--content-ui-background-contrast-l),
         var(--content-ui-background-contrast-a)
     );
-    --content-ui-hover: {{hsl base}};
+    --content-ui-hover: {{hsl accent}};
         {{!-- --content-ui-hover-r: 209;
     --content-ui-hover-g: 236;
     --content-ui-hover-b: 255;
@@ -482,7 +530,7 @@ label.error {
         var(--content-ui-hover-l),
         var(--content-ui-hover-a)
     ); --}}
-        --content-ui-hover-contrast-r: 0;
+        {{!-- --content-ui-hover-contrast-r: 0;
     --content-ui-hover-contrast-g: 0;
     --content-ui-hover-contrast-b: 0;
     --content-ui-hover-contrast-h: 0;
@@ -494,7 +542,7 @@ label.error {
         var(--content-ui-hover-contrast-s),
         var(--content-ui-hover-contrast-l),
         var(--content-ui-hover-contrast-a)
-    );
+    ); --}}
     --content-ui-selected: {{hsl surface0}};
         {{!-- --content-ui-selected-r: 229;
     --content-ui-selected-g: 244;

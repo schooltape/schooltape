@@ -15,7 +15,21 @@ p, h1, h2, h3, h4 {
     color: hsl(227, 68%, 88%);
 }
 
-.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #right-menu-dock {
+#account-content {
+    overflow: hidden;
+}
+.account-menu-mobile .separator, .account-drop .separator {
+    color: hsl(316, 74%, 85%);
+}
+
+.side-nav {
+    background-color: hsl(230, 19%, 26%);
+}
+.side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):hover, .side-nav li a:not(.button):not(.adtp-btn):not(button):not([type=submit]):not(a.submit):not(button.submit):not(.show-ckeditor-button):focus {
+    color: hsla(316, 74%, 85%, 0.70);
+}
+
+.right-off-canvas-menu ul.off-canvas-list label, .right-small a[data-unread]:not([data-unread="0"]), #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock {
     background-color: hsl(351, 74%, 73%);
     color: hsl(232, 24%, 18%);
 }
@@ -43,6 +57,23 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
 
 [type=submit]:hover, .flex-list.buttons a.submit:hover, .flex-list.buttons button.submit:hover, a.submit:hover, button.submit:hover, [type=submit]:focus, .flex-list.buttons a.submit:focus, .flex-list.buttons button.submit:focus, a.submit:focus, button.submit:focus {
     background-color: hsla(316, 74%, 85%, 0.80);
+}
+
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: hsl(230, 19%, 26%);
+}
+
+.selectize-dropdown {
+    background: hsl(231, 16%, 34%);
+    color: hsl(227, 68%, 88%);
+}
+
+.dzone {
+    background: none !important;
+}
+
+label {
+    color: hsl(227, 68%, 88%);
 }
 
 .editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card, .show-ckeditor-button {
@@ -88,8 +119,17 @@ table tr th, table tr td {
     background-color: hsl(230, 19%, 26%) !important;
 }
 
-.timetable th, .timetable-small th {
+.timetable th, .timetable-small th, .timetable td, .timetable-small td {
     background-color: hsl(230, 19%, 26%);
+}
+.timetable a {
+    color: #0066b0;
+}
+.timetable div.timetable-subject > div {
+    color: hsl(232, 24%, 18%);
+}
+.timetable-day-active {
+    background-color: hsl(231, 16%, 34%) !important;
 }
 
 .breadcrumb li.active span:not([href]) {
@@ -166,58 +206,8 @@ label.error {
     }
     --off-canvas-background: hsl(233, 23%, 15%);
     --off-canvas-hover: hsl(230, 19%, 26%);
-        --accounts-menu-foreground-r: 0;
-    --accounts-menu-foreground-g: 102;
-    --accounts-menu-foreground-b: 176;
-    --accounts-menu-foreground-h: 205.23;
-    --accounts-menu-foreground-s: 100%;
-    --accounts-menu-foreground-l: 34.51%;
-    --accounts-menu-foreground-a: 1;
-    --accounts-menu-foreground:   hsla(
-        var(--accounts-menu-foreground-h),
-        var(--accounts-menu-foreground-s),
-        var(--accounts-menu-foreground-l),
-        var(--accounts-menu-foreground-a)
-    );
-        --accounts-menu-foreground-contrast-r: 255;
-    --accounts-menu-foreground-contrast-g: 255;
-    --accounts-menu-foreground-contrast-b: 255;
-    --accounts-menu-foreground-contrast-h: 0;
-    --accounts-menu-foreground-contrast-s: 0%;
-    --accounts-menu-foreground-contrast-l: 100%;
-    --accounts-menu-foreground-contrast-a: 1;
-    --accounts-menu-foreground-contrast:   hsla(
-        var(--accounts-menu-foreground-contrast-h),
-        var(--accounts-menu-foreground-contrast-s),
-        var(--accounts-menu-foreground-contrast-l),
-        var(--accounts-menu-foreground-contrast-a)
-    );
-        --accounts-menu-background-r: 229;
-    --accounts-menu-background-g: 244;
-    --accounts-menu-background-b: 255;
-    --accounts-menu-background-h: 205.38;
-    --accounts-menu-background-s: 100%;
-    --accounts-menu-background-l: 94.9%;
-    --accounts-menu-background-a: 1;
-    --accounts-menu-background:   hsla(
-        var(--accounts-menu-background-h),
-        var(--accounts-menu-background-s),
-        var(--accounts-menu-background-l),
-        var(--accounts-menu-background-a)
-    );
-        --accounts-menu-background-contrast-r: 0;
-    --accounts-menu-background-contrast-g: 0;
-    --accounts-menu-background-contrast-b: 0;
-    --accounts-menu-background-contrast-h: 0;
-    --accounts-menu-background-contrast-s: 0%;
-    --accounts-menu-background-contrast-l: 0%;
-    --accounts-menu-background-contrast-a: 1;
-    --accounts-menu-background-contrast:   hsla(
-        var(--accounts-menu-background-contrast-h),
-        var(--accounts-menu-background-contrast-s),
-        var(--accounts-menu-background-contrast-l),
-        var(--accounts-menu-background-contrast-a)
-    );
+    --accounts-menu-foreground: hsl(227, 68%, 88%);
+    --accounts-menu-background: hsl(230, 14%, 42%);
         --accounts-menu-hover-r: 229;
     --accounts-menu-hover-g: 244;
     --accounts-menu-hover-b: 255;
@@ -259,20 +249,7 @@ label.error {
         var(--content-ui-background-contrast-l),
         var(--content-ui-background-contrast-a)
     );
-    --content-ui-hover: hsl(232, 24%, 18%);
-        --content-ui-hover-contrast-r: 0;
-    --content-ui-hover-contrast-g: 0;
-    --content-ui-hover-contrast-b: 0;
-    --content-ui-hover-contrast-h: 0;
-    --content-ui-hover-contrast-s: 0%;
-    --content-ui-hover-contrast-l: 0%;
-    --content-ui-hover-contrast-a: 1;
-    --content-ui-hover-contrast:   hsla(
-        var(--content-ui-hover-contrast-h),
-        var(--content-ui-hover-contrast-s),
-        var(--content-ui-hover-contrast-l),
-        var(--content-ui-hover-contrast-a)
-    );
+    --content-ui-hover: hsl(316, 74%, 85%);
     --content-ui-selected: hsl(230, 19%, 26%);
         --content-ui-selected-contrast-r: 0;
     --content-ui-selected-contrast-g: 0;
