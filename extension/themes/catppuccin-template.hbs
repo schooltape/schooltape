@@ -12,16 +12,81 @@ a.logo > img {
     max-width: 30%;
 }
 
-.material-icons-round {
+.material-icons-round, ::placeholder {
     color: {{hsl text}} !important;
 }
 
-body {
+body, p, h1, h2, h3, h4, .tab-bar {
     color: {{hsl text}};
 }
 
-p, h1, h2, h3, h4 {
+{{!-- date picker (flatpickr) --}}
+.adtp .flatpickr-calendar, .adtp .flatpickr-innerContainer {
+    border: none;
+}
+
+.flatpickr-calendar, .flatpickr-day, span.flatpickr-weekday {
+    background: {{hsl base}};
     color: {{hsl text}};
+}
+.adtp .flatpickr-day.selected, .adtp .flatpickr-day.selected:focus, .adtp .flatpickr-day.selected:hover, .adtp .flatpickr-day.selected.prevMonthDay, .adtp .flatpickr-day.selected.nextMonthDay {
+    color: {{hsl base}};
+}
+.adtp .flatpickr-day.inRange, .adtp .flatpickr-day.prevMonthDay.inRange, .adtp .flatpickr-day.nextMonthDay.inRange, .adtp .flatpickr-day.today.inRange, .adtp .flatpickr-day.prevMonthDay.today.inRange, .adtp .flatpickr-day.nextMonthDay.today.inRange, .adtp .flatpickr-day:hover, .adtp .flatpickr-day:hover, .adtp .flatpickr-day.nextMonthDay:hover, .adtp .flatpickr-day:focus, .adtp .flatpickr-day.prevMonthDay:focus, .adtp .flatpickr-day.nextMonthDay:focus {
+    background: {{hsl surface0}};
+}
+.flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+    fill: {{hsl accent}};
+    color: {{hsl accent}};
+}
+.flatpickr-months .flatpickr-month {
+    color: {{hsl accent}};
+}
+.flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay, .flatpickr-day.notAllowed, .flatpickr-day.notAllowed.prevMonthDay, .flatpickr-day.notAllowed.nextMonthDay {
+    color: {{rgb overlay1}};
+}
+
+{{!-- settings/messages --}}
+.alert-box, .eotc-status, .alert-box-icon {
+    background-color: {{hsl surface0}};
+}
+
+{{!-- /groups page buttons --}}
+.group-actions[data-v-2e9f597c] {
+    background: {{hsl surface0}} !important;
+}
+
+{{!-- modals --}}
+{{!-- calendar -> event popups --}}
+{{!-- confirmation dialogues --}}
+.reveal-modal {
+    background-color: {{hsl base}};
+}
+.reveal-modal .close-reveal-modal {
+    color: {{hsl accent}};
+}
+.component-action section {
+    background-color: {{hsl surface0}};
+}
+
+{{!-- calendar --}}
+table {
+    background: {{hsl surface0}};
+}
+table thead {
+    background: {{hsl surface1}};
+}
+.fc .fc-col-header-cell a {
+    color: {{hsl text}} !important;
+}
+table * {
+    border: none !important;
+}
+.fc-toolbar {
+    border-bottom: none !important;
+}
+.fc .fc-col-header-cell.fc-day-today>div, .fc .fc-daygrid-day.fc-day-today {
+    background-color: {{hsl surface1}} !important;
 }
 
 {{!-- account menu --}}
@@ -80,9 +145,13 @@ input:focus, textarea:focus, select:focus, input:not([type]):focus, input[type=t
     background: {{hsl surface0}};
 }
 
-{{!-- form dropdowns --}}
+{{!-- dropdowns --}}
 .selectize-dropdown {
     background: {{hsl surface1}};
+    color: {{hsl text}};
+}
+select {
+    background-color: {{hsl base}};
     color: {{hsl text}};
 }
 
@@ -97,7 +166,7 @@ label {
 }
 
 {{!-- boxes --}}
-.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card, .show-ckeditor-button {
+.editPanel.socialstream-new-post, .content, .information-lis, .empty-state, .empty-state-flex-centered, .card, .show-ckeditor-button, .v-card {
     background-color: {{hsl surface0}};
 }
 
@@ -122,7 +191,7 @@ table tr th, table tr td {
 }
 
 {{!-- news articles --}}
-.island span[style]:not(a > span[style]):not(.tile > span[style]) {
+.island span[style]:not(a > span[style]):not(.tile > span[style]):not(.event-container > span[style]) {
     color: {{hsl text}} !important;
     background-color: rgba(0,0,0,0) !important;
 }
@@ -152,10 +221,10 @@ table tr th, table tr td {
 .timetable th, .timetable-small th, .timetable td, .timetable-small td {
     background-color: {{hsl surface0}};
 }
-.timetable a {
+.timetable a, .timetable-small a {
     color: #0066b0;
 }
-.timetable div.timetable-subject > div {
+.timetable div.timetable-subject > div, .timetable-small div.timetable-subject > div {
     color: {{hsl base}};
 }
 .timetable-day-active {
@@ -168,17 +237,18 @@ table tr th, table tr td {
 }
 
 {{!-- scrollbars --}}
-#container::-webkit-scrollbar, .left-off-canvas-menu::-webkit-scrollbar, .right-off-canvas-menu::-webkit-scrollbar, .hybrid-bar .account-drop::-webkit-scrollbar {
+.scrollable::-webkit-scrollbar, #container::-webkit-scrollbar, .left-off-canvas-menu::-webkit-scrollbar, .right-off-canvas-menu::-webkit-scrollbar, .hybrid-bar .account-drop::-webkit-scrollbar {
     background-color: {{hsl crust}};
     width: 8px;
+    height: 8px;
 }
-#container::-webkit-scrollbar-thumb, .left-off-canvas-menu::-webkit-scrollbar-thumb, .right-off-canvas-menu::-webkit-scrollbar-thumb, .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
+.scrollable::-webkit-scrollbar-thumb, #container::-webkit-scrollbar-thumb, .left-off-canvas-menu::-webkit-scrollbar-thumb, .right-off-canvas-menu::-webkit-scrollbar-thumb, .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
     background: {{hsla (opacity accent 0.5)}};
 }
-#container:hover::-webkit-scrollbar-thumb, .left-off-canvas-menu:hover::-webkit-scrollbar-thumb, .right-off-canvas-menu:hover::-webkit-scrollbar-thumb, .hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
+.scrollable:hover::-webkit-scrollbar-thumb, #container:hover::-webkit-scrollbar-thumb, .left-off-canvas-menu:hover::-webkit-scrollbar-thumb, .right-off-canvas-menu:hover::-webkit-scrollbar-thumb, .hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
     background: {{hsl accent}};
 }
-#container::-webkit-scrollbar-track, .left-off-canvas-menu::-webkit-scrollbar-track, .right-off-canvas-menu::-webkit-scrollbar-track, .hybrid-bar .account-drop::-webkit-scrollbar-track {
+.scrollable::-webkit-scrollbar-track, #container::-webkit-scrollbar-track, .left-off-canvas-menu::-webkit-scrollbar-track, .right-off-canvas-menu::-webkit-scrollbar-track, .hybrid-bar .account-drop::-webkit-scrollbar-track {
     background: {{hsl crust}};
 }
 
@@ -213,9 +283,13 @@ label.error {
 
     {{!-- skin.css.php --}}
 
+    {{!-- search box --}}
+    --foreground-colour: {{hsl surface0}} !important;
+    --primary-text-colour: {{hsl text}} !important;
+{{!-- 
         --navigation-foreground-r: {{red_i text}};
     --navigation-foreground-g: {{green_i text}};
-    --navigation-foreground-b: {{blue_i text}};
+    --navigation-foreground-b: {{blue_i text}}; --}}
     --navigation-foreground: {{hsl text}};
     {{!-- --navigation-foreground-h: 0;
     --navigation-foreground-s: 0%;
@@ -227,9 +301,9 @@ label.error {
         var(--navigation-foreground-l),
         var(--navigation-foreground-a)
     ); --}}
-        --navigation-foreground-contrast-r: {{red_i crust}};
+        {{!-- --navigation-foreground-contrast-r: {{red_i crust}};
     --navigation-foreground-contrast-g: {{green_i crust}};
-    --navigation-foreground-contrast-b: {{blue_i crust}};
+    --navigation-foreground-contrast-b: {{blue_i crust}}; --}}
     --navigation-foreground-contrast: {{hsl crust}};
     {{!-- --navigation-foreground-contrast-h: 0;
     --navigation-foreground-contrast-s: 0%;
@@ -241,9 +315,9 @@ label.error {
         var(--navigation-foreground-contrast-l),
         var(--navigation-foreground-contrast-a)
     ); --}}
-        --navigation-background-r: {{red_i mantle}};
+        {{!-- --navigation-background-r: {{red_i mantle}};
     --navigation-background-g: {{green_i mantle}};
-    --navigation-background-b: {{blue_i mantle}};
+    --navigation-background-b: {{blue_i mantle}}; --}}
     --navigation-background: {{hsla mantle}};
     {{!-- --navigation-background-h: 214.84;
     --navigation-background-s: 88.57%;
@@ -256,9 +330,9 @@ label.error {
         var(--navigation-background-a)
     ); --}}
     {{!-- --navigation-background: {{hsl base}} --}}
-        --navigation-background-contrast-r: {{red_i crust}};
+        {{!-- --navigation-background-contrast-r: {{red_i crust}};
     --navigation-background-contrast-g: {{green_i crust}};
-    --navigation-background-contrast-b: {{blue_i crust}};
+    --navigation-background-contrast-b: {{blue_i crust}}; --}}
     --navigation-background-contrast: {{hsl crust}};
     {{!-- --navigation-background-contrast-h: 0;
     --navigation-background-contrast-s: 0%;
@@ -270,10 +344,10 @@ label.error {
         var(--navigation-background-contrast-l),
         var(--navigation-background-contrast-a)
     ); --}}
-        --navigation-hover-r: {{red_i accent}};
+        {{!-- --navigation-hover-r: {{red_i accent}};
     --navigation-hover-g: {{green_i accent}};
-    --navigation-hover-b: {{blue_i accent}};
-    --navigation-hover: {{hsl accent}};
+    --navigation-hover-b: {{blue_i accent}}; --}}
+    --navigation-hover: {{hsl surface0}};
     {{!-- --navigation-hover-h: 210;
     --navigation-hover-s: 58.49%;
     --navigation-hover-l: 79.22%;
@@ -284,9 +358,9 @@ label.error {
         var(--navigation-hover-l),
         var(--navigation-hover-a)
     ); --}}
-        --navigation-hover-contrast-r: {{red_i crust}};
+        {{!-- --navigation-hover-contrast-r: {{red_i crust}};
     --navigation-hover-contrast-g: {{green_i crust}};
-    --navigation-hover-contrast-b: {{blue_i crust}};
+    --navigation-hover-contrast-b: {{blue_i crust}}; --}}
     --navigation-hover-contrast: {{hsl crust}};
     {{!-- --navigation-hover-contrast-h: 0;
     --navigation-hover-contrast-s: 0%;
@@ -436,7 +510,7 @@ label.error {
         var(--accounts-menu-background-contrast-l),
         var(--accounts-menu-background-contrast-a)
     ); --}}
-        --accounts-menu-hover-r: 229;
+        {{!-- --accounts-menu-hover-r: 229;
     --accounts-menu-hover-g: 244;
     --accounts-menu-hover-b: 255;
     --accounts-menu-hover-h: 205.38;
@@ -448,8 +522,9 @@ label.error {
         var(--accounts-menu-hover-s),
         var(--accounts-menu-hover-l),
         var(--accounts-menu-hover-a)
-    );
-        --accounts-menu-hover-contrast-r: 0;
+    ); --}}
+    --accounts-menu-hover: {{hsl overlay1}};
+        {{!-- --accounts-menu-hover-contrast-r: 0;
     --accounts-menu-hover-contrast-g: 0;
     --accounts-menu-hover-contrast-b: 0;
     --accounts-menu-hover-contrast-h: 0;
@@ -461,7 +536,7 @@ label.error {
         var(--accounts-menu-hover-contrast-s),
         var(--accounts-menu-hover-contrast-l),
         var(--accounts-menu-hover-contrast-a)
-    );
+    ); --}}
     --content-ui-foreground: {{hsl accent}};
         {{!-- --content-ui-foreground-r: 0;
     --content-ui-foreground-g: 102;
@@ -503,7 +578,7 @@ label.error {
         var(--content-ui-background-l),
         var(--content-ui-background-a)
     ); --}}
-        --content-ui-background-contrast-r: 0;
+        {{!-- --content-ui-background-contrast-r: 0;
     --content-ui-background-contrast-g: 0;
     --content-ui-background-contrast-b: 0;
     --content-ui-background-contrast-h: 0;
@@ -515,8 +590,8 @@ label.error {
         var(--content-ui-background-contrast-s),
         var(--content-ui-background-contrast-l),
         var(--content-ui-background-contrast-a)
-    );
-    --content-ui-hover: {{hsl accent}};
+    ); --}}
+    --content-ui-hover: {{hsl surface1}};
         {{!-- --content-ui-hover-r: 209;
     --content-ui-hover-g: 236;
     --content-ui-hover-b: 255;
@@ -557,7 +632,7 @@ label.error {
         var(--content-ui-selected-l),
         var(--content-ui-selected-a)
     ); --}}
-        --content-ui-selected-contrast-r: 0;
+        {{!-- --content-ui-selected-contrast-r: 0;
     --content-ui-selected-contrast-g: 0;
     --content-ui-selected-contrast-b: 0;
     --content-ui-selected-contrast-h: 0;
@@ -569,7 +644,7 @@ label.error {
         var(--content-ui-selected-contrast-s),
         var(--content-ui-selected-contrast-l),
         var(--content-ui-selected-contrast-a)
-    );
+    ); --}}
     --content-ui-submit-foreground: {{hsl base}};
         {{!-- --content-ui-submit-foreground-r: 255;
     --content-ui-submit-foreground-g: 255;
@@ -611,7 +686,7 @@ label.error {
         var(--content-ui-submit-background-l),
         var(--content-ui-submit-background-a)
     ); --}}
-        --content-ui-submit-background-contrast-r: 255;
+        {{!-- --content-ui-submit-background-contrast-r: 255;
     --content-ui-submit-background-contrast-g: 255;
     --content-ui-submit-background-contrast-b: 255;
     --content-ui-submit-background-contrast-h: 0;
@@ -623,9 +698,10 @@ label.error {
         var(--content-ui-submit-background-contrast-s),
         var(--content-ui-submit-background-contrast-l),
         var(--content-ui-submit-background-contrast-a)
-    );
+    ); --}}
     {{!-- highlighting --}}
     --accent-foreground: {{hsl accent}};
+    {{!-- NOTE: THIS NEEDS TO BE ACCENT FOR HIGHLIGHTING --}}
         {{!-- --accent-foreground-r: 0;
     --accent-foreground-g: 102;
     --accent-foreground-b: 176;
@@ -652,7 +728,8 @@ label.error {
         var(--accent-foreground-contrast-l),
         var(--accent-foreground-contrast-a)
     ); --}}
-    --accent-background: {{hsl accent}};
+    --accent-background: {{hsl base}};
+    {{!-- NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING --}}
         {{!-- --accent-background-r: 241;
     --accent-background-g: 249;
     --accent-background-b: 255;
@@ -666,7 +743,7 @@ label.error {
         var(--accent-background-l),
         var(--accent-background-a)
     ); --}}
-        --accent-background-contrast-r: 0;
+        {{!-- --accent-background-contrast-r: 0;
     --accent-background-contrast-g: 0;
     --accent-background-contrast-b: 0;
     --accent-background-contrast-h: 0;
@@ -704,7 +781,7 @@ label.error {
         var(--accent-hover-contrast-s),
         var(--accent-hover-contrast-l),
         var(--accent-hover-contrast-a)
-    );
+    ); --}}
     --logo-background: {{base}};
         {{!-- --logo-background-r: 255;
     --logo-background-g: 255;
