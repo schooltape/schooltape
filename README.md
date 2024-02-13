@@ -11,7 +11,7 @@
 
 A web extension to improve the look and feel of [Schoolbox](https://schoolbox.education/). [Download the latest release here!](https://github.com/42willow/schooltape/releases/latest)
 
-To install Schooltape and get started, view the [getting started](https://github.com/42Willow/schooltape/wiki/Getting-Started) guide.
+To install Schooltape and get started, **view the [getting started](https://github.com/42Willow/schooltape/wiki/Getting-Started) guide**.
 
 ## Features
 - **Schoolbox detection:** You do not need to manually enter your Schoolbox URL
