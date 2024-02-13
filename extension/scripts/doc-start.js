@@ -49,15 +49,11 @@ function injectThemes() {
     chrome.storage.local.get(["settings"], function (data) {
         if (data.settings.themes) {
             let theme = data.settings.currentTheme;
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", chrome.runtime.getURL("/themes/themes.json"), true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    let path = `/themes/${JSON.parse(xhr.responseText)[theme].path}`;
-                    injectCSS(path);
-                }
-            }
-            xhr.send();
+            // eg theme = "catppuccin-macchiato-pink"
+            // now we have to split this into three sections, separated by the -'s
+            let sections = theme.split('-');
+            // sections will be an array containing ["catppuccin", "macchiato", "pink"]
+            injectCSS(`/themes/${sections[1]}/${sections[2]}.css`);
         }
     });
 }

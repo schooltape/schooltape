@@ -30,6 +30,14 @@ h1, h2 {
     scroll-snap-align: start;
 } */
 
+/* ---------------------------------- Themes (Dropdowns) ---------------------------------- */
+select {
+    width: 200px;
+    height: 50px;
+    font-size: large;
+    padding: 10px;
+}
+
 /* ---------------------------------- Navigation ---------------------------------- */
 nav {
     display: flex;

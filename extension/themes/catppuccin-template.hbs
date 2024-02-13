@@ -224,9 +224,11 @@ table tr th, table tr td {
 .timetable a, .timetable-small a {
     color: #0066b0;
 }
+{{#if isDark}}
 .timetable div.timetable-subject > div, .timetable-small div.timetable-subject > div {
     color: {{hsl base}};
 }
+{{/if}}
 .timetable-day-active {
     background-color: {{hsl surface1}} !important;
 }
