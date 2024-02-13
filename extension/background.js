@@ -10,15 +10,14 @@ const defaultSettings = {
   "global": true,
   "updateReminder": true,
   "themes": false,
-  "currentTheme": "light-modern",
+  "currentTheme": "catppuccin-macchiato-rosewater",
   "enabledPlugins": [
       "subheader",
-      // "modern-icons",
-      // "hide-pfp",
-      // "legacy-timetable",
+      "hide-pfp",
       "scroll-segments",
       "tab-title",
-      "tab-titles-specific",
+      "scroll-period",
+      "timetable-labels"
   ],
   "urls": ["https://help.schoolbox.com.au"]
 }

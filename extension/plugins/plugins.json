@@ -1,7 +1,6 @@
 {
     "hide-pfp": {
         "name": "Hide PFP",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Hide your profile picture accross Schoolbox.",
         "scripts": [
@@ -18,7 +17,6 @@
     },
     "modern-icons": {
         "name": "Modern Icons",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Modernise the icons across Schoolbox.",
         "scripts": [
@@ -31,7 +29,6 @@
     },
     "subheader": {
         "name": "Subheader Revamp",
-        "version": "1.0",
         "author": "Subheader Revamp",
         "description": "Adds significant functionality and customisability to the subheader.",
         "scripts": [
@@ -44,7 +41,6 @@
     },
     "legacy-timetable": {
         "name": "Legacy Timetable",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Reverts the timetable to the old version.",
         "scripts": [
@@ -56,7 +52,6 @@
     },
     "scroll-segments": {
         "name": "Scroll Segments",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Segments Schoolbox's scrolling into sections.",
         "scripts": [
@@ -68,7 +63,6 @@
     },
     "tab-title": {
         "name": "Tab Title",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Adds the current page to the tab title.",
         "scripts": [
@@ -80,7 +74,6 @@
     },
     "homepage-switcher": {
         "name": "Homepage Switcher",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "When the Schoolbox logo is clicked, the user it taken to an existing homepage tab (when available).",
         "scripts": [
@@ -92,7 +85,6 @@
     },
     "scroll-period": {
         "name": "Scroll Period",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Scrolls to the current period on the timetable.",
         "scripts": [
@@ -104,7 +96,6 @@
     },
     "timetable-labels": {
         "name": "Timetable Labels",
-        "version": "1.0",
         "author": "Schooltape",
         "description": "Labels the day of the week from numbers to the actual day",
         "scripts": [
