@@ -191,12 +191,6 @@ chrome.contextMenus.removeAll(function() {
     contexts: ['browser_action']
   })
   chrome.contextMenus.create({
-    id: 'githubDiscussions',
-    parentId: github,
-    title: 'Discussions',
-    contexts: ['browser_action']
-  })
-  chrome.contextMenus.create({
     id: 'githubProjects',
     parentId: github,
     title: 'Projects',
@@ -232,9 +226,6 @@ function contextClick(info, tab) {
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubPRs') {
     var newURL = "https://github.com/42willow/schooltape/pulls";
-    chrome.tabs.create({ url: newURL });
-  } else if (menuItemId === 'githubDiscussions') {
-    var newURL = "https://github.com/42willow/schooltape/discussions";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubProjects') {
     var newURL = "https://github.com/42willow/schooltape/projects";
