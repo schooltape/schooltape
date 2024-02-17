@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    width: 400px; /* max: 1000px */
+    height: 500px; /* max: 750px */
+}
+
 #card {
     @apply w-auto md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
 }
@@ -37,4 +42,21 @@
 
 .navbutton-right {
     @apply hover:bg-pink/50 active:bg-pink/80 py-2 pl-2 pr-4 rounded-r-xl outline outline-1 outline-overlay2/10;
+}
+
+div[title] {
+    position: relative;
+}
+
+div[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%; /* Position the tooltip above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
 }

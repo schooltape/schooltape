@@ -618,10 +618,6 @@ video {
   min-height: 100vh;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -726,21 +722,15 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-mantle {
-  --tw-gradient-from: rgb(var(--ctp-mantle)) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(var(--ctp-mantle), 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-pink {
-  --tw-gradient-from: rgb(var(--ctp-pink)) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(var(--ctp-pink), 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-blue {
   --tw-gradient-from: rgb(var(--ctp-blue)) var(--tw-gradient-from-position);
   --tw-gradient-to: rgba(var(--ctp-blue), 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-mantle {
+  --tw-gradient-from: rgb(var(--ctp-mantle)) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgba(var(--ctp-mantle), 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -748,20 +738,8 @@ video {
   --tw-gradient-to: rgb(var(--ctp-crust)) var(--tw-gradient-to-position);
 }
 
-.to-mauve {
-  --tw-gradient-to: rgb(var(--ctp-mauve)) var(--tw-gradient-to-position);
-}
-
-.to-sapphire {
-  --tw-gradient-to: rgb(var(--ctp-sapphire)) var(--tw-gradient-to-position);
-}
-
 .to-teal {
   --tw-gradient-to: rgb(var(--ctp-teal)) var(--tw-gradient-to-position);
-}
-
-.p-4 {
-  padding: 1rem;
 }
 
 .p-6 {
@@ -778,19 +756,6 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.text-overlay1 {
-  --tw-text-opacity: 1;
-  color: rgba(var(--ctp-overlay1), var(--tw-text-opacity));
-}
-
 .text-subtext0 {
   --tw-text-opacity: 1;
   color: rgba(var(--ctp-subtext0), var(--tw-text-opacity));
@@ -803,6 +768,13 @@ video {
 
 .outline-pink {
   outline-color: rgb(var(--ctp-pink));
+}
+
+html {
+  width: 400px;
+  /* max: 1000px */
+  height: 500px;
+  /* max: 750px */
 }
 
 #card {
@@ -944,6 +916,24 @@ video {
 
 .navbutton-right:active {
   background-color: rgba(var(--ctp-pink), 0.8);
+}
+
+div[title] {
+  position: relative;
+}
+
+div[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  /* Position the tooltip above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
 }
 
 .hover\:bg-mauve:hover {

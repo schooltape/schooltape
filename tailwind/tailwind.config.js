@@ -7,6 +7,6 @@ module.exports = {
         }),
     ],
     content: [
-        './popup.html',
+        '../src/options/*/index.{html,js}',
     ],
 };

@@ -23,7 +23,7 @@
       "*"
     ],
     "options_ui": {
-      "page": "options/settings.html",
+      "page": "options/home/index.html",
       "open_in_tab": true
     },
     "content_scripts": [
@@ -36,17 +36,12 @@
         "matches": ["<all_urls>"],
         "js": ["scripts/doc-start.js"],
         "run_at": "document_start"
-      },
-      {
-        "matches": ["*://schooltape-community.github.io/*"],
-        "js": ["options/option-links.js"],
-        "run_at": "document_end"
       }
     ],
     "browser_action": {
       "default_icon": "logo.png",
       "default_title": "Toggle Schooltape",
-      "default_popup": "options/settings.html"
+      "default_popup": "options/home/index.html"
     },
     "browser_specific_settings": {
       "gecko": {
