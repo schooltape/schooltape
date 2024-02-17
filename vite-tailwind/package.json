@@ -1,0 +1,16 @@
+{
+  "name": "vite-tailwind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "popup.js",
+  "scripts": {
+    "build": "tailwindcss build -i styles.css -o dist/styles.css",
+    "dev": "tailwindcss build -i styles.css -o dist/styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "^0.1.6"
+  }
+}
