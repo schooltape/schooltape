@@ -23,7 +23,7 @@
       "*"
     ],
     "options_ui": {
-      "page": "options/home/index.html",
+      "page": "options/home/home.html",
       "open_in_tab": true
     },
     "content_scripts": [
@@ -41,7 +41,7 @@
     "browser_action": {
       "default_icon": "logo.png",
       "default_title": "Toggle Schooltape",
-      "default_popup": "options/home/index.html"
+      "default_popup": "options/home/home.html"
     },
     "browser_specific_settings": {
       "gecko": {

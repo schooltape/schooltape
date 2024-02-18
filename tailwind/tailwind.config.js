@@ -7,6 +7,6 @@ module.exports = {
         }),
     ],
     content: [
-        '../src/options/*/index.{html,js}',
+        '../src/options/*/*.{html,js}',
     ],
 };

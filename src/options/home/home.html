@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schooltape Options</title>
   <link href="../dist/styles.css" rel="stylesheet">
-  <script src="index.js"></script>
+  <script defer src="home.js"></script>
 </head>
 <body class="min-h-screen grid macchiato">
     <main class="flex flex-col justify-center items-center bg-gradient-to-b from-base to-crust p-6">
         <div class="flex mb-6 px-4 py-2 rounded-xl text-text">
-            <a href="../home/index.html"><button class="navbutton-left bg-overlay0/50">Settings</button></a>
-            <button class="navbutton-center bg-pink/50">Plugins</button></a>
-            <a href="../themes/index.html"><button class="navbutton-center bg-overlay0/50">Themes</button></a>
-            <a href="../snippets/index.html"><button class="navbutton-right bg-overlay0/50">Snippets</button></a>
+            <button class="navbutton-left bg-pink/50">Settings</button>
+            <a href="../plugins/plugins.html"><button class="navbutton-center bg-overlay0/50">Plugins</button></a>
+            <a href="../themes/themes.html"><button class="navbutton-center bg-overlay0/50">Themes</button></a>
+            <a href="../snippets/snippets.html"><button class="navbutton-right bg-overlay0/50">Snippets</button></a>
         </div>
         <div id="card" class="from-mantle to-crust outline-pink">
             <h1 class="from-blue to-teal">Schooltape</h1>
@@ -35,7 +35,7 @@
                 <div class="bg-lavender" title="Lavender"></div>
             </div>
             
-            <button class="bg-lavender hover:bg-mauve active:bg-mauve/75">Toggle</button>
+            <button id="toggle">Toggle</button>
         </div>
     </main>
 </body>

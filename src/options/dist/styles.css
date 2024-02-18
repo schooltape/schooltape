@@ -473,6 +473,35 @@ video {
   --ctp-crust: 220, 224, 232;
 }
 
+.frappe {
+  --ctp-rosewater: 242, 213, 207;
+  --ctp-flamingo: 238, 190, 190;
+  --ctp-pink: 244, 184, 228;
+  --ctp-mauve: 202, 158, 230;
+  --ctp-red: 231, 130, 132;
+  --ctp-maroon: 234, 153, 156;
+  --ctp-peach: 239, 159, 118;
+  --ctp-yellow: 229, 200, 144;
+  --ctp-green: 166, 209, 137;
+  --ctp-teal: 129, 200, 190;
+  --ctp-sky: 153, 209, 219;
+  --ctp-sapphire: 133, 193, 220;
+  --ctp-blue: 140, 170, 238;
+  --ctp-lavender: 186, 187, 241;
+  --ctp-text: 198, 208, 245;
+  --ctp-subtext1: 181, 191, 226;
+  --ctp-subtext0: 165, 173, 206;
+  --ctp-overlay2: 148, 156, 187;
+  --ctp-overlay1: 131, 139, 167;
+  --ctp-overlay0: 115, 121, 148;
+  --ctp-surface2: 98, 104, 128;
+  --ctp-surface1: 81, 87, 109;
+  --ctp-surface0: 65, 69, 89;
+  --ctp-base: 48, 52, 70;
+  --ctp-mantle: 41, 44, 60;
+  --ctp-crust: 35, 38, 52;
+}
+
 .macchiato {
   --ctp-rosewater: 244, 219, 214;
   --ctp-flamingo: 240, 198, 198;
@@ -500,6 +529,35 @@ video {
   --ctp-base: 36, 39, 58;
   --ctp-mantle: 30, 32, 48;
   --ctp-crust: 24, 25, 38;
+}
+
+.mocha {
+  --ctp-rosewater: 245, 224, 220;
+  --ctp-flamingo: 242, 205, 205;
+  --ctp-pink: 245, 194, 231;
+  --ctp-mauve: 203, 166, 247;
+  --ctp-red: 243, 139, 168;
+  --ctp-maroon: 235, 160, 172;
+  --ctp-peach: 250, 179, 135;
+  --ctp-yellow: 249, 226, 175;
+  --ctp-green: 166, 227, 161;
+  --ctp-teal: 148, 226, 213;
+  --ctp-sky: 137, 220, 235;
+  --ctp-sapphire: 116, 199, 236;
+  --ctp-blue: 137, 180, 250;
+  --ctp-lavender: 180, 190, 254;
+  --ctp-text: 205, 214, 244;
+  --ctp-subtext1: 186, 194, 222;
+  --ctp-subtext0: 166, 173, 200;
+  --ctp-overlay2: 147, 153, 178;
+  --ctp-overlay1: 127, 132, 156;
+  --ctp-overlay0: 108, 112, 134;
+  --ctp-surface2: 88, 91, 112;
+  --ctp-surface1: 69, 71, 90;
+  --ctp-surface0: 49, 50, 68;
+  --ctp-base: 30, 30, 46;
+  --ctp-mantle: 24, 24, 37;
+  --ctp-crust: 17, 17, 27;
 }
 
 *, ::before, ::after {
@@ -600,6 +658,40 @@ video {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+}
+
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
 }
 
 .mb-6 {
@@ -823,6 +915,38 @@ html {
   }
 }
 
+#card h2 {
+  margin-bottom: 1rem;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  -webkit-background-clip: text;
+          background-clip: text;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 900;
+  color: transparent;
+}
+
+@media (min-width: 1024px) {
+  #card h2 {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+#card h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 900;
+}
+
+@media (min-width: 1024px) {
+  #card h3 {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
 #card p {
   margin-bottom: 1rem;
   text-align: center;
@@ -843,7 +967,25 @@ html {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-duration: 300ms;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#card button.small {
+  border-radius: 0.375rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgba(var(--ctp-base), var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-duration: 500ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -936,11 +1078,15 @@ div[title]:hover::after {
   white-space: nowrap;
 }
 
-.hover\:bg-mauve:hover {
+.hover\:bg-pink:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(var(--ctp-mauve), var(--tw-bg-opacity));
+  background-color: rgba(var(--ctp-pink), var(--tw-bg-opacity));
 }
 
-.active\:bg-mauve\/75:active {
-  background-color: rgba(var(--ctp-mauve), 0.75);
+.active\:bg-green\/75:active {
+  background-color: rgba(var(--ctp-green), 0.75);
+}
+
+.active\:bg-red\/75:active {
+  background-color: rgba(var(--ctp-red), 0.75);
 }
