@@ -1,0 +1,32 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schooltape Options</title>
+  <link href="../dist/styles.css" rel="stylesheet">
+  <script defer src="home.js"></script>
+</head>
+<body class="min-h-screen grid macchiato">
+    <main class="flex flex-col justify-center items-center bg-gradient-to-b from-base to-crust p-6">
+        <div class="flex mb-6 px-4 py-2 rounded-xl text-text">
+            <button class="navbutton-left bg-pink/50">Settings</button>
+            <a href="../plugins/plugins.html"><button class="navbutton-center bg-overlay0/50">Plugins</button></a>
+            <a href="../themes/themes.html"><button class="navbutton-center bg-overlay0/50">Themes</button></a>
+            <a href="../snippets/snippets.html"><button class="navbutton-right bg-overlay0/50">Snippets</button></a>
+        </div>
+        <div id="card" class="from-mantle to-crust outline-pink">
+            <h1 class="from-blue to-teal mb-6">Schooltape</h1>
+            
+            <button id="toggle">Toggle</button>
+
+            <label class="relative flex justify-between items-center group p-2 mt-6 text-text text-lg">
+                <h4>Update Notifications</h4>
+                <input id="update-notifs" type="checkbox" class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" />
+                <span class="w-14 h-8 flex items-center flex-shrink-0 ml-4 p-1 bg-red rounded-lg duration-500 ease-in-out peer-checked:bg-green after:w-6 after:h-6 after:bg-base after:rounded-lg after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1"></span>
+            </label>
+        </div>
+    </main>
+</body>
+</html>
