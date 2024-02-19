@@ -660,40 +660,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .absolute {
   position: absolute;
 }
@@ -722,6 +688,10 @@ video {
 
 .ml-4 {
   margin-left: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .flex {
@@ -965,11 +935,9 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html {
-  width: 400px;
+body {
+  width: 450px;
   /* max: 1000px */
-  height: 500px;
-  /* max: 750px */
 }
 
 #flavours button {
@@ -1159,10 +1127,6 @@ div[title] {
   position: relative;
 }
 
-div[title]::after {
-  opacity: 0;
-}
-
 div[title]:hover::after {
   position: absolute;
   bottom: 100%;
@@ -1172,10 +1136,6 @@ div[title]:hover::after {
   background-color: rgba(var(--ctp-surface0), var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgba(var(--ctp-text), var(--tw-text-opacity));
-  opacity: 1;
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
   content: attr(title);
   transform: translateX(-50%);
   padding: 0.5rem;
