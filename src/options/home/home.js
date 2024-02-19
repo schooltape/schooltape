@@ -37,3 +37,29 @@ document.getElementById("toggle").addEventListener("click", function () {
         }
     });
 });
+
+
+// update notifications
+
+chrome.storage.local.get(["settings"], function (result) {
+    console.log("settings is currently ", result.settings);
+    if (result.settings.updateReminder) {
+        document.getElementById("update-notifs").checked = true;
+    } else {
+        document.getElementById("update-notifs").checked = false;
+    }
+});
+// update notifications listener
+document.getElementById("update-notifs").addEventListener("change", function () {
+    chrome.storage.local.get(['settings'], function(result) {
+        if (result.settings.updateReminder === true) {
+            let newSettings = result.settings;
+            newSettings.updateReminder = false;
+            chrome.storage.local.set({"settings": newSettings}, function() {});        
+        } else if (result.settings.updateReminder === false) {
+            let newSettings = result.settings;
+            newSettings.updateReminder = true;
+            chrome.storage.local.set({"settings": newSettings}, function() {});
+        }
+    });
+});

@@ -724,20 +724,12 @@ video {
   margin-left: 1rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .flex {
   display: flex;
 }
 
 .grid {
   display: grid;
-}
-
-.h-0 {
-  height: 0px;
 }
 
 .h-5 {
@@ -797,10 +789,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.overflow-hidden {
-  overflow: hidden;
 }
 
 .rounded-lg {
@@ -1171,6 +1159,10 @@ div[title] {
   position: relative;
 }
 
+div[title]::after {
+  opacity: 0;
+}
+
 div[title]:hover::after {
   position: absolute;
   bottom: 100%;
@@ -1180,6 +1172,10 @@ div[title]:hover::after {
   background-color: rgba(var(--ctp-surface0), var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgba(var(--ctp-text), var(--tw-text-opacity));
+  opacity: 1;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
   content: attr(title);
   transform: translateX(-50%);
   padding: 0.5rem;
@@ -1240,10 +1236,6 @@ div[title]:hover::after {
 
 .active\:bg-red\/75:active {
   background-color: rgba(var(--ctp-red), 0.75);
-}
-
-.group:hover .group-hover\:h-full {
-  height: 100%;
 }
 
 .group:hover .group-hover\:text-subtext1 {
