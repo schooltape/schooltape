@@ -40,27 +40,6 @@ chrome.storage.local.get(["settings"], function (result) {
     }
 });
 
-// functions
-
-// function updateSettings() {
-//     const flavourDropdown = document.getElementById("flavour-dropdown");
-//     const accentDropdown = document.getElementById("accent-dropdown");
-
-//     let selectedFlavour = flavourDropdown.value;
-//     let selectedAccent = accentDropdown.value;
-
-//     let themeID = `catppuccin-${selectedFlavour}-${selectedAccent}`
-
-//     chrome.storage.local.get(['settings'], function(settingsData) {
-//         settingsData.settings.currentTheme = themeID;
-//         chrome.storage.local.set({settings: settingsData.settings}, function() {
-//             console.log("Theme changed to " + themeID);
-//             // Reload page
-//             location.reload();
-//         }
-//     )});
-// }
-
 // buttons for flavours
 function flavourListener() {
     const flavourButtons = document.querySelectorAll("#flavours > button");
@@ -152,39 +131,3 @@ function accentHighlight() {
         document.querySelector(`#palette > div.bg-${currentAccent}`).classList.add("current");
     });
 }
-
-// function populateDropdowns() {
-//     const flavourDropdown = document.getElementById("flavour-dropdown");
-//     const accentDropdown = document.getElementById("accent-dropdown");
-
-//     // Populate flavour dropdown
-//     for (const flavour of flavours) {
-//         let flavourOption = document.createElement("option");
-//         flavourOption.value = flavour;
-//         flavourOption.textContent = flavour;
-//         flavourDropdown.appendChild(flavourOption);
-//     }
-
-//     // Populate accent dropdown
-//     for (const accent of accents) {
-//         let accentOption = document.createElement("option");
-//         accentOption.value = accent;
-//         accentOption.textContent = accent;
-//         accentDropdown.appendChild(accentOption);
-//     }
-
-//     // Set appropriate values of dropdowns
-//     chrome.storage.local.get(['settings'], function(settingsData) {
-//         let theme = settingsData.settings.currentTheme;
-//         // eg theme = "catppuccin-macchiato-pink"
-//         // now we have to split this into three sections, separated by the -'s
-//         let sections = theme.split('-');
-//         // sections will be an array containing ["catppuccin", "macchiato", "pink"]
-//         flavourDropdown.value = sections[1];
-//         accentDropdown.value = sections[2];
-//     });
-
-//     // Add event listeners to dropdowns
-//     flavourDropdown.addEventListener("change", updateSettings);
-//     accentDropdown.addEventListener("change", updateSettings);
-// };
