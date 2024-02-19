@@ -706,6 +706,11 @@ video {
   left: 50%;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -731,6 +736,14 @@ video {
   display: grid;
 }
 
+.h-0 {
+  height: 0px;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -741,6 +754,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-11 {
+  width: 2.75rem;
 }
 
 .w-14 {
@@ -780,6 +797,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .rounded-lg {
@@ -974,7 +995,7 @@ html {
 
 #card {
   display: flex;
-  width: auto;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1165,9 +1186,19 @@ div[title]:hover::after {
   border-radius: 0.25rem;
 }
 
+.after\:h-3::after {
+  content: var(--tw-content);
+  height: 0.75rem;
+}
+
 .after\:h-6::after {
   content: var(--tw-content);
   height: 1.5rem;
+}
+
+.after\:w-3::after {
+  content: var(--tw-content);
+  width: 0.75rem;
 }
 
 .after\:w-6::after {
@@ -1209,6 +1240,15 @@ div[title]:hover::after {
 
 .active\:bg-red\/75:active {
   background-color: rgba(var(--ctp-red), 0.75);
+}
+
+.group:hover .group-hover\:h-full {
+  height: 100%;
+}
+
+.group:hover .group-hover\:text-subtext1 {
+  --tw-text-opacity: 1;
+  color: rgba(var(--ctp-subtext1), var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:after\:translate-x-1::after {

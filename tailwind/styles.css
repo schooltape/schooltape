@@ -16,7 +16,7 @@ html {
 }
 
 #card {
-    @apply w-auto md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
+    @apply w-full md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
 }
 
 #card h1 {
