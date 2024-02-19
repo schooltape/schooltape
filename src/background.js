@@ -44,7 +44,7 @@ chrome.runtime.onInstalled.addListener(function(details){
     chrome.storage.local.set({"settings": defaultSettings}, function() {
       console.log('Set default settings');
     });
-    chrome.tabs.create({url: "https://schooltape-community.github.io/installed"}); // Open tutorial page
+    chrome.tabs.create({url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring"}); // Open tutorial page
 
   } else if (details.reason === "update") {
     var thisVersion = chrome.runtime.getManifest().version;

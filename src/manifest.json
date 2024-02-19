@@ -3,7 +3,7 @@
     "name": "Schooltape",
     "version": "2.2.1",
     "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
-    "homepage_url": "https://schooltape-community.github.io",
+    "homepage_url": "https://github.com/42willow/schooltape",
     "icons": {
         "100": "logo.png"
     },
