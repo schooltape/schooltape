@@ -8,40 +8,47 @@ html {
     height: 500px; /* max: 750px */
 }
 
+#flavours button {
+    @apply bg-surface0;
+}
+#flavours button.active {
+    @apply bg-pink/50;
+}
+
 #card {
     @apply w-auto md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
 }
 
 #card h1 {
-    @apply font-black text-5xl lg:text-6xl mb-4 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply font-black text-5xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
 }
 
 #card h2 {
-    @apply font-black text-4xl lg:text-6xl mb-4 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply font-black text-4xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
 }
 
 #card h3 {
-    @apply font-black text-2xl lg:text-6xl mt-4;
+    @apply font-black text-2xl lg:text-6xl;
 }
 
 #card p {
     @apply font-bold mb-4 text-center;
 }
 
-#card button {
+#card button:not(#flavours button) {
     @apply text-base px-4 py-2 rounded-xl font-bold text-xl transition duration-500 ease-in-out;
 }
 
-#card button.small {
-    @apply text-sm px-2 py-1 rounded-md font-semibold text-base transition duration-500 ease-in-out;
-}
-
 #palette {
-    @apply grid justify-items-center auto-rows-auto grid-cols-7 my-8 gap-4;
+    @apply grid justify-items-center auto-rows-auto grid-cols-7 mb-8 gap-4;
 }
 
 #palette > * {
     @apply w-6 h-6 rounded-full;
+}
+
+.current {
+    @apply outline outline-text;
 }
 
 .navbutton-left {

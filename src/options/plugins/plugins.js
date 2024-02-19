@@ -1,8 +1,4 @@
-console.log("plugin-script.js loaded");
-
-window.addEventListener("load", () => {
-    injectPlugins();
-});
+injectPlugins();
 
 // Get plugins from plugins.json
 function injectPlugins() {
@@ -28,7 +24,7 @@ function addPlugins(data) {
             // Check if plugin is installed (chrome storage)
             if (settingsData.settings.enabledPlugins.includes(plugin[0])) {
                 option.innerHTML = `
-                    <h3 class="text-text">${plugin[1].name}</h3>
+                    <h3 class="text-text mt-4">${plugin[1].name}</h3>
                     <div class="text-subtext0">${plugin[1].description}</div>
                     <button class="small uninstall-plugin bg-green" plugin-name="${plugin[0]}">Enabled</button>
                 `;
@@ -39,7 +35,7 @@ function addPlugins(data) {
                 });
             } else {
                 option.innerHTML = `
-                    <h3 class="text-text">${plugin[1].name}</h3>
+                    <h3 class="text-text mt-4">${plugin[1].name}</h3>
                     <div class="text-subtext0">${plugin[1].description}</div>
                     <button class="small install-plugin bg-red" plugin-name="${plugin[0]}">Disabled</button>
                 `;
