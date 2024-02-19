@@ -46,7 +46,7 @@
     "browser_specific_settings": {
       "gecko": {
         "id": "schooltape@schooltape-community.github.io",
-        "strict_min_version": "115.0"
+        "strict_min_version": "117.0"
       }
     }
   }
