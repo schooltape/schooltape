@@ -64,18 +64,13 @@ html {
 }
 
 div[title] {
-    position: relative;
+    @apply relative;
 }
 
 div[title]:hover::after {
+    @apply bg-surface0 text-text absolute bottom-full left-1/2 whitespace-nowrap;
     content: attr(title);
-    position: absolute;
-    bottom: 100%; /* Position the tooltip above the element */
-    left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.75);
-    color: #fff;
     padding: 0.5rem;
     border-radius: 0.25rem;
-    white-space: nowrap;
 }

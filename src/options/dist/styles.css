@@ -1151,17 +1151,18 @@ div[title] {
 }
 
 div[title]:hover::after {
-  content: attr(title);
   position: absolute;
   bottom: 100%;
-  /* Position the tooltip above the element */
   left: 50%;
+  white-space: nowrap;
+  --tw-bg-opacity: 1;
+  background-color: rgba(var(--ctp-surface0), var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(var(--ctp-text), var(--tw-text-opacity));
+  content: attr(title);
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  white-space: nowrap;
 }
 
 .after\:h-6::after {
