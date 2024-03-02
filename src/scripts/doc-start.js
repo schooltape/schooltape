@@ -13,7 +13,6 @@ chrome.storage.local.get(["settings"], function (data) {
                 injectPlugin(data.settings.enabledPlugins[i]);
             }
             injectThemes();
-            injectCSS("/themes/custom.css");
         }
     }
 });
