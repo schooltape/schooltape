@@ -1,7 +1,7 @@
-// const docEndConsole = "color: lightblue; font-weight: bold;";
-// console.log(`%c[doc-end.js]`, docEndConsole, "Injected doc-end.js!");
+// This is for:
+// - Plugins (that alter the DOM after is has been loaded)
 
-// check if the current url is saved in the storage and extension is enabled
+// inject enabled plugins if the current URL is stored as Schoolbox and extension is enabled
 chrome.storage.local.get(["settings"], function (data) {
     if (data.settings.global) {
         if (data.settings.urls.includes(window.location.origin)) {
@@ -12,29 +12,10 @@ chrome.storage.local.get(["settings"], function (data) {
     }
 });
 
-
-schoolboxChecker(); // Check if the page is Schoolbox
+// check if the page is Schoolbox, if not add it to storage and reload the page
+schoolboxChecker();
 
 // ----------------- Functions ----------------- //
-function getChildNode(node, childNum, nodeName = null) {
-    let childCounter = 0;
-    for (let i = 0; i < node.childNodes.length; i++) {
-        // If node type is an element node
-        if (node.childNodes[i].nodeType === 1) {
-            if (nodeName) {
-                if (node.childNodes[i].nodeName === nodeName) {
-                    childCounter++;
-                }
-            } else {
-                childCounter++;
-            }
-            if (childCounter === childNum) {
-                return node.childNodes[i];
-            }
-        }
-    }
-}
-
 function injectPlugin(pluginName) {
     // inject plugins
     let xhr = new XMLHttpRequest();
@@ -88,5 +69,24 @@ function schoolboxChecker() {
     }
     catch (e) {
         return false;
+    }
+}
+
+function getChildNode(node, childNum, nodeName = null) {
+    let childCounter = 0;
+    for (let i = 0; i < node.childNodes.length; i++) {
+        // If node type is an element node
+        if (node.childNodes[i].nodeType === 1) {
+            if (nodeName) {
+                if (node.childNodes[i].nodeName === nodeName) {
+                    childCounter++;
+                }
+            } else {
+                childCounter++;
+            }
+            if (childCounter === childNum) {
+                return node.childNodes[i];
+            }
+        }
     }
 }

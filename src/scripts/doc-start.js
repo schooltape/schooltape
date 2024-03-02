@@ -1,3 +1,8 @@
+// This is for:
+// - Plugins (That inject stylesheets)
+// - Themes
+// - Snippets
+
 chrome.runtime.sendMessage({checkForUpdates: true}, function() {});
 
 // check if the current url is saved in the storage and extension is enabled
