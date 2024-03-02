@@ -33,7 +33,8 @@ def gen(flavours, accents):
             subprocess.run(command, shell=True)
             print(f"\ngenerated catppuccin-{flavour}-{accent}")
 
-whiskers_path = f"{script_dir}/{search_files(plat.lower())}"
+# whiskers_path = f"{script_dir}/{search_files(plat.lower())}"
+whiskers_path = "whiskers"
 print(f"\nwhiskers_path: {whiskers_path}")
 
 template_path = f"{script_dir}/{search_files('.hbs')}"

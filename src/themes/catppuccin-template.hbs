@@ -172,9 +172,9 @@ label {
 
 {{!-- iframes --}}
 {{!-- since iframes can't be styled, due to cross-origin restrictions - we must force a light background --}}
-{{!-- table tr {
-    color: {{hsl text}} !important;
-} --}}
+section.content:has(iframe) {
+    background: #eff1f5 !important; {{!-- latte base --}}
+}
 
 {{!-- calendar --}}
 .fc-list-table {

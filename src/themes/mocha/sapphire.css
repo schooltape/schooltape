@@ -142,6 +142,9 @@ label {
     background-color: hsl(237, 16%, 23%);
 }
 
+section.content:has(iframe) {
+    background: #eff1f5 !important; 
+}
 
 .fc-list-table {
     background-color: hsl(237, 16%, 23%) !important;
