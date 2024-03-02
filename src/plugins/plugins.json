@@ -24,8 +24,7 @@
                 "execute": "doc-end",
                 "path": "/plugins/modern-icons/modern-icons.js"
             }
-        ],
-        "tags": ["beta", "broken"]
+        ]
     },
     "subheader": {
         "name": "Subheader Revamp",
@@ -36,8 +35,7 @@
                 "execute": "doc-end",
                 "path": "/plugins/subheader/subheader.js"
             }
-        ],
-        "tags": ["beta"]
+        ]
     },
     "legacy-timetable": {
         "name": "Legacy Timetable",
