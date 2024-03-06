@@ -47,7 +47,7 @@ function schoolboxChecker() {
         let footer = getChildNode(document.getElementById("footer"), 1);
         if (footer.innerHTML.includes("Schoolbox")) {
             let footerListItem = document.createElement("LI");
-            footerListItem.innerHTML = "<a href='https://schooltape-community.github.io'>Schooltape</a> "+chrome.runtime.getManifest().version;
+            footerListItem.innerHTML = "<a href='https://github.com/42willow/schooltape'>Schooltape</a> "+chrome.runtime.getManifest().version;
             footer.appendChild(footerListItem);
             // check if the current url is saved in the storage
             chrome.storage.local.get("settings", function (data) {
