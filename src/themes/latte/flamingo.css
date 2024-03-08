@@ -190,6 +190,14 @@ table tr th, table tr td {
 .timetable a, .timetable-small a {
     color: #0066b0;
 }
+.timetable span, .timetable-small span {
+    color: hsl(228, 11%, 65%);
+}
+
+.timetable div, .timetable-small div {
+    color: hsl(220, 23%, 95%);
+}
+
 .timetable-day-active {
     background-color: hsl(225, 14%, 77%) !important;
 }
