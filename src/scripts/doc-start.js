@@ -13,11 +13,58 @@ chrome.storage.local.get(["settings"], function (data) {
                 injectPlugin(data.settings.enabledPlugins[i]);
             }
             injectThemes();
+            injectSnippets();
         }
     }
 });
 
 // ----------------- Functions ----------------- //
+function injectSnippets() {
+    fetch(chrome.runtime.getURL("/snippets/snippets.json"))
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            chrome.storage.local.get(['settings'], function(settingsData) {
+                let snippets = Object.entries(data);
+                // Inject snippets
+                snippets.forEach((snippet) => {
+                    // console.log(snippet);
+                    let snippetID = snippet[0];
+                    let snippetPath = snippet[1].path;
+                    let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetID);
+                    if (snippetToggled) {
+                        injectCSS(`/snippets/${snippetPath}`);
+                    }
+                });
+                
+                // Inject user snippets
+                let userSnippets = settingsData.settings.userSnippets;
+                userSnippets.forEach((snippet) => {
+                    // console.log("Injecting user snippet:");
+                    // console.log(snippet);
+                    let snippetID = Object.keys(snippet)[0];
+                    let snippetAuthor = Object.values(snippet)[0].author;
+                    let snippetURL = `https://gist.githubusercontent.com/${snippetAuthor}/${snippetID}/raw`
+                    // console.log(snippetID);
+                    // console.log(snippetURL);
+                    let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetID);
+                    if (snippetToggled) {
+                        if (snippetToggled) {
+                            fetch(snippetURL)
+                                .then(response => response.text())
+                                .then(css => {
+                                    let style = document.createElement("style");
+                                    style.textContent = css;
+                                    document.head.appendChild(style);
+                                });
+                        }
+                    }
+                });
+            });
+        }
+    );
+}
+
 function injectPlugin(pluginName) {
     // inject plugins
     let xhr = new XMLHttpRequest();
@@ -63,6 +110,7 @@ function injectThemes() {
 }
 
 function injectCSS(css) {
+    // console.log(`Injecting CSS: ${css}`);
     let link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = chrome.runtime.getURL(css);

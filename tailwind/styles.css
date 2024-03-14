@@ -31,11 +31,19 @@ body {
 }
 
 #card p {
-    @apply font-bold mb-4 text-center;
+    @apply font-bold;
 }
 
-#card button:not(#flavours button) {
-    @apply text-base px-4 py-2 rounded-xl font-bold text-xl transition duration-500 ease-in-out;
+button#toggle {
+    @apply text-base px-4 py-2 rounded-xl font-bold text-xl
+}
+
+button.small {
+    @apply text-sm px-2 py-1 rounded-lg font-bold
+}
+
+button {
+    @apply transition duration-500 ease-in-out;
 }
 
 #palette {

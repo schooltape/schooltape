@@ -8,8 +8,8 @@
   <link href="../dist/styles.css" rel="stylesheet">
   <script defer src="home.js"></script>
 </head>
-<body class="min-h-screen grid macchiato">
-    <main class="flex flex-col justify-center items-center bg-gradient-to-b from-base to-crust p-6">
+<body class="grid macchiato">
+    <main class="flex flex-col items-center bg-gradient-to-b from-base to-crust p-6">
         <div class="flex mb-6 px-4 py-2 rounded-xl text-text">
             <button class="navbutton-left bg-pink/50">Settings</button>
             <a href="../plugins/plugins.html"><button class="navbutton-center bg-overlay0/50">Plugins</button></a>
@@ -26,6 +26,12 @@
                 <input id="update-notifs" type="checkbox" class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" />
                 <span class="w-14 h-8 flex items-center flex-shrink-0 ml-4 p-1 bg-red rounded-lg duration-500 ease-in-out peer-checked:bg-green after:w-6 after:h-6 after:bg-base after:rounded-lg after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1"></span>
             </label>
+
+            <footer class="flex justify-around p-4 mt-5 min-w-full">
+                <p class="flex items-center text-text mb-0">Version: <a class="ml-2 version hover:underline text-blue" target="_blank"></a></p>
+                <a target="_blank" href="https://github.com/42willow/schooltape/issues"><button id="support" class="small bg-base text-text hover:bg-pink hover:text-crust">Support</button></a>
+                <button id="reset" class="small bg-base text-text hover:bg-red hover:text-crust">Reset</button>
+            </footer>
         </div>
     </main>
 </body>

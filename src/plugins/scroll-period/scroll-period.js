@@ -61,8 +61,8 @@ function extractTimes(periodTime) {
 }
 
 function getListOfPeriods() {
-    var periodList = [];
-    for (var i = 0; i < 14; i++) {
+    let periodList = [];
+    for (let i = 0; i < 14; i++) {
         periodList.push(getPeriodData(i));
     }
     return periodList;

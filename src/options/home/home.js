@@ -1,4 +1,10 @@
-// toggle button
+const ver = document.querySelector(".version");
+verNum = "v" + chrome.runtime.getManifest().version;
+ver.innerHTML = verNum;
+ver.href = `https://github.com/42Willow/schooltape/releases/tag/${verNum}`;
+
+
+// global toggle button
 chrome.storage.local.get(["settings"], function (result) {
     console.log("settings is currently ", result.settings);
     let btn = document.getElementById("toggle");
@@ -12,8 +18,6 @@ chrome.storage.local.get(["settings"], function (result) {
         btn.innerHTML = "disabled";
     }
 });
-
-
 document.getElementById("toggle").addEventListener("click", function () {
     chrome.storage.local.get(['settings'], function(result) {
         let btn = document.getElementById("toggle");
@@ -38,6 +42,15 @@ document.getElementById("toggle").addEventListener("click", function () {
     });
 });
 
+// reset toggle button
+document.getElementById("reset").addEventListener("click", function () {
+    if (confirm("Are you sure you want to reset all settings?")) {
+        // chrome.runtime.sendMessage({ resetSettings: true });
+        chrome.runtime.sendMessage({resetSettings: true}, function() {});
+        location.reload();
+        chrome.runtime.sendMessage({ badgeText: true });
+    }
+});
 
 // update notifications
 

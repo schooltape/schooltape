@@ -1,20 +1,4 @@
 {
-    "hide-pfp": {
-        "name": "Hide PFP",
-        "author": "Schooltape",
-        "description": "Hide your profile picture accross Schoolbox.",
-        "scripts": [
-            {
-                "execute": "doc-start",
-                "path": "/plugins/hide-pfp/hide-pfp-start.js"
-            },
-            {
-                "execute": "doc-end",
-                "path": "/plugins/hide-pfp/hide-pfp-end.js"
-            }
-        ],
-        "path": "hide-pfp.js"
-    },
     "modern-icons": {
         "name": "Modern Icons",
         "author": "Schooltape",
@@ -28,7 +12,7 @@
     },
     "subheader": {
         "name": "Subheader Revamp",
-        "author": "Subheader Revamp",
+        "author": "Schooltape",
         "description": "Adds significant functionality and customisability to the subheader.",
         "scripts": [
             {

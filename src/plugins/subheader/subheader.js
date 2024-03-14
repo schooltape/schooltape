@@ -2,14 +2,14 @@
 For developers:
 Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
 */
-var consoleStyle = "color: lightgreen; font-weight: bold;";
+let consoleStyle = "color: lightgreen; font-weight: bold;";
 // console.log(`%c[subheader.js]`, consoleStyle, "Injected subheader.js!");
 
 
 if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
-    var timetableHeader = document.querySelectorAll("[data-timetable-header]");
-    var timetableContainer = document.querySelectorAll("[data-timetable-container]");
-    var timetable = document.getElementsByClassName("timetable")[0];
+    let timetableHeader = document.querySelectorAll("[data-timetable-header]");
+    let timetableContainer = document.querySelectorAll("[data-timetable-container]");
+    let timetable = document.getElementsByClassName("timetable")[0];
     // console.log(`%c[subheader.js]`, consoleStyle, "Timetable found, injecting subheader...");
     updateSubheader();
     setInterval(updateSubheader, 1000);
@@ -17,10 +17,10 @@ if (window.location.pathname === "/" && document.getElementsByClassName("timetab
 
 // Function with interval of one second to update the subheader
 function updateSubheader() {
-    var subHeader = document.querySelector("h2.subheader");
+    let subHeader = document.querySelector("h2.subheader");
     let currentPeriod = getCurrentPeriod();
 
-    var currentPeriodData = getPeriodData(currentPeriod);
+    let currentPeriodData = getPeriodData(currentPeriod);
     // console.log("currentPeriodData: ", currentPeriodData)
     
     if (currentPeriodData === null) { // Failed to retrieve any data
@@ -75,8 +75,8 @@ function extractTimes(periodTime) {
 }
 
 function getListOfPeriods() {
-    var periodList = [];
-    for (var i = 0; i < 14; i++) {
+    let periodList = [];
+    for (let i = 0; i < 14; i++) {
         periodList.push(getPeriodData(i));
     }
     return periodList;
@@ -111,9 +111,9 @@ function getPeriodData(periodNum) {
 }
 
 function clock() {
-    var s = getDate().second;
-    var m = getDate().minute;
-    var h = getDate().hour;
+    let s = getDate().second;
+    let m = getDate().minute;
+    let h = getDate().hour;
     // If seconds is a single digit number add a zero before it
     if (s.toString().length === 1) {
         s = "0" + s;
@@ -124,7 +124,7 @@ function clock() {
     }
 
     // Get meridian (AM/PM)
-    var meridian = "AM";
+    let meridian = "AM";
     if (h > 12) {
         h = h - 12;
         meridian = "PM";
@@ -135,15 +135,15 @@ function clock() {
 }
 
 function getDate() {
-    var currentDate = new Date();
-    var day = currentDate.getDay();
-    var month = currentDate.getMonth();
-    var year = currentDate.getFullYear();
-    var date = currentDate.getDate();
-    var hour = currentDate.getHours();
-    var minute = currentDate.getMinutes();
-    var second = currentDate.getSeconds();
-    var dateString = currentDate.toDateString();
+    let currentDate = new Date();
+    let day = currentDate.getDay();
+    let month = currentDate.getMonth();
+    let year = currentDate.getFullYear();
+    let date = currentDate.getDate();
+    let hour = currentDate.getHours();
+    let minute = currentDate.getMinutes();
+    let second = currentDate.getSeconds();
+    let dateString = currentDate.toDateString();
     return {
         day: day,
         month: month,

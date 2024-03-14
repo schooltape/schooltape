@@ -12,13 +12,16 @@ const defaultSettings = {
   "themes": false,
   "currentTheme": "catppuccin-macchiato-rosewater",
   "enabledPlugins": [
-      "subheader",
-      "hide-pfp",
-      "scroll-segments",
-      "tab-title",
-      "scroll-period",
-      "timetable-labels"
+    "subheader",
+    "scroll-segments",
+    "tab-title",
+    "scroll-period",
+    "timetable-labels"
   ],
+  "enabledSnippets": [
+    "hide-pfp"
+  ],
+  "userSnippets": [],
   "urls": ["https://help.schoolbox.com.au"]
 }
 
@@ -44,23 +47,45 @@ chrome.runtime.onInstalled.addListener(function(details){
     chrome.storage.local.set({"settings": defaultSettings}, function() {
       console.log('Set default settings');
     });
-    chrome.tabs.create({url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring"}); // Open tutorial page
 
   } else if (details.reason === "update") {
-    var thisVersion = chrome.runtime.getManifest().version;
-    // set default settings, if major number is increased
-    if (details.previousVersion.split(".")[0] > thisVersion.split(".")[0]) {
-      chrome.storage.local.set({"settings": defaultSettings}, function() {
-        console.log("New major version, refreshed settings");
-      });
-    }
+    let thisVersion = chrome.runtime.getManifest().version;
+    
+    // // set default settings, if major number is increased
+    // if (details.previousVersion.split(".")[0] > thisVersion.split(".")[0]) {
+    //   resetSettings();
+    //   print("New major version installed, reset settings")
+    // }
+
 
     // set "global" to true without overwriting existing settings
     chrome.storage.local.get("settings", function(result) {
-      var settings = result.settings;
+      let settings = result.settings;
+      
+      // iterate over every key in defaultSettings, if it doesn't exist in settings, add it, and vice versa remove it if it doesn't exist in defaultSettings
+      // add setting if it doesn't exist in settings
+      for (const [key, value] of Object.entries(defaultSettings)) {
+        if (!settings.hasOwnProperty(key)) {
+          console.log(`Adding ${key}`);
+          settings[key] = value;
+        }
+      }
+      // remove setting if it doesn't exist in defaultSettings
+      for (const [key, value] of Object.entries(settings)) {
+        if (!defaultSettings.hasOwnProperty(key)) {
+          console.log(`Deleting ${key}`);
+          delete settings[key];
+        }
+      }
       settings.global = true;
+
+      console.log(settings);
+
       chrome.storage.local.set({"settings": settings}, function() {
-        console.log('Set global to true');
+        console.log('Updated settings. Set global to true.');
+        chrome.browserAction.setBadgeText({text:'ON'});
+        chrome.browserAction.setBadgeBackgroundColor({color:"#94DBF9"});
+        chrome.browserAction.setBadgeTextColor({color:"black"});
       });
     });
     // Sends a notification to the user with the changelog
@@ -117,6 +142,11 @@ chrome.runtime.onMessage.addListener (
       });
     }
 
+    if (request.resetSettings) {
+      console.log("Resetting settings...");
+      resetSettings();
+    }
+
     // Check for updates
     if (!navigator.onLine) { // check if online
       console.error("You are currently offline. Please check your internet connection and try again.");
@@ -128,11 +158,11 @@ chrome.runtime.onMessage.addListener (
           .then(response => response.json())
           .then(data => {
             // Get latest version without the "v" in front
-            var latestVersion = data.tag_name.replace("v", "");
+            let latestVersion = data.tag_name.replace("v", "");
             console.log("Latest version is " + latestVersion);
 
             // Get current version
-            var currentVersion = chrome.runtime.getManifest().version;
+            let currentVersion = chrome.runtime.getManifest().version;
             console.log("Current version is " + currentVersion);
 
             // Compare versions
@@ -219,19 +249,19 @@ chrome.contextMenus.removeAll(function() {
 function contextClick(info, tab) {
   const { menuItemId } = info
   if (menuItemId === 'githubRepo') {
-    var newURL = "https://github.com/42willow/schooltape";
+    let newURL = "https://github.com/42willow/schooltape";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubIssues') {
-    var newURL = "https://github.com/42willow/schooltape/issues";
+    let newURL = "https://github.com/42willow/schooltape/issues";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubPRs') {
-    var newURL = "https://github.com/42willow/schooltape/pulls";
+    let newURL = "https://github.com/42willow/schooltape/pulls";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubProjects') {
-    var newURL = "https://github.com/42willow/schooltape/projects";
+    let newURL = "https://github.com/42willow/schooltape/projects";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'githubWiki') {
-    var newURL = "https://github.com/42willow/schooltape/wiki";
+    let newURL = "https://github.com/42willow/schooltape/wiki";
     chrome.tabs.create({ url: newURL });
   } else if (menuItemId === 'extRefresh') {
     console.log("Refreshing extension...");
@@ -250,11 +280,11 @@ chrome.notifications.onClicked.addListener(function(notifID) {
     chrome.tabs.create({url: "https://github.com/42willow/schooltape/releases/latest"});
   }
   if (notifID === "tutorial") {
-    chrome.tabs.create({url: "https://github.com/42willow/schooltape/wiki/tutorial"});
+    chrome.tabs.create({url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring"});
   }
   if (notifID === "updated") {
-    var thisVersion = chrome.runtime.getManifest().version;
-    var newURL = "https://github.com/42willow/schooltape/releases/tag/v"+thisVersion;
+    let thisVersion = chrome.runtime.getManifest().version;
+    let newURL = "https://github.com/42willow/schooltape/releases/tag/v"+thisVersion;
     chrome.tabs.create({ url: newURL });
   }
 });
@@ -308,5 +338,12 @@ function updateBadge() {
     }
     chrome.browserAction.setBadgeBackgroundColor({color:"#94DBF9"});
     chrome.browserAction.setBadgeTextColor({color:"black"});
+  });
+}
+
+
+function resetSettings() {
+  chrome.storage.local.set({"settings": defaultSettings}, function() {
+    console.log("Reset settings");
   });
 }

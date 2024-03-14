@@ -1,0 +1,8 @@
+{
+    "hide-pfp": {
+        "name": "Hide PFP",
+        "author": "Schooltape",
+        "description": "Hide your profile picture across Schoolbox.",
+        "path": "hide-pfp.css"
+    }
+}
