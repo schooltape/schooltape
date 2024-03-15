@@ -31,13 +31,13 @@ body:
     validations:
       required: false
   - type: checkboxes
-  id: contribute
-  attributes:
-    label: Would you like to contribute code to this feature?
-    description: By checking this, you agree to our https://github.com/42Willow/schooltape/blob/main/CONTRIBUTING.md
-    options:
-      - label: "I'm interested in contributing code to this feature"
-        required: true
+    id: contribute
+    attributes:
+      label: Would you like to contribute code to this feature?
+      description: By checking this, you agree to our https://github.com/42Willow/schooltape/blob/main/CONTRIBUTING.md
+      options:
+        - label: "I'm interested in contributing code to this feature"
+          required: true
   - type: checkboxes
     id: terms
     attributes:
