@@ -37,7 +37,7 @@ body:
       description: By checking this, you agree to our https://github.com/42Willow/schooltape/blob/main/CONTRIBUTING.md
       options:
         - label: "I'm interested in contributing code to this feature"
-          required: true
+          required: false
   - type: checkboxes
     id: terms
     attributes:
