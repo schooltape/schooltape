@@ -3,6 +3,5 @@ if (window.location.pathname === "/timetable" && document.getElementsByClassName
     for(let i = 0; i < 7; i++) {
         document.querySelector(`.timetable > thead > tr > th:nth-child(${i+2})`).innerHTML = days[i]
         document.querySelector(`.timetable-small > div:nth-child(${i+1}) > h2`).innerHTML = days[i]
-        console.log(i)
     }
 }
