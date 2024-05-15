@@ -15,30 +15,16 @@ chrome.storage.local.get(["settings"], function (data) {
 });
 
 
-function injectCatppuccin(req_flavor, req_accent) {
-    // console.log("match!");
-    // get info from catppuccin.json
+function injectCatppuccin(flavor, accent) {
     fetch(chrome.runtime.getURL("/themes/catppuccin.json"))
         .then(response => response.json())
         .then(palette => {
-            // console.log(palette);
-            for (let flavor in palette) {
-                // console.log(palette[flavor]);
-                // if flavor is in sections, inject the css vars
-                if (flavor == req_flavor) {
-                    // console.log("flavor match!"+flavor);
-                    for (let color in palette[flavor]["colors"]) {
-                        let c = palette[flavor]["colors"][color]
-                        // console.log(color);
-                        // console.log(c);
-                        document.querySelector(':root').style.setProperty(`--ctp-${color}`, `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
-                        if (color === req_accent) {
-                            document.querySelector(':root').style.setProperty("--ctp-accent", `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
-                        }
-                    }
+            for (let color in palette[flavor]["colors"]) {
+                let c = palette[flavor]["colors"][color]
+                document.querySelector(':root').style.setProperty(`--ctp-${color}`, `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
+                if (color === accent) {
+                    document.querySelector(':root').style.setProperty("--ctp-accent", `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
                 }
-            };
-        }
-    );
-    
+            }
+        });
 }
