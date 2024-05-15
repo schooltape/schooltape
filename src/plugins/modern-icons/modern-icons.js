@@ -27,6 +27,8 @@ const icons = [ // [className, iconName] (material icons)
   ["icon-approve", "check_circle"],
   ["icon-forms", "description"],
   ["icon-group", "group"],
+  ["icon-info", "info"],
+  ["icon-resource-booking", "book_online"],
   // ["icon-approve", "check_circle", true],
   // ["icon-notifications", "notifications_none", true],
 ];
