@@ -274,6 +274,10 @@ label.error {
     color: hsl(var(--ctp-red));
 }
 
+.left-off-canvas-menu ul.off-canvas-list li h3, .left-off-canvas-menu ul.off-canvas-list li label .unit-heading, label .left-off-canvas-menu ul.off-canvas-list li .unit-heading, .left-off-canvas-menu ul.off-canvas-list li h4 {
+    color: hsl(var(--ctp-text));
+}
+
 /* CKEditor */
 :root {
     /* TODO */
@@ -296,14 +300,12 @@ label.error {
     --primary-text-colour: hsl(var(--ctp-text)) !important;
     --navigation-foreground: hsl(var(--ctp-text));
     --navigation-foreground-contrast: hsl(var(--ctp-crust));
-    --navigation-background: (--ctp-mantle);
+    --navigation-background: hsl(var(--ctp-mantle));
     --navigation-background-contrast: hsl(var(--ctp-crust));
     --navigation-hover: hsl(var(--ctp-surface0));
     --navigation-hover-contrast: hsl(var(--ctp-crust));
     --off-canvas-foreground: hsl(var(--ctp-text));
-    .left-off-canvas-menu ul.off-canvas-list li h3, .left-off-canvas-menu ul.off-canvas-list li label .unit-heading, label .left-off-canvas-menu ul.off-canvas-list li .unit-heading, .left-off-canvas-menu ul.off-canvas-list li h4 {
-        color: hsl(var(--ctp-text));
-    }
+
     --off-canvas-background: hsl(var(--ctp-mantle));
     --off-canvas-hover: hsl(var(--ctp-surface0));
     --accounts-menu-foreground: hsl(var(--ctp-text));
@@ -320,7 +322,7 @@ label.error {
     /* NOTE: THIS NEEDS TO BE ACCENT FOR HIGHLIGHTING */
     --accent-background: hsl(var(--ctp-base));
     /* NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING */
-    --logo-background: hsl(var(--ctp-base));
+    --logo-background: hsl(var(--ctp-mantle));
     --body-background: hsl(var(--ctp-base));
     --form-border-color: color: hsla(var(--ctp-accent), 0.4);
     --form-bg-hover-color: color: hsla(var(--ctp-accent), 0.3);
