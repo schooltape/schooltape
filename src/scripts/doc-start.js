@@ -12,7 +12,7 @@ chrome.storage.local.get(["settings"], function (data) {
             for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
                 injectPlugin(data.settings.enabledPlugins[i]);
             }
-            injectThemes();
+            injectJS(`/themes/themes.js`);
             injectSnippets();
         }
     }
@@ -95,18 +95,6 @@ function injectPlugin(pluginName) {
         }
     }
     xhr.send();
-}
-function injectThemes() {
-    chrome.storage.local.get(["settings"], function (data) {
-        if (data.settings.themes) {
-            let theme = data.settings.currentTheme;
-            // eg theme = "catppuccin-macchiato-pink"
-            // now we have to split this into three sections, separated by the -'s
-            let sections = theme.split('-');
-            // sections will be an array containing ["catppuccin", "macchiato", "pink"]
-            injectCSS(`/themes/${sections[1]}/${sections[2]}.css`);
-        }
-    });
 }
 
 function injectCSS(css) {
