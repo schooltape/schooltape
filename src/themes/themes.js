@@ -19,12 +19,16 @@ function injectCatppuccin(flavor, accent) {
     fetch(chrome.runtime.getURL("/themes/catppuccin.json"))
         .then(response => response.json())
         .then(palette => {
+            let style = document.createElement('style');
+            let cssText = '';
             for (let color in palette[flavor]["colors"]) {
                 let c = palette[flavor]["colors"][color]
-                document.querySelector(':root').style.setProperty(`--ctp-${color}`, `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
-                if (color === accent) {
-                    document.querySelector(':root').style.setProperty("--ctp-accent", `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`);
-                }
+                let hsl = `${c.hsl.h} ${c.hsl.s*100}% ${c.hsl.l*100}%`;
+                cssText += `:root { --ctp-${color}: ${hsl}; }\n`;
             }
+            let a = palette[flavor]["colors"][accent].hsl;
+            cssText += `:root { --ctp-accent: ${`${a.h} ${a.s*100}% ${a.l*100}%`}; }\n`;
+            style.textContent = cssText;
+            document.head.appendChild(style);
         });
 }
