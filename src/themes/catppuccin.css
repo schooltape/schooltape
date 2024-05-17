@@ -208,6 +208,16 @@ table tr th, table tr td {
     background-color: hsl(var(--ctp-surface0)) !important;
 }
 
+/* quiz/test results table */
+.lrn-report-area, .lrn-report-measure {
+    background-color: var(--content-ui-background) !important;
+}
+
+/* news sections */
+.detail.content {
+    background: hsl(var(--ctp-base)) !important;
+}
+
 /* timetable */
 .timetable th, .timetable-small th, .timetable td, .timetable-small td {
     background-color: hsl(var(--ctp-surface0));
