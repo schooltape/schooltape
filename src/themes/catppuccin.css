@@ -29,6 +29,12 @@ blockquote {
     border-left: 6px solid hsl(var(--ctp-accent)) !important;
 }
 
+/* checkboxes */
+.checklist input[type=radio]:not(.plain)+label:after, .checklist input[type=checkbox]:not(.plain)+label:after, .radiolist input[type=radio]:not(.plain)+label:after, .radiolist input[type=checkbox]:not(.plain)+label:after {
+    background-color: hsl(var(--ctp-surface2));
+}
+
+
 /* date picker (flatpickr) */
 .adtp .flatpickr-calendar, .adtp .flatpickr-innerContainer {
     border: none;
