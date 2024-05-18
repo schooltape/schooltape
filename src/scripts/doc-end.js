@@ -6,7 +6,7 @@ chrome.storage.local.get(["settings"], function (data) {
     if (data.settings.global) {
         if (data.settings.urls.includes(window.location.origin)) {
             for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
-                injectPlugin(data.settings.enabledPlugins[i]);
+                runUtilsFunction('injectPlugin', data.settings.enabledPlugins[i], "doc-end");
             }
         }
     }
@@ -16,30 +16,7 @@ chrome.storage.local.get(["settings"], function (data) {
 schoolboxChecker();
 
 // ----------------- Functions ----------------- //
-function injectPlugin(pluginName) {
-    // inject plugins
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", chrome.runtime.getURL("/plugins/plugins.json"), true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            let resp = JSON.parse(xhr.responseText);
-            let scripts = resp[pluginName].scripts;
-            // for each script, inject it
-            for (let i = 0; i < scripts.length; i++) {
-                if (scripts[i].execute == "doc-end") {
-                    injectJS(scripts[i].path);
-                }
-            }
-        }
-    }
-    xhr.send();
-}
 
-function injectJS(js) {
-    chrome.runtime.sendMessage({inject: js}, function() {
-    });
-    // console.log(`%c[doc-end.js]`, docEndConsole, "Requested to inject " + js);
-}
 
 function schoolboxChecker() {
     // check if the page is schoolbox
@@ -88,5 +65,15 @@ function getChildNode(node, childNum, nodeName = null) {
                 return node.childNodes[i];
             }
         }
+    }
+}
+
+async function runUtilsFunction(functionName, ...args) {
+    const src = chrome.runtime.getURL("scripts/utils.js");
+    const utils = await import(src);
+    if (typeof utils[functionName] === 'function') {
+        utils[functionName](...args);
+    } else {
+        console.error(`Function ${functionName} does not exist in utils`);
     }
 }
