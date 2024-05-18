@@ -21,7 +21,6 @@ body, p, h1, h2, h3, h4, .tab-bar, .profile-tabs .subheader {
     border: none;
 }
 
-
 /* blockquotes */
 blockquote {
     background-color: hsl(var(--ctp-surface1));
@@ -30,10 +29,29 @@ blockquote {
 }
 
 /* checkboxes */
-.checklist input[type=radio]:not(.plain)+label:after, .checklist input[type=checkbox]:not(.plain)+label:after, .radiolist input[type=radio]:not(.plain)+label:after, .radiolist input[type=checkbox]:not(.plain)+label:after {
+.checklist input[type=radio]:not(.plain)+label:after, .checklist input[type=checkbox]:not(.plain)+label:after, .radiolist input[type=radio]:not(.plain)+label:after, .radiolist input[type=checkbox]:not(.plain)+label:after, input[type=checkbox]:not(.plain)+label.checkbox-label:after, body.login input[type=checkbox]:not(.plain)+label:after{
     background-color: hsl(var(--ctp-surface2));
 }
 
+.checklist input[type=radio]:not(.plain):not(:disabled)+label:hover:after, .checklist input[type=checkbox]:not(.plain):not(:disabled)+label:hover:after, .radiolist input[type=radio]:not(.plain):not(:disabled)+label:hover:after, .radiolist input[type=checkbox]:not(.plain):not(:disabled)+label:hover:after {
+    color: hsl(var(--ctp-text));
+}
+
+/* drop down menus */
+.filter-dropdown .filter-component {
+    background-color: hsl(var(--ctp-surface0));
+    border: none;
+}
+.checklist.item.filter-component .f-dropdown.content {
+    background-color: hsl(var(--ctp-surface0));
+}
+
+/* goals */
+.badge-grid .badge, .badge-grid .badge .card-feature-image {
+    background-color: hsl(var(--ctp-surface0));
+    border-color: hsl(var(--ctp-overlay1));
+    border-bottom: 1px solid hsl(var(--ctp-overlay1));
+}
 
 /* date picker (flatpickr) */
 .adtp .flatpickr-calendar, .adtp .flatpickr-innerContainer {
@@ -228,7 +246,6 @@ table tr th, table tr td {
     color: hsl(var(--ctp-text));
 }
 
-
 .information-list, .action-list > .actions-small-1 {
     background-color: hsl(var(--ctp-surface0)) !important;
 }
@@ -275,6 +292,10 @@ TODO
 /* breadcrumbs */
 .breadcrumb li.active span:not([href]) {
     color: hsl(var(--ctp-accent));
+}
+
+.breadcrumb li a:before, .breadcrumb li span:before {
+    border-left-color: hsl(var(--ctp-overlay0));
 }
 
 /* scrollbars */
