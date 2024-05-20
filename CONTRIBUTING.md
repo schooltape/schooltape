@@ -1,40 +1,23 @@
-# Contributing
+# Contributing!
 
-## Commits
+🎉 First off, thanks for taking the time to contribute! 🎉
 
-Please ensure that your commits follow the [conventional commits](https://www.conventionalcommits.org/) specification.
+## Guidelines
 
-## Code
+The following is a set of guidelines for contributing to this repository. Use your best judgment, and feel free to propose
+changes to this document in a pull request.
 
-### Comments
+- Use the `.editorconfig` file (located at the root of this project) on your editor to "maintain consistent coding
+  styles." For instructions on how to use this file refer to [EditorConfig's website](https://editorconfig.org/).
 
-Please ensure your code comes with clear, concise comments in `This format without a full stop`.
+## Recommendations
 
-Some useful information on best practices for writing comments can be found in [this](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/) Stack Overflow article.
-
-### Conventions
-
-Please ensure your variables etc. follow the language-specific conventions. For example in JavaScript:
-
-```js
-// Example variable declaration (camelCase)
-let exampleVariable = 10;
-
-// Example function declaration (camelCase)
-function calculateSum(a, b) {
-  return a + b;
-}
-
-// Example constant declaration (
-const MAX_VALUE = 100;
-```
-
-## Versioning
-
-This project uses [Semantic Versioning](https://semver.org)
-
-**X**.y.z = Major updates. (Resets y & z when changed)
-
-x.**Y**.z = New features. (Resets z when changed)
-
-x.y.**Z** = New bug fixes.
+- Create a [topic branch](git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#_topic_branch) on your fork for your
+  specific PR.
+- Consider using [conventionalcommits.org](https://www.conventionalcommits.org/en/v1.0.0/)'s rules for creating explicit
+  and meaningful commit messages.
+- If it's your first time contributing to a project then you should look to the
+  popular [first-contributions](https://github.com/firstcontributions/first-contributions) repository on GitHub. This
+  will give you hands-on experience with the features of GitHub required to make a contribution.
+- Check out [good first issues](https://github.com/42Willow/schooltape/issues?q=label%3A%22good+first+issue%22+is%3Aissue+is%3Aopen)
+  for a list of issues that are good for beginners.
