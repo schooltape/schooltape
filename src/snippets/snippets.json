@@ -4,5 +4,11 @@
         "author": "Schooltape",
         "description": "Hide your profile picture across Schoolbox.",
         "path": "hide-pfp.css"
+    },
+    "censor": {
+        "name": "Censor",
+        "author": "Schooltape",
+        "description": "Censors all text and images. This is intended for development purposes.",
+        "path": "censor.css"
     }
 }
