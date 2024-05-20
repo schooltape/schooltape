@@ -272,22 +272,8 @@ table tr th, table tr td {
 }
 
 .timetable div, .timetable-small div {
-    color: hsl(var(--ctp-base));
+    color: #24273a;
 }
-
-/* 
-TODO
-(need to fix the timtable text)
-*/
-/* {{#if isDark-hsl)
-.timetable div.timetable-subject > div, .timetable-small div.timetable-subject > div {
-    color: hsl(var(--ctp-base));
-}
-{{/if-hsl)
-.timetable-day-active {
-    background-color: hsl(var(--ctp-surface1)) !important;
-}
-*/
 
 /* breadcrumbs */
 .breadcrumb li.active span:not([href]) {
