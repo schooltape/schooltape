@@ -322,8 +322,6 @@ label.error {
 
 /* CKEditor */
 :root {
-    /* TODO */
-
     --sb-ck-active: hsl(var(--ctp-accent));
     --sb-ck-active-grey: hsl(var(--ctp-base));
     --sb-ck-active-highlight: #daedff;
