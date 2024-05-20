@@ -51,13 +51,9 @@ body.login input[type="checkbox"]:not(.plain) + label:after {
 }
 
 .checklist input[type="radio"]:not(.plain):not(:disabled) + label:hover:after,
-.checklist
-  input[type="checkbox"]:not(.plain):not(:disabled)
-  + label:hover:after,
+.checklist input[type="checkbox"]:not(.plain):not(:disabled) + label:hover:after,
 .radiolist input[type="radio"]:not(.plain):not(:disabled) + label:hover:after,
-.radiolist
-  input[type="checkbox"]:not(.plain):not(:disabled)
-  + label:hover:after {
+.radiolist input[type="checkbox"]:not(.plain):not(:disabled) + label:hover:after {
   color: hsl(var(--ctp-text));
 }
 
@@ -190,14 +186,14 @@ table * {
 }
 .side-nav
   li
-  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(
-    a.submit
-  ):not(button.submit):not(.show-ckeditor-button):hover,
+  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
+    .show-ckeditor-button
+  ):hover,
 .side-nav
   li
-  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(
-    a.submit
-  ):not(button.submit):not(.show-ckeditor-button):focus {
+  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
+    .show-ckeditor-button
+  ):focus {
   color: hsla(var(--ctp-accent), 0.7);
 }
 
@@ -329,10 +325,7 @@ table tr td {
 }
 
 /* news articles */
-.island
-  span[style]:not(a > span[style]):not(.tile > span[style]):not(
-    .event-container > span[style]
-  ) {
+.island span[style]:not(a > span[style]):not(.tile > span[style]):not(.event-container > span[style]) {
   color: hsl(var(--ctp-text)) !important;
   background-color: rgba(0, 0, 0, 0) !important;
 }

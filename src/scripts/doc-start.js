@@ -7,16 +7,9 @@ chrome.runtime.sendMessage({ checkForUpdates: true }, function () {});
 
 // check if the current url is saved in the storage and extension is enabled
 chrome.storage.local.get(["settings"], function (data) {
-  if (
-    data.settings.global &&
-    data.settings.urls.includes(window.location.origin)
-  ) {
+  if (data.settings.global && data.settings.urls.includes(window.location.origin)) {
     for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
-      runUtilsFunction(
-        "injectPlugin",
-        data.settings.enabledPlugins[i],
-        "doc-start",
-      );
+      runUtilsFunction("injectPlugin", data.settings.enabledPlugins[i], "doc-start");
     }
 
     if (data.settings.themes) {
@@ -72,8 +65,7 @@ function injectSnippets() {
         snippets.forEach((snippet) => {
           let snippetID = snippet[0];
           let snippetPath = snippet[1].path;
-          let snippetToggled =
-            settingsData.settings.enabledSnippets.includes(snippetID);
+          let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetID);
           if (snippetToggled) {
             runUtilsFunction("injectCSS", `/snippets/${snippetPath}`);
           }
@@ -85,8 +77,7 @@ function injectSnippets() {
           let snippetID = Object.keys(snippet)[0];
           let snippetAuthor = Object.values(snippet)[0].author;
           let snippetURL = `https://gist.githubusercontent.com/${snippetAuthor}/${snippetID}/raw`;
-          let snippetToggled =
-            settingsData.settings.enabledSnippets.includes(snippetID);
+          let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetID);
           if (snippetToggled) {
             if (snippetToggled) {
               fetch(snippetURL)

@@ -68,10 +68,7 @@ function installPlugin(pluginId) {
 function uninstallPlugin(pluginId) {
   chrome.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
-    settings.enabledPlugins.splice(
-      settings.enabledPlugins.indexOf(pluginId),
-      1,
-    );
+    settings.enabledPlugins.splice(settings.enabledPlugins.indexOf(pluginId), 1);
     chrome.storage.local.set({ settings: settings }, function () {
       console.log(`Uninstalled plugin ${pluginId}`);
     });

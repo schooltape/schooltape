@@ -5,14 +5,9 @@ Please read the Contributing guidelines here --> https://github.com/schooltape/s
 let consoleStyle = "color: lightgreen; font-weight: bold;";
 // console.log(`%c[subheader.js]`, consoleStyle, "Injected subheader.js!");
 
-if (
-  window.location.pathname === "/" &&
-  document.getElementsByClassName("timetable")[0]
-) {
+if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
   let timetableHeader = document.querySelectorAll("[data-timetable-header]");
-  let timetableContainer = document.querySelectorAll(
-    "[data-timetable-container]",
-  );
+  let timetableContainer = document.querySelectorAll("[data-timetable-container]");
   let timetable = document.getElementsByClassName("timetable")[0];
   // console.log(`%c[subheader.js]`, consoleStyle, "Timetable found, injecting subheader...");
   updateSubheader();
@@ -29,8 +24,7 @@ function updateSubheader() {
 
   if (currentPeriodData === null) {
     // Failed to retrieve any data
-    subHeader.innerHTML =
-      getDate().dateString + " <strong>|</strong> " + clock();
+    subHeader.innerHTML = getDate().dateString + " <strong>|</strong> " + clock();
   } else if (currentPeriodData.missingData) {
     // Missing period info
     subHeader.innerHTML =
@@ -113,20 +107,11 @@ function getPeriodData(periodNum) {
 
     try {
       let timetableRow = document.querySelector(".timetable tbody tr");
-      let currentData = timetableRow.querySelector(
-        `td:nth-child(${periodNum}) div:nth-child(1) div:nth-child(1)`,
-      );
+      let currentData = timetableRow.querySelector(`td:nth-child(${periodNum}) div:nth-child(1) div:nth-child(1)`);
       periodData.periodName = currentData.querySelector("a").textContent.trim();
-      periodData.periodLink = currentData
-        .querySelector("a")
-        .getAttribute("href")
-        .trim();
-      periodData.periodID = currentData
-        .querySelector("div:nth-child(2)")
-        .textContent.trim();
-      periodData.periodRoom = currentData
-        .querySelector("div:nth-child(3)")
-        .textContent.trim();
+      periodData.periodLink = currentData.querySelector("a").getAttribute("href").trim();
+      periodData.periodID = currentData.querySelector("div:nth-child(2)").textContent.trim();
+      periodData.periodRoom = currentData.querySelector("div:nth-child(3)").textContent.trim();
     } catch {
       periodData.missingData = true;
     }

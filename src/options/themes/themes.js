@@ -118,9 +118,7 @@ function accentClicked(event) {
     // remove styling
     let currentFlavour = settingsData.settings.currentTheme.split("-")[1];
     let currentAccent = settingsData.settings.currentTheme.split("-")[2];
-    document
-      .querySelector(`#palette > div.bg-${currentAccent}`)
-      .classList.remove("current");
+    document.querySelector(`#palette > div.bg-${currentAccent}`).classList.remove("current");
 
     // update accent in settings
     // console.log(event.target);
@@ -133,9 +131,7 @@ function accentClicked(event) {
     });
 
     // add styling
-    document
-      .querySelector(`#palette > div.bg-${selectedAccent}`)
-      .classList.add("current");
+    document.querySelector(`#palette > div.bg-${selectedAccent}`).classList.add("current");
   });
 }
 
@@ -144,8 +140,6 @@ function accentHighlight() {
     // eg theme = "catppuccin-macchiato-pink"
     // will be an array containing ["catppuccin", "macchiato", "pink"]
     let currentAccent = settingsData.settings.currentTheme.split("-")[2];
-    document
-      .querySelector(`#palette > div.bg-${currentAccent}`)
-      .classList.add("current");
+    document.querySelector(`#palette > div.bg-${currentAccent}`).classList.add("current");
   });
 }

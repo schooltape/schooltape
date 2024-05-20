@@ -36,17 +36,13 @@ const icons = [
 
 const modernIconsConsole = "color: green; font-weight: bold;";
 
-icons.forEach(([className, iconName, assignRefreshClass]) =>
-  insertIcon(className, iconName, assignRefreshClass),
-);
+icons.forEach(([className, iconName, assignRefreshClass]) => insertIcon(className, iconName, assignRefreshClass));
 // setInterval(autoInsertIcons, 1000);
 injectCSS();
 
 function insertIcon(className, iconName, assignRefreshClass) {
   try {
-    const ICON_MAIN = document.querySelector(
-      `nav.tab-bar .top-menu .${className}`,
-    );
+    const ICON_MAIN = document.querySelector(`nav.tab-bar .top-menu .${className}`);
     // console.log(ICON_MAIN);
     const iconElement = document.createElement("i");
     iconElement.innerHTML = iconName;

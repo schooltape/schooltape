@@ -1,78 +1,68 @@
 // add snippet listener
-document
-  .getElementById("snippet-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    let url = document.getElementById("snippet-input").value;
-    if (url) {
-      console.log(url);
+document.getElementById("snippet-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  let url = document.getElementById("snippet-input").value;
+  if (url) {
+    console.log(url);
 
-      // if is link, send request
-      if (url.startsWith("http") && url.includes("gist.github.com")) {
-        console.log("Downloading snippet...");
-        // send request to get snippet
-        fetch(url + "/raw")
-          .then((response) => response.text())
-          .then((cssSnippet) => {
-            console.log(cssSnippet);
-            let nameMatch = cssSnippet.match(/\/\*\s*name:\s*(.*?)\s*\*\//);
-            let descriptionMatch = cssSnippet.match(
-              /\/\*\s*description:\s*(.*?)\s*\*\//,
-            );
-            let snippetName = nameMatch ? nameMatch[1] : null;
-            let snippetDescription = descriptionMatch
-              ? descriptionMatch[1]
-              : null;
-            let sections = url.split("/");
-            let snippetAuthor = sections[3];
-            let snippetID = sections[sections.length - 1].split(".")[0];
+    // if is link, send request
+    if (url.startsWith("http") && url.includes("gist.github.com")) {
+      console.log("Downloading snippet...");
+      // send request to get snippet
+      fetch(url + "/raw")
+        .then((response) => response.text())
+        .then((cssSnippet) => {
+          console.log(cssSnippet);
+          let nameMatch = cssSnippet.match(/\/\*\s*name:\s*(.*?)\s*\*\//);
+          let descriptionMatch = cssSnippet.match(/\/\*\s*description:\s*(.*?)\s*\*\//);
+          let snippetName = nameMatch ? nameMatch[1] : null;
+          let snippetDescription = descriptionMatch ? descriptionMatch[1] : null;
+          let sections = url.split("/");
+          let snippetAuthor = sections[3];
+          let snippetID = sections[sections.length - 1].split(".")[0];
 
-            // example URL: https://gist.githubusercontent.com/42Willow/98435ecb3d871ecf14659936cdf36105
-            console.log(`author: ${snippetAuthor}`); // Outputs: 42Willow
-            console.log(`id: ${snippetID}`); // Outputs: hide-iframes
-            console.log(`name: ${snippetName}`); // Outputs: Hide homepage iframe
-            console.log(`description: ${snippetDescription}`); // Outputs: Useful for use with dark mode themes
+          // example URL: https://gist.githubusercontent.com/42Willow/98435ecb3d871ecf14659936cdf36105
+          console.log(`author: ${snippetAuthor}`); // Outputs: 42Willow
+          console.log(`id: ${snippetID}`); // Outputs: hide-iframes
+          console.log(`name: ${snippetName}`); // Outputs: Hide homepage iframe
+          console.log(`description: ${snippetDescription}`); // Outputs: Useful for use with dark mode themes
 
-            let snip = {
-              [snippetID]: {
-                name: snippetName,
-                author: snippetAuthor,
-                description: snippetDescription,
-              },
-            };
+          let snip = {
+            [snippetID]: {
+              name: snippetName,
+              author: snippetAuthor,
+              description: snippetDescription,
+            },
+          };
 
-            if (Object.values(snip[snippetID]).includes(null)) {
-              alert("This snippet is missing a name or description");
+          if (Object.values(snip[snippetID]).includes(null)) {
+            alert("This snippet is missing a name or description");
+            return;
+          }
+          console.log(snip);
+
+          // modify the settings to add to list of userSnippets
+          chrome.storage.local.get(["settings"], function (settingsData) {
+            let settings = settingsData.settings;
+            // if not already installed
+            if (settings.userSnippets.some((e) => e[snippetID])) {
+              alert("This snippet is already installed.");
               return;
             }
-            console.log(snip);
-
-            // modify the settings to add to list of userSnippets
-            chrome.storage.local.get(["settings"], function (settingsData) {
-              let settings = settingsData.settings;
-              // if not already installed
-              if (settings.userSnippets.some((e) => e[snippetID])) {
-                alert("This snippet is already installed.");
-                return;
-              }
-              settings.userSnippets.push(snip);
-              chrome.storage.local.set({ settings: settings }, function () {
-                console.log(`Installed snippet ${snip}`);
-              });
-              addUserSnippets();
+            settings.userSnippets.push(snip);
+            chrome.storage.local.set({ settings: settings }, function () {
+              console.log(`Installed snippet ${snip}`);
             });
+            addUserSnippets();
           });
-      } else if (
-        url.startsWith("http") &&
-        url.includes("gist") &&
-        url.includes("raw")
-      ) {
-        alert("Please use the main URL of the Gist, not the raw URL.");
-      } else {
-        alert("Please enter a valid URL.");
-      }
+        });
+    } else if (url.startsWith("http") && url.includes("gist") && url.includes("raw")) {
+      alert("Please use the main URL of the Gist, not the raw URL.");
+    } else {
+      alert("Please enter a valid URL.");
     }
-  });
+  }
+});
 
 fetch("/snippets/snippets.json")
   .then((response) => response.json())
@@ -98,8 +88,7 @@ function addSnippets(data) {
       let snippetId = snippet[0];
       let snippetName = snippet[1].name;
       let snippetDescription = snippet[1].description;
-      let snippetToggled =
-        settingsData.settings.enabledSnippets.includes(snippetId);
+      let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetId);
       let option = document.createElement("div");
       option.classList.add("my-4");
       option.classList.add("group");
@@ -131,8 +120,7 @@ function addUserSnippets() {
         let snippetDescription = snippet[snippetId].description;
         let snippetURL = `https://gist.github.com/${snippet[snippetId].author}/${snippetId}`;
         let option = document.createElement("div");
-        let snippetToggled =
-          settingsData.settings.enabledSnippets.includes(snippetId);
+        let snippetToggled = settingsData.settings.enabledSnippets.includes(snippetId);
         option.classList.add("my-4");
         option.classList.add("group");
         option.innerHTML = `
@@ -207,10 +195,7 @@ function installSnippet(snippetId) {
 function uninstallSnippet(snippetId) {
   chrome.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
-    settings.enabledSnippets.splice(
-      settings.enabledSnippets.indexOf(snippetId),
-      1,
-    );
+    settings.enabledSnippets.splice(settings.enabledSnippets.indexOf(snippetId), 1);
     chrome.storage.local.set({ settings: settings }, function () {
       console.log(`Uninstalled snippet ${snippetId}`);
     });

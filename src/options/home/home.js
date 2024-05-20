@@ -61,18 +61,16 @@ chrome.storage.local.get(["settings"], function (result) {
   }
 });
 // update notifications listener
-document
-  .getElementById("update-notifs")
-  .addEventListener("change", function () {
-    chrome.storage.local.get(["settings"], function (result) {
-      if (result.settings.updateReminder === true) {
-        let newSettings = result.settings;
-        newSettings.updateReminder = false;
-        chrome.storage.local.set({ settings: newSettings }, function () {});
-      } else if (result.settings.updateReminder === false) {
-        let newSettings = result.settings;
-        newSettings.updateReminder = true;
-        chrome.storage.local.set({ settings: newSettings }, function () {});
-      }
-    });
+document.getElementById("update-notifs").addEventListener("change", function () {
+  chrome.storage.local.get(["settings"], function (result) {
+    if (result.settings.updateReminder === true) {
+      let newSettings = result.settings;
+      newSettings.updateReminder = false;
+      chrome.storage.local.set({ settings: newSettings }, function () {});
+    } else if (result.settings.updateReminder === false) {
+      let newSettings = result.settings;
+      newSettings.updateReminder = true;
+      chrome.storage.local.set({ settings: newSettings }, function () {});
+    }
   });
+});

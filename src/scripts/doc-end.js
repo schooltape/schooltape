@@ -6,11 +6,7 @@ chrome.storage.local.get(["settings"], function (data) {
   if (data.settings.global) {
     if (data.settings.urls.includes(window.location.origin)) {
       for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
-        runUtilsFunction(
-          "injectPlugin",
-          data.settings.enabledPlugins[i],
-          "doc-end",
-        );
+        runUtilsFunction("injectPlugin", data.settings.enabledPlugins[i], "doc-end");
       }
     }
   }
@@ -20,8 +16,7 @@ chrome.storage.local.get(["settings"], function (data) {
 let footer = document.querySelector("#footer > ul");
 if (footer.innerHTML.includes("Schoolbox")) {
   let footerListItem = document.createElement("li");
-  footerListItem.appendChild(document.createElement("a")).href =
-    "https://github.com/42willow/schooltape";
+  footerListItem.appendChild(document.createElement("a")).href = "https://github.com/42willow/schooltape";
   footerListItem.firstChild.textContent = `Schooltape v${chrome.runtime.getManifest().version}`;
   footer.appendChild(footerListItem);
   chrome.storage.local.get("settings", function ({ settings }) {

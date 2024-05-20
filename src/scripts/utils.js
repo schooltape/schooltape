@@ -29,10 +29,7 @@ export function injectPlugin(pluginName, loadTime) {
         // console.error('An error occurred:', error);
         chrome.storage.local.get(["settings"], function (data) {
           let newSettings = data.settings;
-          newSettings.enabledPlugins.splice(
-            newSettings.enabledPlugins.indexOf(pluginName),
-            1,
-          );
+          newSettings.enabledPlugins.splice(newSettings.enabledPlugins.indexOf(pluginName), 1);
           chrome.storage.local.set({ settings: newSettings }, function () {
             // console.log(`Removed ${pluginName} from enabled plugins list`);
           });

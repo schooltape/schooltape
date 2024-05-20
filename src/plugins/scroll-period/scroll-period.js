@@ -8,9 +8,7 @@ function updateScrollbar() {
   if (periodNum !== undefined) {
     try {
       let timetableRow = document.querySelector(".timetable tbody tr");
-      let currentData = timetableRow.querySelector(
-        `td:nth-child(${periodNum})`,
-      );
+      let currentData = timetableRow.querySelector(`td:nth-child(${periodNum})`);
       x.scroll({
         left: currentData.offsetLeft - 55, // 16 for perfect alignment
         behavior: "smooth", // or 'auto' to scroll instantly
@@ -89,20 +87,11 @@ function getPeriodData(periodNum) {
 
     try {
       let timetableRow = document.querySelector(".timetable tbody tr");
-      let currentData = timetableRow.querySelector(
-        `td:nth-child(${periodNum}) div:nth-child(1) div:nth-child(1)`,
-      );
+      let currentData = timetableRow.querySelector(`td:nth-child(${periodNum}) div:nth-child(1) div:nth-child(1)`);
       periodData.periodName = currentData.querySelector("a").textContent.trim();
-      periodData.periodLink = currentData
-        .querySelector("a")
-        .getAttribute("href")
-        .trim();
-      periodData.periodID = currentData
-        .querySelector("div:nth-child(2)")
-        .textContent.trim();
-      periodData.periodRoom = currentData
-        .querySelector("div:nth-child(3)")
-        .textContent.trim();
+      periodData.periodLink = currentData.querySelector("a").getAttribute("href").trim();
+      periodData.periodID = currentData.querySelector("div:nth-child(2)").textContent.trim();
+      periodData.periodRoom = currentData.querySelector("div:nth-child(3)").textContent.trim();
     } catch {
       periodData.missingData = true;
     }

@@ -23,9 +23,7 @@ injectCSS();
 
 function injectCSS() {
   const link = document.createElement("link");
-  link.href = chrome.runtime.getURL(
-    "/plugins/scroll-segments/scroll-segments.css",
-  );
+  link.href = chrome.runtime.getURL("/plugins/scroll-segments/scroll-segments.css");
   link.type = "text/css";
   link.rel = "stylesheet";
   link.className = "schooltape-css";

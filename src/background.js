@@ -11,13 +11,7 @@ const defaultSettings = {
   updateReminder: true,
   themes: false,
   currentTheme: "catppuccin-macchiato-rosewater",
-  enabledPlugins: [
-    "subheader",
-    "scroll-segments",
-    "tab-title",
-    "scroll-period",
-    "timetable-labels",
-  ],
+  enabledPlugins: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
   enabledSnippets: ["hide-pfp"],
   userSnippets: [],
   urls: ["https://help.schoolbox.com.au"],
@@ -142,16 +136,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Check for updates
   if (!navigator.onLine) {
     // check if online
-    console.error(
-      "You are currently offline. Please check your internet connection and try again.",
-    );
+    console.error("You are currently offline. Please check your internet connection and try again.");
   } else {
     chrome.storage.local.get("settings", function (result) {
       if (request.checkForUpdates && result.settings.updateReminder) {
         // Get latest and pre-release information from github
-        fetch(
-          "https://api.github.com/repos/42willow/schooltape/releases/latest",
-        )
+        fetch("https://api.github.com/repos/42willow/schooltape/releases/latest")
           .then((response) => response.json())
           .then((data) => {
             // Get latest version without the "v" in front
@@ -178,10 +168,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             }
           })
           .catch((error) => {
-            console.error(
-              "Error occurred while fetching latest release",
-              error,
-            );
+            console.error("Error occurred while fetching latest release", error);
           });
       }
     });
@@ -286,8 +273,7 @@ chrome.notifications.onClicked.addListener(function (notifID) {
   }
   if (notifID === "updated") {
     let thisVersion = chrome.runtime.getManifest().version;
-    let newURL =
-      "https://github.com/42willow/schooltape/releases/tag/v" + thisVersion;
+    let newURL = "https://github.com/42willow/schooltape/releases/tag/v" + thisVersion;
     chrome.tabs.create({ url: newURL });
   }
 });

@@ -1,12 +1,4 @@
-const days = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const observer = new MutationObserver((mutationsList, observer) => {
   for (let mutation of mutationsList) {
@@ -16,12 +8,8 @@ const observer = new MutationObserver((mutationsList, observer) => {
       if (timetable && timetableSmall) {
         observer.disconnect();
         days.forEach((day, i) => {
-          document.querySelector(
-            `.timetable > thead > tr > th:nth-child(${i + 2})`,
-          ).innerHTML = day;
-          document.querySelector(
-            `.timetable-small > div:nth-child(${i + 1}) > h2`,
-          ).innerHTML = day;
+          document.querySelector(`.timetable > thead > tr > th:nth-child(${i + 2})`).innerHTML = day;
+          document.querySelector(`.timetable-small > div:nth-child(${i + 1}) > h2`).innerHTML = day;
         });
         return;
       }
