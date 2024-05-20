@@ -42,6 +42,7 @@ To install Schooltape and get started, **view the [getting started](https://gith
 </details>
 
 ## Features
+
 - **Schoolbox detection:** You do not need to manually enter your Schoolbox URL
 - **Plugins:** Increase Schoolbox functionality
 - **Themes:** Change the colours of Schoolbox

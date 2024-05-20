@@ -7,14 +7,15 @@ Please read the Contributing guidelines here --> https://github.com/schooltape/s
 
 /* fallback */
 @font-face {
-    font-family: 'Material Icons Round';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/materialiconsround/v100/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2) format('woff2');
+  font-family: "Material Icons Round";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialiconsround/v100/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2)
+    format("woff2");
 }
 
 .material-icons-round {
-  font-family: 'Material Icons Round';
+  font-family: "Material Icons Round";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -29,21 +30,22 @@ Please read the Contributing guidelines here --> https://github.com/schooltape/s
   color: #0066b0; /* Make icons blue */
 }
 
-#top-menu>li>a::before, #overflow-nav>li>a::before {
+#top-menu > li > a::before,
+#overflow-nav > li > a::before {
   display: none !important;
 }
 
 /* Fix span text not aligned properly */
-.second-nav>li>a>i {
+.second-nav > li > a > i {
   float: left;
   margin-right: 10px;
 }
-ul#profile-options>li>a>i {
+ul#profile-options > li > a > i {
   float: left;
   margin-right: 10px;
 }
 
 /* Fix colours in light mode */
-ul#top-menu>li>a>i {
+ul#top-menu > li > a > i {
   color: white;
 }

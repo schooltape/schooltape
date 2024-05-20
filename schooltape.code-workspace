@@ -1,18 +1,16 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../schooltape.wiki"
-		},
-		{
-			"path": "../schooltape.github.io"
-		}
-	],
-	"settings": {
-		"conventionalCommits.scopes": [
-			"manifest"
-		]
-	}
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../schooltape.wiki",
+    },
+    {
+      "path": "../schooltape.github.io",
+    },
+  ],
+  "settings": {
+    "conventionalCommits.scopes": ["manifest"],
+  },
 }

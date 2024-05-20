@@ -1,13 +1,14 @@
-#left-menu, #container {
-    height: 100vh !important;
-    overflow-y: scroll !important;
+#left-menu,
+#container {
+  height: 100vh !important;
+  overflow-y: scroll !important;
 }
 
 .main {
-    overflow-y: hidden !important;
-    height: 100vh !important;
+  overflow-y: hidden !important;
+  height: 100vh !important;
 }
 
 body {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }

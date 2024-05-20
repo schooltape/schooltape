@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Flow+Circular&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Flow+Circular&display=swap");
 
-*, #side-menu > h3 {
-  font-family: 'Flow Circular', cursive;
+*,
+#side-menu > h3 {
+  font-family: "Flow Circular", cursive;
 }
 
-.Component_Dashboard_TextboxController, .tileList {
-    display: none;
+.Component_Dashboard_TextboxController,
+.tileList {
+  display: none;
 }
 
 img:not(.account-menu > img) {
-    display: none;
+  display: none;
 }

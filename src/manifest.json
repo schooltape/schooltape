@@ -1,53 +1,50 @@
 {
-    "manifest_version": 2,
-    "name": "Schooltape",
-    "version": "2.4.0",
-    "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
-    "homepage_url": "https://github.com/42willow/schooltape",
-    "icons": {
-        "100": "logo.png"
+  "manifest_version": 2,
+  "name": "Schooltape",
+  "version": "2.4.0",
+  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
+  "homepage_url": "https://github.com/42willow/schooltape",
+  "icons": {
+    "100": "logo.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": ["*"],
+  "options_ui": {
+    "page": "options/home/home.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/doc-end.js"],
+      "run_at": "document_end"
     },
-    "background": {
-      "scripts": ["background.js"]
-    },
-    "permissions": [
-      "storage",
-      "contextMenus",
-      "activeTab",
-      "tabs",
-      "notifications",
-      "webRequest",
-      "<all_urls>"
-    ],
-    "web_accessible_resources": [
-      "*"
-    ],
-    "options_ui": {
-      "page": "options/home/home.html",
-      "open_in_tab": true
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["scripts/doc-end.js"],
-        "run_at": "document_end"
-      },
-      {
-        "matches": ["<all_urls>"],
-        "js": ["scripts/doc-start.js"],
-        "run_at": "document_start"
-      }
-    ],
-    "browser_action": {
-      "default_icon": "logo.png",
-      "default_title": "Toggle Schooltape",
-      "default_popup": "options/home/home.html"
-    },
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "schooltape@schooltape-community.github.io",
-        "strict_min_version": "117.0"
-      }
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/doc-start.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_title": "Toggle Schooltape",
+    "default_popup": "options/home/home.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "schooltape@schooltape-community.github.io",
+      "strict_min_version": "117.0"
     }
   }
-  
+}

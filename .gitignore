@@ -3,4 +3,7 @@ build.sh
 src/web-ext-artifacts
 whiskers*
 src/themes/custom.css
-tailwind/node_modules
+
+node_modules
+package-lock.json
+package.json

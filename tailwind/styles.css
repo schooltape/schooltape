@@ -4,80 +4,80 @@
 @tailwind utilities;
 
 body {
-    width: 450px; /* max: 1000px */
+  width: 450px; /* max: 1000px */
 }
 
 #flavours button {
-    @apply bg-surface0;
+  @apply bg-surface0;
 }
 #flavours button.active {
-    @apply bg-pink/50;
+  @apply bg-pink/50;
 }
 
 #card {
-    @apply w-full md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
+  @apply w-full md:w-2/4 2xl:w-1/4 bg-gradient-to-b p-6 rounded-3xl flex flex-col justify-center items-center outline outline-2 shadow-xl;
 }
 
 #card h1 {
-    @apply font-black text-5xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
+  @apply font-black text-5xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
 }
 
 #card h2 {
-    @apply font-black text-4xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
+  @apply font-black text-4xl lg:text-6xl bg-gradient-to-r bg-clip-text text-transparent;
 }
 
 #card h3 {
-    @apply font-black text-2xl lg:text-6xl;
+  @apply font-black text-2xl lg:text-6xl;
 }
 
 #card p {
-    @apply font-bold;
+  @apply font-bold;
 }
 
 button#toggle {
-    @apply text-base px-4 py-2 rounded-xl font-bold text-xl
+  @apply text-base px-4 py-2 rounded-xl font-bold text-xl;
 }
 
 button.small {
-    @apply text-sm px-2 py-1 rounded-lg font-bold
+  @apply text-sm px-2 py-1 rounded-lg font-bold;
 }
 
 button {
-    @apply transition duration-500 ease-in-out;
+  @apply transition duration-500 ease-in-out;
 }
 
 #palette {
-    @apply grid justify-items-center auto-rows-auto grid-cols-7 mb-8 gap-4;
+  @apply grid justify-items-center auto-rows-auto grid-cols-7 mb-8 gap-4;
 }
 
 #palette > * {
-    @apply w-6 h-6 rounded-full;
+  @apply w-6 h-6 rounded-full;
 }
 
 .current {
-    @apply outline outline-text;
+  @apply outline outline-text;
 }
 
 .navbutton-left {
-    @apply hover:bg-pink/50 active:bg-pink/80 py-2 pr-2 pl-4 rounded-l-xl outline outline-1 outline-overlay2/10;
+  @apply hover:bg-pink/50 active:bg-pink/80 py-2 pr-2 pl-4 rounded-l-xl outline outline-1 outline-overlay2/10;
 }
 
 .navbutton-center {
-    @apply hover:bg-pink/50 active:bg-pink/80 p-2 outline outline-1 outline-overlay2/10;
+  @apply hover:bg-pink/50 active:bg-pink/80 p-2 outline outline-1 outline-overlay2/10;
 }
 
 .navbutton-right {
-    @apply hover:bg-pink/50 active:bg-pink/80 py-2 pl-2 pr-4 rounded-r-xl outline outline-1 outline-overlay2/10;
+  @apply hover:bg-pink/50 active:bg-pink/80 py-2 pl-2 pr-4 rounded-r-xl outline outline-1 outline-overlay2/10;
 }
 
 div[title] {
-    @apply relative;
+  @apply relative;
 }
 
 div[title]:hover::after {
-    @apply bg-surface0 text-text absolute bottom-full left-1/2 whitespace-nowrap;
-    content: attr(title);
-    transform: translateX(-50%);
-    padding: 0.5rem;
-    border-radius: 0.25rem;
+  @apply bg-surface0 text-text absolute bottom-full left-1/2 whitespace-nowrap;
+  content: attr(title);
+  transform: translateX(-50%);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }

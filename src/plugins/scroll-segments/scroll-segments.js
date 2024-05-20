@@ -1,7 +1,6 @@
 const scrollSegmentsConsole = "color: brown; font-weight: bold;";
 // console.log(`%cscroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.js!");
 
-
 // append a new div with the class "row" to the element with the id "content"
 let content = document.getElementById("content");
 let row = document.createElement("div");
@@ -20,16 +19,26 @@ footerClone.style.display = "block";
 footerClone.style.marginBottom = "50px";
 row.appendChild(footerClone);
 
-
-
 injectCSS();
 
 function injectCSS() {
-    const link = document.createElement("link");
-    link.href = chrome.runtime.getURL("/plugins/scroll-segments/scroll-segments.css");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.className = "schooltape-css";
-    document.head.appendChild(link);
-    // console.log(`%c[scroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.css");
+  const link = document.createElement("link");
+  link.href = chrome.runtime.getURL(
+    "/plugins/scroll-segments/scroll-segments.css",
+  );
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.className = "schooltape-css";
+  document.head.appendChild(link);
+  // console.log(`%c[scroll-segments.js]`, scrollSegmentsConsole, "Injected scroll-segments.css");
+}
+
+async function runUtilsFunction(functionName, ...args) {
+  const src = chrome.runtime.getURL("scripts/utils.js");
+  const utils = await import(src);
+  if (typeof utils[functionName] === "function") {
+    utils[functionName](...args);
+  } else {
+    console.error(`Function ${functionName} does not exist in utils`);
   }
+}
