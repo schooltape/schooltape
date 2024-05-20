@@ -5,12 +5,6 @@
         "description": "Hide your profile picture across Schoolbox.",
         "path": "hide-pfp.css"
     },
-    "scroll-segments": {
-        "name": "Scroll Segments",
-        "author": "Schooltape",
-        "description": "Segments Schoolbox's scrolling into sections.",
-        "path": "scroll-segments.css"
-    },
     "censor": {
         "name": "Censor",
         "author": "Schooltape",

@@ -32,6 +32,17 @@
             }
         ]
     },
+    "scroll-segments": {
+        "name": "Scroll Segments",
+        "author": "Schooltape",
+        "description": "Segments Schoolbox's scrolling into sections.",
+        "scripts": [
+            {
+                "execute": "doc-end",
+                "path": "/plugins/scroll-segments/scroll-segments.js"
+            }
+        ]
+    },
     "tab-title": {
         "name": "Tab Title",
         "author": "Schooltape",
