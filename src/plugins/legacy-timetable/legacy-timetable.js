@@ -1,8 +1,3 @@
-/*
-For developers:
-Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
-*/
-
 // If window pathname is "/" and the element with the class "timetable" exists, run the code
 if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
   let timetableContainer = document.querySelectorAll("[data-timetable-container]");

@@ -1,7 +1,3 @@
-/*
-For developers:
-Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
-*/
 let consoleStyle = "color: lightgreen; font-weight: bold;";
 // console.log(`%c[subheader.js]`, consoleStyle, "Injected subheader.js!");
 

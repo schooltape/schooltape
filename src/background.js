@@ -1,8 +1,3 @@
-/*
-For developers:
-Please read the Contributing guidelines here --> https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
-*/
-
 console.log("Service worker active!");
 
 // ----------------- Variables ----------------- //
