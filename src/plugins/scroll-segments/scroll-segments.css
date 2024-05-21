@@ -1,14 +1,18 @@
-#left-menu,
-#container {
+#left-menu {
   height: 100vh !important;
   overflow-y: scroll !important;
 }
 
-.main {
-  overflow-y: hidden !important;
-  height: 100vh !important;
+#container {
+  height: calc(100vh - 72px) !important;
+  overflow-y: scroll !important;
+  padding-bottom: 0px;
 }
 
 body {
   overflow-y: hidden;
+}
+
+#footer {
+  margin-top: 16px;
 }

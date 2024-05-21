@@ -38,7 +38,7 @@
     "description": "Segments Schoolbox's scrolling into sections.",
     "scripts": [
       {
-        "execute": "doc-end",
+        "execute": "doc-start",
         "path": "/plugins/scroll-segments/scroll-segments.js"
       }
     ]
