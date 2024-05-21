@@ -1,10 +1,14 @@
-for (let i = 0; i < document.getElementsByClassName("logo").length; i++) {
-  let logo = document.getElementsByClassName("logo")[i];
+let logos = Array.from(document.getElementsByClassName("logo"));
+
+logos.forEach((logo) => {
   logo.addEventListener("click", function (e) {
-    e.preventDefault(); // Prevents the default action of the link
+    if (window.location.pathname === "/") {
+      return;
+    }
+    e.preventDefault();
     chrome.storage.local.get(["settings"], function () {
-      let tab = document.getElementsByClassName("logo")[0].href;
-      chrome.runtime.sendMessage({ toHomepage: tab }, function (response) {});
+      let tab = logos[0].href;
+      chrome.runtime.sendMessage({ toHomepage: tab });
     });
   });
-}
+});
