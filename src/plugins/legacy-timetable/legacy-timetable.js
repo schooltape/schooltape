@@ -1,12 +1,14 @@
-// If window pathname is "/" and the element with the class "timetable" exists, run the code
-if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
-  let timetableContainer = document.querySelectorAll("[data-timetable-container]");
+// moves the timetable to it's own row on the dashboard, preventing it from being squished by other elements
 
-  // Add the class "columns" to timetableContainer
-  timetableContainer[0].classList.add("columns");
+// check if we're on the homepage and a timetable element exists
+if (window.location.pathname !== "/" || !document.querySelector(".timetable")) return;
 
-  let rowElement = document.getElementsByClassName("Component_Dashboard_TimetableController")[0].parentNode.parentNode;
+// get the timetable container and add the 'columns' class
+let timetableContainer = document.querySelector("[data-timetable-container]");
+if (!timetableContainer) return;
+timetableContainer.classList.add("columns");
 
-  // Move timetableContainer to the start of the row
-  rowElement.insertBefore(timetableContainer[0], rowElement.firstChild);
-}
+// get the row element and move the timetable container to the beginning
+let rowElement = document.querySelector(".Component_Dashboard_TimetableController")?.parentNode?.parentNode;
+if (!rowElement) return;
+rowElement.insertBefore(timetableContainer, rowElement.firstChild);
