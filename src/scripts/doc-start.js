@@ -21,12 +21,7 @@ chrome.storage.local.get(["settings"], function (data) {
       // console.log(sections);
       if (sections[0] == "catppuccin") {
         injectCatppuccin(sections[1], sections[2]);
-        // injectCSS(`/themes/catppuccin.css`);
-        (async () => {
-          const src = chrome.runtime.getURL("scripts/utils.js");
-          const utils = await import(src);
-          utils.injectCSS(`/themes/catppuccin.css`);
-        })();
+        runUtilsFunction("injectCSS", "/themes/catppuccin.css");
       }
     }
     function injectCatppuccin(flavor, accent) {
@@ -96,7 +91,7 @@ function injectSnippets() {
 }
 
 async function runUtilsFunction(functionName, ...args) {
-  const src = chrome.runtime.getURL("scripts/utils.js");
+  const src = chrome.runtime.getURL("scripts/scriptUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
     utils[functionName](...args);

@@ -8,7 +8,7 @@ try {
 }
 
 async function runUtilsFunction(functionName, ...args) {
-  const src = chrome.runtime.getURL("scripts/utils.js");
+  const src = chrome.runtime.getURL("scripts/scriptUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
     utils[functionName](...args);
