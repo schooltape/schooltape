@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="25%" src="https://github.com/42Willow/schooltape/blob/main/assets/schooltape-box.png?raw=true" />
+  <img width="30%" src="assets/schooltape-logo.png" />
 </p>
 <p align="center">
   <b> ~ Schooltape ~ </b><br>
