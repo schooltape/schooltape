@@ -25,7 +25,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
     // Execute code when first installed
     chrome.notifications.create("tutorial", {
       type: "basic",
-      iconUrl: "logo.png",
+      iconUrl: "assets/icon-128.png",
       title: "Thank you for installing Schooltape!",
       message: "Click here to look at the tutorial.",
       priority: 2,
@@ -77,7 +77,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
     console.log(`Updated from ${details.previousVersion} to ${thisVersion}!`);
     chrome.notifications.create("updated", {
       type: "basic",
-      iconUrl: "logo.png",
+      iconUrl: "assets/icon-128.png",
       title: `Updated from ${details.previousVersion} to ${thisVersion}!`,
       message: "Click here to look at the release notes.",
       priority: 2,
@@ -153,7 +153,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
               // Send notification
               chrome.notifications.create("update", {
                 type: "basic",
-                iconUrl: "logo.png",
+                iconUrl: "assets/icon-128.png",
                 title: "Update available!",
                 message: `New version: ${latestVersion}\n(Currently installed: ${currentVersion})\nClick here to look at the release notes.`,
                 priority: 2,
