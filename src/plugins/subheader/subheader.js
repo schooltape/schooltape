@@ -12,12 +12,55 @@ Date = function (...args) {
 Date.prototype = _Date.prototype;
 // END DEBUG
 
+let style = document.createElement("style");
+style.classList = "schooltape";
+style.innerHTML = `
+  .subheader span:not(:last-child)::after {
+    content: " | ";
+    font-weight: bold;
+  }
+`;
+document.head.appendChild(style);
+
 if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
-  // let timetableHeader = document.querySelectorAll("[data-timetable-header]");
-  // let timetableContainer = document.querySelectorAll("[data-timetable-container]");
-  // let timetable = document.getElementsByClassName("timetable")[0];
-  updateSubheader();
-  setInterval(updateSubheader, 1000);
+  createSubheader();
+  // updateSubheader();
+  // setInterval(updateSubheader, 1000);
+}
+
+function createSubheader() {
+  const subheader = document.querySelector("h2.subheader");
+  // delete all children of the subheader
+  while (subheader.firstChild) {
+    subheader.removeChild(subheader.firstChild);
+  }
+  const span = document.createElement("span");
+  span.classList = "schooltape";
+  subheader.appendChild(span);
+
+  const date = new Date();
+
+  // period
+  let period = runUtilsFunction("getCurrentPeriod");
+  if (period) {
+    let periodSpan = document.createElement("span");
+    periodSpan.classList.add("period");
+    span.appendChild(periodSpan);
+  }
+  // clock
+  let clockSpan = document.createElement("span");
+  clockSpan.classList.add("clock");
+  clockSpan.textContent = date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  span.appendChild(clockSpan);
+
+  // date
+  let dateSpan = document.createElement("span");
+  dateSpan.classList.add("date");
+  dateSpan.textContent = date.toDateString();
+  span.appendChild(dateSpan);
 }
 
 // Function with interval of one second to update the subheader
@@ -47,52 +90,6 @@ function updateSubheader() {
   // } else {
   //   subHeader.innerHTML = `<a style='color: inherit;' href='${currentPeriodData.periodLink}' target='_blank'>${currentPeriodData.periodName} (${currentPeriodData.periodRoom})</a> <strong>|</strong> ${getDate().dateString} <strong>|</strong> ${clock()}`;
   // }
-}
-
-function clock() {
-  let s = getDate().second;
-  let m = getDate().minute;
-  let h = getDate().hour;
-  // If seconds is a single digit number add a zero before it
-  if (s.toString().length === 1) {
-    s = "0" + s;
-  }
-  // If minutes is a single digit number add a zero before it
-  if (m.toString().length === 1) {
-    m = "0" + m;
-  }
-
-  // Get meridian (AM/PM)
-  let meridian = "AM";
-  if (h > 12) {
-    h = h - 12;
-    meridian = "PM";
-  }
-
-  // return h + ":" + m + ":" + s;
-  return h + ":" + m + " " + meridian;
-}
-
-function getDate() {
-  let currentDate = new Date();
-  let day = currentDate.getDay();
-  let month = currentDate.getMonth();
-  let year = currentDate.getFullYear();
-  let date = currentDate.getDate();
-  let hour = currentDate.getHours();
-  let minute = currentDate.getMinutes();
-  let second = currentDate.getSeconds();
-  let dateString = currentDate.toDateString();
-  return {
-    day: day,
-    month: month,
-    year: year,
-    date: date,
-    hour: hour,
-    minute: minute,
-    second: second,
-    dateString: dateString,
-  };
 }
 
 async function runUtilsFunction(functionName, ...args) {

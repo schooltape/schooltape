@@ -3,11 +3,13 @@ export function getListOfPeriods() {
   let periodList = [];
   for (let i = 0; i < 14; i++) {
     periodList.push(getPeriodData(i));
+    console.log(i);
   }
   return periodList;
 }
 
 export function getCurrentPeriod() {
+  // TODO: refactor this function to return the current period object, not index
   const periodList = getListOfPeriods();
   console.log(periodList);
   // const currentTime = new Date().getTime();
@@ -52,6 +54,7 @@ export function extractTimes(periodTime) {
 }
 
 export function getPeriodData(index) {
+  console.log(index);
   // if period number is not provided, return null
   if (index === undefined) {
     console.error("Period number was not provided");
