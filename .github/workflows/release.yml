@@ -5,12 +5,26 @@ on:
       - "v*.*.*"
 
 jobs:
-  sign:
+  release:
     name: "Release"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1
+
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: "Install dependencies and build"
+        run: |
+          npm ci
+          npm run build
+
+      - name: "Create zip"
+        run: |
+          zip -r extension.zip src/
 
       - name: "web-ext build"
         id: web-ext-build
@@ -29,9 +43,12 @@ jobs:
           apiKey: ${{ secrets.AMO_SIGN_KEY }}
           apiSecret: ${{ secrets.AMO_SIGN_SECRET }}
           timeout: 900000
+
       - name: "Create Release"
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ${{ steps.web-ext-sign.outputs.target }}
+          files: |
+            ${{ steps.web-ext-sign.outputs.target }}
+            extension.zip
