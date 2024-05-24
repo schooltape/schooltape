@@ -6,5 +6,5 @@ module.exports = {
       defaultFlavour: "latte",
     }),
   ],
-  content: ["../src/options/*/*.{html,js}"],
+  content: ["./src/options/*/*.{html,js}"],
 };

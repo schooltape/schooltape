@@ -1,9 +1,4 @@
-build.sh
 *.DS_Store
-src/web-ext-artifacts
-whiskers*
-src/themes/custom.css
-
-node_modules
-package-lock.json
-package.json
+web-ext-artifacts/
+node_modules/
+dist/

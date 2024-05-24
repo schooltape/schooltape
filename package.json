@@ -1,0 +1,18 @@
+{
+  "name": "schooltape",
+  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
+  "scripts": {
+    "build": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css",
+    "dev": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css --watch",
+    "serve:firefox": "web-ext run -s ./src/ -u \"https://github.com/42willow/schooltape/issues\"",
+    "serve:chrome": "web-ext run -s ./src/ -t chromium -u \"https://github.com/42willow/schooltape/issues\"",
+    "format": "prettier --write \"src/**/*.{js,css,html}\""
+  },
+  "author": "42willow",
+  "license": "MIT",
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "^0.1.6",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14"
+  }
+}
