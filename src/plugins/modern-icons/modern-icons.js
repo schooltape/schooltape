@@ -1,5 +1,5 @@
+// [className, iconName] (material icons)
 const icons = [
-  // [className, iconName] (material icons)
   ["icon-teacher", "school"],
   ["icon-due-work", "inventory_2"],
   ["icon-task", "inventory"],
@@ -25,44 +25,35 @@ const icons = [
   ["icon-group", "group"],
   ["icon-info", "info"],
   ["icon-resource-booking", "book_online"],
-  // ["icon-approve", "check_circle", true],
-  // ["icon-notifications", "notifications_none", true],
 ];
 
-const modernIconsConsole = "color: green; font-weight: bold;";
-
-icons.forEach(([className, iconName, assignRefreshClass]) => insertIcon(className, iconName, assignRefreshClass));
-// setInterval(autoInsertIcons, 1000);
-injectCSS();
-
-function insertIcon(className, iconName, assignRefreshClass) {
-  try {
-    const ICON_MAIN = document.querySelector(`nav.tab-bar .top-menu .${className}`);
-    // console.log(ICON_MAIN);
-    const iconElement = document.createElement("i");
-    iconElement.innerHTML = iconName;
-    iconElement.classList.add("material-icons-round");
-    ICON_MAIN.insertBefore(iconElement, ICON_MAIN.firstChild);
-  } catch (e) {
-    // console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
-  }
-  try {
-    const ICON_MAIN = document.querySelector(`#overflow-nav .${className}`);
-    // console.log(ICON_MAIN);
-    const iconElement = document.createElement("i");
-    iconElement.innerHTML = iconName;
-    iconElement.classList.add("material-icons-round");
-    ICON_MAIN.insertBefore(iconElement, ICON_MAIN.firstChild);
-  } catch (e) {
-    // console.log(`%c[modern-icons.js]`, modernIconsConsole, `Failed to insert icon for ${className}`);
-  }
+function insertIcon(className, iconName) {
+  const selectors = [`nav.tab-bar .top-menu .${className}`, `#overflow-nav .${className}`];
+  selectors.forEach(selector => {
+    try {
+      const ICON_MAIN = document.querySelector(selector);
+      // Check if the icon already exists
+      if (!ICON_MAIN.querySelector('.material-icons-round')) {
+        const iconElement = document.createElement("i");
+        iconElement.innerHTML = iconName;
+        iconElement.classList.add("material-icons-round");
+        ICON_MAIN.insertBefore(iconElement, ICON_MAIN.firstChild);
+      }
+    } catch (e) {
+      // console.error(`Error inserting icon for ${className}: ${e}`);
+    }
+  });
 }
+
+icons.forEach(([className, iconName]) => insertIcon(className, iconName));
+injectCSS();
 
 function injectCSS() {
   const link = document.createElement("link");
   link.href = chrome.runtime.getURL("/plugins/modern-icons/modern-icons.css");
   link.type = "text/css";
   link.rel = "stylesheet";
+  // TODO: Hot reload
   link.className = "schooltape-css";
   document.head.appendChild(link);
 }
