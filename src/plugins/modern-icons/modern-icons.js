@@ -34,6 +34,7 @@ function insertIcon(className, iconName) {
       const ICON_MAIN = document.querySelector(selector);
       // Check if the icon already exists
       if (!ICON_MAIN.querySelector('.material-icons-round')) {
+        // console.log(`Inserting icon for ${className} at ${selector}`);
         const iconElement = document.createElement("i");
         iconElement.innerHTML = iconName;
         iconElement.classList.add("material-icons-round");
@@ -45,8 +46,11 @@ function insertIcon(className, iconName) {
   });
 }
 
-icons.forEach(([className, iconName]) => insertIcon(className, iconName));
 injectCSS();
+icons.forEach(([className, iconName]) => insertIcon(className, iconName));
+setTimeout(() => {
+  icons.forEach(([className, iconName]) => insertIcon(className, iconName));
+}, 500);
 
 function injectCSS() {
   const link = document.createElement("link");
