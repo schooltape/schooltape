@@ -5,41 +5,20 @@ export function getListOfPeriods() {
 
 export function getCurrentPeriod() {
   const periodList = getListOfPeriods();
-  // console.log(periodList);
   const currentTime = new Date().getTime();
 
-  periodList.forEach((period, i) => {
+  const currentPeriod = periodList.find((period) => {
     if (period.header.time) {
       const { start, end } = period.header.time;
+      // console.log("startTime: ", start.getTime(), "endTime: ", end.getTime(), "currentTime: ", currentTime);
       if (start.getTime() <= currentTime && currentTime <= end.getTime()) {
-        // console.log("period: ", period, i);
-        return period; // return current period data
+        return true;
       }
     }
-  });
-  return null;
-}
-
-function extractTimes(periodTime) {
-  try {
-    let times = periodTime.split("–");
-    let [start, end] = times.map((time) => {
-      let [hour, minute] = time.split(":");
-      let isAM = minute.substr(2) === "am";
-      hour = parseInt(hour);
-      minute = parseInt(minute.substring(0, 2));
-      if (!isAM && hour !== 12) {
-        hour += 12;
-      }
-      let date = new Date();
-      date.setHours(hour, minute, 0, 0);
-      return date;
-    });
-    return { start, end };
-  } catch (error) {
-    console.error(error);
     return false;
-  }
+  });
+
+  return currentPeriod || null;
 }
 
 export function getPeriodData(index) {
@@ -79,4 +58,26 @@ export function getPeriodData(index) {
       room: data?.querySelector("div:nth-child(3)")?.textContent.trim() || null,
     },
   };
+}
+
+function extractTimes(periodTime) {
+  try {
+    let times = periodTime.split("–");
+    let [start, end] = times.map((time) => {
+      let [hour, minute] = time.split(":");
+      let isAM = minute.substr(2) === "am";
+      hour = parseInt(hour);
+      minute = parseInt(minute.substring(0, 2));
+      if (!isAM && hour !== 12) {
+        hour += 12;
+      }
+      let date = new Date();
+      date.setHours(hour, minute, 0, 0);
+      return date;
+    });
+    return { start, end };
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }

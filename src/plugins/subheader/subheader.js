@@ -19,17 +19,22 @@ style.innerHTML = `
     content: " | ";
     font-weight: bold;
   }
+  .subheader a {
+    color: inherit;
+  }
 `;
 document.head.appendChild(style);
 
 if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
   createSubheader();
-  // updateSubheader();
-  // setInterval(updateSubheader, 1000);
+  setInterval(updatePeriodSpan, 5000);
+  setInterval(updateClockSpan, 1000);
+  setInterval(updateDateSpan, 60000);
 }
 
 async function createSubheader() {
   const subheader = document.querySelector("h2.subheader");
+  // TODO: Refactor to support hot reload/uninjection
   // delete all children of the subheader
   while (subheader.firstChild) {
     subheader.removeChild(subheader.firstChild);
@@ -38,61 +43,67 @@ async function createSubheader() {
   span.classList = "schooltape";
   subheader.appendChild(span);
 
-  const date = new Date();
+  updatePeriodSpan()
+  updateClockSpan()
+  updateDateSpan()
+}
 
-  // period
+async function updatePeriodSpan() {
+  let periodSpan = document.querySelector(".subheader .period");
+  if (!periodSpan) {
+    const subheader = document.querySelector(".subheader .schooltape");
+    periodSpan = document.createElement("span");
+    periodSpan.classList.add("period");
+    subheader.appendChild(periodSpan);
+  }
+
   let period = await runUtilsFunction("getCurrentPeriod");
   if (period) {
-    console.log("period: ", period);
-    let periodSpan = document.createElement("span");
-    periodSpan.classList.add("period");
-    span.appendChild(periodSpan);
-  } else {
-    console.error("Failed to get current period");
+    const name = period.data.name || period.header.name;
+    const room = period.data.room ? ` (${period.data.room})` : "";
+    let periodLink = periodSpan.querySelector("a");
+    if (period.data.name && period.data.link) { // if there's period data
+      if (!periodLink) {
+        periodLink = document.createElement("a");
+        periodLink.target = "_blank";
+        periodSpan.appendChild(periodLink);
+      }
+      periodLink.href = period.data.link;
+      periodLink.textContent = `${name}${room}`;
+    } else { // if there's only the header
+      periodSpan.textContent = `${name}${room}`;
+      if (periodLink) {
+        periodSpan.removeChild(periodLink);
+      }
+    }
   }
-  // clock
-  let clockSpan = document.createElement("span");
-  clockSpan.classList.add("clock");
+}
+
+function updateClockSpan() {
+  let clockSpan = document.querySelector(".subheader .clock");
+  if (!clockSpan) {
+    const subheader = document.querySelector(".subheader .schooltape");
+    clockSpan = document.createElement("span");
+    clockSpan.classList.add("clock");
+    subheader.appendChild(clockSpan);
+  }
+  let date = new Date();
   clockSpan.textContent = date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
-  span.appendChild(clockSpan);
-
-  // date
-  let dateSpan = document.createElement("span");
-  dateSpan.classList.add("date");
-  dateSpan.textContent = date.toDateString();
-  span.appendChild(dateSpan);
 }
 
-// Function with interval of one second to update the subheader
-function updateSubheader() {
-  // console.log(clock());
-  // console.log("Updating subheader");
-  let currentPeriod = runUtilsFunction("getCurrentPeriod");
-  console.log("currentPeriod: ", currentPeriod);
-
-  // let subHeader = document.querySelector("h2.subheader");
-  // let currentPeriod = runUtilsFunction("getCurrentPeriod");
-
-  // let currentPeriodData = runUtilsFunction("getPeriodData", currentPeriod);
-  // // console.log("currentPeriodData: ", currentPeriodData)
-
-  // if (currentPeriodData === null) {
-  //   // Failed to retrieve any data
-  //   subHeader.innerHTML = getDate().dateString + " <strong>|</strong> " + clock();
-  // } else if (currentPeriodData.missingData) {
-  //   // Missing period info
-  //   subHeader.innerHTML =
-  //     currentPeriodData.topPeriodName +
-  //     " <strong>|</strong> " +
-  //     getDate().dateString +
-  //     " <strong>|</strong> " +
-  //     clock();
-  // } else {
-  //   subHeader.innerHTML = `<a style='color: inherit;' href='${currentPeriodData.periodLink}' target='_blank'>${currentPeriodData.periodName} (${currentPeriodData.periodRoom})</a> <strong>|</strong> ${getDate().dateString} <strong>|</strong> ${clock()}`;
-  // }
+function updateDateSpan() {
+  let dateSpan = document.querySelector(".subheader .date");
+  if (!dateSpan) {
+    const subheader = document.querySelector(".subheader .schooltape");
+    dateSpan = document.createElement("span");
+    dateSpan.classList.add("date");
+    subheader.appendChild(dateSpan);
+  }
+  let date = new Date();
+  dateSpan.textContent = date.toDateString();
 }
 
 async function runUtilsFunction(functionName, ...args) {
