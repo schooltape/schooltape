@@ -28,7 +28,7 @@ if (window.location.pathname === "/" && document.getElementsByClassName("timetab
   // setInterval(updateSubheader, 1000);
 }
 
-function createSubheader() {
+async function createSubheader() {
   const subheader = document.querySelector("h2.subheader");
   // delete all children of the subheader
   while (subheader.firstChild) {
@@ -41,11 +41,14 @@ function createSubheader() {
   const date = new Date();
 
   // period
-  let period = runUtilsFunction("getCurrentPeriod");
+  let period = await runUtilsFunction("getCurrentPeriod");
   if (period) {
+    console.log("period: ", period);
     let periodSpan = document.createElement("span");
     periodSpan.classList.add("period");
     span.appendChild(periodSpan);
+  } else {
+    console.error("Failed to get current period");
   }
   // clock
   let clockSpan = document.createElement("span");
@@ -96,7 +99,7 @@ async function runUtilsFunction(functionName, ...args) {
   const src = chrome.runtime.getURL("plugins/pluginUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
-    utils[functionName](...args);
+    return utils[functionName](...args);
   } else {
     console.error(`Function ${functionName} does not exist in utils`);
   }
