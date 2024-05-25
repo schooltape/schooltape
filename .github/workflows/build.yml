@@ -30,7 +30,6 @@ jobs:
       - name: "Upload zip"
         uses: actions/upload-artifact@v4
         with:
-          name: extension.zip
           path: extension.zip
 
       - name: "web-ext build"
