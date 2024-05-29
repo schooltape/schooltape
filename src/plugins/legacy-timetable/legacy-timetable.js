@@ -2,7 +2,6 @@
 
 // check if we're on the homepage and a timetable element exists
 if (window.location.pathname === "/" || document.querySelector(".timetable")) {
-
   // get the timetable container and add the 'columns' class
   let timetableContainer = document.querySelector("[data-timetable-container]");
   if (timetableContainer) {

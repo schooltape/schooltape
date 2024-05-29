@@ -43,9 +43,9 @@ function createSubheader() {
   span.classList = "schooltape";
   subheader.appendChild(span);
 
-  updatePeriodSpan()
-  updateClockSpan()
-  updateDateSpan()
+  updatePeriodSpan();
+  updateClockSpan();
+  updateDateSpan();
 }
 
 function updatePeriodSpan() {
@@ -57,12 +57,13 @@ function updatePeriodSpan() {
     subheader.appendChild(periodSpan);
   }
 
-  let period = getCurrentPeriod()
+  let period = getCurrentPeriod();
   if (period) {
     const name = period.data.name || period.header.name;
     const room = period.data.room ? ` (${period.data.room})` : "";
     let periodLink = periodSpan.querySelector("a");
-    if (period.data.name && period.data.link) { // if there's period data
+    if (period.data.name && period.data.link) {
+      // if there's period data
       if (!periodLink) {
         periodLink = document.createElement("a");
         periodLink.target = "_blank";
@@ -70,7 +71,8 @@ function updatePeriodSpan() {
       }
       periodLink.href = period.data.link;
       periodLink.textContent = `${name}${room}`;
-    } else { // if there's only the header
+    } else {
+      // if there's only the header
       periodSpan.textContent = `${name}${room}`;
       if (periodLink) {
         periodSpan.removeChild(periodLink);

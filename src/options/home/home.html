@@ -8,33 +8,33 @@
     <link href="../dist/styles.css" rel="stylesheet" />
     <script defer src="home.js"></script>
   </head>
-  <body class="grid macchiato">
+  <body class="macchiato grid">
     <main class="flex flex-col items-center bg-gradient-to-b from-base to-crust p-6">
-      <div class="flex mb-6 px-4 py-2 rounded-xl text-text">
+      <div class="mb-6 flex rounded-xl px-4 py-2 text-text">
         <button class="navbutton-left bg-pink/50">Settings</button>
         <a href="../plugins/plugins.html"><button class="navbutton-center bg-overlay0/50">Plugins</button></a>
         <a href="../themes/themes.html"><button class="navbutton-center bg-overlay0/50">Themes</button></a>
         <a href="../snippets/snippets.html"><button class="navbutton-right bg-overlay0/50">Snippets</button></a>
       </div>
       <div id="card" class="from-mantle to-crust outline-pink">
-        <h1 class="from-blue to-teal mb-6">Schooltape</h1>
+        <h1 class="mb-6 from-blue to-teal">Schooltape</h1>
 
         <button id="toggle">Toggle</button>
 
-        <label class="relative flex justify-between items-center group p-2 mt-6 text-text text-lg">
+        <label class="group relative mt-6 flex items-center justify-between p-2 text-lg text-text">
           <h4>Update Notifications</h4>
           <input
             id="update-notifs"
             type="checkbox"
-            class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" />
+            class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
           <span
-            class="w-14 h-8 flex items-center flex-shrink-0 ml-4 p-1 bg-red rounded-lg duration-500 ease-in-out peer-checked:bg-green after:w-6 after:h-6 after:bg-base after:rounded-lg after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1"></span>
+            class="ml-4 flex h-8 w-14 flex-shrink-0 items-center rounded-lg bg-red p-1 duration-500 ease-in-out after:h-6 after:w-6 after:rounded-lg after:bg-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-green peer-checked:after:translate-x-6"></span>
         </label>
 
-        <footer class="flex justify-around p-4 mt-5 min-w-full">
-          <p class="flex items-center text-text mb-0">
+        <footer class="mt-5 flex min-w-full justify-around p-4">
+          <p class="mb-0 flex items-center text-text">
             Version:
-            <a class="ml-2 version hover:underline text-blue" target="_blank"></a>
+            <a class="version ml-2 text-blue hover:underline" target="_blank"></a>
           </p>
           <a target="_blank" href="https://github.com/42willow/schooltape/issues"
             ><button id="support" class="small bg-base text-text hover:bg-pink hover:text-crust">Support</button></a

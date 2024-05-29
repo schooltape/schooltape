@@ -29,11 +29,11 @@ const icons = [
 
 function insertIcon(className, iconName) {
   const selectors = [`nav.tab-bar .top-menu .${className}`, `#overflow-nav .${className}`];
-  selectors.forEach(selector => {
+  selectors.forEach((selector) => {
     try {
       const ICON_MAIN = document.querySelector(selector);
       // Check if the icon already exists
-      if (!ICON_MAIN.querySelector('.material-icons-round')) {
+      if (!ICON_MAIN.querySelector(".material-icons-round")) {
         // console.log(`Inserting icon for ${className} at ${selector}`);
         const iconElement = document.createElement("i");
         iconElement.innerHTML = iconName;
