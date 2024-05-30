@@ -1,11 +1,13 @@
 {
   "name": "schooltape",
   "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css",
-    "dev": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css --watch",
-    "serve:firefox": "web-ext run -s ./src/ -u \"https://github.com/42willow/schooltape/issues\"",
-    "serve:chrome": "web-ext run -s ./src/ -t chromium -u \"https://github.com/42willow/schooltape/issues\"",
+    "build": "TARGET=chrome vite build --mode production",
+    "build:firefox": "TARGET=firefox vite build --mode production",
+    "dev": "TARGET=chrome vite build --watch --mode development",
+    "dev:firefox": "TARGET=firefox vite build --watch --mode development",
     "format": "prettier --write \"src/**/*.{js,css,html}\""
   },
   "author": "42willow",
@@ -13,6 +15,15 @@
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "rollup-plugin-copy": "^3.5.0",
+    "vite": "^5.2.12",
+    "vite-plugin-web-extension": "^4.1.3",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

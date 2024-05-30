@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 try {
   const content = document.getElementById("content");
   const footer = document.getElementById("footer");
@@ -8,7 +10,7 @@ try {
 }
 
 async function runUtilsFunction(functionName, ...args) {
-  const src = chrome.runtime.getURL("scripts/scriptUtils.js");
+  const src = browser.runtime.getURL("scripts/scriptUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
     utils[functionName](...args);

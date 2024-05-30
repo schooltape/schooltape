@@ -1,7 +1,7 @@
 export function injectCSS(css) {
   let link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = chrome.runtime.getURL(css);
+  link.href = browser.runtime.getURL(css);
   link.classList.add("schooltape");
   document.head.appendChild(link);
 }
@@ -9,7 +9,7 @@ export function injectCSS(css) {
 export function injectPlugin(pluginName, loadTime) {
   // inject plugins
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", chrome.runtime.getURL("/plugins/plugins.json"), true);
+  xhr.open("GET", browser.runtime.getURL("/plugins/plugins.json"), true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       let resp = JSON.parse(xhr.responseText);
@@ -20,17 +20,17 @@ export function injectPlugin(pluginName, loadTime) {
         let scripts = resp[pluginName].scripts;
         for (let i = 0; i < scripts.length; i++) {
           if (scripts[i].execute == loadTime) {
-            chrome.runtime.sendMessage({ inject: scripts[i].path });
+            browser.runtime.sendMessage({ inject: scripts[i].path });
             // console.log(`Injected Plugin ${i+1}/${scripts.length} (${scripts[i].path})`);
           }
         }
       } catch (error) {
         // Enabled plugin not found in plugins.json, remove it from the enabled plugins list
         // console.error('An error occurred:', error);
-        chrome.storage.local.get(["settings"], function (data) {
+        browser.storage.local.get(["settings"], function (data) {
           let newSettings = data.settings;
           newSettings.enabledPlugins.splice(newSettings.enabledPlugins.indexOf(pluginName), 1);
-          chrome.storage.local.set({ settings: newSettings }, function () {
+          browser.storage.local.set({ settings: newSettings }, function () {
             // console.log(`Removed ${pluginName} from enabled plugins list`);
           });
         });

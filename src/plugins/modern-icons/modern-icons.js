@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 // [className, iconName] (material icons)
 const icons = [
   ["icon-teacher", "school"],
@@ -54,7 +56,7 @@ setTimeout(() => {
 
 function injectCSS() {
   const link = document.createElement("link");
-  link.href = chrome.runtime.getURL("/plugins/modern-icons/modern-icons.css");
+  link.href = browser.runtime.getURL("/plugins/modern-icons/modern-icons.css");
   link.type = "text/css";
   link.rel = "stylesheet";
   // TODO: Hot reload

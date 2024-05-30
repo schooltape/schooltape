@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 // inject plugins
 fetch("/plugins/plugins.json")
   .then((response) => response.json())
@@ -8,7 +10,7 @@ fetch("/plugins/plugins.json")
 
 // Add plugins to the page
 function addPlugins(data) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let options = document.querySelector(".plugins-container");
     let plugins = Object.entries(data);
     console.log(settingsData);
@@ -57,19 +59,19 @@ function toggleClicked(event) {
 }
 
 function installPlugin(pluginId) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     settings.enabledPlugins.push(pluginId);
-    chrome.storage.local.set({ settings: settings }, function () {
+    browser.storage.local.set({ settings: settings }, function () {
       console.log(`Installed plugin ${pluginId}`);
     });
   });
 }
 function uninstallPlugin(pluginId) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     settings.enabledPlugins.splice(settings.enabledPlugins.indexOf(pluginId), 1);
-    chrome.storage.local.set({ settings: settings }, function () {
+    browser.storage.local.set({ settings: settings }, function () {
       console.log(`Uninstalled plugin ${pluginId}`);
     });
   });

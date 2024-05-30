@@ -1,7 +1,8 @@
 {
-  "manifest_version": 2,
+  "{{chrome}}.manifest_version": 3,
+  "{{firefox}}.manifest_version": 2,
   "name": "Schooltape",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
   "homepage_url": "https://github.com/42willow/schooltape",
   "icons": {
@@ -10,32 +11,56 @@
     "128": "assets/icon-128.png"
   },
   "background": {
-    "scripts": ["background.js"]
+    "{{chrome}}.service_worker": "src/background.js",
+    "{{firefox}}.scripts": ["src/background.js"]
   },
-  "permissions": ["storage", "contextMenus", "activeTab", "tabs", "notifications", "webRequest", "<all_urls>"],
-  "web_accessible_resources": ["*"],
-  "options_ui": {
-    "page": "options/home/home.html",
-    "open_in_tab": true
-  },
+  "{{chrome}}.permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "webRequest",
+    "notifications",
+    "background"
+  ],
+  "{{chrome}}.host_permissions": [
+    "<all_urls>"
+  ],
+  "{{firefox}}.permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "{{chrome}}.web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["*"]
+    }
+  ],
+  "{{firefox}}.web_accessible_resources":  ["*"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts/doc-end.js"],
+      "js": ["src/scripts/doc-end.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts/doc-start.js"],
+      "js": ["src/scripts/doc-start.js"],
       "run_at": "document_start"
     }
   ],
-  "browser_action": {
-    "default_icon": "assets/icon-16.png",
-    "default_title": "Toggle Schooltape",
-    "default_popup": "options/home/home.html"
+  "{{chrome}}.action": {
+    "default_popup": "src/options/home/home.html"
   },
-  "browser_specific_settings": {
+  "{{firefox}}.browser_action": {
+    "default_popup": "src/options/home/home.html"
+  },
+  "{{firefox}}.browser_specific_settings": {
     "gecko": {
       "id": "schooltape@schooltape-community.github.io",
       "strict_min_version": "117.0"

@@ -1,12 +1,14 @@
+import browser from "webextension-polyfill";
+
 // This is for:
 // - Plugins (That inject stylesheets)
 // - Themes
 // - Snippets
 
-chrome.runtime.sendMessage({ checkForUpdates: true }, function () {});
+browser.runtime.sendMessage({ checkForUpdates: true }, function () {});
 
 // check if the current url is saved in the storage and extension is enabled
-chrome.storage.local.get(["settings"], function (data) {
+browser.storage.local.get(["settings"], function (data) {
   if (data.settings.global && data.settings.urls.includes(window.location.origin)) {
     for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
       runUtilsFunction("injectPlugin", data.settings.enabledPlugins[i], "doc-start");
@@ -26,7 +28,7 @@ chrome.storage.local.get(["settings"], function (data) {
     }
     function injectCatppuccin(flavor, accent) {
       // console.log("injecting catppuccin theme");
-      fetch(chrome.runtime.getURL("/themes/catppuccin.json"))
+      fetch(browser.runtime.getURL("/themes/catppuccin.json"))
         .then((response) => response.json())
         .then((palette) => injectStyles(palette, flavor, accent));
     }
@@ -50,11 +52,11 @@ chrome.storage.local.get(["settings"], function (data) {
 
 // ----------------- Functions ----------------- //
 function injectSnippets() {
-  fetch(chrome.runtime.getURL("/snippets/snippets.json"))
+  fetch(browser.runtime.getURL("/snippets/snippets.json"))
     .then((response) => response.json())
     .then((data) => {
       // console.log(data);
-      chrome.storage.local.get(["settings"], function (settingsData) {
+      browser.storage.local.get(["settings"], function (settingsData) {
         let snippets = Object.entries(data);
         // Inject inbuilt snippets
         snippets.forEach((snippet) => {
@@ -91,7 +93,7 @@ function injectSnippets() {
 }
 
 async function runUtilsFunction(functionName, ...args) {
-  const src = chrome.runtime.getURL("scripts/scriptUtils.js");
+  const src = browser.runtime.getURL("scripts/scriptUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
     utils[functionName](...args);

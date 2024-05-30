@@ -1,10 +1,14 @@
-// tailwind.config.js
-module.exports = {
-  // Other settings
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
   plugins: [
     require("@catppuccin/tailwindcss")({
       defaultFlavour: "latte",
     }),
   ],
-  content: ["./src/options/*/*.{html,js}"],
-};
+}

@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 const flavours = ["latte", "frappe", "macchiato", "mocha"];
 const accents = [
   "rosewater",
@@ -23,7 +25,7 @@ flavourHighlight();
 flavourListener();
 
 // load theme toggle
-chrome.storage.local.get(["settings"], function (result) {
+browser.storage.local.get(["settings"], function (result) {
   console.log(result.settings);
   if (result.settings.themes) {
     document.getElementById("theme-toggle").checked = true;
@@ -34,21 +36,21 @@ chrome.storage.local.get(["settings"], function (result) {
 
 // theme toggle listener
 document.getElementById("theme-toggle").addEventListener("change", function () {
-  chrome.storage.local.get(["settings"], function (result) {
+  browser.storage.local.get(["settings"], function (result) {
     if (result.settings.themes === true) {
       let newSettings = result.settings;
       newSettings.themes = false;
-      chrome.storage.local.set({ settings: newSettings }, function () {});
+      browser.storage.local.set({ settings: newSettings }, function () {});
     } else if (result.settings.themes === false) {
       let newSettings = result.settings;
       newSettings.themes = true;
-      chrome.storage.local.set({ settings: newSettings }, function () {});
+      browser.storage.local.set({ settings: newSettings }, function () {});
     }
   });
 });
 
 // populate themes page
-chrome.storage.local.get(["settings"], function (result) {
+browser.storage.local.get(["settings"], function (result) {
   if (result.settings.themes) {
     // populateDropdowns();
     console.log(result.settings.currentTheme);
@@ -65,7 +67,7 @@ function flavourListener() {
 }
 
 function flavourClicked(event) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let currentAccent = settingsData.settings.currentTheme.split("-")[2];
 
     // update accent in settings
@@ -74,7 +76,7 @@ function flavourClicked(event) {
     let selectedFlavour = event.target.innerHTML;
     let themeID = `catppuccin-${selectedFlavour}-${currentAccent}`;
     settingsData.settings.currentTheme = themeID;
-    chrome.storage.local.set({ settings: settingsData.settings }, function () {
+    browser.storage.local.set({ settings: settingsData.settings }, function () {
       console.log("theme changed to " + themeID);
     });
 
@@ -86,7 +88,7 @@ function flavourClicked(event) {
 function flavourHighlight() {
   const flavourButtons = document.querySelectorAll("#flavours > button");
 
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     flavourButtons.forEach((btn) => {
       let currentFlavour = settingsData.settings.currentTheme.split("-")[1];
       // console.log(`currentFlavour = ${currentFlavour}`);
@@ -114,7 +116,7 @@ function accentListener() {
 
 // triggered when a pallete circle is clicked
 function accentClicked(event) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     // remove styling
     let currentFlavour = settingsData.settings.currentTheme.split("-")[1];
     let currentAccent = settingsData.settings.currentTheme.split("-")[2];
@@ -126,7 +128,7 @@ function accentClicked(event) {
     let selectedAccent = event.target.classList[0].split("-")[1];
     let themeID = `catppuccin-${currentFlavour}-${selectedAccent}`;
     settingsData.settings.currentTheme = themeID;
-    chrome.storage.local.set({ settings: settingsData.settings }, function () {
+    browser.storage.local.set({ settings: settingsData.settings }, function () {
       console.log("theme changed to " + themeID);
     });
 
@@ -136,7 +138,7 @@ function accentClicked(event) {
 }
 
 function accentHighlight() {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     // eg theme = "catppuccin-macchiato-pink"
     // will be an array containing ["catppuccin", "macchiato", "pink"]
     let currentAccent = settingsData.settings.currentTheme.split("-")[2];

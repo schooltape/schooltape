@@ -42,7 +42,7 @@ document.getElementById("snippet-form").addEventListener("submit", function (eve
           console.log(snip);
 
           // modify the settings to add to list of userSnippets
-          chrome.storage.local.get(["settings"], function (settingsData) {
+          browser.storage.local.get(["settings"], function (settingsData) {
             let settings = settingsData.settings;
             // if not already installed
             if (settings.userSnippets.some((e) => e[snippetID])) {
@@ -50,7 +50,7 @@ document.getElementById("snippet-form").addEventListener("submit", function (eve
               return;
             }
             settings.userSnippets.push(snip);
-            chrome.storage.local.set({ settings: settings }, function () {
+            browser.storage.local.set({ settings: settings }, function () {
               console.log(`Installed snippet ${snip}`);
             });
             addUserSnippets();
@@ -78,7 +78,7 @@ fetch("/snippets/snippets.json")
 
 // Add snippets to the page
 function addSnippets(data) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let options = document.querySelector(".snippets-container");
     let snippets = Object.entries(data);
     // console.log(snippets);
@@ -106,7 +106,7 @@ function addSnippets(data) {
 }
 
 function addUserSnippets() {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     let snippets = settings.userSnippets;
     let options = document.querySelector(".user-snippets-container");
@@ -166,7 +166,7 @@ function toggleClicked(event) {
 
 function removeClicked(event) {
   let snippetId = event.target.getAttribute("snippet-id");
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     let index = settings.enabledSnippets.indexOf(snippetId);
     if (index !== -1) {
@@ -176,7 +176,7 @@ function removeClicked(event) {
       settings.userSnippets.findIndex((e) => e[snippetId]),
       1,
     );
-    chrome.storage.local.set({ settings: settings }, function () {
+    browser.storage.local.set({ settings: settings }, function () {
       console.log(`Removed snippet ${snippetId}`);
     });
     addUserSnippets();
@@ -184,19 +184,19 @@ function removeClicked(event) {
 }
 
 function installSnippet(snippetId) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     settings.enabledSnippets.push(snippetId);
-    chrome.storage.local.set({ settings: settings }, function () {
+    browser.storage.local.set({ settings: settings }, function () {
       console.log(`Installed snippet ${snippetId}`);
     });
   });
 }
 function uninstallSnippet(snippetId) {
-  chrome.storage.local.get(["settings"], function (settingsData) {
+  browser.storage.local.get(["settings"], function (settingsData) {
     let settings = settingsData.settings;
     settings.enabledSnippets.splice(settings.enabledSnippets.indexOf(snippetId), 1);
-    chrome.storage.local.set({ settings: settings }, function () {
+    browser.storage.local.set({ settings: settings }, function () {
       console.log(`Uninstalled snippet ${snippetId}`);
     });
   });

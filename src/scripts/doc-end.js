@@ -1,8 +1,9 @@
+import browser from "webextension-polyfill";
 // This is for:
 // - Plugins (that alter the DOM after is has been loaded)
 
 // inject enabled plugins if the current URL is stored as Schoolbox and extension is enabled
-chrome.storage.local.get(["settings"], function (data) {
+browser.storage.local.get(["settings"], function (data) {
   if (data.settings.global) {
     if (data.settings.urls.includes(window.location.origin)) {
       for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
@@ -17,12 +18,12 @@ let footer = document.querySelector("#footer > ul");
 if (footer.innerHTML.includes("Schoolbox")) {
   let footerListItem = document.createElement("li");
   footerListItem.appendChild(document.createElement("a")).href = "https://github.com/42willow/schooltape";
-  footerListItem.firstChild.textContent = `Schooltape v${chrome.runtime.getManifest().version}`;
+  footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
   footer.appendChild(footerListItem);
-  chrome.storage.local.get("settings", function ({ settings }) {
+  browser.storage.local.get("settings", function ({ settings }) {
     if (!settings.urls.includes(window.location.origin)) {
       settings.urls.push(window.location.origin);
-      chrome.storage.local.set({ settings: settings });
+      browser.storage.local.set({ settings: settings });
       // TODO: hot reload
       window.location.reload();
     }
@@ -30,7 +31,7 @@ if (footer.innerHTML.includes("Schoolbox")) {
 }
 
 async function runUtilsFunction(functionName, ...args) {
-  const src = chrome.runtime.getURL("scripts/scriptUtils.js");
+  const src = browser.runtime.getURL("scripts/scriptUtils.js");
   const utils = await import(src);
   if (typeof utils[functionName] === "function") {
     utils[functionName](...args);
