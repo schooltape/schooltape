@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
 import copy from 'rollup-plugin-copy';
+import path from 'path';
 
 // const APPID_CHROME = '';
 const browser = process.env.TARGET || 'chrome';
@@ -17,6 +18,11 @@ function generateManifest() {
 }
 
 export default defineConfig(({ mode }) => ({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src")
+    }
+  },
   plugins: [
     webExtension({
       manifest: generateManifest,
