@@ -27,8 +27,7 @@ export default defineConfig(({ mode }) => ({
     webExtension({
       manifest: generateManifest,
       browser: process.env.TARGET || "chrome",
-      watchFilePaths: ["package.json", "manifest.json"],
-      additionalInputs: ['src/options/home/home.html'],
+      watchFilePaths: ["package.json", "manifest.json"]
     }),
     // copy({
     //   targets: [
