@@ -10,6 +10,7 @@
 	<a href="https://github.com/42willow/schooltape/stargazers"><img src="https://img.shields.io/github/stars/42willow/schooltape?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 	<a href="https://github.com/42willow/schooltape/issues"><img src="https://img.shields.io/github/issues/42willow/schooltape?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
 	<a href="https://github.com/42willow/schooltape/contributors"><img src="https://img.shields.io/github/contributors/42willow/schooltape?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+  <a href="https://discord.gg/rZxtGJ98BE"><img alt="Discord" src="https://img.shields.io/discord/1246027558923800626?style=for-the-badge&label=discord&labelColor=363a4f&color=7dc4e4"></a>
 </p>
 
 <p align="center">
