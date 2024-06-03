@@ -4,12 +4,14 @@
 
 body {
   width: 450px; /* max: 1000px */
-  @apply bg-ctp-base text-ctp-text;
+  @apply bg-ctp-base text-ctp-text text-base;
+  font-family: 'Courier New', Courier, monospace
 }
 
 #flavours button {
   @apply bg-ctp-surface0;
 }
+
 #flavours button.active {
   @apply bg-ctp-pink/50;
 }

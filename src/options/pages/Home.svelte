@@ -41,32 +41,6 @@
     await browser.storage.local.set({ settings: newSettings });
     updateToggle = newSettings.updates.toggle;
   }
-
-
-  // // update notifications
-
-  // browser.storage.local.get(["settings"], function (result) {
-  //   console.log("settings is currently ", result.settings);
-  //   if (result.settings.updateReminder) {
-  //     document.getElementById("update-notifs").checked = true;
-  //   } else {
-  //     document.getElementById("update-notifs").checked = false;
-  //   }
-  // });
-  // // update notifications listener
-  // document.getElementById("update-notifs").addEventListener("change", function () {
-  //   browser.storage.local.get(["settings"], function (result) {
-  //     if (result.settings.updateReminder === true) {
-  //       let newSettings = result.settings;
-  //       newSettings.updateReminder = false;
-  //       browser.storage.local.set({ settings: newSettings }, function () {});
-  //     } else if (result.settings.updateReminder === false) {
-  //       let newSettings = result.settings;
-  //       newSettings.updateReminder = true;
-  //       browser.storage.local.set({ settings: newSettings }, function () {});
-  //     }
-  //   });
-  // });
 </script>
 
 <div id="card" class="from-ctp-mantle to-ctp-crust outline-ctp-pink">
