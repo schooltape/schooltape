@@ -16,6 +16,14 @@ body {
   @apply bg-ctp-pink/50;
 }
 
+#navbar a.active {
+  @apply bg-ctp-pink/50;
+}
+
+#navbar a {
+  @apply bg-ctp-overlay0/50;
+}
+
 #card {
   @apply flex w-full flex-col items-center justify-center rounded-3xl bg-gradient-to-b p-6 shadow-xl outline outline-2
 }
