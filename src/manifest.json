@@ -12,6 +12,7 @@
   },
   "background": {
     "{{chrome}}.service_worker": "src/background.js",
+    "{{chrome}}.type": "module",
     "{{firefox}}.scripts": ["src/background.js"]
   },
   "{{chrome}}.permissions": [
@@ -55,10 +56,10 @@
     }
   ],
   "{{chrome}}.action": {
-    "default_popup": "src/options/home/home.html"
+    "default_popup": "src/options/popup.html"
   },
   "{{firefox}}.browser_action": {
-    "default_popup": "src/options/home/home.html"
+    "default_popup": "src/options/popup.html"
   },
   "{{firefox}}.browser_specific_settings": {
     "gecko": {

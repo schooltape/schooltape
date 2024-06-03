@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
-import copy from 'rollup-plugin-copy';
+// import copy from 'rollup-plugin-copy';
 import path from 'path';
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 // const APPID_CHROME = '';
 const browser = process.env.TARGET || 'chrome';
@@ -24,6 +25,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   plugins: [
+    svelte(),
     webExtension({
       manifest: generateManifest,
       browser: process.env.TARGET || "chrome",
@@ -49,7 +51,7 @@ export default defineConfig(({ mode }) => ({
       },
     },
 
-    emptyOutDir: false,
+    emptyOutDir: true,
     // sourcemap: mode === 'development' ? 'inline' : false,
     minify: mode === 'development' ? false : true,
   },

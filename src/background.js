@@ -1,23 +1,53 @@
 import browser from "webextension-polyfill";
 
-console.log("Service worker active!");
+switch (__BROWSER__) {
+  case "chrome":
+    console.log("Service worker active!");
+    break;
+  case "firefox":
+    console.log("Background script active!");
+    break;
+}
 
 // ----------------- Variables ----------------- //
+// const defaultSettings = {
+//   global: true,
+//   updateReminder: true,
+//   themes: false,
+//   currentTheme: "catppuccin-macchiato-rosewater",
+//   enabledPlugins: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
+//   enabledSnippets: ["hide-pfp"],
+//   userSnippets: [],
+//   urls: ["https://help.schoolbox.com.au"],
+// };
+// // TODO: update default settings
 const defaultSettings = {
-  global: true,
-  updateReminder: true,
-  themes: false,
-  currentTheme: "catppuccin-macchiato-rosewater",
-  enabledPlugins: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
-  enabledSnippets: ["hide-pfp"],
-  userSnippets: [],
-  urls: ["https://help.schoolbox.com.au"],
+  settings: {
+    global: true,
+    updates: {
+      toggle: true,
+      toast: true, // TODO
+    },
+    urls: ["https://help.schoolbox.com.au"],
+  },
+  snippets: {
+    toggle: true, // TODO
+    enabled: ["hide-pfp"],
+    user: [],
+  },
+  plugins: {
+    toggle: true, // TODO
+    enabled: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
+    settings: {},
+  },
+  themes: {
+    toggle: true,
+    theme: "catppuccin",
+    flavour: "macchiato",
+    accent: "rosewater",
+    logo: "schooltape.png", // TODO
+  },
 };
-
-// ----------------- Update Badge Text () ----------------- //
-browser.tabs.onActivated.addListener(function () {
-  updateBadge();
-});
 
 // ----------------- Install/Update ----------------- //
 
@@ -32,49 +62,14 @@ browser.runtime.onInstalled.addListener(function (details) {
       message: "Click here to look at the tutorial.",
       priority: 2,
     });
-    // set default settings
-    browser.storage.local.set({ settings: defaultSettings }, function () {
-      console.log("Set default settings");
-    });
+    resetSettings();
   } else if (details.reason === "update") {
     let thisVersion = browser.runtime.getManifest().version;
-
-    // // set default settings, if major number is increased
-    // if (details.previousVersion.split(".")[0] > thisVersion.split(".")[0]) {
-    //   resetSettings();
-    //   print("New major version installed, reset settings")
-    // }
-
-    // set "global" to true without overwriting existing settings
-    browser.storage.local.get("settings", function (result) {
-      let settings = result.settings;
-
-      // iterate over every key in defaultSettings, if it doesn't exist in settings, add it, and vice versa remove it if it doesn't exist in defaultSettings
-      // add setting if it doesn't exist in settings
-      for (const [key, value] of Object.entries(defaultSettings)) {
-        if (!settings.hasOwnProperty(key)) {
-          console.log(`Adding ${key}`);
-          settings[key] = value;
-        }
-      }
-      // remove setting if it doesn't exist in defaultSettings
-      for (const [key, value] of Object.entries(settings)) {
-        if (!defaultSettings.hasOwnProperty(key)) {
-          console.log(`Deleting ${key}`);
-          delete settings[key];
-        }
-      }
-      settings.global = true;
-
-      console.log(settings);
-
-      browser.storage.local.set({ settings: settings }, function () {
-        console.log("Updated settings. Set global to true.");
-        browser.action.setBadgeText({ text: "ON" });
-        browser.action.setBadgeBackgroundColor({ color: "#94DBF9" });
-        browser.action.setBadgeTextColor({ color: "black" });
-      });
-    });
+    // set default settings, if major number is increased
+    if (details.previousVersion.split(".")[0] > thisVersion.split(".")[0]) {
+      resetSettings();
+      print("New major version installed, reset settings");
+    }
     // Sends a notification to the user with the changelog
     console.log(`Updated from ${details.previousVersion} to ${thisVersion}!`);
     browser.notifications.create("updated", {
@@ -85,6 +80,7 @@ browser.runtime.onInstalled.addListener(function (details) {
       priority: 2,
     });
   }
+  updateBadge();
 });
 
 // ----------------- Listeners ----------------- //
@@ -94,25 +90,18 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
   sendResponse({ messageReceived: true });
 
-  // CHANGE ICON
-  if (request.icon) {
-    browser.action.setIcon({
-      path: request.icon,
-      tabId: sender.tab.id,
-    });
-  }
-  // UPDATE BADGE TEXT
   if (request.badgeText) {
     updateBadge();
     console.log("Running update badge text function");
   }
-  // INJECT JS
+
   if (request.inject) {
     console.log("Injecting " + request.inject);
     console.log(`tabid: ${sender.tab.id}`);
     // NOTE: see https://github.com/mozilla/webextension-polyfill?tab=readme-ov-file#tabsexecutescript
     browser.tabs.executeScript(sender.tab.id, { file: request.inject });
   }
+
   // Switch to homepage
   if (request.toHomepage) {
     console.log("Changing tab to " + request.toHomepage);
@@ -126,14 +115,176 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     });
   }
 
+  // Reset settings
   if (request.resetSettings) {
     console.log("Resetting settings...");
     resetSettings();
   }
 
   // Check for updates
+  if (request.checkForUpdates) {
+    checkForUpdates();
+  }
+});
+
+/*
+--------------------------------CONTEXT MENUS--------------------------------
+*/
+// Context menus
+// let action = "action";
+// switch (__BROWSER__) {
+//   case "chrome":
+//     action = "browser_action"
+//     break;
+//   case "firefox":
+//     action = "action"
+//     break;
+// }
+// console.log("created context menu");
+// browser.contextMenus.removeAll(function () {
+//   // Github
+//   let github = browser.contextMenus.create({
+//     id: "github",
+//     title: "GitHub",
+//     contexts: [action],
+//   });
+//   browser.contextMenus.create({
+//     id: "githubRepo",
+//     parentId: github,
+//     title: "Repository",
+//     contexts: [action],
+//   });
+//   browser.contextMenus.create({
+//     id: "githubIssues",
+//     parentId: github,
+//     title: "Issues",
+//     contexts: [action],
+//   });
+//   browser.contextMenus.create({
+//     id: "githubPRs",
+//     parentId: github,
+//     title: "Pull Requests",
+//     contexts: [action],
+//   });
+//   browser.contextMenus.create({
+//     id: "githubProjects",
+//     parentId: github,
+//     title: "Projects",
+//     contexts: [action],
+//   });
+//   browser.contextMenus.create({
+//     id: "githubWiki",
+//     parentId: github,
+//     title: "Wiki",
+//     contexts: [action],
+//   });
+
+//   browser.contextMenus.create({
+//     id: "extRefresh",
+//     title: "Refresh Extension",
+//     contexts: [action],
+//   });
+// });
+
+// // Check which context menu button was clicked
+// function contextClick(info, tab) {
+//   const { menuItemId } = info;
+//   if (menuItemId === "githubRepo") {
+//     let newURL = "https://github.com/42willow/schooltape";
+//     browser.tabs.create({ url: newURL });
+//   } else if (menuItemId === "githubIssues") {
+//     let newURL = "https://github.com/42willow/schooltape/issues";
+//     browser.tabs.create({ url: newURL });
+//   } else if (menuItemId === "githubPRs") {
+//     let newURL = "https://github.com/42willow/schooltape/pulls";
+//     browser.tabs.create({ url: newURL });
+//   } else if (menuItemId === "githubProjects") {
+//     let newURL = "https://github.com/42willow/schooltape/projects";
+//     browser.tabs.create({ url: newURL });
+//   } else if (menuItemId === "githubWiki") {
+//     let newURL = "https://github.com/42willow/schooltape/wiki";
+//     browser.tabs.create({ url: newURL });
+//   } else if (menuItemId === "extRefresh") {
+//     console.log("Refreshing extension...");
+//     browser.runtime.reload();
+//   }
+// }
+// browser.contextMenus.onClicked.addListener(contextClick);
+
+// /*
+// // --------------------------------UPDATE NOTIFICATION CLICKED LISTERNER--------------------------------
+// // */
+// browser.notifications.onClicked.addListener(function (notifID) {
+//   if (notifID === "update") {
+//     browser.tabs.create({
+//       url: "https://github.com/42willow/schooltape/releases/latest",
+//     });
+//   }
+//   if (notifID === "tutorial") {
+//     browser.tabs.create({
+//       url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring",
+//     });
+//   }
+//   if (notifID === "updated") {
+//     let thisVersion = browser.runtime.getManifest().version;
+//     let newURL = "https://github.com/42willow/schooltape/releases/tag/v" + thisVersion;
+//     browser.tabs.create({ url: newURL });
+//   }
+// });
+
+// /*
+// --------------------------------EXTENSION BUTTON CLICKED--------------------------------
+// */
+// On extension clicked
+// browser.action.onClicked.addListener((tab) => {
+//   console.log("Button clicked!");
+
+//   // TOGGLE EXTENSION
+//   browser.storage.local.get(["settings"], function (result) {
+//     if (result.settings.global === true) {
+//       let newSettings = result.settings;
+//       newSettings.global = false;
+//       browser.storage.local.set({ settings: newSettings }, function () {});
+//       browser.action.setBadgeText({ text: "OFF" });
+//       // Reload current tab
+//       browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//         browser.tabs.reload(tabs[0].id);
+//       });
+//     } else if (result.settings.global === false) {
+//       let newSettings = result.settings;
+//       newSettings.global = true;
+//       browser.storage.local.set({ settings: newSettings }, function () {});
+//       browser.action.setBadgeText({ text: "ON" });
+//       browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//         browser.tabs.reload(tabs[0].id);
+//       });
+//     }
+//     browser.action.setBadgeBackgroundColor({ color: "#94DBF9" });
+//     browser.action.setBadgeTextColor({ color: "black" });
+//   });
+// });
+
+// // /*
+// // --------------------------------UPDATE BADGE--------------------------------
+// // */
+async function updateBadge() {
+  console.log("Updating badge...");
+  const settings = await browser.storage.local.get('settings');
+  console.log(settings);
+  // if (settings.global) {
+  //   console.log("Badge: ON");
+  // } else {
+  //   console.log("Badge: OFF");
+  // }
+}
+
+function resetSettings() {
+  browser.storage.local.set(defaultSettings);
+  updateBadge();
+}
+
+function checkForUpdates() {
   if (!navigator.onLine) {
-    // check if online
     console.error("You are currently offline. Please check your internet connection and try again.");
   } else {
     browser.storage.local.get("settings", function (result) {
@@ -145,11 +296,9 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             // Get latest version without the "v" in front
             let latestVersion = data.tag_name.replace("v", "");
             console.log("Latest version is " + latestVersion);
-
             // Get current version
             let currentVersion = browser.runtime.getManifest().version;
             console.log("Current version is " + currentVersion);
-
             // Compare versions
             if (latestVersion > currentVersion) {
               console.log("Update available");
@@ -171,155 +320,4 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       }
     });
   }
-});
-
-/*
---------------------------------CONTEXT MENUS--------------------------------
-*/
-// Context menus
-console.log("created context menu");
-browser.contextMenus.removeAll(function () {
-  // Github
-  let github = browser.contextMenus.create({
-    id: "github",
-    title: "GitHub",
-    contexts: ["action"],
-  });
-  browser.contextMenus.create({
-    id: "githubRepo",
-    parentId: github,
-    title: "Repository",
-    contexts: ["action"],
-  });
-  browser.contextMenus.create({
-    id: "githubIssues",
-    parentId: github,
-    title: "Issues",
-    contexts: ["action"],
-  });
-  browser.contextMenus.create({
-    id: "githubPRs",
-    parentId: github,
-    title: "Pull Requests",
-    contexts: ["action"],
-  });
-  browser.contextMenus.create({
-    id: "githubProjects",
-    parentId: github,
-    title: "Projects",
-    contexts: ["action"],
-  });
-  browser.contextMenus.create({
-    id: "githubWiki",
-    parentId: github,
-    title: "Wiki",
-    contexts: ["action"],
-  });
-
-  browser.contextMenus.create({
-    id: "extRefresh",
-    title: "Refresh Extension",
-    contexts: ["action"],
-  });
-});
-
-// Check which context menu button was clicked
-function contextClick(info, tab) {
-  const { menuItemId } = info;
-  if (menuItemId === "githubRepo") {
-    let newURL = "https://github.com/42willow/schooltape";
-    browser.tabs.create({ url: newURL });
-  } else if (menuItemId === "githubIssues") {
-    let newURL = "https://github.com/42willow/schooltape/issues";
-    browser.tabs.create({ url: newURL });
-  } else if (menuItemId === "githubPRs") {
-    let newURL = "https://github.com/42willow/schooltape/pulls";
-    browser.tabs.create({ url: newURL });
-  } else if (menuItemId === "githubProjects") {
-    let newURL = "https://github.com/42willow/schooltape/projects";
-    browser.tabs.create({ url: newURL });
-  } else if (menuItemId === "githubWiki") {
-    let newURL = "https://github.com/42willow/schooltape/wiki";
-    browser.tabs.create({ url: newURL });
-  } else if (menuItemId === "extRefresh") {
-    console.log("Refreshing extension...");
-    browser.runtime.reload();
-  }
-}
-browser.contextMenus.onClicked.addListener(contextClick);
-
-/*
-// --------------------------------UPDATE NOTIFICATION CLICKED LISTERNER--------------------------------
-// */
-browser.notifications.onClicked.addListener(function (notifID) {
-  if (notifID === "update") {
-    browser.tabs.create({
-      url: "https://github.com/42willow/schooltape/releases/latest",
-    });
-  }
-  if (notifID === "tutorial") {
-    browser.tabs.create({
-      url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring",
-    });
-  }
-  if (notifID === "updated") {
-    let thisVersion = browser.runtime.getManifest().version;
-    let newURL = "https://github.com/42willow/schooltape/releases/tag/v" + thisVersion;
-    browser.tabs.create({ url: newURL });
-  }
-});
-
-// /*
-// --------------------------------EXTENSION BUTTON CLICKED--------------------------------
-// */
-// On extension clicked
-browser.action.onClicked.addListener((tab) => {
-  console.log("Button clicked!");
-
-  // TOGGLE EXTENSION
-  browser.storage.local.get(["settings"], function (result) {
-    if (result.settings.global === true) {
-      let newSettings = result.settings;
-      newSettings.global = false;
-      browser.storage.local.set({ settings: newSettings }, function () {});
-      browser.action.setBadgeText({ text: "OFF" });
-      // Reload current tab
-      browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        browser.tabs.reload(tabs[0].id);
-      });
-    } else if (result.settings.global === false) {
-      let newSettings = result.settings;
-      newSettings.global = true;
-      browser.storage.local.set({ settings: newSettings }, function () {});
-      browser.action.setBadgeText({ text: "ON" });
-      browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        browser.tabs.reload(tabs[0].id);
-      });
-    }
-    browser.action.setBadgeBackgroundColor({ color: "#94DBF9" });
-    browser.action.setBadgeTextColor({ color: "black" });
-  });
-});
-
-// /*
-// --------------------------------UPDATE BADGE--------------------------------
-// */
-function updateBadge() {
-  console.log("Updating badge...");
-  browser.storage.local.get(["settings"], function (data) {
-    console.log(data);
-    if (data.settings.global) {
-      browser.action.setBadgeText({ text: "ON" });
-    } else {
-      browser.action.setBadgeText({ text: "OFF" });
-    }
-    browser.action.setBadgeBackgroundColor({ color: "#94DBF9" });
-    browser.action.setBadgeTextColor({ color: "black" });
-  });
-}
-
-function resetSettings() {
-  browser.storage.local.set({ settings: defaultSettings }, function () {
-    console.log("Reset settings");
-  });
 }
