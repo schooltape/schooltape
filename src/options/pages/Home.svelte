@@ -48,16 +48,22 @@
 
   <button class={btnClass} id="toggle" on:click={toggle}>{btnText}</button>
 
-  <label class="group relative mt-6 flex items-center justify-between p-2 text-lg text-ctp-text">
-    <h4>Update Notifications</h4>
-    <input
-      bind:checked={updateToggle}
-      on:change={toggleUpdates}
-      type="checkbox"
-      class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
-    <span
-      class="ml-4 flex h-8 w-14 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:h-6 after:w-6 after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6"></span>
-  </label>
+
+  <details class="mt-10">
+    <summary>Update Notifications</summary>
+
+    <label class="group relative mt-6 flex items-center justify-between p-2 text-lg text-ctp-text">
+      <h4>Desktop</h4>
+      <input
+        bind:checked={updateToggle}
+        on:change={toggleUpdates}
+        type="checkbox"
+        class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
+      <span
+        class="ml-4 flex h-8 w-14 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:h-6 after:w-6 after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6"></span>
+    </label>
+  </details>
+
 
 </div>
 
