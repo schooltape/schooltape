@@ -24,9 +24,7 @@
     "notifications",
     "background"
   ],
-  "{{chrome}}.host_permissions": [
-    "<all_urls>"
-  ],
+  "{{chrome}}.host_permissions": ["<all_urls>"],
   "{{firefox}}.permissions": [
     "storage",
     "contextMenus",
@@ -42,7 +40,7 @@
       "resources": ["*"]
     }
   ],
-  "{{firefox}}.web_accessible_resources":  ["*"],
+  "{{firefox}}.web_accessible_resources": ["*"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

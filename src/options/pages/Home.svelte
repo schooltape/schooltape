@@ -19,11 +19,11 @@
 
   function updateButton() {
     if (settings.global) {
-      btnClass = 'bg-ctp-green hover:bg-ctp-pink active:bg-ctp-red/75';
-      btnText = 'enabled';
+      btnClass = "bg-ctp-green hover:bg-ctp-pink active:bg-ctp-red/75";
+      btnText = "enabled";
     } else {
-      btnClass = 'bg-ctp-red hover:bg-ctp-pink active:bg-ctp-green/75';
-      btnText = 'disabled';
+      btnClass = "bg-ctp-red hover:bg-ctp-pink active:bg-ctp-green/75";
+      btnText = "disabled";
     }
   }
 
@@ -35,7 +35,7 @@
   }
 
   async function toggleUpdates() {
-    const result = await browser.storage.local.get('settings');
+    const result = await browser.storage.local.get("settings");
     let newSettings = result.settings;
     newSettings.updates.toggle = !newSettings.updates.toggle;
     await browser.storage.local.set({ settings: newSettings });
@@ -43,12 +43,10 @@
   }
 </script>
 
-<div id="card" class="from-ctp-mantle to-ctp-crust outline-ctp-pink">
-  <h1 class="mb-6 from-ctp-blue to-ctp-teal">Schooltape</h1>
+<div id="card">
+  <h1 class="mb-6">Schooltape</h1>
 
   <button class={btnClass} id="toggle" on:click={toggle}>{btnText}</button>
-
-
   <details class="mt-10">
     <summary>Update Notifications</summary>
 
@@ -59,12 +57,10 @@
         on:change={toggleUpdates}
         type="checkbox"
         class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
-      <span
-        class="ml-4 flex h-8 w-14 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:h-6 after:w-6 after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6"></span>
+      <!-- slider -->
+      <span class="slider big"></span>
     </label>
   </details>
-
-
 </div>
 
 <Footer />

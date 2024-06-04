@@ -1,13 +1,12 @@
 <script>
-  import {Route,router} from 'tinro';
-  import {active} from 'tinro';
+  import { Route, router } from "tinro";
+  import { active } from "tinro";
   router.mode.hash(); // enables hash navigation method
-  import Home from './pages/Home.svelte';
-  import Plugins from './pages/Plugins.svelte';
-  import Themes from './pages/Themes.svelte';
-  import Snippets from './pages/Snippets.svelte';
+  import Home from "./pages/Home.svelte";
+  import Plugins from "./pages/Plugins.svelte";
+  import Themes from "./pages/Themes.svelte";
+  import Snippets from "./pages/Snippets.svelte";
 </script>
-
 
 <body class="grid">
   <main class="flex flex-col items-center bg-gradient-to-b from-ctp-base to-ctp-crust p-6">

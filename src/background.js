@@ -269,7 +269,7 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // // */
 async function updateBadge() {
   console.log("Updating badge...");
-  const settings = await browser.storage.local.get('settings');
+  const settings = await browser.storage.local.get("settings");
   console.log(settings);
   // if (settings.global) {
   //   console.log("Badge: ON");
