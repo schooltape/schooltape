@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
 
-  let settings = {};
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
     "rosewater",
@@ -19,30 +18,28 @@
     "blue",
     "lavender",
   ];
+  let themes = {
+    toggle: false,
+  }
 
   onMount(async () => {
-    chrome.storage.local.get(["settings"], function (result) {
-      settings = result.settings;
-    });
+    const result = await browser.storage.local.get();
+    themes = result.themes;
+    console.log("themes", themes);
   });
 
   function toggleTheme() {
-    settings.themes = !settings.themes;
-    chrome.storage.local.set({ settings: settings });
+    chrome.storage.local.set({ themes: themes });
   }
 
   function flavourClicked(flavour) {
-    let currentAccent = settings.currentTheme.split("-")[2];
-    let themeID = `catppuccin-${flavour}-${currentAccent}`;
-    settings.currentTheme = themeID;
-    chrome.storage.local.set({ settings: settings });
+    themes.flavour = flavour;
+    chrome.storage.local.set({ themes: themes });
   }
 
   function accentClicked(accent) {
-    let currentFlavour = settings.currentTheme.split("-")[1];
-    let themeID = `catppuccin-${currentFlavour}-${accent}`;
-    settings.currentTheme = themeID;
-    chrome.storage.local.set({ settings: settings });
+    themes.accent = accent;
+    chrome.storage.local.set({ themes: themes });
   }
 </script>
 
@@ -53,7 +50,7 @@
       id="theme-toggle"
       type="checkbox"
       class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md"
-      bind:checked={settings.themes}
+      bind:checked={themes.toggle}
       on:change={toggleTheme} />
     <span class="slider big"></span>
   </label>
@@ -61,6 +58,7 @@
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour}
       <button
+        class:active={themes.flavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={(flavour === "macchiato") | (flavour === "frappe")}
@@ -70,7 +68,7 @@
 
   <div id="palette">
     {#each accents as accent}
-      <button class="bg-ctp-{accent}" title={accent} on:click={() => accentClicked(accent)}></button>
+      <button class="bg-ctp-{accent}" class:current={themes.accent === accent} title={accent} on:click={() => accentClicked(accent)}></button>
     {/each}
   </div>
 </div>
