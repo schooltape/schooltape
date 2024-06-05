@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import browser from "webextension-polyfill";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [

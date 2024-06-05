@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import { injectCSS, injectCatppuccin } from "./script-utils.js";
 
-browser.storage.local.get(function (storage) {
+browser.storage.local.get().then(function (storage) {
   console.log(storage);
   if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
     console.log("Schooltape is enabled on this site");

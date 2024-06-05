@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 export function injectCSS(css) {
   let link = document.createElement("link");
   link.rel = "stylesheet";

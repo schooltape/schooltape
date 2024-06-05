@@ -6,6 +6,7 @@
   import Themes from "./pages/Themes.svelte";
   import Snippets from "./pages/Snippets.svelte";
   import { onMount, onDestroy } from "svelte";
+  import browser from "webextension-polyfill";
 
   let flavour = "macchiato";
   router.mode.hash(); // enables hash navigation method
