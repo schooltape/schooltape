@@ -1,8 +1,23 @@
 import browser from "webextension-polyfill";
 
-browser.storage.local.get(["settings"], function (storage) {
+browser.storage.local.get().then(function (storage) {
   if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
     console.log("Schooltape is enabled on this site");
+  }
+
+  let footer = document.querySelector("#footer > ul");
+  if (footer.innerHTML.includes("Schoolbox")) {
+    let footerListItem = document.createElement("li");
+    footerListItem.appendChild(document.createElement("a")).href = "https://github.com/42willow/schooltape";
+    footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
+    footer.appendChild(footerListItem);
+    if (!storage.settings.urls.includes(window.location.origin)) {
+      let newSettings = storage.settings;
+      newSettings.urls.push(window.location.origin);
+      browser.storage.local.set({ settings: newSettings });
+      // TODO: hot reload
+      window.location.reload();
+    }
   }
 });
 
@@ -20,22 +35,8 @@ browser.storage.local.get(["settings"], function (storage) {
 //   }
 // });
 
-// // check if the page is Schoolbox, if not add it to storage and reload the page
-// let footer = document.querySelector("#footer > ul");
-// if (footer.innerHTML.includes("Schoolbox")) {
-//   let footerListItem = document.createElement("li");
-//   footerListItem.appendChild(document.createElement("a")).href = "https://github.com/42willow/schooltape";
-//   footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
-//   footer.appendChild(footerListItem);
-//   browser.storage.local.get("settings", function ({ settings }) {
-//     if (!settings.urls.includes(window.location.origin)) {
-//       settings.urls.push(window.location.origin);
-//       browser.storage.local.set({ settings: settings });
-//       // TODO: hot reload
-//       window.location.reload();
-//     }
-//   });
-// }
+// check if the page is Schoolbox, if not add it to storage and reload the page
+
 
 // async function runUtilsFunction(functionName, ...args) {
 //   const src = browser.runtime.getURL("scripts/scriptUtils.js");
