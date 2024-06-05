@@ -2,20 +2,30 @@
   import Footer from "../components/Footer.svelte";
   import browser from "webextension-polyfill";
   import { onMount } from "svelte";
+  import Toggle from '../components/Toggle.svelte';
 
   let settings;
   let btnText;
   let btnClass;
-  let updateToggle;
+  let updateToggle = {
+    toast: false,
+    desktop: false,
+  };
 
   onMount(async () => {
     const storage = await browser.storage.local.get();
     console.log("storage", storage);
     settings = storage.settings;
-    updateToggle = storage.settings.updates.toggle;
-    console.log("settings", settings);
+    updateToggle = settings.updates;
     updateButton();
   });
+
+  async function toggleUpdate() {
+    const storage = await browser.storage.local.get("settings");
+    let newSettings = storage.settings;
+    newSettings.updates = updateToggle;
+    await browser.storage.local.set({ settings: newSettings });
+  }
 
   function updateButton() {
     if (settings.global) {
@@ -27,38 +37,39 @@
     }
   }
 
-  async function toggle() {
+  async function globalToggle() {
     settings.global = !settings.global;
     await browser.storage.local.set({ settings });
     browser.runtime.sendMessage({ badgeText: true });
     updateButton();
-  }
-
-  async function toggleUpdates() {
-    const result = await browser.storage.local.get("settings");
-    let newSettings = result.settings;
-    newSettings.updates.toggle = !newSettings.updates.toggle;
-    await browser.storage.local.set({ settings: newSettings });
-    updateToggle = newSettings.updates.toggle;
   }
 </script>
 
 <div id="card">
   <h1 class="mb-6">Schooltape</h1>
 
-  <button class={btnClass} id="toggle" on:click={toggle}>{btnText}</button>
+  <button class={btnClass} id="toggle" on:click={globalToggle}>{btnText}</button>
   <details class="mt-10">
     <summary>Update Notifications</summary>
 
-    <label class="group relative mt-6 flex items-center justify-between p-2 text-lg text-ctp-text">
-      <h4>Desktop</h4>
+    <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
+      <h4>Toast</h4>
       <input
-        bind:checked={updateToggle}
-        on:change={toggleUpdates}
+        bind:checked={updateToggle.toast}
+        on:change={() => toggleUpdate("toast")}
         type="checkbox"
         class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
-      <!-- slider -->
-      <span class="slider big"></span>
+      <span class="slider small"></span>
+    </label>
+
+    <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
+      <h4>Desktop</h4>
+      <input
+        bind:checked={updateToggle.desktop}
+        on:change={() => toggleUpdate("desktop")}
+        type="checkbox"
+        class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
+      <span class="slider small"></span>
     </label>
   </details>
 </div>

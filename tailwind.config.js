@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{svelte,js,ts,jsx,tsx,html}"],
+  safelist: [
+    {
+      pattern: /bg-ctp-.+/,
+    }
+  ],
   theme: {
     extend: {},
   },

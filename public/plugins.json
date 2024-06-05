@@ -1,7 +1,6 @@
 {
   "modern-icons": {
     "name": "Modern Icons",
-    "author": "Schooltape",
     "description": "Modernise the icons across Schoolbox.",
     "scripts": [
       {
@@ -12,7 +11,6 @@
   },
   "subheader": {
     "name": "Subheader Revamp",
-    "author": "Schooltape",
     "description": "Adds significant functionality and customisability to the subheader.",
     "scripts": [
       {
@@ -23,7 +21,6 @@
   },
   "legacy-timetable": {
     "name": "Legacy Timetable",
-    "author": "Schooltape",
     "description": "Reverts the timetable to the old version.",
     "scripts": [
       {
@@ -34,7 +31,6 @@
   },
   "scroll-segments": {
     "name": "Scroll Segments",
-    "author": "Schooltape",
     "description": "Segments Schoolbox's scrolling into sections.",
     "scripts": [
       {
@@ -45,7 +41,6 @@
   },
   "tab-title": {
     "name": "Tab Title",
-    "author": "Schooltape",
     "description": "Adds the current page to the tab title.",
     "scripts": [
       {
@@ -56,7 +51,6 @@
   },
   "homepage-switcher": {
     "name": "Homepage Switcher",
-    "author": "Schooltape",
     "description": "When the Schoolbox logo is clicked, the user it taken to an existing homepage tab (when available).",
     "scripts": [
       {
@@ -67,7 +61,6 @@
   },
   "scroll-period": {
     "name": "Scroll Period",
-    "author": "Schooltape",
     "description": "Scrolls to the current period on the timetable.",
     "scripts": [
       {
@@ -78,7 +71,6 @@
   },
   "timetable-labels": {
     "name": "Timetable Labels",
-    "author": "Schooltape",
     "description": "Labels the day of the week from numbers to the actual day",
     "scripts": [
       {

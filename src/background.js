@@ -10,33 +10,22 @@ switch (__BROWSER__) {
 }
 
 // ----------------- Variables ----------------- //
-// const defaultSettings = {
-//   global: true,
-//   updateReminder: true,
-//   themes: false,
-//   currentTheme: "catppuccin-macchiato-rosewater",
-//   enabledPlugins: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
-//   enabledSnippets: ["hide-pfp"],
-//   userSnippets: [],
-//   urls: ["https://help.schoolbox.com.au"],
-// };
-// // TODO: update default settings
 const defaultSettings = {
   settings: {
     global: true,
     updates: {
-      toggle: true,
-      toast: true, // TODO
+      toast: true,
+      desktop: false,
     },
     urls: ["https://help.schoolbox.com.au"],
   },
   snippets: {
-    toggle: true, // TODO
+    toggle: true,
     enabled: ["hide-pfp"],
     user: [],
   },
   plugins: {
-    toggle: true, // TODO
+    toggle: true,
     enabled: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
     settings: {},
   },
@@ -45,7 +34,7 @@ const defaultSettings = {
     theme: "catppuccin",
     flavour: "macchiato",
     accent: "rosewater",
-    logo: "schooltape.png", // TODO
+    logo: "schooltape.png",
   },
 };
 

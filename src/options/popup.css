@@ -8,8 +8,16 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+.slider {
+  @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6;
+}
+
 .slider.big {
-  @apply ml-4 flex h-8 w-14 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:h-6 after:w-6 after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6;
+  @apply h-8 w-14 after:h-6 after:w-6;
+}
+
+.slider.small {
+  @apply after:h-3 after:w-3;
 }
 
 #flavours button {
