@@ -4,7 +4,7 @@ module.exports = {
   safelist: [
     {
       pattern: /bg-ctp-.+/,
-    }
+    },
   ],
   theme: {
     extend: {},

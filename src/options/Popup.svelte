@@ -1,13 +1,14 @@
 <script>
   import { Route, router } from "tinro";
   import { active } from "tinro";
-  router.mode.hash(); // enables hash navigation method
   import Home from "./pages/Home.svelte";
   import Plugins from "./pages/Plugins.svelte";
   import Themes from "./pages/Themes.svelte";
   import Snippets from "./pages/Snippets.svelte";
   import { onMount } from "svelte";
+
   let flavour = "macchiato";
+  router.mode.hash(); // enables hash navigation method
 
   onMount(async () => {
     const storage = await browser.storage.local.get("themes");
