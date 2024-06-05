@@ -57,6 +57,11 @@ body.login input[type="checkbox"]:not(.plain) + label:after {
   color: hsl(var(--ctp-text));
 }
 
+/* sidebar */
+#nav {
+  background: hsl(var(--ctp-mantle)) !important;
+}
+
 /* drop down menus */
 .filter-dropdown .filter-component {
   background-color: hsl(var(--ctp-surface0));
