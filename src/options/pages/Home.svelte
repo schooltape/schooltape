@@ -2,7 +2,6 @@
   import Footer from "../components/Footer.svelte";
   import browser from "webextension-polyfill";
   import { onMount } from "svelte";
-  import Toggle from '../components/Toggle.svelte';
 
   let settings;
   let btnText;
