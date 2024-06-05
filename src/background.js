@@ -37,7 +37,6 @@ const defaultSettings = {
     logo: "schooltape.png",
   },
 };
-
 // ----------------- Install/Update ----------------- //
 
 // Check whether new version is installed
@@ -268,7 +267,13 @@ async function updateBadge() {
 }
 
 function resetSettings() {
-  browser.storage.local.set(defaultSettings);
+  browser.storage.local.clear();
+  browser.storage.local.set({
+    settings: defaultSettings.settings,
+    snippets: defaultSettings.snippets,
+    plugins: defaultSettings.plugins,
+    themes: defaultSettings.themes
+  });
   updateBadge();
 }
 

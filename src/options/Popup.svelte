@@ -14,9 +14,9 @@
   onMount(async () => {
     const storage = await browser.storage.local.get("themes");
     flavour = storage.themes.flavour;
-    console.log("flavour", flavour);
+    // console.log("flavour", flavour);
     browser.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === 'local' && changes.themes) {
+      if (areaName === "local" && changes.themes) {
         flavour = changes.themes.newValue.flavour;
       }
     });
@@ -27,7 +27,7 @@
 </script>
 
 <body class="grid ctp-{flavour}">
-  <main class="flex flex-col items-center bg-gradient-to-b bg-ctp-base p-6">
+  <main class="flex flex-col items-center bg-ctp-base p-6">
     <div class="mb-6 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
       <a href="/" use:active exact class="navbutton-left">Settings</a>
       <a href="/plugins" use:active class="navbutton-center">Plugins</a>

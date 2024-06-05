@@ -3,73 +3,58 @@
   import browser from "webextension-polyfill";
   import { onMount } from "svelte";
 
-  let settings;
-  let btnText;
-  let btnClass;
-  let updateToggle = {
-    toast: false,
-    desktop: false,
+  let settings = {
+    global: false,
+    updates: {
+      toast: false,
+      desktop: false,
+    },
   };
+  let updates = Object.keys(settings.updates);
 
   onMount(async () => {
     const storage = await browser.storage.local.get();
-    console.log("storage", storage);
+    console.log(storage);
     settings = storage.settings;
-    updateToggle = settings.updates;
-    updateButton();
   });
 
   async function toggleUpdate() {
-    const storage = await browser.storage.local.get("settings");
-    let newSettings = storage.settings;
-    newSettings.updates = updateToggle;
-    await browser.storage.local.set({ settings: newSettings });
-  }
-
-  function updateButton() {
-    if (settings.global) {
-      btnClass = "bg-ctp-green hover:bg-ctp-pink active:bg-ctp-red/75";
-      btnText = "enabled";
-    } else {
-      btnClass = "bg-ctp-red hover:bg-ctp-pink active:bg-ctp-green/75";
-      btnText = "disabled";
-    }
+    await browser.storage.local.set({ settings: settings });
   }
 
   async function globalToggle() {
     settings.global = !settings.global;
-    await browser.storage.local.set({ settings });
+    await browser.storage.local.set({ settings: settings });
     browser.runtime.sendMessage({ badgeText: true });
-    updateButton();
   }
+
 </script>
 
 <div id="card">
   <h1 class="mb-6">Schooltape</h1>
 
-  <button class={btnClass} id="toggle" on:click={globalToggle}>{btnText}</button>
+  <button
+    class={settings.global
+      ? "bg-ctp-green hover:bg-ctp-pink active:bg-ctp-red/75"
+      : "bg-ctp-red hover:bg-ctp-pink active:bg-ctp-green/75"}
+    id="toggle"
+    on:click={globalToggle}
+    >{settings.global ? "enabled" : "disabled"}
+  </button>
   <details class="mt-10">
     <summary>Update Notifications</summary>
 
-    <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
-      <h4>Toast</h4>
-      <input
-        bind:checked={updateToggle.toast}
-        on:change={() => toggleUpdate("toast")}
-        type="checkbox"
-        class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
-      <span class="slider small"></span>
-    </label>
-
-    <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
-      <h4>Desktop</h4>
-      <input
-        bind:checked={updateToggle.desktop}
-        on:change={() => toggleUpdate("desktop")}
-        type="checkbox"
-        class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
-      <span class="slider small"></span>
-    </label>
+    {#each updates as update (update)}
+      <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
+        <h4>{update}</h4>
+        <input
+          bind:checked={settings.updates[update]}
+          on:change={() => toggleUpdate()}
+          type="checkbox"
+          class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
+        <span class="slider small"></span>
+      </label>
+    {/each}
   </details>
 </div>
 

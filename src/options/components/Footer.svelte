@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { MessageCircleQuestion, BugPlay, RotateCcw } from "lucide-svelte";
   import browser from "webextension-polyfill";
 
   let verNum;
@@ -16,9 +17,22 @@
       });
     }
   });
+
+  function handleSupportClick() {
+    window.open("https://github.com/42willow/schooltape/", "_blank");
+  }
+
+  function handleResetClick() {
+    browser.runtime.sendMessage({ resetSettings: true });
+    location.reload();
+  }
+
+  function handleBugClick() {
+    window.open(browser.runtime.getURL("src/options/popup.html"), "_blank");
+  }
 </script>
 
-<footer class="mt-5 flex min-w-full justify-around p-4">
+<footer class="flex min-w-full justify-around p-4">
   <p class="mb-0 flex items-center text-ctp-text">
     Version:
     <a
@@ -26,8 +40,27 @@
       target="_blank"
       href="https://github.com/42Willow/schooltape/releases/tag/${verNum}">{verNum}</a>
   </p>
-  <a target="_blank" href="https://github.com/42willow/schooltape/issues"
-    ><button id="support" class="small bg-ctp-surface0 text-ctp-text hover:bg-ctp-pink hover:text-ctp-crust">Support</button
-    ></a>
-  <button id="reset" class="small bg-ctp-surface0 text-ctp-text hover:bg-ctp-red hover:text-ctp-crust">Reset</button>
+  <div class="flex">
+    <button
+      title="Support"
+      id="support"
+      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-pink hover:text-ctp-crust"
+      on:click={handleSupportClick}>
+      <MessageCircleQuestion />
+    </button>
+    <button
+      title="Reset"
+      id="reset"
+      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-red hover:text-ctp-crust"
+      on:click={handleResetClick}>
+      <RotateCcw />
+    </button>
+    <button
+      title="Debug"
+      id="support"
+      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-blue hover:text-ctp-crust"
+      on:click={handleBugClick}>
+      <BugPlay />
+    </button>
+  </div>
 </footer>

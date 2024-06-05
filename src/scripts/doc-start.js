@@ -13,7 +13,6 @@ browser.storage.local.get().then(function (storage) {
   }
 });
 
-
 // // This is for:
 // // - Plugins (That inject stylesheets)
 // // - Themes

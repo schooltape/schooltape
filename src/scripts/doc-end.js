@@ -37,7 +37,6 @@ browser.storage.local.get().then(function (storage) {
 
 // check if the page is Schoolbox, if not add it to storage and reload the page
 
-
 // async function runUtilsFunction(functionName, ...args) {
 //   const src = browser.runtime.getURL("scripts/scriptUtils.js");
 //   const utils = await import(src);

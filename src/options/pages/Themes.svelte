@@ -21,7 +21,7 @@
   ];
   let themes = {
     toggle: false,
-  }
+  };
 
   onMount(async () => {
     const result = await browser.storage.local.get();
@@ -69,7 +69,11 @@
 
   <div id="palette">
     {#each accents as accent}
-      <button class="bg-ctp-{accent}" class:current={themes.accent === accent} title={accent} on:click={() => accentClicked(accent)}></button>
+      <button
+        class="bg-ctp-{accent}"
+        class:current={themes.accent === accent}
+        title={accent}
+        on:click={() => accentClicked(accent)}></button>
     {/each}
   </div>
 </div>
