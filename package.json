@@ -14,7 +14,6 @@
   "license": "MIT",
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
-    "@icons-pack/svelte-simple-icons": "^3.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "@types/webextension-polyfill": "^0.10.7",
     "lucide-svelte": "^0.383.0",
