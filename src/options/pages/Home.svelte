@@ -27,7 +27,6 @@
     await browser.storage.local.set({ settings: settings });
     browser.runtime.sendMessage({ badgeText: true });
   }
-
 </script>
 
 <div id="card">

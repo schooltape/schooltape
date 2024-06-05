@@ -7,7 +7,7 @@
     enabled: [],
   };
 
-  let populatedPlugins = []
+  let populatedPlugins = [];
 
   onMount(async () => {
     const response = await fetch("/plugins.json");

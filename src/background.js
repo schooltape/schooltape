@@ -272,7 +272,7 @@ function resetSettings() {
     settings: defaultSettings.settings,
     snippets: defaultSettings.snippets,
     plugins: defaultSettings.plugins,
-    themes: defaultSettings.themes
+    themes: defaultSettings.themes,
   });
   updateBadge();
 }

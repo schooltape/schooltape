@@ -32,7 +32,7 @@
   }
 </script>
 
-<footer class="flex min-w-full justify-around p-4">
+<footer class="flex min-w-full justify-around p-4 mt-4">
   <p class="mb-0 flex items-center text-ctp-text">
     Version:
     <a
