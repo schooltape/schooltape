@@ -27,7 +27,7 @@
       href="https://github.com/42Willow/schooltape/releases/tag/${verNum}">{verNum}</a>
   </p>
   <a target="_blank" href="https://github.com/42willow/schooltape/issues"
-    ><button id="support" class="small bg-ctp-base text-ctp-text hover:bg-ctp-pink hover:text-ctp-crust">Support</button
+    ><button id="support" class="small bg-ctp-surface0 text-ctp-text hover:bg-ctp-pink hover:text-ctp-crust">Support</button
     ></a>
-  <button id="reset" class="small bg-ctp-base text-ctp-text hover:bg-ctp-red hover:text-ctp-crust">Reset</button>
+  <button id="reset" class="small bg-ctp-surface0 text-ctp-text hover:bg-ctp-red hover:text-ctp-crust">Reset</button>
 </footer>
