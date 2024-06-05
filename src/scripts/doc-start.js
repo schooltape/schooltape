@@ -1,5 +1,5 @@
 import browser from "webextension-polyfill";
-import { injectCSS } from "./script-utils.js";
+import { injectCSS, injectCatppuccin } from "./script-utils.js";
 
 browser.storage.local.get(function (storage) {
   console.log(storage);
@@ -13,26 +13,6 @@ browser.storage.local.get(function (storage) {
   }
 });
 
-function injectCatppuccin(flavour, accent) {
-  console.log("injecting catppuccin theme");
-  fetch(browser.runtime.getURL("themes/catppuccin.json"))
-    .then((response) => response.json())
-    .then((palette) => {
-      let style = document.createElement("style");
-      style.classList.add("schooltape");
-      let cssText = "";
-      for (let color in palette[flavour]["colors"]) {
-        let c = palette[flavour]["colors"][color];
-        let hsl = `${c.hsl.h} ${c.hsl.s * 100}% ${c.hsl.l * 100}%`;
-        cssText += `:root { --ctp-${color}: ${hsl}; }\n`;
-      }
-      let a = palette[flavour]["colors"][accent].hsl;
-      cssText += `:root { --ctp-accent: ${`${a.h} ${a.s * 100}% ${a.l * 100}%`}; }\n`;
-      style.textContent = cssText;
-      document.head.appendChild(style);
-      console.log(style);
-    });
-}
 
 // // This is for:
 // // - Plugins (That inject stylesheets)
