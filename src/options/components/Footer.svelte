@@ -6,16 +6,6 @@
   let verNum;
   onMount(async () => {
     verNum = "v" + browser.runtime.getManifest().version;
-
-    const resetButton = document.getElementById("reset");
-    if (resetButton) {
-      resetButton.addEventListener("click", function () {
-        if (confirm("Are you sure you want to reset all settings?")) {
-          browser.runtime.sendMessage({ resetSettings: true });
-          location.reload();
-        }
-      });
-    }
   });
 
   function handleSupportClick() {
@@ -23,8 +13,10 @@
   }
 
   function handleResetClick() {
-    browser.runtime.sendMessage({ resetSettings: true });
-    location.reload();
+    if (confirm("Are you sure you want to reset all settings?")) {
+      browser.runtime.sendMessage({ resetSettings: true });
+      location.reload();
+    }
   }
 
   function handleBugClick() {

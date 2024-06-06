@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import browser from "webextension-polyfill";
+  import Title from "../components/Title.svelte";
 
   let plugins = {
     toggle: false,
@@ -13,7 +14,7 @@
     const response = await fetch("/plugins.json");
     const data = await response.json();
     const storage = await browser.storage.local.get();
-    console.log(storage.plugins.enabled);
+    console.log("plugins", storage.plugins);
     plugins = storage.plugins;
     populatedPlugins = Object.entries(data).map(([pluginId, pluginData]) => {
       return {
@@ -33,23 +34,10 @@
     }
     await browser.storage.local.set({ plugins: plugins });
   }
-
-  async function togglePlugins() {
-    await browser.storage.local.set({ plugins: plugins });
-  }
 </script>
 
 <div id="card">
-  <label class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
-    <h2 class="from-blue to-teal">Plugins</h2>
-    <input
-      id="theme-toggle"
-      type="checkbox"
-      class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md"
-      bind:checked={plugins.toggle}
-      on:change={togglePlugins} />
-    <span class="slider big"></span>
-  </label>
+  <Title title="Plugins" data={plugins} key="plugins" />
 
   <div class="plugins-container">
     {#each populatedPlugins as plugin (plugin.id)}

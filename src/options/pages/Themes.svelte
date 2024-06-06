@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import browser from "webextension-polyfill";
+  import Title from "../components/Title.svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -45,16 +46,7 @@
 </script>
 
 <div id="card">
-  <label class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
-    <h2 class="from-blue to-teal">Themes</h2>
-    <input
-      id="theme-toggle"
-      type="checkbox"
-      class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md"
-      bind:checked={themes.toggle}
-      on:change={toggleTheme} />
-    <span class="slider big"></span>
-  </label>
+  <Title title="Themes" data={themes} key="themes" />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour}
