@@ -50,7 +50,7 @@
           bind:checked={settings.updates[update]}
           on:change={() => toggleUpdate()}
           type="checkbox"
-          class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md" />
+          class="peer slider-input" />
         <span class="slider small"></span>
       </label>
     {/each}

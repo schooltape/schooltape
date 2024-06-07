@@ -22,7 +22,7 @@ const defaultSettings = {
   snippets: {
     toggle: true,
     enabled: ["hide-pfp"],
-    user: [],
+    user: {},
   },
   plugins: {
     toggle: true,

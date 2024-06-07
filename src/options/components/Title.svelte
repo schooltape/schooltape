@@ -1,9 +1,9 @@
 <script>
-  import browser from 'webextension-polyfill';
+  import browser from "webextension-polyfill";
 
   export let data = {};
-  export let title = '';
-  export let key = '';
+  export let title = "";
+  export let key = "";
 
   function setStorage() {
     browser.storage.local.set({ [key]: data });
@@ -15,7 +15,7 @@
   <input
     id="theme-toggle"
     type="checkbox"
-    class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md"
+    class="peer slider-input"
     bind:checked={data.toggle}
     on:change={setStorage} />
   <span class="slider big"></span>

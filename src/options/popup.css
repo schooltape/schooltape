@@ -20,6 +20,10 @@ body {
   @apply after:h-3 after:w-3;
 }
 
+.slider-input {
+  @apply absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md;
+}
+
 #flavours button {
   @apply bg-ctp-surface0;
 }

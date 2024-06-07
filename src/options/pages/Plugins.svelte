@@ -48,7 +48,7 @@
             plugin-id={plugin.id}
             bind:checked={plugin.toggled}
             type="checkbox"
-            class="plugin-toggle absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md"
+            class="peer slider-input"
             on:change={() => togglePlugin(plugin.id, plugin.toggled)} />
           <span class="slider small"></span>
         </label>
