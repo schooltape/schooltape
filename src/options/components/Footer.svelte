@@ -36,21 +36,21 @@
     <button
       title="Support"
       id="support"
-      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-pink hover:text-ctp-crust"
+      class="mx-2 small"
       on:click={handleSupportClick}>
       <MessageCircleQuestion />
     </button>
     <button
       title="Reset"
       id="reset"
-      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-red hover:text-ctp-crust"
+      class="mx-2 small hover:bg-ctp-red"
       on:click={handleResetClick}>
       <RotateCcw />
     </button>
     <button
       title="Debug"
       id="support"
-      class="mx-2 small bg-ctp-surface0 text-ctp-text hover:bg-ctp-blue hover:text-ctp-crust"
+      class="mx-2 small hover:bg-ctp-blue"
       on:click={handleBugClick}>
       <BugPlay />
     </button>

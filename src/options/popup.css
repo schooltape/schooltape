@@ -68,8 +68,12 @@ button.small {
   @apply rounded-lg px-2 py-1 text-sm font-bold;
 }
 
+button.xsmall {
+  @apply rounded-md px-1 py-0.5 text-xs;
+}
+
 button {
-  @apply transition duration-500 ease-in-out;
+  @apply transition duration-500 ease-in-out bg-ctp-surface0 text-ctp-text hover:text-ctp-crust hover:bg-ctp-pink;
 }
 
 #palette {

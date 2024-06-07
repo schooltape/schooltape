@@ -51,6 +51,7 @@
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//),
       description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//),
+      url: snippetURL,
       toggled: true,
     };
     await browser.storage.local.set({ snippets: snippets });
@@ -67,6 +68,12 @@
         snippets.enabled = snippets.enabled.filter((id) => id !== snippetId);
       }
     }
+    await browser.storage.local.set({ snippets: snippets });
+  }
+
+  async function removeSnippet(snippetId) {
+    delete snippets.user[snippetId];
+    snippets.user = {...snippets.user}; // force reactivity
     await browser.storage.local.set({ snippets: snippets });
   }
 </script>
@@ -130,6 +137,8 @@
         <div class="text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out">
           {snippet.description}
         </div>
+        <button class="xsmall hover:bg-ctp-red" on:click={() => { removeSnippet(key); }}>Remove</button>
+        <a href={snippet.url} target="_blank"><button class="xsmall">Gist</button></a>
       </div>
     {/each}
   </div>
