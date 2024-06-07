@@ -73,7 +73,7 @@
 
   async function removeSnippet(snippetId) {
     delete snippets.user[snippetId];
-    snippets.user = {...snippets.user}; // force reactivity
+    snippets.user = snippets.user; // force reactivity
     await browser.storage.local.set({ snippets: snippets });
   }
 </script>
@@ -84,7 +84,7 @@
   <div class="snippets-container w-full">
     {#each defaultSnippets as snippet (snippet.id)}
       <div class="my-4 group w-full">
-        <label class="relative flex justify-between items-center group py-2 text-xl text-ctp-text">
+        <label class="slider-label group">
           <h4 class="text-ctp-text">{snippet.name}</h4>
           <input
             snippet-id={snippet.id}
@@ -94,7 +94,7 @@
             on:change={() => toggleSnippet(snippet.id, snippet.toggled)} />
           <span class="slider small"></span>
         </label>
-        <div class="text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out">
+        <div class="slider-description">
           {snippet.description}
         </div>
       </div>
@@ -125,7 +125,7 @@
   <div class="user-snippets-container w-full">
     {#each Object.entries(snippets.user) as [key, snippet] (key)}
       <div class="my-4 group w-full">
-        <label class="relative flex justify-between items-center group py-2 text-xl text-ctp-text">
+        <label class="slider-label group">
           <h4 class="text-ctp-text">{snippet.name}</h4>
           <input
             bind:checked={snippet.toggled}
@@ -134,10 +134,14 @@
             on:change={() => toggleSnippet(key, snippet.toggled, true)} />
           <span class="slider small"></span>
         </label>
-        <div class="text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out">
+        <div class="slider-description">
           {snippet.description}
         </div>
-        <button class="xsmall hover:bg-ctp-red" on:click={() => { removeSnippet(key); }}>Remove</button>
+        <button
+          class="xsmall hover:bg-ctp-red"
+          on:click={() => {
+            removeSnippet(key);
+          }}>Remove</button>
         <a href={snippet.url} target="_blank"><button class="xsmall">Gist</button></a>
       </div>
     {/each}

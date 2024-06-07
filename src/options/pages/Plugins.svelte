@@ -42,7 +42,7 @@
   <div class="plugins-container">
     {#each populatedPlugins as plugin (plugin.id)}
       <div class="my-4 group">
-        <label class="relative flex justify-between items-center group py-2 text-xl text-ctp-text">
+        <label class="slider-label group">
           <h4 class="text-ctp-text">{plugin.name}</h4>
           <input
             plugin-id={plugin.id}
@@ -52,7 +52,7 @@
             on:change={() => togglePlugin(plugin.id, plugin.toggled)} />
           <span class="slider small"></span>
         </label>
-        <div class="text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out">
+        <div class="slider-description">
           {plugin.description}
         </div>
       </div>

@@ -33,25 +33,13 @@
       href="https://github.com/42Willow/schooltape/releases/tag/${verNum}">{verNum}</a>
   </p>
   <div class="flex">
-    <button
-      title="Support"
-      id="support"
-      class="mx-2 small"
-      on:click={handleSupportClick}>
+    <button title="Support" id="support" class="mx-2 small" on:click={handleSupportClick}>
       <MessageCircleQuestion />
     </button>
-    <button
-      title="Reset"
-      id="reset"
-      class="mx-2 small hover:bg-ctp-red"
-      on:click={handleResetClick}>
+    <button title="Reset" id="reset" class="mx-2 small hover:bg-ctp-red" on:click={handleResetClick}>
       <RotateCcw />
     </button>
-    <button
-      title="Debug"
-      id="support"
-      class="mx-2 small hover:bg-ctp-blue"
-      on:click={handleBugClick}>
+    <button title="Debug" id="support" class="mx-2 small hover:bg-ctp-blue" on:click={handleBugClick}>
       <BugPlay />
     </button>
   </div>

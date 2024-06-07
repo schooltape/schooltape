@@ -24,6 +24,14 @@ body {
   @apply absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md;
 }
 
+.slider-label {
+  @apply relative flex items-center justify-between py-2 text-xl text-ctp-text;
+}
+
+.slider-description {
+  @apply text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0;
+}
+
 #flavours button {
   @apply bg-ctp-surface0;
 }
@@ -73,7 +81,7 @@ button.xsmall {
 }
 
 button {
-  @apply transition duration-500 ease-in-out bg-ctp-surface0 text-ctp-text hover:text-ctp-crust hover:bg-ctp-pink;
+  @apply bg-ctp-surface0 text-ctp-text transition duration-500 ease-in-out hover:bg-ctp-pink hover:text-ctp-crust;
 }
 
 #palette {
