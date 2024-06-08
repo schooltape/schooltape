@@ -10,39 +10,22 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
-      - name: "Setup Node.js"
-        uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: "latest"
+          bun-version: latest
 
-      - name: "Install dependencies and build"
+      - name: "Install dependencies"
+        uses: bun install
+
+      - name: "Build and Zip"
         run: |
-          npm ci
-          npm run build
+          bun run zip
+          bun run zip:firefox
 
-      - name: "Create zip"
-        run: |
-          zip -r extension.zip src/
-
-      - name: "Upload zip"
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: extension.zip
-
-      - name: "web-ext build"
-        id: web-ext-build
-        uses: kewisch/action-web-ext@v1
-        with:
-          cmd: build
-          source: src
-          filename: "{name}-{version}.xpi"
-          ignoreFiles: '[ "package.json","package-lock.json","yarn.lock" ]'
-
-      - name: "Upload xpi"
-        uses: actions/upload-artifact@v4
-        with:
-          name: target.xpi
-          path: ${{ steps.web-ext-build.outputs.target }}
+          path: .output/*.zip
+          if-no-files-found: error
