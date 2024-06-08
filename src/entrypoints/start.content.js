@@ -1,19 +1,20 @@
+import "~/assets/catppuccin.css";
+
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
   main() {
-    console.log("Hello from document_start");
-    // browser.storage.local.get().then(function (storage) {
-    //   console.log(storage);
-    //   if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
-    //     console.log("Schooltape is enabled on this site");
-    //     if (storage.themes.toggle) {
-    //       console.log(storage.themes);
-    //       injectCSS("/themes/catppuccin.css");
-    //       injectCatppuccin(storage.themes.flavour, storage.themes.accent);
-    //     }
-    //   }
-    // });
+    browser.storage.local.get().then(function (storage) {
+      // console.log(storage);
+      if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
+        console.log("Schooltape is enabled on this site");
+        if (storage.themes.toggle) {
+          console.log(storage.themes);
+          injectCSS("content-scripts/start.css");
+          injectCatppuccin(storage.themes.flavour, storage.themes.accent);
+        }
+      }
+    });
   },
 });
 

@@ -8,7 +8,7 @@ export function injectCSS(css) {
 
 export function injectCatppuccin(flavour, accent) {
   console.log("injecting catppuccin theme");
-  fetch(browser.runtime.getURL("themes/catppuccin.json"))
+  fetch(browser.runtime.getURL("catppuccin.json"))
     .then((response) => response.json())
     .then((palette) => {
       let style = document.createElement("style");
