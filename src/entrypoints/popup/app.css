@@ -81,7 +81,7 @@ button.xsmall {
 }
 
 button {
-  @apply bg-ctp-surface0 text-ctp-text transition duration-500 ease-in-out hover:bg-ctp-pink hover:text-ctp-crust;
+  @apply bg-ctp-surface0 text-ctp-text transition duration-500 ease-in-out;
 }
 
 #palette {
