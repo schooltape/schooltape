@@ -1,7 +1,7 @@
 const ver = document.querySelector(".version");
 verNum = "v" + chrome.runtime.getManifest().version;
 ver.innerHTML = verNum;
-ver.href = `https://github.com/42Willow/schooltape/releases/tag/${verNum}`;
+ver.href = `https://github.com/schooltape/schooltape/releases/tag/${verNum}`;
 
 // global toggle button
 chrome.storage.local.get(["settings"], function (result) {
