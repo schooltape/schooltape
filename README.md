@@ -21,7 +21,7 @@
 
 A web extension to improve the look and feel of [Schoolbox](https://schoolbox.education/). [Download the latest release here!](https://github.com/schooltape/schooltape/releases/latest)
 
-To install Schooltape and get started, **view the [getting started](https://github.com/schooltape/schooltape/wiki/Getting-Started) guide**.
+To install Schooltape and get started, **view the [installation](https://schooltape.github.io/installation/) guide**.
 
 ## Previews
 
@@ -44,11 +44,11 @@ To install Schooltape and get started, **view the [getting started](https://gith
 
 ## Features
 
-- **Schoolbox detection:** You do not need to manually enter your Schoolbox URL
-- **Plugins:** Increase Schoolbox functionality
-- **Themes:** Change the colours of Schoolbox
-- **Snippets:** Make other adjustments to styling
+- **Schoolbox detection:** Automatic detection of any Schoolbox instance!
+- **Plugins:** Built with a plugin system in mind, allowing for easy extensibility.
+- **Themes:** Save your eyes from the harsh white of Schoolbox.
+- **Snippets:** Schooltape has a growing ecosystem of snippets, allowing for easy CSS modifications.
 
 ## Wiki
 
-There is more information in [the wiki](https://github.com/schooltape/schooltape/wiki)!
+There is more information in [the website](https://schooltape.github.io/)!
