@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { MessageCircleQuestion, BugPlay, RotateCcw } from "lucide-svelte";
+  import { MessageCircleQuestion, RotateCcw, BookText } from "lucide-svelte";
 
   let verNum;
   onMount(async () => {
@@ -44,9 +44,6 @@
     </button>
     <button title="Reset" id="reset" class="mx-2 small hover:bg-ctp-red hover:text-ctp-crust" on:click={handleResetClick}>
       <RotateCcw />
-    </button>
-    <button title="Debug" id="support" class="mx-2 small hover:bg-ctp-blue hover:text-ctp-crust" on:click={handleBugClick}>
-      <BugPlay />
     </button>
   </div>
 </footer>
