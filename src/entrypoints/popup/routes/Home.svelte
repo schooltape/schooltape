@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   let settings = globalSettings.defaultValue;
-  let updates = Object.keys(settings.updates);
+  const updateKeys = ["toast", "desktop"]
 
   onMount(async () => {
     settings = await globalSettings.getValue();
@@ -36,7 +36,7 @@
   <details class="mt-10">
     <summary>Update Notifications</summary>
 
-    {#each updates as update (update)}
+    {#each updateKeys as update (update)}
       <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
         <h4>{update}</h4>
         <input
