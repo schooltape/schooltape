@@ -11,17 +11,14 @@
   });
 
   async function toggleUpdate() {
-    console.log("settings", settings);
+    // console.log("settings", settings);
     await globalSettings.setValue(settings);
   }
 
   async function globalToggle() {
     settings.global = !settings.global;
-    console.log("settings", settings);
+    // console.log("settings", settings);
     await globalSettings.setValue(settings);
-    // settings.global = !settings.global;
-    // await browser.storage.local.set({ settings: settings });
-    // browser.runtime.sendMessage({ badgeText: true });
   }
 </script>
 
