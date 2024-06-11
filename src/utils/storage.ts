@@ -67,6 +67,7 @@ export type ExtensionStorageSchema = GlobalSettingsV1 & {
 export type GlobalSettingsV1 = {
   global: boolean;
   updates: {
+    available: boolean;
     toast: boolean;
     desktop: boolean;
     [key: string]: boolean;
@@ -78,6 +79,7 @@ export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:global
   defaultValue: {
     global: true,
     updates: {
+      available: false,
       toast: true,
       desktop: false,
     },
