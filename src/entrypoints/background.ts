@@ -33,14 +33,7 @@ export default defineBackground(() => {
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
-      browser.action.setIcon({
-        path: {
-          16: newSettings.global ? "/icon/16.png" : "/icon/16-disabled.png",
-          32: newSettings.global ? "/icon/32.png" : "/icon/32-disabled.png",
-          48: newSettings.global ? "/icon/48.png" : "/icon/48-disabled.png",
-          128: newSettings.global ? "/icon/128.png" : "/icon/128-disabled.png",
-        },
-      });
+      updateIcon();
       // if global is enabled, check for updates
       if (newSettings.global) {
         checkForUpdates();
@@ -61,8 +54,18 @@ export default defineBackground(() => {
       const data = await response.json();
       const latestVersion = data.tag_name.replace("v", "");
       const currentVersion = browser.runtime.getManifest().version;
+      // if there is an update available
       if (latestVersion !== currentVersion) {
         logger.info(`[background] Found new version: ${latestVersion}`);
+        // set update available
+        await globalSettings.setValue({
+          ...await globalSettings.getValue(),
+          updates: {
+            ...(await globalSettings.getValue()).updates,
+            available: true,
+          },
+        });
+        // notify
         if ((await globalSettings.getValue()).updates.desktop) {
           browser.notifications.create("update", {
             title: "Available update",
@@ -71,6 +74,8 @@ export default defineBackground(() => {
             message: `Click here to update to v${latestVersion}`,
           });
         }
+        // update icon accordingly
+        updateIcon();
         return true;
       }
     } catch (error) {
@@ -79,8 +84,25 @@ export default defineBackground(() => {
     }
     return false;
   }
-
 });
 
-
-
+async function updateIcon() {
+  const global = (await globalSettings.getValue()).global;
+  const updateAvailable = (await globalSettings.getValue()).updates.available;
+  let iconSuffix = "-disabled";
+  if (global) {
+    if (updateAvailable) {
+      iconSuffix = "-red";
+    } else {
+      iconSuffix = "";
+    }
+  }
+  browser.action.setIcon({
+    path: {
+      16: `/icon/16${iconSuffix}.png`,
+      32: `/icon/32${iconSuffix}.png`,
+      48: `/icon/48${iconSuffix}.png`,
+      128: `/icon/128${iconSuffix}.png`,
+    },
+  });
+}
