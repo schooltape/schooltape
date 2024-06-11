@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   let settings = globalSettings.defaultValue;
-  const updateKeys = ["toast", "desktop"]
+  const updateKeys = ["toast", "desktop"];
 
   onMount(async () => {
     settings = await globalSettings.getValue();

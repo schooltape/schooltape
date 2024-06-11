@@ -19,7 +19,7 @@
     "blue",
     "lavender",
   ];
-  let themes = themeSettings.defaultValue
+  let themes = themeSettings.defaultValue;
 
   onMount(async () => {
     themes = await themeSettings.getValue();
@@ -46,7 +46,7 @@
         class:active={themes.flavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
-        class:navbutton-center={(flavour === "macchiato") || (flavour === "frappe")}
+        class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
         on:click={() => flavourClicked(flavour)}>{flavour}</button>
     {/each}
   </div>
