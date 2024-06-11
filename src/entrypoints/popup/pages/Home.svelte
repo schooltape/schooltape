@@ -1,30 +1,27 @@
-<script>
+<script lang="ts">
   import Footer from "../components/Footer.svelte";
   import { onMount } from "svelte";
 
-  let settings = {
-    global: false,
-    updates: {
-      toast: false,
-      desktop: false,
-    },
-  };
+  let settings = globalSettings.defaultValue;
   let updates = Object.keys(settings.updates);
 
   onMount(async () => {
-    const storage = await browser.storage.local.get();
-    console.log(storage);
-    settings = storage.settings;
+    settings = await globalSettings.getValue();
+    console.log("settings", settings);
   });
 
   async function toggleUpdate() {
-    await browser.storage.local.set({ settings: settings });
+    console.log("settings", settings);
+    await globalSettings.setValue(settings);
   }
 
   async function globalToggle() {
     settings.global = !settings.global;
-    await browser.storage.local.set({ settings: settings });
-    browser.runtime.sendMessage({ badgeText: true });
+    console.log("settings", settings);
+    await globalSettings.setValue(settings);
+    // settings.global = !settings.global;
+    // await browser.storage.local.set({ settings: settings });
+    // browser.runtime.sendMessage({ badgeText: true });
   }
 </script>
 

@@ -11,20 +11,20 @@
   router.mode.hash(); // enables hash navigation method
 
   onMount(async () => {
-    const storage = await browser.storage.local.get("themes");
-    flavour = storage.themes.flavour;
+    // const storage = await browser.storage.local.get("themes");
+    // flavour = storage.themes.flavour;
     // console.log("flavour", flavour);
 
-    browser.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === "local" && changes.themes) {
-        try {
-          flavour = changes.themes.newValue.flavour;
-        } catch {}
-      }
-    });
+    // browser.storage.onChanged.addListener((changes, areaName) => {
+    //   if (areaName === "local" && changes.themes) {
+    //     try {
+    //       flavour = changes.themes.newValue.flavour;
+    //     } catch {}
+    //   }
+    // });
   });
   onDestroy(() => {
-    browser.storage.onChanged.removeListener(listener);
+    // browser.storage.onChanged.removeListener(listener);
   });
 </script>
 
