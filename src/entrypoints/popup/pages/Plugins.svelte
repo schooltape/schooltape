@@ -4,7 +4,7 @@
 
   let plugins = pluginSettings.defaultValue;
 
-  let populatedPlugins: PopulatedPluginV1[];
+  let populatedPlugins: PopulatedPluginV1[] = [];
 
   onMount(async () => {
     const response = await fetch("/plugins.json");
