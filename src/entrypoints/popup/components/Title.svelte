@@ -3,8 +3,21 @@
   export let title = "";
   export let key = "";
 
-  function setStorage() {
-    browser.storage.local.set({ [key]: data });
+  async function setStorage() {
+    switch (key) {
+      case "plugins":
+        await pluginSettings.setValue(data);
+        break;
+      case "themes":
+        await themeSettings.setValue(data);
+        break;
+      case "snippets":
+        await snippetSettings.setValue(data);
+        break;
+      default:
+        await globalSettings.setValue(data);
+        browser.storage.local.set({ settings: data });
+    }
   }
 </script>
 

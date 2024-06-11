@@ -2,25 +2,21 @@
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
 
-  let plugins = {
-    toggle: false,
-    enabled: [],
-  };
+  let plugins = pluginSettings.defaultValue;
 
   let populatedPlugins = [];
 
   onMount(async () => {
     const response = await fetch("/plugins.json");
     const data = await response.json();
-    const storage = await browser.storage.local.get();
-    console.log("plugins", storage.plugins);
-    plugins = storage.plugins;
+    plugins = await pluginSettings.getValue();
+    console.log("plugins", plugins);
     populatedPlugins = Object.entries(data).map(([pluginId, pluginData]) => {
       return {
         id: pluginId,
         name: pluginData.name,
         description: pluginData.description,
-        toggled: storage.plugins.enabled.includes(pluginId),
+        toggled: plugins.enabled.includes(pluginId),
       };
     });
   });
@@ -31,7 +27,7 @@
     } else {
       plugins.enabled = plugins.enabled.filter((id) => id !== pluginId);
     }
-    await browser.storage.local.set({ plugins: plugins });
+    await pluginSettings.setValue(plugins);
   }
 </script>
 
