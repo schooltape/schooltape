@@ -28,9 +28,23 @@ export default defineBackground(() => {
     }
   });
 
-  browser.runtime.onMessage.addListener((message) => {
-    if (message === "update") {
-      browser.runtime.reload();
+  // watch for global toggle
+  globalSettings.watch((newSettings, oldSettings) => {
+    if (newSettings.global !== oldSettings.global) {
+      logger.info(`[background] Global toggle changed to ${newSettings.global}`);
+      // update icon
+      browser.action.setIcon({
+        path: {
+          16: newSettings.global ? "/icon/16.png" : "/icon/16-disabled.png",
+          32: newSettings.global ? "/icon/32.png" : "/icon/32-disabled.png",
+          48: newSettings.global ? "/icon/48.png" : "/icon/48-disabled.png",
+          128: newSettings.global ? "/icon/128.png" : "/icon/128-disabled.png",
+        },
+      });
+      // if global is enabled, check for updates
+      if (newSettings.global) {
+        checkForUpdates();
+      }
     }
   });
 
@@ -65,6 +79,7 @@ export default defineBackground(() => {
     }
     return false;
   }
+
 });
 
 
