@@ -258,10 +258,10 @@ export default defineBackground(() => {
 
   async function resetSettings() {
     await storage.setItem([
-      {key: "local:settings", value: defaultSettings.settings},
-      {key: "local:snippets", value: defaultSettings.snippets},
-      {key: "local:plugins", value: defaultSettings.plugins},
-      {key: "local:themes", value: defaultSettings.themes},
+      { key: "local:settings", value: defaultSettings.settings },
+      { key: "local:snippets", value: defaultSettings.snippets },
+      { key: "local:plugins", value: defaultSettings.plugins },
+      { key: "local:themes", value: defaultSettings.themes },
     ]);
     updateBadge();
   }

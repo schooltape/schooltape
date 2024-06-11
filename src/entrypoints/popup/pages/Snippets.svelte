@@ -1,32 +1,28 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
 
-  let snippets = {
-    toggle: false,
-    user: [],
-  };
+  let snippets = snippetSettings.defaultValue;
   let snippetURL = "";
-  let defaultSnippets = [];
+  let populatedSnippets: PopulatedSnippetV1[] = [];
 
   onMount(async () => {
     const response = await fetch("/snippets.json");
     const data = await response.json();
-    const storage = await browser.storage.local.get();
-    snippets = storage.snippets;
+    snippets = await snippetSettings.getValue();
     console.log("snippets", snippets);
 
     // populate default snippets
-    defaultSnippets = Object.entries(data).map(([snippetId, snippetData]) => {
+    populatedSnippets = Object.entries(data as Record<string, SnippetDataV1>).map(([snippetId, snippetData]) => {
       return {
         id: snippetId,
         name: snippetData.name,
         description: snippetData.description,
         path: snippetData.path,
-        toggled: storage.snippets.enabled.includes(snippetId),
+        toggle: snippets.enabled.includes(snippetId),
       };
     });
-    // console.log(defaultSnippets);
+    // console.log(populatedSnippets);
   });
 
   async function addUserSnippet() {
@@ -39,7 +35,7 @@
     const response = await fetch(snippetURL + "/raw");
     const data = await response.text();
     // console.log(data);
-    const getMatch = (snippet, regex) => {
+    const getMatch = (snippet: string, regex: RegExp) => {
       const match = snippet.match(regex);
       return match ? match[1] : null;
     };
@@ -48,18 +44,18 @@
 
     snippets.user[key] = {
       author: sections[3],
-      name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//),
-      description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//),
+      name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
+      description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
       url: snippetURL,
-      toggled: true,
+      toggle: true,
     };
-    await browser.storage.local.set({ snippets: snippets });
+    await snippetSettings.setValue(snippets);
     // console.log(snippets);
   }
 
-  async function toggleSnippet(snippetId, toggled, isUser = false) {
+  async function toggleSnippet(snippetId: string, toggled: boolean, isUser: boolean = false) {
     if (isUser) {
-      snippets.user[snippetId].toggled = toggled;
+      snippets.user[snippetId].toggle = toggled;
     } else {
       if (toggled) {
         snippets.enabled.push(snippetId);
@@ -67,13 +63,15 @@
         snippets.enabled = snippets.enabled.filter((id) => id !== snippetId);
       }
     }
-    await browser.storage.local.set({ snippets: snippets });
+    await snippetSettings.setValue(snippets);
+    // console.log(snippets);
   }
 
-  async function removeSnippet(snippetId) {
+  async function removeSnippet(snippetId: string) {
     delete snippets.user[snippetId];
     snippets.user = snippets.user; // force reactivity
-    await browser.storage.local.set({ snippets: snippets });
+    await snippetSettings.setValue(snippets);
+    // console.log(snippets);
   }
 </script>
 
@@ -81,16 +79,15 @@
   <Title title="Snippets" data={snippets} key="snippets" />
 
   <div class="snippets-container w-full">
-    {#each defaultSnippets as snippet (snippet.id)}
+    {#each populatedSnippets as snippet (snippet.id)}
       <div class="my-4 group w-full">
         <label class="slider-label group">
           <h4 class="text-ctp-text">{snippet.name}</h4>
           <input
-            snippet-id={snippet.id}
-            bind:checked={snippet.toggled}
+            bind:checked={snippet.toggle}
             type="checkbox"
             class="peer slider-input"
-            on:change={() => toggleSnippet(snippet.id, snippet.toggled)} />
+            on:change={() => toggleSnippet(snippet.id, snippet.toggle)} />
           <span class="slider small"></span>
         </label>
         <div class="slider-description">
@@ -127,10 +124,10 @@
         <label class="slider-label group">
           <h4 class="text-ctp-text">{snippet.name}</h4>
           <input
-            bind:checked={snippet.toggled}
+            bind:checked={snippet.toggle}
             type="checkbox"
             class="peer slider-input"
-            on:change={() => toggleSnippet(key, snippet.toggled, true)} />
+            on:change={() => toggleSnippet(key, snippet.toggle, true)} />
           <span class="slider small"></span>
         </label>
         <div class="slider-description">
