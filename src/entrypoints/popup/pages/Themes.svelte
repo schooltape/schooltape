@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
 
@@ -19,28 +19,21 @@
     "blue",
     "lavender",
   ];
-  let themes = {
-    toggle: false,
-  };
+  let themes = themeSettings.defaultValue
 
   onMount(async () => {
-    const result = await browser.storage.local.get();
-    themes = result.themes;
+    themes = await themeSettings.getValue();
     console.log("themes", themes);
   });
 
-  function toggleTheme() {
-    chrome.storage.local.set({ themes: themes });
-  }
-
-  function flavourClicked(flavour) {
+  function flavourClicked(flavour: string) {
     themes.flavour = flavour;
-    chrome.storage.local.set({ themes: themes });
+    themeSettings.setValue(themes);
   }
 
-  function accentClicked(accent) {
+  function accentClicked(accent: string) {
     themes.accent = accent;
-    chrome.storage.local.set({ themes: themes });
+    themeSettings.setValue(themes);
   }
 </script>
 
@@ -53,7 +46,7 @@
         class:active={themes.flavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
-        class:navbutton-center={(flavour === "macchiato") | (flavour === "frappe")}
+        class:navbutton-center={(flavour === "macchiato") || (flavour === "frappe")}
         on:click={() => flavourClicked(flavour)}>{flavour}</button>
     {/each}
   </div>
