@@ -2,6 +2,7 @@
   "name": "schooltape",
   "version": "3.0.0-beta",
   "author": "42willow",
+  "homepage": "https://schooltape.github.io",
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
