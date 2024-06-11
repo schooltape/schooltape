@@ -168,19 +168,19 @@ export default defineBackground(() => {
   // function contextClick(info, tab) {
   //   const { menuItemId } = info;
   //   if (menuItemId === "githubRepo") {
-  //     let newURL = "https://github.com/42willow/schooltape";
+  //     let newURL = "https://github.com/schooltape/schooltape";
   //     browser.tabs.create({ url: newURL });
   //   } else if (menuItemId === "githubIssues") {
-  //     let newURL = "https://github.com/42willow/schooltape/issues";
+  //     let newURL = "https://github.com/schooltape/schooltape/issues";
   //     browser.tabs.create({ url: newURL });
   //   } else if (menuItemId === "githubPRs") {
-  //     let newURL = "https://github.com/42willow/schooltape/pulls";
+  //     let newURL = "https://github.com/schooltape/schooltape/pulls";
   //     browser.tabs.create({ url: newURL });
   //   } else if (menuItemId === "githubProjects") {
-  //     let newURL = "https://github.com/42willow/schooltape/projects";
+  //     let newURL = "https://github.com/schooltape/schooltape/projects";
   //     browser.tabs.create({ url: newURL });
   //   } else if (menuItemId === "githubWiki") {
-  //     let newURL = "https://github.com/42willow/schooltape/wiki";
+  //     let newURL = "https://github.com/schooltape/schooltape/wiki";
   //     browser.tabs.create({ url: newURL });
   //   } else if (menuItemId === "extRefresh") {
   //     console.log("Refreshing extension...");
@@ -195,17 +195,17 @@ export default defineBackground(() => {
   // browser.notifications.onClicked.addListener(function (notifID) {
   //   if (notifID === "update") {
   //     browser.tabs.create({
-  //       url: "https://github.com/42willow/schooltape/releases/latest",
+  //       url: "https://github.com/schooltape/schooltape/releases/latest",
   //     });
   //   }
   //   if (notifID === "tutorial") {
   //     browser.tabs.create({
-  //       url: "https://github.com/42Willow/schooltape/wiki/Getting-Started#configuring",
+  //       url: "https://github.com/schooltape/schooltape/wiki/Getting-Started#configuring",
   //     });
   //   }
   //   if (notifID === "updated") {
   //     let thisVersion = browser.runtime.getManifest().version;
-  //     let newURL = "https://github.com/42willow/schooltape/releases/tag/v" + thisVersion;
+  //     let newURL = "https://github.com/schooltape/schooltape/releases/tag/v" + thisVersion;
   //     browser.tabs.create({ url: newURL });
   //   }
   // });
@@ -273,7 +273,7 @@ export default defineBackground(() => {
       browser.storage.local.get("settings", function (result) {
         if (request.checkForUpdates && result.settings.updateReminder) {
           // Get latest and pre-release information from github
-          fetch("https://api.github.com/repos/42willow/schooltape/releases/latest")
+          fetch("https://api.github.com/repos/schooltape/schooltape/releases/latest")
             .then((response) => response.json())
             .then((data) => {
               // Get latest version without the "v" in front

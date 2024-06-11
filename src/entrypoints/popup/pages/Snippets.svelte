@@ -105,7 +105,7 @@
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
-        href="https://github.com/42Willow/schooltape/wiki/Contributing#snippets"
+        href="https://github.com/schooltape/schooltape/wiki/Contributing#snippets"
         target="_blank">wiki</a
       >.
     </p>

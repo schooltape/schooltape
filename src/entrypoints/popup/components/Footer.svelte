@@ -8,7 +8,7 @@
   });
 
   function handleSupportClick() {
-    window.open("https://github.com/42willow/schooltape/", "_blank");
+    window.open("https://github.com/schooltape/schooltape/", "_blank");
   }
 
   function handleResetClick() {
@@ -21,6 +21,10 @@
   function handleBugClick() {
     window.open(browser.runtime.getURL("popup.html"), "_blank");
   }
+
+  function handleWikiClick() {
+    window.open("https://schooltape.github.io", "_blank");
+  }
 </script>
 
 <footer class="flex min-w-full justify-around p-4 mt-4">
@@ -29,9 +33,12 @@
     <a
       class="version ml-2 text-ctp-blue hover:underline"
       target="_blank"
-      href="https://github.com/42Willow/schooltape/releases/tag/${verNum}">{verNum}</a>
+      href="https://github.com/schooltape/schooltape/releases/tag/{verNum}">{verNum}</a>
   </p>
   <div class="flex">
+    <button title="Wiki" id="wiki" class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust" on:click={handleWikiClick}>
+      <BookText />
+    </button>
     <button title="Support" id="support" class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust" on:click={handleSupportClick}>
       <MessageCircleQuestion />
     </button>
