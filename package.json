@@ -7,8 +7,9 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "autoprefixer": "^10.4.19",
     "lucide-svelte": "^0.383.0",
+    "pino": "^9.1.0",
     "postcss": "^8.4.38",
-    "prettier": "^3.3.1",
+    "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "svelte": "^4.2.18",
@@ -31,7 +32,8 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "postinstall": "wxt prepare"
   },
   "type": "module"
 }
