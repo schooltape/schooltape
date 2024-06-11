@@ -5,7 +5,7 @@ import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 export default defineConfig({
   manifest: {
     name: "Schooltape",
-    homepage_url: 'https://schooltape.github.io',
+    homepage_url: "https://schooltape.github.io",
     web_accessible_resources: [
       {
         matches: ["<all_urls>"],
