@@ -247,7 +247,7 @@ export default defineBackground(() => {
   // // */
   async function updateBadge() {
     console.log("Updating badge...");
-    const settings = await browser.storage.local.get("settings");
+    const settings = await storage.getItem("local:settings");
     console.log(settings);
     // if (settings.global) {
     //   console.log("Badge: ON");
@@ -256,14 +256,13 @@ export default defineBackground(() => {
     // }
   }
 
-  function resetSettings() {
-    browser.storage.local.clear();
-    browser.storage.local.set({
-      settings: defaultSettings.settings,
-      snippets: defaultSettings.snippets,
-      plugins: defaultSettings.plugins,
-      themes: defaultSettings.themes,
-    });
+  async function resetSettings() {
+    await storage.setItem([
+      {key: "local:settings", value: defaultSettings.settings},
+      {key: "local:snippets", value: defaultSettings.snippets},
+      {key: "local:plugins", value: defaultSettings.plugins},
+      {key: "local:themes", value: defaultSettings.themes},
+    ]);
     updateBadge();
   }
 
