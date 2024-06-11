@@ -26,6 +26,22 @@
 //   },
 // };
 
+export interface Script {
+  execute: string;
+  path: string;
+}
+export interface PluginData {
+  name: string;
+  description: string;
+  scripts: Script[]; // This denotes an array of any length
+}
+export type PopulatedPluginV1 = {
+  id: string;
+  name: string;
+  description: string;
+  toggle: boolean;
+}
+
 export type ExtensionStorageSchema = GlobalSettingsV1 & {
   snippets: SnippetSettingsV1;
   plugins: PluginSettingsV1;
