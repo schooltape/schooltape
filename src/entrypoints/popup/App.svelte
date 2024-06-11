@@ -1,43 +1,41 @@
-<script>
-  import { Route, router } from "tinro";
-  import { active } from "tinro";
-  import Home from "./pages/Home.svelte";
-  import Plugins from "./pages/Plugins.svelte";
-  import Themes from "./pages/Themes.svelte";
-  import Snippets from "./pages/Snippets.svelte";
+<script lang="ts">
+  import Router from 'svelte-spa-router'
+  import active from 'svelte-spa-router/active'
+  import Home from "./routes/Home.svelte";
+  import Plugins from "./routes/Plugins.svelte";
+  import Themes from "./routes/Themes.svelte";
+  import Snippets from "./routes/Snippets.svelte";
   import { onMount, onDestroy } from "svelte";
 
+  const routes = {
+    '/': Home,
+    '/plugins': Plugins,
+    '/themes': Themes,
+    '/snippets': Snippets,
+  }
+
   let flavour = "macchiato";
-  router.mode.hash(); // enables hash navigation method
+  let unwatch: () => void;
 
   onMount(async () => {
-    // const storage = await browser.storage.local.get("themes");
-    // flavour = storage.themes.flavour;
-    // console.log("flavour", flavour);
-    // browser.storage.onChanged.addListener((changes, areaName) => {
-    //   if (areaName === "local" && changes.themes) {
-    //     try {
-    //       flavour = changes.themes.newValue.flavour;
-    //     } catch {}
-    //   }
-    // });
+    unwatch = themeSettings.watch((newValue) => {
+      flavour = newValue.flavour;
+    });
   });
+
   onDestroy(() => {
-    // browser.storage.onChanged.removeListener(listener);
+    unwatch();
   });
 </script>
 
 <body class="grid ctp-{flavour}">
   <main class="flex flex-col items-center bg-ctp-base p-6">
-    <div class="mb-6 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
-      <a href="/" use:active exact class="navbutton-left">Settings</a>
-      <a href="/plugins" use:active class="navbutton-center">Plugins</a>
-      <a href="/themes" use:active class="navbutton-center">Themes</a>
-      <a href="/snippets" use:active class="navbutton-right">Snippets</a>
-    </div>
-    <Route fallback path="/"><Home /></Route>
-    <Route path="/plugins"><Plugins /></Route>
-    <Route path="/themes"><Themes /></Route>
-    <Route path="/snippets"><Snippets /></Route>
+      <nav class="mb-6 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
+        <a href="#/" class="navbutton-left" use:active={{className: 'active'}}>Settings</a>
+        <a href="#/plugins" class="navbutton-center" use:active={{className: 'active'}}>Plugins</a>
+        <a href="#/themes" class="navbutton-center" use:active={{className: 'active'}}>Themes</a>
+        <a href="#/snippets" class="navbutton-right" use:active={{className: 'active'}}>Snippets</a>
+      </nav>
+      <Router {routes}/>
   </main>
 </body>
