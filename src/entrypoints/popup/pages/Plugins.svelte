@@ -11,7 +11,7 @@
     const data = await response.json();
     plugins = await pluginSettings.getValue();
     console.log("plugins", plugins);
-    populatedPlugins = Object.entries(data as Record<string, PluginData>).map(([pluginId, pluginData]) => {
+    populatedPlugins = Object.entries(data as Record<string, PluginDataV1>).map(([pluginId, pluginData]) => {
       return {
         id: pluginId,
         name: pluginData.name,

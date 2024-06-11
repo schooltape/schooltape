@@ -14,7 +14,6 @@
     // const storage = await browser.storage.local.get("themes");
     // flavour = storage.themes.flavour;
     // console.log("flavour", flavour);
-
     // browser.storage.onChanged.addListener((changes, areaName) => {
     //   if (areaName === "local" && changes.themes) {
     //     try {

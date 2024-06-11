@@ -39,10 +39,18 @@
     <button title="Wiki" id="wiki" class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust" on:click={handleWikiClick}>
       <BookText />
     </button>
-    <button title="Support" id="support" class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust" on:click={handleSupportClick}>
+    <button
+      title="Support"
+      id="support"
+      class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust"
+      on:click={handleSupportClick}>
       <MessageCircleQuestion />
     </button>
-    <button title="Reset" id="reset" class="mx-2 small hover:bg-ctp-red hover:text-ctp-crust" on:click={handleResetClick}>
+    <button
+      title="Reset"
+      id="reset"
+      class="mx-2 small hover:bg-ctp-red hover:text-ctp-crust"
+      on:click={handleResetClick}>
       <RotateCcw />
     </button>
   </div>
