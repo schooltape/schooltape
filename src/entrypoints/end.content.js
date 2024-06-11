@@ -10,7 +10,7 @@ export default defineContentScript({
       let footer = document.querySelector("#footer > ul");
       if (footer.innerHTML.includes("Schoolbox")) {
         let footerListItem = document.createElement("li");
-        footerListItem.appendChild(document.createElement("a")).href = "https://github.com/42willow/schooltape";
+        footerListItem.appendChild(document.createElement("a")).href = "https://github.com/schooltape/schooltape";
         footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
         footer.appendChild(footerListItem);
         if (!storage.settings.urls.includes(window.location.origin)) {

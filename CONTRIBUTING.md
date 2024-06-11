@@ -19,5 +19,5 @@ changes to this document in a pull request.
 - If it's your first time contributing to a project then you should look to the
   popular [first-contributions](https://github.com/firstcontributions/first-contributions) repository on GitHub. This
   will give you hands-on experience with the features of GitHub required to make a contribution.
-- Check out [good first issues](https://github.com/42Willow/schooltape/issues?q=label%3A%22good+first+issue%22+is%3Aissue+is%3Aopen)
+- Check out [good first issues](https://github.com/schooltape/schooltape/issues?q=label%3A%22good+first+issue%22+is%3Aissue+is%3Aopen)
   for a list of issues that are good for beginners.
