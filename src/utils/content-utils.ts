@@ -1,4 +1,4 @@
-export function injectCSS(css) {
+export function injectCSS(css: any) {
   logger.info(`[content-utils] Injecting CSS: ${css}`);
   let link = document.createElement("link");
   link.rel = "stylesheet";
@@ -7,9 +7,9 @@ export function injectCSS(css) {
   document.head.appendChild(link);
 }
 
-export function injectCatppuccin(flavour, accent) {
+export function injectCatppuccin(flavour: string, accent: string) {
   logger.info(`[content-utils] Injecting Catppuccin: ${flavour} ${accent}`);
-  fetch(browser.runtime.getURL("catppuccin.json"))
+  fetch(browser.runtime.getURL("/catppuccin.json"))
     .then((response) => response.json())
     .then((palette) => {
       let style = document.createElement("style");
@@ -28,10 +28,10 @@ export function injectCatppuccin(flavour, accent) {
     });
 }
 
-export function injectPlugin(pluginName, injectionScript) {
+export function injectPlugin(pluginName: string, injectionScript: string) {
   // inject plugins
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", browser.runtime.getURL("plugins.json"), true);
+  xhr.open("GET", browser.runtime.getURL("/plugins.json"), true);
   xhr.onreadystatechange = async function () {
     if (xhr.readyState == 4) {
       let resp = JSON.parse(xhr.responseText);
@@ -53,4 +53,44 @@ export function injectPlugin(pluginName, injectionScript) {
     }
   };
   xhr.send();
+}
+
+export function injectSnippets() {
+  fetch(browser.runtime.getURL("/snippets.json"))
+    .then((response) => response.json())
+    .then(async (data) => {
+      console.log("ewqewqeqw!!!!");
+      console.log(data);
+      const snippetsSettings = await snippetSettings.getValue();
+      const snippets = Object.entries(data);
+      console.log(snippets);
+      // Inject inbuilt snippets
+      snippets.forEach((snippet) => {
+        let snippetID = snippet[0];
+        if (typeof snippet[1] === 'object' && snippet[1] !== null && 'path' in snippet[1]) {
+          let snippetPath = snippet[1].path;
+          let snippetToggled = snippetsSettings.enabled.includes(snippetID);
+          if (snippetToggled) {
+            injectCSS(`assets/${snippetPath}`);
+          }
+        }
+      });
+
+      // Inject user snippets
+      let userSnippets = (await (snippetSettings.getValue())).user;
+      for (let snippetID in userSnippets) {
+        let userSnippet = userSnippets[snippetID];
+        console.log("userSnippet", userSnippet);
+        if (userSnippet.toggle) {
+          fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetID}/raw`)
+            .then((response) => response.text())
+            .then((css) => {
+              let style = document.createElement("style");
+              style.textContent = css;
+              style.classList.add("schooltape");
+              document.head.appendChild(style);
+            });
+        }
+      }
+    });
 }
