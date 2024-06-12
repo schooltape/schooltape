@@ -1,4 +1,5 @@
 export function injectCSS(css) {
+  logger.info(`[content-utils] Injecting CSS: ${css}`);
   let link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = browser.runtime.getURL(css);
@@ -7,7 +8,7 @@ export function injectCSS(css) {
 }
 
 export function injectCatppuccin(flavour, accent) {
-  console.log("injecting catppuccin theme");
+  logger.info(`[content-utils] Injecting Catppuccin: ${flavour} ${accent}`);
   fetch(browser.runtime.getURL("catppuccin.json"))
     .then((response) => response.json())
     .then((palette) => {

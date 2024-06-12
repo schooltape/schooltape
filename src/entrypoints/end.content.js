@@ -1,27 +1,29 @@
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_end",
-  main() {
-    browser.storage.local.get().then(function (storage) {
-      if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
+  async main() {
+    let settings = await globalSettings.getValue();
+    console.log(settings);
+    if (settings.global) {
+      if (settings.urls.includes(window.location.origin)) {
         console.log("Schooltape is enabled on this site");
-      }
-
-      let footer = document.querySelector("#footer > ul");
-      if (footer.innerHTML.includes("Schoolbox")) {
-        let footerListItem = document.createElement("li");
-        footerListItem.appendChild(document.createElement("a")).href = "https://github.com/schooltape/schooltape";
-        footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
-        footer.appendChild(footerListItem);
-        if (!storage.settings.urls.includes(window.location.origin)) {
-          let newSettings = storage.settings;
-          newSettings.urls.push(window.location.origin);
-          browser.storage.local.set({ settings: newSettings });
-          // TODO: hot reload
-          window.location.reload();
+      } else {
+        // detect Schoolbox
+        let footer = document.querySelector("#footer > ul");
+        if (footer.innerHTML.includes("Schoolbox")) {
+          let footerListItem = document.createElement("li");
+          footerListItem.appendChild(document.createElement("a")).href = "https://github.com/schooltape/schooltape";
+          footerListItem.firstChild.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
+          footer.appendChild(footerListItem);
+          if (!settings.urls.includes(window.location.origin)) {
+            settings.urls.push(window.location.origin);
+            await globalSettings.setValue(settings);
+            // TODO: hot reload
+            window.location.reload();
+          }
         }
       }
-    });
+    }
   },
 });
 
