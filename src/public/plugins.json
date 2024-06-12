@@ -1,0 +1,82 @@
+{
+  "modern-icons": {
+    "name": "Modern Icons",
+    "description": "Modernise the icons across Schoolbox.",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/modern-icons/modern-icons.js"
+      }
+    ]
+  },
+  "subheader": {
+    "name": "Subheader Revamp",
+    "description": "Adds significant functionality and customisability to the subheader.",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/subheader/subheader.js"
+      }
+    ]
+  },
+  "legacy-timetable": {
+    "name": "Legacy Timetable",
+    "description": "Reverts the timetable to the old version.",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/legacy-timetable/legacy-timetable.js"
+      }
+    ]
+  },
+  "scroll-segments": {
+    "name": "Scroll Segments",
+    "description": "Segments Schoolbox's scrolling into sections.",
+    "scripts": [
+      {
+        "execute": "doc-start",
+        "path": "/plugins/scroll-segments/scroll-segments.js"
+      }
+    ]
+  },
+  "tab-title": {
+    "name": "Tab Title",
+    "description": "Adds the current page to the tab title.",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/tab-title/tab-title.js"
+      }
+    ]
+  },
+  "homepage-switcher": {
+    "name": "Homepage Switcher",
+    "description": "When the Schoolbox logo is clicked, the user it taken to an existing homepage tab (when available).",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/homepage-switcher/homepage-switcher.js"
+      }
+    ]
+  },
+  "scroll-period": {
+    "name": "Scroll Period",
+    "description": "Scrolls to the current period on the timetable.",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/scroll-period/scroll-period.js"
+      }
+    ]
+  },
+  "timetable-labels": {
+    "name": "Timetable Labels",
+    "description": "Labels the day of the week from numbers to the actual day",
+    "scripts": [
+      {
+        "execute": "doc-end",
+        "path": "/plugins/timetable-labels/timetable-labels.js"
+      }
+    ]
+  }
+}
