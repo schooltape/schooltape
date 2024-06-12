@@ -1,31 +1,3 @@
-// const defaultSettings = {
-//   settings: {
-//     global: true,
-//     updates: {
-//       toast: true,
-//       desktop: false,
-//     },
-//     urls: ["https://help.schoolbox.com.au"],
-//   },
-//   snippets: {
-//     toggle: true,
-//     enabled: ["hide-pfp"],
-//     user: {},
-//   },
-//   plugins: {
-//     toggle: true,
-//     enabled: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
-//     settings: {},
-//   },
-//   themes: {
-//     toggle: true,
-//     theme: "catppuccin",
-//     flavour: "macchiato",
-//     accent: "rosewater",
-//     logo: "schooltape.png",
-//   },
-// };
-
 export type ScriptV1 = {
   execute: string;
   path: string;
