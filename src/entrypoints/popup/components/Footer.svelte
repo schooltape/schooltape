@@ -1,14 +1,14 @@
 <script>
   import { onMount } from "svelte";
-  import { MessageCircleQuestion, RotateCcw, BookText } from "lucide-svelte";
+  import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
 
   let verNum;
   onMount(async () => {
     verNum = "v" + browser.runtime.getManifest().version;
   });
 
-  function handleSupportClick() {
-    window.open("https://github.com/schooltape/schooltape/", "_blank");
+  function handleDiscordClick() {
+    window.open("https://discord.gg/rZxtGJ98BE", "_blank");
   }
 
   function handleResetClick() {
@@ -40,11 +40,11 @@
       <BookText />
     </button>
     <button
-      title="Support"
-      id="support"
+      title="Discord"
+      id="discord"
       class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust"
-      on:click={handleSupportClick}>
-      <MessageCircleQuestion />
+      on:click={handleDiscordClick}>
+      <MessageCircleMore />
     </button>
     <button
       title="Reset"
