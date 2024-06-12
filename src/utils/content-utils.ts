@@ -24,7 +24,6 @@ export function injectCatppuccin(flavour: string, accent: string) {
       cssText += `:root { --ctp-accent: ${`${a.h} ${a.s * 100}% ${a.l * 100}%`}; }\n`;
       style.textContent = cssText;
       document.head.appendChild(style);
-      console.log(style);
     });
 }
 
@@ -59,15 +58,12 @@ export function injectSnippets() {
   fetch(browser.runtime.getURL("/snippets.json"))
     .then((response) => response.json())
     .then(async (data) => {
-      console.log("ewqewqeqw!!!!");
-      console.log(data);
       const snippetsSettings = await snippetSettings.getValue();
       const snippets = Object.entries(data);
-      console.log(snippets);
       // Inject inbuilt snippets
       snippets.forEach((snippet) => {
         let snippetID = snippet[0];
-        if (typeof snippet[1] === 'object' && snippet[1] !== null && 'path' in snippet[1]) {
+        if (typeof snippet[1] === "object" && snippet[1] !== null && "path" in snippet[1]) {
           let snippetPath = snippet[1].path;
           let snippetToggled = snippetsSettings.enabled.includes(snippetID);
           if (snippetToggled) {
@@ -77,10 +73,9 @@ export function injectSnippets() {
       });
 
       // Inject user snippets
-      let userSnippets = (await (snippetSettings.getValue())).user;
+      let userSnippets = (await snippetSettings.getValue()).user;
       for (let snippetID in userSnippets) {
         let userSnippet = userSnippets[snippetID];
-        console.log("userSnippet", userSnippet);
         if (userSnippet.toggle) {
           fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetID}/raw`)
             .then((response) => response.text())

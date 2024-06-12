@@ -1,4 +1,4 @@
-import "~/assets/modern-icons.css"
+import "~/assets/modern-icons.css";
 
 export default defineUnlistedScript(() => {
   // [className, iconName] (material icons)

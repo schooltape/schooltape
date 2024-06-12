@@ -1,4 +1,4 @@
-import "~/assets/scroll-segments.css"
+import "~/assets/scroll-segments.css";
 
 export default defineUnlistedScript(() => {
   try {

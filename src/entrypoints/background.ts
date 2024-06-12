@@ -61,17 +61,13 @@ export default defineBackground(() => {
     }
     if (message.inject && sender.tab?.id) {
       logger.info(`[background] Injecting ${message.inject}`);
-      console.log("tabID: " + sender.tab.id);
-      console.log("files: " + message.inject);
       // https://wxt.dev/guide/extension-apis/scripting.html
       const res = await browser.scripting.executeScript({
         target: { tabId: sender.tab.id },
         files: [message.inject],
       });
-      console.log("res",res);
     }
     if (message.toTab) {
-      console.log("Changing tab to " + message.toTab);
       const tabs = await browser.tabs.query({ url: message.toTab });
       if (tabs.length > 0) {
         browser.tabs.update(tabs[0].id, { active: true });
@@ -109,18 +105,21 @@ export default defineBackground(() => {
   browser.contextMenus.onClicked.addListener((info, tab) => {
     switch (info.menuItemId) {
       case "report-bug":
-        browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml"});
+        browser.tabs.create({
+          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml",
+        });
         break;
       case "feature-request":
-        browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml"});
+        browser.tabs.create({
+          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml",
+        });
         break;
       case "github":
-        browser.tabs.create({ url: "https://github.com/schooltape/schooltape"});
+        browser.tabs.create({ url: "https://github.com/schooltape/schooltape" });
         break;
     }
   });
 });
-
 
 async function resetSettings(): Promise<void> {
   logger.info("[background] Resetting settings");
@@ -148,7 +147,7 @@ async function checkForUpdates(): Promise<boolean> {
     }
     const data = await response.json();
     const latestVersion = data.tag_name.replace("v", "");
-    const currentVersion = browser.runtime.getManifest().version;
+    const currentVersion = browser.runtime.getManifest().version_name;
     // if there is an update available
     if (latestVersion !== currentVersion) {
       logger.info(`[background] Found new version: ${latestVersion}`);
