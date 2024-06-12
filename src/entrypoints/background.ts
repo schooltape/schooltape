@@ -94,19 +94,20 @@ export default defineBackground(() => {
     title: "GitHub",
     contexts: contexts,
   });
-});
-browser.contextMenus.onClicked.addListener((info, tab) => {
-  switch (info.menuItemId) {
-    case "report-bug":
-      browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml"});
-      break;
-    case "feature-request":
-      browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml"});
-      break;
-    case "github":
-      browser.tabs.create({ url: "https://github.com/schooltape/schooltape"});
-      break;
-  }
+
+  browser.contextMenus.onClicked.addListener((info, tab) => {
+    switch (info.menuItemId) {
+      case "report-bug":
+        browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml"});
+        break;
+      case "feature-request":
+        browser.tabs.create({ url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml"});
+        break;
+      case "github":
+        browser.tabs.create({ url: "https://github.com/schooltape/schooltape"});
+        break;
+    }
+  });
 });
 
 
