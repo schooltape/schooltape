@@ -7,6 +7,11 @@ export default defineBackground(() => {
     if (reason === "install") {
       logger.info("[background] Opening wiki page after install");
       browser.tabs.create({ url: "https://schooltape.github.io/installed" });
+      if (import.meta.env.DEV) {
+        logger.info("[background] Opening development URLs");
+        browser.tabs.create({ url: "https://help.schoolbox.com.au/account/anonymous.php?" });
+        browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
+      }
     } else if (reason === "update") {
       logger.info("[background] Notifying user about the update");
       browser.notifications.create("updated", {
@@ -15,6 +20,10 @@ export default defineBackground(() => {
         iconUrl: browser.runtime.getURL("/icon/128.png"),
         message: "Click here to look at the release notes.",
       });
+      if (import.meta.env.DEV) {
+        logger.info("[background] Opening development URLs");
+        browser.tabs.create({ url: browser.runtime.getURL("/popup.html"), active: false });
+      }
     }
   });
 
@@ -124,6 +133,10 @@ async function resetSettings(): Promise<void> {
 async function checkForUpdates(): Promise<boolean> {
   if (!navigator.onLine) {
     logger.error("[background] Failed to check for updates: offline");
+    return false;
+  }
+  if (import.meta.env.DEV) {
+    logger.warn("[background] Skipping update check in dev mode");
     return false;
   }
   try {
