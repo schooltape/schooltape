@@ -5,7 +5,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/modern-icons/modern-icons.js"
+        "path": "modern-icons.js"
       }
     ]
   },
@@ -15,7 +15,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/subheader/subheader.js"
+        "path": "subheader.js"
       }
     ]
   },
@@ -25,7 +25,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/legacy-timetable/legacy-timetable.js"
+        "path": "legacy-timetable.js"
       }
     ]
   },
@@ -35,7 +35,7 @@
     "scripts": [
       {
         "execute": "doc-start",
-        "path": "/plugins/scroll-segments/scroll-segments.js"
+        "path": "scroll-segments.js"
       }
     ]
   },
@@ -45,7 +45,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/tab-title/tab-title.js"
+        "path": "tab-title.js"
       }
     ]
   },
@@ -55,7 +55,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/homepage-switcher/homepage-switcher.js"
+        "path": "homepage-switcher.js"
       }
     ]
   },
@@ -65,7 +65,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/scroll-period/scroll-period.js"
+        "path": "scroll-period.js"
       }
     ]
   },
@@ -75,7 +75,7 @@
     "scripts": [
       {
         "execute": "doc-end",
-        "path": "/plugins/timetable-labels/timetable-labels.js"
+        "path": "timetable-labels.js"
       }
     ]
   }

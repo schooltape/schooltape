@@ -61,12 +61,14 @@ export default defineBackground(() => {
     }
     if (message.inject && sender.tab?.id) {
       logger.info(`[background] Injecting ${message.inject}`);
+      console.log("tabID: " + sender.tab.id);
+      console.log("files: " + message.inject);
       // https://wxt.dev/guide/extension-apis/scripting.html
       const res = await browser.scripting.executeScript({
         target: { tabId: sender.tab.id },
         files: [message.inject],
       });
-      console.log(res);
+      console.log("res",res);
     }
     if (message.toTab) {
       console.log("Changing tab to " + message.toTab);

@@ -3,10 +3,16 @@ export default defineContentScript({
   runAt: "document_end",
   async main() {
     let settings = await globalSettings.getValue();
-    console.log(settings);
+    let plugins = await pluginSettings.getValue();
+
     if (settings.global) {
       if (settings.urls.includes(window.location.origin)) {
-        console.log("Schooltape is enabled on this site");
+        // inject plugins
+        if (plugins.toggle) {
+          for (let i = 0; i < plugins.enabled.length; i++) {
+            injectPlugin(plugins.enabled[i], "doc-end");
+          }
+        }
       } else {
         // detect Schoolbox
         let footer = document.querySelector("#footer > ul");
@@ -26,29 +32,3 @@ export default defineContentScript({
     }
   },
 });
-
-// // // This is for:
-// // // - Plugins (that alter the DOM after is has been loaded)
-
-// // // inject enabled plugins if the current URL is stored as Schoolbox and extension is enabled
-// // browser.storage.local.get(["settings"], function (data) {
-// //   if (data.settings.global) {
-// //     if (data.settings.urls.includes(window.location.origin)) {
-// //       for (let i = 0; i < data.settings.enabledPlugins.length; i++) {
-// //         runUtilsFunction("injectPlugin", data.settings.enabledPlugins[i], "doc-end");
-// //       }
-// //     }
-// //   }
-// // });
-
-// // check if the page is Schoolbox, if not add it to storage and reload the page
-
-// // async function runUtilsFunction(functionName, ...args) {
-// //   const src = browser.runtime.getURL("scripts/scriptUtils.js");
-// //   const utils = await import(src);
-// //   if (typeof utils[functionName] === "function") {
-// //     utils[functionName](...args);
-// //   } else {
-// //     console.error(`Function ${functionName} does not exist in utils`);
-// //   }
-// // }
