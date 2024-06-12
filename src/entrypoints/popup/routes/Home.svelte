@@ -4,6 +4,7 @@
 
   let settings = globalSettings.defaultValue;
   const updateKeys = ["toast", "desktop"];
+  let checkForUpdates = browser.runtime.sendMessage({ checkForUpdates: true });
 
   onMount(async () => {
     settings = await globalSettings.getValue();
@@ -20,6 +21,10 @@
     // console.log("settings", settings);
     await globalSettings.setValue(settings);
   }
+
+  async function handleUpdateClick() {
+    window.open("https://github.com/schooltape/schooltape/releases/latest", "_blank");
+  }
 </script>
 
 <div id="card">
@@ -33,7 +38,8 @@
     on:click={globalToggle}
     >{settings.global ? "enabled" : "disabled"}
   </button>
-  <details class="mt-10">
+
+  <details class="mt-10 flex justify-center">
     <summary>Update Notifications</summary>
 
     {#each updateKeys as update (update)}
@@ -47,7 +53,26 @@
         <span class="slider small"></span>
       </label>
     {/each}
+    <label class="mt-2 flex justify-center">
+      <button
+        title="Check for updates"
+        id="updates"
+        class="small hover:bg-ctp-pink hover:text-ctp-crust"
+        on:click={handleUpdateClick}>
+        {#await checkForUpdates}
+          Loading...
+        {:then result}
+          {result ? "Update available" : "Up to date!"}
+        {:catch error}
+          {error}
+        {/await}
+      </button>
+    </label>
   </details>
+
+
+
+
 </div>
 
 <Footer />

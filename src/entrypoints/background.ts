@@ -75,6 +75,9 @@ export default defineBackground(() => {
         browser.tabs.update(sender.tab.id, { url: message.toTab });
       }
     }
+    if (message.checkForUpdates) {
+      return checkForUpdates();
+    }
     return true;
   });
 

@@ -18,10 +18,6 @@
     }
   }
 
-  function handleBugClick() {
-    window.open(browser.runtime.getURL("popup.html"), "_blank");
-  }
-
   function handleWikiClick() {
     window.open("https://schooltape.github.io", "_blank");
   }
