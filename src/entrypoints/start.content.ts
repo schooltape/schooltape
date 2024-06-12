@@ -1,5 +1,3 @@
-import "~/assets/catppuccin.css";
-
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
@@ -11,7 +9,7 @@ export default defineContentScript({
       logger.info("[start.content.ts] Schooltape is enabled on this site");
       if (themes.toggle) {
         logger.info(themes);
-        injectCSS("content-scripts/start.css");
+        injectCSS("/assets/catppuccin.css");
         injectCatppuccin(themes.flavour, themes.accent);
       }
     }
