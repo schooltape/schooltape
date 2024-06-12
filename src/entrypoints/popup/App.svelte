@@ -18,6 +18,7 @@
   let unwatch: () => void;
 
   onMount(async () => {
+    flavour = (await themeSettings.getValue()).flavour;
     unwatch = themeSettings.watch((newValue) => {
       flavour = newValue.flavour;
     });
