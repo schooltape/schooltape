@@ -12,6 +12,10 @@ export default defineConfig({
         resources: ["*"],
       },
     ],
+    host_permissions: [
+      "http://*/*",
+      "https://*/*"
+    ],
     permissions: ["storage", "contextMenus", "activeTab", "scripting", "webRequest", "notifications", "background"],
   },
   srcDir: "src",
