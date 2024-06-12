@@ -3,19 +3,19 @@ import "~/assets/catppuccin.css";
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
-  main() {
-    browser.storage.local.get().then(function (storage) {
-      // console.log(storage);
-      if (storage.settings.global && storage.settings.urls.includes(window.location.origin)) {
-        console.log("Schooltape is enabled on this site");
-        if (storage.themes.toggle) {
-          console.log(storage.themes);
-          injectCSS("content-scripts/start.css");
-          injectCatppuccin(storage.themes.flavour, storage.themes.accent);
-        }
+  cssInjectionMode: 'manual',
+  async main() {
+    let settings = await globalSettings.getValue();
+    let themes = await themeSettings.getValue();
+    if (settings.global && settings.urls.includes(window.location.origin)) {
+      logger.info("[start.content.ts] Schooltape is enabled on this site");
+      if (themes.toggle) {
+        logger.info(themes);
+        injectCSS("content-scripts/start.css");
+        injectCatppuccin(themes.flavour, themes.accent);
       }
-    });
-  },
+    }
+  }
 });
 
 // // // This is for:
