@@ -69,10 +69,6 @@
       </button>
     </label>
   </details>
-
-
-
-
 </div>
 
 <Footer />

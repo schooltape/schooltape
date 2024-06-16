@@ -68,6 +68,10 @@ body {
   @apply font-bold;
 }
 
+.highlight {
+  @apply bg-ctp-surface2;
+}
+
 button#toggle {
   @apply rounded-xl px-4 py-2 text-xl font-bold text-ctp-base;
 }

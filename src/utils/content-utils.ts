@@ -27,6 +27,17 @@ export function injectCatppuccin(flavour: string, accent: string) {
     });
 }
 
+export function injectLogo(logo: LogoDetailsV1) {
+  logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
+  if (logo.disable) {
+    return;
+  }
+  let style = document.createElement("style");
+  style.classList.add("schooltape");
+  style.textContent = `a.logo > img { content: url("${logo.url}"); max-width: 30%; }`;
+  document.head.appendChild(style);
+}
+
 export function injectPlugin(pluginName: string, injectionScript: string) {
   // inject plugins
   let xhr = new XMLHttpRequest();

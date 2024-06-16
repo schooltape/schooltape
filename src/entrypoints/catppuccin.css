@@ -1,8 +1,3 @@
-a.logo > img {
-  content: url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
-  max-width: 30%;
-}
-
 .material-icons-round,
 ::placeholder {
   color: hsl(var(--ctp-text)) !important;

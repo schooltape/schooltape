@@ -94,12 +94,18 @@ export const pluginSettings = storage.defineItem<PluginSettingsV1>("local:plugin
   },
 });
 
+export type LogoDetailsV1 = {
+  name: string;
+  url: string;
+  id: string;
+  disable?: boolean; // whether the icon should be injected or not
+};
 export type ThemeSettingsV1 = {
   toggle: boolean;
   theme: string;
   flavour: string;
   accent: string;
-  logo: string;
+  logo: LogoDetailsV1;
 };
 export const themeSettings = storage.defineItem<ThemeSettingsV1>("local:themeSettings", {
   version: 1,
@@ -108,6 +114,10 @@ export const themeSettings = storage.defineItem<ThemeSettingsV1>("local:themeSet
     theme: "catppuccin",
     flavour: "macchiato",
     accent: "rosewater",
-    logo: "schooltape.png",
+    logo: {
+      name: "ST Rainbow",
+      id: "st-rainbow",
+      url: "https://schooltape.github.io/schooltape-ctp.svg",
+    },
   },
 });

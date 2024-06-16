@@ -14,6 +14,13 @@ export default defineContentScript({
         injectCSS("/assets/catppuccin.css");
         injectCatppuccin(themes.flavour, themes.accent);
       }
+      // inject logo
+      // a.logo > img {
+      //   content: url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
+      //   max-width: 30%;
+      // }
+      injectLogo(themes.logo);
+
       // inject plugins
       if (plugins.toggle) {
         for (let i = 0; i < plugins.enabled.length; i++) {
