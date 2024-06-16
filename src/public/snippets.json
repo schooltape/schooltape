@@ -1,0 +1,12 @@
+{
+  "hide-pfp": {
+    "name": "Hide PFP",
+    "description": "Hide your profile picture across Schoolbox.",
+    "path": "hide-pfp.css"
+  },
+  "censor": {
+    "name": "Censor",
+    "description": "Censors all text and images. This is intended for development purposes.",
+    "path": "censor.css"
+  }
+}

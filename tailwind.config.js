@@ -1,10 +1,22 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  // Other settings
+  content: ["./src/**/*.{svelte,js,ts,jsx,tsx,html}"],
+  safelist: [
+    {
+      pattern: /bg-ctp-.+/,
+    },
+    "ctp-mocha",
+    "ctp-macchiato",
+    "ctp-frappe",
+    "ctp-latte",
+  ],
+  theme: {
+    extend: {},
+  },
   plugins: [
     require("@catppuccin/tailwindcss")({
-      defaultFlavour: "latte",
+      prefix: "ctp",
+      defaultFlavour: "macchiato",
     }),
   ],
-  content: ["./src/options/*/*.{html,js}"],
 };

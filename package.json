@@ -1,18 +1,39 @@
 {
   "name": "schooltape",
-  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
-  "scripts": {
-    "build": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css",
-    "dev": "tailwindcss build -i src/options/styles.css -o src/options/dist/styles.css --watch",
-    "serve:firefox": "web-ext run -s ./src/ -u \"https://github.com/schooltape/schooltape/issues\"",
-    "serve:chrome": "web-ext run -s ./src/ -t chromium -u \"https://github.com/schooltape/schooltape/issues\"",
-    "format": "prettier --write \"src/**/*.{js,css,html}\""
-  },
+  "version": "3.0.0-beta",
   "author": "42willow",
-  "license": "MIT",
+  "homepage": "https://schooltape.github.io",
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14"
-  }
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
+    "autoprefixer": "^10.4.19",
+    "lucide-svelte": "^0.383.0",
+    "pino": "^9.2.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.2",
+    "prettier-plugin-svelte": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "svelte": "^4.2.18",
+    "svelte-check": "^3.8.0",
+    "svelte-spa-router": "^4.0.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.5",
+    "wxt": "^0.18.5"
+  },
+  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
+  "homepage_url": "https://github.com/schooltape/schooltape",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "format": "prettier --write .",
+    "postinstall": "wxt prepare"
+  },
+  "type": "module"
 }

@@ -1,0 +1,524 @@
+a.logo > img {
+  content: url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
+  max-width: 30%;
+}
+
+.material-icons-round,
+::placeholder {
+  color: hsl(var(--ctp-text)) !important;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+.tab-bar,
+.profile-tabs .subheader {
+  color: hsl(var(--ctp-text));
+}
+
+/* activity feed */
+.feed,
+.activity-feed,
+.feed-column,
+.feed-item,
+.feed .subheader {
+  background-color: hsl(var(--ctp-surface0)) !important;
+  border: none;
+}
+
+.feed > section {
+  border: none;
+}
+
+/* blockquotes */
+blockquote {
+  background-color: hsl(var(--ctp-surface1));
+  color: hsl(var(--ctp-text));
+  border-left: 6px solid hsl(var(--ctp-accent)) !important;
+}
+
+/* checkboxes */
+.checklist input[type="radio"]:not(.plain) + label:after,
+.checklist input[type="checkbox"]:not(.plain) + label:after,
+.radiolist input[type="radio"]:not(.plain) + label:after,
+.radiolist input[type="checkbox"]:not(.plain) + label:after,
+input[type="checkbox"]:not(.plain) + label.checkbox-label:after,
+body.login input[type="checkbox"]:not(.plain) + label:after {
+  background-color: hsl(var(--ctp-surface2));
+}
+
+.checklist input[type="radio"]:not(.plain):not(:disabled) + label:hover:after,
+.checklist input[type="checkbox"]:not(.plain):not(:disabled) + label:hover:after,
+.radiolist input[type="radio"]:not(.plain):not(:disabled) + label:hover:after,
+.radiolist input[type="checkbox"]:not(.plain):not(:disabled) + label:hover:after {
+  color: hsl(var(--ctp-text));
+}
+
+/* sidebar */
+#nav {
+  background: hsl(var(--ctp-mantle)) !important;
+}
+
+/* drop down menus */
+.filter-dropdown .filter-component {
+  background-color: hsl(var(--ctp-surface0));
+  border: none;
+}
+.checklist.item.filter-component .f-dropdown.content {
+  background-color: hsl(var(--ctp-surface0));
+}
+
+/* goals */
+.badge-grid .badge,
+.badge-grid .badge .card-feature-image {
+  background-color: hsl(var(--ctp-surface0));
+  border-color: hsl(var(--ctp-overlay1));
+  border-bottom: 1px solid hsl(var(--ctp-overlay1));
+}
+
+/* date picker (flatpickr) */
+.adtp .flatpickr-calendar,
+.adtp .flatpickr-innerContainer {
+  border: none;
+}
+
+.flatpickr-calendar,
+.flatpickr-day,
+span.flatpickr-weekday {
+  background: hsl(var(--ctp-base));
+  color: hsl(var(--ctp-text));
+}
+.adtp .flatpickr-day.selected,
+.adtp .flatpickr-day.selected:focus,
+.adtp .flatpickr-day.selected:hover,
+.adtp .flatpickr-day.selected.prevMonthDay,
+.adtp .flatpickr-day.selected.nextMonthDay {
+  color: hsl(var(--ctp-base));
+}
+.adtp .flatpickr-day.inRange,
+.adtp .flatpickr-day.prevMonthDay.inRange,
+.adtp .flatpickr-day.nextMonthDay.inRange,
+.adtp .flatpickr-day.today.inRange,
+.adtp .flatpickr-day.prevMonthDay.today.inRange,
+.adtp .flatpickr-day.nextMonthDay.today.inRange,
+.adtp .flatpickr-day:hover,
+.adtp .flatpickr-day:hover,
+.adtp .flatpickr-day.nextMonthDay:hover,
+.adtp .flatpickr-day:focus,
+.adtp .flatpickr-day.prevMonthDay:focus,
+.adtp .flatpickr-day.nextMonthDay:focus {
+  background: hsl(var(--ctp-surface0));
+}
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  fill: hsl(var(--ctp-accent));
+  color: hsl(var(--ctp-accent));
+}
+.flatpickr-months .flatpickr-month {
+  color: hsl(var(--ctp-accent));
+}
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover,
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.notAllowed,
+.flatpickr-day.notAllowed.prevMonthDay,
+.flatpickr-day.notAllowed.nextMonthDay {
+  color: hsl(var(--ctp-overlay1));
+}
+
+/* settings/messages */
+.alert-box,
+.eotc-status,
+.alert-box-icon {
+  background-color: hsl(var(--ctp-surface0));
+}
+
+/* groups page buttons */
+.group-actions[data-v-2e9f597c] {
+  background: hsl(var(--ctp-surface0)) !important;
+}
+
+/* modals */
+/* calendar -> event popups */
+/* confirmation dialogues */
+.reveal-modal {
+  background-color: hsl(var(--ctp-base));
+}
+.reveal-modal .close-reveal-modal {
+  color: hsl(var(--ctp-accent));
+}
+.component-action section {
+  background-color: hsl(var(--ctp-surface0));
+}
+
+/* calendar */
+table {
+  background: hsl(var(--ctp-surface0));
+}
+table thead {
+  background: hsl(var(--ctp-surface1));
+}
+.fc .fc-col-header-cell a {
+  color: hsl(var(--ctp-text)) !important;
+}
+table * {
+  border: none !important;
+}
+.fc-toolbar {
+  border-bottom: none !important;
+}
+.fc .fc-col-header-cell.fc-day-today > div,
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* account menu */
+#account-content {
+  overflow: hidden;
+}
+.account-menu-mobile .separator,
+.account-drop .separator {
+  color: hsl(var(--ctp-accent));
+}
+
+/* side nav / news -> right hand side */
+.side-nav {
+  background-color: hsl(var(--ctp-surface0));
+}
+.side-nav
+  li
+  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
+    .show-ckeditor-button
+  ):hover,
+.side-nav
+  li
+  a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
+    .show-ckeditor-button
+  ):focus {
+  color: hsla(var(--ctp-accent), 0.7);
+}
+
+/* notifications */
+.right-off-canvas-menu ul.off-canvas-list label,
+.right-small a[data-unread]:not([data-unread="0"]),
+#msgs[data-unread]:not([data-unread="0"]) #right-menu-dock {
+  background-color: hsl(var(--ctp-red));
+  color: hsl(var(--ctp-base));
+}
+
+/* drop down menus */
+#component-layout {
+  --left-head-bg: hsl(var(--ctp-accent)) !important;
+  --right-head-bg: hsl(var(--ctp-accent)) !important;
+  --top-head-bg: hsl(var(--ctp-accent)) !important;
+  --top-head-font: hsl(var(--ctp-base)) !important;
+  --left-head-font: hsl(var(--ctp-base)) !important;
+  --right-head-font: hsl(var(--ctp-base)) !important;
+  --top-bg-primary: hsl(var(--ctp-base)) !important;
+  --left-bg-primary: hsl(var(--ctp-surface1)) !important;
+  --right-bg-primary: hsl(var(--ctp-surface0)) !important;
+  --left-font-primary: hsl(var(--ctp-text)) !important;
+}
+
+/* three dot menu */
+#tab-control .separator {
+  background-color: hsl(var(--ctp-surface1));
+}
+
+/* form borders */
+input:focus,
+textarea:focus,
+select:focus,
+input:not([type]):focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+input[type="color"]:focus,
+textarea:focus,
+.ck.ck-content.ck-editor__editable.ck-focused,
+.ck.ck-editor__main .ck-source-editing-area textarea:focus {
+  border-color: hsl(var(--ctp-accent)) !important;
+}
+
+/* submit buttons */
+[type="submit"]:hover,
+.flex-list.buttons a.submit:hover,
+.flex-list.buttons button.submit:hover,
+a.submit:hover,
+button.submit:hover,
+[type="submit"]:focus,
+.flex-list.buttons a.submit:focus,
+.flex-list.buttons button.submit:focus,
+a.submit:focus,
+button.submit:focus {
+  background-color: hsla(var(--ctp-accent), 0.8);
+}
+
+/* form inputs */
+.selectize-input,
+.selectize-control.single .selectize-input.input-active {
+  background: hsl(var(--ctp-surface0));
+}
+
+/* dropdowns */
+.selectize-dropdown {
+  background: hsl(var(--ctp-surface1));
+  color: hsl(var(--ctp-text));
+}
+select {
+  background-color: hsl(var(--ctp-base));
+  color: hsl(var(--ctp-text));
+}
+
+/* attach buttons */
+.dzone {
+  background: none !important;
+}
+
+/* labels */
+label {
+  color: hsl(var(--ctp-text));
+}
+
+/* boxes */
+.editPanel.socialstream-new-post,
+.content,
+.information-lis,
+.empty-state,
+.empty-state-flex-centered,
+.card,
+.show-ckeditor-button,
+.v-card,
+.profile-tabs .classes-groups .v-card {
+  background-color: hsl(var(--ctp-surface0));
+  border: none;
+}
+
+/* iframes */
+/* since iframes can't be styled, due to cross-origin restrictions - we must force a light background */
+section.content:has(iframe) {
+  background: #eff1f5 !important; /* latte base */
+}
+
+/* calendar */
+.fc-list-table {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+table tr th,
+table tr td {
+  color: hsl(var(--ctp-text)) !important;
+}
+.fc .fc-cell-shaded {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+.fc-theme-standard tbody {
+  border: none !important;
+}
+
+/* news articles */
+.island span[style]:not(a > span[style]):not(.tile > span[style]):not(.event-container > span[style]) {
+  color: hsl(var(--ctp-text)) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.island a > span[style] {
+  color: hsl(var(--ctp-accent)) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.island section {
+  background-color: hsl(var(--ctp-base));
+}
+
+/* home -> news */
+.tabs {
+  background: hsl(var(--ctp-surface1));
+  border-bottom: none;
+}
+.tabs dd > a,
+.tabs .tab-title > a {
+  color: hsl(var(--ctp-text));
+}
+
+.information-list,
+.action-list > .actions-small-1 {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+
+/* quiz/test results table */
+.lrn-report-area,
+.lrn-report-measure {
+  background-color: var(--content-ui-background) !important;
+}
+
+/* news sections */
+.detail.content {
+  background: hsl(var(--ctp-base)) !important;
+}
+
+/* timetable */
+.timetable th,
+.timetable-small th,
+.timetable td,
+.timetable-small td {
+  background-color: hsl(var(--ctp-surface0));
+}
+.timetable a,
+.timetable-small a {
+  color: #0066b0;
+}
+.timetable span,
+.timetable-small span {
+  color: hsl(var(--ctp-overlay0));
+}
+
+.timetable div,
+.timetable-small div {
+  color: #24273a;
+}
+
+/* breadcrumbs */
+.breadcrumb li.active span:not([href]) {
+  color: hsl(var(--ctp-accent));
+}
+
+.breadcrumb li a:before,
+.breadcrumb li span:before {
+  border-left-color: hsl(var(--ctp-overlay0));
+}
+
+/* scrollbars */
+.scrollable::-webkit-scrollbar,
+#container::-webkit-scrollbar,
+.left-off-canvas-menu::-webkit-scrollbar,
+.right-off-canvas-menu::-webkit-scrollbar,
+.hybrid-bar .account-drop::-webkit-scrollbar {
+  background-color: hsl(var(--ctp-crust));
+  width: 8px;
+  height: 8px;
+}
+.scrollable::-webkit-scrollbar-thumb,
+#container::-webkit-scrollbar-thumb,
+.left-off-canvas-menu::-webkit-scrollbar-thumb,
+.right-off-canvas-menu::-webkit-scrollbar-thumb,
+.hybrid-bar .account-drop::-webkit-scrollbar-thumb {
+  background: hsla(var(--ctp-accent), 0.5);
+}
+.scrollable:hover::-webkit-scrollbar-thumb,
+#container:hover::-webkit-scrollbar-thumb,
+.left-off-canvas-menu:hover::-webkit-scrollbar-thumb,
+.right-off-canvas-menu:hover::-webkit-scrollbar-thumb,
+.hybrid-bar .account-drop:hover::-webkit-scrollbar-thumb {
+  background: hsl(var(--ctp-accent));
+}
+.scrollable::-webkit-scrollbar-track,
+#container::-webkit-scrollbar-track,
+.left-off-canvas-menu::-webkit-scrollbar-track,
+.right-off-canvas-menu::-webkit-scrollbar-track,
+.hybrid-bar .account-drop::-webkit-scrollbar-track {
+  background: hsl(var(--ctp-crust));
+}
+
+/* news icon */
+.icon-news::before {
+  color: hsl(var(--ctp-text));
+}
+
+/* text inputs */
+input:not([type]),
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+textarea,
+input:hover,
+textarea:hover,
+select:hover {
+  background-color: hsl(var(--ctp-base));
+  color: hsl(var(--ctp-text));
+}
+
+/* error messages */
+label.error {
+  color: hsl(var(--ctp-red));
+}
+
+.left-off-canvas-menu ul.off-canvas-list li h3,
+.left-off-canvas-menu ul.off-canvas-list li label .unit-heading,
+label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
+.left-off-canvas-menu ul.off-canvas-list li h4 {
+  color: hsl(var(--ctp-text));
+}
+
+/* CKEditor */
+:root {
+  --sb-ck-active: hsl(var(--ctp-accent));
+  --sb-ck-active-grey: hsl(var(--ctp-base));
+  --sb-ck-active-highlight: #daedff;
+  --sb-ck-button-grid-border: #bbbbbb;
+  --sb-ck-disabled: #dddddd;
+  --sb-ck-icon-colour: rgb(51, 51, 51);
+
+  /* Overrides of default CK colours */
+  --ck-color-base-background: hsl(var(--ctp-surface0)) !important;
+  --ck-color-text: hsl(var(--ctp-text)) !important;
+
+  /* skin.css.php */
+
+  /* search box */
+  --foreground-colour: hsl(var(--ctp-surface0)) !important;
+  --primary-text-colour: hsl(var(--ctp-text)) !important;
+  --navigation-foreground: hsl(var(--ctp-text));
+  --navigation-foreground-contrast: hsl(var(--ctp-crust));
+  --navigation-background: hsl(var(--ctp-mantle));
+  --navigation-background-contrast: hsl(var(--ctp-crust));
+  --navigation-hover: hsl(var(--ctp-surface0));
+  --navigation-hover-contrast: hsl(var(--ctp-crust));
+  --off-canvas-foreground: hsl(var(--ctp-text));
+
+  --off-canvas-background: hsl(var(--ctp-mantle));
+  --off-canvas-hover: hsl(var(--ctp-surface0));
+  --accounts-menu-foreground: hsl(var(--ctp-text));
+  --accounts-menu-background: hsl(var(--ctp-surface2));
+  --accounts-menu-hover: hsl(var(--ctp-overlay1));
+  --content-ui-foreground: hsl(var(--ctp-accent));
+  --content-ui-background: hsl(var(--ctp-surface0));
+  --content-ui-hover: hsl(var(--ctp-surface1));
+  --content-ui-selected: hsl(var(--ctp-surface0));
+  --content-ui-submit-foreground: hsl(var(--ctp-base));
+  --content-ui-submit-background: hsl(var(--ctp-accent));
+  /* highlighting */
+  --accent-foreground: hsl(var(--ctp-accent));
+  /* NOTE: THIS NEEDS TO BE ACCENT FOR HIGHLIGHTING */
+  --accent-background: hsl(var(--ctp-base));
+  /* NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING */
+  --logo-background: hsl(var(--ctp-mantle));
+  --body-background: hsl(var(--ctp-base));
+  --form-border-color: color: hsla(var(--ctp-accent), 0.4);
+  --form-bg-hover-color: color: hsla(var(--ctp-accent), 0.3);
+  --form-bg-hover-color-contrast: hsl(var(--ctp-text));
+  --body-foreground: hsl(var(--ctp-text));
+  --body-foreground-h1: hsl(var(--ctp-text));
+}
