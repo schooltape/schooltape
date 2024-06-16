@@ -1,31 +1,28 @@
-name: "Build"
+name: Build
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   build:
-    name: "Build"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: oven-sh/setup-bun@v1
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          bun-version: latest
+          fetch-depth: 0
+          submodules: 'recursive'
 
-      - name: "Install dependencies"
-        uses: bun install
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
 
-      - name: "Build and Zip"
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build and zip
         run: |
-          bun run zip
-          bun run zip:firefox
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: .output/*.zip
-          if-no-files-found: error
+          bun zip
+          bun zip:firefox
