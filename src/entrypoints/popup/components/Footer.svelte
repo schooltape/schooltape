@@ -4,7 +4,13 @@
 
   let verNum;
   onMount(async () => {
-    verNum = "v" + browser.runtime.getManifest().version;
+    // Set version number
+    // Uses manifest.version_name when available (on mv3)
+    let manifest = browser.runtime.getManifest();
+    let version = import.meta.env.MANIFEST_VERSION === 2 ? manifest.version : manifest.version_name;
+    let prefix = version.length <= 5 ? "Version: v" : "v";
+
+    verNum = prefix + version;
   });
 
   function handleDiscordClick() {
@@ -25,9 +31,8 @@
 
 <footer class="flex min-w-full justify-around p-4 mt-4">
   <p class="mb-0 flex items-center text-ctp-text">
-    Version:
     <a
-      class="version ml-2 text-ctp-blue hover:underline"
+      class="version ml-2 text-ctp-subtext0 hover:underline"
       target="_blank"
       href="https://github.com/schooltape/schooltape/releases/tag/{verNum}">{verNum}</a>
   </p>
