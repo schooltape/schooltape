@@ -54,7 +54,7 @@
     {
       name: "ST Legacy",
       id: "st-legacy",
-      url: "https://github.com/schooltape-community/schooltape-community.github.io/blob/238a7f2f8814467ddb08cda3f16e80f04dfd1998/assets/schooltape-high-resolution.png?raw=true",
+      url: "https://schooltape.github.io/schooltape-legacy.svg",
     },
   ];
 
