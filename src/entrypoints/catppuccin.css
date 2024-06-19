@@ -29,7 +29,10 @@ h4,
 }
 
 /* error messages */
-.error-state section h1, .error-state section h2, .error-state section .Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .fc-list-heading-main, .Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .error-state section .fc-list-heading-main {
+.error-state section h1,
+.error-state section h2,
+.error-state section .Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .fc-list-heading-main,
+.Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .error-state section .fc-list-heading-main {
   color: hsl(var(--ctp-red));
 }
 
