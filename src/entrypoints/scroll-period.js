@@ -7,8 +7,8 @@ export default defineUnlistedScript(() => {
   }
 
   function updateScrollbar() {
-    const periodIndex = getCurrentPeriod().index;
-    if (periodIndex) {
+    const currentPeriod = getCurrentPeriod();
+    if (currentPeriod && currentPeriod.index) {
       // console.log("scrolling to period", periodIndex);
       try {
         const period = document.querySelector(`.timetable thead tr th:nth-child(${periodIndex})`);
