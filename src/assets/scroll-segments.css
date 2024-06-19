@@ -16,3 +16,7 @@ body {
 #footer {
   margin-top: 16px;
 }
+
+#msgs {
+  height: 100vh;
+}
