@@ -3,7 +3,7 @@ import { Menus } from "wxt/browser";
 export default defineBackground(() => {
   checkForUpdates();
 
-  browser.runtime.onInstalled.addListener(({ reason }) => {
+  browser.runtime.onInstalled.addListener(async ({ reason }) => {
     if (reason === "install") {
       logger.info("[background] Opening wiki page after install");
       browser.tabs.create({ url: "https://schooltape.github.io/installed" });
@@ -11,6 +11,16 @@ export default defineBackground(() => {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: "https://help.schoolbox.com.au/account/anonymous.php?" });
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
+      }
+      if (import.meta.env.VITE_OSS_BUILD == true) {
+        logger.info("[background] This is an OSS build, adding to settings");
+        await globalSettings.setValue({
+          ...(await globalSettings.getValue()),
+          updates: {
+            ...(await globalSettings.getValue()).updates,
+            available: true,
+          },
+        });
       }
     } else if (reason === "update") {
       logger.info("[background] Notifying user about the update");

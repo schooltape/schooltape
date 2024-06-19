@@ -39,6 +39,7 @@
     >{settings.global ? "enabled" : "disabled"}
   </button>
 
+  {#if settings.updates.available}
   <details class="mt-10 flex justify-center">
     <summary>Update Notifications</summary>
 
@@ -69,6 +70,7 @@
       </button>
     </label>
   </details>
+  {/if}
 </div>
 
 <Footer />
