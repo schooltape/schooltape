@@ -16,7 +16,7 @@ export default defineUnlistedScript(() => {
   let style = document.createElement("style");
   style.classList = "schooltape";
   style.innerHTML = `
-    .subheader span:not(:last-child)::after {
+    .subheader span:not(:last-child):not(.period:empty)::after {
       content: " | ";
       font-weight: bold;
     }
