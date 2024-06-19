@@ -75,7 +75,7 @@
       name: "Home",
       id: "home",
       url: "https://fonts.gstatic.com/s/i/materialiconsround/home/v16/24px.svg",
-    }
+    },
   ];
 
   onMount(async () => {
@@ -105,20 +105,22 @@
 
   <div class="grid grid-cols-3 gap-4">
     {#each logos as logo (logo)}
-    <button on:click={() => logoClicked(logo)} class:highlight={themes.logo.id === logo.id} class="border border-ctp-pink p-2 flex flex-col items-center justify-between rounded-lg">
-      <span>{logo.name}</span>
+      <button
+        on:click={() => logoClicked(logo)}
+        class:highlight={themes.logo.id === logo.id}
+        class="border border-ctp-pink p-2 flex flex-col items-center justify-between rounded-lg">
+        <span>{logo.name}</span>
         {#if logo.disable !== true}
-        <img src={logo.url} alt="Logo" class="h-16 mt-2" />
+          <img src={logo.url} alt="Logo" class="h-16 mt-2" />
         {/if}
       </button>
     {/each}
   </div>
-  <br>
+  <br />
   <!-- TODO -->
   <h3 class="text-lg font-bold">Coming soon™</h3>
   <p>Adaptive SVG logos that change based on your theme!</p>
 </Modal>
-
 
 <div id="card">
   <Title title="Themes" data={themes} key="themes" />
