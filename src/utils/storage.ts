@@ -51,7 +51,7 @@ export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:global
   defaultValue: {
     global: true,
     updates: {
-      available: false,
+      available: true,
       toast: true,
       desktop: false,
     },
