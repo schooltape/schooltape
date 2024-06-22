@@ -1,4 +1,4 @@
-import "~/assets/scroll-segments.css";
+import "./scroll-segments.css";
 
 export default defineWxtPlugin(() => {
   try {
