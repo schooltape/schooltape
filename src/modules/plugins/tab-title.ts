@@ -1,5 +1,4 @@
 export default defineWxtPlugin(() => {
-  let original = document.title;
   defineStPlugin(
     "tab-title",
     () => {
@@ -42,12 +41,6 @@ export default defineWxtPlugin(() => {
       } else if (path.includes("/homepage/")) {
         document.title = document.getElementsByTagName("h1")[0].innerText;
       }
-    },
-    () => {
-      document.title = original;
-      // uninjectLogic function goes here
-      // This function should undo whatever the injectLogic function does
-      logger.info("uninjectign!!!!")
     }
   );
 });

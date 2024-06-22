@@ -14,11 +14,6 @@ export default async function defineWxtPlugin() {
           }
         }
       }
-    },
-    () => {
-      // uninjectLogic function goes here
-      // This function should undo whatever the injectLogic function does
-      logger.info("uninjectign!!!!")
     }
   );
 }

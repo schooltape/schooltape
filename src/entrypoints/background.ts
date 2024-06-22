@@ -1,4 +1,3 @@
-import { plugin } from "postcss";
 import { Menus } from "wxt/browser";
 
 export default defineBackground(() => {

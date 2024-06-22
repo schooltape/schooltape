@@ -11,11 +11,6 @@ export default async function defineWxtPlugin() {
           browser.runtime.sendMessage({ toTab: tab });
         });
       });
-    },
-    () => {
-      // uninjectLogic function goes here
-      // This function should undo whatever the injectLogic function does
-      logger.info("uninjectign!!!!")
     }
   );
 }
