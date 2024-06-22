@@ -1,3 +1,4 @@
+import { plugin } from "postcss";
 import { Menus } from "wxt/browser";
 
 export default defineBackground(() => {
@@ -51,7 +52,8 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
-  globalSettings.watch((newSettings, oldSettings) => {
+  globalSettings.watch(async (newSettings, oldSettings) => {
+    // update icon and check for updates
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
@@ -61,6 +63,29 @@ export default defineBackground(() => {
         checkForUpdates();
       }
     }
+    const port = browser.runtime.connect({ name: 'global' });
+    port.postMessage({global: newSettings.global});
+
+    // browser.runtime.onConnect.addListener((port) => {
+    //   if (port.name !== 'plugin') return;
+    //   port.onMessage.addListener((message) => {
+    //     console.log('Background received:', message);
+    //     let info = {
+    //       global: newSettings.global &&
+    //     }
+    //     console.log('Background sending:', 'pong');
+    //     port.postMessage('pong');
+    //   });
+    // });
+  });
+
+  // watch for plugin changes
+  pluginSettings.watch(async (newSettings, oldSettings) => {
+    const port = browser.runtime.connect({ name: 'plugins' });
+    port.postMessage({
+      global: newSettings.toggle,
+      plugins: newSettings.enabled,
+    });
   });
 
   // listen for messages
@@ -114,7 +139,6 @@ export default defineBackground(() => {
     title: "GitHub",
     contexts: contexts,
   });
-
   browser.contextMenus.onClicked.addListener((info, tab) => {
     switch (info.menuItemId) {
       case "report-bug":

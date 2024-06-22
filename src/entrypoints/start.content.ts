@@ -23,15 +23,15 @@ export default defineContentScript({
       injectLogo(themes.logo);
 
       // inject plugins
-      if (plugins.toggle) {
-        for (let i = 0; i < plugins.enabled.length; i++) {
-          injectPlugin(plugins.enabled[i], "doc-start");
-        }
-      }
+      // if (plugins.toggle) {
+      //   for (let i = 0; i < plugins.enabled.length; i++) {
+      //     injectPlugin(plugins.enabled[i], "doc-start");
+      //   }
+      // }
       // inject snippets
-      if (snippets.toggle) {
-        injectSnippets();
-      }
+      // if (snippets.toggle) {
+      //   injectSnippets();
+      // }
     }
   },
 });

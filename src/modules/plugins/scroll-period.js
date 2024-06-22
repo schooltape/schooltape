@@ -1,4 +1,4 @@
-export default defineUnlistedScript(() => {
+export default defineWxtPlugin(() => {
   const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
   if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {

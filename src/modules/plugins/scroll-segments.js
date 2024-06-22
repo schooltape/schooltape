@@ -1,6 +1,6 @@
 import "~/assets/scroll-segments.css";
 
-export default defineUnlistedScript(() => {
+export default defineWxtPlugin(() => {
   try {
     const content = document.getElementById("content");
     const footer = document.getElementById("footer");

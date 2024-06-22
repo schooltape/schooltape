@@ -9,11 +9,11 @@ export default defineContentScript({
     if (settings.global) {
       if (settings.urls.includes(window.location.origin)) {
         // inject plugins
-        if (plugins.toggle) {
-          for (let i = 0; i < plugins.enabled.length; i++) {
-            injectPlugin(plugins.enabled[i], "doc-end");
-          }
-        }
+        // if (plugins.toggle) {
+        //   for (let i = 0; i < plugins.enabled.length; i++) {
+        //     injectPlugin(plugins.enabled[i], "doc-end");
+        //   }
+        // }
       } else {
         // detect Schoolbox
         let footer = document.querySelector("#footer > ul");

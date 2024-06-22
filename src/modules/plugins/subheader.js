@@ -1,4 +1,4 @@
-export default defineUnlistedScript(() => {
+export default defineWxtPlugin(() => {
   // // DEBUG: set time to 8:55am
   // const _Date = Date;
   // Date = function (...args) {
