@@ -2,7 +2,7 @@ export async function defineStPlugin(pluginName: string, injectLogic: () => void
   let settings = await globalSettings.getValue();
   let plugins = await pluginSettings.getValue();
 
-  if (settings.urls.includes(window.location.origin)) {
+  if (typeof window !== 'undefined' && settings.urls.includes(window.location.origin)) {
     if (
       settings.global &&
       plugins.toggle &&
