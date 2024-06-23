@@ -62,29 +62,6 @@ export default defineBackground(() => {
         checkForUpdates();
       }
     }
-    const port = browser.runtime.connect({ name: 'global' });
-    port.postMessage({global: newSettings.global});
-
-    // browser.runtime.onConnect.addListener((port) => {
-    //   if (port.name !== 'plugin') return;
-    //   port.onMessage.addListener((message) => {
-    //     console.log('Background received:', message);
-    //     let info = {
-    //       global: newSettings.global &&
-    //     }
-    //     console.log('Background sending:', 'pong');
-    //     port.postMessage('pong');
-    //   });
-    // });
-  });
-
-  // watch for plugin changes
-  pluginSettings.watch(async (newSettings, oldSettings) => {
-    const port = browser.runtime.connect({ name: 'plugins' });
-    port.postMessage({
-      global: newSettings.toggle,
-      plugins: newSettings.enabled,
-    });
   });
 
   // listen for messages
