@@ -13,7 +13,7 @@ export default defineConfig({
       },
     ],
     host_permissions: ["http://*/*", "https://*/*"],
-    permissions: ["storage", "contextMenus", "activeTab", "scripting", "webRequest", "notifications", "background"],
+    permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
   },
   srcDir: "src",
   vite: () => ({
