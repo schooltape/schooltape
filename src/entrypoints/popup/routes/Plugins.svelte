@@ -3,7 +3,6 @@
   import Title from "../components/Title.svelte";
 
   let plugins = pluginSettings.defaultValue;
-
   let populatedPlugins: PopulatedPluginV1[] = [];
 
   onMount(async () => {

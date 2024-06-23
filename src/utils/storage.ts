@@ -43,6 +43,7 @@ export type GlobalSettingsV1 = {
     desktop: boolean;
   };
   urls: string[];
+  needsRefresh: boolean;
 };
 export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:globalSettings", {
   version: 1,
@@ -53,6 +54,7 @@ export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:global
       desktop: false,
     },
     urls: ["https://help.schoolbox.com.au"],
+    needsRefresh: false,
   },
 });
 

@@ -8,6 +8,9 @@ export default defineContentScript({
     let plugins = await pluginSettings.getValue();
     let snippets = await snippetSettings.getValue();
 
+    settings.needsRefresh = false; // the page has been refreshed
+    globalSettings.setValue(settings);
+
     if (settings.global && settings.urls.includes(window.location.origin)) {
       // inject themes
       if (themes.toggle) {
