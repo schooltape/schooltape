@@ -40,9 +40,7 @@ export type GlobalSettingsV1 = {
   global: boolean;
   updates: {
     available: boolean;
-    toast: boolean;
     desktop: boolean;
-    [key: string]: boolean;
   };
   urls: string[];
 };
@@ -52,7 +50,6 @@ export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:global
     global: true,
     updates: {
       available: true,
-      toast: true,
       desktop: false,
     },
     urls: ["https://help.schoolbox.com.au"],

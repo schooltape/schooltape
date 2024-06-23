@@ -3,7 +3,6 @@
   import { onMount } from "svelte";
 
   let settings = globalSettings.defaultValue;
-  const updateKeys = ["toast", "desktop"];
   let checkForUpdates = browser.runtime.sendMessage({ checkForUpdates: true });
 
   onMount(async () => {
@@ -43,17 +42,15 @@
     <details class="mt-10 flex justify-center">
       <summary>Update Notifications</summary>
 
-      {#each updateKeys as update (update)}
-        <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
-          <h4>{update}</h4>
-          <input
-            bind:checked={settings.updates[update]}
-            on:change={() => toggleUpdate()}
-            type="checkbox"
-            class="peer slider-input" />
-          <span class="slider small"></span>
-        </label>
-      {/each}
+      <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
+        <h4>Desktop</h4>
+        <input
+          bind:checked={settings.updates.desktop}
+          on:change={() => toggleUpdate()}
+          type="checkbox"
+          class="peer slider-input" />
+        <span class="slider small"></span>
+      </label>
       <label class="mt-2 flex justify-center">
         <button
           title="Check for updates"
