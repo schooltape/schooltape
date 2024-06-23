@@ -16,6 +16,7 @@ export default defineConfig({
     permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
   },
   srcDir: "src",
+  // TODO
   vite: () => ({
     plugins: [
       svelte({

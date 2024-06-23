@@ -1,4 +1,4 @@
-import "./modern-icons.css";
+import styleText from "./modern-icons.css?inline";
 
 export default async function defineWxtPlugin() {
   defineStPlugin(
@@ -51,7 +51,7 @@ export default async function defineWxtPlugin() {
         });
       }
 
-      // injectCSS("assets/modern-icons.css");
+      injectStyles(styleText);
 
       icons.forEach(([className, iconName]) => insertIcon(className, iconName));
       setTimeout(() => {
