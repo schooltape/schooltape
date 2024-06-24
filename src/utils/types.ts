@@ -1,20 +1,28 @@
-export type Script = {
-  execute: string;
-  path: string;
-};
-
-export type PluginData = {
+export type LogoDetails = {
   name: string;
-  description: string;
-  scripts: Script[]; // This denotes an array of any length
-};
-
-export type PopulatedPlugin = {
+  url: string;
   id: string;
-  name: string;
-  description: string;
-  toggle: boolean;
+  disable?: boolean; // whether the icon should be injected or not
 };
+
+// export type Script = {
+//   execute: string;
+//   path: string;
+// };
+
+// export type PluginData = {
+//   name: string;
+//   description: string;
+//   scripts: Script[]; // This denotes an array of any length
+// };
+
+// export type PopulatedPlugin = {
+//   id: string;
+//   name: string;
+//   description: string;
+//   toggle: boolean;
+// };
+
 
 export type SnippetData = {
   name: string;
@@ -61,12 +69,7 @@ export type UserSnippetSchema = {
 };
 
 
-export type LogoDetails = {
-  name: string;
-  url: string;
-  id: string;
-  disable?: boolean; // whether the icon should be injected or not
-};
+
 export type ThemeSettings = {
   toggle: boolean;
   theme: string;
@@ -74,8 +77,15 @@ export type ThemeSettings = {
   accent: string;
   logo: LogoDetails;
 };
+
+export type Plugin = {
+  toggle: boolean;
+  name: string;
+  description: string;
+  settings?: Record<string, any>;
+}
+
 export type PluginSettings = {
   toggle: boolean;
-  enabled: string[];
-  settings: Record<string, any>;
+  plugins: Record<string, Plugin>;
 };

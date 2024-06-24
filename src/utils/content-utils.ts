@@ -38,32 +38,32 @@ export function injectLogo(logo: LogoDetails) {
   document.head.appendChild(style);
 }
 
-export function injectPlugin(pluginName: string, injectionScript: string) {
-  // inject plugins
-  let xhr = new XMLHttpRequest();
-  xhr.open("GET", browser.runtime.getURL("/plugins.json"), true);
-  xhr.onreadystatechange = async function () {
-    if (xhr.readyState == 4) {
-      let resp = JSON.parse(xhr.responseText);
-      try {
-        let scripts = resp[pluginName].scripts;
-        for (let i = 0; i < scripts.length; i++) {
-          if (scripts[i].execute == injectionScript) {
-            // it's time to inject!
-            browser.runtime.sendMessage({ inject: scripts[i].path });
-          }
-        }
-      } catch (error) {
-        // Enabled plugin not found in plugins.json, remove it from the enabled plugins list
-        logger.warn(`[content-utils] Plugin ${pluginName} not found in plugins.json, disabling`);
-        let plugins = await pluginSettings.getValue();
-        plugins.enabled.splice(plugins.enabled.indexOf(pluginName), 1);
-        await pluginSettings.setValue(plugins);
-      }
-    }
-  };
-  xhr.send();
-}
+// export function injectPlugin(pluginName: string, injectionScript: string) {
+//   // inject plugins
+//   let xhr = new XMLHttpRequest();
+//   xhr.open("GET", browser.runtime.getURL("/plugins.json"), true);
+//   xhr.onreadystatechange = async function () {
+//     if (xhr.readyState == 4) {
+//       let resp = JSON.parse(xhr.responseText);
+//       try {
+//         let scripts = resp[pluginName].scripts;
+//         for (let i = 0; i < scripts.length; i++) {
+//           if (scripts[i].execute == injectionScript) {
+//             // it's time to inject!
+//             browser.runtime.sendMessage({ inject: scripts[i].path });
+//           }
+//         }
+//       } catch (error) {
+//         // Enabled plugin not found in plugins.json, remove it from the enabled plugins list
+//         logger.warn(`[content-utils] Plugin ${pluginName} not found in plugins.json, disabling`);
+//         let plugins = await pluginSettings.getValue();
+//         plugins.enabled.splice(plugins.enabled.indexOf(pluginName), 1);
+//         await pluginSettings.setValue(plugins);
+//       }
+//     }
+//   };
+//   xhr.send();
+// }
 
 export function injectSnippets() {
   fetch(browser.runtime.getURL("/snippets.json"))

@@ -3,7 +3,6 @@
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
   import { Layers3 } from "lucide-svelte";
-  import { LogoDetails } from "@/utils/types";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [

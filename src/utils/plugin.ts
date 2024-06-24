@@ -1,4 +1,7 @@
-export async function defineStPlugin(pluginName: string, injectLogic: () => void) {
+export async function defineStPlugin(pluginID: string, injectLogic: () => void) {
+  let plugin = (await pluginSettings.getValue()).plugins[pluginID];
+  console.log("------------------")
+  console.log(plugin, pluginID);
   let settings = await globalSettings.getValue();
   let plugins = await pluginSettings.getValue();
 
@@ -6,10 +9,10 @@ export async function defineStPlugin(pluginName: string, injectLogic: () => void
     if (
       settings.global &&
       plugins.toggle &&
-      plugins.enabled.includes(pluginName)
+      plugin.toggle
     ) {
       // inject
-      logger.info(`Injecting plugin: ${pluginName}`);
+      logger.info(`Injecting plugin: ${plugin.name}`);
       injectLogic();
     }
   }
