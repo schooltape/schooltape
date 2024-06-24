@@ -3,22 +3,16 @@
   import Title from "../components/Title.svelte";
 
   let plugins = pluginSettings.defaultValue;
-  let pluginsList = Object.keys(plugins.plugins).map((id) => ({
-    ...plugins.plugins[id],
-    id: id
-  }));
 
   onMount(async () => {
     plugins = await pluginSettings.getValue();
-    pluginsList = Object.keys(plugins.plugins).map((id) => ({
-      ...plugins.plugins[id],
-      id: id
-    }));
+    console.log("plugins", plugins);
   });
 
   async function togglePlugin(pluginId: string, toggled: boolean): Promise<void> {
     plugins.plugins[pluginId].toggle = toggled;
     await pluginSettings.setValue(plugins);
+    console.log(await pluginSettings.getValue())
   }
 </script>
 
@@ -26,19 +20,19 @@
   <Title title="Plugins" data={plugins} key="plugins" />
 
   <div class="plugins-container">
-    {#each pluginsList as plugin (plugin.id)}
+    {#each plugins.pluginOrder as id}
       <div class="my-4 group">
         <label class="slider-label group">
-          <h4 class="text-ctp-text">{plugin.name}</h4>
+          <h4 class="text-ctp-text">{plugins.plugins[id].name}</h4>
           <input
-            bind:checked={plugin.toggle}
+            bind:checked={plugins.plugins[id].toggle}
             type="checkbox"
             class="peer slider-input"
-            on:change={() => togglePlugin(plugin.id, plugin.toggle)} />
+            on:change={() => togglePlugin(id, plugins.plugins[id].toggle)} />
           <span class="slider small"></span>
         </label>
         <div class="slider-description">
-          {plugin.description}
+          {plugins.plugins[id].description}
         </div>
       </div>
     {/each}

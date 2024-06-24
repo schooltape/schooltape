@@ -1,7 +1,5 @@
 export async function defineStPlugin(pluginID: string, injectLogic: () => void) {
   let plugin = (await pluginSettings.getValue()).plugins[pluginID];
-  console.log("------------------")
-  console.log(plugin, pluginID);
   let settings = await globalSettings.getValue();
   let plugins = await pluginSettings.getValue();
 

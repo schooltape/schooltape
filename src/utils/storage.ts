@@ -19,7 +19,22 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
   version: 1,
   defaultValue: {
     toggle: true,
-    enabled: ["hide-pfp"],
+    snippetOrder: [
+      "hide-pfp",
+      "censor",
+    ],
+    snippets: {
+      "hide-pfp": {
+        toggle: true,
+        name: "Hide PFP",
+        description: "Hide your profile picture across Schoolbox.",
+      },
+      "censor": {
+        toggle: false,
+        name: "Censor",
+        description: "Censors all text and images. This is intended for development purposes.",
+      },
+    },
     user: {},
   },
 });
@@ -30,6 +45,16 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
   version: 1,
   defaultValue: {
     toggle: true,
+    pluginOrder: [
+      "subheader",
+      "scroll-segments",
+      "scroll-period",
+      "modern-icons",
+      "tab-title",
+      "homepage-switcher",
+      "timetable-labels",
+      "legacy-timetable",
+    ],
     plugins: {
       "subheader": {
         toggle: true,

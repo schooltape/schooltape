@@ -3,26 +3,12 @@
   import Title from "../components/Title.svelte";
 
   let snippets = snippetSettings.defaultValue;
+
   let snippetURL = "";
-  let populatedSnippets: PopulatedSnippet[] = [];
 
   onMount(async () => {
-    const response = await fetch("/snippets.json");
-    const data = await response.json();
     snippets = await snippetSettings.getValue();
     console.log("snippets", snippets);
-
-    // populate default snippets
-    populatedSnippets = Object.entries(data as Record<string, SnippetData>).map(([snippetId, SnippetData]) => {
-      return {
-        id: snippetId,
-        name: SnippetData.name,
-        description: SnippetData.description,
-        path: SnippetData.path,
-        toggle: snippets.enabled.includes(snippetId),
-      };
-    });
-    // console.log(populatedSnippets);
   });
 
   async function addUserSnippet() {
@@ -34,7 +20,6 @@
     // eg. https://gist.github.com/42Willow/e89e76ef3853e83a6439ffba42f7d273
     const response = await fetch(snippetURL + "/raw");
     const data = await response.text();
-    // console.log(data);
     const getMatch = (snippet: string, regex: RegExp) => {
       const match = snippet.match(regex);
       return match ? match[1] : null;
@@ -50,28 +35,21 @@
       toggle: true,
     };
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 
   async function toggleSnippet(snippetId: string, toggled: boolean, isUser: boolean = false) {
     if (isUser) {
       snippets.user[snippetId].toggle = toggled;
     } else {
-      if (toggled) {
-        snippets.enabled.push(snippetId);
-      } else {
-        snippets.enabled = snippets.enabled.filter((id) => id !== snippetId);
-      }
+      snippets.snippets[snippetId].toggle = toggled;
     }
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 
-  async function removeSnippet(snippetId: string) {
+  async function removeUserSnippet(snippetId: string) {
     delete snippets.user[snippetId];
     snippets.user = snippets.user; // force reactivity
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 </script>
 
@@ -79,19 +57,19 @@
   <Title title="Snippets" data={snippets} key="snippets" />
 
   <div class="snippets-container w-full">
-    {#each populatedSnippets as snippet (snippet.id)}
+    {#each snippets.snippetOrder as id}
       <div class="my-4 group w-full">
         <label class="slider-label group">
-          <h4 class="text-ctp-text">{snippet.name}</h4>
+          <h4 class="text-ctp-text">{snippets.snippets[id].name}</h4>
           <input
-            bind:checked={snippet.toggle}
+            bind:checked={snippets.snippets[id].toggle}
             type="checkbox"
             class="peer slider-input"
-            on:change={() => toggleSnippet(snippet.id, snippet.toggle)} />
+            on:change={() => toggleSnippet(id, snippets.snippets[id].toggle)} />
           <span class="slider small"></span>
         </label>
         <div class="slider-description">
-          {snippet.description}
+          {snippets.snippets[id].description}
         </div>
       </div>
     {/each}
@@ -136,7 +114,7 @@
         <button
           class="xsmall hover:bg-ctp-red"
           on:click={() => {
-            removeSnippet(key);
+            removeUserSnippet(key);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"><button class="xsmall">Gist</button></a>
       </div>
