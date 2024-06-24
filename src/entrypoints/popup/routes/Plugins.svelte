@@ -12,7 +12,7 @@
   async function togglePlugin(pluginId: string, toggled: boolean): Promise<void> {
     plugins.plugins[pluginId].toggle = toggled;
     await pluginSettings.setValue(plugins);
-    console.log(await pluginSettings.getValue())
+    console.log(await pluginSettings.getValue());
   }
 </script>
 

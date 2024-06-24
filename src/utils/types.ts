@@ -29,7 +29,6 @@ export type SnippetSettings = {
   user: Record<string, UserSnippet>;
 };
 
-
 // Themes
 export type LogoDetails = {
   name: string;
@@ -51,7 +50,7 @@ export type Plugin = {
   name: string;
   description: string;
   settings?: Record<string, any>;
-}
+};
 export type PluginSettings = {
   toggle: boolean;
   plugins: Record<string, Plugin>;

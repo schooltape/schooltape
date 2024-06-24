@@ -19,17 +19,14 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
   version: 1,
   defaultValue: {
     toggle: true,
-    snippetOrder: [
-      "hide-pfp",
-      "censor",
-    ],
+    snippetOrder: ["hide-pfp", "censor"],
     snippets: {
       "hide-pfp": {
         toggle: true,
         name: "Hide PFP",
         description: "Hide your profile picture across Schoolbox.",
       },
-      "censor": {
+      censor: {
         toggle: false,
         name: "Censor",
         description: "Censors all text and images. This is intended for development purposes.",
@@ -56,7 +53,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       "legacy-timetable",
     ],
     plugins: {
-      "subheader": {
+      subheader: {
         toggle: true,
         name: "Subheader Revamp",
         description: "Adds a clock and current period info to the subheader",
@@ -86,7 +83,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       "homepage-switcher": {
         toggle: true,
         name: "Homepage Switcher",
-        description: "The logo will switch to existing Schoolbox homepage when available"
+        description: "The logo will switch to existing Schoolbox homepage when available",
       },
       "timetable-labels": {
         toggle: true,

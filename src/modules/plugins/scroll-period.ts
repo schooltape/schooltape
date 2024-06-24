@@ -10,8 +10,11 @@ export default defineWxtPlugin(() => {
     function updateScrollbar() {
       const currentPeriod = getCurrentPeriod();
       if (currentPeriod && currentPeriod.index && timetable) {
-        const period = document.querySelector(`.timetable thead tr th:nth-child(${currentPeriod.index})`) as HTMLElement; // Type assertion here
-        if (period) { // Check if period is truthy to ensure it's not null
+        const period = document.querySelector(
+          `.timetable thead tr th:nth-child(${currentPeriod.index})`,
+        ) as HTMLElement; // Type assertion here
+        if (period) {
+          // Check if period is truthy to ensure it's not null
           timetable.scroll({
             left: period.offsetLeft - 55, // Adjusted for alignment
             behavior: "smooth", // or 'auto' for instant scroll

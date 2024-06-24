@@ -18,8 +18,8 @@
   let settings = globalSettings.defaultValue;
 
   async function refreshSchoolboxURLs() {
-    logger.info("[App.svelte] Refreshing all Schoolbox URLs")
-    const urls = (await globalSettings.getValue()).urls.map(url => url.replace(/^https:\/\//, '*://') + '/*');
+    logger.info("[App.svelte] Refreshing all Schoolbox URLs");
+    const urls = (await globalSettings.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
       browser.tabs.reload(tab.id);
@@ -35,7 +35,6 @@
   let settingsUnwatch: () => void;
   let snippetsUnwatch: () => void;
   let pluginsUnwatch: () => void;
-
 
   function showBanner() {
     settings.needsRefresh = true;

@@ -16,5 +16,5 @@ export default defineConfig({
     permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
   },
   srcDir: "src",
-  modules: ['@wxt-dev/module-svelte'],
+  modules: ["@wxt-dev/module-svelte"],
 });
