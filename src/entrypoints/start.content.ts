@@ -5,10 +5,9 @@ export default defineContentScript({
   async main() {
     let settings = await globalSettings.getValue();
     let themes = await themeSettings.getValue();
-    let plugins = await pluginSettings.getValue();
-    let snippets = await snippetSettings.getValue();
+    // let plugins = await pluginSettings.getValue();
+    // let snippets = await snippetSettings.getValue();
 
-    settings.needsRefresh = false; // the page has been refreshed
     globalSettings.setValue(settings);
 
     if (settings.global && settings.urls.includes(window.location.origin)) {
