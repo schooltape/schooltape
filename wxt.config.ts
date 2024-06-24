@@ -16,14 +16,5 @@ export default defineConfig({
     permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
   },
   srcDir: "src",
-  // TODO
-  vite: () => ({
-    plugins: [
-      svelte({
-        // Using a svelte.config.js file causes a segmentation fault when importing the file
-        configFile: false,
-        preprocess: [vitePreprocess()],
-      }),
-    ],
-  }),
+  modules: ['@wxt-dev/module-svelte'],
 });
