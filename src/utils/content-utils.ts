@@ -27,7 +27,7 @@ export function injectCatppuccin(flavour: string, accent: string) {
     });
 }
 
-export function injectLogo(logo: LogoDetailsV1) {
+export function injectLogo(logo: LogoDetails) {
   logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
   if (logo.disable) {
     return;

@@ -4,7 +4,7 @@
 
   let snippets = snippetSettings.defaultValue;
   let snippetURL = "";
-  let populatedSnippets: PopulatedSnippetV1[] = [];
+  let populatedSnippets: PopulatedSnippet[] = [];
 
   onMount(async () => {
     const response = await fetch("/snippets.json");
@@ -13,12 +13,12 @@
     console.log("snippets", snippets);
 
     // populate default snippets
-    populatedSnippets = Object.entries(data as Record<string, SnippetDataV1>).map(([snippetId, snippetData]) => {
+    populatedSnippets = Object.entries(data as Record<string, SnippetData>).map(([snippetId, SnippetData]) => {
       return {
         id: snippetId,
-        name: snippetData.name,
-        description: snippetData.description,
-        path: snippetData.path,
+        name: SnippetData.name,
+        description: SnippetData.description,
+        path: SnippetData.path,
         toggle: snippets.enabled.includes(snippetId),
       };
     });

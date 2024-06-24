@@ -3,14 +3,14 @@
   import Title from "../components/Title.svelte";
 
   let plugins = pluginSettings.defaultValue;
-  let populatedPlugins: PopulatedPluginV1[] = [];
+  let populatedPlugins: PopulatedPlugin[] = [];
 
   onMount(async () => {
     const response = await fetch("/plugins.json");
     const data = await response.json();
     plugins = await pluginSettings.getValue();
     console.log("plugins", plugins);
-    populatedPlugins = Object.entries(data as Record<string, PluginDataV1>).map(([pluginId, pluginData]) => {
+    populatedPlugins = Object.entries(data as Record<string, PluginData>).map(([pluginId, pluginData]) => {
       return {
         id: pluginId,
         name: pluginData.name,
