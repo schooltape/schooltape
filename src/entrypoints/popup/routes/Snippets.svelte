@@ -3,11 +3,15 @@
   import Title from "../components/Title.svelte";
 
   let snippets = snippetSettings.defaultValue;
+  let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
+  console.log(populatedSnippets);
 
   let snippetURL = "";
 
   onMount(async () => {
     snippets = await snippetSettings.getValue();
+    populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
+    console.log(populatedSnippets);
     console.log("snippets", snippets);
   });
 
@@ -57,19 +61,19 @@
   <Title title="Snippets" data={snippets} key="snippets" />
 
   <div class="snippets-container w-full">
-    {#each snippets.snippetOrder as id}
+    {#each populatedSnippets as snippet}
       <div class="my-4 group w-full">
         <label class="slider-label group">
-          <h4 class="text-ctp-text">{snippets.snippets[id].name}</h4>
+          <h4 class="text-ctp-text">{snippet.name}</h4>
           <input
-            bind:checked={snippets.snippets[id].toggle}
+            bind:checked={snippet.toggle}
             type="checkbox"
             class="peer slider-input"
-            on:change={() => toggleSnippet(id, snippets.snippets[id].toggle)} />
+            on:change={() => toggleSnippet(snippet.id, snippet.toggle)} />
           <span class="slider small"></span>
         </label>
         <div class="slider-description">
-          {snippets.snippets[id].description}
+          {snippet.description}
         </div>
       </div>
     {/each}

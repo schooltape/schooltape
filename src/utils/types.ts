@@ -17,15 +17,20 @@ export type UserSnippet = {
   url: string;
   toggle: boolean;
 };
-export type Snippet = {
-  name: string;
-  description: string;
+export type SnippetData = {
   toggle: boolean;
 };
+export type SnippetInfo = {
+  name: string;
+  description: string;
+  order: number;
+}
+export type PopulatedSnippet = {
+  id: string;
+} & SnippetInfo & SnippetData;
 export type SnippetSettings = {
   toggle: boolean;
-  snippets: Record<string, Snippet>;
-  snippetOrder: string[];
+  snippets: Record<string, SnippetData>;
   user: Record<string, UserSnippet>;
 };
 
@@ -36,23 +41,29 @@ export type LogoDetails = {
   id: string;
   disable?: boolean; // whether the icon should be injected or not
 };
+type Theme = "catppuccin";
 export type ThemeSettings = {
   toggle: boolean;
-  theme: string;
+  theme: Theme;
   flavour: string;
   accent: string;
   logo: LogoDetails;
 };
 
 // Plugins
-export type Plugin = {
+export type PluginData = {
   toggle: boolean;
-  name: string;
-  description: string;
   settings?: Record<string, any>;
 };
+export type PluginInfo = {
+  name: string;
+  description: string;
+  order: number;
+};
+export type PopulatedPlugin = {
+  id: string;
+} & PluginInfo & PluginData;
 export type PluginSettings = {
   toggle: boolean;
-  plugins: Record<string, Plugin>;
-  pluginOrder: string[];
+  plugins: Record<string, PluginData>;
 };

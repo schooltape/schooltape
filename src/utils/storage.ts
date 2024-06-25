@@ -19,17 +19,12 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
   version: 1,
   defaultValue: {
     toggle: true,
-    snippetOrder: ["hidePfp", "censor"],
     snippets: {
       hidePfp: {
         toggle: true,
-        name: "Hide PFP",
-        description: "Hide your profile picture across Schoolbox.",
       },
       censor: {
         toggle: false,
-        name: "Censor",
-        description: "Censors all text and images. This is intended for development purposes.",
       },
     },
     user: {},
@@ -42,58 +37,32 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
   version: 1,
   defaultValue: {
     toggle: true,
-    pluginOrder: [
-      "subheader",
-      "scrollSegments",
-      "scrollPeriod",
-      "modernIcons",
-      "tabTitle",
-      "homepageSwitcher",
-      "timetableLabels",
-      "legacyTimetable",
-    ],
     plugins: {
       subheader: {
         toggle: true,
-        name: "Subheader Revamp",
-        description: "Adds a clock and current period info to the subheader",
         settings: {},
       },
       scrollSegments: {
         toggle: true,
-        name: "Scroll Segments",
-        description: "Segments the Schoolbox page into scrollable sections",
       },
       scrollPeriod: {
         toggle: true,
-        name: "Scroll Period",
-        description: "Scrolls to the current period on the timetable",
       },
       modernIcons: {
         toggle: true,
-        name: "Modern Icons",
-        description: "Modernise the icons across Schoolbox.",
         settings: {},
       },
       tabTitle: {
         toggle: true,
-        name: "Better Tab Titles",
-        description: "Improves the tab titles for easier navigation",
       },
       homepageSwitcher: {
         toggle: true,
-        name: "Homepage Switcher",
-        description: "The logo will switch to existing Schoolbox homepage when available",
       },
       timetableLabels: {
         toggle: true,
-        name: "Timetable Labels",
-        description: "Labels the day of the week from numbers to the actual day",
       },
       legacyTimetable: {
         toggle: false,
-        name: "Legacy Timetable",
-        description: "Moves the timetable to it's own row",
       },
     },
   },

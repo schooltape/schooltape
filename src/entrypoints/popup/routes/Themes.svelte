@@ -21,41 +21,10 @@
     "blue",
     "lavender",
   ];
+  const logos = LOGOS;
+
   let themes = themeSettings.defaultValue;
   let showModal = false;
-  let logos: LogoDetails[] = [
-    {
-      name: "Default",
-      url: "default",
-      id: "default",
-      disable: true,
-    },
-    {
-      name: "Catppuccin",
-      id: "catppuccin",
-      url: "https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png",
-    },
-    {
-      name: "Schoolbox",
-      id: "schoolbox",
-      url: "https://schooltape.github.io/schoolbox.svg",
-    },
-    {
-      name: "Schooltape",
-      id: "st",
-      url: "https://schooltape.github.io/schooltape.svg",
-    },
-    {
-      name: "ST Rainbow",
-      id: "st-rainbow",
-      url: "https://schooltape.github.io/schooltape-ctp.svg",
-    },
-    {
-      name: "ST Legacy",
-      id: "st-legacy",
-      url: "https://schooltape.github.io/schooltape-legacy.svg",
-    },
-  ];
 
   // TODO
   let logosAdaptive: LogoDetails[] = [
