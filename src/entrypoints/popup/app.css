@@ -5,7 +5,6 @@
 body {
   width: 450px; /* max: 1000px */
   @apply bg-ctp-base text-base text-ctp-text;
-  font-family: "Courier New", Courier, monospace;
 }
 
 .slider {
