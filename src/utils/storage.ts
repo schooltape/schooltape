@@ -19,9 +19,9 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
   version: 1,
   defaultValue: {
     toggle: true,
-    snippetOrder: ["hide-pfp", "censor"],
+    snippetOrder: ["hidePfp", "censor"],
     snippets: {
-      "hide-pfp": {
+      hidePfp: {
         toggle: true,
         name: "Hide PFP",
         description: "Hide your profile picture across Schoolbox.",
@@ -44,13 +44,13 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
     toggle: true,
     pluginOrder: [
       "subheader",
-      "scroll-segments",
-      "scroll-period",
-      "modern-icons",
-      "tab-title",
-      "homepage-switcher",
-      "timetable-labels",
-      "legacy-timetable",
+      "scrollSegments",
+      "scrollPeriod",
+      "modernIcons",
+      "tabTitle",
+      "homepageSwitcher",
+      "timetableLabels",
+      "legacyTimetable",
     ],
     plugins: {
       subheader: {
@@ -59,38 +59,38 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
         description: "Adds a clock and current period info to the subheader",
         settings: {},
       },
-      "scroll-segments": {
+      scrollSegments: {
         toggle: true,
         name: "Scroll Segments",
         description: "Segments the Schoolbox page into scrollable sections",
       },
-      "scroll-period": {
+      scrollPeriod: {
         toggle: true,
         name: "Scroll Period",
         description: "Scrolls to the current period on the timetable",
       },
-      "modern-icons": {
+      modernIcons: {
         toggle: true,
         name: "Modern Icons",
         description: "Modernise the icons across Schoolbox.",
         settings: {},
       },
-      "tab-title": {
+      tabTitle: {
         toggle: true,
         name: "Better Tab Titles",
         description: "Improves the tab titles for easier navigation",
       },
-      "homepage-switcher": {
+      homepageSwitcher: {
         toggle: true,
         name: "Homepage Switcher",
         description: "The logo will switch to existing Schoolbox homepage when available",
       },
-      "timetable-labels": {
+      timetableLabels: {
         toggle: true,
         name: "Timetable Labels",
         description: "Labels the day of the week from numbers to the actual day",
       },
-      "legacy-timetable": {
+      legacyTimetable: {
         toggle: false,
         name: "Legacy Timetable",
         description: "Moves the timetable to it's own row",

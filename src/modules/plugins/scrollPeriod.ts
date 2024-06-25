@@ -1,5 +1,5 @@
 export default defineWxtPlugin(() => {
-  defineStPlugin("scroll-period", () => {
+  defineStPlugin("scrollPeriod", () => {
     const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
     if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {

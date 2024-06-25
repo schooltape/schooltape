@@ -1,5 +1,5 @@
 export default async function defineWxtPlugin() {
-  defineStPlugin("homepage-switcher", () => {
+  defineStPlugin("homepageSwitcher", () => {
     let logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
     logos.forEach((logo) => {
       logo.addEventListener("click", async function (e) {

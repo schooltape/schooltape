@@ -1,5 +1,5 @@
 export default defineWxtPlugin(() => {
-  defineStPlugin("timetable-labels", () => {
+  defineStPlugin("timetableLabels", () => {
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     if (window.location.pathname === "/timetable" && document.getElementsByClassName("timetable")[0]) {
