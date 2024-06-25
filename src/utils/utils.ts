@@ -70,20 +70,20 @@ export async function injectSnippets() {
 }
 
 // This is used in Plugins.svelte and Snippets.svelte to populate the items in the list
-type ItemType = 'plugin' | 'snippet';
+type ItemType = "plugin" | "snippet";
 // Define a generic function with a conditional return type
 export function populateItems<T extends ItemType>(
   data: Record<string, PluginData> | Record<string, SnippetData>,
   info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
-  type: T
-): T extends 'plugin' ? PopulatedPlugin[] : PopulatedSnippet[] {
+  type: T,
+): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
   // console.log(data, info, type);
   return Object.entries(info)
     .sort((a, b) => a[1].order - b[1].order)
     .map(([key, value]) => {
       // console.log(key, value);
       // console.log(data[key]);
-      if (type === 'plugin') {
+      if (type === "plugin") {
         const populatedItem: PopulatedPlugin = {
           id: key,
           ...value,

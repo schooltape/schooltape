@@ -24,10 +24,11 @@ export type SnippetInfo = {
   name: string;
   description: string;
   order: number;
-}
+};
 export type PopulatedSnippet = {
   id: string;
-} & SnippetInfo & SnippetData;
+} & SnippetInfo &
+  SnippetData;
 export type SnippetSettings = {
   toggle: boolean;
   snippets: Record<string, SnippetData>;
@@ -62,7 +63,8 @@ export type PluginInfo = {
 };
 export type PopulatedPlugin = {
   id: string;
-} & PluginInfo & PluginData;
+} & PluginInfo &
+  PluginData;
 export type PluginSettings = {
   toggle: boolean;
   plugins: Record<string, PluginData>;

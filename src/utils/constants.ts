@@ -41,7 +41,7 @@ export const PLUGIN_INFO: Record<string, PluginInfo> = {
     description: "Moves the timetable to it's own row",
     order: 7,
   },
-}
+};
 
 export const SNIPPET_INFO: Record<string, SnippetInfo> = {
   hidePfp: {
@@ -54,7 +54,7 @@ export const SNIPPET_INFO: Record<string, SnippetInfo> = {
     description: "Censors all text and images. This is intended for development purposes.",
     order: 1,
   },
-}
+};
 
 export const LOGOS: LogoDetails[] = [
   {
