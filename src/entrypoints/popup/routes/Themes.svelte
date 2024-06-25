@@ -4,7 +4,6 @@
   import Modal from "../components/Modal.svelte";
   import { Layers3 } from "lucide-svelte";
 
-  let isLoaded = false;
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
     "rosewater",
@@ -22,44 +21,13 @@
     "blue",
     "lavender",
   ];
+  const logos = LOGOS;
+
   let themes = themeSettings.defaultValue;
   let showModal = false;
-  let logos: LogoDetailsV1[] = [
-    {
-      name: "Default",
-      url: "default",
-      id: "default",
-      disable: true,
-    },
-    {
-      name: "Catppuccin",
-      id: "catppuccin",
-      url: "https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png",
-    },
-    {
-      name: "Schoolbox",
-      id: "schoolbox",
-      url: "https://schooltape.github.io/schoolbox.svg",
-    },
-    {
-      name: "Schooltape",
-      id: "st",
-      url: "https://schooltape.github.io/schooltape.svg",
-    },
-    {
-      name: "ST Rainbow",
-      id: "st-rainbow",
-      url: "https://schooltape.github.io/schooltape-ctp.svg",
-    },
-    {
-      name: "ST Legacy",
-      id: "st-legacy",
-      url: "https://schooltape.github.io/schooltape-legacy.svg",
-    },
-  ];
 
   // TODO
-  let logosAdaptive: LogoDetailsV1[] = [
+  let logosAdaptive: LogoDetails[] = [
     {
       name: "Default",
       url: "default",
@@ -92,7 +60,7 @@
     themes.accent = accent;
     themeSettings.setValue(themes);
   }
-  function logoClicked(logo: LogoDetailsV1) {
+  function logoClicked(logo: LogoDetails) {
     console.log(logo);
     themes.logo = logo;
     console.log(themes);

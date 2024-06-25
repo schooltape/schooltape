@@ -13,16 +13,8 @@ export default defineConfig({
       },
     ],
     host_permissions: ["http://*/*", "https://*/*"],
-    permissions: ["storage", "contextMenus", "activeTab", "scripting", "webRequest", "notifications", "background"],
+    permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
   },
   srcDir: "src",
-  vite: () => ({
-    plugins: [
-      svelte({
-        // Using a svelte.config.js file causes a segmentation fault when importing the file
-        configFile: false,
-        preprocess: [vitePreprocess()],
-      }),
-    ],
-  }),
+  modules: ["@wxt-dev/module-svelte"],
 });

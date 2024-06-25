@@ -3,7 +3,6 @@
   import { onMount } from "svelte";
 
   let settings = globalSettings.defaultValue;
-  const updateKeys = ["toast", "desktop"];
   let checkForUpdates = browser.runtime.sendMessage({ checkForUpdates: true });
 
   onMount(async () => {
@@ -40,36 +39,34 @@
   </button>
 
   {#if settings.updates.available}
-  <details class="mt-10 flex justify-center">
-    <summary>Update Notifications</summary>
+    <details class="mt-10 flex justify-center">
+      <summary>Update Notifications</summary>
 
-    {#each updateKeys as update (update)}
       <label class="group relative mt-2 flex items-center justify-between p-2 text-lg text-ctp-text">
-        <h4>{update}</h4>
+        <h4>Desktop</h4>
         <input
-          bind:checked={settings.updates[update]}
+          bind:checked={settings.updates.desktop}
           on:change={() => toggleUpdate()}
           type="checkbox"
           class="peer slider-input" />
         <span class="slider small"></span>
       </label>
-    {/each}
-    <label class="mt-2 flex justify-center">
-      <button
-        title="Check for updates"
-        id="updates"
-        class="small hover:bg-ctp-pink hover:text-ctp-crust"
-        on:click={handleUpdateClick}>
-        {#await checkForUpdates}
-          Loading...
-        {:then result}
-          {result ? "Update available" : "Up to date!"}
-        {:catch error}
-          {error}
-        {/await}
-      </button>
-    </label>
-  </details>
+      <label class="mt-2 flex justify-center">
+        <button
+          title="Check for updates"
+          id="updates"
+          class="small hover:bg-ctp-pink hover:text-ctp-crust"
+          on:click={handleUpdateClick}>
+          {#await checkForUpdates}
+            Loading...
+          {:then result}
+            {result ? "Update available" : "Up to date!"}
+          {:catch error}
+            {error}
+          {/await}
+        </button>
+      </label>
+    </details>
   {/if}
 </div>
 

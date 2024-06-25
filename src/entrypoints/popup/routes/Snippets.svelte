@@ -3,26 +3,16 @@
   import Title from "../components/Title.svelte";
 
   let snippets = snippetSettings.defaultValue;
+  let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
+  console.log(populatedSnippets);
+
   let snippetURL = "";
-  let populatedSnippets: PopulatedSnippetV1[] = [];
 
   onMount(async () => {
-    const response = await fetch("/snippets.json");
-    const data = await response.json();
     snippets = await snippetSettings.getValue();
+    populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
+    console.log(populatedSnippets);
     console.log("snippets", snippets);
-
-    // populate default snippets
-    populatedSnippets = Object.entries(data as Record<string, SnippetDataV1>).map(([snippetId, snippetData]) => {
-      return {
-        id: snippetId,
-        name: snippetData.name,
-        description: snippetData.description,
-        path: snippetData.path,
-        toggle: snippets.enabled.includes(snippetId),
-      };
-    });
-    // console.log(populatedSnippets);
   });
 
   async function addUserSnippet() {
@@ -34,7 +24,6 @@
     // eg. https://gist.github.com/42Willow/e89e76ef3853e83a6439ffba42f7d273
     const response = await fetch(snippetURL + "/raw");
     const data = await response.text();
-    // console.log(data);
     const getMatch = (snippet: string, regex: RegExp) => {
       const match = snippet.match(regex);
       return match ? match[1] : null;
@@ -50,28 +39,21 @@
       toggle: true,
     };
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 
   async function toggleSnippet(snippetId: string, toggled: boolean, isUser: boolean = false) {
     if (isUser) {
       snippets.user[snippetId].toggle = toggled;
     } else {
-      if (toggled) {
-        snippets.enabled.push(snippetId);
-      } else {
-        snippets.enabled = snippets.enabled.filter((id) => id !== snippetId);
-      }
+      snippets.snippets[snippetId].toggle = toggled;
     }
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 
-  async function removeSnippet(snippetId: string) {
+  async function removeUserSnippet(snippetId: string) {
     delete snippets.user[snippetId];
     snippets.user = snippets.user; // force reactivity
     await snippetSettings.setValue(snippets);
-    // console.log(snippets);
   }
 </script>
 
@@ -79,7 +61,7 @@
   <Title title="Snippets" data={snippets} key="snippets" />
 
   <div class="snippets-container w-full">
-    {#each populatedSnippets as snippet (snippet.id)}
+    {#each populatedSnippets as snippet}
       <div class="my-4 group w-full">
         <label class="slider-label group">
           <h4 class="text-ctp-text">{snippet.name}</h4>
@@ -136,7 +118,7 @@
         <button
           class="xsmall hover:bg-ctp-red"
           on:click={() => {
-            removeSnippet(key);
+            removeUserSnippet(key);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"><button class="xsmall">Gist</button></a>
       </div>

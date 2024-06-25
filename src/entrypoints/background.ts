@@ -51,7 +51,8 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
-  globalSettings.watch((newSettings, oldSettings) => {
+  globalSettings.watch(async (newSettings, oldSettings) => {
+    // update icon and check for updates
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
@@ -114,7 +115,6 @@ export default defineBackground(() => {
     title: "GitHub",
     contexts: contexts,
   });
-
   browser.contextMenus.onClicked.addListener((info, tab) => {
     switch (info.menuItemId) {
       case "report-bug":

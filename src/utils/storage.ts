@@ -1,113 +1,75 @@
-export type ScriptV1 = {
-  execute: string;
-  path: string;
-};
+import * as Types from "./types";
 
-export type PluginDataV1 = {
-  name: string;
-  description: string;
-  scripts: ScriptV1[]; // This denotes an array of any length
-};
-
-export type PopulatedPluginV1 = {
-  id: string;
-  name: string;
-  description: string;
-  toggle: boolean;
-};
-
-export type SnippetDataV1 = {
-  name: string;
-  description: string;
-  path: string;
-};
-
-export type PopulatedSnippetV1 = {
-  id: string;
-  name: string;
-  description: string;
-  path: string;
-  toggle: boolean;
-};
-
-export type ExtensionStorageSchema = GlobalSettingsV1 & {
-  snippets: SnippetSettingsV1;
-  plugins: PluginSettingsV1;
-  themes: ThemeSettingsV1;
-};
-
-export type GlobalSettingsV1 = {
-  global: boolean;
-  updates: {
-    available: boolean;
-    toast: boolean;
-    desktop: boolean;
-    [key: string]: boolean;
-  };
-  urls: string[];
-};
-export const globalSettings = storage.defineItem<GlobalSettingsV1>("local:globalSettings", {
+// Global settings
+export const globalSettings = storage.defineItem<Types.GlobalSettings>("local:globalSettings", {
   version: 1,
   defaultValue: {
     global: true,
     updates: {
       available: true,
-      toast: true,
       desktop: false,
     },
     urls: ["https://help.schoolbox.com.au"],
+    needsRefresh: false,
   },
 });
 
-export type SnippetSettingsV1 = {
-  toggle: boolean;
-  enabled: string[];
-  user: Record<string, UserSnippetSchema>;
-};
-export type UserSnippetSchema = {
-  author: string;
-  name: string;
-  description: string;
-  url: string;
-  toggle: boolean;
-};
-export const snippetSettings = storage.defineItem<SnippetSettingsV1>("local:snippetSettings", {
+// Snippet settings
+export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:snippetSettings", {
   version: 1,
   defaultValue: {
     toggle: true,
-    enabled: ["hide-pfp"],
+    snippets: {
+      hidePfp: {
+        toggle: true,
+      },
+      censor: {
+        toggle: false,
+      },
+    },
     user: {},
   },
 });
 
-export type PluginSettingsV1 = {
-  toggle: boolean;
-  enabled: string[];
-  settings: Record<string, any>;
-};
-export const pluginSettings = storage.defineItem<PluginSettingsV1>("local:pluginSettings", {
+// Plugin settings
+// Plugins considered very cross-compatible between Schoolbox instances are enabled by default
+export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pluginSettings", {
   version: 1,
   defaultValue: {
     toggle: true,
-    enabled: ["subheader", "scroll-segments", "tab-title", "scroll-period", "timetable-labels"],
-    settings: {},
+    plugins: {
+      subheader: {
+        toggle: true,
+        settings: {},
+      },
+      scrollSegments: {
+        toggle: true,
+      },
+      scrollPeriod: {
+        toggle: true,
+      },
+      modernIcons: {
+        toggle: true,
+        settings: {},
+      },
+      tabTitle: {
+        toggle: true,
+      },
+      homepageSwitcher: {
+        toggle: true,
+      },
+      timetableLabels: {
+        toggle: true,
+      },
+      legacyTimetable: {
+        toggle: false,
+      },
+    },
   },
 });
 
-export type LogoDetailsV1 = {
-  name: string;
-  url: string;
-  id: string;
-  disable?: boolean; // whether the icon should be injected or not
-};
-export type ThemeSettingsV1 = {
-  toggle: boolean;
-  theme: string;
-  flavour: string;
-  accent: string;
-  logo: LogoDetailsV1;
-};
-export const themeSettings = storage.defineItem<ThemeSettingsV1>("local:themeSettings", {
+// Theme settings
+export const themeSettings = storage.defineItem<Types.ThemeSettings>("local:themeSettings", {
   version: 1,
   defaultValue: {
     toggle: true,

@@ -5,14 +5,15 @@ export default defineContentScript({
   async main() {
     let settings = await globalSettings.getValue();
     let themes = await themeSettings.getValue();
-    let plugins = await pluginSettings.getValue();
     let snippets = await snippetSettings.getValue();
+
+    globalSettings.setValue(settings);
 
     if (settings.global && settings.urls.includes(window.location.origin)) {
       // inject themes
       if (themes.toggle) {
         logger.info(themes);
-        injectCSS("/assets/catppuccin.css");
+        injectStylesheet("/assets/catppuccin.css");
         injectCatppuccin(themes.flavour, themes.accent);
       }
       // inject logo
@@ -22,12 +23,6 @@ export default defineContentScript({
       // }
       injectLogo(themes.logo);
 
-      // inject plugins
-      if (plugins.toggle) {
-        for (let i = 0; i < plugins.enabled.length; i++) {
-          injectPlugin(plugins.enabled[i], "doc-start");
-        }
-      }
       // inject snippets
       if (snippets.toggle) {
         injectSnippets();

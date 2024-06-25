@@ -3,31 +3,20 @@
   import Title from "../components/Title.svelte";
 
   let plugins = pluginSettings.defaultValue;
-
-  let populatedPlugins: PopulatedPluginV1[] = [];
+  let populatedPlugins: PopulatedPlugin[] = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
+  console.log(populatedPlugins);
 
   onMount(async () => {
-    const response = await fetch("/plugins.json");
-    const data = await response.json();
     plugins = await pluginSettings.getValue();
+    populatedPlugins = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
+    console.log(populatedPlugins);
     console.log("plugins", plugins);
-    populatedPlugins = Object.entries(data as Record<string, PluginDataV1>).map(([pluginId, pluginData]) => {
-      return {
-        id: pluginId,
-        name: pluginData.name,
-        description: pluginData.description,
-        toggle: plugins.enabled.includes(pluginId),
-      };
-    });
   });
 
   async function togglePlugin(pluginId: string, toggled: boolean): Promise<void> {
-    if (toggled) {
-      plugins.enabled.push(pluginId);
-    } else {
-      plugins.enabled = plugins.enabled.filter((id: string) => id !== pluginId);
-    }
+    plugins.plugins[pluginId].toggle = toggled;
     await pluginSettings.setValue(plugins);
+    console.log(await pluginSettings.getValue());
   }
 </script>
 
@@ -35,7 +24,7 @@
   <Title title="Plugins" data={plugins} key="plugins" />
 
   <div class="plugins-container">
-    {#each populatedPlugins as plugin (plugin.id)}
+    {#each populatedPlugins as plugin}
       <div class="my-4 group">
         <label class="slider-label group">
           <h4 class="text-ctp-text">{plugin.name}</h4>
