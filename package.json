@@ -11,6 +11,7 @@
     "autoprefixer": "^10.4.19",
     "ics": "^3.7.6",
     "lucide-svelte": "^0.383.0",
+    "ninja-keys": "^1.2.2",
     "pino": "^9.2.0",
     "postcss": "^8.4.38",
     "prettier": "^3.3.2",
