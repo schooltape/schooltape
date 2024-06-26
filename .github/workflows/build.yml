@@ -26,3 +26,8 @@ jobs:
         run: |
           bun zip
           bun zip:firefox
+
+      - name: Upload artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ needs.release-please.outputs.tag_name }} dist/*.zip
