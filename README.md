@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-<a href="https://schooltape.github.io">Schooltape</a> is a free an open source extension for <a href="https://schooltape.github.io">Schoolbox</a>!
+  <a href="https://schooltape.github.io">Schooltape</a> is a free an open source extension for <a href="https://schooltape.github.io">Schoolbox</a>!
 </p>
 
 <p align="center">
@@ -105,16 +105,16 @@ bun install
 #### Chrome
 
 1. Run `bun build`.
-1. Open the Extensions page by navigating to `chrome://extensions`.
-1. Enable Developer Mode by flipping the toggle switch labelled **Developer mode**.
-1. Click the **Load unpacked** button and select the `dist/chrome-mv3` directory from the cloned repository.
+2. Open the Extensions page by navigating to `chrome://extensions`.
+3. Enable Developer Mode by flipping the toggle switch labelled **Developer mode**.
+4. Click the **Load unpacked** button and select the `dist/chrome-mv3` directory from the cloned repository.
 
 #### Firefox
 
 1. Run `bun zip:firefox`.
-1. Open the Add-ons page by navigating to `about:addons`.
-1. Click the cog/settings icon in line with the "Manage Your Extensions" heading, and select **Debug Add-ons**.
-1. Click the **Load Temporary Add-on...** button and select the `dist/schooltape-<version>-firefox.zip` file from the cloned repository.
+2. Open the Add-ons page by navigating to `about:addons`.
+3. Click the cog/settings icon in line with the "Manage Your Extensions" heading, and select **Debug Add-ons**.
+4. Click the **Load Temporary Add-on...** button and select the `dist/schooltape-<version>-firefox.zip` file from the cloned repository.
 
 ## Development
 
