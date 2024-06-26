@@ -48,6 +48,10 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       scrollPeriod: {
         toggle: true,
       },
+      cmdPalette: {
+        toggle: true,
+        settings: {},
+      },
       modernIcons: {
         toggle: true,
         settings: {},

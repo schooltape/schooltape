@@ -11,5 +11,6 @@ export default defineWxtModule({
     addWxtPlugin(wxt, resolve(__dirname, "plugins/subheader.js"));
     addWxtPlugin(wxt, resolve(__dirname, "plugins/tabTitle.js"));
     addWxtPlugin(wxt, resolve(__dirname, "plugins/timetableLabels.js"));
+    addWxtPlugin(wxt, resolve(__dirname, "plugins/cmdPalette/index.ts"));
   },
 });

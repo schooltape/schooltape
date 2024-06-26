@@ -3,43 +3,48 @@ import { SnippetInfo } from "./types";
 export const PLUGIN_INFO: Record<string, PluginInfo> = {
   subheader: {
     name: "Subheader Revamp",
-    description: "Adds a clock and current period info to the subheader",
+    description: "Adds a clock and current period info to the subheader.",
     order: 0,
   },
   scrollSegments: {
     name: "Scroll Segments",
-    description: "Segments the Schoolbox page into scrollable sections",
+    description: "Segments the Schoolbox page into scrollable sections.",
     order: 1,
   },
   scrollPeriod: {
     name: "Scroll Period",
-    description: "Scrolls to the current period on the timetable",
+    description: "Scrolls to the current period on the timetable.",
     order: 2,
+  },
+  cmdPalette: {
+    name: "Command Palette",
+    description: "A command palette with useful commands and shortcuts.",
+    order: 3,
   },
   modernIcons: {
     name: "Modern Icons",
     description: "Modernise the icons across Schoolbox.",
-    order: 3,
+    order: 4,
   },
   tabTitle: {
     name: "Better Tab Titles",
-    description: "Improves the tab titles for easier navigation",
-    order: 4,
+    description: "Improves the tab titles for easier navigation.",
+    order: 5,
   },
   homepageSwitcher: {
     name: "Homepage Switcher",
-    description: "The logo will switch to existing Schoolbox homepage when available",
-    order: 5,
+    description: "The logo will switch to existing Schoolbox homepage when available.",
+    order: 6,
   },
   timetableLabels: {
     name: "Timetable Labels",
-    description: "Labels the day of the week from numbers to the actual day",
-    order: 6,
+    description: "Labels the day of the week from numbers to the actual day.",
+    order: 7,
   },
   legacyTimetable: {
     name: "Legacy Timetable",
-    description: "Moves the timetable to it's own row",
-    order: 7,
+    description: "Moves the timetable to it's own row.",
+    order: 8,
   },
 };
 
