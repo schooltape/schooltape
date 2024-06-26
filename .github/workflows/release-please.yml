@@ -39,6 +39,8 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build and zip
+        env:
+          VITE_OSS_BUILD: 0
         run: |
           bun zip
           bun zip:firefox
