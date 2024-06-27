@@ -54,6 +54,11 @@ export const SNIPPET_INFO: Record<string, SnippetInfo> = {
     description: "Censors all text and images. This is intended for development purposes.",
     order: 1,
   },
+  roundedCorners: {
+    name: "Rounded Corners",
+    description: "Makes rounded corners",
+    order: 2,
+  }
 };
 
 export const LOGOS: LogoDetails[] = [

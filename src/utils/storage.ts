@@ -26,6 +26,9 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
       censor: {
         toggle: false,
       },
+      roundedCorners: {
+        toggle: true,
+      },
     },
     user: {},
   },
