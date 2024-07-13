@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/schooltape/schooltape/compare/v3.1.1...v3.1.2) (2024-07-13)
+
+
+### Miscellaneous Chores
+
+* release 3.1.2 ([8f7d4d4](https://github.com/schooltape/schooltape/commit/8f7d4d4d4cd985edae80613d77574563b477bef8))
+
 ## [3.1.1](https://github.com/schooltape/schooltape/compare/v3.1.0...v3.1.1) (2024-07-13)
 
 
