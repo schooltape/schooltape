@@ -86,15 +86,11 @@ There is more information on [the website](https://schooltape.github.io/)!
 
 ## Usage
 
-<!-- The extension is available on the Chrome Web Store, Firefox Add-ons, and Microsoft Edge Add-ons extension stores. Click on your browser's badge below to install. -->
-The extension is available on Firefox Add-ons, and is currently awaiting approval for the Chrome Web Store.
+The extension is available on the Chrome Web Store and the Firefox Add-ons extension store. Click on your browser's badge below to install.
 
 <p align="center">
   <a href="https://addons.mozilla.org/en-US/firefox/addon/schooltape/"><img src="https://img.shields.io/badge/Firefox_Add--ons-f5a97f?style=for-the-badge&logo=Firefox-Browser&logoColor=24273a"></a>
-  <!--
-  <a href="https://chromewebstore.google.com/detail/catppuccin-for-github-fil/lnjaiaapbakfhlbjenjkhffcdpoompki"><img src="https://img.shields.io/badge/Chrome_Web_Store-b7bdf8?style=for-the-badge&logo=GoogleChrome&logoColor=24273a"></a>
-  <a href="https://microsoftedge.microsoft.com/addons/detail/catppuccin-for-github-fil/enicfllfdibbjhnpembomakaamcdcakl"><img src="https://img.shields.io/badge/Microsoft_Edge_Add--ons-7dc4e4?style=for-the-badge&logo=Microsoft-edge&logoColor=24273a"></a>
-  -->
+  <a href="https://chromewebstore.google.com/detail/schooltape/denkadefchjkchlefgfhdmabagdcefhf"><img src="https://img.shields.io/badge/Chrome_Web_Store-b7bdf8?style=for-the-badge&logo=GoogleChrome&logoColor=24273a"></a>
 </p>
 
 ### Manually
