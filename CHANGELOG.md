@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/schooltape/schooltape/compare/v3.0.0...v3.1.0) (2024-07-13)
+
+
+### Features
+
+* remove update notifications ([536eae3](https://github.com/schooltape/schooltape/commit/536eae3ac21ac1af64884f8daf357bda19494532))
+
+
+### Bug Fixes
+
+* **popup:** version name undefined ([7685e99](https://github.com/schooltape/schooltape/commit/7685e99e953dbcbe3cfb0ba2bb48b5cd560e6cc4))
+
 ## [3.0.0](https://github.com/schooltape/schooltape/compare/v2.3.1...v3.0.0) (2024-06-27)
 
 
