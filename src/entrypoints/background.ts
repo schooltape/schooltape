@@ -1,8 +1,6 @@
 import { Menus } from "wxt/browser";
 
 export default defineBackground(() => {
-  checkForUpdates();
-
   browser.runtime.onInstalled.addListener(async ({ reason }) => {
     if (reason === "install") {
       logger.info("[background] Opening wiki page after install");
@@ -11,16 +9,6 @@ export default defineBackground(() => {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: "https://help.schoolbox.com.au/account/anonymous.php?" });
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
-      }
-      if (import.meta.env.VITE_OSS_BUILD == true) {
-        logger.info("[background] This is an OSS build, adding to settings");
-        await globalSettings.setValue({
-          ...(await globalSettings.getValue()),
-          updates: {
-            ...(await globalSettings.getValue()).updates,
-            available: true,
-          },
-        });
       }
     } else if (reason === "update") {
       logger.info("[background] Notifying user about the update");
@@ -52,15 +40,10 @@ export default defineBackground(() => {
 
   // watch for global toggle
   globalSettings.watch(async (newSettings, oldSettings) => {
-    // update icon and check for updates
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
       updateIcon();
-      // if global is enabled, check for updates
-      if (newSettings.global) {
-        checkForUpdates();
-      }
     }
   });
 
@@ -85,9 +68,6 @@ export default defineBackground(() => {
       } else if (sender.tab?.id) {
         browser.tabs.update(sender.tab.id, { url: message.toTab });
       }
-    }
-    if (message.checkForUpdates) {
-      return checkForUpdates();
     }
     return true;
   });
@@ -144,64 +124,11 @@ async function resetSettings(): Promise<void> {
   ]);
 }
 
-async function checkForUpdates(): Promise<boolean> {
-  if (!navigator.onLine) {
-    logger.error("[background] Failed to check for updates: offline");
-    return false;
-  }
-  if (import.meta.env.DEV) {
-    logger.warn("[background] Skipping update check in dev mode");
-    return false;
-  }
-  try {
-    const response = await fetch("https://api.github.com/repos/schooltape/schooltape/releases/latest");
-    if (!response.ok) {
-      throw new Error(`Failed to fetch latest release: ${response.statusText}`);
-    }
-    const data = await response.json();
-    const latestVersion = data.tag_name.replace("v", "");
-    const currentVersion = browser.runtime.getManifest().version_name;
-    // if there is an update available
-    if (latestVersion !== currentVersion) {
-      logger.info(`[background] Found new version: ${latestVersion}`);
-      // set update available
-      await globalSettings.setValue({
-        ...(await globalSettings.getValue()),
-        updates: {
-          ...(await globalSettings.getValue()).updates,
-          available: true,
-        },
-      });
-      // notify
-      if ((await globalSettings.getValue()).updates.desktop) {
-        browser.notifications.create("update", {
-          title: "Available update",
-          type: "basic",
-          iconUrl: browser.runtime.getURL("/icon/128.png"),
-          message: `Click here to update to v${latestVersion}`,
-        });
-      }
-      // update icon accordingly
-      updateIcon();
-      return true;
-    }
-  } catch (error) {
-    logger.error(`[background] Failed to check for updates: ${error}`);
-    return false;
-  }
-  return false;
-}
-
 async function updateIcon() {
   const global = (await globalSettings.getValue()).global;
-  const updateAvailable = (await globalSettings.getValue()).updates.available;
   let iconSuffix = "-disabled";
   if (global) {
-    if (updateAvailable) {
-      iconSuffix = "-green";
-    } else {
-      iconSuffix = "";
-    }
+    iconSuffix = "";
   }
   if (import.meta.env.MANIFEST_VERSION === 2) {
     browser.browserAction.setIcon({

@@ -1,10 +1,6 @@
 // Global
 export type GlobalSettings = {
   global: boolean;
-  updates: {
-    available: boolean;
-    desktop: boolean;
-  };
   urls: string[];
   needsRefresh: boolean;
 };
