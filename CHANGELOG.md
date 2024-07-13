@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.1](https://github.com/schooltape/schooltape/compare/v3.1.0...v3.1.1) (2024-07-13)
+
+
+### Reverts
+
+* don't skip on manual dispatch ([94f9960](https://github.com/schooltape/schooltape/commit/94f9960f82293a39f1d700c8a7f685f6b721a957))
+
+
+### Miscellaneous Chores
+
+* release 3.1.1 ([ff6cc55](https://github.com/schooltape/schooltape/commit/ff6cc5565aefe7eb57db8ae892e4dd14dc0c1ae9))
+
 ## [3.1.0](https://github.com/schooltape/schooltape/compare/v3.0.0...v3.1.0) (2024-07-13)
 
 
