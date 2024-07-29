@@ -5,10 +5,6 @@ export const globalSettings = storage.defineItem<Types.GlobalSettings>("local:gl
   version: 1,
   defaultValue: {
     global: true,
-    updates: {
-      available: true,
-      desktop: false,
-    },
     urls: ["https://help.schoolbox.com.au"],
     needsRefresh: false,
   },

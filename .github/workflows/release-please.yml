@@ -39,8 +39,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build and zip
-        env:
-          VITE_OSS_BUILD: 0
         run: |
           bun zip
           bun zip:firefox
@@ -50,19 +48,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload ${{ needs.release-please.outputs.tag_name }} dist/*.zip
 
-      # - name: Submit to stores
-      #   run: pnpm wxt submit --chrome-zip dist/*-chrome.zip --firefox-zip dist/*-firefox.zip --firefox-sources-zip dist/*-sources.zip --edge-zip dist/*-chrome.zip
-      #   env:
-      #     CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
-      #     CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
-      #     CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
-      #     CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
-      #     FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
-      #     FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER }}
-      #     FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET }}
-      #     FIREFOX_CHANNEL: listed
-      #     EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
-      #     EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
-      #     EDGE_CLIENT_SECRET: ${{ secrets.EDGE_CLIENT_SECRET }}
-      #     EDGE_ACCESS_TOKEN_URL: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
-      #     EDGE_SKIP_SUBMIT_REVIEW: false
+      - name: Submit to stores
+        run: bun x wxt submit --chrome-zip dist/*-chrome.zip --firefox-zip dist/*-firefox.zip --firefox-sources-zip dist/*-sources.zip
+        env:
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
+          FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET }}
+          FIREFOX_CHANNEL: listed
