@@ -1,7 +1,7 @@
 import { forEachChild } from "typescript";
 
 export default async function defineWxtPlugin() {
-  defineStPlugin("homepageSwitcher", () => {
+  defineStPlugin("smartLinks", () => {
     // Select all relevant links and convert to an array of HTMLAnchorElement
     let logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
     let timetableLinks = Array.from(document.querySelectorAll(".timetable-subject > a")) as HTMLAnchorElement[];
@@ -11,7 +11,7 @@ export default async function defineWxtPlugin() {
     let tileLinks = Array.from(document.querySelectorAll(".tile > a")) as HTMLAnchorElement[];
     let breadLinks = Array.from(document.querySelectorAll(".breadcrumbs > li > a")) as HTMLAnchorElement[];
     let infoLinks = Array.from(document.querySelectorAll(".list-item > div > h3 > a")) as HTMLAnchorElement[];
-  
+
     // Combine all links into one array
     let allLinks = [...logos, ...timetableLinks, ...topLinks, ...sideLinks, ...vCardLinks, ...tileLinks, ...breadLinks, ...infoLinks];
 

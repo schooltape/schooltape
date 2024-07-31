@@ -51,7 +51,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       tabTitle: {
         toggle: true,
       },
-      homepageSwitcher: {
+      smartLinks: {
         toggle: true,
       },
       timetableLabels: {
