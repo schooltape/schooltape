@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.3](https://github.com/schooltape/schooltape/compare/v3.1.2...v3.1.3) (2024-07-31)
+
+
+### Bug Fixes
+
+* timetableLabels not injecting ([c6bdac8](https://github.com/schooltape/schooltape/commit/c6bdac8eeed187bc349dee0f5d11375283117005))
+
 ## [3.1.2](https://github.com/schooltape/schooltape/compare/v3.1.1...v3.1.2) (2024-07-13)
 
 
