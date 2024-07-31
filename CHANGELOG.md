@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.5](https://github.com/schooltape/schooltape/compare/v3.1.4...v3.1.5) (2024-07-31)
+
+
+### Miscellaneous Chores
+
+* release 3.1.5 ([7e0440c](https://github.com/schooltape/schooltape/commit/7e0440c587d5a34fe6dd1e5d434f994b2a432aca))
+
+## [3.1.4](https://github.com/schooltape/schooltape/compare/v3.1.3...v3.1.4) (2024-07-31)
+
+
+### Bug Fixes
+
+* schooltape not injecting into footer ([0aeb97e](https://github.com/schooltape/schooltape/commit/0aeb97ef58d53f49d8d464e94b79376106290981))
+
 ## [3.1.3](https://github.com/schooltape/schooltape/compare/v3.1.2...v3.1.3) (2024-07-31)
 
 
