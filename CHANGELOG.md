@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.6](https://github.com/schooltape/schooltape/compare/v3.1.5...v3.1.6) (2024-07-31)
+
+
+### Bug Fixes
+
+* period stacking [#88](https://github.com/schooltape/schooltape/issues/88) ([7126d25](https://github.com/schooltape/schooltape/commit/7126d25cf457d94143ebcf4efcc248b3b9da96c3))
+
 ## [3.1.5](https://github.com/schooltape/schooltape/compare/v3.1.4...v3.1.5) (2024-07-31)
 
 
