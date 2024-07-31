@@ -58,6 +58,7 @@ export default defineWxtPlugin(() => {
         periodSpan.classList.add("period");
         subheader.appendChild(periodSpan);
       }
+      periodSpan.textContent = "";
 
       let period = getCurrentPeriod();
       if (period) {
