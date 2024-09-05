@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.7](https://github.com/schooltape/schooltape/compare/v3.1.6...v3.1.7) (2024-09-05)
+
+
+### Bug Fixes
+
+* version link in popup broken [#99](https://github.com/schooltape/schooltape/issues/99) ([174b2af](https://github.com/schooltape/schooltape/commit/174b2afc9c42d5ec8fcfeefd76f5b150a9e29a95))
+
 ## [3.1.6](https://github.com/schooltape/schooltape/compare/v3.1.5...v3.1.6) (2024-07-31)
 
 
