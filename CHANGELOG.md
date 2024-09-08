@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.8](https://github.com/schooltape/schooltape/compare/v3.1.7...v3.1.8) (2024-09-08)
+
+
+### Bug Fixes
+
+* **modern-icons:** add files icon ([7fe0a49](https://github.com/schooltape/schooltape/commit/7fe0a4994a5848432c00f52ce9e19adb55e63d8b))
+
 ## [3.1.7](https://github.com/schooltape/schooltape/compare/v3.1.6...v3.1.7) (2024-09-05)
 
 
