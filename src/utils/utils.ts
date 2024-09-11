@@ -29,7 +29,9 @@ export function injectLogo(logo: LogoDetails) {
     url = browser.runtime.getURL(url as any);
   }
   logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
-  if (logo.disable) { return; }
+  if (logo.disable) {
+    return;
+  }
   let style = document.createElement("style");
   style.classList.add("schooltape");
   if (logo.adaptive) {

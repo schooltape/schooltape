@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       colors: {
         "ctp-accent": "rgba(var(--ctp-accent) , <alpha-value>)",
-      }
+      },
     },
   },
   plugins: [

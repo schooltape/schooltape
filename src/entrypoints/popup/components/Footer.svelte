@@ -36,7 +36,11 @@
       href="https://github.com/schooltape/schooltape/releases/tag/v{version}">{prefix}{version}</a>
   </p>
   <div class="flex">
-    <button title="Wiki" id="wiki" class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust" on:click={handleWikiClick}>
+    <button
+      title="Wiki"
+      id="wiki"
+      class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
+      on:click={handleWikiClick}>
       <BookText />
     </button>
     <button
