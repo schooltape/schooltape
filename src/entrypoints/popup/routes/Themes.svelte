@@ -69,9 +69,9 @@
 </script>
 
 <Modal bind:showModal>
-  <h2 slot="header" class="mb-10 text-xl">Choose an icon</h2>
+  <h2 slot="header" class="mb-4 text-xl">Choose an icon</h2>
 
-  <div class="grid grid-cols-3 gap-4 icon-picker">
+  <div class="grid grid-cols-3 gap-4">
     {#each logos as logo (logo)}
       <button
         on:click={() => logoClicked(logo)}
@@ -79,7 +79,11 @@
         class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
-          <img src={logo.url} alt="Logo" class="h-16 mt-2" />
+          {#if logo.adaptive}
+            <span class="logo-picker" style="--icon: url({logo.url})"></span>
+          {:else}
+            <img src={logo.url} alt="Logo" class="h-16 mt-2" />
+          {/if}
         {/if}
       </button>
     {/each}

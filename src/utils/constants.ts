@@ -72,6 +72,7 @@ export const LOGOS: LogoDetails[] = [
     name: "Schoolbox",
     id: "schoolbox",
     url: "schoolbox.svg",
+    adaptive: true,
   },
   {
     name: "Schooltape",

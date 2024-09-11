@@ -7,6 +7,13 @@ body {
   @apply bg-ctp-base text-base text-ctp-text;
 }
 
+.logo-picker {
+  mask: var(--icon) no-repeat;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  @apply text-ctp-accent h-16 w-20;
+}
+
 .slider {
   @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6;
 }

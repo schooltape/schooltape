@@ -37,6 +37,7 @@ export type LogoDetails = {
   url: string;
   id: string;
   disable?: boolean; // whether the icon should be injected or not
+  adaptive?: boolean; // whether the icon should follow the accent colour
 };
 type Theme = "catppuccin";
 export type ThemeSettings = {
