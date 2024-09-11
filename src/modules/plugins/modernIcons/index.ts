@@ -30,6 +30,8 @@ export default async function defineWxtPlugin() {
       ["icon-info", "info"],
       ["icon-resource-booking", "book_online"],
       ["icon-files", "description"],
+      ["icon-schoolbox", "language"],
+      ["icon-user", "person"],
     ];
 
     function insertIcon(className: string, iconName: string) {
