@@ -74,7 +74,7 @@ export function extractTimes(periodTime) {
       let date = new Date();
       date.setHours(hour, minute);
       if (index === 1) {
-        end.setSeconds(59, 999);
+        date.setSeconds(59, 999);
       }
       return date;
     });
