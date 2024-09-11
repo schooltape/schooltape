@@ -26,26 +26,6 @@
   let themes = themeSettings.defaultValue;
   let showModal = false;
 
-  // TODO
-  let logosAdaptive: LogoDetails[] = [
-    {
-      name: "Default",
-      url: "default",
-      id: "default",
-      disable: true,
-    },
-    {
-      name: "Catppuccin",
-      id: "catppuccin",
-      url: "https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png",
-    },
-    {
-      name: "Home",
-      id: "home",
-      url: "https://fonts.gstatic.com/s/i/materialiconsround/home/v16/24px.svg",
-    },
-  ];
-
   onMount(async () => {
     themes = await themeSettings.getValue();
     console.log("themes", themes);
