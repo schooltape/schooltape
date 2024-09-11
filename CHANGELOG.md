@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/schooltape/schooltape/compare/v3.1.8...v3.2.0) (2024-09-11)
+
+
+### Features
+
+* adaptive accent colors ([c544fc2](https://github.com/schooltape/schooltape/commit/c544fc2806d5a6e25ed4542affebea84b2e846b3))
+* dynamic icons ([3bda1cb](https://github.com/schooltape/schooltape/commit/3bda1cb13f101d71bc9dd1d8e3efb6a9edcd7cdf))
+
+
+### Bug Fixes
+
+* **modernIcons:** add missing icons ([e9f82df](https://github.com/schooltape/schooltape/commit/e9f82df28b788889b0378d48a6f96dc97ef725cc))
+* **subheader:** current period time [#105](https://github.com/schooltape/schooltape/issues/105) ([d65e7e2](https://github.com/schooltape/schooltape/commit/d65e7e23ecb698d8aa768d4567fb41fc569e9da8))
+
 ## [3.1.8](https://github.com/schooltape/schooltape/compare/v3.1.7...v3.1.8) (2024-09-08)
 
 
