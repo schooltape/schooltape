@@ -1,19 +1,5 @@
 export default defineWxtPlugin(() => {
   defineStPlugin("subheader", () => {
-    // // DEBUG: set time to 8:55am
-    // const _Date = Date;
-    // Date = function (...args) {
-    //   if (args.length === 0) {
-    //     // Return the artificial date
-    //     return new _Date("2021-01-01T08:55:00");
-    //   } else {
-    //     // Call the original Date constructor
-    //     return new _Date(...args);
-    //   }
-    // };
-    // Date.prototype = _Date.prototype;
-    // // END DEBUG
-
     let style = document.createElement("style");
     style.classList = "schooltape";
     style.innerHTML = `
