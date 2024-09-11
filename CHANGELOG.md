@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/schooltape/schooltape/compare/v3.2.0...v3.2.1) (2024-09-11)
+
+
+### Bug Fixes
+
+* **periodUtils:** typo ([cb811ee](https://github.com/schooltape/schooltape/commit/cb811ee062fcfc663353ce2428d3efdce591ee39))
+
 ## [3.2.0](https://github.com/schooltape/schooltape/compare/v3.1.8...v3.2.0) (2024-09-11)
 
 
