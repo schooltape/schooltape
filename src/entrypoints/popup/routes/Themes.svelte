@@ -71,12 +71,12 @@
 <Modal bind:showModal>
   <h2 slot="header" class="mb-10 text-xl">Choose an icon</h2>
 
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid grid-cols-3 gap-4 icon-picker">
     {#each logos as logo (logo)}
       <button
         on:click={() => logoClicked(logo)}
         class:highlight={themes.logo.id === logo.id}
-        class="border border-ctp-pink p-2 flex flex-col items-center justify-between rounded-lg">
+        class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           <img src={logo.url} alt="Logo" class="h-16 mt-2" />
@@ -84,10 +84,6 @@
       </button>
     {/each}
   </div>
-  <br />
-  <!-- TODO -->
-  <h3 class="text-lg font-bold">Coming soon™</h3>
-  <p>Adaptive SVG logos that change based on your theme!</p>
 </Modal>
 
 <div id="card">
@@ -117,7 +113,7 @@
   <button
     title="Choose icon"
     id="choose-icon"
-    class="flex items-center mx-2 small hover:bg-ctp-pink hover:text-ctp-crust"
+    class="flex items-center mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
     on:click={() => (showModal = true)}>
     <Layers3 />
     <span class="ml-3">Choose an icon</span>

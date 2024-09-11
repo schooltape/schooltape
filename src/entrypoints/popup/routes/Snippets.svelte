@@ -96,7 +96,7 @@
         type="text"
         placeholder="Gist URL"
         bind:value={snippetURL} />
-      <button class="p-2 rounded-r-xl bg-ctp-pink text-ctp-crust" type="submit" on:click={addUserSnippet}>Add</button>
+      <button class="p-2 rounded-r-xl bg-ctp-accent text-ctp-crust" type="submit" on:click={addUserSnippet}>Add</button>
     </div>
   </div>
 

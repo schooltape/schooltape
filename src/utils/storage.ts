@@ -70,8 +70,8 @@ export const themeSettings = storage.defineItem<Types.ThemeSettings>("local:them
   defaultValue: {
     toggle: true,
     theme: "catppuccin",
-    flavour: "macchiato",
-    accent: "rosewater",
+    flavour: "mocha",
+    accent: "mauve",
     logo: {
       name: "ST Rainbow",
       id: "st-rainbow",
