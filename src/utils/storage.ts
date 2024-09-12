@@ -36,7 +36,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
     plugins: {
       subheader: {
         toggle: true,
-        settings: {},
+        options: {},
       },
       scrollSegments: {
         toggle: true,
@@ -46,7 +46,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       },
       modernIcons: {
         toggle: true,
-        settings: {},
+        options: {},
       },
       tabTitle: {
         toggle: true,
