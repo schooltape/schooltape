@@ -18,7 +18,7 @@ export const PLUGIN_INFO: Record<string, PluginInfo> = {
   },
   modernIcons: {
     name: "Modern Icons",
-    description: "Modernise the icons across Schoolbox.",
+    description: "Modernise the icons across Schoolbox",
     order: 3,
   },
   tabTitle: {
