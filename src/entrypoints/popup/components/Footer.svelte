@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import IconBtn from "./inputs/IconBtn.svelte";
   import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
 
   let version: string;
@@ -37,8 +36,26 @@
       href="https://github.com/schooltape/schooltape/releases/tag/v{version}">{prefix}{version}</a>
   </p>
   <div class="flex">
-    <IconBtn title="Wiki" id="wiki" onClick={handleWikiClick} icon={BookText} />
-    <IconBtn title="Discord" id="discord" onClick={handleDiscordClick} icon={MessageCircleMore} />
-    <IconBtn title="Reset" id="reset" onClick={handleResetClick} icon={RotateCcw} color="red" />
+    <button
+      title="Wiki"
+      id="wiki"
+      class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
+      on:click={handleWikiClick}>
+      <BookText />
+    </button>
+    <button
+      title="Discord"
+      id="discord"
+      class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
+      on:click={handleDiscordClick}>
+      <MessageCircleMore />
+    </button>
+    <button
+      title="Reset"
+      id="reset"
+      class="mx-2 small hover:bg-ctp-red hover:text-ctp-crust"
+      on:click={handleResetClick}>
+      <RotateCcw />
+    </button>
   </div>
 </footer>
