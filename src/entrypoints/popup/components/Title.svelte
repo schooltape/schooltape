@@ -1,4 +1,6 @@
 <script>
+  import Slider from "./inputs/Slider.svelte";
+
   export let data = {};
   export let title = "";
   export let key = "";
@@ -21,13 +23,11 @@
   }
 </script>
 
-<label class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
+<label for="theme-toggle" class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
   <h2>{title}</h2>
-  <input
+  <Slider
     id="theme-toggle"
-    type="checkbox"
-    class="peer slider-input"
     bind:checked={data.toggle}
-    on:change={setStorage} />
-  <span class="slider big"></span>
+    onChange={setStorage}
+    size="big" />
 </label>

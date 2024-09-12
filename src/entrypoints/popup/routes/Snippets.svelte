@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
+  import Slider from "../components/inputs/Slider.svelte";
+  import TextInput from "../components/inputs/TextInput.svelte";
 
   let snippets = snippetSettings.defaultValue;
   let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
@@ -63,18 +65,13 @@
   <div class="snippets-container w-full">
     {#each populatedSnippets as snippet}
       <div class="my-4 group w-full">
-        <label class="slider-label group">
-          <h4 class="text-ctp-text">{snippet.name}</h4>
-          <input
-            bind:checked={snippet.toggle}
-            type="checkbox"
-            class="peer slider-input"
-            on:change={() => toggleSnippet(snippet.id, snippet.toggle)} />
-          <span class="slider small"></span>
-        </label>
-        <div class="slider-description">
-          {snippet.description}
-        </div>
+        <Slider
+          id={snippet.id}
+          bind:checked={snippet.toggle}
+          onChange={() => toggleSnippet(snippet.id, snippet.toggle)}
+          text={snippet.name}
+          description={snippet.description}
+          size="small" />
       </div>
     {/each}
   </div>
@@ -89,38 +86,32 @@
       >.
     </p>
     <!-- input box to make new snippet -->
-    <div class="flex justify-center items-center w-full">
-      <input
-        id="snippet-input"
-        class="w-full p-2 rounded-l-xl bg-ctp-surface0 text-ctp-text"
-        type="text"
-        placeholder="Gist URL"
-        bind:value={snippetURL} />
-      <button class="p-2 rounded-r-xl bg-ctp-accent text-ctp-crust" type="submit" on:click={addUserSnippet}>Add</button>
-    </div>
+    <TextInput
+      id="snippet-input"
+      bind:value={snippetURL}
+      placeholder="Gist URL"
+      label="Add"
+      onClick={addUserSnippet}
+    />
+
   </div>
 
   <div class="user-snippets-container w-full">
     {#each Object.entries(snippets.user) as [key, snippet] (key)}
       <div class="my-4 group w-full">
-        <label class="slider-label group">
-          <h4 class="text-ctp-text">{snippet.name}</h4>
-          <input
-            bind:checked={snippet.toggle}
-            type="checkbox"
-            class="peer slider-input"
-            on:change={() => toggleSnippet(key, snippet.toggle, true)} />
-          <span class="slider small"></span>
-        </label>
-        <div class="slider-description">
-          {snippet.description}
-        </div>
+        <Slider
+          id={key}
+          bind:checked={snippet.toggle}
+          onChange={() => toggleSnippet(key, snippet.toggle, true)}
+          text={snippet.name}
+          description={snippet.description}
+          size="small" />
         <button
-          class="xsmall hover:bg-ctp-red"
+          class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
           on:click={() => {
             removeUserSnippet(key);
           }}>Remove</button>
-        <a href={snippet.url} target="_blank"><button class="xsmall">Gist</button></a>
+        <a href={snippet.url} target="_blank"><button class="xsmall hover:bg-ctp-accent hover:text-ctp-mantle">Gist</button></a>
       </div>
     {/each}
   </div>

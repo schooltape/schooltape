@@ -2,7 +2,8 @@
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
-  import { Layers3 } from "lucide-svelte";
+  import IconBtn from "../components/inputs/IconBtn.svelte";
+  import { Icon, Layers3 } from "lucide-svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -94,12 +95,10 @@
     {/each}
   </div>
 
-  <button
+  <IconBtn
     title="Choose icon"
     id="choose-icon"
-    class="flex items-center mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
-    on:click={() => (showModal = true)}>
-    <Layers3 />
-    <span class="ml-3">Choose an icon</span>
-  </button>
+    onClick={() => (showModal = true)}
+    icon={Layers3}
+    label="Choose an icon" />
 </div>

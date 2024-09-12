@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
+  import Slider from "../components/inputs/Slider.svelte";
 
   let plugins = pluginSettings.defaultValue;
   let populatedPlugins: PopulatedPlugin[] = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
@@ -26,18 +27,13 @@
   <div class="plugins-container">
     {#each populatedPlugins as plugin}
       <div class="my-4 group">
-        <label class="slider-label group">
-          <h4 class="text-ctp-text">{plugin.name}</h4>
-          <input
-            bind:checked={plugin.toggle}
-            type="checkbox"
-            class="peer slider-input"
-            on:change={() => togglePlugin(plugin.id, plugin.toggle)} />
-          <span class="slider small"></span>
-        </label>
-        <div class="slider-description">
-          {plugin.description}
-        </div>
+        <Slider
+          id={plugin.id}
+          bind:checked={plugin.toggle}
+          onChange={() => togglePlugin(plugin.id, plugin.toggle)}
+          text={plugin.name}
+          description={plugin.description}
+          size="small" />
       </div>
     {/each}
   </div>
