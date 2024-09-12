@@ -7,6 +7,13 @@ body {
   @apply bg-ctp-base text-base text-ctp-text;
 }
 
+.logo-picker {
+  mask: var(--icon) no-repeat;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  @apply h-16 w-20 text-ctp-accent;
+}
+
 .slider {
   @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6;
 }
@@ -36,11 +43,11 @@ body {
 }
 
 #flavours button.active {
-  @apply bg-ctp-pink/50;
+  @apply bg-ctp-accent/50;
 }
 
 #navbar a.active {
-  @apply bg-ctp-pink/50;
+  @apply bg-ctp-accent/50;
 }
 
 #navbar a {
@@ -48,7 +55,7 @@ body {
 }
 
 #card {
-  @apply flex w-full flex-col items-center justify-center rounded-3xl bg-gradient-to-b p-6 shadow-xl outline outline-2 outline-ctp-pink;
+  @apply flex w-full flex-col items-center justify-center rounded-3xl bg-gradient-to-b p-6 shadow-xl outline outline-2 outline-ctp-accent;
 }
 
 #card h1 {
@@ -100,15 +107,15 @@ button {
 }
 
 .navbutton-left {
-  @apply rounded-l-xl py-2 pl-4 pr-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-pink/50 active:bg-ctp-pink/80;
+  @apply rounded-l-xl py-2 pl-4 pr-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
 }
 
 .navbutton-center {
-  @apply p-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-pink/50 active:bg-ctp-pink/80;
+  @apply p-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
 }
 
 .navbutton-right {
-  @apply rounded-r-xl py-2 pl-2 pr-4 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-pink/50 active:bg-ctp-pink/80;
+  @apply rounded-r-xl py-2 pl-2 pr-4 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
 }
 
 div[title] {

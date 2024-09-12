@@ -24,13 +24,34 @@ export function injectCatppuccin(flavour: string, accent: string) {
 }
 
 export function injectLogo(logo: LogoDetails) {
+  let url = logo.url;
+  if (!url.startsWith("http")) {
+    url = browser.runtime.getURL(url as any);
+  }
   logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
   if (logo.disable) {
     return;
   }
   let style = document.createElement("style");
   style.classList.add("schooltape");
-  style.textContent = `a.logo > img { content: url("${logo.url}"); max-width: 30%; }`;
+  if (logo.adaptive) {
+    style.textContent = `a.logo > img { display: none !important; } a.logo { display: flex; align-items: center; justify-content: center; }`;
+    let span = document.createElement("span");
+    span.style.mask = `url("${url}") no-repeat center`;
+    span.style.maskSize = "100% 100%";
+    span.style.backgroundColor = "hsl(var(--ctp-accent))";
+    span.style.width = "100%";
+    span.style.height = "60px";
+    span.style.display = "block";
+    window.addEventListener("load", () => {
+      document.querySelectorAll("a.logo").forEach((logo) => {
+        const clonedSpan = span.cloneNode(true);
+        logo.append(clonedSpan);
+      });
+    });
+  } else {
+    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; }`;
+  }
   document.head.appendChild(style);
 }
 

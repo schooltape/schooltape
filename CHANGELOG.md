@@ -1,5 +1,47 @@
 # Changelog
 
+## [3.2.1](https://github.com/schooltape/schooltape/compare/v3.2.0...v3.2.1) (2024-09-11)
+
+
+### Bug Fixes
+
+* **periodUtils:** typo ([cb811ee](https://github.com/schooltape/schooltape/commit/cb811ee062fcfc663353ce2428d3efdce591ee39))
+
+## [3.2.0](https://github.com/schooltape/schooltape/compare/v3.1.8...v3.2.0) (2024-09-11)
+
+
+### Features
+
+* adaptive accent colors ([c544fc2](https://github.com/schooltape/schooltape/commit/c544fc2806d5a6e25ed4542affebea84b2e846b3))
+* dynamic icons ([3bda1cb](https://github.com/schooltape/schooltape/commit/3bda1cb13f101d71bc9dd1d8e3efb6a9edcd7cdf))
+
+
+### Bug Fixes
+
+* **modernIcons:** add missing icons ([e9f82df](https://github.com/schooltape/schooltape/commit/e9f82df28b788889b0378d48a6f96dc97ef725cc))
+* **subheader:** current period time [#105](https://github.com/schooltape/schooltape/issues/105) ([d65e7e2](https://github.com/schooltape/schooltape/commit/d65e7e23ecb698d8aa768d4567fb41fc569e9da8))
+
+## [3.1.8](https://github.com/schooltape/schooltape/compare/v3.1.7...v3.1.8) (2024-09-08)
+
+
+### Bug Fixes
+
+* **modern-icons:** add files icon ([7fe0a49](https://github.com/schooltape/schooltape/commit/7fe0a4994a5848432c00f52ce9e19adb55e63d8b))
+
+## [3.1.7](https://github.com/schooltape/schooltape/compare/v3.1.6...v3.1.7) (2024-09-05)
+
+
+### Bug Fixes
+
+* version link in popup broken [#99](https://github.com/schooltape/schooltape/issues/99) ([174b2af](https://github.com/schooltape/schooltape/commit/174b2afc9c42d5ec8fcfeefd76f5b150a9e29a95))
+
+## [3.1.6](https://github.com/schooltape/schooltape/compare/v3.1.5...v3.1.6) (2024-07-31)
+
+
+### Bug Fixes
+
+* period stacking [#88](https://github.com/schooltape/schooltape/issues/88) ([7126d25](https://github.com/schooltape/schooltape/commit/7126d25cf457d94143ebcf4efcc248b3b9da96c3))
+
 ## [3.1.5](https://github.com/schooltape/schooltape/compare/v3.1.4...v3.1.5) (2024-07-31)
 
 

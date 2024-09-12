@@ -63,21 +63,24 @@ export function getPeriodData(index) {
 export function extractTimes(periodTime) {
   try {
     let times = periodTime.split("–"); // en dash
-    let [start, end] = times.map((time) => {
+    let [start, end] = times.map((time, index) => {
       let [hour, minute] = time.split(":");
-      let isAM = time.slice(-2) === "am";
+      let isAM = time.slice(-2).toLowerCase() === "am";
       hour = parseInt(hour);
       minute = parseInt(minute.substring(0, 2));
       if (!isAM && hour !== 12) {
         hour += 12;
       }
       let date = new Date();
-      date.setHours(hour, minute, 0, 0);
+      date.setHours(hour, minute);
+      if (index === 1) {
+        date.setSeconds(59, 999);
+      }
       return date;
     });
     return { start, end };
   } catch (error) {
-    console.error(error);
+    console.error("Error extracting times:", error);
     return false;
   }
 }

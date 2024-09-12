@@ -11,12 +11,16 @@ module.exports = {
     "ctp-latte",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "ctp-accent": "rgba(var(--ctp-accent) , <alpha-value>)",
+      },
+    },
   },
   plugins: [
     require("@catppuccin/tailwindcss")({
       prefix: "ctp",
-      defaultFlavour: "macchiato",
+      defaultFlavour: "mocha",
     }),
   ],
 };

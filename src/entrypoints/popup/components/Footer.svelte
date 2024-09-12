@@ -2,15 +2,14 @@
   import { onMount } from "svelte";
   import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
 
-  let verNum;
+  let version;
+  let prefix;
   onMount(async () => {
     // Set version number
     // Uses manifest.version_name when available (on mv3)
     let manifest = browser.runtime.getManifest();
-    let version = manifest.version_name || manifest.version;
-    let prefix = version.length <= 5 ? "Version: v" : "v";
-
-    verNum = prefix + version;
+    version = manifest.version_name || manifest.version;
+    prefix = version.length <= 5 ? "Version: v" : "v";
   });
 
   function handleDiscordClick() {
@@ -34,16 +33,20 @@
     <a
       class="version ml-2 text-ctp-subtext0 hover:underline"
       target="_blank"
-      href="https://github.com/schooltape/schooltape/releases/tag/{verNum}">{verNum}</a>
+      href="https://github.com/schooltape/schooltape/releases/tag/v{version}">{prefix}{version}</a>
   </p>
   <div class="flex">
-    <button title="Wiki" id="wiki" class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust" on:click={handleWikiClick}>
+    <button
+      title="Wiki"
+      id="wiki"
+      class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
+      on:click={handleWikiClick}>
       <BookText />
     </button>
     <button
       title="Discord"
       id="discord"
-      class="mx-2 small hover:bg-ctp-pink hover:text-ctp-crust"
+      class="mx-2 small hover:bg-ctp-accent hover:text-ctp-crust"
       on:click={handleDiscordClick}>
       <MessageCircleMore />
     </button>

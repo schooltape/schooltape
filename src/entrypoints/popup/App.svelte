@@ -6,6 +6,7 @@
   import Themes from "./routes/Themes.svelte";
   import Snippets from "./routes/Snippets.svelte";
   import Banner from "./components/Banner.svelte";
+  import { flavors } from "@catppuccin/palette";
   import { onMount, onDestroy } from "svelte";
 
   const routes = {
@@ -14,7 +15,9 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-  let flavour = "macchiato";
+  let flavour = "";
+  let accent = "";
+  let accentHex = "";
   let settings = globalSettings.defaultValue;
 
   async function refreshSchoolboxURLs() {
@@ -46,11 +49,25 @@
     globalSettings.setValue(settings);
   }
 
+  function getAccentHex(accent: string, flavour: string) {
+    // console.log(accent, flavour);
+    // console.log(flavors);
+    // console.log(flavors[flavour].colors[accent].hex);
+    let x = flavors[flavour].colors[accent].rgb;
+    return `${x.r}, ${x.g}, ${x.b}`;
+  }
+
   onMount(async () => {
     settings = await globalSettings.getValue();
     flavour = (await themeSettings.getValue()).flavour;
+    accent = (await themeSettings.getValue()).accent;
+    accentHex = getAccentHex(accent, flavour);
+    document.documentElement.style.setProperty("--ctp-accent", accentHex);
     themesUnwatch = themeSettings.watch((newValue) => {
       flavour = newValue.flavour;
+      accent = newValue.accent;
+      accentHex = getAccentHex(accent, flavour);
+      document.documentElement.style.setProperty("--ctp-accent", accentHex);
       showBanner();
     });
     settingsUnwatch = globalSettings.watch((newValue, oldValue) => {
