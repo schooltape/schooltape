@@ -49,19 +49,78 @@ export type ThemeSettings = {
 };
 
 // Plugins
-export type PluginData = {
-  toggle: boolean;
-  settings?: Record<string, any>;
+export type PluginOption =
+  | TextInputOption
+  | CheckboxOption
+  | ToggleOption
+  | RadioButtonOption
+  | SelectOption;
+
+export type TextInputOption = {
+  type: 'text';
+  label: string;
+  name: string;
+  placeholder?: string;
+  default?: string;
+  value?: string;
 };
+
+export type CheckboxOption = {
+  type: 'checkbox';
+  label: string;
+  name: string;
+  default?: boolean;
+  value?: boolean;
+};
+
+export type ToggleOption = {
+  type: 'toggle';
+  label: string;
+  name: string;
+  default?: boolean;
+  value?: boolean;
+};
+
+export type RadioButtonOption = {
+  type: 'radio';
+  label: string;
+  name: string;
+  default?: string;
+  value?: string;
+  options: {
+    label: string;
+    value: string;
+  }[];
+};
+
+export type SelectOption = {
+  type: 'select';
+  label: string;
+  name: string;
+  default?: string;
+  value?: string;
+  options: {
+    label: string;
+    value: string;
+  }[];
+};
+
+export type PluginData = {
+  toggle: boolean; // Overall toggle for enabling/disabling the plugin
+  options?: Record<string, PluginOption[]>; // Options are an array of PluginOption objects for each plugin
+};
+
 export type PluginInfo = {
   name: string;
   description: string;
   order: number;
 };
+
 export type PopulatedPlugin = {
   id: string;
 } & PluginInfo &
   PluginData;
+
 export type PluginSettings = {
   toggle: boolean;
   plugins: Record<string, PluginData>;
