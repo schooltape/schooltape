@@ -53,7 +53,7 @@
     // console.log(accent, flavour);
     // console.log(flavors);
     // console.log(flavors[flavour].colors[accent].hex);
-    let x = flavors[flavour].colors[accent].rgb;
+    let x = (flavors as any)[flavour].colors[accent].rgb;
     return `${x.r}, ${x.g}, ${x.b}`;
   }
 

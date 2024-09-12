@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import IconBtn from "./inputs/IconBtn.svelte";
   import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
 
-  let version;
-  let prefix;
+  let version: string;
+  let prefix: string;
   onMount(async () => {
     // Set version number
     // Uses manifest.version_name when available (on mv3)
