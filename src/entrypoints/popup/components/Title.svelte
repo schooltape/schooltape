@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import Slider from "./inputs/Slider.svelte";
 
-  export let data = {};
+  export let data: any = {};
   export let title = "";
   export let key = "";
 
