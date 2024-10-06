@@ -30,7 +30,7 @@ export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:
 // Plugin settings
 // Plugins considered very cross-compatible between Schoolbox instances are enabled by default
 export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pluginSettings", {
-  version: 1,
+  version: 2,
   defaultValue: {
     toggle: true,
     plugins: {
@@ -51,7 +51,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       tabTitle: {
         toggle: true,
       },
-      homepageSwitcher: {
+      smartLinks: {
         toggle: true,
       },
       timetableLabels: {
@@ -62,6 +62,13 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
       },
     },
   },
+  migrations: {
+    2: (pluginSettings: Types.PluginSettings) => {
+      pluginSettings.plugins["smartLinks"] = pluginSettings.plugins["homepageSwitcher"];
+      delete pluginSettings.plugins["homepageSwitcher"];
+      return pluginSettings;
+    }
+  }
 });
 
 // Theme settings
