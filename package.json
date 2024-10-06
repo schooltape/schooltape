@@ -21,7 +21,7 @@
     "svelte-spa-router": "^4.0.1",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2",
-    "wxt": "^0.18.9"
+    "wxt": "^0.19.0"
   },
   "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
   "homepage_url": "https://github.com/schooltape/schooltape",
