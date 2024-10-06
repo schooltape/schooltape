@@ -110,8 +110,8 @@ export function populateItems<T extends ItemType>(
           ...value,
           ...data[key],
         };
-        if (data.options) {
-          populatedItem.options = data.options as any;
+        if (data.settings) {
+          populatedItem.settings = data.settings;
         }
         return populatedItem;
       } else {
