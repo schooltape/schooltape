@@ -26,9 +26,9 @@ export const PLUGIN_INFO: Record<string, PluginInfo> = {
     description: "Improves the tab titles for easier navigation",
     order: 4,
   },
-  smartLinks: {
-    name: "Smart Links",
-    description: "Switches to already open Schoolbox tabs instead of opening a new one when available",
+  homepageSwitcher: {
+    name: "Homepage Switcher",
+    description: "The logo will switch to existing Schoolbox homepage when available",
     order: 5,
   },
   timetableLabels: {
