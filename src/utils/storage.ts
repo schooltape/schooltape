@@ -63,7 +63,7 @@ export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pl
     },
   },
   migrations: {
-    3: (pluginSettings: Types.PluginSettings) => {
+    2: (pluginSettings: Types.PluginSettings) => {
       pluginSettings.plugins["smartLinks"] = pluginSettings.plugins["homepageSwitcher"];
       delete pluginSettings.plugins["homepageSwitcher"];
       return pluginSettings;
