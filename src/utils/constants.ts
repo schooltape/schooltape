@@ -38,7 +38,7 @@ export const PLUGIN_INFO: Record<string, PluginInfo> = {
   },
   legacyTimetable: {
     name: "Legacy Timetable",
-    description: "Moves the timetable to it's own row",
+    description: "Moves the timetable to its own row",
     order: 7,
   },
 };
