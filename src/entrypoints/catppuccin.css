@@ -208,9 +208,18 @@ table * {
 /* notifications */
 .right-off-canvas-menu ul.off-canvas-list label,
 .right-small a[data-unread]:not([data-unread="0"]),
-#msgs[data-unread]:not([data-unread="0"]) #right-menu-dock {
+#msgs[data-unread]:not([data-unread="0"]) #right-menu-dock,
+.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full,
+ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]):active {
   background-color: hsl(var(--ctp-red));
-  color: hsl(var(--ctp-base));
+  color: hsl(var(--ctp-mantle));
+}
+.right-off-canvas-menu .settings-button {
+  color: hsl(var(--ctp-mantle));
+}
+#pwaPrompt {
+  background: hsl(var(--ctp-surface1));
+  border: none;
 }
 
 /* drop down menus */
