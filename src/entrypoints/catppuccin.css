@@ -533,4 +533,10 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   --form-bg-hover-color-contrast: hsl(var(--ctp-text));
   --body-foreground: hsl(var(--ctp-text));
   --body-foreground-h1: hsl(var(--ctp-text));
+
+  /* core.css (v24.0.7 at time of writing) */
+  --color-foreground-primary: hsl(var(--ctp-surface0)) !important;
+  --color-foreground-secondary: hsl(var(--ctp-surface1)) !important;
+  --color-text-primary: hsl(var(--ctp-text)) !important;
+  --color-text-secondary: hsl(var(--ctp-subtext0)) !important;
 }
