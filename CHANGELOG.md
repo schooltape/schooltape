@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.2.2](https://github.com/schooltape/schooltape/compare/v3.2.1...v3.2.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* grammar! ([359bc44](https://github.com/schooltape/schooltape/commit/359bc4471d266e7970644317cf3210335ba7420a))
+* **theme:** contrast styling ([f6803c5](https://github.com/schooltape/schooltape/commit/f6803c59152f0da10d1b14e864fd00aca965e8a7))
+* **theme:** notification + PWA styling [#115](https://github.com/schooltape/schooltape/issues/115) ([aeff1ae](https://github.com/schooltape/schooltape/commit/aeff1aee89696c9bdefe935c8b6dd9a7a57c6e74))
+* **theme:** search box styling [#118](https://github.com/schooltape/schooltape/issues/118) ([a9d6de6](https://github.com/schooltape/schooltape/commit/a9d6de690ced0c241ee9cdcfe13cb18b2efa4dda))
+
 ## [3.2.1](https://github.com/schooltape/schooltape/compare/v3.2.0...v3.2.1) (2024-09-11)
 
 
