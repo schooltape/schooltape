@@ -516,6 +516,7 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   --accounts-menu-background: hsl(var(--ctp-surface2));
   --accounts-menu-hover: hsl(var(--ctp-overlay1));
   --content-ui-foreground: hsl(var(--ctp-accent));
+  --content-ui-foreground-contrast: hsl(var(--ctp-mantle));
   --content-ui-background: hsl(var(--ctp-surface0));
   --content-ui-hover: hsl(var(--ctp-surface1));
   --content-ui-selected: hsl(var(--ctp-surface0));
