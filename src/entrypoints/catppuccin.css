@@ -11,7 +11,7 @@ h3,
 h4,
 .tab-bar,
 .profile-tabs .subheader {
-  color: hsl(var(--ctp-text));
+  color: hsl(var(--ctp-text)) !important;
 }
 
 /* activity feed */
@@ -138,6 +138,7 @@ span.flatpickr-weekday {
 .eotc-status,
 .alert-box-icon {
   background-color: hsl(var(--ctp-surface0));
+  color: hsl(var(--ctp-text));
 }
 
 /* groups page buttons */
@@ -277,7 +278,7 @@ button.submit:hover,
 .flex-list.buttons button.submit:focus,
 a.submit:focus,
 button.submit:focus {
-  background-color: hsla(var(--ctp-accent), 0.8);
+  background-color: hsla(var(--ctp-accent), 0.2);
 }
 
 /* form inputs */
