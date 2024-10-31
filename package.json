@@ -6,7 +6,7 @@
   "devDependencies": {
     "@catppuccin/palette": "^1.2.0",
     "@catppuccin/tailwindcss": "^0.1.6",
-    "@sveltejs/vite-plugin-svelte": "^3.1.1",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tsconfig/svelte": "^5.0.4",
     "@wxt-dev/module-svelte": "^1.0.0",
     "autoprefixer": "^10.4.19",
