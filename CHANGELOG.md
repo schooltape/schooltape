@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.5](https://github.com/schooltape/schooltape/compare/v3.2.4...v3.2.5) (2024-11-01)
+
+
+### Bug Fixes
+
+* disable logging in production ([#130](https://github.com/schooltape/schooltape/issues/130)) ([fae34a4](https://github.com/schooltape/schooltape/commit/fae34a45e8be3122554c5571478a8b3b91effacb))
+* styling issue ([d9c9f53](https://github.com/schooltape/schooltape/commit/d9c9f5306f21639136254603b2b032ae6f5f854e))
+* styling issue ([5c6e86d](https://github.com/schooltape/schooltape/commit/5c6e86d417171160e1c69684d9a6eb85ec47bdee))
+
 ## [3.2.4](https://github.com/schooltape/schooltape/compare/v3.2.3...v3.2.4) (2024-10-30)
 
 
