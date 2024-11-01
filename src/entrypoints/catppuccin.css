@@ -14,6 +14,11 @@ h4,
   color: hsl(var(--ctp-text));
 }
 
+.title-section > h1 {
+  color: hsl(var(--ctp-text)) !important;
+}
+
+
 /* activity feed */
 .feed,
 .activity-feed,
@@ -376,9 +381,24 @@ table tr td {
   background-color: var(--content-ui-background) !important;
 }
 
+/* file tables */
+.VueTables__search,
+.VueTables__table-footer,
+.VueTables__wrapper,
+.VueTables__sortable,
+.filters {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+
 /* news sections */
 .detail.content {
   background: hsl(var(--ctp-base)) !important;
+}
+
+article > div > p.x_MsoNormal,
+article > div#x_Signature {
+  background-color: hsl(var(--ctp-base)) !important;
+  color: hsl(var(--ctp-text)) !important;
 }
 
 /* timetable */
