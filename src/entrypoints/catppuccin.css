@@ -211,7 +211,7 @@ table * {
 .right-small a[data-unread]:not([data-unread="0"]),
 #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock,
 .right-off-canvas-menu ul.off-canvas-list #notification-toggle-full,
-ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]):active {
+ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
   background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }

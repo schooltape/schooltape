@@ -25,9 +25,5 @@
 
 <label for="theme-toggle" class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
   <h2>{title}</h2>
-  <Slider
-    id="theme-toggle"
-    bind:checked={data.toggle}
-    onChange={setStorage}
-    size="big" />
+  <Slider id="theme-toggle" bind:checked={data.toggle} onChange={setStorage} size="big" />
 </label>
