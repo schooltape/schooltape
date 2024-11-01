@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.4](https://github.com/schooltape/schooltape/compare/v3.2.3...v3.2.4) (2024-10-30)
+
+
+### Bug Fixes
+
+* title styling ([bebf9cb](https://github.com/schooltape/schooltape/commit/bebf9cbb75b5082c1acf8174285058b98e0c4f45))
+
 ## [3.2.3](https://github.com/schooltape/schooltape/compare/v3.2.2...v3.2.3) (2024-10-07)
 
 
