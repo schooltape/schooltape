@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-  <a href="https://schooltape.github.io">Schooltape</a> is a free an open source extension for <a href="https://schoolbox.education/">Schoolbox</a>!
+  <a href="https://schooltape.github.io">Schooltape</a> is a free and open source extension for <a href="https://schoolbox.education/">Schoolbox</a>!
 </p>
 
 <p align="center">
