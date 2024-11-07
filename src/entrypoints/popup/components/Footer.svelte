@@ -37,21 +37,8 @@
       href="https://github.com/schooltape/schooltape/releases/tag/v{version}">{prefix}{version}</a>
   </p>
   <div class="flex">
-    <IconBtn
-      title="Wiki"
-      id="wiki"
-      onClick={handleWikiClick}
-      icon={BookText} />
-    <IconBtn
-      title="Discord"
-      id="discord"
-      onClick={handleDiscordClick}
-      icon={MessageCircleMore} />
-    <IconBtn
-      title="Reset"
-      id="reset"
-      onClick={handleResetClick}
-      icon={RotateCcw}
-      color="red" />
+    <IconBtn title="Wiki" id="wiki" onClick={handleWikiClick} icon={BookText} />
+    <IconBtn title="Discord" id="discord" onClick={handleDiscordClick} icon={MessageCircleMore} />
+    <IconBtn title="Reset" id="reset" onClick={handleResetClick} icon={RotateCcw} color="red" />
   </div>
 </footer>
