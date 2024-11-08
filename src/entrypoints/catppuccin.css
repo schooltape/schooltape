@@ -293,7 +293,9 @@ button.submit:hover,
 .flex-list.buttons button.submit:focus,
 a.submit:focus,
 button.submit:focus {
-  background-color: hsla(var(--ctp-accent), 0.8);
+  /* background-color: hsla(var(--ctp-accent), 0.8); */
+  background-color: hsl(var(--ctp-accent));
+  opacity: 0.8;
 }
 
 /* form inputs */
