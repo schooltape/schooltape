@@ -86,14 +86,7 @@
       >.
     </p>
     <!-- input box to make new snippet -->
-    <TextInput
-      id="snippet-input"
-      bind:value={snippetURL}
-      placeholder="Gist URL"
-      label="Add"
-      onClick={addUserSnippet}
-    />
-
+    <TextInput id="snippet-input" bind:value={snippetURL} placeholder="Gist URL" label="Add" onClick={addUserSnippet} />
   </div>
 
   <div class="user-snippets-container w-full">
@@ -111,7 +104,8 @@
           on:click={() => {
             removeUserSnippet(key);
           }}>Remove</button>
-        <a href={snippet.url} target="_blank"><button class="xsmall hover:bg-ctp-accent hover:text-ctp-mantle">Gist</button></a>
+        <a href={snippet.url} target="_blank"
+          ><button class="xsmall hover:bg-ctp-accent hover:text-ctp-mantle">Gist</button></a>
       </div>
     {/each}
   </div>
