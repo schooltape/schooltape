@@ -65,6 +65,13 @@ body.login input[type="checkbox"]:not(.plain) + label:after {
   color: hsl(var(--ctp-text));
 }
 
+.progress-tick,
+.action-list nav a.progress-tick,
+ul.az-list nav a.progress-tick,
+ul.az-error-list nav a.progress-tick {
+   background-color: hsl(var(--ctp-surface2));
+}
+
 /* sidebar */
 #nav {
   background: hsl(var(--ctp-mantle)) !important;
