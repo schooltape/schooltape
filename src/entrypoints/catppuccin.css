@@ -401,6 +401,11 @@ article > div#x_Signature {
   color: hsl(var(--ctp-text)) !important;
 }
 
+li > article > div > p.x_MsoNormal,
+li > article > div#x_Signature {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+
 /* timetable */
 .timetable th,
 .timetable-small th,
