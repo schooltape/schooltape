@@ -18,7 +18,6 @@ h4,
   color: hsl(var(--ctp-text)) !important;
 }
 
-
 /* activity feed */
 .feed,
 .activity-feed,
@@ -69,7 +68,12 @@ body.login input[type="checkbox"]:not(.plain) + label:after {
 .action-list nav a.progress-tick,
 ul.az-list nav a.progress-tick,
 ul.az-error-list nav a.progress-tick {
-   background-color: hsl(var(--ctp-surface2));
+  background-color: hsl(var(--ctp-surface2));
+}
+
+
+input[type=checkbox]:not(.plain):not(:disabled)+label.checkbox-label:hover:before {
+  background-color: hsl(var(--ctp-surface1));
 }
 
 /* sidebar */
@@ -336,6 +340,52 @@ label {
 .profile-tabs .classes-groups .v-card {
   background-color: hsl(var(--ctp-surface0));
   border: none;
+}
+
+/* submissions text input */
+.ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover,
+a.ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* button colours */
+.ck.ck-button.ck-on.ck-dropdown__button {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* button colours when already selected */
+.ck.ck-button.ck-on,
+a.ck.ck-button.ck-on {
+  background-color: hsl(var(--ctp-surface2)) !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
+/* styles drop-down menu */
+.ck.ck-style-panel .ck-style-grid .ck-style-grid__button:not(.ck-on) .ck-button__label {
+  background-color: hsl(var(--ctp-surface0)) !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
+/* find and replace fields */
+.ck.ck-dropdown__panel input.ck.ck-input,
+.ck.ck-balloon-panel input.ck.ck-input,
+.ck.ck-dropdown__panel input.ck.ck-input:focus,
+.ck.ck-balloon-panel input.ck.ck-input:focus {
+  background-color: hsl(var(--ctp-surface2)) !important;
+}
+
+/* find and replace next/previous buttons */
+.ck.ck-find-and-replace-form__find > button.ck-button[aria-disabled="true"],
+.ck.ck-find-and-replace-form__replace > button.ck-button[aria-disabled="true"] {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* tick/cross buttons for media url input */
+.ck.ck-button.ck-button-save, a.ck.ck-button.ck-button-save {
+  color: hsl(var(--ctp-green)) !important;
+}
+.ck.ck-button.ck-button-cancel, a.ck.ck-button.ck-button-cancel {
+  color: hsl(var(--ctp-red)) !important;
 }
 
 /* iframes */
