@@ -16,6 +16,7 @@ jobs:
           fetch-depth: 0
           submodules: "recursive"
 
+      - name: Setup bun
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
