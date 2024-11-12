@@ -17,16 +17,15 @@ jobs:
           submodules: "recursive"
 
       - name: Setup bun
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build and zip
         run: |
-          pnpm zip
-          pnpm zip:firefox
+          bun zip
+          bun zip:firefox
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
