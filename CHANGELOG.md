@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.6](https://github.com/schooltape/schooltape/compare/v3.2.5...v3.2.6) (2024-11-12)
+
+
+### Bug Fixes
+
+* h1 and div element styling in news ([#137](https://github.com/schooltape/schooltape/issues/137)) ([b7a1657](https://github.com/schooltape/schooltape/commit/b7a1657cd087fd34259cae3788548414b6f6e7b5))
+* styling in side panels ([#139](https://github.com/schooltape/schooltape/issues/139)) ([b7ca936](https://github.com/schooltape/schooltape/commit/b7ca9360a7a54a435a2ceb2cb69f8ed703885822))
+
 ## [3.2.5](https://github.com/schooltape/schooltape/compare/v3.2.4...v3.2.5) (2024-11-01)
 
 
