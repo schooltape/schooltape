@@ -231,8 +231,14 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
   background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }
+
+/* notification settings button */
+ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]) {
+  padding: 0.5rem;
+}
+
 .right-off-canvas-menu .settings-button {
-  color: hsl(var(--ctp-mantle));
+  color: hsl(var(--ctp-text));
 }
 #pwaPrompt {
   background: hsl(var(--ctp-surface1));
