@@ -236,10 +236,10 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
 ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]) {
   padding: 0.5rem;
 }
-
 .right-off-canvas-menu .settings-button {
   color: hsl(var(--ctp-text));
 }
+
 #pwaPrompt {
   background: hsl(var(--ctp-surface1));
   border: none;
@@ -301,6 +301,31 @@ button.submit:hover,
 a.submit:focus,
 button.submit:focus {
   background-color: hsla(var(--ctp-accent), 0.8);
+}
+
+/* upload dialog boxes */
+.attachment-browser-container .attachment-browser-filesystems li.active>a {
+  background: hsl(var(--ctp-surface1));
+}
+.attachment-browser-container .attachment-browser-filesystems ul {
+  box-shadow: none;
+}
+#ab-upload .dz-preview {
+  background-color: hsl(var(--ctp-surface1));
+}
+.side-nav li.divider {
+  border-color: hsl(var(--ctp-surface0))
+}
+
+/* recording tab of upload dialog */
+.pseudo-video[data-v-037f4389] {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+data-v-037f4389::before,
+data-v-037f4389.menu-item {
+  background-color: hsl(var(--ctp-surface1)) !important;
+  color: hsl(var(--ctp-text)) !important;
+  border: none;
 }
 
 /* form inputs */
