@@ -226,12 +226,9 @@ table * {
 .right-off-canvas-menu ul.off-canvas-list label,
 .right-small a[data-unread]:not([data-unread="0"]),
 #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock,
-.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full {
-  background-color: hsl(var(--ctp-red));
-  color: hsl(var(--ctp-mantle));
-}
+.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full,
 ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
-  background-color: hsl(var(--ctp-surface0));
+  background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }
 .right-off-canvas-menu .settings-button {
@@ -297,9 +294,7 @@ button.submit:hover,
 .flex-list.buttons button.submit:focus,
 a.submit:focus,
 button.submit:focus {
-  /* background-color: hsla(var(--ctp-accent), 0.8); */
-  background-color: hsl(var(--ctp-accent));
-  opacity: 0.8;
+  background-color: hsla(var(--ctp-accent), 0.8);
 }
 
 /* form inputs */
@@ -401,6 +396,7 @@ section.content:has(iframe) {
 table tr th,
 table tr td {
   color: hsl(var(--ctp-text)) !important;
+  background: hsl(var(--ctp-surface0)) !important;
 }
 .fc .fc-cell-shaded {
   background-color: hsl(var(--ctp-surface1)) !important;
