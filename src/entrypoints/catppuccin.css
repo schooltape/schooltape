@@ -436,6 +436,14 @@ table tr td {
   border: none !important;
 }
 
+/* rubric */
+.rb-blank {
+  background-image: repeating-linear-gradient(135deg, var(--content-ui-foreground) 0px, var(--content-ui-foreground) 5px, hsl(var(--ctp-base)) 5px, hsl(var(--ctp-base)) 20px) !important;
+}
+.rb-selected {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
 /* news articles */
 .island span[style]:not(a > span[style]):not(.tile > span[style]):not(.event-container > span[style]) {
   color: hsl(var(--ctp-text)) !important;
