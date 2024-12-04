@@ -219,7 +219,7 @@ table * {
   a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
     .show-ckeditor-button
   ):focus {
-  color: hsla(var(--ctp-accent), 0.7);
+  color: hsl(var(--ctp-accent), 0.7);
 }
 
 /* notifications */
@@ -300,7 +300,7 @@ button.submit:hover,
 .flex-list.buttons button.submit:focus,
 a.submit:focus,
 button.submit:focus {
-  background-color: hsla(var(--ctp-accent), 0.8);
+  background-color: hsl(var(--ctp-accent), 0.8);
 }
 
 /* upload dialog boxes */
@@ -541,7 +541,7 @@ li > article > div#x_Signature {
 .left-off-canvas-menu::-webkit-scrollbar-thumb,
 .right-off-canvas-menu::-webkit-scrollbar-thumb,
 .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
-  background: hsla(var(--ctp-accent), 0.5);
+  background: hsl(var(--ctp-accent), 0.5);
 }
 .scrollable:hover::-webkit-scrollbar-thumb,
 #container:hover::-webkit-scrollbar-thumb,
@@ -644,8 +644,8 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   /* NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING */
   --logo-background: hsl(var(--ctp-mantle));
   --body-background: hsl(var(--ctp-base));
-  --form-border-color: color: hsla(var(--ctp-accent), 0.4);
-  --form-bg-hover-color: color: hsla(var(--ctp-accent), 0.3);
+  --form-border-color: color: hsl(var(--ctp-accent), 0.4);
+  --form-bg-hover-color: color: hsl(var(--ctp-accent), 0.3);
   --form-bg-hover-color-contrast: hsl(var(--ctp-text));
   --body-foreground: hsl(var(--ctp-text));
   --body-foreground-h1: hsl(var(--ctp-text));
