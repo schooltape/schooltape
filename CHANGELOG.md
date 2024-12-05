@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.7](https://github.com/schooltape/schooltape/compare/v3.2.6...v3.2.7) (2024-12-05)
+
+
+### Bug Fixes
+
+* misc styling issues ([#157](https://github.com/schooltape/schooltape/issues/157)) ([1a0e587](https://github.com/schooltape/schooltape/commit/1a0e5874084cad15372f41c43ffa2cf637720e5f))
+
 ## [3.2.6](https://github.com/schooltape/schooltape/compare/v3.2.5...v3.2.6) (2024-11-12)
 
 
