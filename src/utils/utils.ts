@@ -10,16 +10,17 @@ export function injectStyles(styleText: string) {
 
 export function injectCatppuccin(flavour: string, accent: string) {
   logger.info(`[content-utils] Injecting Catppuccin: ${flavour} ${accent}`);
-  let styleText = "";
+  let styleText = ":root {";
   const flavourArray = flavorEntries.find((entry) => entry[0] === flavour);
   if (flavourArray) {
     flavourArray[1].colorEntries.map(([colorName, { hsl }]) => {
-      styleText += `:root { --ctp-${colorName}: ${hsl.h} ${hsl.s * 100}% ${hsl.l * 100}%; }\n`;
+      styleText += `--ctp-${colorName}: ${hsl.h}, ${hsl.s * 100}%, ${hsl.l * 100}%;\n`;
       if (colorName === accent) {
-        styleText += `:root { --ctp-accent: ${hsl.h} ${hsl.s * 100}% ${hsl.l * 100}%; }\n`;
+        styleText += `--ctp-accent: ${hsl.h}, ${hsl.s * 100}%, ${hsl.l * 100}%;\n`;
       }
     });
   }
+  styleText += "}"
   injectStyles(styleText);
 }
 

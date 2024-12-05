@@ -64,6 +64,18 @@ body.login input[type="checkbox"]:not(.plain) + label:after {
   color: hsl(var(--ctp-text));
 }
 
+.progress-tick,
+.action-list nav a.progress-tick,
+ul.az-list nav a.progress-tick,
+ul.az-error-list nav a.progress-tick {
+  background-color: hsl(var(--ctp-surface2));
+}
+
+
+input[type=checkbox]:not(.plain):not(:disabled)+label.checkbox-label:hover:before {
+  background-color: hsl(var(--ctp-surface1));
+}
+
 /* sidebar */
 #nav {
   background: hsl(var(--ctp-mantle)) !important;
@@ -207,7 +219,7 @@ table * {
   a:not(.button):not(.adtp-btn):not(button):not([type="submit"]):not(a.submit):not(button.submit):not(
     .show-ckeditor-button
   ):focus {
-  color: hsla(var(--ctp-accent), 0.7);
+  color: hsl(var(--ctp-accent), 0.7);
 }
 
 /* notifications */
@@ -219,9 +231,15 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
   background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }
-.right-off-canvas-menu .settings-button {
-  color: hsl(var(--ctp-mantle));
+
+/* notification settings button */
+ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]) {
+  padding: 0.5rem;
 }
+.right-off-canvas-menu .settings-button {
+  color: hsl(var(--ctp-text));
+}
+
 #pwaPrompt {
   background: hsl(var(--ctp-surface1));
   border: none;
@@ -282,7 +300,32 @@ button.submit:hover,
 .flex-list.buttons button.submit:focus,
 a.submit:focus,
 button.submit:focus {
-  background-color: hsla(var(--ctp-accent), 0.8);
+  background-color: hsl(var(--ctp-accent), 0.8);
+}
+
+/* upload dialog boxes */
+.attachment-browser-container .attachment-browser-filesystems li.active>a {
+  background: hsl(var(--ctp-surface1));
+}
+.attachment-browser-container .attachment-browser-filesystems ul {
+  box-shadow: none;
+}
+#ab-upload .dz-preview {
+  background-color: hsl(var(--ctp-surface1));
+}
+.side-nav li.divider {
+  border-color: hsl(var(--ctp-surface0))
+}
+
+/* recording tab of upload dialog */
+.pseudo-video[data-v-037f4389] {
+  background-color: hsl(var(--ctp-surface0)) !important;
+}
+data-v-037f4389::before,
+data-v-037f4389.menu-item {
+  background-color: hsl(var(--ctp-surface1)) !important;
+  color: hsl(var(--ctp-text)) !important;
+  border: none;
 }
 
 /* form inputs */
@@ -325,6 +368,52 @@ label {
   border: none;
 }
 
+/* submissions text input */
+.ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover,
+a.ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* button colours */
+.ck.ck-button.ck-on.ck-dropdown__button {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* button colours when already selected */
+.ck.ck-button.ck-on,
+a.ck.ck-button.ck-on {
+  background-color: hsl(var(--ctp-surface2)) !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
+/* styles drop-down menu */
+.ck.ck-style-panel .ck-style-grid .ck-style-grid__button:not(.ck-on) .ck-button__label {
+  background-color: hsl(var(--ctp-surface0)) !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
+/* find and replace fields */
+.ck.ck-dropdown__panel input.ck.ck-input,
+.ck.ck-balloon-panel input.ck.ck-input,
+.ck.ck-dropdown__panel input.ck.ck-input:focus,
+.ck.ck-balloon-panel input.ck.ck-input:focus {
+  background-color: hsl(var(--ctp-surface2)) !important;
+}
+
+/* find and replace next/previous buttons */
+.ck.ck-find-and-replace-form__find > button.ck-button[aria-disabled="true"],
+.ck.ck-find-and-replace-form__replace > button.ck-button[aria-disabled="true"] {
+  background-color: hsl(var(--ctp-surface1)) !important;
+}
+
+/* tick/cross buttons for media url input */
+.ck.ck-button.ck-button-save, a.ck.ck-button.ck-button-save {
+  color: hsl(var(--ctp-green)) !important;
+}
+.ck.ck-button.ck-button-cancel, a.ck.ck-button.ck-button-cancel {
+  color: hsl(var(--ctp-red)) !important;
+}
+
 /* iframes */
 /* since iframes can't be styled, due to cross-origin restrictions - we must force a light background */
 section.content:has(iframe) {
@@ -338,12 +427,21 @@ section.content:has(iframe) {
 table tr th,
 table tr td {
   color: hsl(var(--ctp-text)) !important;
+  background: hsl(var(--ctp-surface0)) !important;
 }
 .fc .fc-cell-shaded {
   background-color: hsl(var(--ctp-surface1)) !important;
 }
 .fc-theme-standard tbody {
   border: none !important;
+}
+
+/* rubric */
+.rb-blank {
+  background-image: repeating-linear-gradient(135deg, var(--content-ui-foreground) 0px, var(--content-ui-foreground) 5px, hsl(var(--ctp-base)) 5px, hsl(var(--ctp-base)) 20px) !important;
+}
+.rb-selected {
+  background-color: hsl(var(--ctp-surface1)) !important;
 }
 
 /* news articles */
@@ -451,7 +549,7 @@ li > article > div#x_Signature {
 .left-off-canvas-menu::-webkit-scrollbar-thumb,
 .right-off-canvas-menu::-webkit-scrollbar-thumb,
 .hybrid-bar .account-drop::-webkit-scrollbar-thumb {
-  background: hsla(var(--ctp-accent), 0.5);
+  background: hsl(var(--ctp-accent), 0.5);
 }
 .scrollable:hover::-webkit-scrollbar-thumb,
 #container:hover::-webkit-scrollbar-thumb,
@@ -554,11 +652,12 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   /* NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING */
   --logo-background: hsl(var(--ctp-mantle));
   --body-background: hsl(var(--ctp-base));
-  --form-border-color: color: hsla(var(--ctp-accent), 0.4);
-  --form-bg-hover-color: color: hsla(var(--ctp-accent), 0.3);
+  --form-border-color: color: hsl(var(--ctp-accent), 0.4);
+  --form-bg-hover-color: color: hsl(var(--ctp-accent), 0.3);
   --form-bg-hover-color-contrast: hsl(var(--ctp-text));
   --body-foreground: hsl(var(--ctp-text));
   --body-foreground-h1: hsl(var(--ctp-text));
+  --navigation-foreground-highlight: hsl(var(--ctp-text));
 
   /* core.css (v24.0.7 at time of writing) */
   --color-foreground-primary: hsl(var(--ctp-surface0)) !important;
