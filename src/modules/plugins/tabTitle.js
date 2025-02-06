@@ -9,7 +9,6 @@ export default defineWxtPlugin(() => {
     const path = window.location.pathname;
     const titleMap = {
       "/": "Homepage",
-      "/timetable": "Timetable",
       "/calendar": "Calendar",
       "/news": "News",
       "/learning/classes": "Classes",
@@ -22,6 +21,8 @@ export default defineWxtPlugin(() => {
 
     if (titleMap.hasOwnProperty(path)) {
       document.title = titleMap[path];
+    } else if (path.includes("/timetable")) {
+      document.title = "Timetable";
     } else if (path.includes("/calendar")) {
       document.title = "Calendar";
     } else if (path.includes("/grades/")) {
