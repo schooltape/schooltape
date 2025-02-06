@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.8](https://github.com/schooltape/schooltape/compare/v3.2.7...v3.2.8) (2025-02-06)
+
+
+### Bug Fixes
+
+* **plugins/tabTitle:** `calendar/timetable` not displaying ([#164](https://github.com/schooltape/schooltape/issues/164)) ([96d2d68](https://github.com/schooltape/schooltape/commit/96d2d6825f7bf994dee4cb8930c2f99ca01af5c5))
+
 ## [3.2.7](https://github.com/schooltape/schooltape/compare/v3.2.6...v3.2.7) (2024-12-05)
 
 
