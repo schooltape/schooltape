@@ -235,8 +235,11 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
 ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
   padding: 0.5rem;
 }
-.right-off-canvas-menu .settings-button {
+.right-off-canvas-menu[data-unread="0"] .settings-button {
   color: hsl(var(--ctp-text));
+}
+.right-off-canvas-menu .settings-button {
+  color: hsl(var(--ctp-mantle));
 }
 
 #pwaPrompt {
