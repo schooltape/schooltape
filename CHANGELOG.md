@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.9](https://github.com/schooltape/schooltape/compare/v3.2.8...v3.2.9) (2025-02-12)
+
+
+### Bug Fixes
+
+* css hot reload ([#123](https://github.com/schooltape/schooltape/issues/123)) ([3cd293e](https://github.com/schooltape/schooltape/commit/3cd293e170668edb2664891e887e6791624bbc26))
+* notification icon colour ([#163](https://github.com/schooltape/schooltape/issues/163)) ([54055ee](https://github.com/schooltape/schooltape/commit/54055eeb59f5af2c843fcdc45ef74b63748e2e9c))
+
 ## [3.2.8](https://github.com/schooltape/schooltape/compare/v3.2.7...v3.2.8) (2025-02-06)
 
 
