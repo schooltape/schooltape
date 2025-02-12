@@ -20,7 +20,7 @@ export function injectCatppuccin(flavour: string, accent: string) {
       }
     });
   }
-  styleText += "}"
+  styleText += "}";
   injectStyles(styleText);
 }
 
