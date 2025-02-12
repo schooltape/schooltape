@@ -71,8 +71,7 @@ ul.az-error-list nav a.progress-tick {
   background-color: hsl(var(--ctp-surface2));
 }
 
-
-input[type=checkbox]:not(.plain):not(:disabled)+label.checkbox-label:hover:before {
+input[type="checkbox"]:not(.plain):not(:disabled) + label.checkbox-label:hover:before {
   background-color: hsl(var(--ctp-surface1));
 }
 
@@ -233,7 +232,7 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
 }
 
 /* notification settings button */
-ul.off-canvas-list li a:not([data-pwa-action=retryNotifPrompt]) {
+ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
   padding: 0.5rem;
 }
 .right-off-canvas-menu .settings-button {
@@ -304,7 +303,7 @@ button.submit:focus {
 }
 
 /* upload dialog boxes */
-.attachment-browser-container .attachment-browser-filesystems li.active>a {
+.attachment-browser-container .attachment-browser-filesystems li.active > a {
   background: hsl(var(--ctp-surface1));
 }
 .attachment-browser-container .attachment-browser-filesystems ul {
@@ -314,7 +313,7 @@ button.submit:focus {
   background-color: hsl(var(--ctp-surface1));
 }
 .side-nav li.divider {
-  border-color: hsl(var(--ctp-surface0))
+  border-color: hsl(var(--ctp-surface0));
 }
 
 /* recording tab of upload dialog */
@@ -407,10 +406,12 @@ a.ck.ck-button.ck-on {
 }
 
 /* tick/cross buttons for media url input */
-.ck.ck-button.ck-button-save, a.ck.ck-button.ck-button-save {
+.ck.ck-button.ck-button-save,
+a.ck.ck-button.ck-button-save {
   color: hsl(var(--ctp-green)) !important;
 }
-.ck.ck-button.ck-button-cancel, a.ck.ck-button.ck-button-cancel {
+.ck.ck-button.ck-button-cancel,
+a.ck.ck-button.ck-button-cancel {
   color: hsl(var(--ctp-red)) !important;
 }
 
@@ -438,7 +439,13 @@ table tr td {
 
 /* rubric */
 .rb-blank {
-  background-image: repeating-linear-gradient(135deg, var(--content-ui-foreground) 0px, var(--content-ui-foreground) 5px, hsl(var(--ctp-base)) 5px, hsl(var(--ctp-base)) 20px) !important;
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--content-ui-foreground) 0px,
+    var(--content-ui-foreground) 5px,
+    hsl(var(--ctp-base)) 5px,
+    hsl(var(--ctp-base)) 20px
+  ) !important;
 }
 .rb-selected {
   background-color: hsl(var(--ctp-surface1)) !important;
