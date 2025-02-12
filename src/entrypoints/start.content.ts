@@ -1,5 +1,9 @@
+import cssUrl from "./catppuccin.css?url";
+import "./catppuccin.css";
+
 export default defineContentScript({
   matches: ["<all_urls>"],
+  cssInjectionMode: "manual",
   runAt: "document_start",
   excludeMatches: ["*://*/learning/quiz/*"],
   async main() {
@@ -13,7 +17,7 @@ export default defineContentScript({
       // inject themes
       if (themes.toggle) {
         logger.info(themes);
-        injectStylesheet("/assets/catppuccin.css");
+        injectStylesheet(cssUrl);
         injectCatppuccin(themes.flavour, themes.accent);
       }
       // inject logo
