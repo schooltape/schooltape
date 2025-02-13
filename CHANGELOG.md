@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.11](https://github.com/schooltape/schooltape/compare/v3.2.10...v3.2.11) (2025-02-13)
+
+
+### Miscellaneous Chores
+
+* release 3.2.11 ([33dad25](https://github.com/schooltape/schooltape/commit/33dad25365c1271d15bc577ec27d1fa8c51eb944))
+
 ## [3.2.10](https://github.com/schooltape/schooltape/compare/v3.2.9...v3.2.10) (2025-02-13)
 
 
