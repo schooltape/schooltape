@@ -10,7 +10,6 @@
     // Uses manifest.version_name when available (on mv3)
     let manifest = browser.runtime.getManifest();
     version = manifest.version_name || manifest.version;
-    prefix = version.length <= 5 ? "Version: v" : "v";
   });
 
   function handleDiscordClick() {
@@ -34,7 +33,7 @@
     <a
       class="version ml-2 text-ctp-subtext0 hover:underline"
       target="_blank"
-      href="https://github.com/schooltape/schooltape/releases/tag/v{version}">{prefix}{version}</a>
+      href="https://github.com/schooltape/schooltape/releases/tag/v{version}">Version: v{version}</a>
   </p>
   <div class="flex">
     <IconBtn title="Wiki" id="wiki" onClick={handleWikiClick} icon={BookText} />
