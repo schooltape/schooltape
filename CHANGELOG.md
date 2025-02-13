@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.10](https://github.com/schooltape/schooltape/compare/v3.2.9...v3.2.10) (2025-02-13)
+
+
+### Reverts
+
+* "fix: css hot reload ([#123](https://github.com/schooltape/schooltape/issues/123))" ([79ef41c](https://github.com/schooltape/schooltape/commit/79ef41cb338b96bbc28132a112db6b00ddfd41c8))
+
 ## [3.2.9](https://github.com/schooltape/schooltape/compare/v3.2.8...v3.2.9) (2025-02-12)
 
 
