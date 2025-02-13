@@ -1,6 +1,3 @@
-import cssUrl from "./catppuccin.css?url";
-import "./catppuccin.css";
-
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
@@ -16,7 +13,7 @@ export default defineContentScript({
       // inject themes
       if (themes.toggle) {
         logger.info(themes);
-        injectStylesheet(cssUrl);
+        injectStylesheet("/assets/catppuccin.css");
         injectCatppuccin(themes.flavour, themes.accent);
       }
       // inject logo
