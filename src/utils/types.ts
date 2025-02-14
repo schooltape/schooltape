@@ -1,37 +1,25 @@
-// Global
+// === Global ===
+// settings for plugins and in-built snippets are stored in individual WXT storage items
 export type GlobalSettings = {
   global: boolean;
+  plugins: boolean;
+  themes: boolean;
+  snippets: boolean;
+
+  themeFlavour: string;
+  themeAccent: string;
+  themeLogo: LogoDetails;
+
+  userSnippets: Record<string, UserSnippet>;
+
+  // Schoolbox URLs
   urls: string[];
+
+  // whether the settings require a refresh
   needsRefresh: boolean;
 };
 
-// Snippets
-export type UserSnippet = {
-  author: string;
-  name: string;
-  description: string;
-  url: string;
-  toggle: boolean;
-};
-export type SnippetData = {
-  toggle: boolean;
-};
-export type SnippetInfo = {
-  name: string;
-  description: string;
-  order: number;
-};
-export type PopulatedSnippet = {
-  id: string;
-} & SnippetInfo &
-  SnippetData;
-export type SnippetSettings = {
-  toggle: boolean;
-  snippets: Record<string, SnippetData>;
-  user: Record<string, UserSnippet>;
-};
-
-// Themes
+// === Themes ===
 export type LogoDetails = {
   name: string;
   url: string;
@@ -39,30 +27,62 @@ export type LogoDetails = {
   disable?: boolean; // whether the icon should be injected or not
   adaptive?: boolean; // whether the icon should follow the accent colour
 };
-type Theme = "catppuccin";
-export type ThemeSettings = {
+
+// === Plugins ===
+export type Plugin = {
+  id: PluginId;
   toggle: boolean;
-  theme: Theme;
-  flavour: string;
-  accent: string;
-  logo: LogoDetails;
+  // extend this type for plugin-specific settings
 };
 
-// Plugins
-export type PluginData = {
-  toggle: boolean;
-  settings?: Record<string, any>;
-};
+export type PluginId =
+  | "subheader"
+  | "scrollSegments"
+  | "scrollPeriod"
+  | "modernIcons"
+  | "tabTitle"
+  | "homepageSwitcher"
+  | "timetableLabels"
+  | "legacyTimetable";
+
+// hardcoded, see constants.ts (can probably be moved there)
 export type PluginInfo = {
   name: string;
   description: string;
   order: number;
 };
-export type PopulatedPlugin = {
-  id: string;
-} & PluginInfo &
-  PluginData;
-export type PluginSettings = {
+
+// we can move this over to the relevant svelte file, it doesn't need to be in here
+// export type PopulatedPlugin = {
+//   id: string;
+// } & PluginInfo &
+//   PluginData;
+
+// === Snippets ===
+export type Snippet = {
+  id: SnippetId;
   toggle: boolean;
-  plugins: Record<string, PluginData>;
+  // extend this type for snippet-specific settings
 };
+
+export type UserSnippet = {
+  author: string;
+  name: string;
+  description: string;
+  url: string;
+  toggle: boolean;
+};
+
+export type SnippetId = "hidePfp" | "censor";
+
+// hardcoded, see constants.ts (can probably be moved there)
+export type SnippetInfo = {
+  name: string;
+  description: string;
+  order: number;
+};
+// we can move this over to the relevant svelte file, it doesn't need to be in here
+// export type PopulatedSnippet = {
+//   id: string;
+// } & SnippetInfo &
+//   SnippetData;
