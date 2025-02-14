@@ -1,6 +1,6 @@
 // === Global ===
 // settings for plugins and in-built snippets are stored in individual WXT storage items
-export type GlobalSettings = {
+export type Settings = {
   global: boolean;
   plugins: boolean;
   themes: boolean;

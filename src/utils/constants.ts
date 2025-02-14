@@ -1,6 +1,6 @@
-import { SnippetInfo } from "./types";
+import { PluginId, PluginInfo, SnippetId, SnippetInfo } from "./types";
 
-export const PLUGIN_INFO: Record<string, PluginInfo> = {
+export const PLUGIN_INFO: Record<PluginId, PluginInfo> = {
   subheader: {
     name: "Subheader Revamp",
     description: "Adds a clock and current period info to the subheader",
@@ -43,7 +43,7 @@ export const PLUGIN_INFO: Record<string, PluginInfo> = {
   },
 };
 
-export const SNIPPET_INFO: Record<string, SnippetInfo> = {
+export const SNIPPET_INFO: Record<SnippetId, SnippetInfo> = {
   hidePfp: {
     name: "Hide PFP",
     description: "Hide your profile picture across Schoolbox.",

@@ -1,81 +1,24 @@
 import * as Types from "./types";
 
 // Global settings
-export const globalSettings = storage.defineItem<Types.GlobalSettings>("local:globalSettings", {
+export const settings = storage.defineItem<Types.Settings>("local:globalSettings", {
   version: 1,
-  defaultValue: {
+  fallback: {
     global: true,
-    urls: ["https://help.schoolbox.com.au"],
-    needsRefresh: false,
-  },
-});
+    plugins: true,
+    themes: true,
+    snippets: true,
 
-// Snippet settings
-export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:snippetSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    snippets: {
-      hidePfp: {
-        toggle: true,
-      },
-      censor: {
-        toggle: false,
-      },
-    },
-    user: {},
-  },
-});
-
-// Plugin settings
-// Plugins considered very cross-compatible between Schoolbox instances are enabled by default
-export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pluginSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    plugins: {
-      subheader: {
-        toggle: true,
-        settings: {},
-      },
-      scrollSegments: {
-        toggle: true,
-      },
-      scrollPeriod: {
-        toggle: true,
-      },
-      modernIcons: {
-        toggle: true,
-        settings: {},
-      },
-      tabTitle: {
-        toggle: true,
-      },
-      homepageSwitcher: {
-        toggle: true,
-      },
-      timetableLabels: {
-        toggle: true,
-      },
-      legacyTimetable: {
-        toggle: false,
-      },
-    },
-  },
-});
-
-// Theme settings
-export const themeSettings = storage.defineItem<Types.ThemeSettings>("local:themeSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    theme: "catppuccin",
-    flavour: "mocha",
-    accent: "mauve",
-    logo: {
+    themeFlavour: "mocha",
+    themeAccent: "mauve",
+    themeLogo: {
       name: "ST Rainbow",
       id: "st-rainbow",
       url: "https://schooltape.github.io/schooltape-ctp.svg",
     },
+
+    userSnippets: {},
+    urls: ["https://help.schoolbox.com.au"],
+    needsRefresh: false,
   },
 });
