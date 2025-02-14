@@ -1,4 +1,4 @@
-import { PluginId, PluginInfo, SnippetId, SnippetInfo } from "./types";
+import { LogoId, LogoInfo, PluginId, PluginInfo, SnippetId, SnippetInfo } from "./types";
 
 export const PLUGIN_INFO: Record<PluginId, PluginInfo> = {
   subheader: {
@@ -56,37 +56,31 @@ export const SNIPPET_INFO: Record<SnippetId, SnippetInfo> = {
   },
 };
 
-export const LOGOS: LogoDetails[] = [
-  {
+export const LOGO_INFO: Record<LogoId, LogoInfo> = {
+  default: {
     name: "Default",
     url: "default",
-    id: "default",
     disable: true,
   },
-  {
+  catppuccin: {
     name: "Catppuccin",
-    id: "catppuccin",
     url: "https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png",
   },
-  {
+  schoolbox: {
     name: "Schoolbox",
-    id: "schoolbox",
     url: "schoolbox.svg",
     adaptive: true,
   },
-  {
+  schooltape: {
     name: "Schooltape",
-    id: "st",
     url: "https://schooltape.github.io/schooltape.svg",
   },
-  {
+  "schooltape-rainbow": {
     name: "ST Rainbow",
-    id: "st-rainbow",
     url: "https://schooltape.github.io/schooltape-ctp.svg",
   },
-  {
+  "schooltape-legacy": {
     name: "ST Legacy",
-    id: "st-legacy",
     url: "https://schooltape.github.io/schooltape-legacy.svg",
   },
-];
+};

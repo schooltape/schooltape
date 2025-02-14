@@ -8,7 +8,7 @@ export type Settings = {
 
   themeFlavour: string;
   themeAccent: string;
-  themeLogo: LogoDetails;
+  themeLogo: LogoId;
 
   userSnippets: Record<string, UserSnippet>;
 
@@ -20,10 +20,12 @@ export type Settings = {
 };
 
 // === Themes ===
-export type LogoDetails = {
+export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";
+
+// hardcoded, see constants.ts
+export type LogoInfo = {
   name: string;
   url: string;
-  id: string;
   disable?: boolean; // whether the icon should be injected or not
   adaptive?: boolean; // whether the icon should follow the accent colour
 };
@@ -45,14 +47,14 @@ export type PluginId =
   | "timetableLabels"
   | "legacyTimetable";
 
-// hardcoded, see constants.ts (can probably be moved there)
+// hardcoded, see constants.ts
 export type PluginInfo = {
   name: string;
   description: string;
   order: number;
 };
 
-// we can move this over to the relevant svelte file, it doesn't need to be in here
+// TODO)) we can move this over to the relevant svelte file, it doesn't need to be in here
 // export type PopulatedPlugin = {
 //   id: string;
 // } & PluginInfo &
@@ -75,13 +77,14 @@ export type UserSnippet = {
 
 export type SnippetId = "hidePfp" | "censor";
 
-// hardcoded, see constants.ts (can probably be moved there)
+// hardcoded, see constants.ts
 export type SnippetInfo = {
   name: string;
   description: string;
   order: number;
 };
-// we can move this over to the relevant svelte file, it doesn't need to be in here
+
+// TODO)) we can move this over to the relevant svelte file, it doesn't need to be in here
 // export type PopulatedSnippet = {
 //   id: string;
 // } & SnippetInfo &

@@ -11,11 +11,7 @@ export const settings = storage.defineItem<Types.Settings>("local:globalSettings
 
     themeFlavour: "mocha",
     themeAccent: "mauve",
-    themeLogo: {
-      name: "ST Rainbow",
-      id: "st-rainbow",
-      url: "https://schooltape.github.io/schooltape-ctp.svg",
-    },
+    themeLogo: "schooltape-rainbow",
 
     userSnippets: {},
     urls: ["https://help.schoolbox.com.au"],
