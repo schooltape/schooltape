@@ -1,29 +1,19 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import Slider from "./inputs/Slider.svelte";
 
-  export let data: any = {};
   export let title = "";
-  export let key = "";
+  export let checked: boolean;
 
-  async function setStorage() {
-    switch (key) {
-      case "plugins":
-        await pluginSettings.setValue(data);
-        break;
-      case "themes":
-        await themeSettings.setValue(data);
-        break;
-      case "snippets":
-        await snippetSettings.setValue(data);
-        break;
-      default:
-        await globalSettings.setValue(data);
-        browser.storage.local.set({ settings: data });
-    }
+  const dispatch = createEventDispatcher();
+
+  function handleChange(event: CustomEvent) {
+    checked = event.detail.checked;
+    dispatch("change", { checked });
   }
 </script>
 
 <label for="theme-toggle" class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
   <h2>{title}</h2>
-  <Slider id="theme-toggle" bind:checked={data.toggle} onChange={setStorage} size="big" />
+  <Slider id="theme-toggle" size="big" bind:checked on:change={handleChange} />
 </label>

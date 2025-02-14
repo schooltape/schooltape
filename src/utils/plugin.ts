@@ -1,15 +1,50 @@
-export async function defineStPlugin(pluginID: string, injectLogic: () => void) {
-  let plugin = populateItems((await pluginSettings.getValue()).plugins, PLUGIN_INFO, "plugin").find(
-    (plugin) => plugin.id === pluginID,
-  );
-  let settings = await globalSettings.getValue();
-  let plugins = await pluginSettings.getValue();
+export async function defineStPlugin(
+  pluginId: PluginId,
+  injectLogic: (pluginId: PluginId) => void,
+  elementsToWaitFor: string[] = [],
+) {
+  let plugin = await plugins[pluginId].getValue();
 
-  if (plugin && typeof window !== "undefined" && settings.urls.includes(window.location.origin)) {
-    if (settings.global && plugins.toggle && plugin.toggle) {
-      // inject
-      logger.info(`Injecting plugin: ${plugin.name}`);
-      injectLogic();
+  logger.info(`${PLUGIN_INFO[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
+
+  let settings = await globalSettings.getValue();
+  let urls = await schoolboxUrls.getValue();
+
+  if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
+    if (settings.global && settings.plugins && plugin.toggle) {
+      const injectPlugin = () => {
+        // wait for elements to be loaded
+        if (elementsToWaitFor.length > 0) {
+          const observer = new MutationObserver((mutations, observer) => {
+            const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
+            if (allElementsPresent) {
+              observer.disconnect();
+              logger.info(`all elements present, injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+              injectLogic(pluginId);
+            }
+          });
+
+          observer.observe(document.body, { childList: true, subtree: true });
+
+          // Check if elements are already present
+          const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
+          if (allElementsPresent) {
+            observer.disconnect();
+            logger.info(`all elements already present, injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+            injectLogic(pluginId);
+          }
+        } else {
+          // no elements to wait for
+          logger.info(`injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+          injectLogic(pluginId);
+        }
+      };
+
+      if (document.body) {
+        injectPlugin();
+      } else {
+        document.addEventListener("DOMContentLoaded", injectPlugin);
+      }
     }
   }
 }
