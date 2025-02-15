@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.13](https://github.com/schooltape/schooltape/compare/v3.2.12...v3.2.13) (2025-02-13)
+
+
+### Bug Fixes
+
+* **popup:** version number in footer ([a03cf03](https://github.com/schooltape/schooltape/commit/a03cf034356bd47615a9c9a4cf2e81da47c2580c))
+
 ## [3.2.12](https://github.com/schooltape/schooltape/compare/v3.2.11...v3.2.12) (2025-02-13)
 
 
