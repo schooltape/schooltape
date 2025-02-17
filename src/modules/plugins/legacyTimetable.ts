@@ -1,5 +1,10 @@
+const fb: StPlugin = {
+  toggle: true,
+  id: "legacyTimetable",
+};
+
 export default async function defineWxtPlugin() {
-  defineStPlugin("legacyTimetable", () => {
+  defineStPlugin(() => {
     if (window.location.pathname === "/" && document.querySelector(".timetable")) {
       // get the timetable container and add the 'columns' class
       let timetableContainer = document.querySelector("[data-timetable-container]");
@@ -12,5 +17,5 @@ export default async function defineWxtPlugin() {
         }
       }
     }
-  });
+  }, fb);
 }

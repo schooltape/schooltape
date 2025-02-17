@@ -1,6 +1,6 @@
 // === Global ===
 // settings for plugins and in-built snippets are stored in individual WXT storage items
-export type Settings = {
+export interface Settings {
   global: boolean;
   plugins: boolean;
   themes: boolean;
@@ -17,25 +17,25 @@ export type Settings = {
 
   // whether the settings require a refresh
   needsRefresh: boolean;
-};
+}
 
 // === Themes ===
 export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";
 
 // hardcoded, see constants.ts
-export type LogoInfo = {
+export interface LogoInfo {
   name: string;
   url: string;
   disable?: boolean; // whether the icon should be injected or not
   adaptive?: boolean; // whether the icon should follow the accent colour
-};
+}
 
 // === Plugins ===
-export type Plugin = {
+export interface StPlugin {
   id: PluginId;
   toggle: boolean;
   // extend this type for plugin-specific settings
-};
+}
 
 export type PluginId =
   | "subheader"
@@ -48,12 +48,13 @@ export type PluginId =
   | "legacyTimetable";
 
 // hardcoded, see constants.ts
-export type PluginInfo = {
+export interface PluginInfo {
   name: string;
   description: string;
   order: number;
-};
+}
 
+export interface PopulatedPlugin extends StPlugin, PluginInfo {}
 // TODO)) we can move this over to the relevant svelte file, it doesn't need to be in here
 // export type PopulatedPlugin = {
 //   id: string;
@@ -61,28 +62,28 @@ export type PluginInfo = {
 //   PluginData;
 
 // === Snippets ===
-export type Snippet = {
+export interface Snippet {
   id: SnippetId;
   toggle: boolean;
   // extend this type for snippet-specific settings
-};
+}
 
-export type UserSnippet = {
+export interface UserSnippet {
   author: string;
   name: string;
   description: string;
   url: string;
   toggle: boolean;
-};
+}
 
 export type SnippetId = "hidePfp" | "censor";
 
 // hardcoded, see constants.ts
-export type SnippetInfo = {
+export interface SnippetInfo {
   name: string;
   description: string;
   order: number;
-};
+}
 
 // TODO)) we can move this over to the relevant svelte file, it doesn't need to be in here
 // export type PopulatedSnippet = {

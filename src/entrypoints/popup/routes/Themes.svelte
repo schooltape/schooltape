@@ -24,7 +24,7 @@
   ];
   const logos = LOGOS;
 
-  let themes = themeSettings.defaultValue;
+  let themes = themeSettings.fallback;
   let showModal = false;
 
   onMount(async () => {

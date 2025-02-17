@@ -3,25 +3,27 @@
   import active from "svelte-spa-router/active";
   import Home from "./routes/Home.svelte";
   import Plugins from "./routes/Plugins.svelte";
-  import Themes from "./routes/Themes.svelte";
-  import Snippets from "./routes/Snippets.svelte";
+  // import Themes from "./routes/Themes.svelte";
+  // import Snippets from "./routes/Snippets.svelte";
   import Banner from "./components/Banner.svelte";
+
   import { flavors } from "@catppuccin/palette";
   import { onMount, onDestroy } from "svelte";
 
   const routes = {
     "/": Home,
     "/plugins": Plugins,
-    "/themes": Themes,
-    "/snippets": Snippets,
+    // "/themes": Themes,
+    // "/snippets": Snippets,
   };
   let flavour = "";
   let accent = "";
   let accentHex = "";
-  let settings = globalSettings.defaultValue;
+  let settings = globalSettings.fallback;
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
+    // @ts-ignore
     const urls = (await globalSettings.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
@@ -33,11 +35,6 @@
     hideBanner();
     refreshSchoolboxURLs();
   }
-
-  let themesUnwatch: () => void;
-  let settingsUnwatch: () => void;
-  let snippetsUnwatch: () => void;
-  let pluginsUnwatch: () => void;
 
   function showBanner() {
     settings.needsRefresh = true;
@@ -57,35 +54,28 @@
     return `${x.r}, ${x.g}, ${x.b}`;
   }
 
+  let settingsUnwatch: () => void;
+
   onMount(async () => {
     settings = await globalSettings.getValue();
-    flavour = (await themeSettings.getValue()).flavour;
-    accent = (await themeSettings.getValue()).accent;
-    accentHex = getAccentHex(accent, flavour);
+    accentHex = getAccentHex(settings.themeAccent, settings.themeFlavour);
     document.documentElement.style.setProperty("--ctp-accent", accentHex);
-    themesUnwatch = themeSettings.watch((newValue) => {
-      flavour = newValue.flavour;
-      accent = newValue.accent;
-      accentHex = getAccentHex(accent, flavour);
-      document.documentElement.style.setProperty("--ctp-accent", accentHex);
-      showBanner();
-    });
+    // TODO)) make sure changing plugins also triggers the banner
+    // @ts-ignore
     settingsUnwatch = globalSettings.watch((newValue, oldValue) => {
-      console.log(newValue);
       settings = newValue;
-      if (oldValue.needsRefresh === newValue.needsRefresh) {
-        showBanner();
-      }
+      flavour = newValue.themeFlavour;
+      accent = newValue.themeAccent;
+
+      accentHex = getAccentHex(accent, flavour);
+
+      document.documentElement.style.setProperty("--ctp-accent", accentHex);
+      // showBanner();
     });
-    snippetsUnwatch = snippetSettings.watch(showBanner);
-    pluginsUnwatch = pluginSettings.watch(showBanner);
   });
 
   onDestroy(() => {
-    themesUnwatch();
     settingsUnwatch();
-    snippetsUnwatch();
-    pluginsUnwatch();
   });
 </script>
 

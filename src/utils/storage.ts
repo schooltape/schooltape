@@ -1,7 +1,7 @@
 import * as Types from "./types";
 
 // Global settings
-export const settings = storage.defineItem<Types.Settings>("local:globalSettings", {
+export const globalSettings = storage.defineItem<Types.Settings>("local:globalSettings", {
   version: 1,
   fallback: {
     global: true,
