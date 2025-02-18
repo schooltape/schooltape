@@ -1,3 +1,4 @@
+// Global
 export interface Settings {
   global: boolean;
   plugins: boolean;
@@ -32,4 +33,44 @@ export interface UserSnippet {
   description: string;
   url: string;
   toggle: boolean;
+}
+
+// Plugins
+export type PluginId =
+  | "subheader"
+  | "scrollSegments"
+  | "scrollPeriod"
+  | "modernIcons"
+  | "tabTitle"
+  | "homepageSwitcher"
+  | "timetableLabels"
+  | "legacyTimetable";
+
+export interface PluginInfo {
+  name: string;
+  description: string;
+  order: number;
+}
+
+export interface PluginGeneric {
+  toggle: boolean;
+  // extend this type for plugin-specific settings
+}
+
+export interface TabTitle extends PluginGeneric {
+  showSubjectPrefix: boolean;
+}
+
+// Snippets
+export type SnippetId = "hidePfp" | "censor";
+
+export interface SnippetInfo {
+  name: string;
+  description: string;
+  order: number;
+}
+
+export interface SnippetGeneric {
+  toggle: boolean;
+  // extend this type for snippet-specific settings
 }
