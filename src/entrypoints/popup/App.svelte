@@ -3,7 +3,7 @@
   import active from "svelte-spa-router/active";
   import Home from "./routes/Home.svelte";
   import Plugins from "./routes/Plugins.svelte";
-  // import Themes from "./routes/Themes.svelte";
+  import Themes from "./routes/Themes.svelte";
   // import Snippets from "./routes/Snippets.svelte";
   import Banner from "./components/Banner.svelte";
 
@@ -13,7 +13,7 @@
   const routes = {
     "/": Home,
     "/plugins": Plugins,
-    // "/themes": Themes,
+    "/themes": Themes,
     // "/snippets": Snippets,
   };
   let flavour = "";
@@ -58,7 +58,9 @@
 
   onMount(async () => {
     settings = await globalSettings.getValue();
-    accentHex = getAccentHex(settings.themeAccent, settings.themeFlavour);
+    accent = settings.themeAccent;
+    flavour = settings.themeFlavour;
+    accentHex = getAccentHex(accent, flavour);
     document.documentElement.style.setProperty("--ctp-accent", accentHex);
     // TODO)) make sure changing plugins also triggers the banner
     // @ts-ignore
