@@ -8,10 +8,18 @@
   }
 
   let populatedPlugins: PopulatedPlugin[] = [];
+  let pluginsToggle: boolean = true;
 
   onMount(async () => {
     populatedPlugins = await populatePlugins();
+    pluginsToggle = await globalSettings.getValue().then((settings) => settings.plugins);
   });
+
+  async function handleToggleChange(event: CustomEvent) {
+    let settings = await globalSettings.getValue();
+    settings.plugins = event.detail.checked;
+    await globalSettings.setValue(settings);
+  }
 
   async function populatePlugins(): Promise<PopulatedPlugin[]> {
     const populatedPlugins: PopulatedPlugin[] = [];
@@ -41,7 +49,7 @@
     if (item) {
       item.toggle = toggled;
       await plugins[pluginId].setValue(item);
-      console.log(`Toggled ${pluginId} to ${toggled}`);
+      logger.info(`Toggled ${pluginId} to ${toggled}`);
     } else {
       logger.error(`Failed to toggle ${pluginId}, not found in storage`);
     }
@@ -49,7 +57,7 @@
 </script>
 
 <div id="card">
-  <Title title="Plugins" />
+  <Title title="Plugins" bind:checked={pluginsToggle} on:change={handleToggleChange} />
 
   <div class="plugins-container">
     {#each populatedPlugins as plugin}
@@ -57,7 +65,7 @@
         <Slider
           id={plugin.id}
           bind:checked={plugin.toggle}
-          onChange={() => togglePlugin(plugin.id, plugin.toggle)}
+          on:change={() => togglePlugin(plugin.id, plugin.toggle)}
           text={plugin.name}
           description={plugin.description}
           size="small" />
