@@ -24,7 +24,7 @@ export function injectCatppuccin(flavour: string, accent: string) {
   injectStyles(styleText);
 }
 
-export function injectLogo(logo: LogoDetails) {
+export function injectLogo(logo: LogoInfo) {
   let url = logo.url;
   if (!url.startsWith("http")) {
     url = browser.runtime.getURL(url as any);
@@ -65,21 +65,21 @@ export function injectStylesheet(url: any) {
   document.head.appendChild(link);
 }
 
-export async function injectSnippets() {
+export async function injectSnippets(userSnippets: Record<string, UserSnippet>) {
   logger.info("[content-utils] Injecting snippets");
+  // TODO))
   // inbuilt snippets
-  const snippets = await snippetSettings.getValue();
-  const populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  populatedSnippets.forEach((snippet) => {
-    if (snippet.toggle) {
-      injectStylesheet(`/snippets/${snippet.id}.css`);
-    }
-  });
+  // const populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
+  // populatedSnippets.forEach((snippet) => {
+  //   if (snippet.toggle) {
+  //     injectStylesheet(`/snippets/${snippet.id}.css`);
+  //   }
+  // });
   // user snippets
-  for (let snippetID in snippets.user) {
-    let userSnippet = snippets.user[snippetID];
+  Object.keys(userSnippets).forEach((snippetId) => {
+    let userSnippet = userSnippets[snippetId];
     if (userSnippet.toggle) {
-      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetID}/raw`)
+      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetId}/raw`)
         .then((response) => response.text())
         .then((css) => {
           let style = document.createElement("style");
@@ -88,40 +88,41 @@ export async function injectSnippets() {
           document.head.appendChild(style);
         });
     }
-  }
+  });
 }
 
 // This is used in Plugins.svelte and Snippets.svelte to populate the items in the list
-type ItemType = "plugin" | "snippet";
+// type ItemType = "plugin" | "snippet";
 // Define a generic function with a conditional return type
-export function populateItems<T extends ItemType>(
-  data: Record<string, PluginData> | Record<string, SnippetData>,
-  info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
-  type: T,
-): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
-  // console.log(data, info, type);
-  return Object.entries(info)
-    .sort((a, b) => a[1].order - b[1].order)
-    .map(([key, value]) => {
-      // console.log(key, value);
-      // console.log(data[key]);
-      if (type === "plugin") {
-        const populatedItem: PopulatedPlugin = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        if (data.settings) {
-          populatedItem.settings = data.settings;
-        }
-        return populatedItem;
-      } else {
-        const populatedItem: PopulatedSnippet = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        return populatedItem;
-      }
-    });
-}
+// TODO)) remove
+// export function populateItems<T extends ItemType>(
+//   data: Record<string, PluginData> | Record<string, SnippetData>,
+//   info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
+//   type: T,
+// ): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
+//   // console.log(data, info, type);
+//   return Object.entries(info)
+//     .sort((a, b) => a[1].order - b[1].order)
+//     .map(([key, value]) => {
+//       // console.log(key, value);
+//       // console.log(data[key]);
+//       if (type === "plugin") {
+//         const populatedItem: PopulatedPlugin = {
+//           id: key,
+//           ...value,
+//           ...data[key],
+//         };
+//         if (data.settings) {
+//           populatedItem.settings = data.settings;
+//         }
+//         return populatedItem;
+//       } else {
+//         const populatedItem: PopulatedSnippet = {
+//           id: key,
+//           ...value,
+//           ...data[key],
+//         };
+//         return populatedItem;
+//       }
+//     });
+// }

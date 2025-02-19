@@ -1,5 +1,5 @@
 export default defineWxtPlugin(() => {
-  defineStPlugin("subheader", () => {
+  defineStPlugin("subheader", (pluginId) => {
     let style = document.createElement("style");
     style.classList = "schooltape";
     style.innerHTML = `

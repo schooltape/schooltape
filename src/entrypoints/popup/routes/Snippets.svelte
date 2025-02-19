@@ -4,7 +4,7 @@
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  let snippets = snippetSettings.defaultValue;
+  let snippets = snippetSettings.fallback;
   let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
   console.log(populatedSnippets);
 

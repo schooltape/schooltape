@@ -1,7 +1,7 @@
 import styleText from "./styles.css?inline";
 
 export default async function defineWxtPlugin() {
-  defineStPlugin("modernIcons", () => {
+  defineStPlugin("modernIcons", (pluginId) => {
     // [className, iconName] (material icons)
     const icons = [
       ["icon-teacher", "school"],

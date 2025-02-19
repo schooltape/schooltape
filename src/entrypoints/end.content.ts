@@ -4,7 +4,6 @@ export default defineContentScript({
   excludeMatches: ["*://*/learning/quiz/*"],
   async main() {
     let settings = await globalSettings.getValue();
-    // let plugins = await pluginSettings.getValue();
 
     if (!settings.global) return;
     let footer = document.querySelector("#footer > ul");
