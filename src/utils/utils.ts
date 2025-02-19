@@ -65,16 +65,8 @@ export function injectStylesheet(url: any) {
   document.head.appendChild(link);
 }
 
-export async function injectSnippets(userSnippets: Record<string, UserSnippet>) {
+export async function injectUserSnippets(userSnippets: Record<string, UserSnippet>) {
   logger.info("[content-utils] Injecting snippets");
-  // TODO))
-  // inbuilt snippets
-  // const populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  // populatedSnippets.forEach((snippet) => {
-  //   if (snippet.toggle) {
-  //     injectStylesheet(`/snippets/${snippet.id}.css`);
-  //   }
-  // });
   // user snippets
   Object.keys(userSnippets).forEach((snippetId) => {
     let userSnippet = userSnippets[snippetId];
@@ -90,39 +82,3 @@ export async function injectSnippets(userSnippets: Record<string, UserSnippet>) 
     }
   });
 }
-
-// This is used in Plugins.svelte and Snippets.svelte to populate the items in the list
-// type ItemType = "plugin" | "snippet";
-// Define a generic function with a conditional return type
-// TODO)) remove
-// export function populateItems<T extends ItemType>(
-//   data: Record<string, PluginData> | Record<string, SnippetData>,
-//   info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
-//   type: T,
-// ): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
-//   // console.log(data, info, type);
-//   return Object.entries(info)
-//     .sort((a, b) => a[1].order - b[1].order)
-//     .map(([key, value]) => {
-//       // console.log(key, value);
-//       // console.log(data[key]);
-//       if (type === "plugin") {
-//         const populatedItem: PopulatedPlugin = {
-//           id: key,
-//           ...value,
-//           ...data[key],
-//         };
-//         if (data.settings) {
-//           populatedItem.settings = data.settings;
-//         }
-//         return populatedItem;
-//       } else {
-//         const populatedItem: PopulatedSnippet = {
-//           id: key,
-//           ...value,
-//           ...data[key],
-//         };
-//         return populatedItem;
-//       }
-//     });
-// }

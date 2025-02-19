@@ -21,7 +21,7 @@ export default defineContentScript({
 
       // inject snippets
       if (settings.snippets) {
-        injectSnippets(settings.userSnippets);
+        injectUserSnippets(settings.userSnippets);
       }
     }
   },
