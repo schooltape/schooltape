@@ -7,41 +7,30 @@
     id: PluginId;
   }
 
-  let populatedPlugins: PopulatedPlugin[] = populatePlugins();
+  let populatedPlugins: PopulatedPlugin[] = [];
 
   onMount(async () => {
-    for (const plugin of populatedPlugins) {
-      const item = await plugins[plugin.id].getValue();
-      if (item) {
-        console.log(`Got ${plugin.id}, set toggle to ${item.toggle}`);
-        plugin.toggle = item.toggle;
-      } else {
-        logger.error(`Failed to get ${plugin.id}, not found in storage`);
-      }
-    }
-    // trigger reactivity
-    populatedPlugins = [...populatedPlugins];
+    populatedPlugins = await populatePlugins();
   });
 
-  function populatePlugin(pluginId: PluginId, plugin: PluginGeneric, pluginInfo: PluginInfo): PopulatedPlugin {
-    return {
-      id: pluginId,
-      ...plugin,
-      ...pluginInfo,
-    };
-  }
-  function populatePlugins(): PopulatedPlugin[] {
-    let populatedPlugins: PopulatedPlugin[] = [];
+  async function populatePlugins(): Promise<PopulatedPlugin[]> {
+    const populatedPlugins: PopulatedPlugin[] = [];
 
     for (const pluginId of Object.keys(plugins) as PluginId[]) {
-      let plugin = plugins[pluginId].fallback;
-
+      const plugin = plugins[pluginId].fallback;
       const pluginInfo = PLUGIN_INFO[pluginId];
-      if (plugin && pluginInfo) {
-        populatedPlugins.push(populatePlugin(pluginId, plugin, pluginInfo));
-      } else {
-        logger.error(`Plugin ${pluginId} not found in storage`);
-      }
+
+      const populatedPlugin: PopulatedPlugin = {
+        id: pluginId,
+        ...plugin,
+        ...pluginInfo,
+        toggle: false,
+      };
+
+      const item = await plugins[pluginId].getValue();
+      populatedPlugin.toggle = item.toggle;
+
+      populatedPlugins.push(populatedPlugin);
     }
 
     return populatedPlugins;
