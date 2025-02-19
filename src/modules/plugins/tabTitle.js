@@ -1,5 +1,5 @@
 export default defineWxtPlugin(() => {
-  defineStPlugin("tabTitle", () => {
+  defineStPlugin("tabTitle", (pluginId) => {
     try {
       if (document.getElementById("heading")) {
         document.title = document.getElementById("heading").getAttribute("value");

@@ -49,7 +49,6 @@ export type PluginId =
 export interface PluginInfo {
   name: string;
   description: string;
-  order: number;
 }
 
 export interface PluginGeneric {
@@ -67,7 +66,6 @@ export type SnippetId = "hidePfp" | "censor";
 export interface SnippetInfo {
   name: string;
   description: string;
-  order: number;
 }
 
 export interface SnippetGeneric {
