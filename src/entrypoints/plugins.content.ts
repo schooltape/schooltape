@@ -12,7 +12,6 @@ import legacyTimetable from "./plugins/legacyTimetable";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
-  cssInjectionMode: "manual",
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
