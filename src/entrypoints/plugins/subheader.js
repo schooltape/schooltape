@@ -1,4 +1,4 @@
-export default defineWxtPlugin(() => {
+export default function init() {
   defineStPlugin("subheader", (pluginId) => {
     let style = document.createElement("style");
     style.classList = "schooltape";
@@ -97,4 +97,4 @@ export default defineWxtPlugin(() => {
       dateSpan.textContent = date.toDateString();
     }
   });
-});
+}

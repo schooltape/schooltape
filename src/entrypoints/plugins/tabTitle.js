@@ -1,10 +1,10 @@
-export default defineWxtPlugin(() => {
+export default function init() {
   defineStPlugin("tabTitle", (pluginId) => {
     try {
       if (document.getElementById("heading")) {
         document.title = document.getElementById("heading").getAttribute("value");
       }
-    } catch (error) {}
+    } catch (error) { }
 
     const path = window.location.pathname;
     const titleMap = {
@@ -41,4 +41,4 @@ export default defineWxtPlugin(() => {
       document.title = document.getElementsByTagName("h1")[0].innerText;
     }
   });
-});
+}

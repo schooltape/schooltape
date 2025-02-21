@@ -1,4 +1,4 @@
-export default defineWxtPlugin(() => {
+export default function init() {
   defineStPlugin("timetableLabels", (pluginId) => {
     function inject() {
       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -11,4 +11,4 @@ export default defineWxtPlugin(() => {
     }
     setTimeout(inject, 500);
   });
-});
+}

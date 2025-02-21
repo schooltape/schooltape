@@ -1,4 +1,4 @@
-export default async function defineWxtPlugin() {
+export default function init() {
   defineStPlugin("homepageSwitcher", (pluginId) => {
     let logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
     logos.forEach((logo) => {

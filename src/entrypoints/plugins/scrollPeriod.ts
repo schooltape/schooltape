@@ -1,4 +1,4 @@
-export default defineWxtPlugin(() => {
+export default function init() {
   defineStPlugin("scrollPeriod", (pluginId) => {
     const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
@@ -23,4 +23,4 @@ export default defineWxtPlugin(() => {
       }
     }
   });
-});
+}

@@ -1,6 +1,6 @@
 import styleText from "./styles.css?inline";
 
-export default async function defineWxtPlugin() {
+export default function init() {
   defineStPlugin("modernIcons", (pluginId) => {
     // [className, iconName] (material icons)
     const icons = [

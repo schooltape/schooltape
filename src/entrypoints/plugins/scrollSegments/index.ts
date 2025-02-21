@@ -1,6 +1,6 @@
 import styleText from "./styles.css?inline";
 
-export default defineWxtPlugin(() => {
+export default function init() {
   defineStPlugin("scrollSegments", (pluginId) => {
     const content = document.getElementById("content");
     const footer = document.getElementById("footer");
@@ -9,4 +9,4 @@ export default defineWxtPlugin(() => {
     }
     injectStyles(styleText);
   });
-});
+}

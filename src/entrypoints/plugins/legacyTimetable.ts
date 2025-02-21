@@ -1,4 +1,4 @@
-export default async function defineWxtPlugin() {
+export default function init() {
   defineStPlugin("legacyTimetable", (pluginId) => {
     if (window.location.pathname === "/" && document.querySelector(".timetable")) {
       // get the timetable container and add the 'columns' class
