@@ -3,6 +3,7 @@
   "version": "3.2.13",
   "author": "42willow",
   "homepage": "https://schooltape.github.io",
+  "packageManager": "pnpm@9.12.3",
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "^0.1.6",
