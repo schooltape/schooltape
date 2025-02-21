@@ -1,7 +1,7 @@
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_end",
-  excludeMatches: ["*://*/learning/quiz/*"],
+  excludeMatches: EXCLUDE_MATCHES,
   async main() {
     let settings = await globalSettings.getValue();
 

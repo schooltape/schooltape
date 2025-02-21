@@ -1,6 +1,7 @@
 import * as Types from "./types";
 
 // Global
+export const EXCLUDE_MATCHES: string[] = ["*://*/learning/quiz/*"];
 export const LOGO_INFO: Record<Types.LogoId, Types.LogoInfo> = {
   default: {
     name: "Default",
