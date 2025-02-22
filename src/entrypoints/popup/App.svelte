@@ -4,7 +4,7 @@
   import Home from "./routes/Home.svelte";
   import Plugins from "./routes/Plugins.svelte";
   import Themes from "./routes/Themes.svelte";
-  // import Snippets from "./routes/Snippets.svelte";
+  import Snippets from "./routes/Snippets.svelte";
   import Banner from "./components/Banner.svelte";
 
   import { flavors } from "@catppuccin/palette";
@@ -14,7 +14,7 @@
     "/": Home,
     "/plugins": Plugins,
     "/themes": Themes,
-    // "/snippets": Snippets,
+    "/snippets": Snippets,
   };
   let flavour = "";
   let accent = "";
