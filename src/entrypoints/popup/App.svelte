@@ -9,6 +9,7 @@
 
   import { flavors } from "@catppuccin/palette";
   import { onMount, onDestroy } from "svelte";
+  import { needsRefresh } from "@/utils/storage";
 
   const routes = {
     "/": Home,
@@ -20,6 +21,7 @@
   let accent = "";
   let accentHex = "";
   let settings = globalSettings.fallback;
+  let refresh = needsRefresh.fallback;
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
@@ -32,18 +34,9 @@
   }
 
   async function onBannerClick() {
-    hideBanner();
+    refresh = false;
+    needsRefresh.setValue(refresh);
     refreshSchoolboxURLs();
-  }
-
-  function showBanner() {
-    settings.needsRefresh = true;
-    globalSettings.setValue(settings);
-  }
-
-  function hideBanner() {
-    settings.needsRefresh = false;
-    globalSettings.setValue(settings);
   }
 
   function getAccentHex(accent: string, flavour: string) {
@@ -55,6 +48,7 @@
   }
 
   let settingsUnwatch: () => void;
+  let refreshUnwatch: () => void;
 
   onMount(async () => {
     settings = await globalSettings.getValue();
@@ -68,16 +62,20 @@
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
-
       accentHex = getAccentHex(accent, flavour);
 
       document.documentElement.style.setProperty("--ctp-accent", accentHex);
-      // showBanner();
+      refresh = true;
+      needsRefresh.setValue(refresh);
+    });
+    refreshUnwatch = needsRefresh.watch((newValue, oldValue) => {
+      refresh = newValue;
     });
   });
 
   onDestroy(() => {
     settingsUnwatch();
+    refreshUnwatch();
   });
 </script>
 
@@ -89,7 +87,7 @@
       <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
       <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
     </nav>
-    <Banner visible={settings.needsRefresh} on:click={onBannerClick} />
+    <Banner visible={refresh} on:click={onBannerClick} />
     <Router {routes} />
   </main>
 

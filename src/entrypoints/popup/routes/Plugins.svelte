@@ -53,6 +53,7 @@
     } else {
       logger.error(`Failed to toggle ${pluginId}, not found in storage`);
     }
+    await needsRefresh.setValue(true);
   }
 </script>
 

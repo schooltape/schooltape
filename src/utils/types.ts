@@ -13,9 +13,6 @@ export interface Settings {
 
   // Schoolbox URLs
   urls: string[];
-
-  // whether the settings require a refresh
-  needsRefresh: boolean;
 }
 
 export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";

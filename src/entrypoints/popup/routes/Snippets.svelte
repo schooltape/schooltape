@@ -75,6 +75,7 @@
 
   async function toggleSnippet(snippetId: SnippetId, toggled: boolean) {
     let item = await snippets[snippetId].getValue();
+    await needsRefresh.setValue(true);
     if (item) {
       item.toggle = toggled;
       await snippets[snippetId].setValue(item);

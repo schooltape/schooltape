@@ -16,8 +16,10 @@ export const globalSettings = storage.defineItem<Types.Settings>("local:globalSe
 
     userSnippets: {},
     urls: ["https://help.schoolbox.com.au"],
-    needsRefresh: false,
   },
+});
+export const needsRefresh = storage.defineItem<boolean>("local:needsRefresh", {
+  fallback: false,
 });
 
 // Plugins
