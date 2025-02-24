@@ -52,6 +52,7 @@
 
   onMount(async () => {
     settings = await globalSettings.getValue();
+    refresh = await needsRefresh.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
     accentHex = getAccentHex(accent, flavour);
