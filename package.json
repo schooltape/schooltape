@@ -6,10 +6,14 @@
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "^0.1.6",
+    "@eslint/js": "^9.21.0",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@tsconfig/svelte": "^5.0.4",
     "@wxt-dev/module-svelte": "^1.0.1",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.21.0",
+    "eslint-plugin-svelte": "^2.46.1",
+    "globals": "^16.0.0",
     "lucide-svelte": "^0.475.0",
     "pino": "^9.6.0",
     "postcss": "^8.5.2",
@@ -21,6 +25,7 @@
     "svelte-spa-router": "^4.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.25.0",
     "wxt": "^0.19.27"
   },
   "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",

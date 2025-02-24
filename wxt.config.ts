@@ -3,6 +3,11 @@ import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
+  imports: {
+    eslintrc: {
+      enabled: 9,
+    },
+  },
   manifest: {
     name: "Schooltape",
     homepage_url: "https://schooltape.github.io",
