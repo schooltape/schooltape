@@ -6,6 +6,7 @@
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "^0.1.6",
+    "@eslint/compat": "^1.2.7",
     "@eslint/js": "^9.21.0",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@tsconfig/svelte": "^5.0.4",
