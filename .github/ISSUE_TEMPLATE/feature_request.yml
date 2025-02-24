@@ -1,6 +1,6 @@
 name: Feature Request
-description: Propose a new feature or plugin
-labels: ["enhancement"]
+description: Propose a new feature or enhancement
+type: "Feature"
 assignees:
   - 42willow
 body:
@@ -8,6 +8,18 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this feature request!
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: Is your request related to plugins, themes, snippets, or something else?
+      options:
+        - Plugins
+        - Themes
+        - Snippets
+        - Other
+    validations:
+      required: true
   - type: textarea
     id: related-problem
     attributes:
@@ -34,15 +46,6 @@ body:
     id: contribute
     attributes:
       label: Would you like to contribute code to this feature?
-      description: By checking this, you agree to our https://github.com/schooltape/schooltape/blob/main/CONTRIBUTING.md
       options:
         - label: "I'm interested in contributing code to this feature"
           required: false
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/schooltape/schooltape/blob/main/CODE_OF_CONDUCT.md)
-      options:
-        - label: "I agree to follow this project's Code of Conduct"
-          required: true
