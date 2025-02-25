@@ -1,5 +1,5 @@
-export default defineWxtPlugin(() => {
-  defineStPlugin("timetableLabels", () => {
+export default function init() {
+  defineStPlugin("timetableLabels", (pluginId) => {
     function inject() {
       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       if (window.location.pathname === "/timetable" && document.getElementsByClassName("timetable")[0]) {
@@ -11,4 +11,4 @@ export default defineWxtPlugin(() => {
     }
     setTimeout(inject, 500);
   });
-});
+}

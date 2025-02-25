@@ -2,7 +2,7 @@
   import Footer from "../components/Footer.svelte";
   import { onMount } from "svelte";
 
-  let settings = globalSettings.defaultValue;
+  let settings = globalSettings.fallback;
 
   onMount(async () => {
     settings = await globalSettings.getValue();

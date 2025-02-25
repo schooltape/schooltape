@@ -1,81 +1,82 @@
+import { WxtStorageItem } from "wxt/storage";
 import * as Types from "./types";
 
-// Global settings
-export const globalSettings = storage.defineItem<Types.GlobalSettings>("local:globalSettings", {
+// Global
+export const globalSettings = storage.defineItem<Types.Settings>("local:globalSettings", {
   version: 1,
-  defaultValue: {
+  fallback: {
     global: true,
+    plugins: true,
+    themes: true,
+    snippets: true,
+
+    themeFlavour: "mocha",
+    themeAccent: "mauve",
+    themeLogo: "schooltape-rainbow",
+
+    userSnippets: {},
     urls: ["https://help.schoolbox.com.au"],
-    needsRefresh: false,
   },
+});
+export const needsRefresh = storage.defineItem<boolean>("local:needsRefresh", {
+  fallback: false,
 });
 
-// Snippet settings
-export const snippetSettings = storage.defineItem<Types.SnippetSettings>("local:snippetSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    snippets: {
-      hidePfp: {
-        toggle: true,
-      },
-      censor: {
-        toggle: false,
-      },
+// Plugins
+export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric, any>> = {
+  subheader: storage.defineItem<Types.PluginGeneric>("local:plugin-subheader", {
+    fallback: {
+      toggle: true,
     },
-    user: {},
-  },
-});
+  }),
+  scrollSegments: storage.defineItem<Types.PluginGeneric>("local:plugin-scrollSegments", {
+    fallback: {
+      toggle: true,
+    },
+  }),
+  scrollPeriod: storage.defineItem<Types.PluginGeneric>("local:plugin-scrollPeriod", {
+    fallback: {
+      toggle: true,
+    },
+  }),
+  modernIcons: storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
+    fallback: {
+      toggle: true,
+    },
+  }),
+  tabTitle: storage.defineItem<Types.TabTitle>("local:plugin-tabTitle", {
+    fallback: {
+      toggle: true,
+      showSubjectPrefix: true,
+    },
+  }),
+  homepageSwitcher: storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {
+    fallback: {
+      toggle: true,
+    },
+  }),
+  timetableLabels: storage.defineItem<Types.PluginGeneric>("local:plugin-timetableLabels", {
+    fallback: {
+      toggle: true,
+    },
+  }),
+  legacyTimetable: storage.defineItem<Types.PluginGeneric>("local:plugin-legacyTimetable", {
+    fallback: {
+      toggle: false,
+    },
+  }),
+};
 
-// Plugin settings
-// Plugins considered very cross-compatible between Schoolbox instances are enabled by default
-export const pluginSettings = storage.defineItem<Types.PluginSettings>("local:pluginSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    plugins: {
-      subheader: {
-        toggle: true,
-        settings: {},
-      },
-      scrollSegments: {
-        toggle: true,
-      },
-      scrollPeriod: {
-        toggle: true,
-      },
-      modernIcons: {
-        toggle: true,
-        settings: {},
-      },
-      tabTitle: {
-        toggle: true,
-      },
-      homepageSwitcher: {
-        toggle: true,
-      },
-      timetableLabels: {
-        toggle: true,
-      },
-      legacyTimetable: {
-        toggle: false,
-      },
+// Snippets
+export const snippets: Record<Types.SnippetId, WxtStorageItem<Types.SnippetGeneric, any>> = {
+  hidePfp: storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePfp", {
+    fallback: {
+      toggle: true,
     },
-  },
-});
-
-// Theme settings
-export const themeSettings = storage.defineItem<Types.ThemeSettings>("local:themeSettings", {
-  version: 1,
-  defaultValue: {
-    toggle: true,
-    theme: "catppuccin",
-    flavour: "mocha",
-    accent: "mauve",
-    logo: {
-      name: "ST Rainbow",
-      id: "st-rainbow",
-      url: "https://schooltape.github.io/schooltape-ctp.svg",
+  }),
+  censor: storage.defineItem<Types.SnippetGeneric>("local:snippet-censor", {
+    fallback: {
+      toggle: false,
     },
-  },
-});
+  }),
+};
