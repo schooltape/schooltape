@@ -1,15 +1,15 @@
-export async function defineStPlugin(pluginID: string, injectLogic: () => void) {
-  let plugin = populateItems((await pluginSettings.getValue()).plugins, PLUGIN_INFO, "plugin").find(
-    (plugin) => plugin.id === pluginID,
-  );
+export async function defineStPlugin(pluginId: PluginId, injectLogic: (pluginId: PluginId) => void) {
+  let plugin = await plugins[pluginId].getValue();
+
+  logger.info(`${PLUGIN_INFO[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
+
   let settings = await globalSettings.getValue();
-  let plugins = await pluginSettings.getValue();
 
   if (plugin && typeof window !== "undefined" && settings.urls.includes(window.location.origin)) {
-    if (settings.global && plugins.toggle && plugin.toggle) {
+    if (settings.global && settings.plugins && plugin.toggle) {
       // inject
-      logger.info(`Injecting plugin: ${plugin.name}`);
-      injectLogic();
+      logger.info(`Injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+      injectLogic(pluginId);
     }
   }
 }

@@ -39,6 +39,7 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
+  // @ts-ignore
   globalSettings.watch(async (newSettings, oldSettings) => {
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
@@ -48,7 +49,13 @@ export default defineBackground(() => {
   });
 
   // listen for messages
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  interface Message {
+    resetSettings?: boolean;
+    inject?: string;
+    toTab?: string;
+  }
+  browser.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
+    let message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
     if (message.resetSettings) {
       resetSettings();
@@ -115,13 +122,8 @@ export default defineBackground(() => {
 });
 
 async function resetSettings(): Promise<void> {
-  logger.info("[background] Resetting settings");
-  await storage.removeItems([
-    "local:globalSettings",
-    "local:snippetSettings",
-    "local:pluginSettings",
-    "local:themeSettings",
-  ]);
+  logger.info("[background] Clearing local storage");
+  await storage.clear("local");
 }
 
 async function updateIcon() {

@@ -4,18 +4,48 @@
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  let snippets = snippetSettings.defaultValue;
-  let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  console.log(populatedSnippets);
+  interface PopulatedSnippet extends SnippetGeneric, SnippetInfo {
+    id: SnippetId;
+  }
+
+  let populatedSnippets: PopulatedSnippet[] = [];
+  let settings = globalSettings.fallback;
 
   let snippetURL = "";
 
   onMount(async () => {
-    snippets = await snippetSettings.getValue();
-    populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-    console.log(populatedSnippets);
-    console.log("snippets", snippets);
+    populatedSnippets = await populateSnippets();
+    settings = await globalSettings.getValue();
   });
+
+  async function populateSnippets(): Promise<PopulatedSnippet[]> {
+    const populatedSnippets: PopulatedSnippet[] = [];
+
+    for (const snippetId of Object.keys(snippets) as SnippetId[]) {
+      const snippet = snippets[snippetId].fallback;
+      const snippetInfo = SNIPPET_INFO[snippetId];
+
+      const populatedSnippet: PopulatedSnippet = {
+        id: snippetId,
+        ...snippet,
+        ...snippetInfo,
+        toggle: false,
+      };
+
+      const item = await snippets[snippetId].getValue();
+      populatedSnippet.toggle = item.toggle;
+
+      populatedSnippets.push(populatedSnippet);
+    }
+
+    return populatedSnippets;
+  }
+
+  async function handleToggleChange(event: CustomEvent) {
+    let settings = await globalSettings.getValue();
+    settings.snippets = event.detail.checked;
+    await globalSettings.setValue(settings);
+  }
 
   async function addUserSnippet() {
     if (!snippetURL.startsWith("http") && !snippetURL.includes("gist.github.com")) {
@@ -33,34 +63,42 @@
     let sections = snippetURL.split("/");
     let key = sections[sections.length - 1].split(".")[0];
 
-    snippets.user[key] = {
+    settings.userSnippets[key] = {
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
       description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
       url: snippetURL,
       toggle: true,
     };
-    await snippetSettings.setValue(snippets);
+    await globalSettings.setValue(settings);
   }
 
-  async function toggleSnippet(snippetId: string, toggled: boolean, isUser: boolean = false) {
-    if (isUser) {
-      snippets.user[snippetId].toggle = toggled;
+  async function toggleSnippet(snippetId: SnippetId, toggled: boolean) {
+    let item = await snippets[snippetId].getValue();
+    await needsRefresh.setValue(true);
+    if (item) {
+      item.toggle = toggled;
+      await snippets[snippetId].setValue(item);
+      logger.info(`Toggled ${snippetId} to ${toggled}`);
     } else {
-      snippets.snippets[snippetId].toggle = toggled;
+      logger.error(`Failed to toggle ${snippetId}, not found in storage`);
     }
-    await snippetSettings.setValue(snippets);
+  }
+
+  async function toggleUserSnippet(snippetId: string, toggled: boolean) {
+    settings.userSnippets[snippetId].toggle = toggled;
+    await globalSettings.setValue(settings);
   }
 
   async function removeUserSnippet(snippetId: string) {
-    delete snippets.user[snippetId];
-    snippets.user = snippets.user; // force reactivity
-    await snippetSettings.setValue(snippets);
+    delete settings.userSnippets[snippetId];
+    settings.userSnippets = settings.userSnippets; // force reactivity
+    await globalSettings.setValue(settings);
   }
 </script>
 
 <div id="card">
-  <Title title="Snippets" data={snippets} key="snippets" />
+  <Title title="Snippets" bind:checked={settings.snippets} on:change={handleToggleChange} />
 
   <div class="snippets-container w-full">
     {#each populatedSnippets as snippet}
@@ -68,7 +106,7 @@
         <Slider
           id={snippet.id}
           bind:checked={snippet.toggle}
-          onChange={() => toggleSnippet(snippet.id, snippet.toggle)}
+          on:change={() => toggleSnippet(snippet.id, snippet.toggle)}
           text={snippet.name}
           description={snippet.description}
           size="small" />
@@ -90,12 +128,12 @@
   </div>
 
   <div class="user-snippets-container w-full">
-    {#each Object.entries(snippets.user) as [key, snippet] (key)}
+    {#each Object.entries(settings.userSnippets) as [key, snippet] (key)}
       <div class="my-4 group w-full">
         <Slider
           id={key}
           bind:checked={snippet.toggle}
-          onChange={() => toggleSnippet(key, snippet.toggle, true)}
+          on:change={() => toggleUserSnippet(key, snippet.toggle)}
           text={snippet.name}
           description={snippet.description}
           size="small" />

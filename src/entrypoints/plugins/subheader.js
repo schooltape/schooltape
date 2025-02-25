@@ -1,5 +1,5 @@
-export default defineWxtPlugin(() => {
-  defineStPlugin("subheader", () => {
+export default function init() {
+  defineStPlugin("subheader", (pluginId) => {
     let style = document.createElement("style");
     style.classList = "schooltape";
     style.innerHTML = `
@@ -97,4 +97,4 @@ export default defineWxtPlugin(() => {
       dateSpan.textContent = date.toDateString();
     }
   });
-});
+}
