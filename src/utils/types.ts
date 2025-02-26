@@ -10,9 +10,6 @@ export interface Settings {
   themeLogo: LogoId;
 
   userSnippets: Record<string, UserSnippet>;
-
-  // Schoolbox URLs
-  urls: string[];
 }
 
 export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";

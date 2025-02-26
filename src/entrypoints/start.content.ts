@@ -8,8 +8,9 @@ export default defineContentScript({
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
     let settings = await globalSettings.getValue();
+    let urls = await schoolboxUrls.getValue();
 
-    if (settings.global && settings.urls.includes(window.location.origin)) {
+    if (settings.global && urls.includes(window.location.origin)) {
       // inject themes
       if (settings.themes) {
         injectStylesheet(cssUrl);

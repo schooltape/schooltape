@@ -4,6 +4,7 @@ export default defineContentScript({
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
     let settings = await globalSettings.getValue();
+    let urls = await schoolboxUrls.getValue();
 
     if (!settings.global) return;
     let footer = document.querySelector("#footer > ul");
@@ -15,11 +16,11 @@ export default defineContentScript({
       footerListItem.appendChild(footerLink);
       footer.appendChild(footerListItem);
 
-      if (!settings.urls.includes(window.location.origin)) {
+      if (!urls.includes(window.location.origin)) {
         logger.info("[end.content.ts] URL not in settings, adding...");
-        if (!settings.urls.includes(window.location.origin)) {
-          settings.urls.push(window.location.origin);
-          await globalSettings.setValue(settings);
+        if (!urls.includes(window.location.origin)) {
+          urls.push(window.location.origin);
+          await schoolboxUrls.setValue(urls);
           // TODO: hot reload
           window.location.reload();
         }

@@ -25,8 +25,7 @@
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    // @ts-ignore
-    const urls = (await globalSettings.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
+    const urls = (await schoolboxUrls.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
       browser.tabs.reload(tab.id);
@@ -58,7 +57,6 @@
     accentHex = getAccentHex(accent, flavour);
     document.documentElement.style.setProperty("--ctp-accent", accentHex);
     // TODO)) make sure changing plugins also triggers the banner
-    // @ts-ignore
     settingsUnwatch = globalSettings.watch((newValue, oldValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;

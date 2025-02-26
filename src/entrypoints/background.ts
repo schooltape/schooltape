@@ -39,7 +39,6 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
-  // @ts-ignore
   globalSettings.watch(async (newSettings, oldSettings) => {
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);

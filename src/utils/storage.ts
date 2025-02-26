@@ -15,11 +15,13 @@ export const globalSettings = storage.defineItem<Types.Settings>("local:globalSe
     themeLogo: "schooltape-rainbow",
 
     userSnippets: {},
-    urls: ["https://help.schoolbox.com.au"],
   },
 });
 export const needsRefresh = storage.defineItem<boolean>("local:needsRefresh", {
   fallback: false,
+});
+export const schoolboxUrls = storage.defineItem<string[]>("local:urls", {
+  fallback: ["https://help.schoolbox.com.au"],
 });
 
 // Plugins
