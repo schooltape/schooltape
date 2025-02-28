@@ -56,7 +56,7 @@
     flavour = settings.themeFlavour;
     accentHex = getAccentHex(accent, flavour);
     document.documentElement.style.setProperty("--ctp-accent", accentHex);
-    // TODO)) make sure changing plugins also triggers the banner
+
     settingsUnwatch = globalSettings.watch((newValue, oldValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
