@@ -5,31 +5,24 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   cssInjectionMode: "manual",
   runAt: "document_start",
-  excludeMatches: ["*://*/learning/quiz/*"],
+  excludeMatches: EXCLUDE_MATCHES,
   async main() {
     let settings = await globalSettings.getValue();
-    let themes = await themeSettings.getValue();
-    let snippets = await snippetSettings.getValue();
+    let urls = await schoolboxUrls.getValue();
 
-    globalSettings.setValue(settings);
-
-    if (settings.global && settings.urls.includes(window.location.origin)) {
+    if (settings.global && urls.includes(window.location.origin)) {
       // inject themes
-      if (themes.toggle) {
-        logger.info(themes);
+      if (settings.themes) {
         injectStylesheet(cssUrl);
-        injectCatppuccin(themes.flavour, themes.accent);
+        injectCatppuccin(settings.themeFlavour, settings.themeAccent);
       }
+
       // inject logo
-      // a.logo > img {
-      //   content: url("https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png");
-      //   max-width: 30%;
-      // }
-      injectLogo(themes.logo);
+      injectLogo(LOGO_INFO[settings.themeLogo as LogoId]);
 
       // inject snippets
-      if (snippets.toggle) {
-        injectSnippets();
+      if (settings.snippets) {
+        injectUserSnippets(settings.userSnippets);
       }
     }
   },
