@@ -98,19 +98,19 @@ The extension is available on the Chrome Web Store and the Firefox Add-ons exten
 ```bash
 git clone https://github.com/schooltape/schooltape.git
 cd schooltape
-bun install
+pnpm install
 ```
 
 #### Chrome
 
-1. Run `bun build`.
+1. Run `pnpm build`.
 2. Open the Extensions page by navigating to `chrome://extensions`.
 3. Enable Developer Mode by flipping the toggle switch labelled **Developer mode**.
 4. Click the **Load unpacked** button and select the `dist/chrome-mv3` directory from the cloned repository.
 
 #### Firefox
 
-1. Run `bun zip:firefox`.
+1. Run `pnpm zip:firefox`.
 2. Open the Add-ons page by navigating to `about:addons`.
 3. Click the cog/settings icon in line with the "Manage Your Extensions" heading, and select **Debug Add-ons**.
 4. Click the **Load Temporary Add-on...** button and select the `dist/schooltape-<version>-firefox.zip` file from the cloned repository.
@@ -122,21 +122,21 @@ bun install
 ```bash
 git clone https://github.com/schooltape/schooltape.git
 cd schooltape
-bun install
+pnpm install
 ```
 
 ### Usage
 
-To launch a browser instance with the extension loaded and a Schoolbox page already opened, run `bun dev` for Chrome or `bun dev:firefox` for Firefox.
+To launch a browser instance with the extension loaded and a Schoolbox page already opened, run `pnpm dev` for Chrome or `pnpm dev:firefox` for Firefox.
 
 To build the extension, run either:
 
-- `bun build`, where the compiled extension will be available at `dist/chrome-mv3`...
-- or `bun zip:firefox`, where the compiled and _zipped_ extension can be found at `dist/schooltape-<version>-firefox.zip`.
+- `pnpm build`, where the compiled extension will be available at `dist/chrome-mv3`...
+- or `pnpm zip:firefox`, where the compiled and _zipped_ extension can be found at `dist/schooltape-<version>-firefox.zip`.
 
 ### Publishing
 
-The [`bun wxt submit init` command](https://wxt.dev/get-started/publishing.html#automation) will walk you through each of the tokens that needs to be added for publishing to each store.
+The [`pnpm wxt submit init` command](https://wxt.dev/get-started/publishing.html#automation) will walk you through each of the tokens that needs to be added for publishing to each store.
 
 ## 💝 Thanks to
 
