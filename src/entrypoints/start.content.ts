@@ -1,5 +1,4 @@
 import cssUrl from "./catppuccin.css?url";
-import "./catppuccin.css";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
