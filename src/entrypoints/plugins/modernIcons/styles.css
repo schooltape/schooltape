@@ -20,7 +20,7 @@
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
-  color: #0066b0; /* Make icons blue */
+  color: var(--navigation-foreground) !important;
 }
 
 #top-menu > li > a::before,

@@ -1,8 +1,3 @@
-.material-icons-round,
-::placeholder {
-  color: hsl(var(--ctp-text)) !important;
-}
-
 body,
 p,
 h1,
@@ -14,7 +9,8 @@ h4,
   color: hsl(var(--ctp-text));
 }
 
-.title-section > h1 {
+.title-section > h1,
+::placeholder {
   color: hsl(var(--ctp-text)) !important;
 }
 
