@@ -119,7 +119,7 @@
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
-        href="https://github.com/schooltape/schooltape/wiki/Contributing#snippets"
+        href="https://schooltape.github.io/contributing/snippets.html#user-snippets"
         target="_blank">wiki</a
       >.
     </p>
