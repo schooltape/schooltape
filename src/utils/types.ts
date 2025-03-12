@@ -29,6 +29,19 @@ export interface UserSnippet {
   toggle: boolean;
 }
 
+// Common for plugins and snippets
+export interface ItemGeneric {
+  toggle: boolean;
+}
+export interface ItemInfo {
+  name: string;
+  description: string;
+}
+export type ItemId = PluginId | SnippetId;
+export interface PopulatedItem<T> extends ItemGeneric, ItemInfo {
+  id: T;
+}
+
 // Plugins
 export type PluginId =
   | "subheader"
@@ -40,29 +53,15 @@ export type PluginId =
   | "timetableLabels"
   | "legacyTimetable";
 
-export interface PluginInfo {
-  name: string;
-  description: string;
-}
+export interface PluginInfo extends ItemInfo {}
+export interface PluginGeneric extends ItemGeneric {}
 
-export interface PluginGeneric {
-  toggle: boolean;
-  // extend this type for plugin-specific settings
-}
-
-export interface TabTitle extends PluginGeneric {
+export interface TabTitle extends ItemGeneric {
   showSubjectPrefix: boolean;
 }
 
 // Snippets
 export type SnippetId = "hidePfp" | "censor";
 
-export interface SnippetInfo {
-  name: string;
-  description: string;
-}
-
-export interface SnippetGeneric {
-  toggle: boolean;
-  // extend this type for snippet-specific settings
-}
+export interface SnippetInfo extends ItemInfo {}
+export interface SnippetGeneric extends ItemGeneric {}
