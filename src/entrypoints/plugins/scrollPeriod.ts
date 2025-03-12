@@ -5,7 +5,7 @@ export default function init() {
       const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
-        setTimeout(updateScrollbar, 500);
+        updateScrollbar();
         setInterval(updateScrollbar, 10000);
       }
 
