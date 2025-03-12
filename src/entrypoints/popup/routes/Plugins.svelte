@@ -3,15 +3,11 @@
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
 
-  interface PopulatedPlugin extends PluginGeneric, PluginInfo {
-    id: PluginId;
-  }
-
-  let populatedPlugins: PopulatedPlugin[] = [];
+  let populatedPlugins: PopulatedItem<PluginId>[] = [];
   let pluginsToggle: boolean = true;
 
   onMount(async () => {
-    populatedPlugins = await populatePlugins();
+    populatedPlugins = await populateItems(plugins, PLUGIN_INFO);
     pluginsToggle = await globalSettings.getValue().then((settings) => settings.plugins);
   });
 
@@ -21,39 +17,8 @@
     await globalSettings.setValue(settings);
   }
 
-  async function populatePlugins(): Promise<PopulatedPlugin[]> {
-    const populatedPlugins: PopulatedPlugin[] = [];
-
-    for (const pluginId of Object.keys(plugins) as PluginId[]) {
-      const plugin = plugins[pluginId].fallback;
-      const pluginInfo = PLUGIN_INFO[pluginId];
-
-      const populatedPlugin: PopulatedPlugin = {
-        id: pluginId,
-        ...plugin,
-        ...pluginInfo,
-        toggle: false,
-      };
-
-      const item = await plugins[pluginId].getValue();
-      populatedPlugin.toggle = item.toggle;
-
-      populatedPlugins.push(populatedPlugin);
-    }
-
-    return populatedPlugins;
-  }
-
   async function togglePlugin(pluginId: PluginId, toggled: boolean): Promise<void> {
-    let item = await plugins[pluginId].getValue();
-    if (item) {
-      item.toggle = toggled;
-      await plugins[pluginId].setValue(item);
-      logger.info(`Toggled ${pluginId} to ${toggled}`);
-    } else {
-      logger.error(`Failed to toggle ${pluginId}, not found in storage`);
-    }
-    await needsRefresh.setValue(true);
+    await toggleItem(plugins, pluginId, toggled);
   }
 </script>
 

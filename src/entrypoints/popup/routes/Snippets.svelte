@@ -4,42 +4,15 @@
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  interface PopulatedSnippet extends SnippetGeneric, SnippetInfo {
-    id: SnippetId;
-  }
-
-  let populatedSnippets: PopulatedSnippet[] = [];
+  let populatedSnippets: PopulatedItem<SnippetId>[] = [];
   let settings = globalSettings.fallback;
 
   let snippetURL = "";
 
   onMount(async () => {
-    populatedSnippets = await populateSnippets();
+    populatedSnippets = await populateItems(snippets, SNIPPET_INFO);
     settings = await globalSettings.getValue();
   });
-
-  async function populateSnippets(): Promise<PopulatedSnippet[]> {
-    const populatedSnippets: PopulatedSnippet[] = [];
-
-    for (const snippetId of Object.keys(snippets) as SnippetId[]) {
-      const snippet = snippets[snippetId].fallback;
-      const snippetInfo = SNIPPET_INFO[snippetId];
-
-      const populatedSnippet: PopulatedSnippet = {
-        id: snippetId,
-        ...snippet,
-        ...snippetInfo,
-        toggle: false,
-      };
-
-      const item = await snippets[snippetId].getValue();
-      populatedSnippet.toggle = item.toggle;
-
-      populatedSnippets.push(populatedSnippet);
-    }
-
-    return populatedSnippets;
-  }
 
   async function handleToggleChange(event: CustomEvent) {
     let settings = await globalSettings.getValue();
@@ -74,15 +47,7 @@
   }
 
   async function toggleSnippet(snippetId: SnippetId, toggled: boolean) {
-    let item = await snippets[snippetId].getValue();
-    await needsRefresh.setValue(true);
-    if (item) {
-      item.toggle = toggled;
-      await snippets[snippetId].setValue(item);
-      logger.info(`Toggled ${snippetId} to ${toggled}`);
-    } else {
-      logger.error(`Failed to toggle ${snippetId}, not found in storage`);
-    }
+    await toggleItem(snippets, snippetId, toggled);
   }
 
   async function toggleUserSnippet(snippetId: string, toggled: boolean) {
