@@ -36,6 +36,13 @@ h4,
   color: hsl(var(--ctp-red));
 }
 
+/* empty state */
+/* applies to empty calendar widget on homepage */
+.empty-state p,
+.empty-state [class^="icon-"] {
+  color: hsl(var(--ctp-subtext0));
+}
+
 /* blockquotes */
 blockquote {
   background-color: hsl(var(--ctp-surface1));
