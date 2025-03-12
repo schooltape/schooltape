@@ -36,6 +36,7 @@ export async function toggleItem<T extends ItemId>(
   if (item) {
     item.toggle = toggled;
     await storage[itemId].setValue(item);
+    await needsRefresh.setValue(true);
     logger.info(`Toggled ${itemId} to ${toggled}`);
   } else {
     logger.error(`Failed to toggle ${itemId}, not found in storage`);
