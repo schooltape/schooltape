@@ -76,6 +76,11 @@ export const snippets: Record<Types.SnippetId, WxtStorageItem<Types.SnippetGener
       toggle: true,
     },
   }),
+  hidePwaPrompt: storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePwaPrompt", {
+    fallback: {
+      toggle: true,
+    },
+  }),
   censor: storage.defineItem<Types.SnippetGeneric>("local:snippet-censor", {
     fallback: {
       toggle: false,

@@ -1,4 +1,5 @@
 import hidePfp from "./snippets/hidePfp";
+import hidePwaPrompt from "./snippets/hidePwaPrompt";
 import censor from "./snippets/censor";
 
 export default defineContentScript({
@@ -7,6 +8,7 @@ export default defineContentScript({
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
     hidePfp();
+    hidePwaPrompt();
     censor();
   },
 });

@@ -73,6 +73,10 @@ export const SNIPPET_INFO: Record<Types.SnippetId, Types.SnippetInfo> = {
     name: "Hide PFP",
     description: "Hide your profile picture across Schoolbox.",
   },
+  hidePwaPrompt: {
+    name: "Hide PWA Prompt",
+    description: "Hides the prompt in the notifications menu to install Schoolbox as a PWA and enable notifications.",
+  },
   censor: {
     name: "Censor",
     description: "Censors all text and images. This is intended for development purposes.",
