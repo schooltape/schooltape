@@ -18,12 +18,13 @@
   padding-bottom: 0px;
 }
 .progress-container > td {
-  line-height: 4px;
+  line-height: 0px;
 }
 progress.progress-bar {
   -webkit-appearance: none;
   appearance: none;
   height: 7px;
+  border: none;
 }
 
 /* can't put other selectors with this */
@@ -31,7 +32,12 @@ progress.progress-bar {
 progress::-webkit-progress-value {
   background: var(--content-ui-foreground) !important;
 }
-
 progress::-webkit-progress-bar {
   background: inherit;
+}
+progress {
+  background-color: inherit;
+}
+progress::-moz-progress-bar {
+  background: var(--content-ui-foreground) !important;
 }
