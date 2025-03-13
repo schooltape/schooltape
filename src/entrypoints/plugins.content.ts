@@ -2,6 +2,7 @@
 import subheader from "./plugins/subheader";
 import scrollSegments from "./plugins/scrollSegments";
 import scrollPeriod from "./plugins/scrollPeriod";
+import progressBar from "./plugins/progressBar";
 import modernIcons from "./plugins/modernIcons";
 // @ts-ignore
 import tabTitle from "./plugins/tabTitle";
@@ -18,6 +19,7 @@ export default defineContentScript({
     subheader();
     scrollSegments();
     scrollPeriod();
+    progressBar();
     modernIcons();
     tabTitle();
     homepageSwitcher();

@@ -41,6 +41,11 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
       toggle: true,
     },
   }),
+  progressBar: storage.defineItem<Types.PluginGeneric>("local:plugin-progressBar", {
+    fallback: {
+      toggle: true,
+    },
+  }),
   modernIcons: storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
     fallback: {
       toggle: true,

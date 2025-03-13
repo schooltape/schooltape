@@ -41,6 +41,10 @@ export const PLUGIN_INFO: Record<Types.PluginId, Types.PluginInfo> = {
     name: "Scroll Segments",
     description: "Segments the Schoolbox page into scrollable sections",
   },
+  progressBar: {
+    name: "Progress Bar",
+    description: "Displays a progress bar below the timetable to show the time of the day",
+  },
   scrollPeriod: {
     name: "Scroll Period",
     description: "Scrolls to the current period on the timetable",

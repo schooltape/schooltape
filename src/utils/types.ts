@@ -47,6 +47,7 @@ export type PluginId =
   | "subheader"
   | "scrollSegments"
   | "scrollPeriod"
+  | "progressBar"
   | "modernIcons"
   | "tabTitle"
   | "homepageSwitcher"
