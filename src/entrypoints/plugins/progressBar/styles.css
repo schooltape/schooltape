@@ -1,6 +1,13 @@
 /* hides schoolbox's current period indicator */
+.timetable-subject-active {
+  border: none !important;
+}
 .timetable-subject-active:before {
   display: none;
+}
+.timetable .timetable-period-active {
+  color: inherit !important;
+  background: unset;
 }
 .timetable-subject {
   height: 130px !important;
