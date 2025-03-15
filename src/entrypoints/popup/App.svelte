@@ -17,11 +17,11 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-  let flavour = "";
+  let flavour = $state("");
   let accent = "";
   let accentHex = "";
   let settings = globalSettings.fallback;
-  let refresh = needsRefresh.fallback;
+  let refresh = $state(needsRefresh.fallback);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
@@ -78,19 +78,13 @@
   });
 </script>
 
-<body class="grid ctp-{flavour}">
-  <main class="flex flex-col items-center bg-ctp-base p-6">
-    <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
-      <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
-      <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
-      <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
-      <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
-    </nav>
-    <Banner visible={refresh} on:click={onBannerClick} />
-    <Router {routes} />
-  </main>
-
-  <!-- DEBUG
-  <button on:click={showBanner}>Show Banner</button>
-  <button on:click={hideBanner}>Hide Banner</button> -->
-</body>
+<main class="flex flex-col items-center bg-ctp-base p-6 ctp-{flavour}">
+  <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
+    <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
+    <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
+    <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
+    <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
+  </nav>
+  <Banner visible={refresh} on:click={onBannerClick} />
+  <Router {routes} />
+</main>

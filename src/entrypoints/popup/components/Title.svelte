@@ -2,8 +2,12 @@
   import { createEventDispatcher } from "svelte";
   import Slider from "./inputs/Slider.svelte";
 
-  export let title = "";
-  export let checked: boolean;
+  interface Props {
+    title?: string;
+    checked: boolean;
+  }
+
+  let { title = "", checked = $bindable() }: Props = $props();
 
   const dispatch = createEventDispatcher();
 

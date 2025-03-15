@@ -3,8 +3,8 @@
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
 
-  let populatedPlugins: PopulatedItem<PluginId>[] = [];
-  let pluginsToggle: boolean = true;
+  let populatedPlugins: PopulatedItem<PluginId>[] = $state([]);
+  let pluginsToggle: boolean = $state(true);
 
   onMount(async () => {
     populatedPlugins = await populateItems(plugins, PLUGIN_INFO);
