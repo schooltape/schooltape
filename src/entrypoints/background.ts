@@ -102,15 +102,18 @@ export default defineBackground(() => {
     contexts: contexts,
   });
   browser.contextMenus.onClicked.addListener((info, tab) => {
+    const manifest = browser.runtime.getManifest();
+    const version = manifest.version_name || manifest.version;
+
     switch (info.menuItemId) {
       case "report-bug":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml",
+          url: `https://github.com/schooltape/schooltape/issues/new?template=bug.yml&version=v${version}`,
         });
         break;
       case "feature-request":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml",
+          url: "https://github.com/schooltape/schooltape/issues/new?template=feature.yml",
         });
         break;
       case "github":
