@@ -6,12 +6,12 @@
 
   onMount(async () => {
     settings = await globalSettings.getValue();
-    console.log("settings", settings);
   });
+
+  // $inspect(settings);
 
   async function globalToggle() {
     settings.global = !settings.global;
-    // console.log("settings", settings);
     await globalSettings.setValue(settings);
   }
 </script>
