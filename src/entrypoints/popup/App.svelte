@@ -78,7 +78,7 @@
   });
 </script>
 
-<main class="flex flex-col items-center bg-ctp-base p-6">
+<main class="flex flex-col items-center bg-ctp-base p-6 ctp-{flavour}">
   <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
