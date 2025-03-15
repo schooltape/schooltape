@@ -240,8 +240,8 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
 }
 
 /* notification settings button */
-ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
-  padding: 0.5rem;
+a.settings-button {
+  padding: 0.5rem !important;
 }
 .right-off-canvas-menu[data-unread="0"] .settings-button {
   color: hsl(var(--ctp-text));
