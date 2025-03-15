@@ -4,10 +4,10 @@
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  let populatedSnippets: PopulatedItem<SnippetId>[] = [];
-  let settings = globalSettings.fallback;
+  let populatedSnippets: PopulatedItem<SnippetId>[] = $state([]);
+  let settings = $state(globalSettings.fallback);
 
-  let snippetURL = "";
+  let snippetURL = $state("");
 
   onMount(async () => {
     populatedSnippets = await populateItems(snippets, SNIPPET_INFO);
@@ -104,7 +104,7 @@
           size="small" />
         <button
           class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
-          on:click={() => {
+          onclick={() => {
             removeUserSnippet(key);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"

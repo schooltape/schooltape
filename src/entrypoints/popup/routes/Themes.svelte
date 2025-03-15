@@ -24,8 +24,8 @@
   ];
 
   const logos = LOGO_INFO;
-  let settings = globalSettings.fallback;
-  let showModal = false;
+  let settings = $state(globalSettings.fallback);
+  let showModal = $state(false);
 
   onMount(async () => {
     settings = await globalSettings.getValue();
@@ -54,12 +54,14 @@
 </script>
 
 <Modal bind:showModal>
-  <h2 slot="header" class="mb-4 text-xl">Choose an icon</h2>
+  {#snippet header()}
+    <h2  class="mb-4 text-xl">Choose an icon</h2>
+  {/snippet}
 
   <div class="grid grid-cols-3 gap-4">
     {#each Object.entries(logos) as [logoId, logo]}
       <button
-        on:click={() => logoClicked(logoId)}
+        onclick={() => logoClicked(logoId)}
         class:highlight={settings.themeLogo === logoId}
         class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
@@ -85,7 +87,7 @@
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
-        on:click={() => flavourClicked(flavour)}>{flavour}</button>
+        onclick={() => flavourClicked(flavour)}>{flavour}</button>
     {/each}
   </div>
 
@@ -95,7 +97,7 @@
         class="bg-ctp-{accent}"
         class:current={settings.themeAccent === accent}
         title={accent}
-        on:click={() => accentClicked(accent)}></button>
+        onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>
 

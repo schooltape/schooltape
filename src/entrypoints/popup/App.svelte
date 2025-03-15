@@ -17,11 +17,11 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-  let flavour = "";
+  let flavour = $state("");
   let accent = "";
   let accentHex = "";
   let settings = globalSettings.fallback;
-  let refresh = needsRefresh.fallback;
+  let refresh = $state(needsRefresh.fallback);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
