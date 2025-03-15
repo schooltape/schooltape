@@ -3,10 +3,6 @@ import styleText from "./styles.css?inline";
 export default function init() {
   defineStPlugin("switcharoo", async () => {
     const footer = document.getElementById("footer");
-    const toast = document.getElementById("toast");
-    if (toast) {
-      toast.style.display = "none";
-    }
     const content = document.getElementById("content");
     if (content) {
       const title = content.getElementsByClassName("Component_Dashboard_GreetingController");
