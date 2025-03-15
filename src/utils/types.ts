@@ -1,68 +1,68 @@
 // Global
-export type GlobalSettings = {
+export interface Settings {
   global: boolean;
-  urls: string[];
-  needsRefresh: boolean;
-};
+  plugins: boolean;
+  themes: boolean;
+  snippets: boolean;
 
-// Snippets
-export type UserSnippet = {
+  themeFlavour: string;
+  themeAccent: string;
+  themeLogo: LogoId;
+
+  userSnippets: Record<string, UserSnippet>;
+}
+
+export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";
+
+export interface LogoInfo {
+  name: string;
+  url: string;
+  disable?: boolean; // whether the icon should be injected or not
+  adaptive?: boolean; // whether the icon should follow the accent colour
+}
+
+export interface UserSnippet {
   author: string;
   name: string;
   description: string;
   url: string;
   toggle: boolean;
-};
-export type SnippetData = {
+}
+
+// Common for plugins and snippets
+export interface ItemGeneric {
   toggle: boolean;
-};
-export type SnippetInfo = {
+}
+export interface ItemInfo {
   name: string;
   description: string;
-  order: number;
-};
-export type PopulatedSnippet = {
-  id: string;
-} & SnippetInfo &
-  SnippetData;
-export type SnippetSettings = {
-  toggle: boolean;
-  snippets: Record<string, SnippetData>;
-  user: Record<string, UserSnippet>;
-};
-
-// Themes
-export type LogoDetails = {
-  name: string;
-  url: string;
-  id: string;
-  disable?: boolean; // whether the icon should be injected or not
-  adaptive?: boolean; // whether the icon should follow the accent colour
-};
-type Theme = "catppuccin";
-export type ThemeSettings = {
-  toggle: boolean;
-  theme: Theme;
-  flavour: string;
-  accent: string;
-  logo: LogoDetails;
-};
+}
+export type ItemId = PluginId | SnippetId;
+export interface PopulatedItem<T> extends ItemGeneric, ItemInfo {
+  id: T;
+}
 
 // Plugins
-export type PluginData = {
-  toggle: boolean;
-  settings?: Record<string, any>;
-};
-export type PluginInfo = {
-  name: string;
-  description: string;
-  order: number;
-};
-export type PopulatedPlugin = {
-  id: string;
-} & PluginInfo &
-  PluginData;
-export type PluginSettings = {
-  toggle: boolean;
-  plugins: Record<string, PluginData>;
-};
+export type PluginId =
+  | "subheader"
+  | "scrollSegments"
+  | "scrollPeriod"
+  | "progressBar"
+  | "modernIcons"
+  | "tabTitle"
+  | "homepageSwitcher"
+  | "timetableLabels"
+  | "legacyTimetable";
+
+export interface PluginInfo extends ItemInfo {}
+export interface PluginGeneric extends ItemGeneric {}
+
+export interface TabTitle extends ItemGeneric {
+  showSubjectPrefix: boolean;
+}
+
+// Snippets
+export type SnippetId = "hidePfp" | "hidePwaPrompt" | "censor";
+
+export interface SnippetInfo extends ItemInfo {}
+export interface SnippetGeneric extends ItemGeneric {}

@@ -1,8 +1,3 @@
-.material-icons-round,
-::placeholder {
-  color: hsl(var(--ctp-text)) !important;
-}
-
 body,
 p,
 h1,
@@ -14,7 +9,8 @@ h4,
   color: hsl(var(--ctp-text));
 }
 
-.title-section > h1 {
+.title-section > h1,
+::placeholder {
   color: hsl(var(--ctp-text)) !important;
 }
 
@@ -38,6 +34,13 @@ h4,
 .error-state section .Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .fc-list-heading-main,
 .Schoolbox_Calendar_Component_Dashboard_Controller .fc-widget-header .error-state section .fc-list-heading-main {
   color: hsl(var(--ctp-red));
+}
+
+/* empty state */
+/* applies to empty calendar widget on homepage */
+.empty-state p,
+.empty-state [class^="icon-"] {
+  color: hsl(var(--ctp-subtext0));
 }
 
 /* blockquotes */
@@ -225,15 +228,20 @@ table * {
 .right-off-canvas-menu ul.off-canvas-list label,
 .right-small a[data-unread]:not([data-unread="0"]),
 #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock,
-.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full,
-ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
+.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full {
   background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }
+ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
+  background: none;
+}
+#msg-content .list-item > div:active {
+  background: hsl(var(--ctp-overlay0));
+}
 
 /* notification settings button */
-ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
-  padding: 0.5rem;
+a.settings-button {
+  padding: 0.5rem !important;
 }
 .right-off-canvas-menu[data-unread="0"] .settings-button {
   color: hsl(var(--ctp-text));

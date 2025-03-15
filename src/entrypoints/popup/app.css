@@ -15,7 +15,7 @@ body {
 }
 
 .slider {
-  @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-red p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-base after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-green peer-checked:after:translate-x-6;
+  @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-surface1 p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-text after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-accent peer-checked:after:translate-x-6 peer-checked:after:bg-ctp-mantle;
 }
 
 .slider.big {

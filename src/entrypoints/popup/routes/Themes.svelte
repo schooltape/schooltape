@@ -3,7 +3,7 @@
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
-  import { Icon, Layers3 } from "lucide-svelte";
+  import { Layers3 } from "lucide-svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -22,41 +22,47 @@
     "blue",
     "lavender",
   ];
-  const logos = LOGOS;
 
-  let themes = themeSettings.defaultValue;
-  let showModal = false;
+  const logos = LOGO_INFO;
+  let settings = $state(globalSettings.fallback);
+  let showModal = $state(false);
 
   onMount(async () => {
-    themes = await themeSettings.getValue();
-    console.log("themes", themes);
+    settings = await globalSettings.getValue();
   });
 
-  function flavourClicked(flavour: string) {
-    themes.flavour = flavour;
-    themeSettings.setValue(themes);
+  async function flavourClicked(flavour: string) {
+    settings.themeFlavour = flavour;
+    await globalSettings.setValue(settings);
   }
 
-  function accentClicked(accent: string) {
-    themes.accent = accent;
-    themeSettings.setValue(themes);
+  async function accentClicked(accent: string) {
+    settings.themeAccent = accent;
+    await globalSettings.setValue(settings);
   }
-  function logoClicked(logo: LogoDetails) {
-    console.log(logo);
-    themes.logo = logo;
-    console.log(themes);
-    themeSettings.setValue(themes);
+
+  async function logoClicked(logoId: string) {
+    settings.themeLogo = logoId as LogoId;
+    await globalSettings.setValue(settings);
+  }
+
+  async function handleToggleChange(event: CustomEvent) {
+    let settings = await globalSettings.getValue();
+    settings.themes = event.detail.checked;
+    await globalSettings.setValue(settings);
   }
 </script>
 
 <Modal bind:showModal>
-  <h2 slot="header" class="mb-4 text-xl">Choose an icon</h2>
+  {#snippet header()}
+    <h2  class="mb-4 text-xl">Choose an icon</h2>
+  {/snippet}
 
   <div class="grid grid-cols-3 gap-4">
-    {#each logos as logo (logo)}
+    {#each Object.entries(logos) as [logoId, logo]}
       <button
-        on:click={() => logoClicked(logo)}
-        class:highlight={themes.logo.id === logo.id}
+        onclick={() => logoClicked(logoId)}
+        class:highlight={settings.themeLogo === logoId}
         class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
@@ -72,16 +78,16 @@
 </Modal>
 
 <div id="card">
-  <Title title="Themes" data={themes} key="themes" />
+  <Title title="Themes" bind:checked={settings.themes} on:change={handleToggleChange} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour}
       <button
-        class:active={themes.flavour === flavour}
+        class:active={settings.themeFlavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
-        on:click={() => flavourClicked(flavour)}>{flavour}</button>
+        onclick={() => flavourClicked(flavour)}>{flavour}</button>
     {/each}
   </div>
 
@@ -89,9 +95,9 @@
     {#each accents as accent}
       <button
         class="bg-ctp-{accent}"
-        class:current={themes.accent === accent}
+        class:current={settings.themeAccent === accent}
         title={accent}
-        on:click={() => accentClicked(accent)}></button>
+        onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>
 

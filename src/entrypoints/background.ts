@@ -48,7 +48,13 @@ export default defineBackground(() => {
   });
 
   // listen for messages
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  interface Message {
+    resetSettings?: boolean;
+    inject?: string;
+    toTab?: string;
+  }
+  browser.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
+    let message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
     if (message.resetSettings) {
       resetSettings();
@@ -96,15 +102,18 @@ export default defineBackground(() => {
     contexts: contexts,
   });
   browser.contextMenus.onClicked.addListener((info, tab) => {
+    const manifest = browser.runtime.getManifest();
+    const version = manifest.version_name || manifest.version;
+
     switch (info.menuItemId) {
       case "report-bug":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml",
+          url: `https://github.com/schooltape/schooltape/issues/new?template=bug.yml&version=v${version}`,
         });
         break;
       case "feature-request":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml",
+          url: "https://github.com/schooltape/schooltape/issues/new?template=feature.yml",
         });
         break;
       case "github":
@@ -115,13 +124,8 @@ export default defineBackground(() => {
 });
 
 async function resetSettings(): Promise<void> {
-  logger.info("[background] Resetting settings");
-  await storage.removeItems([
-    "local:globalSettings",
-    "local:snippetSettings",
-    "local:pluginSettings",
-    "local:themeSettings",
-  ]);
+  logger.info("[background] Clearing local storage");
+  await storage.clear("local");
 }
 
 async function updateIcon() {

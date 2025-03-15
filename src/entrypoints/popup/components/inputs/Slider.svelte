@@ -1,15 +1,34 @@
 <script lang="ts">
-  export let id: string;
-  export let checked: boolean;
-  export let onChange: (event: Event) => void;
-  export let size: "big" | "small" = "big";
-  export let text: string = "";
-  export let description: string = "";
+  import { createEventDispatcher } from "svelte";
+
+  interface Props {
+    id: string;
+    checked: boolean;
+    size?: "big" | "small";
+    text?: string;
+    description?: string;
+  }
+
+  let {
+    id,
+    checked = $bindable(),
+    size = "big",
+    text = "",
+    description = ""
+  }: Props = $props();
+
+  const dispatch = createEventDispatcher();
+
+  function handleChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    checked = input.checked;
+    dispatch("change", { checked });
+  }
 </script>
 
 <label class="slider-label group">
   <h4 class="text-ctp-text">{text}</h4>
-  <input {id} type="checkbox" class="peer slider-input" bind:checked on:change={onChange} />
+  <input {id} type="checkbox" class="peer slider-input" bind:checked onchange={handleChange} />
   <span class="slider {size}"></span>
 </label>
 

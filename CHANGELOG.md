@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/schooltape/schooltape/compare/v3.2.13...v3.3.0) (2025-03-12)
+
+
+### Features
+
+* **plugins/modernIcons:** add cloudy and eportfolio icons ([#200](https://github.com/schooltape/schooltape/issues/200)) ([b23bfe8](https://github.com/schooltape/schooltape/commit/b23bfe8abd598379d36700d700064985fb92499c))
+
 ## [3.2.13](https://github.com/schooltape/schooltape/compare/v3.2.12...v3.2.13) (2025-02-13)
 
 
