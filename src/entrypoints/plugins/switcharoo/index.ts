@@ -40,9 +40,9 @@ export default function init() {
       if (footer) {
         content.appendChild(footer);
       }
-      injectStyles(styleText);
     } else {
       logger.error("Could not find content element");
     }
+    injectStyles(styleText);
   });
 }
