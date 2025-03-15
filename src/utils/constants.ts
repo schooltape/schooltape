@@ -69,6 +69,10 @@ export const PLUGIN_INFO: Record<Types.PluginId, Types.PluginInfo> = {
     name: "Legacy Timetable",
     description: "Moves the timetable to its own row",
   },
+  switcharoo: {
+    name: "Switcharoo",
+    description: "Rearranges the homepage to have notices and due work side by side",
+  },
 };
 
 // Snippets

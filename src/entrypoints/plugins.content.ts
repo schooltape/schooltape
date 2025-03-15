@@ -10,6 +10,7 @@ import homepageSwitcher from "./plugins/homepageSwitcher";
 // @ts-ignore
 import timetableLabels from "./plugins/timetableLabels";
 import legacyTimetable from "./plugins/legacyTimetable";
+import switcharoo from "./plugins/switcharoo";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -25,5 +26,6 @@ export default defineContentScript({
     homepageSwitcher();
     timetableLabels();
     legacyTimetable();
+    switcharoo();
   },
 });

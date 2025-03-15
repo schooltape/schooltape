@@ -52,7 +52,8 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher"
   | "timetableLabels"
-  | "legacyTimetable";
+  | "legacyTimetable"
+  | "switcharoo";
 
 export interface PluginInfo extends ItemInfo {}
 export interface PluginGeneric extends ItemGeneric {}

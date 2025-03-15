@@ -1,0 +1,21 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#content > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Schoolbox_Comms_News_Component_Dashboard_Controller {
+    width: calc(100% - 8px);
+    margin-right: 8px;
+}
+
+.Schoolbox_Learning_Component_Dashboard_UpcomingWorkController {
+    width: calc(100% - 8px);
+    margin-left: 8px;
+}

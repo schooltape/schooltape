@@ -72,6 +72,11 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
       toggle: false,
     },
   }),
+  switcharoo: storage.defineItem<Types.PluginGeneric>("local:plugin-switcharoo", {
+    fallback: {
+      toggle: true,
+    },
+  }),
 };
 
 // Snippets
