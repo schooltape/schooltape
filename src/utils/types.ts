@@ -51,7 +51,6 @@ export type PluginId =
   | "modernIcons"
   | "tabTitle"
   | "homepageSwitcher"
-  | "timetableLabels"
   | "legacyTimetable";
 
 export interface PluginInfo extends ItemInfo {}

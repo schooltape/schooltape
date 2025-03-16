@@ -62,11 +62,6 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
       toggle: true,
     },
   }),
-  timetableLabels: storage.defineItem<Types.PluginGeneric>("local:plugin-timetableLabels", {
-    fallback: {
-      toggle: true,
-    },
-  }),
   legacyTimetable: storage.defineItem<Types.PluginGeneric>("local:plugin-legacyTimetable", {
     fallback: {
       toggle: false,
