@@ -1,10 +1,10 @@
 export async function defineStSnippet(snippetId: SnippetId, styleText: string) {
-  let snippet = await snippets[snippetId].getValue();
+  const snippet = await snippets[snippetId].getValue();
 
   logger.info(`${SNIPPET_INFO[snippetId].name}: ${snippet.toggle ? "enabled" : "disabled"}`);
 
-  let settings = await globalSettings.getValue();
-  let urls = await schoolboxUrls.getValue();
+  const settings = await globalSettings.getValue();
+  const urls = await schoolboxUrls.getValue();
 
   if (snippet && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.snippets && snippet.toggle) {

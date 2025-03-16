@@ -57,7 +57,7 @@
     accentHex = getAccentHex(accent, flavour);
     document.documentElement.style.setProperty("--ctp-accent", accentHex);
 
-    settingsUnwatch = globalSettings.watch((newValue, oldValue) => {
+    settingsUnwatch = globalSettings.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
@@ -67,7 +67,7 @@
       refresh = true;
       needsRefresh.setValue(refresh);
     });
-    refreshUnwatch = needsRefresh.watch((newValue, oldValue) => {
+    refreshUnwatch = needsRefresh.watch((newValue) => {
       refresh = newValue;
     });
   });

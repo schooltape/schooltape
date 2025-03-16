@@ -3,14 +3,14 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    let settings = await globalSettings.getValue();
-    let urls = await schoolboxUrls.getValue();
+    const settings = await globalSettings.getValue();
+    const urls = await schoolboxUrls.getValue();
 
     if (!settings.global) return;
-    let footer = document.querySelector("#footer > ul");
+    const footer = document.querySelector("#footer > ul");
     if (footer && footer.innerHTML.includes("Schoolbox")) {
-      let footerListItem = document.createElement("li");
-      let footerLink = document.createElement("a");
+      const footerListItem = document.createElement("li");
+      const footerLink = document.createElement("a");
       footerLink.href = "https://github.com/schooltape/schooltape";
       footerLink.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
       footerListItem.appendChild(footerLink);
