@@ -7,8 +7,6 @@ import modernIcons from "./plugins/modernIcons";
 // @ts-ignore
 import tabTitle from "./plugins/tabTitle";
 import homepageSwitcher from "./plugins/homepageSwitcher";
-// @ts-ignore
-import timetableLabels from "./plugins/timetableLabels";
 import legacyTimetable from "./plugins/legacyTimetable";
 
 export default defineContentScript({
@@ -23,7 +21,6 @@ export default defineContentScript({
     modernIcons();
     tabTitle();
     homepageSwitcher();
-    timetableLabels();
     legacyTimetable();
   },
 });
