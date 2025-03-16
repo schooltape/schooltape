@@ -42,18 +42,14 @@ export default function init() {
       function insertIcon(className: string, iconName: string) {
         const selectors = [`nav.tab-bar .top-menu .${className}`, `#overflow-nav .${className}`];
         selectors.forEach((selector) => {
-          try {
-            const icon = document.querySelector(selector);
-            // Check if the icon already exists
-            if (icon && !icon.querySelector(".material-icons-round")) {
-              // console.log(`Inserting icon for ${className} at ${selector}`);
-              const iconElement = document.createElement("i");
-              iconElement.innerHTML = iconName;
-              iconElement.classList.add("material-icons-round");
-              icon.insertBefore(iconElement, icon.firstChild);
-            }
-          } catch (e) {
-            // console.error(`Error inserting icon for ${className}: ${e}`);
+          const icon = document.querySelector(selector);
+          // Check if the icon already exists
+          if (icon && !icon.querySelector(".material-icons-round")) {
+            // console.log(`Inserting icon for ${className} at ${selector}`);
+            const iconElement = document.createElement("i");
+            iconElement.innerHTML = iconName;
+            iconElement.classList.add("material-icons-round");
+            icon.insertBefore(iconElement, icon.firstChild);
           }
         });
       }

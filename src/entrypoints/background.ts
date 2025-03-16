@@ -54,7 +54,7 @@ export default defineBackground(() => {
     toTab?: string;
   }
   browser.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
-    let message = msg as Message;
+    const message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
     if (message.resetSettings) {
       resetSettings();
