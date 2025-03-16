@@ -25,6 +25,7 @@ export const schoolboxUrls = storage.defineItem<string[]>("local:urls", {
 });
 
 // Plugins
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric, any>> = {
   subheader: storage.defineItem<Types.PluginGeneric>("local:plugin-subheader", {
     fallback: {
@@ -70,6 +71,7 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
 };
 
 // Snippets
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const snippets: Record<Types.SnippetId, WxtStorageItem<Types.SnippetGeneric, any>> = {
   hidePfp: storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePfp", {
     fallback: {
