@@ -1,21 +1,42 @@
+import js from "@eslint/js";
+import ts from "typescript-eslint";
+import svelte from "eslint-plugin-svelte";
+import wxtAutoImports from "./.wxt/eslint-auto-imports.mjs";
+
 import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import autoImports from "./.wxt/eslint-auto-imports.mjs";
 import { includeIgnoreFile } from "@eslint/compat";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const gitignorePath = path.resolve(__dirname, ".gitignore");
+const gitignorePath = path.resolve(import.meta.dirname, ".gitignore");
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default ts.config(
+  js.configs.recommended,
+  // ...ts.configs.recommendedTypeChecked,
+  ...ts.configs.recommended,
+  ...svelte.configs.recommended,
+
   includeIgnoreFile(gitignorePath),
-  autoImports,
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-];
+  wxtAutoImports,
+  { ignores: ["*.d.ts", "tailwind.config.js"] },
+
+  // {
+  //   files: ["**/*.js"],
+  //   extends: [ts.configs.disableTypeChecked],
+  // },
+  {
+    languageOptions: {
+      parserOptions: {
+        // projectService: {
+        //   allowDefaultProject: ["*.js"],
+        // },
+        extraFileExtensions: [".svelte"],
+        parser: ts.parser,
+      },
+      globals: globals.browser,
+    },
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-explicit-any": "warn",
+    },
+  },
+);
