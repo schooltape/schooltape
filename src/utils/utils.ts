@@ -1,4 +1,4 @@
-import { flavors, flavorEntries } from "@catppuccin/palette";
+import { flavorEntries } from "@catppuccin/palette";
 import { WxtStorageItem } from "wxt/storage";
 
 export async function populateItems<T extends ItemId>(
@@ -76,11 +76,11 @@ export function injectLogo(logo: LogoInfo) {
   if (logo.disable) {
     return;
   }
-  let style = document.createElement("style");
+  const style = document.createElement("style");
   style.classList.add("schooltape");
   if (logo.adaptive) {
     style.textContent = `a.logo > img { display: none !important; } a.logo { display: flex; align-items: center; justify-content: center; }`;
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.style.mask = `url("${url}") no-repeat center`;
     span.style.maskSize = "100% 100%";
     span.style.backgroundColor = "hsl(var(--ctp-accent))";
@@ -101,7 +101,7 @@ export function injectLogo(logo: LogoInfo) {
 
 export function injectStylesheet(url: any) {
   logger.info(`[content-utils] Injecting stylesheet: ${url}`);
-  let link = document.createElement("link");
+  const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = browser.runtime.getURL(url);
   link.classList.add("schooltape");
@@ -112,12 +112,12 @@ export async function injectUserSnippets(userSnippets: Record<string, UserSnippe
   logger.info("[content-utils] Injecting snippets");
   // user snippets
   Object.keys(userSnippets).forEach((snippetId) => {
-    let userSnippet = userSnippets[snippetId];
+    const userSnippet = userSnippets[snippetId];
     if (userSnippet.toggle) {
       fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetId}/raw`)
         .then((response) => response.text())
         .then((css) => {
-          let style = document.createElement("style");
+          const style = document.createElement("style");
           style.textContent = css;
           style.classList.add("schooltape");
           document.head.appendChild(style);

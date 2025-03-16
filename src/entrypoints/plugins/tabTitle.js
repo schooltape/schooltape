@@ -15,7 +15,7 @@ export default function init() {
         "/policy": "Guidelines of Use and Privacy Policy",
       };
 
-      if (titleMap.hasOwnProperty(path)) {
+      if (Object.prototype.hasOwnProperty.call(titleMap, path)) {
         document.title = titleMap[path];
       } else if (path.includes("/timetable")) {
         document.title = "Timetable";

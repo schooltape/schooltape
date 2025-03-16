@@ -3,12 +3,12 @@ export async function defineStPlugin(
   injectLogic: (pluginId: PluginId) => void,
   elementsToWaitFor: string[] = [],
 ) {
-  let plugin = await plugins[pluginId].getValue();
+  const plugin = await plugins[pluginId].getValue();
 
   logger.info(`${PLUGIN_INFO[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
-  let settings = await globalSettings.getValue();
-  let urls = await schoolboxUrls.getValue();
+  const settings = await globalSettings.getValue();
+  const urls = await schoolboxUrls.getValue();
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.plugins && plugin.toggle) {
