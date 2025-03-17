@@ -1,0 +1,110 @@
+/*
+  Be specific as possible with your selectors, try and use the verbose Schoolbox component class names
+  For example:
+  .Schoolbox_Learning_Component_Dashboard_UpcomingWorkController <your selectors>
+*/
+
+/* simple components */
+div#calendar-15403,
+.scrollable,
+section.content,
+.tile {
+  border-radius: 10px !important;
+}
+
+/* news/information list glob:/messages */
+.notification-list .information-list > li:first-child > div,
+.notification-list .information-list > li:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+.notification-list .information-list > li:last-child > div,
+.notification-list .information-list > li:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+.notification-list .information-list,
+.notification-list .information-list > li:only-child > div {
+  border-radius: 10px;
+}
+
+/* social stream glob:/homepage/code* */
+.Component_Homepage_SocialStreamController section,
+.Component_Homepage_SocialStreamController .information-list {
+  border-radius: 10px;
+}
+
+/* news component glob:/ */
+.Schoolbox_Comms_News_Component_Dashboard_Controller .information-list,
+.Schoolbox_Comms_News_Component_Dashboard_Controller .card {
+  border-radius: 10px;
+}
+.Schoolbox_Comms_News_Component_Dashboard_Controller .tabs {
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* upcoming work component glob:/ */
+.Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list,
+.Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list .card {
+  border-radius: 10px !important;
+}
+
+/* account dropdown glob:/ */
+/* action dropdown glob:/ */
+#account-content,
+.f-dropdown {
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* homepage calendar glob:/ */
+.calendar-15403,
+.fc {
+  border-radius: 10px;
+}
+
+/* buttons glob:/calendar */
+.fc-button-group > button:first-child {
+  border-radius: 10px 0px 0px 10px;
+}
+.fc-button-group > button:last-child {
+  border-radius: 0px 10px 10px 0px;
+}
+
+/* main view */
+/*
+#container {
+  border-radius: 20px;
+  background: hsl(var(--ctp-base));
+}
+.main {
+  background: hsl(var(--ctp-mantle));
+}
+*/
+/* classes glob:/classes */
+.v-card {
+  border-radius: 10px;
+}
+.card-class-image {
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* CLASS PAGE STYLES */
+/* dropdowns glob:/homepage/code/* */
+div.columns .component-titlebar {
+  border-radius: 10px;
+}
+.Component_Homepage_CountdownController.component-container,
+.Schoolbox_Resource_Textbox_Component_Homepage_Controller.component-container,
+.Component_Homepage_SocialStreamController.component-container,
+.Component_Homepage_SlideshowController.component-container,
+.Component_Homepage_AudioController.component-container,
+.Component_Homepage_TeachersController.component-container,
+.Component_Homepage_ClassListController.component-container,
+.Schoolbox_Comms_News_Component_Homepage_Controller.component-container,
+.Component_Homepage_LinkListController.component-container,
+.Component_Homepage_FileListController.component-container,
+.Schoolbox_Learning_Assessment_Component_Homepage_Outline_Controller.component-container,
+.Schoolbox_Learning_Assessment_DueWork_Component_Homepage_Controller.component-container,
+.Schoolbox_Learning_Assessment_Task_Component_Homepage_Controller.component-container,
+.Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container {
+  background: hsl(var(--ctp-accent));
+  border-radius: 10px;
+}

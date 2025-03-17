@@ -61,7 +61,7 @@ export interface TabTitle extends ItemGeneric {
 }
 
 // Snippets
-export type SnippetId = "hidePfp" | "hidePwaPrompt" | "censor";
+export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
 export interface SnippetInfo extends ItemInfo {}
 export interface SnippetGeneric extends ItemGeneric {}

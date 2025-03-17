@@ -69,6 +69,10 @@ export const PLUGIN_INFO: Record<Types.PluginId, Types.PluginInfo> = {
 
 // Snippets
 export const SNIPPET_INFO: Record<Types.SnippetId, Types.SnippetInfo> = {
+  roundedCorners: {
+    name: "Rounded Corners",
+    description: "Round corners across Schoolbox!",
+  },
   hidePfp: {
     name: "Hide PFP",
     description: "Hide your profile picture across Schoolbox.",

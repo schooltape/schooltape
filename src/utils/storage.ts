@@ -73,6 +73,11 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
 // Snippets
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const snippets: Record<Types.SnippetId, WxtStorageItem<Types.SnippetGeneric, any>> = {
+  roundedCorners: storage.defineItem<Types.SnippetGeneric>("local:snippet-roundedCorners", {
+    fallback: {
+      toggle: true,
+    },
+  }),
   hidePfp: storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePfp", {
     fallback: {
       toggle: true,
