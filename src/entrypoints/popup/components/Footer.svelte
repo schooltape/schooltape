@@ -3,8 +3,7 @@
   import IconBtn from "./inputs/IconBtn.svelte";
   import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
 
-  let version: string;
-  let prefix: string;
+  let version = $state();
   onMount(async () => {
     // Set version number
     // Uses manifest.version_name when available (on mv3)

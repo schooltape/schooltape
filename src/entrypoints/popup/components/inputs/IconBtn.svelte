@@ -1,15 +1,27 @@
 <script lang="ts">
-  export let title;
-  export let id;
-  export let onClick;
-  export let icon;
-  export let label = "";
-  export let color = "accent";
+  interface Props {
+    title: any;
+    id: any;
+    onClick: any;
+    icon: any;
+    label?: string;
+    color?: string;
+  }
+
+  let {
+    title,
+    id,
+    onClick,
+    icon,
+    label = "",
+    color = "accent"
+  }: Props = $props();
 </script>
 
-<button {title} {id} class="flex items-center mx-2 small hover:text-ctp-crust hover:bg-ctp-{color}" on:click={onClick}>
+<button {title} {id} class="flex items-center mx-2 small hover:text-ctp-crust hover:bg-ctp-{color}" onclick={onClick}>
   {#if icon}
-    <svelte:component this={icon} />
+    {@const SvelteComponent = icon}
+    <SvelteComponent />
   {/if}
   {#if label}
     <span class="ml-3">{label}</span>

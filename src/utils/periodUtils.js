@@ -1,8 +1,3 @@
-export function getListOfPeriods() {
-  const periods = document.querySelectorAll(".timetable thead tr th");
-  return Array.from(periods).map((_, i) => getPeriodData(i));
-}
-
 export function getCurrentPeriod() {
   const periodList = getListOfPeriods();
   const currentTime = new Date().getTime();
@@ -20,7 +15,12 @@ export function getCurrentPeriod() {
   return currentPeriod || null;
 }
 
-export function getPeriodData(index) {
+export function getListOfPeriods() {
+  const periods = document.querySelectorAll(".timetable thead tr th");
+  return Array.from(periods).map((_, i) => getPeriodData(i));
+}
+
+function getPeriodData(index) {
   if (typeof index !== "number") {
     console.error("Period number was not provided or is not a number");
     return null;
@@ -60,7 +60,7 @@ export function getPeriodData(index) {
   };
 }
 
-export function extractTimes(periodTime) {
+function extractTimes(periodTime) {
   try {
     let times = periodTime.split("–"); // en dash
     let [start, end] = times.map((time, index) => {

@@ -3,26 +3,27 @@
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
 
-  let plugins = pluginSettings.defaultValue;
-  let populatedPlugins: PopulatedPlugin[] = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
-  console.log(populatedPlugins);
+  let populatedPlugins: PopulatedItem<PluginId>[] = $state([]);
+  let pluginsToggle: boolean = $state(true);
 
   onMount(async () => {
-    plugins = await pluginSettings.getValue();
-    populatedPlugins = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
-    console.log(populatedPlugins);
-    console.log("plugins", plugins);
+    populatedPlugins = await populateItems(plugins, PLUGIN_INFO);
+    pluginsToggle = await globalSettings.getValue().then((settings) => settings.plugins);
   });
 
-  async function togglePlugin(pluginId: string, toggled: boolean): Promise<void> {
-    plugins.plugins[pluginId].toggle = toggled;
-    await pluginSettings.setValue(plugins);
-    console.log(await pluginSettings.getValue());
+  async function handleToggleChange(event: CustomEvent) {
+    let settings = await globalSettings.getValue();
+    settings.plugins = event.detail.checked;
+    await globalSettings.setValue(settings);
+  }
+
+  async function togglePlugin(pluginId: PluginId, toggled: boolean): Promise<void> {
+    await toggleItem(plugins, pluginId, toggled);
   }
 </script>
 
 <div id="card">
-  <Title title="Plugins" data={plugins} key="plugins" />
+  <Title title="Plugins" bind:checked={pluginsToggle} on:change={handleToggleChange} />
 
   <div class="plugins-container">
     {#each populatedPlugins as plugin}
@@ -30,7 +31,7 @@
         <Slider
           id={plugin.id}
           bind:checked={plugin.toggle}
-          onChange={() => togglePlugin(plugin.id, plugin.toggle)}
+          on:change={() => togglePlugin(plugin.id, plugin.toggle)}
           text={plugin.name}
           description={plugin.description}
           size="small" />

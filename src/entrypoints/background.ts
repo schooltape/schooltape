@@ -48,18 +48,17 @@ export default defineBackground(() => {
   });
 
   // listen for messages
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  interface Message {
+    resetSettings?: boolean;
+    inject?: string;
+    toTab?: string;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  browser.runtime.onMessage.addListener(async (msg: any, sender: any) => {
+    const message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
     if (message.resetSettings) {
       resetSettings();
-    }
-    if (message.inject && sender.tab?.id) {
-      logger.info(`[background] Injecting ${message.inject}`);
-      // https://wxt.dev/guide/extension-apis/scripting.html
-      const res = await browser.scripting.executeScript({
-        target: { tabId: sender.tab.id },
-        files: [message.inject],
-      });
     }
     if (message.toTab) {
       const tabs = await browser.tabs.query({ url: message.toTab });
@@ -95,16 +94,19 @@ export default defineBackground(() => {
     title: "GitHub",
     contexts: contexts,
   });
-  browser.contextMenus.onClicked.addListener((info, tab) => {
+  browser.contextMenus.onClicked.addListener((info) => {
+    const manifest = browser.runtime.getManifest();
+    const version = manifest.version_name || manifest.version;
+
     switch (info.menuItemId) {
       case "report-bug":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml",
+          url: `https://github.com/schooltape/schooltape/issues/new?template=bug.yml&version=v${version}`,
         });
         break;
       case "feature-request":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml",
+          url: "https://github.com/schooltape/schooltape/issues/new?template=feature.yml",
         });
         break;
       case "github":
@@ -115,13 +117,8 @@ export default defineBackground(() => {
 });
 
 async function resetSettings(): Promise<void> {
-  logger.info("[background] Resetting settings");
-  await storage.removeItems([
-    "local:globalSettings",
-    "local:snippetSettings",
-    "local:pluginSettings",
-    "local:themeSettings",
-  ]);
+  logger.info("[background] Clearing local storage");
+  await storage.clear("local");
 }
 
 async function updateIcon() {
