@@ -4,15 +4,28 @@
   .Schoolbox_Learning_Component_Dashboard_UpcomingWorkController <your selectors>
 */
 
-/* simple components */
+/* ----- global ----- */
+
 div#calendar-15403,
 .scrollable,
 section.content,
-.tile {
+.tile,
+.button {
   border-radius: 10px !important;
 }
+/* account and action dropdown */
+#account-content,
+.f-dropdown {
+  border-radius: 0px 0px 10px 10px;
+}
+/* see all notifications button */
+#message-list > li > a.button {
+  border-radius: 0px 0px 10px 10px !important;
+}
 
-/* news/information list glob:/messages */
+/* ----- notifications page ----- */
+/* url:/notifications */
+
 .notification-list .information-list > li:first-child > div,
 .notification-list .information-list > li:first-child {
   border-radius: 10px 10px 0px 0px;
@@ -26,13 +39,10 @@ section.content,
   border-radius: 10px;
 }
 
-/* social stream glob:/homepage/code* */
-.Component_Homepage_SocialStreamController section,
-.Component_Homepage_SocialStreamController .information-list {
-  border-radius: 10px;
-}
+/* ----- dashboard (home page) ----- */
+/* url:/ */
 
-/* news component glob:/ */
+/* news component */
 .Schoolbox_Comms_News_Component_Dashboard_Controller .information-list,
 .Schoolbox_Comms_News_Component_Dashboard_Controller .card {
   border-radius: 10px;
@@ -41,26 +51,32 @@ section.content,
   border-radius: 10px 10px 0px 0px;
 }
 
-/* upcoming work component glob:/ */
+/* empty component */
+.Schoolbox_Calendar_Component_Dashboard_Controller.component-container .empty-state {
+  border-radius: 10px;
+}
+
+/* upcoming work component */
 .Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list,
 .Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list .card {
   border-radius: 10px !important;
 }
 
-/* account dropdown glob:/ */
-/* action dropdown glob:/ */
-#account-content,
-.f-dropdown {
-  border-radius: 0px 0px 10px 10px;
-}
-
-/* homepage calendar glob:/ */
+/* calendar */
 .calendar-15403,
 .fc {
   border-radius: 10px;
 }
 
-/* buttons glob:/calendar */
+/* slideshow */
+.Component_Dashboard_SlideshowController.component-container .swiper {
+  border-radius: 10px !important;
+}
+
+/* ----- calendar page ----- */
+/* url:/calendar */
+
+/* buttons */
 .fc-button-group > button:first-child {
   border-radius: 10px 0px 0px 10px;
 }
@@ -68,17 +84,9 @@ section.content,
   border-radius: 0px 10px 10px 0px;
 }
 
-/* main view */
-/*
-#container {
-  border-radius: 20px;
-  background: hsl(var(--ctp-base));
-}
-.main {
-  background: hsl(var(--ctp-mantle));
-}
-*/
-/* classes glob:/classes */
+/* ----- classes page ----- */
+/* url:/learning/classes */
+
 .v-card {
   border-radius: 10px;
 }
@@ -86,11 +94,35 @@ section.content,
   border-radius: 10px 10px 0px 0px;
 }
 
-/* CLASS PAGE STYLES */
-/* dropdowns glob:/homepage/code/* */
+/* ----- homepage (class pages) ----- */
+/* url:/homepage/code/:id */
+
 div.columns .component-titlebar {
   border-radius: 10px;
 }
+
+/* social stream */
+.Component_Homepage_SocialStreamController section,
+.Component_Homepage_SocialStreamController .information-list {
+  border-radius: 10px;
+}
+
+/* news */
+.component-action > section {
+  background-color: var(--left-bg-primary) !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+.component-action {
+  background: var(--left-bg-primary) !important;
+  border-radius: 0px 0px 10px 10px;
+}
+.Schoolbox_Comms_News_Component_Homepage_Controller.component-container .island > section,
+.Component_Homepage_ImageController.component-container .island > section,
+.Component_Homepage_ClassListController.component-container .island > section {
+  background: none !important;
+}
+
 .Component_Homepage_CountdownController.component-container,
 .Schoolbox_Resource_Textbox_Component_Homepage_Controller.component-container,
 .Component_Homepage_SocialStreamController.component-container,
@@ -104,7 +136,12 @@ div.columns .component-titlebar {
 .Schoolbox_Learning_Assessment_Component_Homepage_Outline_Controller.component-container,
 .Schoolbox_Learning_Assessment_DueWork_Component_Homepage_Controller.component-container,
 .Schoolbox_Learning_Assessment_Task_Component_Homepage_Controller.component-container,
-.Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container {
+.Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container,
+.Component_Homepage_ImageController.component-container {
   background: hsl(var(--ctp-accent));
   border-radius: 10px;
+}
+
+.Component_Homepage_ImageController.component-container img {
+  border-radius: 0px 0px 10px 10px !important;
 }
