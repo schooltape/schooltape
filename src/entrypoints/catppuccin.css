@@ -589,6 +589,15 @@ li > article > div#x_Signature {
   color: hsl(var(--ctp-text));
 }
 
+/* class list */
+
+.Component_Homepage_ClassListController.component-container ul.grid {
+  background: hsl(var(--ctp-surface0)) !important;
+}
+.Component_Homepage_ClassListController.component-container ul.grid li {
+  box-shadow: none !important;
+}
+
 /* text inputs */
 input:not([type]),
 input[type="text"],
