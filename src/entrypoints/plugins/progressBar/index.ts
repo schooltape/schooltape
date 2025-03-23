@@ -6,7 +6,7 @@ export default function init() {
     () => {
       if (window.location.pathname === "/" && document.querySelector(".timetable")) {
         const periodList = getListOfPeriods();
-        // console.log(periodList);
+        console.log(periodList);
 
         const progressRow = document.createElement("tr");
         progressRow.classList.add("progress-container");
@@ -20,11 +20,11 @@ export default function init() {
   );
 }
 
-function insertProgressBars(periodList: any[], container: HTMLElement) {
+function insertProgressBars(periodList: Period[], container: HTMLElement) {
   periodList.forEach((period) => {
     const td = document.createElement("td");
     const progressBar = document.createElement("progress");
-    const progress = calculateProgress(period);
+    const progress = period.getProgress();
     progressBar.className = "progress-bar";
     progressBar.max = 100;
     progressBar.style.width = "100%";
@@ -32,7 +32,7 @@ function insertProgressBars(periodList: any[], container: HTMLElement) {
 
     if (progress < 100) {
       const intervalId = setInterval(() => {
-        progressBar.value = calculateProgress(period);
+        progressBar.value = period.getProgress();
         if (progressBar.value === 100) {
           clearInterval(intervalId);
         }
@@ -42,21 +42,4 @@ function insertProgressBars(periodList: any[], container: HTMLElement) {
     td.appendChild(progressBar);
     container.appendChild(td);
   });
-}
-
-function calculateProgress(period: any): number {
-  const now = new Date().getTime();
-  const startTime = new Date(period.header.time.start).getTime();
-  const endTime = new Date(period.header.time.end).getTime();
-  const periodDuration = endTime - startTime;
-  let progressPercentage = 0;
-
-  if (now >= startTime && now <= endTime) {
-    const elapsedTime = now - startTime;
-    progressPercentage = Math.min(Math.max((elapsedTime / periodDuration) * 100, 0), 100);
-  } else if (now > endTime) {
-    progressPercentage = 100;
-  }
-
-  return progressPercentage;
 }
