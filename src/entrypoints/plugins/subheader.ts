@@ -2,7 +2,7 @@ export default function init() {
   defineStPlugin(
     "subheader",
     () => {
-      let style = document.createElement("style");
+      const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `
       .subheader span:not(:last-child):not(.period:empty)::after {
@@ -24,6 +24,7 @@ export default function init() {
 
       function createSubheader() {
         const subheader = document.querySelector("h2.subheader");
+        if (!subheader) return;
         // TODO: Refactor to support hot reload/uninjection
         // delete all children of the subheader
         while (subheader.firstChild) {
@@ -42,13 +43,14 @@ export default function init() {
         let periodSpan = document.querySelector(".subheader .period");
         if (!periodSpan) {
           const subheader = document.querySelector(".subheader .schooltape");
+          if (!subheader) return;
           periodSpan = document.createElement("span");
           periodSpan.classList.add("period");
           subheader.appendChild(periodSpan);
         }
         periodSpan.textContent = "";
 
-        let period = getCurrentPeriod();
+        const period = getCurrentPeriod();
         if (period) {
           const name = period.data.name || period.header.name;
           const room = period.data.room ? ` (${period.data.room})` : "";
@@ -76,11 +78,12 @@ export default function init() {
         let clockSpan = document.querySelector(".subheader .clock");
         if (!clockSpan) {
           const subheader = document.querySelector(".subheader .schooltape");
+          if (!subheader) return;
           clockSpan = document.createElement("span");
           clockSpan.classList.add("clock");
           subheader.appendChild(clockSpan);
         }
-        let date = new Date();
+        const date = new Date();
         clockSpan.textContent = date.toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -91,11 +94,12 @@ export default function init() {
         let dateSpan = document.querySelector(".subheader .date");
         if (!dateSpan) {
           const subheader = document.querySelector(".subheader .schooltape");
+          if (!subheader) return;
           dateSpan = document.createElement("span");
           dateSpan.classList.add("date");
           subheader.appendChild(dateSpan);
         }
-        let date = new Date();
+        const date = new Date();
         dateSpan.textContent = date.toDateString();
       }
     },
