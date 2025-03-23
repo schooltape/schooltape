@@ -85,6 +85,6 @@
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
     <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
   </nav>
-  <Banner visible={refresh} on:click={onBannerClick} />
+  <Banner visible={refresh} onclick={onBannerClick} />
   <Router {routes} />
 </main>

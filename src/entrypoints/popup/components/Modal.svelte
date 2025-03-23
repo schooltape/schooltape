@@ -1,37 +1,27 @@
 <script lang="ts">
-  import { run, self, createBubbler, stopPropagation } from 'svelte/legacy';
-
-  const bubble = createBubbler();
+  let { showModal = $bindable(), header, children } = $props();
   import { X } from "lucide-svelte";
 
-  interface Props {
-    showModal: boolean;
-    header?: import('svelte').Snippet<[any]>;
-    children?: import('svelte').Snippet;
-  }
+  let dialog: HTMLDialogElement | undefined = $state();
 
-  let { showModal = $bindable(), header, children }: Props = $props();
-
-  let dialog: HTMLDialogElement = $state();
-
-  run(() => {
-    if (dialog && showModal) dialog.showModal();
+  $effect(() => {
+    if (showModal) dialog?.showModal();
   });
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
 <dialog
   bind:this={dialog}
   onclose={() => (showModal = false)}
-  onclick={self(() => dialog.close())}
+  onclick={(e) => {
+    if (e.target === dialog) dialog.close();
+  }}
   class="bg-ctp-base text-ctp-text relative">
   <!-- svelte-ignore a11y_autofocus -->
-  <button autofocus onclick={() => dialog.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
+  <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
     ><X /></button>
 
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div onclick={stopPropagation(bubble('click'))} class="p-4">
-    {@render header?.({ class: "py-5", })}
+  <div class="p-4">
+    {@render header?.({ class: "py-5" })}
     {@render children?.()}
   </div>
 </dialog>

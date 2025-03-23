@@ -103,7 +103,7 @@ button {
 }
 
 .current {
-  @apply outline outline-ctp-text;
+  @apply outline outline-ctp-overlay0;
 }
 
 .navbutton-left {

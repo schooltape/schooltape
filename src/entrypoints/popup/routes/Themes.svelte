@@ -55,11 +55,11 @@
 
 <Modal bind:showModal>
   {#snippet header()}
-    <h2  class="mb-4 text-xl">Choose an icon</h2>
+    <h2 class="mb-4 text-xl">Choose an icon</h2>
   {/snippet}
 
   <div class="grid grid-cols-3 gap-4">
-    {#each Object.entries(logos) as [logoId, logo]}
+    {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
         onclick={() => logoClicked(logoId)}
         class:highlight={settings.themeLogo === logoId}
@@ -81,7 +81,7 @@
   <Title title="Themes" bind:checked={settings.themes} on:change={handleToggleChange} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
-    {#each flavours as flavour}
+    {#each flavours as flavour (flavour)}
       <button
         class:active={settings.themeFlavour === flavour}
         class:navbutton-left={flavour === "latte"}
@@ -92,11 +92,12 @@
   </div>
 
   <div id="palette">
-    {#each accents as accent}
+    {#each accents as accent (accent)}
       <button
         class="bg-ctp-{accent}"
         class:current={settings.themeAccent === accent}
         title={accent}
+        aria-label={accent}
         onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>
