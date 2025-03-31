@@ -467,6 +467,11 @@ table tr td {
   background-color: hsl(var(--ctp-base));
 }
 
+.x_x_x_x_elementToProof {
+  background-color: hsl(var(--body-background)) !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
 /* home -> news */
 .tabs {
   background: hsl(var(--ctp-surface1));
