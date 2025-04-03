@@ -467,8 +467,12 @@ table tr td {
   background-color: hsl(var(--ctp-base));
 }
 
+<<<<<<< HEAD
 .x_x_x_x_elementToProof,
 .x_elementToProof {
+=======
+.x_x_x_x_elementToProof {
+>>>>>>> main
   background-color: hsl(var(--body-background)) !important;
   color: hsl(var(--ctp-text)) !important;
 }
