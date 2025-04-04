@@ -1,4 +1,47 @@
-import { flavors, flavorEntries } from "@catppuccin/palette";
+import { flavorEntries } from "@catppuccin/palette";
+import { WxtStorageItem } from "wxt/storage";
+
+export async function populateItems<T extends ItemId>(
+  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
+  info: Record<T, ItemInfo>,
+): Promise<PopulatedItem<T>[]> {
+  const populatedItems: PopulatedItem<T>[] = [];
+
+  for (const itemId of Object.keys(storage) as T[]) {
+    const item = storage[itemId].fallback;
+    const itemInfo = info[itemId];
+
+    const populatedItem: PopulatedItem<T> = {
+      id: itemId,
+      ...item,
+      ...itemInfo,
+      toggle: false,
+    };
+
+    const storedItem = await storage[itemId].getValue();
+    populatedItem.toggle = storedItem.toggle;
+
+    populatedItems.push(populatedItem);
+  }
+
+  return populatedItems;
+}
+
+export async function toggleItem<T extends ItemId>(
+  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
+  itemId: T,
+  toggled: boolean,
+): Promise<void> {
+  const item = await storage[itemId].getValue();
+  if (item) {
+    item.toggle = toggled;
+    await storage[itemId].setValue(item);
+    await needsRefresh.setValue(true);
+    logger.info(`Toggled ${itemId} to ${toggled}`);
+  } else {
+    logger.error(`Failed to toggle ${itemId}, not found in storage`);
+  }
+}
 
 export function injectStyles(styleText: string) {
   logger.info(`[content-utils] Injecting styles: ${styleText}`);
@@ -24,7 +67,7 @@ export function injectCatppuccin(flavour: string, accent: string) {
   injectStyles(styleText);
 }
 
-export function injectLogo(logo: LogoDetails) {
+export function injectLogo(logo: LogoInfo) {
   let url = logo.url;
   if (!url.startsWith("http")) {
     url = browser.runtime.getURL(url as any);
@@ -33,11 +76,11 @@ export function injectLogo(logo: LogoDetails) {
   if (logo.disable) {
     return;
   }
-  let style = document.createElement("style");
+  const style = document.createElement("style");
   style.classList.add("schooltape");
   if (logo.adaptive) {
     style.textContent = `a.logo > img { display: none !important; } a.logo { display: flex; align-items: center; justify-content: center; }`;
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.style.mask = `url("${url}") no-repeat center`;
     span.style.maskSize = "100% 100%";
     span.style.backgroundColor = "hsl(var(--ctp-accent))";
@@ -58,70 +101,27 @@ export function injectLogo(logo: LogoDetails) {
 
 export function injectStylesheet(url: any) {
   logger.info(`[content-utils] Injecting stylesheet: ${url}`);
-  let link = document.createElement("link");
+  const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = browser.runtime.getURL(url);
   link.classList.add("schooltape");
   document.head.appendChild(link);
 }
 
-export async function injectSnippets() {
+export async function injectUserSnippets(userSnippets: Record<string, UserSnippet>) {
   logger.info("[content-utils] Injecting snippets");
-  // inbuilt snippets
-  const snippets = await snippetSettings.getValue();
-  const populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  populatedSnippets.forEach((snippet) => {
-    if (snippet.toggle) {
-      injectStylesheet(`/snippets/${snippet.id}.css`);
-    }
-  });
   // user snippets
-  for (let snippetID in snippets.user) {
-    let userSnippet = snippets.user[snippetID];
+  Object.keys(userSnippets).forEach((snippetId) => {
+    const userSnippet = userSnippets[snippetId];
     if (userSnippet.toggle) {
-      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetID}/raw`)
+      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetId}/raw`)
         .then((response) => response.text())
         .then((css) => {
-          let style = document.createElement("style");
+          const style = document.createElement("style");
           style.textContent = css;
           style.classList.add("schooltape");
           document.head.appendChild(style);
         });
     }
-  }
-}
-
-// This is used in Plugins.svelte and Snippets.svelte to populate the items in the list
-type ItemType = "plugin" | "snippet";
-// Define a generic function with a conditional return type
-export function populateItems<T extends ItemType>(
-  data: Record<string, PluginData> | Record<string, SnippetData>,
-  info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
-  type: T,
-): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
-  // console.log(data, info, type);
-  return Object.entries(info)
-    .sort((a, b) => a[1].order - b[1].order)
-    .map(([key, value]) => {
-      // console.log(key, value);
-      // console.log(data[key]);
-      if (type === "plugin") {
-        const populatedItem: PopulatedPlugin = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        if (data.settings) {
-          populatedItem.settings = data.settings;
-        }
-        return populatedItem;
-      } else {
-        const populatedItem: PopulatedSnippet = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        return populatedItem;
-      }
-    });
+  });
 }

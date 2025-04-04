@@ -1,27 +1,28 @@
 <script lang="ts">
+  let { showModal = $bindable(), header, children } = $props();
   import { X } from "lucide-svelte";
 
-  export let showModal: boolean;
+  let dialog: HTMLDialogElement | undefined = $state();
 
-  let dialog: HTMLDialogElement;
-
-  $: if (dialog && showModal) dialog.showModal();
+  $effect(() => {
+    if (showModal) dialog?.showModal();
+  });
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
   bind:this={dialog}
-  on:close={() => (showModal = false)}
-  on:click|self={() => dialog.close()}
+  onclose={() => (showModal = false)}
+  onclick={(e) => {
+    if (e.target === dialog) dialog.close();
+  }}
   class="bg-ctp-base text-ctp-text relative">
-  <!-- svelte-ignore a11y-autofocus -->
-  <button autofocus on:click={() => dialog.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
+  <!-- svelte-ignore a11y_autofocus -->
+  <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
     ><X /></button>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div on:click|stopPropagation class="p-4">
-    <slot name="header" class="py-5" />
-    <slot />
+  <div class="p-4">
+    {@render header?.({ class: "py-5" })}
+    {@render children?.()}
   </div>
 </dialog>
 
