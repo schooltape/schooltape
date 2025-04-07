@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.1](https://github.com/schooltape/schooltape/compare/v3.3.0...v3.3.1) (2025-04-07)
+
+
+### Bug Fixes
+
+* news text styling ([#219](https://github.com/schooltape/schooltape/issues/219)) ([d378126](https://github.com/schooltape/schooltape/commit/d378126f91b57c3d31bfb0dd98fb9a8f9d1ef453))
+* **theme:** news paragraph styling ([#221](https://github.com/schooltape/schooltape/issues/221)) ([6f87fc9](https://github.com/schooltape/schooltape/commit/6f87fc9047774bcc8c321cd0b4ef42ec7419bcbf))
+
 ## [3.3.0](https://github.com/schooltape/schooltape/compare/v3.2.13...v3.3.0) (2025-03-12)
 
 
