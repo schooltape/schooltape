@@ -467,7 +467,16 @@ table tr td {
   background-color: hsl(var(--ctp-base));
 }
 
-article * {
+article a {
+  background-color: transparent !important;
+  color: hsl(var(--ctp-blue)) !important;
+}
+
+article a:hover {
+  text-decoration: underline !important;
+}
+
+article *:not(a) {
   background-color: transparent !important;
   color: hsl(var(--ctp-text)) !important;
 }
