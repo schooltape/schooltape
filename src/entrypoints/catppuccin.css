@@ -467,8 +467,7 @@ table tr td {
   background-color: hsl(var(--ctp-base));
 }
 
-.x_x_x_x_elementToProof,
-.x_elementToProof {
+article * {
   background-color: transparent !important;
   color: hsl(var(--ctp-text)) !important;
 }
