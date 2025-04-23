@@ -469,14 +469,14 @@ table tr td {
 
 article a {
   background-color: transparent !important;
-  color: hsl(var(--ctp-blue)) !important;
+  color: hsl(var(--ctp-accent)) !important;
 }
 
 article a:hover {
   text-decoration: underline !important;
 }
 
-article *:not(a) {
+article *:not(a):not(a *) {
   background-color: transparent !important;
   color: hsl(var(--ctp-text)) !important;
 }
