@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.2](https://github.com/schooltape/schooltape/compare/v3.3.1...v3.3.2) (2025-04-29)
+
+
+### Bug Fixes
+
+* **theme:** article text and link styling ([#223](https://github.com/schooltape/schooltape/issues/223)) ([616e560](https://github.com/schooltape/schooltape/commit/616e5608c6da4a4de5176d13f2a4e92d1a9351d7))
+
 ## [3.3.1](https://github.com/schooltape/schooltape/compare/v3.3.0...v3.3.1) (2025-04-07)
 
 
