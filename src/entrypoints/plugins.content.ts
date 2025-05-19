@@ -5,7 +5,6 @@ import progressBar from "./plugins/progressBar";
 import modernIcons from "./plugins/modernIcons";
 import tabTitle from "./plugins/tabTitle";
 import homepageSwitcher from "./plugins/homepageSwitcher";
-import legacyTimetable from "./plugins/legacyTimetable";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -19,6 +18,5 @@ export default defineContentScript({
     modernIcons();
     tabTitle();
     homepageSwitcher();
-    legacyTimetable();
   },
 });

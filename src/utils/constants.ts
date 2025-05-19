@@ -61,10 +61,6 @@ export const PLUGIN_INFO: Record<Types.PluginId, Types.PluginInfo> = {
     name: "Homepage Switcher",
     description: "The logo will switch to existing Schoolbox homepage when available",
   },
-  legacyTimetable: {
-    name: "Legacy Timetable",
-    description: "Moves the timetable to its own row",
-  },
 };
 
 // Snippets
