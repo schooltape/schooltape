@@ -26,7 +26,7 @@
   <Title title="Plugins" bind:checked={pluginsToggle} on:change={handleToggleChange} />
 
   <div class="plugins-container">
-    {#each populatedPlugins as plugin}
+    {#each populatedPlugins as plugin (plugin.id)}
       <div class="my-4 group">
         <Slider
           id={plugin.id}

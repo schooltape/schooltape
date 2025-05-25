@@ -1,5 +1,6 @@
 import { WxtStorageItem } from "wxt/storage";
 import * as Types from "./types";
+import * as Setting from "./settings";
 
 // Global
 export const globalSettings = storage.defineItem<Types.Settings>("local:globalSettings", {
@@ -40,11 +41,13 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
   scrollPeriod: storage.defineItem<Types.PluginGeneric>("local:plugin-scrollPeriod", {
     fallback: {
       toggle: true,
+      settings: [new Setting.Slider("Delay (in ms)", 1000, 60000, 10000)],
     },
   }),
   progressBar: storage.defineItem<Types.PluginGeneric>("local:plugin-progressBar", {
     fallback: {
       toggle: true,
+      settings: [new Setting.Toggle("Hide when complete", true)],
     },
   }),
   modernIcons: storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
@@ -52,10 +55,10 @@ export const plugins: Record<Types.PluginId, WxtStorageItem<Types.PluginGeneric,
       toggle: true,
     },
   }),
-  tabTitle: storage.defineItem<Types.TabTitle>("local:plugin-tabTitle", {
+  tabTitle: storage.defineItem<Types.PluginGeneric>("local:plugin-tabTitle", {
     fallback: {
       toggle: true,
-      showSubjectPrefix: true,
+      settings: [new Setting.Toggle("Show Subject Prefix", false)],
     },
   }),
   homepageSwitcher: storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {

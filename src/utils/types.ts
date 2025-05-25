@@ -1,3 +1,5 @@
+import { Setting } from "./settings";
+
 // Global
 export interface Settings {
   global: boolean;
@@ -53,7 +55,9 @@ export type PluginId =
   | "homepageSwitcher";
 
 export interface PluginInfo extends ItemInfo {}
-export interface PluginGeneric extends ItemGeneric {}
+export interface PluginGeneric extends ItemGeneric {
+  settings?: Setting[];
+}
 
 export interface TabTitle extends ItemGeneric {
   showSubjectPrefix: boolean;

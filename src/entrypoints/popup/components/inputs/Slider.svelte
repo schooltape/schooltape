@@ -9,13 +9,7 @@
     description?: string;
   }
 
-  let {
-    id,
-    checked = $bindable(),
-    size = "big",
-    text = "",
-    description = ""
-  }: Props = $props();
+  let { id, checked = $bindable(), size = "big", text = "", description = "" }: Props = $props();
 
   const dispatch = createEventDispatcher();
 
