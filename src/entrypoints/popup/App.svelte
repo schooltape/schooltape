@@ -39,9 +39,9 @@
   }
 
   function getAccentRgb(accent: string, flavour: string) {
-    // console.log(accent, flavour);
-    // console.log(flavors);
-    // console.log(flavors[flavour].colors[accent].hex);
+    console.log(accent, flavour);
+    console.log(flavors);
+    console.log(flavors[flavour].colors);
     let x = (flavors as any)[flavour].colors[accent].rgb;
     return `${x.r}, ${x.g}, ${x.b}`;
   }

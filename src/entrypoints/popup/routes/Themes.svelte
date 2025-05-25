@@ -36,8 +36,12 @@
     await globalSettings.setValue(settings);
   }
 
+  function cleanAccent(accent: string) {
+    return accent.replace("bg-ctp-", "");
+  }
+
   async function accentClicked(accent: string) {
-    settings.themeAccent = accent;
+    settings.themeAccent = cleanAccent(accent);
     await globalSettings.setValue(settings);
   }
 
@@ -95,9 +99,9 @@
     {#each accents as accent (accent)}
       <button
         class={accent}
-        class:current={settings.themeAccent === accent}
-        aria-label={accent.replace("bg-ctp-", "")}
-        title={accent.replace("bg-ctp-", "")}
+        class:current={settings.themeAccent === cleanAccent(accent)}
+        aria-label={cleanAccent(accent)}
+        title={cleanAccent(accent)}
         onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>
