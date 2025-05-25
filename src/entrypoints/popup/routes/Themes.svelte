@@ -7,20 +7,20 @@
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
-    "rosewater",
-    "flamingo",
-    "pink",
-    "mauve",
-    "red",
-    "maroon",
-    "peach",
-    "yellow",
-    "green",
-    "teal",
-    "sky",
-    "sapphire",
-    "blue",
-    "lavender",
+    "bg-ctp-rosewater",
+    "bg-ctp-flamingo",
+    "bg-ctp-pink",
+    "bg-ctp-mauve",
+    "bg-ctp-red",
+    "bg-ctp-maroon",
+    "bg-ctp-peach",
+    "bg-ctp-yellow",
+    "bg-ctp-green",
+    "bg-ctp-teal",
+    "bg-ctp-sky",
+    "bg-ctp-sapphire",
+    "bg-ctp-blue",
+    "bg-ctp-lavender",
   ];
 
   const logos = LOGO_INFO;
@@ -94,10 +94,10 @@
   <div id="palette">
     {#each accents as accent (accent)}
       <button
-        class="bg-ctp-{accent}"
+        class={accent}
         class:current={settings.themeAccent === accent}
-        title={accent}
-        aria-label={accent}
+        aria-label={accent.replace("bg-ctp-", "")}
+        title={accent.replace("bg-ctp-", "")}
         onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>
