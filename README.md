@@ -22,6 +22,7 @@
   <a href="https://github.com/schooltape/schooltape/releases/latest"><img src="https://img.shields.io/github/v/release/schooltape/schooltape?colorA=363a4f&colorB=a6da95&style=for-the-badge&logo=github&logoColor=cad3f5"></a>
   <a href="https://github.com/schooltape/schooltape/issues"><img src="https://img.shields.io/github/issues/schooltape/schooltape?colorA=363a4f&colorB=f5a97f&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij4KPHBhdGggZD0iTTIxNiwzMlYxOTJhOCw4LDAsMCwxLTgsOEg3MmExNiwxNiwwLDAsMC0xNiwxNkgxOTJhOCw4LDAsMCwxLDAsMTZINDhhOCw4LDAsMCwxLTgtOFY1NkEzMiwzMiwwLDAsMSw3MiwyNEgyMDhBOCw4LDAsMCwxLDIxNiwzMloiIHN0eWxlPSJmaWxsOiAjQ0FEM0Y1OyIvPgo8L3N2Zz4="></a>
   <a href="https://discord.gg/rZxtGJ98BE"><img src="https://img.shields.io/discord/1246027558923800626?style=for-the-badge&color=c6a0f6&labelColor=363a4f&logo=discord&logoColor=cad3f5"></a>
+  <a href="https://chromewebstore.google.com/detail/schooltape/denkadefchjkchlefgfhdmabagdcefhf"><img alt="Chrome Web Store Users" src="https://img.shields.io/chrome-web-store/users/denkadefchjkchlefgfhdmabagdcefhf?style=for-the-badge&logo=GoogleChrome&logoColor=b7bdf8&label=Users&labelColor=363a4f&color=7dc4e4"></a>
 </p>
 
 <p align="center">
