@@ -6,7 +6,6 @@ export default function init() {
     () => {
       if (window.location.pathname === "/" && document.querySelector(".timetable")) {
         const periodList = getListOfPeriods();
-        console.log(periodList);
 
         const progressRow = document.createElement("tr");
         progressRow.classList.add("progress-container");
