@@ -7,20 +7,20 @@
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
-    "rosewater",
-    "flamingo",
-    "pink",
-    "mauve",
-    "red",
-    "maroon",
-    "peach",
-    "yellow",
-    "green",
-    "teal",
-    "sky",
-    "sapphire",
-    "blue",
-    "lavender",
+    "bg-ctp-rosewater",
+    "bg-ctp-flamingo",
+    "bg-ctp-pink",
+    "bg-ctp-mauve",
+    "bg-ctp-red",
+    "bg-ctp-maroon",
+    "bg-ctp-peach",
+    "bg-ctp-yellow",
+    "bg-ctp-green",
+    "bg-ctp-teal",
+    "bg-ctp-sky",
+    "bg-ctp-sapphire",
+    "bg-ctp-blue",
+    "bg-ctp-lavender",
   ];
 
   const logos = LOGO_INFO;
@@ -36,8 +36,12 @@
     await globalSettings.setValue(settings);
   }
 
+  function cleanAccent(accent: string) {
+    return accent.replace("bg-ctp-", "");
+  }
+
   async function accentClicked(accent: string) {
-    settings.themeAccent = accent;
+    settings.themeAccent = cleanAccent(accent);
     await globalSettings.setValue(settings);
   }
 
@@ -63,7 +67,7 @@
       <button
         onclick={() => logoClicked(logoId)}
         class:highlight={settings.themeLogo === logoId}
-        class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
+        class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           {#if logo.adaptive}
@@ -94,10 +98,10 @@
   <div id="palette">
     {#each accents as accent (accent)}
       <button
-        class="bg-ctp-{accent}"
-        class:current={settings.themeAccent === accent}
-        title={accent}
-        aria-label={accent}
+        class={accent}
+        class:current={settings.themeAccent === cleanAccent(accent)}
+        aria-label={cleanAccent(accent)}
+        title={cleanAccent(accent)}
         onclick={() => accentClicked(accent)}></button>
     {/each}
   </div>

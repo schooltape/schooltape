@@ -19,7 +19,7 @@
   };
   let flavour = $state("");
   let accent = "";
-  let accentHex = "";
+  let accentRgb = "";
   let settings = globalSettings.fallback;
   let refresh = $state(needsRefresh.fallback);
 
@@ -38,12 +38,12 @@
     refreshSchoolboxURLs();
   }
 
-  function getAccentHex(accent: string, flavour: string) {
-    // console.log(accent, flavour);
-    // console.log(flavors);
-    // console.log(flavors[flavour].colors[accent].hex);
+  function getAccentRgb(accent: string, flavour: string) {
+    console.log(accent, flavour);
+    console.log(flavors);
+    console.log(flavors[flavour].colors);
     let x = (flavors as any)[flavour].colors[accent].rgb;
-    return `${x.r}, ${x.g}, ${x.b}`;
+    return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
 
   let settingsUnwatch: () => void;
@@ -54,16 +54,14 @@
     refresh = await needsRefresh.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
-    accentHex = getAccentHex(accent, flavour);
-    document.documentElement.style.setProperty("--ctp-accent", accentHex);
+    document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
 
     settingsUnwatch = globalSettings.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
-      accentHex = getAccentHex(accent, flavour);
 
-      document.documentElement.style.setProperty("--ctp-accent", accentHex);
+      document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
       refresh = true;
       needsRefresh.setValue(refresh);
     });
@@ -78,7 +76,7 @@
   });
 </script>
 
-<main class="flex flex-col items-center bg-ctp-base p-6 ctp-{flavour}">
+<main class="flex flex-col items-center bg-ctp-base p-6 {flavour}">
   <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
