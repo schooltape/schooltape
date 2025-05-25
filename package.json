@@ -1,6 +1,6 @@
 {
   "name": "schooltape",
-  "version": "3.3.0",
+  "version": "3.3.2",
   "author": "42willow",
   "homepage": "https://schooltape.github.io",
   "devDependencies": {
@@ -15,7 +15,7 @@
     "eslint": "^9.27.0",
     "eslint-plugin-svelte": "^3.9.0",
     "globals": "^16.1.0",
-    "lucide-svelte": "^0.475.0",
+    "lucide-svelte": "^0.507.0",
     "pino": "^9.7.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
