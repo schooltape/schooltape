@@ -1,5 +1,3 @@
-import { Menus } from "wxt/browser";
-
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async ({ reason }) => {
     if (reason === "install") {
@@ -72,7 +70,7 @@ export default defineBackground(() => {
   });
 
   // context menus
-  let contexts: Menus.ContextType[];
+  let contexts: Browser.contextMenus.CreateProperties["contexts"];
   logger.info(`[background] Manifest version: ${import.meta.env.MANIFEST_VERSION}`);
   if (import.meta.env.MANIFEST_VERSION === 2) {
     contexts = ["browser_action"];
