@@ -43,7 +43,7 @@
     console.log(flavors);
     console.log(flavors[flavour].colors);
     let x = (flavors as any)[flavour].colors[accent].rgb;
-    return `${x.r}, ${x.g}, ${x.b}`;
+    return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
 
   let settingsUnwatch: () => void;
@@ -54,16 +54,14 @@
     refresh = await needsRefresh.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
-    accentRgb = getAccentRgb(accent, flavour);
-    document.documentElement.style.setProperty("--ctp-accent", `rgb(${accentRgb})`);
+    document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
 
     settingsUnwatch = globalSettings.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
-      accentRgb = getAccentRgb(accent, flavour);
 
-      document.documentElement.style.setProperty("--ctp-accent", `rgb(${accentRgb})`);
+      document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
       refresh = true;
       needsRefresh.setValue(refresh);
     });
