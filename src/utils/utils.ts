@@ -1,5 +1,5 @@
 import { flavorEntries } from "@catppuccin/palette";
-import { WxtStorageItem } from "wxt/storage";
+import { WxtStorageItem } from "#imports";
 
 export async function populateItems<T extends ItemId>(
   storage: Record<T, WxtStorageItem<ItemGeneric, any>>,

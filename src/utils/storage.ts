@@ -1,4 +1,4 @@
-import { WxtStorageItem } from "wxt/storage";
+import { WxtStorageItem } from "#imports";
 import * as Types from "./types";
 
 // Global
