@@ -17,10 +17,10 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@catppuccin/tailwindcss")({
-      prefix: "ctp",
-      defaultFlavour: "mocha",
-    }),
-  ],
+  // plugins: [
+  //   require("@catppuccin/tailwindcss")({
+  //     prefix: "ctp",
+  //     defaultFlavour: "mocha",
+  //   }),
+  // ],
 };

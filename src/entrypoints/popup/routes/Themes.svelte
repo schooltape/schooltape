@@ -63,7 +63,7 @@
       <button
         onclick={() => logoClicked(logoId)}
         class:highlight={settings.themeLogo === logoId}
-        class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
+        class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           {#if logo.adaptive}

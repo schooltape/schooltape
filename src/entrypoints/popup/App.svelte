@@ -19,7 +19,7 @@
   };
   let flavour = $state("");
   let accent = "";
-  let accentHex = "";
+  let accentRgb = "";
   let settings = globalSettings.fallback;
   let refresh = $state(needsRefresh.fallback);
 
@@ -38,7 +38,7 @@
     refreshSchoolboxURLs();
   }
 
-  function getAccentHex(accent: string, flavour: string) {
+  function getAccentRgb(accent: string, flavour: string) {
     // console.log(accent, flavour);
     // console.log(flavors);
     // console.log(flavors[flavour].colors[accent].hex);
@@ -54,16 +54,16 @@
     refresh = await needsRefresh.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
-    accentHex = getAccentHex(accent, flavour);
-    document.documentElement.style.setProperty("--ctp-accent", accentHex);
+    accentRgb = getAccentRgb(accent, flavour);
+    document.documentElement.style.setProperty("--ctp-accent", `rgb(${accentRgb})`);
 
     settingsUnwatch = globalSettings.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
-      accentHex = getAccentHex(accent, flavour);
+      accentRgb = getAccentRgb(accent, flavour);
 
-      document.documentElement.style.setProperty("--ctp-accent", accentHex);
+      document.documentElement.style.setProperty("--ctp-accent", `rgb(${accentRgb})`);
       refresh = true;
       needsRefresh.setValue(refresh);
     });

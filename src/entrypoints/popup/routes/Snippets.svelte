@@ -108,7 +108,7 @@
             removeUserSnippet(key);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:bg-ctp-accent hover:text-ctp-mantle">Gist</button></a>
+          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
       </div>
     {/each}
   </div>
