@@ -33,7 +33,7 @@
 
   async function flavourClicked(flavour: string) {
     settings.themeFlavour = flavour;
-    await globalSettings.setValue(settings);
+    await globalSettings.setValue($state.snapshot(settings));
   }
 
   function cleanAccent(accent: string) {
@@ -42,18 +42,18 @@
 
   async function accentClicked(accent: string) {
     settings.themeAccent = cleanAccent(accent);
-    await globalSettings.setValue(settings);
+    await globalSettings.setValue($state.snapshot(settings));
   }
 
   async function logoClicked(logoId: string) {
     settings.themeLogo = logoId as LogoId;
-    await globalSettings.setValue(settings);
+    await globalSettings.setValue($state.snapshot(settings));
   }
 
   async function handleToggleChange(event: CustomEvent) {
     let settings = await globalSettings.getValue();
     settings.themes = event.detail.checked;
-    await globalSettings.setValue(settings);
+    await globalSettings.setValue($state.snapshot(settings));
   }
 </script>
 
