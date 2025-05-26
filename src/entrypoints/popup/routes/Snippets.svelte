@@ -5,19 +5,19 @@
   import TextInput from "../components/inputs/TextInput.svelte";
 
   let populatedSnippets: PopulatedItem<SnippetId>[] = $state([]);
-  let settings = $state(globalSettings.fallback);
+  let settings = $state(globalSettings.storage.fallback);
 
   let snippetURL = $state("");
 
   onMount(async () => {
     populatedSnippets = await populateItems(snippets, SNIPPET_INFO);
-    settings = await globalSettings.getValue();
+    settings = await globalSettings.storage.getValue();
   });
 
   async function handleToggleChange(event: CustomEvent) {
-    let settings = await globalSettings.getValue();
+    let settings = await globalSettings.storage.getValue();
     settings.snippets = event.detail.checked;
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 
   async function addUserSnippet() {
@@ -43,7 +43,7 @@
       url: snippetURL,
       toggle: true,
     };
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 
   async function toggleSnippet(snippetId: SnippetId, toggled: boolean) {
@@ -52,13 +52,13 @@
 
   async function toggleUserSnippet(snippetId: string, toggled: boolean) {
     settings.userSnippets[snippetId].toggle = toggled;
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 
   async function removeUserSnippet(snippetId: string) {
     delete settings.userSnippets[snippetId];
     settings.userSnippets = settings.userSnippets; // force reactivity
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 </script>
 

@@ -3,7 +3,7 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.getValue();
+    const settings = await globalSettings.storage.getValue();
     const urls = await schoolboxUrls.getValue();
 
     if (!settings.global) return;

@@ -20,7 +20,7 @@
   let flavour = $state("");
   let accent = "";
   let accentRgb = "";
-  let settings = globalSettings.fallback;
+  let settings = globalSettings.storage.fallback;
   let refresh = $state(needsRefresh.fallback);
 
   async function refreshSchoolboxURLs() {
@@ -50,13 +50,13 @@
   let refreshUnwatch: () => void;
 
   onMount(async () => {
-    settings = await globalSettings.getValue();
+    settings = await globalSettings.storage.getValue();
     refresh = await needsRefresh.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
     document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
 
-    settingsUnwatch = globalSettings.watch((newValue) => {
+    settingsUnwatch = globalSettings.storage.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;

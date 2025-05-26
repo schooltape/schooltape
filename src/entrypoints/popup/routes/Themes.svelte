@@ -3,7 +3,6 @@
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Layers3 } from "lucide-svelte";
-  import { globalSettingsState } from "@/utils/state.svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -27,7 +26,7 @@
   let showModal = $state(false);
 
   function flavourClicked(flavour: string) {
-    globalSettingsState.set({ themeFlavour: flavour });
+    globalSettings.set({ themeFlavour: flavour });
   }
 
   function cleanAccent(accent: string) {
@@ -35,15 +34,15 @@
   }
 
   function accentClicked(accent: string) {
-    globalSettingsState.set({ themeAccent: cleanAccent(accent) });
+    globalSettings.set({ themeAccent: cleanAccent(accent) });
   }
 
   function logoClicked(logoId: string) {
-    globalSettingsState.set({ themeLogo: logoId as LogoId });
+    globalSettings.set({ themeLogo: logoId as LogoId });
   }
 
   async function handleToggleChange(event: CustomEvent) {
-    globalSettingsState.set({ themes: event.detail.checked });
+    globalSettings.set({ themes: event.detail.checked });
   }
 </script>
 
@@ -56,7 +55,7 @@
     {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
         onclick={() => logoClicked(logoId)}
-        class:highlight={globalSettingsState.state.themeLogo === logoId}
+        class:highlight={globalSettings.state.themeLogo === logoId}
         class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
@@ -72,12 +71,12 @@
 </Modal>
 
 <div id="card">
-  <Title title="Themes" bind:checked={globalSettingsState.state.themes} on:change={handleToggleChange} />
+  <Title title="Themes" bind:checked={globalSettings.state.themes} on:change={handleToggleChange} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour (flavour)}
       <button
-        class:active={globalSettingsState.state.themeFlavour === flavour}
+        class:active={globalSettings.state.themeFlavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
@@ -89,7 +88,7 @@
     {#each accents as accent (accent)}
       <button
         class={accent}
-        class:current={globalSettingsState.state.themeAccent === cleanAccent(accent)}
+        class:current={globalSettings.state.themeAccent === cleanAccent(accent)}
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
         onclick={() => accentClicked(accent)}></button>

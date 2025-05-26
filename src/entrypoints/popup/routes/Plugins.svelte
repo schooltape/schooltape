@@ -8,13 +8,13 @@
 
   onMount(async () => {
     populatedPlugins = await populateItems(plugins, PLUGIN_INFO);
-    pluginsToggle = await globalSettings.getValue().then((settings) => settings.plugins);
+    pluginsToggle = await globalSettings.storage.getValue().then((settings) => settings.plugins);
   });
 
   async function handleToggleChange(event: CustomEvent) {
-    let settings = await globalSettings.getValue();
+    let settings = await globalSettings.storage.getValue();
     settings.plugins = event.detail.checked;
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 
   async function togglePlugin(pluginId: PluginId, toggled: boolean): Promise<void> {

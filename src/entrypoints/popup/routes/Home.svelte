@@ -2,17 +2,17 @@
   import Footer from "../components/Footer.svelte";
   import { onMount } from "svelte";
 
-  let settings = $state(globalSettings.fallback);
+  let settings = $state(globalSettings.storage.fallback);
 
   onMount(async () => {
-    settings = await globalSettings.getValue();
+    settings = await globalSettings.storage.getValue();
   });
 
   // $inspect(settings);
 
   async function globalToggle() {
     settings.global = !settings.global;
-    await globalSettings.setValue(settings);
+    await globalSettings.storage.setValue(settings);
   }
 </script>
 

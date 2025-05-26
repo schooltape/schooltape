@@ -1,22 +1,25 @@
 import { WxtStorageItem } from "#imports";
 import * as Types from "./types";
+import { StorageState } from "./state.svelte";
 
 // Global
-export const globalSettings = storage.defineItem<Types.Settings>("local:globalSettings", {
-  version: 1,
-  fallback: {
-    global: true,
-    plugins: true,
-    themes: true,
-    snippets: true,
+export const globalSettings = new StorageState(
+  storage.defineItem<Types.Settings>("local:globalSettings", {
+    version: 1,
+    fallback: {
+      global: true,
+      plugins: true,
+      themes: true,
+      snippets: true,
 
-    themeFlavour: "mocha",
-    themeAccent: "mauve",
-    themeLogo: "schooltape-rainbow",
+      themeFlavour: "mocha",
+      themeAccent: "mauve",
+      themeLogo: "schooltape-rainbow",
 
-    userSnippets: {},
-  },
-});
+      userSnippets: {},
+    },
+  }),
+);
 export const needsRefresh = storage.defineItem<boolean>("local:needsRefresh", {
   fallback: false,
 });
