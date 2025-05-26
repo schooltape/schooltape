@@ -21,11 +21,11 @@
   let accent = "";
   let accentRgb = "";
   let settings = globalSettings.storage.fallback;
-  let refresh = $state(needsRefresh.fallback);
+  let refresh = $state(needsRefresh.storage.fallback);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    const urls = (await schoolboxUrls.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
+    const urls = (await schoolboxUrls.storage.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
       browser.tabs.reload(tab.id);
@@ -34,7 +34,7 @@
 
   async function onBannerClick() {
     refresh = false;
-    needsRefresh.setValue(refresh);
+    needsRefresh.storage.setValue(refresh);
     refreshSchoolboxURLs();
   }
 
@@ -51,7 +51,7 @@
 
   onMount(async () => {
     settings = await globalSettings.storage.getValue();
-    refresh = await needsRefresh.getValue();
+    refresh = await needsRefresh.storage.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
     document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
@@ -63,7 +63,7 @@
 
       document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
       refresh = true;
-      needsRefresh.setValue(refresh);
+      needsRefresh.storage.setValue(refresh);
     });
     refreshUnwatch = needsRefresh.watch((newValue) => {
       refresh = newValue;

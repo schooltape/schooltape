@@ -2,13 +2,13 @@ import { flavorEntries } from "@catppuccin/palette";
 import { WxtStorageItem } from "#imports";
 
 export async function populateItems<T extends ItemId>(
-  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
+  storage: Record<T, StorageState<ItemGeneric>>,
   info: Record<T, ItemInfo>,
 ): Promise<PopulatedItem<T>[]> {
   const populatedItems: PopulatedItem<T>[] = [];
 
   for (const itemId of Object.keys(storage) as T[]) {
-    const item = storage[itemId].fallback;
+    const item = storage[itemId].storage.fallback;
     const itemInfo = info[itemId];
 
     const populatedItem: PopulatedItem<T> = {
@@ -18,7 +18,7 @@ export async function populateItems<T extends ItemId>(
       toggle: false,
     };
 
-    const storedItem = await storage[itemId].getValue();
+    const storedItem = await storage[itemId].storage.getValue();
     populatedItem.toggle = storedItem.toggle;
 
     populatedItems.push(populatedItem);
@@ -28,15 +28,15 @@ export async function populateItems<T extends ItemId>(
 }
 
 export async function toggleItem<T extends ItemId>(
-  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
+  storage: Record<T, StorageState<ItemGeneric>>,
   itemId: T,
   toggled: boolean,
 ): Promise<void> {
-  const item = await storage[itemId].getValue();
+  const item = await storage[itemId].storage.getValue();
   if (item) {
     item.toggle = toggled;
-    await storage[itemId].setValue(item);
-    await needsRefresh.setValue(true);
+    await storage[itemId].storage.setValue(item);
+    await needsRefresh.storage.setValue(true);
     logger.info(`Toggled ${itemId} to ${toggled}`);
   } else {
     logger.error(`Failed to toggle ${itemId}, not found in storage`);
