@@ -16,7 +16,8 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-  let flavour = $state("");
+
+  let flavour = $derived(globalSettings.state.themeFlavour);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
