@@ -76,8 +76,10 @@
         <Slider
           {id}
           bind:checked={snippet.toggle}
-          on:change={(event: CustomEvent) => {
-            globalSettings.set({ userSnippets: { id: event.detail.checked, ...globalSettings.get().userSnippets } });
+          on:change={async (event: CustomEvent) => {
+            let settings = await globalSettings.storage.getValue();
+            settings.userSnippets[id].toggle = event.detail.checked;
+            globalSettings.storage.setValue(settings);
           }}
           text={snippet.name}
           description={snippet.description}
