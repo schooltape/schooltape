@@ -1,47 +1,5 @@
 import { flavorEntries } from "@catppuccin/palette";
 
-export async function populateItems<T extends ItemId>(
-  storage: Record<T, StorageState<ItemGeneric>>,
-  info: Record<T, ItemInfo>,
-): Promise<PopulatedItem<T>[]> {
-  const populatedItems: PopulatedItem<T>[] = [];
-
-  for (const itemId of Object.keys(storage) as T[]) {
-    const item = storage[itemId].storage.fallback;
-    const itemInfo = info[itemId];
-
-    const populatedItem: PopulatedItem<T> = {
-      id: itemId,
-      ...item,
-      ...itemInfo,
-      toggle: false,
-    };
-
-    const storedItem = await storage[itemId].storage.getValue();
-    populatedItem.toggle = storedItem.toggle;
-
-    populatedItems.push(populatedItem);
-  }
-
-  return populatedItems;
-}
-
-export async function toggleItem<T extends ItemId>(
-  storage: Record<T, StorageState<ItemGeneric>>,
-  itemId: T,
-  toggled: boolean,
-): Promise<void> {
-  const item = await storage[itemId].storage.getValue();
-  if (item) {
-    item.toggle = toggled;
-    await storage[itemId].storage.setValue(item);
-    await needsRefresh.storage.setValue(true);
-    logger.info(`Toggled ${itemId} to ${toggled}`);
-  } else {
-    logger.error(`Failed to toggle ${itemId}, not found in storage`);
-  }
-}
-
 export function injectStyles(styleText: string) {
   logger.info(`[content-utils] Injecting styles: ${styleText}`);
   const style = document.createElement("style");
