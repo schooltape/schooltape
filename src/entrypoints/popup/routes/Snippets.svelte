@@ -79,7 +79,7 @@
           on:change={async (event: CustomEvent) => {
             let settings = await globalSettings.storage.getValue();
             settings.userSnippets[id].toggle = event.detail.checked;
-            globalSettings.storage.setValue(settings);
+            await globalSettings.storage.setValue(settings);
           }}
           text={snippet.name}
           description={snippet.description}
