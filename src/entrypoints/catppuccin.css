@@ -475,6 +475,20 @@ table tr td {
   background-color: hsl(var(--ctp-base));
 }
 
+article a {
+  background-color: transparent !important;
+  color: hsl(var(--ctp-accent)) !important;
+}
+
+article a:hover {
+  text-decoration: underline !important;
+}
+
+article *:not(a):not(a *) {
+  background-color: transparent !important;
+  color: hsl(var(--ctp-text)) !important;
+}
+
 /* home -> news */
 .tabs {
   background: hsl(var(--ctp-surface1));
