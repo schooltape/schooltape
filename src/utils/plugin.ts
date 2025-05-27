@@ -3,12 +3,12 @@ export async function defineStPlugin(
   injectLogic: (pluginId: PluginId) => void,
   elementsToWaitFor: string[] = [],
 ) {
-  const plugin = await plugins[pluginId].getValue();
+  const plugin = await plugins[pluginId].storage.getValue();
 
-  logger.info(`${PLUGIN_INFO[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
+  logger.info(`${plugins[pluginId].info?.name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
-  const settings = await globalSettings.getValue();
-  const urls = await schoolboxUrls.getValue();
+  const settings = await globalSettings.storage.getValue();
+  const urls = await schoolboxUrls.storage.getValue();
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.plugins && plugin.toggle) {
@@ -19,7 +19,7 @@ export async function defineStPlugin(
             const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
             if (allElementsPresent) {
               observer.disconnect();
-              logger.info(`all elements present, injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+              logger.info(`all elements present, injecting plugin: ${plugins[pluginId].info?.name}`);
               injectLogic(pluginId);
             }
           });
@@ -30,12 +30,12 @@ export async function defineStPlugin(
           const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
           if (allElementsPresent) {
             observer.disconnect();
-            logger.info(`all elements already present, injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+            logger.info(`all elements already present, injecting plugin: ${plugins[pluginId].info?.name}`);
             injectLogic(pluginId);
           }
         } else {
           // no elements to wait for
-          logger.info(`injecting plugin: ${PLUGIN_INFO[pluginId].name}`);
+          logger.info(`injecting plugin: ${plugins[pluginId].info?.name}`);
           injectLogic(pluginId);
         }
       };
