@@ -1,39 +1,27 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
-
-  let populatedPlugins: PopulatedItem<PluginId>[] = $state([]);
-  let pluginsToggle: boolean = $state(true);
-
-  onMount(async () => {
-    populatedPlugins = await populateItems(plugins, PLUGIN_INFO);
-    pluginsToggle = await globalSettings.storage.getValue().then((settings) => settings.plugins);
-  });
-
-  async function handleToggleChange(event: CustomEvent) {
-    let settings = await globalSettings.storage.getValue();
-    settings.plugins = event.detail.checked;
-    await globalSettings.storage.setValue(settings);
-  }
-
-  async function togglePlugin(pluginId: PluginId, toggled: boolean): Promise<void> {
-    await toggleItem(plugins, pluginId, toggled);
-  }
 </script>
 
 <div id="card">
-  <Title title="Plugins" bind:checked={pluginsToggle} on:change={handleToggleChange} />
+  <Title
+    title="Plugins"
+    bind:checked={globalSettings.state.plugins}
+    on:change={(event: CustomEvent) => {
+      globalSettings.set({ plugins: event.detail.checked });
+    }} />
 
   <div class="plugins-container">
-    {#each populatedPlugins as plugin}
+    {#each Object.entries(plugins) as [id, plugin] (id)}
       <div class="my-4 group">
         <Slider
-          id={plugin.id}
-          bind:checked={plugin.toggle}
-          on:change={() => togglePlugin(plugin.id, plugin.toggle)}
-          text={plugin.name}
-          description={plugin.description}
+          {id}
+          bind:checked={plugin.state.toggle}
+          on:change={(event: CustomEvent) => {
+            plugin.set({ toggle: event.detail.checked });
+          }}
+          text={plugin.info?.name}
+          description={plugin.info?.description}
           size="small" />
       </div>
     {/each}

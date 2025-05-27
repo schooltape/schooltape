@@ -19,7 +19,6 @@
   };
   let flavour = $state("");
   let accent = "";
-  let accentRgb = "";
   let settings = globalSettings.storage.fallback;
   let refresh = $state(needsRefresh.storage.fallback);
 
@@ -28,7 +27,9 @@
     const urls = (await schoolboxUrls.storage.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
-      browser.tabs.reload(tab.id);
+      if (tab.id) {
+        browser.tabs.reload(tab.id);
+      }
     });
   }
 
@@ -39,9 +40,7 @@
   }
 
   function getAccentRgb(accent: string, flavour: string) {
-    console.log(accent, flavour);
-    console.log(flavors);
-    console.log(flavors[flavour].colors);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let x = (flavors as any)[flavour].colors[accent].rgb;
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
@@ -65,7 +64,7 @@
       refresh = true;
       needsRefresh.storage.setValue(refresh);
     });
-    refreshUnwatch = needsRefresh.watch((newValue) => {
+    refreshUnwatch = needsRefresh.storage.watch((newValue) => {
       refresh = newValue;
     });
   });

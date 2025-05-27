@@ -25,24 +25,8 @@
   const logos = LOGO_INFO;
   let showModal = $state(false);
 
-  function flavourClicked(flavour: string) {
-    globalSettings.set({ themeFlavour: flavour });
-  }
-
   function cleanAccent(accent: string) {
     return accent.replace("bg-ctp-", "");
-  }
-
-  function accentClicked(accent: string) {
-    globalSettings.set({ themeAccent: cleanAccent(accent) });
-  }
-
-  function logoClicked(logoId: string) {
-    globalSettings.set({ themeLogo: logoId as LogoId });
-  }
-
-  async function handleToggleChange(event: CustomEvent) {
-    globalSettings.set({ themes: event.detail.checked });
   }
 </script>
 
@@ -54,7 +38,9 @@
   <div class="grid grid-cols-3 gap-4">
     {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
-        onclick={() => logoClicked(logoId)}
+        onclick={() => {
+          globalSettings.set({ themeLogo: logoId as LogoId });
+        }}
         class:highlight={globalSettings.state.themeLogo === logoId}
         class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
@@ -71,7 +57,12 @@
 </Modal>
 
 <div id="card">
-  <Title title="Themes" bind:checked={globalSettings.state.themes} on:change={handleToggleChange} />
+  <Title
+    title="Themes"
+    bind:checked={globalSettings.state.themes}
+    on:change={(event: CustomEvent) => {
+      globalSettings.set({ themes: event.detail.checked });
+    }} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour (flavour)}
@@ -80,7 +71,9 @@
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
-        onclick={() => flavourClicked(flavour)}>{flavour}</button>
+        onclick={() => {
+          globalSettings.set({ themeFlavour: flavour });
+        }}>{flavour}</button>
     {/each}
   </div>
 
@@ -91,7 +84,9 @@
         class:current={globalSettings.state.themeAccent === cleanAccent(accent)}
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
-        onclick={() => accentClicked(accent)}></button>
+        onclick={() => {
+          globalSettings.set({ themeAccent: cleanAccent(accent) });
+        }}></button>
     {/each}
   </div>
 

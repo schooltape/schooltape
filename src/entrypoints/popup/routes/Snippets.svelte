@@ -1,24 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  let populatedSnippets: PopulatedItem<SnippetId>[] = $state([]);
-  let settings = $state(globalSettings.storage.fallback);
-
   let snippetURL = $state("");
-
-  onMount(async () => {
-    populatedSnippets = await populateItems(snippets, SNIPPET_INFO);
-    settings = await globalSettings.storage.getValue();
-  });
-
-  async function handleToggleChange(event: CustomEvent) {
-    let settings = await globalSettings.storage.getValue();
-    settings.snippets = event.detail.checked;
-    await globalSettings.storage.setValue(settings);
-  }
 
   async function addUserSnippet() {
     if (!snippetURL.startsWith("http") && !snippetURL.includes("gist.github.com")) {
@@ -36,6 +21,7 @@
     let sections = snippetURL.split("/");
     let key = sections[sections.length - 1].split(".")[0];
 
+    let settings = await globalSettings.storage.getValue();
     settings.userSnippets[key] = {
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
@@ -45,35 +31,27 @@
     };
     await globalSettings.storage.setValue(settings);
   }
-
-  async function toggleSnippet(snippetId: SnippetId, toggled: boolean) {
-    await toggleItem(snippets, snippetId, toggled);
-  }
-
-  async function toggleUserSnippet(snippetId: string, toggled: boolean) {
-    settings.userSnippets[snippetId].toggle = toggled;
-    await globalSettings.storage.setValue(settings);
-  }
-
-  async function removeUserSnippet(snippetId: string) {
-    delete settings.userSnippets[snippetId];
-    settings.userSnippets = settings.userSnippets; // force reactivity
-    await globalSettings.storage.setValue(settings);
-  }
 </script>
 
 <div id="card">
-  <Title title="Snippets" bind:checked={settings.snippets} on:change={handleToggleChange} />
+  <Title
+    title="Snippets"
+    bind:checked={globalSettings.state.snippets}
+    on:change={(event: CustomEvent) => {
+      globalSettings.set({ snippets: event.detail.checked });
+    }} />
 
   <div class="snippets-container w-full">
-    {#each populatedSnippets as snippet}
+    {#each Object.entries(snippets) as [id, snippet] (id)}
       <div class="my-4 group w-full">
         <Slider
-          id={snippet.id}
-          bind:checked={snippet.toggle}
-          on:change={() => toggleSnippet(snippet.id, snippet.toggle)}
-          text={snippet.name}
-          description={snippet.description}
+          {id}
+          bind:checked={snippet.state.toggle}
+          on:change={(event: CustomEvent) => {
+            snippet.set({ toggle: event.detail.checked });
+          }}
+          text={snippet.info?.name}
+          description={snippet.info?.description}
           size="small" />
       </div>
     {/each}
@@ -93,19 +71,23 @@
   </div>
 
   <div class="user-snippets-container w-full">
-    {#each Object.entries(settings.userSnippets) as [key, snippet] (key)}
+    {#each Object.entries(globalSettings.state.userSnippets) as [id, snippet] (id)}
       <div class="my-4 group w-full">
         <Slider
-          id={key}
+          {id}
           bind:checked={snippet.toggle}
-          on:change={() => toggleUserSnippet(key, snippet.toggle)}
+          on:change={(event: CustomEvent) => {
+            globalSettings.set({ userSnippets: { id: event.detail.checked, ...globalSettings.get().userSnippets } });
+          }}
           text={snippet.name}
           description={snippet.description}
           size="small" />
         <button
           class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
-          onclick={() => {
-            removeUserSnippet(key);
+          onclick={async () => {
+            let settings = await globalSettings.storage.getValue();
+            delete settings.userSnippets[id];
+            await globalSettings.storage.setValue(settings);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
           ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
