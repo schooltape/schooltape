@@ -1,47 +1,4 @@
 import { flavorEntries } from "@catppuccin/palette";
-import { WxtStorageItem } from "#imports";
-
-export async function populateItems<T extends ItemId>(
-  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
-  info: Record<T, ItemInfo>,
-): Promise<PopulatedItem<T>[]> {
-  const populatedItems: PopulatedItem<T>[] = [];
-
-  for (const itemId of Object.keys(storage) as T[]) {
-    const item = storage[itemId].fallback;
-    const itemInfo = info[itemId];
-
-    const populatedItem: PopulatedItem<T> = {
-      id: itemId,
-      ...item,
-      ...itemInfo,
-      toggle: false,
-    };
-
-    const storedItem = await storage[itemId].getValue();
-    populatedItem.toggle = storedItem.toggle;
-
-    populatedItems.push(populatedItem);
-  }
-
-  return populatedItems;
-}
-
-export async function toggleItem<T extends ItemId>(
-  storage: Record<T, WxtStorageItem<ItemGeneric, any>>,
-  itemId: T,
-  toggled: boolean,
-): Promise<void> {
-  const item = await storage[itemId].getValue();
-  if (item) {
-    item.toggle = toggled;
-    await storage[itemId].setValue(item);
-    await needsRefresh.setValue(true);
-    logger.info(`Toggled ${itemId} to ${toggled}`);
-  } else {
-    logger.error(`Failed to toggle ${itemId}, not found in storage`);
-  }
-}
 
 export function injectStyles(styleText: string) {
   logger.info(`[content-utils] Injecting styles: ${styleText}`);

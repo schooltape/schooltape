@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
@@ -24,36 +23,10 @@
   ];
 
   const logos = LOGO_INFO;
-  let settings = $state(globalSettings.fallback);
   let showModal = $state(false);
-
-  onMount(async () => {
-    settings = await globalSettings.getValue();
-  });
-
-  async function flavourClicked(flavour: string) {
-    settings.themeFlavour = flavour;
-    await globalSettings.setValue($state.snapshot(settings));
-  }
 
   function cleanAccent(accent: string) {
     return accent.replace("bg-ctp-", "");
-  }
-
-  async function accentClicked(accent: string) {
-    settings.themeAccent = cleanAccent(accent);
-    await globalSettings.setValue($state.snapshot(settings));
-  }
-
-  async function logoClicked(logoId: string) {
-    settings.themeLogo = logoId as LogoId;
-    await globalSettings.setValue($state.snapshot(settings));
-  }
-
-  async function handleToggleChange(event: CustomEvent) {
-    let settings = await globalSettings.getValue();
-    settings.themes = event.detail.checked;
-    await globalSettings.setValue($state.snapshot(settings));
   }
 </script>
 
@@ -65,8 +38,10 @@
   <div class="grid grid-cols-3 gap-4">
     {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
-        onclick={() => logoClicked(logoId)}
-        class:highlight={settings.themeLogo === logoId}
+        onclick={() => {
+          globalSettings.set({ themeLogo: logoId as LogoId });
+        }}
+        class:highlight={globalSettings.state.themeLogo === logoId}
         class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
@@ -82,16 +57,23 @@
 </Modal>
 
 <div id="card">
-  <Title title="Themes" bind:checked={settings.themes} on:change={handleToggleChange} />
+  <Title
+    title="Themes"
+    bind:checked={globalSettings.state.themes}
+    on:change={(event: CustomEvent) => {
+      globalSettings.set({ themes: event.detail.checked });
+    }} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
     {#each flavours as flavour (flavour)}
       <button
-        class:active={settings.themeFlavour === flavour}
+        class:active={globalSettings.state.themeFlavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
-        onclick={() => flavourClicked(flavour)}>{flavour}</button>
+        onclick={() => {
+          globalSettings.set({ themeFlavour: flavour });
+        }}>{flavour}</button>
     {/each}
   </div>
 
@@ -99,10 +81,12 @@
     {#each accents as accent (accent)}
       <button
         class={accent}
-        class:current={settings.themeAccent === cleanAccent(accent)}
+        class:current={globalSettings.state.themeAccent === cleanAccent(accent)}
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
-        onclick={() => accentClicked(accent)}></button>
+        onclick={() => {
+          globalSettings.set({ themeAccent: cleanAccent(accent) });
+        }}></button>
     {/each}
   </div>
 

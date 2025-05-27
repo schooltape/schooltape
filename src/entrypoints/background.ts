@@ -37,7 +37,7 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
-  globalSettings.watch(async (newSettings, oldSettings) => {
+  globalSettings.storage.watch(async (newSettings, oldSettings) => {
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
@@ -120,7 +120,7 @@ async function resetSettings(): Promise<void> {
 }
 
 async function updateIcon() {
-  const global = (await globalSettings.getValue()).global;
+  const global = (await globalSettings.storage.getValue()).global;
   let iconSuffix = "-disabled";
   if (global) {
     iconSuffix = "";

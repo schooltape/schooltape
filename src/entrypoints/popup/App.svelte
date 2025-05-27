@@ -19,29 +19,28 @@
   };
   let flavour = $state("");
   let accent = "";
-  let accentRgb = "";
-  let settings = globalSettings.fallback;
-  let refresh = $state(needsRefresh.fallback);
+  let settings = globalSettings.storage.fallback;
+  let refresh = $state(needsRefresh.storage.fallback);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    const urls = (await schoolboxUrls.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
+    const urls = (await schoolboxUrls.storage.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
-      browser.tabs.reload(tab.id);
+      if (tab.id) {
+        browser.tabs.reload(tab.id);
+      }
     });
   }
 
   async function onBannerClick() {
     refresh = false;
-    needsRefresh.setValue(refresh);
+    needsRefresh.storage.setValue(refresh);
     refreshSchoolboxURLs();
   }
 
   function getAccentRgb(accent: string, flavour: string) {
-    console.log(accent, flavour);
-    console.log(flavors);
-    console.log(flavors[flavour].colors);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let x = (flavors as any)[flavour].colors[accent].rgb;
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
@@ -50,22 +49,22 @@
   let refreshUnwatch: () => void;
 
   onMount(async () => {
-    settings = await globalSettings.getValue();
-    refresh = await needsRefresh.getValue();
+    settings = await globalSettings.storage.getValue();
+    refresh = await needsRefresh.storage.getValue();
     accent = settings.themeAccent;
     flavour = settings.themeFlavour;
     document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
 
-    settingsUnwatch = globalSettings.watch((newValue) => {
+    settingsUnwatch = globalSettings.storage.watch((newValue) => {
       settings = newValue;
       flavour = newValue.themeFlavour;
       accent = newValue.themeAccent;
 
       document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
       refresh = true;
-      needsRefresh.setValue(refresh);
+      needsRefresh.storage.setValue(refresh);
     });
-    refreshUnwatch = needsRefresh.watch((newValue) => {
+    refreshUnwatch = needsRefresh.storage.watch((newValue) => {
       refresh = newValue;
     });
   });
