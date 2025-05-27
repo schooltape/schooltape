@@ -8,7 +8,6 @@
   import Banner from "./components/Banner.svelte";
 
   import { flavors } from "@catppuccin/palette";
-  import { onMount, onDestroy } from "svelte";
   import { needsRefresh } from "@/utils/storage";
 
   const routes = {
@@ -18,9 +17,6 @@
     "/snippets": Snippets,
   };
   let flavour = $state("");
-  let accent = "";
-  let settings = globalSettings.storage.fallback;
-  let refresh = $state(needsRefresh.storage.fallback);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
@@ -33,55 +29,27 @@
     });
   }
 
-  async function onBannerClick() {
-    refresh = false;
-    needsRefresh.storage.setValue(refresh);
-    refreshSchoolboxURLs();
-  }
-
   function getAccentRgb(accent: string, flavour: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let x = (flavors as any)[flavour].colors[accent].rgb;
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
 
-  let settingsUnwatch: () => void;
-  let refreshUnwatch: () => void;
-
-  onMount(async () => {
-    settings = await globalSettings.storage.getValue();
-    refresh = await needsRefresh.storage.getValue();
-    accent = settings.themeAccent;
-    flavour = settings.themeFlavour;
-    document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
-
-    settingsUnwatch = globalSettings.storage.watch((newValue) => {
-      settings = newValue;
-      flavour = newValue.themeFlavour;
-      accent = newValue.themeAccent;
-
-      document.documentElement.style.setProperty("--ctp-accent", getAccentRgb(accent, flavour));
-      refresh = true;
-      needsRefresh.storage.setValue(refresh);
-    });
-    refreshUnwatch = needsRefresh.storage.watch((newValue) => {
-      refresh = newValue;
-    });
-  });
-
-  onDestroy(() => {
-    settingsUnwatch();
-    refreshUnwatch();
-  });
+  let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
 </script>
 
-<main class="flex flex-col items-center bg-ctp-base p-6 {flavour}">
+<main class="flex flex-col items-center bg-ctp-base p-6 {flavour}" style="--ctp-accent: {accentRgb}">
   <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
     <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
   </nav>
-  <Banner visible={refresh} onclick={onBannerClick} />
+  <Banner
+    visible={needsRefresh.state}
+    onclick={() => {
+      needsRefresh.storage.setValue(false);
+      refreshSchoolboxURLs();
+    }} />
   <Router {routes} />
 </main>

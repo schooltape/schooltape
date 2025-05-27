@@ -12,11 +12,14 @@ export class StorageState<T, I = {}> {
     this.state = $state(this.storage.fallback);
 
     this.storage.getValue().then(this.update);
-    this.storage.watch(this.update);
+    this.storage.watch((newState) => this.update(newState, true));
   }
 
-  private update = (newState: T | null) => {
+  private update = (newState: T | null, refresh?: boolean) => {
     this.state = newState ?? this.storage.fallback;
+    if (refresh && this.storage.key !== "local:needsRefresh") {
+      needsRefresh.storage.setValue(true);
+    }
   };
 
   async set(updates: Partial<T>) {
