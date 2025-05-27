@@ -1,21 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
 
-  let snippets = snippetSettings.defaultValue;
-  let populatedSnippets: PopulatedSnippet[] = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  console.log(populatedSnippets);
-
-  let snippetURL = "";
-
-  onMount(async () => {
-    snippets = await snippetSettings.getValue();
-    populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-    console.log(populatedSnippets);
-    console.log("snippets", snippets);
-  });
+  let snippetURL = $state("");
 
   async function addUserSnippet() {
     if (!snippetURL.startsWith("http") && !snippetURL.includes("gist.github.com")) {
@@ -33,44 +21,37 @@
     let sections = snippetURL.split("/");
     let key = sections[sections.length - 1].split(".")[0];
 
-    snippets.user[key] = {
+    let settings = await globalSettings.storage.getValue();
+    settings.userSnippets[key] = {
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
       description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
       url: snippetURL,
       toggle: true,
     };
-    await snippetSettings.setValue(snippets);
-  }
-
-  async function toggleSnippet(snippetId: string, toggled: boolean, isUser: boolean = false) {
-    if (isUser) {
-      snippets.user[snippetId].toggle = toggled;
-    } else {
-      snippets.snippets[snippetId].toggle = toggled;
-    }
-    await snippetSettings.setValue(snippets);
-  }
-
-  async function removeUserSnippet(snippetId: string) {
-    delete snippets.user[snippetId];
-    snippets.user = snippets.user; // force reactivity
-    await snippetSettings.setValue(snippets);
+    await globalSettings.storage.setValue(settings);
   }
 </script>
 
 <div id="card">
-  <Title title="Snippets" data={snippets} key="snippets" />
+  <Title
+    title="Snippets"
+    bind:checked={globalSettings.state.snippets}
+    on:change={(event: CustomEvent) => {
+      globalSettings.set({ snippets: event.detail.checked });
+    }} />
 
   <div class="snippets-container w-full">
-    {#each populatedSnippets as snippet}
+    {#each Object.entries(snippets) as [id, snippet] (id)}
       <div class="my-4 group w-full">
         <Slider
-          id={snippet.id}
-          bind:checked={snippet.toggle}
-          onChange={() => toggleSnippet(snippet.id, snippet.toggle)}
-          text={snippet.name}
-          description={snippet.description}
+          {id}
+          bind:checked={snippet.state.toggle}
+          on:change={(event: CustomEvent) => {
+            snippet.set({ toggle: event.detail.checked });
+          }}
+          text={snippet.info?.name}
+          description={snippet.info?.description}
           size="small" />
       </div>
     {/each}
@@ -81,7 +62,7 @@
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
-        href="https://github.com/schooltape/schooltape/wiki/Contributing#snippets"
+        href="https://schooltape.github.io/contributing/snippets.html#user-snippets"
         target="_blank">wiki</a
       >.
     </p>
@@ -90,22 +71,28 @@
   </div>
 
   <div class="user-snippets-container w-full">
-    {#each Object.entries(snippets.user) as [key, snippet] (key)}
+    {#each Object.entries(globalSettings.state.userSnippets) as [id, snippet] (id)}
       <div class="my-4 group w-full">
         <Slider
-          id={key}
+          {id}
           bind:checked={snippet.toggle}
-          onChange={() => toggleSnippet(key, snippet.toggle, true)}
+          on:change={async (event: CustomEvent) => {
+            let settings = await globalSettings.storage.getValue();
+            settings.userSnippets[id].toggle = event.detail.checked;
+            await globalSettings.storage.setValue(settings);
+          }}
           text={snippet.name}
           description={snippet.description}
           size="small" />
         <button
           class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
-          on:click={() => {
-            removeUserSnippet(key);
+          onclick={async () => {
+            let settings = await globalSettings.storage.getValue();
+            delete settings.userSnippets[id];
+            await globalSettings.storage.setValue(settings);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:bg-ctp-accent hover:text-ctp-mantle">Gist</button></a>
+          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
       </div>
     {/each}
   </div>
