@@ -9,6 +9,7 @@
 
   import { flavors } from "@catppuccin/palette";
   import { needsRefresh } from "@/utils/storage";
+  import { globalSettings } from "#imports";
 
   const routes = {
     "/": Home,
@@ -16,8 +17,6 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-
-  let flavour = $derived(globalSettings.state.themeFlavour);
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
@@ -39,7 +38,9 @@
   let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
 </script>
 
-<main class="flex flex-col items-center bg-ctp-base p-6 {flavour}" style="--ctp-accent: {accentRgb}">
+<main
+  class="flex flex-col items-center bg-ctp-base p-6 {globalSettings.state.themeFlavour}"
+  style="--ctp-accent: {accentRgb}">
   <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
