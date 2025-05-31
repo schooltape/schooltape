@@ -1,6 +1,6 @@
 <script lang="ts">
   import Title from "../components/Title.svelte";
-  import Slider from "../components/inputs/Slider.svelte";
+  import Toggle from "../components/inputs/Toggle.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
   import { globalSettings } from "#imports";
 
@@ -45,7 +45,7 @@
   <div class="snippets-container w-full">
     {#each Object.entries(snippets) as [id, snippet] (id)}
       <div class="my-4 group w-full">
-        <Slider
+        <Toggle
           {id}
           checked={snippet.state.toggle}
           update={(toggled: boolean) => {
@@ -74,7 +74,7 @@
   <div class="user-snippets-container w-full">
     {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
       <div class="my-4 group w-full">
-        <Slider
+        <Toggle
           {id}
           checked={snippet.toggle}
           update={async (toggled: boolean) => {

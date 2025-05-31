@@ -13,8 +13,8 @@
   let { children, title, id, onclick, label = "" }: Props = $props();
 </script>
 
-<button {title} {id} class="flex items-center mx-2 small hover:text-ctp-crust hover:bg-(--ctp-accent)" {onclick}>
-  {@render children?.()}
+<button {title} {id} class="flex items-center ml-4 small hover:text-ctp-crust hover:bg-(--ctp-accent)" {onclick}>
+  {@render children()}
   {#if label}
     <span class="ml-3">{label}</span>
   {/if}

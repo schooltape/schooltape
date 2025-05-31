@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Slider from "./inputs/Slider.svelte";
+  import Toggle from "./inputs/Toggle.svelte";
 
   interface Props {
     update: (toggled: boolean) => void;
@@ -12,5 +12,5 @@
 
 <label for="theme-toggle" class="relative flex justify-between items-center group p-2 text-xl text-ctp-text">
   <h2>{title}</h2>
-  <Slider id="theme-toggle" size="big" {checked} {update} />
+  <Toggle id="theme-toggle" size="big" {checked} {update} />
 </label>
