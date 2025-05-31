@@ -92,7 +92,13 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
       fallback: {
         toggle: true,
         settings: {
-          showSubjectPrefix: true,
+          toggle: {
+            showSubjectPrefix: {
+              name: "Show Subject Prefix",
+              toggle: true,
+              description: "Whether to show the prefix before the subject",
+            } as Types.ToggleSetting,
+          },
         },
       },
     }),
