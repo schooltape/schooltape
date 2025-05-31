@@ -1,14 +1,15 @@
 <script lang="ts">
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
+  import { globalSettings } from "#imports";
 </script>
 
 <div id="card">
   <Title
     title="Plugins"
-    bind:checked={globalSettings.state.plugins}
-    on:change={(event: CustomEvent) => {
-      globalSettings.set({ plugins: event.detail.checked });
+    checked={globalSettings.state.plugins}
+    update={(toggled: boolean) => {
+      globalSettings.set({ plugins: toggled });
     }} />
 
   <div class="plugins-container">
@@ -16,9 +17,9 @@
       <div class="my-4 group">
         <Slider
           {id}
-          bind:checked={plugin.state.toggle}
-          on:change={(event: CustomEvent) => {
-            plugin.set({ toggle: event.detail.checked });
+          checked={plugin.state.toggle}
+          update={(toggled: boolean) => {
+            plugin.set({ toggle: toggled });
           }}
           text={plugin.info?.name}
           description={plugin.info?.description}

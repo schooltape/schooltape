@@ -3,6 +3,7 @@
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Layers3 } from "lucide-svelte";
+  import { globalSettings } from "#imports";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -59,9 +60,9 @@
 <div id="card">
   <Title
     title="Themes"
-    bind:checked={globalSettings.state.themes}
-    on:change={(event: CustomEvent) => {
-      globalSettings.set({ themes: event.detail.checked });
+    checked={globalSettings.state.themes}
+    update={(toggled: boolean) => {
+      globalSettings.set({ themes: toggled });
     }} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
@@ -90,10 +91,6 @@
     {/each}
   </div>
 
-  <IconBtn
-    title="Choose icon"
-    id="choose-icon"
-    onClick={() => (showModal = true)}
-    icon={Layers3}
-    label="Choose an icon" />
+  <IconBtn title="Choose icon" id="choose-icon" onclick={() => (showModal = true)} label="Choose an icon"
+    ><Layers3 /></IconBtn>
 </div>

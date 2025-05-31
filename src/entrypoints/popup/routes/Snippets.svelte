@@ -2,6 +2,7 @@
   import Title from "../components/Title.svelte";
   import Slider from "../components/inputs/Slider.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
+  import { globalSettings } from "#imports";
 
   let snippetURL = $state("");
 
@@ -36,9 +37,9 @@
 <div id="card">
   <Title
     title="Snippets"
-    bind:checked={globalSettings.state.snippets}
-    on:change={(event: CustomEvent) => {
-      globalSettings.set({ snippets: event.detail.checked });
+    checked={globalSettings.state.snippets}
+    update={(toggled: boolean) => {
+      globalSettings.set({ snippets: toggled });
     }} />
 
   <div class="snippets-container w-full">
@@ -46,9 +47,9 @@
       <div class="my-4 group w-full">
         <Slider
           {id}
-          bind:checked={snippet.state.toggle}
-          on:change={(event: CustomEvent) => {
-            snippet.set({ toggle: event.detail.checked });
+          checked={snippet.state.toggle}
+          update={(toggled: boolean) => {
+            snippet.set({ toggle: toggled });
           }}
           text={snippet.info?.name}
           description={snippet.info?.description}
@@ -67,18 +68,18 @@
       >.
     </p>
     <!-- input box to make new snippet -->
-    <TextInput id="snippet-input" bind:value={snippetURL} placeholder="Gist URL" label="Add" onClick={addUserSnippet} />
+    <TextInput id="snippet-input" bind:value={snippetURL} placeholder="Gist URL" label="Add" onclick={addUserSnippet} />
   </div>
 
   <div class="user-snippets-container w-full">
-    {#each Object.entries(globalSettings.state.userSnippets) as [id, snippet] (id)}
+    {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
       <div class="my-4 group w-full">
         <Slider
           {id}
-          bind:checked={snippet.toggle}
-          on:change={async (event: CustomEvent) => {
+          checked={snippet.toggle}
+          update={async (toggled: boolean) => {
             let settings = await globalSettings.storage.getValue();
-            settings.userSnippets[id].toggle = event.detail.checked;
+            settings.userSnippets[id].toggle = toggled;
             await globalSettings.storage.setValue(settings);
           }}
           text={snippet.name}
