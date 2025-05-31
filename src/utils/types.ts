@@ -1,5 +1,3 @@
-import { Setting } from "./settings";
-
 // Global
 export interface Settings {
   global: boolean;
@@ -55,9 +53,25 @@ export type PluginId =
   | "homepageSwitcher";
 
 export interface PluginInfo extends ItemInfo {}
-export type SettingType = "toggle" | "slider";
+
+interface Setting {
+  name: string;
+  description?: string;
+}
+export interface ToggleSetting extends Setting {
+  toggle: boolean;
+}
+export interface SliderSetting extends Setting {
+  min: number;
+  max: number;
+  value: number;
+}
+
 export interface PluginGeneric extends ItemGeneric {
-  settings?: Partial<Record<SettingType, Record<string, Setting>>>;
+  settings?: {
+    toggle?: Record<string, ToggleSetting>;
+    slider?: Record<string, SliderSetting>;
+  };
 }
 
 export interface TabTitle extends ItemGeneric {

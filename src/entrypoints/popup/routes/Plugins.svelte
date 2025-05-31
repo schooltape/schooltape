@@ -13,46 +13,6 @@
       return plugins[selectedPluginId];
     }
   });
-  let hydratedSettings: Record<string, Setting> = $derived.by(() => {
-    let hydrated: Record<string, Setting> = {};
-    if (selectedPlugin === undefined || selectedPlugin.state.settings === undefined) {
-      return hydrated;
-    }
-    for (const [type, settings] of Object.entries(selectedPlugin.state.settings)) {
-      for (const [id, setting] of Object.entries(settings)) {
-        switch (type) {
-          case "toggle":
-            hydrated[id] = hydrate(Toggle, JSON.stringify(setting));
-            break;
-          case "slider":
-            hydrated[id] = hydrate(Slider, JSON.stringify(setting));
-            break;
-        }
-      }
-    }
-    return hydrated;
-  });
-
-  // https://www.stevefenton.co.uk/blog/2018/11/create-and-hydrate-a-typescript-class-from-json/
-  function hydrate<T>(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constr: { new (...args: any[]): T },
-    data: string,
-    strictMode: boolean = true,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...args: any[]
-  ): T {
-    const obj = JSON.parse(data);
-    const instance = new constr(...args);
-
-    for (const key in obj) {
-      if (!strictMode || Object.prototype.hasOwnProperty.call(instance, key)) {
-        // @ts-expect-error expected to match the correct structure
-        instance[key] = obj[key];
-      }
-    }
-    return instance;
-  }
 </script>
 
 <div id="card">
@@ -90,34 +50,24 @@
   </div>
 </div>
 
-{#if selectedPlugin !== undefined && selectedPlugin.state.settings !== undefined}
+{#if selectedPlugin !== undefined && selectedPlugin.state.settings?.toggle !== undefined}
   <Modal bind:showModal>
     {#snippet header()}
       <h2 class="mb-4 text-xl">{selectedPlugin.info?.name}</h2>
     {/snippet}
-    {#each Object.entries(hydratedSettings) as [id, setting] (id)}
-      {#if setting instanceof Toggle}
-        <ToggleComponent
-          text={setting.name}
-          description={setting.description}
-          size="small"
-          checked={setting.toggled}
-          update={async () => {
-            setting.toggle();
-            selectedPlugin.set({
-              settings: {
-                ...selectedPlugin.get().settings,
-                toggle: {
-                  ...selectedPlugin.get().settings?.toggle,
-                  [id]: setting,
-                },
-              },
-            });
-          }}
-          id={setting.name} />
-      {:else if setting instanceof Slider}
-        slider
-      {/if}
+    {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
+      <ToggleComponent
+        text={setting.name}
+        description={setting.description}
+        size="small"
+        checked={setting.toggle}
+        update={async () => {
+          const settings = await selectedPlugin.storage.getValue();
+          if (!settings.settings?.toggle) return;
+          settings.settings.toggle[id].toggle = !settings.settings.toggle[id].toggle;
+          await selectedPlugin.storage.setValue(settings);
+        }}
+        id={setting.name} />
     {/each}
   </Modal>
 {/if}

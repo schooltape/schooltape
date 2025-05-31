@@ -1,5 +1,4 @@
 import * as Types from "./types";
-import * as Settings from "./settings";
 import { StorageState } from "./state.svelte";
 
 // Global
@@ -94,11 +93,11 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
         toggle: true,
         settings: {
           toggle: {
-            showSubjectPrefix: new Settings.Toggle(
-              "Show Subject Prefix",
-              true,
-              "Whether to show the prefix before the subject",
-            ),
+            showSubjectPrefix: {
+              name: "Show Subject Prefix",
+              toggle: true,
+              description: "Whether to show the prefix before the subject",
+            } as Types.ToggleSetting,
           },
         },
       },
