@@ -129,6 +129,15 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
     storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {
       fallback: {
         toggle: true,
+        settings: {
+          toggle: {
+            closeCurrentTabOnSwitch: {
+              name: "Close current tab",
+              description: "When switching to another tab, close the current one",
+              toggle: false,
+            } as Types.ToggleSetting,
+          },
+        },
       },
     }),
     {
