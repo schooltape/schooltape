@@ -20,7 +20,10 @@
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
-  color: #0066b0; /* Make icons blue */
+  color: var(--navigation-foreground) !important;
+}
+.left-off-canvas-menu .material-icons-round {
+  color: var(--off-canvas-foreground) !important;
 }
 
 #top-menu > li > a::before,
@@ -36,9 +39,4 @@
 ul#profile-options > li > a > i {
   float: left;
   margin-right: 10px;
-}
-
-/* Fix colours in light mode */
-ul#top-menu > li > a > i {
-  color: white;
 }
