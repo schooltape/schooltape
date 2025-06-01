@@ -15,6 +15,7 @@ export default function init() {
         function reset() {
           if (interval) {
             clearInterval(interval);
+            start();
           }
         }
 
