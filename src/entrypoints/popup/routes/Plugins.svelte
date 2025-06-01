@@ -5,6 +5,7 @@
   import { Settings } from "lucide-svelte";
   import Modal from "../components/Modal.svelte";
   import ToggleComponent from "../components/inputs/Toggle.svelte";
+  import Slider from "../components/inputs/Slider.svelte";
 
   let showModal = $state(false);
   let selectedPluginId: PluginId | undefined = $state();
@@ -50,24 +51,40 @@
   </div>
 </div>
 
-{#if selectedPlugin !== undefined && selectedPlugin.state.settings?.toggle !== undefined}
+{#if selectedPlugin}
   <Modal bind:showModal>
     {#snippet header()}
       <h2 class="mb-4 text-xl">{selectedPlugin.info?.name}</h2>
     {/snippet}
-    {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
-      <ToggleComponent
-        text={setting.name}
-        description={setting.description}
-        size="small"
-        checked={setting.toggle}
-        update={async () => {
-          const settings = await selectedPlugin.storage.getValue();
-          if (!settings.settings?.toggle) return;
-          settings.settings.toggle[id].toggle = !settings.settings.toggle[id].toggle;
-          await selectedPlugin.storage.setValue(settings);
-        }}
-        id={setting.name} />
-    {/each}
+    {#if selectedPlugin.state.settings?.toggle}
+      {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
+        <ToggleComponent
+          text={setting.name}
+          description={setting.description}
+          size="small"
+          checked={setting.toggle}
+          update={async () => {
+            const settings = await selectedPlugin.storage.getValue();
+            if (!settings.settings?.toggle) return;
+            settings.settings.toggle[id].toggle = !settings.settings.toggle[id].toggle;
+            await selectedPlugin.storage.setValue(settings);
+          }}
+          {id} />
+      {/each}
+    {/if}
+
+    {#if selectedPlugin.state.settings?.slider}
+      {#each Object.entries(selectedPlugin.state.settings.slider) as [id, setting] (id)}
+        <Slider
+          {id}
+          update={async (newValue) => {
+            const settings = await selectedPlugin.storage.getValue();
+            if (!settings.settings?.slider) return;
+            settings.settings.slider[id].value = newValue;
+            await selectedPlugin.storage.setValue(settings);
+          }}
+          {...setting} />
+      {/each}
+    {/if}
   </Modal>
 {/if}

@@ -36,7 +36,7 @@ export default function init() {
         document.title = "Due Work";
       } else if (path.includes("/homepage/")) {
         const settings = (await storage.getValue()).settings;
-        if (settings?.toggle?.["showSubjectPrefix"].toggle === false) {
+        if (settings?.toggle?.showSubjectPrefix.toggle === false) {
           document.title = document.getElementsByTagName("h1")[0].innerText.replace(/^.*- /, "");
         } else {
           document.title = document.getElementsByTagName("h1")[0].innerText;

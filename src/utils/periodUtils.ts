@@ -17,10 +17,12 @@ interface PeriodData {
 export class Period {
   header: PeriodHeader;
   data: PeriodData;
+  index: number;
 
-  constructor(header: PeriodHeader, data: PeriodData) {
+  constructor(header: PeriodHeader, data: PeriodData, index: number) {
     this.header = header;
     this.data = data;
+    this.index = index;
   }
 
   inProgress(): boolean {
@@ -110,6 +112,7 @@ function getPeriodData(index: number): Period {
       id: dataId,
       room: dataRoom,
     },
+    index,
   );
 }
 
