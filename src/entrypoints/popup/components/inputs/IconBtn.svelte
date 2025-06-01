@@ -1,25 +1,20 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
+
   interface Props {
-    title: any;
-    id: any;
-    onClick: any;
-    icon: any;
+    children: Snippet;
+    title: string;
+    id: string;
+    onclick: () => void;
     label?: string;
     color?: string;
   }
 
-  let { title, id, onClick, icon, label = "" }: Props = $props();
+  let { children, title, id, onclick, label = "" }: Props = $props();
 </script>
 
-<button
-  {title}
-  {id}
-  class="flex items-center mx-2 small hover:text-ctp-crust hover:bg-(--ctp-accent)"
-  onclick={onClick}>
-  {#if icon}
-    {@const SvelteComponent = icon}
-    <SvelteComponent />
-  {/if}
+<button {title} {id} class="flex items-center ml-4 small hover:text-ctp-crust hover:bg-(--ctp-accent)" {onclick}>
+  {@render children()}
   {#if label}
     <span class="ml-3">{label}</span>
   {/if}

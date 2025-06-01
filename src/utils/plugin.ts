@@ -1,6 +1,6 @@
 export async function defineStPlugin(
   pluginId: PluginId,
-  injectLogic: (pluginId: PluginId) => void,
+  injectLogic: (pluginId: PluginId, pluginStorage: WxtStorageItem<globalThis.PluginGeneric, {}>) => void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].storage.getValue();
@@ -20,7 +20,7 @@ export async function defineStPlugin(
             if (allElementsPresent) {
               observer.disconnect();
               logger.info(`all elements present, injecting plugin: ${plugins[pluginId].info?.name}`);
-              injectLogic(pluginId);
+              injectLogic(pluginId, plugins[pluginId].storage);
             }
           });
 
@@ -31,12 +31,12 @@ export async function defineStPlugin(
           if (allElementsPresent) {
             observer.disconnect();
             logger.info(`all elements already present, injecting plugin: ${plugins[pluginId].info?.name}`);
-            injectLogic(pluginId);
+            injectLogic(pluginId, plugins[pluginId].storage);
           }
         } else {
           // no elements to wait for
           logger.info(`injecting plugin: ${plugins[pluginId].info?.name}`);
-          injectLogic(pluginId);
+          injectLogic(pluginId, plugins[pluginId].storage);
         }
       };
 

@@ -53,8 +53,25 @@ export type PluginId =
   | "homepageSwitcher";
 
 export interface PluginInfo extends ItemInfo {}
+
+interface Setting {
+  name: string;
+  description?: string;
+}
+export interface ToggleSetting extends Setting {
+  toggle: boolean;
+}
+export interface SliderSetting extends Setting {
+  min: number;
+  max: number;
+  value: number;
+}
+
 export interface PluginGeneric extends ItemGeneric {
-  settings?: any; // temporary until plugin options is implemented
+  settings?: {
+    toggle?: Record<string, ToggleSetting>;
+    slider?: Record<string, SliderSetting>;
+  };
 }
 
 export interface TabTitle extends ItemGeneric {

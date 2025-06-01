@@ -58,6 +58,24 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
     storage.defineItem<Types.PluginGeneric>("local:plugin-scrollPeriod", {
       fallback: {
         toggle: true,
+        settings: {
+          toggle: {
+            resetCooldownOnMouseMove: {
+              name: "Reset on mouse move",
+              description: "Whether to reset the scrolling cooldown when you move your mouse",
+              toggle: true,
+            } as ToggleSetting,
+          },
+          slider: {
+            cooldownDuration: {
+              name: "Cooldown duration (s)",
+              description: "How long to wait before scrolling",
+              min: 1,
+              max: 60,
+              value: 10,
+            },
+          },
+        },
       },
     }),
     {
@@ -92,7 +110,13 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
       fallback: {
         toggle: true,
         settings: {
-          showSubjectPrefix: true,
+          toggle: {
+            showSubjectPrefix: {
+              name: "Show homepage prefix",
+              description: 'e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"',
+              toggle: true,
+            } as Types.ToggleSetting,
+          },
         },
       },
     }),
@@ -105,6 +129,15 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
     storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {
       fallback: {
         toggle: true,
+        settings: {
+          toggle: {
+            closeCurrentTabOnSwitch: {
+              name: "Close current tab",
+              description: "When switching to another tab, close the current one",
+              toggle: false,
+            } as Types.ToggleSetting,
+          },
+        },
       },
     }),
     {
