@@ -8,6 +8,7 @@ export interface Settings {
   themeFlavour: string;
   themeAccent: string;
   themeLogo: LogoId;
+  themeLogoAsFavicon: boolean;
 
   userSnippets: Record<string, UserSnippet>;
 }
