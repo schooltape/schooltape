@@ -3,6 +3,7 @@
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Layers3 } from "lucide-svelte";
+  import { PublicPath } from "wxt/browser";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
