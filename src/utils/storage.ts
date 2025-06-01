@@ -116,6 +116,13 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
 
 // Snippets
 export const snippets: Record<Types.SnippetId, StorageState<Types.SnippetGeneric, Types.SnippetInfo>> = {
+  roundedCorners: new StorageState(
+    storage.defineItem<Types.SnippetGeneric>("local:snippet-roundedCorners", {
+      fallback: {
+        toggle: true,
+      },
+    }),
+  ),
   hidePfp: new StorageState(
     storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePfp", {
       fallback: {
