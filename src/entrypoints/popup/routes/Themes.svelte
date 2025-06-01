@@ -4,6 +4,7 @@
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Layers3 } from "lucide-svelte";
   import { globalSettings } from "#imports";
+  import { PublicPath } from "wxt/browser";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
