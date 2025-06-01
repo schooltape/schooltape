@@ -46,7 +46,7 @@
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           {#if logo.adaptive}
-            <span class="logo-picker" style="--icon: url({logo.url})"></span>
+            <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as PublicPath)})"></span>
           {:else}
             <img src={logo.url} alt="Logo" class="h-16 mt-2" />
           {/if}
