@@ -4,7 +4,6 @@
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Layers3 } from "lucide-svelte";
   import { globalSettings } from "#imports";
-  import { PublicPath } from "wxt/browser";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -48,7 +47,8 @@
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           {#if logo.adaptive}
-            <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as PublicPath)})"></span>
+            <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
+            <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
           {:else}
             <img src={logo.url} alt="Logo" class="h-16 mt-2" />
           {/if}

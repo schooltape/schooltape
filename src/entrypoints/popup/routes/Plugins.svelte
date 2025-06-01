@@ -4,7 +4,7 @@
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import { Settings } from "lucide-svelte";
   import Modal from "../components/Modal.svelte";
-  import ToggleComponent from "../components/inputs/Toggle.svelte";
+  import Toggle from "../components/inputs/Toggle.svelte";
   import Slider from "../components/inputs/Slider.svelte";
 
   let showModal = $state(false);
@@ -27,7 +27,7 @@
   <div class="plugins-container">
     {#each Object.entries(plugins) as [id, plugin] (id)}
       <div class="my-4 group">
-        <ToggleComponent
+        <Toggle
           {id}
           checked={plugin.state.toggle}
           update={(toggled: boolean) => {
@@ -45,7 +45,7 @@
                 showModal = true;
               }}><Settings /></IconBtn>
           {/if}
-        </ToggleComponent>
+        </Toggle>
       </div>
     {/each}
   </div>
@@ -58,7 +58,7 @@
     {/snippet}
     {#if selectedPlugin.state.settings?.toggle}
       {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
-        <ToggleComponent
+        <Toggle
           text={setting.name}
           description={setting.description}
           size="small"
