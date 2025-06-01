@@ -19,11 +19,11 @@ export const LOGO_INFO: Record<Types.LogoId, Types.LogoInfo> = {
   },
   schooltape: {
     name: "Schooltape",
-    url: "https://schooltape.github.io/schooltape.svg",
+    url: "schooltape.svg",
   },
   "schooltape-rainbow": {
     name: "ST Rainbow",
-    url: "https://schooltape.github.io/schooltape-ctp.svg",
+    url: "schooltape-ctp.svg",
   },
   "schooltape-legacy": {
     name: "ST Legacy",

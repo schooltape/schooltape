@@ -2,6 +2,7 @@
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
+  import Toggle from "../components/inputs/Toggle.svelte";
   import { Layers3 } from "lucide-svelte";
   import { globalSettings } from "#imports";
 
@@ -43,18 +44,31 @@
           globalSettings.set({ themeLogo: logoId as LogoId });
         }}
         class:highlight={globalSettings.state.themeLogo === logoId}
-        class="border border-(--ctp-accent) p-2 flex flex-col items-center justify-between rounded-lg">
+        class="border border-(--ctp-accent) p-2 flex flex-col rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
-          {#if logo.adaptive}
-            <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
-            <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
-          {:else}
-            <img src={logo.url} alt="Logo" class="h-16 mt-2" />
-          {/if}
+          <div class="flex items-center justify-center h-full">
+            {#if logo.adaptive}
+              <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
+              <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
+            {:else}
+              <img src={logo.url} alt="Logo" class="w-16 mt-2" />
+            {/if}
+          </div>
         {/if}
       </button>
     {/each}
+  </div>
+
+  <div class="mt-4">
+    <Toggle
+      update={(toggled) => {
+        globalSettings.set({ themeLogoAsFavicon: toggled });
+      }}
+      checked={globalSettings.state.themeLogoAsFavicon}
+      id="setAsFavicon"
+      size="small"
+      text="Set icon as tab favicon" />
   </div>
 </Modal>
 

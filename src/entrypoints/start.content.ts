@@ -17,7 +17,7 @@ export default defineContentScript({
       }
 
       // inject logo
-      injectLogo(LOGO_INFO[settings.themeLogo as LogoId]);
+      injectLogo(LOGO_INFO[settings.themeLogo as LogoId], settings.themeLogoAsFavicon);
 
       // inject snippets
       if (settings.snippets) {

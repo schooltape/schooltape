@@ -14,6 +14,7 @@ export const globalSettings = new StorageState<Types.Settings>(
       themeFlavour: "mocha",
       themeAccent: "mauve",
       themeLogo: "schooltape-rainbow",
+      themeLogoAsFavicon: false,
 
       userSnippets: {},
     },
