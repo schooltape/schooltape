@@ -10,7 +10,7 @@ export default function init() {
 
         let interval: string | number | NodeJS.Timeout | undefined;
         function start() {
-          interval = setInterval(updateScrollbar, settings?.slider?.cooldownDuration.value);
+          interval = setInterval(updateScrollbar, (settings?.slider?.cooldownDuration.value || 10) * 1000);
         }
         function reset() {
           if (interval) {
