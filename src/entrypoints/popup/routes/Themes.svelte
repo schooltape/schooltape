@@ -47,7 +47,7 @@
         class="border border-(--ctp-accent) p-2 flex flex-col rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
-          <div class="flex items-center justify-center h-full">
+          <div class="flex items-center justify-center w-full h-full">
             {#if logo.adaptive}
               <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
               <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
