@@ -1,5 +1,3 @@
-import { Menus } from "wxt/browser";
-
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async ({ reason }) => {
     if (reason === "install") {
@@ -39,7 +37,7 @@ export default defineBackground(() => {
   });
 
   // watch for global toggle
-  globalSettings.watch(async (newSettings, oldSettings) => {
+  globalSettings.storage.watch(async (newSettings, oldSettings) => {
     if (newSettings.global !== oldSettings.global) {
       logger.info(`[background] Global toggle changed to ${newSettings.global}`);
       // update icon
@@ -72,7 +70,7 @@ export default defineBackground(() => {
   });
 
   // context menus
-  let contexts: Menus.ContextType[];
+  let contexts: Browser.contextMenus.CreateProperties["contexts"];
   logger.info(`[background] Manifest version: ${import.meta.env.MANIFEST_VERSION}`);
   if (import.meta.env.MANIFEST_VERSION === 2) {
     contexts = ["browser_action"];
@@ -122,7 +120,7 @@ async function resetSettings(): Promise<void> {
 }
 
 async function updateIcon() {
-  const global = (await globalSettings.getValue()).global;
+  const global = (await globalSettings.storage.getValue()).global;
   let iconSuffix = "-disabled";
   if (global) {
     iconSuffix = "";

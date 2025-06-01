@@ -1,131 +1,132 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
 
 body {
   width: 450px; /* max: 1000px */
-  @apply bg-ctp-base text-base text-ctp-text;
+  @apply bg-ctp-base text-ctp-text text-base;
 }
 
-.logo-picker {
-  mask: var(--icon) no-repeat;
-  mask-size: 100% 100%;
-  background-color: currentColor;
-  @apply h-16 w-20 text-ctp-accent;
-}
+@layer components {
+  .logo-picker {
+    mask: var(--icon) no-repeat;
+    mask-size: 100% 100%;
+    background-color: currentColor;
+    @apply h-16 w-20 text-(--ctp-accent);
+  }
 
-.slider {
-  @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-surface1 p-1 duration-500 ease-in-out after:rounded-lg after:bg-ctp-text after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:bg-ctp-accent peer-checked:after:translate-x-6 peer-checked:after:bg-ctp-mantle;
-}
+  .slider {
+    @apply bg-ctp-surface1 after:bg-ctp-text peer-checked:after:bg-ctp-mantle ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg p-1 duration-500 ease-in-out peer-checked:bg-(--ctp-accent) after:rounded-lg after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6;
+  }
 
-.slider.big {
-  @apply h-8 w-14 after:h-6 after:w-6;
-}
+  .slider.big {
+    @apply h-8 w-14 after:h-6 after:w-6;
+  }
 
-.slider.small {
-  @apply after:h-3 after:w-3;
-}
+  .slider.small {
+    @apply after:h-3 after:w-3;
+  }
 
-.slider-input {
-  @apply absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md;
-}
+  .slider-input {
+    @apply absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md;
+  }
 
-.slider-label {
-  @apply relative flex items-center justify-between py-2 text-xl text-ctp-text;
-}
+  .slider-label {
+    @apply text-ctp-text relative flex items-center justify-between py-2 text-xl;
+  }
 
-.slider-description {
-  @apply text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0;
-}
+  .slider-description {
+    @apply text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out;
+  }
 
-#flavours button {
-  @apply bg-ctp-surface0;
-}
+  #flavours button {
+    @apply bg-ctp-surface0;
+  }
 
-#flavours button.active {
-  @apply bg-ctp-accent/50;
-}
+  #flavours button.active {
+    @apply bg-(--ctp-accent)/50;
+  }
 
-#navbar a.active {
-  @apply bg-ctp-accent/50;
-}
+  #navbar a.active {
+    @apply bg-(--ctp-accent)/50;
+  }
 
-#navbar a {
-  @apply bg-ctp-overlay0/50;
-}
+  #navbar a {
+    @apply bg-ctp-overlay0/50;
+  }
 
-#card {
-  @apply flex w-full flex-col items-center justify-center rounded-3xl bg-gradient-to-b p-6 shadow-xl outline outline-2 outline-ctp-accent;
-}
+  #card {
+    @apply flex w-full flex-col items-center justify-center rounded-3xl bg-linear-to-b p-6 shadow-xl outline-2 outline-(--ctp-accent) outline-solid;
+  }
 
-#card h1 {
-  @apply bg-gradient-to-r from-ctp-blue to-ctp-teal bg-clip-text text-5xl font-black text-transparent;
-}
+  #card h1 {
+    @apply from-ctp-blue to-ctp-teal bg-linear-to-r bg-clip-text text-5xl font-black text-transparent;
+  }
 
-#card h2 {
-  @apply bg-gradient-to-r from-ctp-blue to-ctp-teal bg-clip-text text-4xl font-black text-transparent;
-}
+  #card h2 {
+    @apply from-ctp-blue to-ctp-teal bg-linear-to-r bg-clip-text text-4xl font-black text-transparent;
+  }
 
-#card h3 {
-  @apply text-2xl font-black;
-}
+  #card h3 {
+    @apply text-2xl font-black;
+  }
 
-#card p {
-  @apply font-bold;
-}
+  #card p {
+    @apply font-bold;
+  }
 
-.highlight {
-  @apply bg-ctp-surface2;
-}
+  .highlight {
+    @apply bg-ctp-surface2;
+  }
 
-button#toggle {
-  @apply rounded-xl px-4 py-2 text-xl font-bold text-ctp-base;
-}
+  button#toggle {
+    @apply text-ctp-base rounded-xl px-4 py-2 text-xl font-bold;
+  }
 
-button.small {
-  @apply rounded-lg px-2 py-1 text-sm font-bold;
-}
+  button.small {
+    @apply rounded-lg px-2 py-1 text-sm font-bold;
+  }
 
-button.xsmall {
-  @apply rounded-md px-1 py-0.5 text-xs;
-}
+  button.xsmall {
+    @apply rounded-md px-1 py-0.5 text-xs;
+  }
 
-button {
-  @apply bg-ctp-surface0 text-ctp-text transition duration-500 ease-in-out;
-}
+  button {
+    @apply bg-ctp-surface0 text-ctp-text transition duration-500 ease-in-out;
+  }
 
-#palette {
-  @apply mb-8 grid auto-rows-auto grid-cols-7 justify-items-center gap-4;
-}
+  #palette {
+    @apply mb-8 grid auto-rows-auto grid-cols-7 justify-items-center gap-4;
+  }
 
-#palette > * {
-  @apply h-6 w-6 rounded-full;
-}
+  #palette > * {
+    @apply h-6 w-6 rounded-full;
+  }
 
-.current {
-  @apply outline outline-ctp-text;
-}
+  .current {
+    @apply outline-ctp-overlay0 outline-solid;
+  }
 
-.navbutton-left {
-  @apply rounded-l-xl py-2 pl-4 pr-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
-}
+  .navbutton-left {
+    @apply outline-ctp-overlay2/10 rounded-l-xl py-2 pr-2 pl-4 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+  }
 
-.navbutton-center {
-  @apply p-2 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
-}
+  .navbutton-center {
+    @apply outline-ctp-overlay2/10 p-2 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+  }
 
-.navbutton-right {
-  @apply rounded-r-xl py-2 pl-2 pr-4 outline outline-1 outline-ctp-overlay2/10 hover:bg-ctp-accent/50 active:bg-ctp-accent/80;
-}
+  .navbutton-right {
+    @apply outline-ctp-overlay2/10 rounded-r-xl py-2 pr-4 pl-2 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+  }
 
-div[title] {
-  @apply relative;
-}
+  div[title] {
+    @apply relative;
+  }
 
-div[title]:hover::after {
-  @apply absolute bottom-full left-1/2 whitespace-nowrap bg-ctp-surface0 text-ctp-text;
-  content: attr(title);
-  transform: translateX(-50%);
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+  div[title]:hover::after {
+    @apply bg-ctp-surface0 text-ctp-text absolute bottom-full left-1/2 whitespace-nowrap;
+    content: attr(title);
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
 }

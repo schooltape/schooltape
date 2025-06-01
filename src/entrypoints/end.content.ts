@@ -3,8 +3,8 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.getValue();
-    const urls = await schoolboxUrls.getValue();
+    const settings = await globalSettings.storage.getValue();
+    const urls = await schoolboxUrls.storage.getValue();
 
     if (!settings.global) return;
     const footer = document.querySelector("#footer > ul");
@@ -20,7 +20,7 @@ export default defineContentScript({
         logger.info("[end.content.ts] URL not in settings, adding...");
         if (!urls.includes(window.location.origin)) {
           urls.push(window.location.origin);
-          await schoolboxUrls.setValue(urls);
+          await schoolboxUrls.storage.setValue(urls);
           // TODO: hot reload
           window.location.reload();
         }

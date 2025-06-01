@@ -50,11 +50,12 @@ export type PluginId =
   | "progressBar"
   | "modernIcons"
   | "tabTitle"
-  | "homepageSwitcher"
-  | "legacyTimetable";
+  | "homepageSwitcher";
 
 export interface PluginInfo extends ItemInfo {}
-export interface PluginGeneric extends ItemGeneric {}
+export interface PluginGeneric extends ItemGeneric {
+  settings?: any; // temporary until plugin options is implemented
+}
 
 export interface TabTitle extends ItemGeneric {
   showSubjectPrefix: boolean;

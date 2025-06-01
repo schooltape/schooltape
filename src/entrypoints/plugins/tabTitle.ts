@@ -3,19 +3,20 @@ export default function init() {
     "tabTitle",
     () => {
       const path = window.location.pathname;
-      const titleMap = {
+      const titleMap: { [key: string]: string } = {
         "/": "Homepage",
         "/calendar": "Calendar",
         "/news": "News",
         "/learning/classes": "Classes",
         "/resources": "Resources",
-        "/settings/messages": "Message Settings",
+        "/groups": "Groups",
+        "/settings/notifications": "Notifications Settings",
         "/mail/create": "Compose Email",
         "/feedback": "Support and Feedback",
         "/policy": "Guidelines of Use and Privacy Policy",
       };
 
-      if (Object.prototype.hasOwnProperty.call(titleMap, path)) {
+      if (titleMap[path]) {
         document.title = titleMap[path];
       } else if (path.includes("/timetable")) {
         document.title = "Timetable";
