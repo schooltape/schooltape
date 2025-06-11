@@ -38,17 +38,12 @@ export class Period {
     let progressPercentage = 0;
 
     if (now.getTime() >= start.getTime() && now.getTime() <= end.getTime()) {
-      console.log("in progress");
       const elapsedTime = now.getTime() - start.getTime();
       progressPercentage = Math.min(Math.max((elapsedTime / periodDuration) * 100, 0), 100);
     } else if (now.getTime() > end.getTime()) {
-      console.log("after period");
       progressPercentage = 100;
-    } else {
-      console.log("not in progress");
-      console.log(now.getTime(), end.getTime());
-      console.log(now, end);
     }
+    // otherwise it isn't currently in progress
 
     return progressPercentage;
   }
