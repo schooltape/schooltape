@@ -34,6 +34,7 @@ export default async function defineWxtPlugin() {
       ["icon-user", "person"],
       ["icon-cloudy", "email"],
       ["icon-eportfolio", "work"],
+      ["icon-open", "menu_book"]
     ];
 
     function insertIcon(className: string, iconName: string) {
