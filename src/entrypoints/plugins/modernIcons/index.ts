@@ -37,6 +37,7 @@ export default function init() {
         ["icon-user", "person"],
         ["icon-cloudy", "email"],
         ["icon-eportfolio", "work"],
+        ["icon-open", "door_open"],
       ];
 
       function insertIcon(className: string, iconName: string) {
