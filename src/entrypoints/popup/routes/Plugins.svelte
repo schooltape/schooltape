@@ -1,40 +1,90 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
+  import { globalSettings } from "#imports";
+  import IconBtn from "../components/inputs/IconBtn.svelte";
+  import { Settings } from "lucide-svelte";
+  import Modal from "../components/Modal.svelte";
+  import Toggle from "../components/inputs/Toggle.svelte";
   import Slider from "../components/inputs/Slider.svelte";
 
-  let plugins = pluginSettings.defaultValue;
-  let populatedPlugins: PopulatedPlugin[] = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
-  console.log(populatedPlugins);
-
-  onMount(async () => {
-    plugins = await pluginSettings.getValue();
-    populatedPlugins = populateItems(plugins.plugins, PLUGIN_INFO, "plugin");
-    console.log(populatedPlugins);
-    console.log("plugins", plugins);
+  let showModal = $state(false);
+  let selectedPluginId: PluginId | undefined = $state();
+  let selectedPlugin: StorageState<globalThis.PluginGeneric, globalThis.PluginInfo> | undefined = $derived.by(() => {
+    if (selectedPluginId !== undefined) {
+      return plugins[selectedPluginId];
+    }
   });
-
-  async function togglePlugin(pluginId: string, toggled: boolean): Promise<void> {
-    plugins.plugins[pluginId].toggle = toggled;
-    await pluginSettings.setValue(plugins);
-    console.log(await pluginSettings.getValue());
-  }
 </script>
 
 <div id="card">
-  <Title title="Plugins" data={plugins} key="plugins" />
+  <Title
+    title="Plugins"
+    checked={globalSettings.state.plugins}
+    update={(toggled: boolean) => {
+      globalSettings.set({ plugins: toggled });
+    }} />
 
   <div class="plugins-container">
-    {#each populatedPlugins as plugin}
+    {#each Object.entries(plugins) as [id, plugin] (id)}
       <div class="my-4 group">
-        <Slider
-          id={plugin.id}
-          bind:checked={plugin.toggle}
-          onChange={() => togglePlugin(plugin.id, plugin.toggle)}
-          text={plugin.name}
-          description={plugin.description}
-          size="small" />
+        <Toggle
+          {id}
+          checked={plugin.state.toggle}
+          update={(toggled: boolean) => {
+            plugin.set({ toggle: toggled });
+          }}
+          text={plugin.info?.name}
+          description={plugin.info?.description}
+          size="small">
+          {#if plugin.state.settings}
+            <IconBtn
+              title="Wiki"
+              id="wiki"
+              onclick={() => {
+                selectedPluginId = id as PluginId;
+                showModal = true;
+              }}><Settings /></IconBtn>
+          {/if}
+        </Toggle>
       </div>
     {/each}
   </div>
 </div>
+
+{#if selectedPlugin}
+  <Modal bind:showModal>
+    {#snippet header()}
+      <h2 class="mb-4 text-xl">{selectedPlugin.info?.name}</h2>
+    {/snippet}
+    {#if selectedPlugin.state.settings?.toggle}
+      {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
+        <Toggle
+          text={setting.name}
+          description={setting.description}
+          size="small"
+          checked={setting.toggle}
+          update={async () => {
+            const settings = await selectedPlugin.storage.getValue();
+            if (!settings.settings?.toggle) return;
+            settings.settings.toggle[id].toggle = !settings.settings.toggle[id].toggle;
+            await selectedPlugin.storage.setValue(settings);
+          }}
+          {id} />
+      {/each}
+    {/if}
+
+    {#if selectedPlugin.state.settings?.slider}
+      {#each Object.entries(selectedPlugin.state.settings.slider) as [id, setting] (id)}
+        <Slider
+          {id}
+          update={async (newValue) => {
+            const settings = await selectedPlugin.storage.getValue();
+            if (!settings.settings?.slider) return;
+            settings.settings.slider[id].value = newValue;
+            await selectedPlugin.storage.setValue(settings);
+          }}
+          {...setting} />
+      {/each}
+    {/if}
+  </Modal>
+{/if}

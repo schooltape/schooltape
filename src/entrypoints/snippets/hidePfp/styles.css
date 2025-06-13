@@ -1,0 +1,7 @@
+#profile-drop > img {
+  content: url("guest.png");
+}
+
+#profile-accordion > img {
+  content: url("guest.png");
+}
