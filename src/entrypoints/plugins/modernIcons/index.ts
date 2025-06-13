@@ -45,11 +45,11 @@ export default function init() {
         selectors.forEach((selector) => {
           const icon = document.querySelector(selector);
           // Check if the icon already exists
-          if (icon && !icon.querySelector(".material-icons-round")) {
+          if (icon && !icon.querySelector(".material-symbols-round")) {
             // console.log(`Inserting icon for ${className} at ${selector}`);
             const iconElement = document.createElement("i");
             iconElement.innerHTML = iconName;
-            iconElement.classList.add("material-icons-round");
+            iconElement.classList.add("material-symbols-round");
             icon.insertBefore(iconElement, icon.firstChild);
           }
         });

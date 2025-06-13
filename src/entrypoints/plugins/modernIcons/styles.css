@@ -1,14 +1,14 @@
 /* fallback */
 @font-face {
-  font-family: "Material Icons Round";
+  font-family: "Material Symbols Round";
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialiconsround/v100/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2)
-    format("woff2");
+  src: url("~/assets/MaterialSymbolsRounded.woff2") format("woff2");
+  font-variation-settings: "FILL" 1;
 }
 
-.material-icons-round {
-  font-family: "Material Icons Round";
+.material-symbols-round {
+  font-family: "Material Symbols Round";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
