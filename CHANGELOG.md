@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/schooltape/schooltape/compare/v3.3.2...v3.4.0) (2025-06-13)
+
+
+### Features
+
+* **plugins/modernIcons:** add open icon ([#245](https://github.com/schooltape/schooltape/issues/245)) ([d895a65](https://github.com/schooltape/schooltape/commit/d895a653b45c59c569eb55ef0ceec560146a6a64))
+
 ## [3.3.2](https://github.com/schooltape/schooltape/compare/v3.3.1...v3.3.2) (2025-04-29)
 
 
