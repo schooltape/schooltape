@@ -99,6 +99,15 @@ export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, T
     storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
       fallback: {
         toggle: true,
+        settings: {
+          toggle: {
+            filled: {
+              name: "Filled icons",
+              description: "Whether the icons should be filled or outlined",
+              toggle: true,
+            } as ToggleSetting,
+          },
+        },
       },
     }),
     {
