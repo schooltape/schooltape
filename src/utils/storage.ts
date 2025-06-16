@@ -31,130 +31,181 @@ export const schoolboxUrls = new StorageState(
   }),
 );
 
+type PluginData = {
+  plugin: StorageState<Types.ToggleSetting, Types.PluginInfo>;
+  settings?: {
+    toggle?: StorageState<Types.ToggleSetting, Types.ItemInfo>[];
+    slider?: StorageState<Types.SliderSetting, Types.ItemInfo>[];
+  };
+};
 // Plugins
-export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, Types.PluginInfo>> = {
-  subheader: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-subheader", {
-      fallback: {
-        toggle: true,
+export const plugins: Record<Types.PluginId, PluginData> = {
+  subheader: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-subheader", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Subheader Revamp",
+        description: "Adds a clock and current period info to the subheader",
       },
-    }),
-    {
-      name: "Subheader Revamp",
-      description: "Adds a clock and current period info to the subheader",
-    },
-  ),
-  scrollSegments: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-scrollSegments", {
-      fallback: {
-        toggle: true,
+    ),
+  },
+  scrollSegments: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-scrollSegments", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Scroll Segments",
+        description: "Segments the Schoolbox page into scrollable sections",
       },
-    }),
-    {
-      name: "Scroll Segments",
-      description: "Segments the Schoolbox page into scrollable sections",
-    },
-  ),
-  scrollPeriod: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-scrollPeriod", {
-      fallback: {
-        toggle: true,
-        settings: {
-          toggle: {
-            resetCooldownOnMouseMove: {
-              name: "Reset on mouse move",
-              description: "Whether to reset the scrolling cooldown when you move your mouse",
+    ),
+  },
+  scrollPeriod: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-scrollPeriod", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Scroll Period",
+        description: "Scrolls to the current period on the timetable",
+      },
+    ),
+    settings: {
+      toggle: [
+        new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-scrollPeriod-resetCooldownOnMouseMove", {
+            fallback: {
               toggle: true,
-            } as ToggleSetting,
+            },
+          }),
+          {
+            name: "Reset on mouse move",
+            description: "Whether to reset the scrolling cooldown when you move your mouse",
           },
-          slider: {
-            cooldownDuration: {
-              name: "Cooldown duration (s)",
-              description: "How long to wait before scrolling",
+        ),
+      ],
+      slider: [
+        new StorageState(
+          storage.defineItem<Types.SliderSetting>("local:plugin-scrollPeriod-cooldownDuration", {
+            fallback: {
               min: 1,
               max: 60,
               value: 10,
             },
+          }),
+          {
+            name: "Cooldown duration (s)",
+            description: "How long to wait before scrolling",
           },
+        ),
+      ],
+    },
+  },
+  progressBar: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-progressBar", {
+        fallback: {
+          toggle: true,
         },
+      }),
+      {
+        name: "Progress Bar",
+        description: "Displays a progress bar below the timetable to show the time of the day",
       },
-    }),
-    {
-      name: "Scroll Period",
-      description: "Scrolls to the current period on the timetable",
-    },
-  ),
-  progressBar: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-progressBar", {
-      fallback: {
-        toggle: true,
+    ),
+  },
+  modernIcons: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-modernIcons", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Modern Icons",
+        description: "Modernise the icons across Schoolbox",
       },
-    }),
-    {
-      name: "Progress Bar",
-      description: "Displays a progress bar below the timetable to show the time of the day",
-    },
-  ),
-  modernIcons: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
-      fallback: {
-        toggle: true,
-        settings: {
-          toggle: {
-            filled: {
-              name: "Filled icons",
-              description: "Whether the icons should be filled or outlined",
+    ),
+    settings: {
+      toggle: [
+        new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-modernIcons-filled", {
+            fallback: {
               toggle: true,
-            } as ToggleSetting,
+            },
+          }),
+          {
+            name: "Filled Icons",
+            description: "Whether the icons should be filled or outlined",
           },
-        },
-      },
-    }),
-    {
-      name: "Modern Icons",
-      description: "Modernise the icons across Schoolbox",
+        ),
+      ],
     },
-  ),
-  tabTitle: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-tabTitle", {
-      fallback: {
-        toggle: true,
-        settings: {
-          toggle: {
-            showSubjectPrefix: {
-              name: "Show homepage prefix",
-              description: 'e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"',
+  },
+  tabTitle: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-tabTitle", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Better Tab Titles",
+        description: "Improves the tab titles for easier navigation",
+      },
+    ),
+    settings: {
+      toggle: [
+        new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-tabTitle-showHomepagePrefix", {
+            fallback: {
               toggle: true,
-            } as Types.ToggleSetting,
+            },
+          }),
+          {
+            name: "Show homepage prefix",
+            description: `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
           },
-        },
-      },
-    }),
-    {
-      name: "Better Tab Titles",
-      description: "Improves the tab titles for easier navigation",
+        ),
+      ],
     },
-  ),
-  homepageSwitcher: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {
-      fallback: {
-        toggle: true,
-        settings: {
-          toggle: {
-            closeCurrentTabOnSwitch: {
-              name: "Close current tab",
-              description: "When switching to another tab, close the current one",
+  },
+  homepageSwitcher: {
+    plugin: new StorageState(
+      storage.defineItem<Types.ItemGeneric>("local:plugin-homepageSwitcher", {
+        fallback: {
+          toggle: true,
+        },
+      }),
+      {
+        name: "Homepage Switcher",
+        description: "The logo will switch to existing Schoolbox homepage when available",
+      },
+    ),
+    settings: {
+      toggle: [
+        new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-homepageSwitcher-closeCurrentTabOnSwitch", {
+            fallback: {
               toggle: false,
-            } as Types.ToggleSetting,
+            },
+          }),
+          {
+            name: "Close current tab",
+            description: "When switching to another tab, close the current one",
           },
-        },
-      },
-    }),
-    {
-      name: "Homepage Switcher",
-      description: "The logo will switch to existing Schoolbox homepage when available",
+        ),
+      ],
     },
-  ),
+  },
 };
 
 // Snippets

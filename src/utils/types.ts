@@ -55,24 +55,13 @@ export type PluginId =
 
 export interface PluginInfo extends ItemInfo {}
 
-interface Setting {
-  name: string;
-  description?: string;
-}
-export interface ToggleSetting extends Setting {
+export interface ToggleSetting {
   toggle: boolean;
 }
-export interface SliderSetting extends Setting {
+export interface SliderSetting {
   min: number;
   max: number;
   value: number;
-}
-
-export interface PluginGeneric extends ItemGeneric {
-  settings?: {
-    toggle?: Record<string, ToggleSetting>;
-    slider?: Record<string, SliderSetting>;
-  };
 }
 
 export interface TabTitle extends ItemGeneric {
