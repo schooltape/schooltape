@@ -47,12 +47,12 @@
       <div class="my-4 group w-full">
         <Toggle
           {id}
-          checked={snippet.state.toggle}
+          checked={snippet.toggle.state.toggle}
           update={(toggled: boolean) => {
-            snippet.set({ toggle: toggled });
+            snippet.toggle.set({ toggle: toggled });
           }}
-          text={snippet.info?.name}
-          description={snippet.info?.description}
+          text={snippet.info.name}
+          description={snippet.info.description}
           size="small" />
       </div>
     {/each}

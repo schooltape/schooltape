@@ -3,7 +3,7 @@ import styleText from "./styles.css?inline";
 export default function init() {
   defineStPlugin(
     "modernIcons",
-    async (_id, storage) => {
+    async (_id, data) => {
       // [className, iconName] (material icons)
       const icons = {
         "icon-teacher": "school",
@@ -57,10 +57,10 @@ export default function init() {
       }
 
       let fontFill = true;
-      const settings = (await storage.getValue()).settings;
-      const fillSetting = settings?.toggle?.filled?.toggle;
-      if (fillSetting !== undefined) {
-        fontFill = fillSetting;
+
+      const filled = await data.settings?.toggle?.filled?.toggle?.storage?.getValue();
+      if (filled?.toggle !== undefined) {
+        fontFill = filled.toggle;
       }
 
       const iconNames = [...new Set(Object.values(icons))].sort();

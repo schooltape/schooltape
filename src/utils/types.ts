@@ -53,34 +53,38 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher";
 
-export interface PluginInfo extends ItemInfo {}
+type ToggleData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+};
+type SliderData = {
+  slider: StorageState<SliderSetting>;
+  info: ItemInfo;
+};
 
-interface Setting {
-  name: string;
-  description?: string;
-}
-export interface ToggleSetting extends Setting {
-  toggle: boolean;
-}
-export interface SliderSetting extends Setting {
-  min: number;
-  max: number;
-  value: number;
-}
-
-export interface PluginGeneric extends ItemGeneric {
-  settings?: {
-    toggle?: Record<string, ToggleSetting>;
-    slider?: Record<string, SliderSetting>;
-  };
-}
-
-export interface TabTitle extends ItemGeneric {
-  showSubjectPrefix: boolean;
-}
+export type PluginSettings = {
+  toggle?: Record<string, ToggleData>;
+  slider?: Record<string, SliderData>;
+};
+export type PluginData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+  settings?: PluginSettings;
+};
 
 // Snippets
 export type SnippetId = "hidePfp" | "hidePwaPrompt" | "censor";
 
-export interface SnippetInfo extends ItemInfo {}
-export interface SnippetGeneric extends ItemGeneric {}
+export type SnippetData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+};
+
+export interface ToggleSetting {
+  toggle: boolean;
+}
+export interface SliderSetting {
+  min: number;
+  max: number;
+  value: number;
+}
