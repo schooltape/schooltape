@@ -24,9 +24,10 @@ export function injectCatppuccin(flavour: string, accent: string) {
   injectStyles(styleText);
 }
 
-export function injectLogo(logo: LogoInfo) {
+export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
   let url = logo.url;
   if (!url.startsWith("http")) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     url = browser.runtime.getURL(url as any);
   }
   logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
@@ -51,11 +52,23 @@ export function injectLogo(logo: LogoInfo) {
       });
     });
   } else {
-    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; }`;
+    style.textContent = `a.logo { padding-bottom: 1rem !important; } a.logo > img { content: url("${url}"); max-width: 30%; width: 100px; }`;
   }
   document.head.appendChild(style);
+
+  // inject favicon
+  if (setAsFavicon) {
+    let favicon = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+    if (!favicon) {
+      favicon = document.createElement("link") as HTMLLinkElement;
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+    favicon.href = url;
+  }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function injectStylesheet(url: any) {
   logger.info(`[content-utils] Injecting stylesheet: ${url}`);
   const link = document.createElement("link");

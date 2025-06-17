@@ -46,8 +46,12 @@ h4,
 /* blockquotes */
 blockquote {
   background-color: hsl(var(--ctp-surface1));
-  color: hsl(var(--ctp-text));
+  color: hsl(var(--ctp-text)) !important;
   border-left: 6px solid hsl(var(--ctp-accent)) !important;
+}
+blockquote p,
+blockquote::before {
+  color: hsl(var(--ctp-text)) !important;
 }
 
 /* checkboxes */
@@ -272,6 +276,12 @@ a.settings-button {
 /* three dot menu */
 #tab-control .separator {
   background-color: hsl(var(--ctp-surface1));
+}
+
+/* highlights in search menu */
+mark {
+  background-color: hsl(var(--ctp-accent));
+  color: hsl(var(--ctp-mantle));
 }
 
 /* form borders */
@@ -634,6 +644,7 @@ textarea:hover,
 select:hover {
   background-color: hsl(var(--ctp-base));
   color: hsl(var(--ctp-text));
+  border: none;
 }
 
 /* error messages */
@@ -665,6 +676,7 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
 
   /* search box */
   --foreground-colour: hsl(var(--ctp-surface0)) !important;
+  --alt-foreground-colour: hsl(var(--ctp-surface0)) !important;
   --primary-text-colour: hsl(var(--ctp-text)) !important;
   --navigation-foreground: hsl(var(--ctp-text));
   --navigation-foreground-contrast: hsl(var(--ctp-crust));
@@ -672,8 +684,8 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   --navigation-background-contrast: hsl(var(--ctp-crust));
   --navigation-hover: hsl(var(--ctp-surface0));
   --navigation-hover-contrast: hsl(var(--ctp-crust));
+  --border-colour: hsl(var(--ctp-accent));
   --off-canvas-foreground: hsl(var(--ctp-text));
-
   --off-canvas-background: hsl(var(--ctp-mantle));
   --off-canvas-hover: hsl(var(--ctp-surface0));
   --accounts-menu-foreground: hsl(var(--ctp-text));

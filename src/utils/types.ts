@@ -8,6 +8,7 @@ export interface Settings {
   themeFlavour: string;
   themeAccent: string;
   themeLogo: LogoId;
+  themeLogoAsFavicon: boolean;
 
   userSnippets: Record<string, UserSnippet>;
 }
@@ -52,17 +53,38 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher";
 
-export interface PluginInfo extends ItemInfo {}
-export interface PluginGeneric extends ItemGeneric {
-  settings?: any; // temporary until plugin options is implemented
-}
+type ToggleData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+};
+type SliderData = {
+  slider: StorageState<SliderSetting>;
+  info: ItemInfo;
+};
 
-export interface TabTitle extends ItemGeneric {
-  showSubjectPrefix: boolean;
-}
+export type PluginSettings = {
+  toggle?: Record<string, ToggleData>;
+  slider?: Record<string, SliderData>;
+};
+export type PluginData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+  settings?: PluginSettings;
+};
 
 // Snippets
 export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
-export interface SnippetInfo extends ItemInfo {}
-export interface SnippetGeneric extends ItemGeneric {}
+export type SnippetData = {
+  toggle: StorageState<ToggleSetting>;
+  info: ItemInfo;
+};
+
+export interface ToggleSetting {
+  toggle: boolean;
+}
+export interface SliderSetting {
+  min: number;
+  max: number;
+  value: number;
+}

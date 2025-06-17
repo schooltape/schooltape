@@ -26,18 +26,6 @@ body {
     @apply after:h-3 after:w-3;
   }
 
-  .slider-input {
-    @apply absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md;
-  }
-
-  .slider-label {
-    @apply text-ctp-text relative flex items-center justify-between py-2 text-xl;
-  }
-
-  .slider-description {
-    @apply text-ctp-overlay1 group-hover:text-ctp-subtext0 transition-colors duration-500 ease-in-out;
-  }
-
   #flavours button {
     @apply bg-ctp-surface0;
   }

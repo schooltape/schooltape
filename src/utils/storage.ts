@@ -14,6 +14,7 @@ export const globalSettings = new StorageState<Types.Settings>(
       themeFlavour: "mocha",
       themeAccent: "mauve",
       themeLogo: "schooltape-rainbow",
+      themeLogoAsFavicon: false,
 
       userSnippets: {},
     },
@@ -31,129 +32,190 @@ export const schoolboxUrls = new StorageState(
 );
 
 // Plugins
-export const plugins: Record<Types.PluginId, StorageState<Types.PluginGeneric, Types.PluginInfo>> = {
-  subheader: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-subheader", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Subheader Revamp",
-      description: "Adds a clock and current period info to the subheader",
+function createPlugin(
+  id: string,
+  name: string,
+  description: string,
+  fallbackToggle: boolean,
+  settings?: Types.PluginSettings,
+) {
+  const plugin: Types.PluginData = {
+    toggle: new StorageState(
+      storage.defineItem<Types.ItemGeneric>(`local:plugin-${id}`, {
+        fallback: {
+          toggle: fallbackToggle,
+        },
+      }),
+    ),
+    info: {
+      name,
+      description,
     },
+  };
+
+  if (settings) {
+    plugin.settings = settings;
+  }
+
+  return plugin;
+}
+
+export const plugins: Record<Types.PluginId, Types.PluginData> = {
+  subheader: createPlugin(
+    "subheader",
+    "Subheader Revamp",
+    "Adds a clock and current period info to the subheader",
+    true,
   ),
-  scrollSegments: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-scrollSegments", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Scroll Segments",
-      description: "Segments the Schoolbox page into scrollable sections",
-    },
+
+  scrollSegments: createPlugin(
+    "scrollSegments",
+    "Scroll Segments",
+    "Segments the Schoolbox page into scrollable sections",
+    true,
   ),
-  scrollPeriod: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-scrollPeriod", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Scroll Period",
-      description: "Scrolls to the current period on the timetable",
-    },
-  ),
-  progressBar: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-progressBar", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Progress Bar",
-      description: "Displays a progress bar below the timetable to show the time of the day",
-    },
-  ),
-  modernIcons: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-modernIcons", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Modern Icons",
-      description: "Modernise the icons across Schoolbox",
-    },
-  ),
-  tabTitle: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-tabTitle", {
-      fallback: {
-        toggle: true,
-        settings: {
-          showSubjectPrefix: true,
+
+  scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable", true, {
+    toggle: {
+      resetCooldownOnMouseMove: {
+        toggle: new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-scrollPeriod-resetCooldownOnMouseMove", {
+            fallback: {
+              toggle: true,
+            },
+          }),
+        ),
+        info: {
+          name: "Reset on mouse move",
+          description: "Whether to reset the scrolling cooldown when you move your mouse",
         },
       },
-    }),
-    {
-      name: "Better Tab Titles",
-      description: "Improves the tab titles for easier navigation",
     },
-  ),
-  homepageSwitcher: new StorageState(
-    storage.defineItem<Types.PluginGeneric>("local:plugin-homepageSwitcher", {
-      fallback: {
-        toggle: true,
+    slider: {
+      cooldownDuration: {
+        slider: new StorageState(
+          storage.defineItem<Types.SliderSetting>("local:plugin-scrollPeriod-cooldownDuration", {
+            fallback: {
+              min: 1,
+              max: 60,
+              value: 10,
+            },
+          }),
+        ),
+        info: {
+          name: "Cooldown duration (s)",
+          description: "How long to wait before scrolling",
+        },
       },
-    }),
+    },
+  }),
+
+  progressBar: createPlugin(
+    "progressBar",
+    "Progress Bar",
+    "Displays a progress bar below the timetable to show the time of the day",
+    true,
+  ),
+
+  modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox", true, {
+    toggle: {
+      filled: {
+        toggle: new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-modernIcons-filled", {
+            fallback: {
+              toggle: true,
+            },
+          }),
+        ),
+        info: {
+          name: "Filled Icons",
+          description: "Whether the icons should be filled or outlined",
+        },
+      },
+    },
+  }),
+
+  tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation", true, {
+    toggle: {
+      showSubjectPrefix: {
+        toggle: new StorageState(
+          storage.defineItem<Types.ToggleSetting>("local:plugin-tabTitle-showSubjectPrefix", {
+            fallback: {
+              toggle: true,
+            },
+          }),
+        ),
+        info: {
+          name: "Show subject prefix",
+          description: `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
+        },
+      },
+    },
+  }),
+
+  homepageSwitcher: createPlugin(
+    "homepageSwitcher",
+    "Homepage Switcher",
+    "The logo will switch to existing Schoolbox homepage when available",
+    true,
     {
-      name: "Homepage Switcher",
-      description: "The logo will switch to existing Schoolbox homepage when available",
+      toggle: {
+        closeCurrentTab: {
+          toggle: new StorageState(
+            storage.defineItem<Types.ToggleSetting>("local:plugin-homepageSwitcher-closeCurrentTab", {
+              fallback: {
+                toggle: false,
+              },
+            }),
+          ),
+          info: {
+            name: "Close current tab",
+            description: "When switching to another tab, close the current one",
+          },
+        },
+      },
     },
   ),
 };
 
 // Snippets
-export const snippets: Record<Types.SnippetId, StorageState<Types.SnippetGeneric, Types.SnippetInfo>> = {
-  roundedCorners: new StorageState(
-    storage.defineItem<Types.SnippetGeneric>("local:snippet-roundedCorners", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-  ),
-  hidePfp: new StorageState(
-    storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePfp", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Hide PFP",
-      description: "Hide your profile picture across Schoolbox.",
+function createSnippet(id: string, name: string, description: string, fallbackToggle: boolean) {
+  return {
+    toggle: new StorageState(
+      storage.defineItem<Types.ItemGeneric>(`local:snippet-${id}`, {
+        fallback: {
+          toggle: fallbackToggle,
+        },
+      }),
+    ),
+    info: {
+      name,
+      description,
     },
+  };
+}
+
+export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
+  roundedCorners: createSnippet(
+    "roundedCorners",
+    "Rounded Corners",
+    "Adds rounded corners to all elements across Schoolbox.",
+    true,
   ),
-  hidePwaPrompt: new StorageState(
-    storage.defineItem<Types.SnippetGeneric>("local:snippet-hidePwaPrompt", {
-      fallback: {
-        toggle: true,
-      },
-    }),
-    {
-      name: "Hide PWA Prompt",
-      description: "Hides the prompt in the notifications menu to install Schoolbox as a PWA and enable notifications.",
-    },
+
+  hidePfp: createSnippet("hidePfp", "Hide PFP", "Hide your profile picture across Schoolbox.", true),
+
+  hidePwaPrompt: createSnippet(
+    "hidePwaPrompt",
+    "Hide PWA Prompt",
+    "Hides the prompt in the notifications menu to install Schoolbox as a PWA and enable notifications.",
+    true,
   ),
-  censor: new StorageState(
-    storage.defineItem<Types.SnippetGeneric>("local:snippet-censor", {
-      fallback: {
-        toggle: false,
-      },
-    }),
-    {
-      name: "Censor",
-      description: "Censors all text and images. This is intended for development purposes.",
-    },
+
+  censor: createSnippet(
+    "censor",
+    "Censor",
+    "Censors all text and images. This is intended for development purposes.",
+    false,
   ),
 };
