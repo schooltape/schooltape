@@ -1,16 +1,19 @@
 export default function init() {
   defineStPlugin(
     "scrollPeriod",
-    async (_id, storage) => {
+    async (_id, data) => {
       const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
         updateScrollbar();
-        const settings = (await storage.getValue()).settings;
+
+        const cooldownDuration = await data.settings?.slider?.cooldownDuration?.slider?.storage?.getValue();
+        const resetCooldownOnMouseMove =
+          await data.settings?.toggle?.resetCooldownOnMouseMove?.toggle?.storage?.getValue();
 
         let interval: string | number | NodeJS.Timeout | undefined;
         function start() {
-          interval = setInterval(updateScrollbar, (settings?.slider?.cooldownDuration.value || 10) * 1000);
+          interval = setInterval(updateScrollbar, (cooldownDuration?.value || 10) * 1000);
         }
         function reset() {
           if (interval) {
@@ -21,7 +24,7 @@ export default function init() {
 
         start();
 
-        if (settings?.toggle?.resetCooldownOnMouseMove.toggle === true) {
+        if (resetCooldownOnMouseMove?.toggle === true) {
           document.addEventListener("mousemove", reset);
         }
       }

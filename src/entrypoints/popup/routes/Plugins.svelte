@@ -9,7 +9,7 @@
 
   let showModal = $state(false);
   let selectedPluginId: PluginId | undefined = $state();
-  let selectedPlugin: StorageState<globalThis.PluginGeneric, globalThis.PluginInfo> | undefined = $derived.by(() => {
+  let selectedPlugin = $derived.by(() => {
     if (selectedPluginId !== undefined) {
       return plugins[selectedPluginId];
     }
@@ -29,14 +29,14 @@
       <div class="my-4 group">
         <Toggle
           {id}
-          checked={plugin.state.toggle}
+          checked={plugin.toggle.state.toggle}
           update={(toggled: boolean) => {
-            plugin.set({ toggle: toggled });
+            plugin.toggle.set({ toggle: toggled });
           }}
-          text={plugin.info?.name}
-          description={plugin.info?.description}
+          text={plugin.info.name}
+          description={plugin.info.description}
           size="small">
-          {#if plugin.state.settings}
+          {#if plugin.settings !== undefined}
             <IconBtn
               title="Wiki"
               id="wiki"
@@ -54,36 +54,32 @@
 {#if selectedPlugin}
   <Modal bind:showModal>
     {#snippet header()}
-      <h2 class="mb-4 text-xl">{selectedPlugin.info?.name}</h2>
+      <h2 class="mb-4 text-xl">{selectedPlugin.info.name}</h2>
     {/snippet}
-    {#if selectedPlugin.state.settings?.toggle}
-      {#each Object.entries(selectedPlugin.state.settings.toggle) as [id, setting] (id)}
+    <!-- toggles -->
+    {#if selectedPlugin.settings?.toggle !== undefined}
+      {#each Object.entries(selectedPlugin.settings.toggle) as [id, setting] (id)}
         <Toggle
-          text={setting.name}
-          description={setting.description}
+          text={setting.info.name}
+          description={setting.info.description}
           size="small"
-          checked={setting.toggle}
-          update={async () => {
-            const settings = await selectedPlugin.storage.getValue();
-            if (!settings.settings?.toggle) return;
-            settings.settings.toggle[id].toggle = !settings.settings.toggle[id].toggle;
-            await selectedPlugin.storage.setValue(settings);
+          checked={setting.toggle.state.toggle}
+          update={async (toggled) => {
+            setting.toggle.set({ toggle: toggled });
           }}
           {id} />
       {/each}
     {/if}
 
-    {#if selectedPlugin.state.settings?.slider}
-      {#each Object.entries(selectedPlugin.state.settings.slider) as [id, setting] (id)}
+    <!-- sliders -->
+    {#if selectedPlugin.settings?.slider !== undefined}
+      {#each Object.entries(selectedPlugin.settings.slider) as [id, setting] (id)}
         <Slider
           {id}
           update={async (newValue) => {
-            const settings = await selectedPlugin.storage.getValue();
-            if (!settings.settings?.slider) return;
-            settings.settings.slider[id].value = newValue;
-            await selectedPlugin.storage.setValue(settings);
+            setting.slider.set({ value: newValue });
           }}
-          {...setting} />
+          {...setting.slider.state} />
       {/each}
     {/if}
   </Modal>

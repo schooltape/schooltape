@@ -1,13 +1,9 @@
 import { WxtStorageItem } from "#imports";
 
-export class StorageState<T, I = {}> {
+export class StorageState<T> {
   public state;
 
-  constructor(
-    public storage: WxtStorageItem<T, {}>,
-    public info?: I,
-  ) {
-    this.info = info;
+  constructor(public storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
 

@@ -1,15 +1,15 @@
 export default function init() {
   defineStPlugin(
     "homepageSwitcher",
-    (_id, storage) => {
+    (_id, data) => {
       const logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
       logos.forEach((logo) => {
         logo.addEventListener("click", async function (e) {
           if (window.location.pathname === "/") return;
           e.preventDefault();
           const tab = logos[0].href;
-          const settings = (await storage.getValue()).settings;
-          if (settings?.toggle?.closeCurrentTabOnSwitch.toggle === true) {
+          const closeCurrentTab = await data.settings?.toggle?.closeCurrentTab?.toggle?.storage?.getValue();
+          if (closeCurrentTab?.toggle === true) {
             window.close();
           }
           browser.runtime.sendMessage({ toTab: tab });
