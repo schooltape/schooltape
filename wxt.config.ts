@@ -18,6 +18,7 @@ export default defineConfig({
   srcDir: "src",
   outDir: "dist",
   modules: ["@wxt-dev/module-svelte"],
+  // @ts-expect-error type mismatch
   vite: () => ({
     plugins: [tailwindcss()],
   }),
