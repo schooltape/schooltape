@@ -62,13 +62,14 @@ type SliderData = {
   info: ItemInfo;
 };
 
+export type PluginSettings = {
+  toggle?: Record<string, ToggleData>;
+  slider?: Record<string, SliderData>;
+};
 export type PluginData = {
   toggle: StorageState<ToggleSetting>;
   info: ItemInfo;
-  settings?: {
-    toggle?: Record<string, ToggleData>;
-    slider?: Record<string, SliderData>;
-  };
+  settings?: PluginSettings;
 };
 
 // Snippets
