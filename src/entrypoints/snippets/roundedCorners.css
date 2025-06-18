@@ -23,6 +23,15 @@ section.content,
   border-radius: 0px 0px 10px 10px !important;
 }
 
+/* round action buttons */
+.actions-small-3 > nav a[class*="icon-"]:hover,
+.actions-small-3 > nav a[class^="icon-"]:hover,
+.island .row.actions-small-3 > nav a[class*="icon-"]:hover,
+.island .row.actions-small-3 > nav a[class^="icon-"]:hover,
+.left-off-canvas-menu .left-menu-dock:hover {
+  border-radius: 10px;
+}
+
 /* ----- notifications page ----- */
 /* url:/notifications */
 
@@ -40,15 +49,25 @@ section.content,
 }
 
 /* ----- dashboard (home page) ----- */
-/* url:/ */
 
 /* news component */
-.Schoolbox_Comms_News_Component_Dashboard_Controller .information-list,
-.Schoolbox_Comms_News_Component_Dashboard_Controller .card {
-  border-radius: 10px;
-}
-.Schoolbox_Comms_News_Component_Dashboard_Controller .tabs {
-  border-radius: 10px 10px 0px 0px;
+#news-component {
+  /* round tabs at the bottom */
+  & .tabs {
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  /* round the news cards */
+  & ul.information-list {
+    background: none !important;
+    & > li {
+      background-color: hsl(var(--ctp-surface0)) !important;
+      /* round the bottom of the last card */
+      &:last-child {
+        border-radius: 0px 0px 10px 10px !important;
+      }
+    }
+  }
 }
 
 /* empty component */
