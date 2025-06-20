@@ -196,6 +196,13 @@ function createSnippet(id: string, name: string, description: string, fallbackTo
 }
 
 export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
+  roundedCorners: createSnippet(
+    "roundedCorners",
+    "Rounded Corners",
+    "Adds rounded corners to all elements across Schoolbox.",
+    true,
+  ),
+
   hidePfp: createSnippet("hidePfp", "Hide PFP", "Hide your profile picture across Schoolbox.", true),
 
   hidePwaPrompt: createSnippet(

@@ -73,7 +73,7 @@ export type PluginData = {
 };
 
 // Snippets
-export type SnippetId = "hidePfp" | "hidePwaPrompt" | "censor";
+export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
 export type SnippetData = {
   toggle: StorageState<ToggleSetting>;
