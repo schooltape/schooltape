@@ -6,17 +6,24 @@
 
 /* ----- global ----- */
 
-div#calendar-15403,
+/* div#calendar-15403, TODO)) not sure if I need this
 .scrollable,
-section.content,
+section.content, */
 .tile,
 .button {
   border-radius: 10px !important;
+  overflow: clip;
 }
+
+.small-12.island > section {
+  border-radius: 0px 0px 10px 10px !important;
+  overflow: clip;
+}
+
 /* account and action dropdown */
 #account-content,
 .f-dropdown {
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px !important;
 }
 /* see all notifications button */
 #message-list > li > a.button {
@@ -48,7 +55,11 @@ section.content,
   border-radius: 10px;
 }
 
-/* ----- dashboard (home page) ----- */
+/* fixtures component */
+.Schoolbox_Fixtures_Component_Dashboard_Controller section {
+  border-radius: 10px;
+  overflow: clip;
+}
 
 /* news component */
 #news-component {
