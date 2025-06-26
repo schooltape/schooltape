@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import IconBtn from "./inputs/IconBtn.svelte";
-  import { MessageCircleMore, RotateCcw, BookText } from "lucide-svelte";
+  import { MessageCircleMore, RotateCcw, BookText } from "@lucide/svelte";
 
   let version = $state();
   onMount(async () => {

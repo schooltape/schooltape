@@ -1,6 +1,6 @@
 <script lang="ts">
   let { showModal = $bindable(), header, children } = $props();
-  import { X } from "lucide-svelte";
+  import { X } from "@lucide/svelte";
 
   let dialog: HTMLDialogElement | undefined = $state();
 
