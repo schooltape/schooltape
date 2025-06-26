@@ -1,23 +1,13 @@
 <script lang="ts">
-  import { Info } from "lucide-svelte";
-  import { writable } from "svelte/store";
-  import { createEventDispatcher } from "svelte";
+  let { visible = false, onclick } = $props();
 
-  export let visible = false; // Use a prop to control visibility
-  const bannerVisible = writable(visible);
-  // Watch for changes in the prop and update the store
-  $: bannerVisible.set(visible);
-
-  const dispatch = createEventDispatcher();
-  function handleClick() {
-    dispatch("click");
-  }
+  import { Info } from "@lucide/svelte";
 </script>
 
-{#if $bannerVisible}
+{#if visible}
   <button
     class="banner bg-ctp-blue text-ctp-crust rounded-lg mb-4 flex items-center justify-center p-4 w-full"
-    on:click={handleClick}>
+    {onclick}>
     <Info class="w-8 mr-2" />
     <p>Click here to apply changes</p>
   </button>
