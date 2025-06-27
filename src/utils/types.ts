@@ -51,7 +51,8 @@ export type PluginId =
   | "progressBar"
   | "modernIcons"
   | "tabTitle"
-  | "homepageSwitcher";
+  | "homepageSwitcher"
+  | "rearrange";
 
 type ToggleData = {
   toggle: StorageState<ToggleSetting>;

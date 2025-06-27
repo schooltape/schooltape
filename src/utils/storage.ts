@@ -68,6 +68,13 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     true,
   ),
 
+  rearrange: createPlugin(
+    "rearrange",
+    "Rearrange Components",
+    "Adds the ability to drag and drop components around on the homepage",
+    true,
+  ),
+
   scrollSegments: createPlugin(
     "scrollSegments",
     "Scroll Segments",
