@@ -4,9 +4,10 @@
   import { MessageCircleMore, RotateCcw, BookText } from "@lucide/svelte";
 
   let version = $state();
-  onMount(async () => {
-    // Set version number
-    // Uses manifest.version_name when available (on mv3)
+
+  onMount(() => {
+    // set version number
+    // uses manifest.version_name when available (on mv3)
     let manifest = browser.runtime.getManifest();
     version = manifest.version_name || manifest.version;
   });

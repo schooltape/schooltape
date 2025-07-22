@@ -1,10 +1,13 @@
 <script lang="ts">
   import Footer from "../components/Footer.svelte";
+  import Motd from "../components/Motd.svelte";
   import { globalSettings } from "#imports";
 </script>
 
-<div id="card">
-  <h1 class="mb-6">Schooltape</h1>
+<div id="card" class="flex flex-col gap-4">
+  <h1>Schooltape</h1>
+
+  <Motd />
 
   <button
     class={globalSettings.state.global
