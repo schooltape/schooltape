@@ -1,7 +1,7 @@
 <script lang="ts">
   let { visible = false, onclick } = $props();
 
-  import { Info } from "lucide-svelte";
+  import { Info } from "@lucide/svelte";
 </script>
 
 {#if visible}

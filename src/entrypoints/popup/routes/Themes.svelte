@@ -3,7 +3,7 @@
   import Modal from "../components/Modal.svelte";
   import IconBtn from "../components/inputs/IconBtn.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import { Layers3 } from "lucide-svelte";
+  import { Layers3 } from "@lucide/svelte";
   import { globalSettings } from "#imports";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
