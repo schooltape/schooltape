@@ -1,0 +1,180 @@
+/*
+  Be specific as possible with your selectors, try and use the verbose Schoolbox component class names
+  For example:
+  .Schoolbox_Learning_Component_Dashboard_UpcomingWorkController <your selectors>
+*/
+
+/* ----- global ----- */
+
+/* div#calendar-15403, TODO)) not sure if I need this
+.scrollable,
+section.content, */
+.tile,
+.button {
+  border-radius: 10px !important;
+  overflow: clip;
+}
+
+.small-12.island > section {
+  border-radius: 0px 0px 10px 10px;
+  overflow: clip;
+}
+
+/* account and action dropdown */
+#account-content,
+.f-dropdown {
+  border-radius: 0px 0px 10px 10px !important;
+}
+/* see all notifications button */
+#message-list > li > a.button {
+  border-radius: 0px 0px 10px 10px !important;
+}
+
+/* round action buttons */
+.actions-small-3 > nav a[class*="icon-"]:hover,
+.actions-small-3 > nav a[class^="icon-"]:hover,
+.island .row.actions-small-3 > nav a[class*="icon-"]:hover,
+.island .row.actions-small-3 > nav a[class^="icon-"]:hover,
+.left-off-canvas-menu .left-menu-dock:hover {
+  border-radius: 10px;
+}
+
+/* ----- notifications page ----- */
+/* url:/notifications */
+
+.notification-list .information-list > li:first-child > div,
+.notification-list .information-list > li:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+.notification-list .information-list > li:last-child > div,
+.notification-list .information-list > li:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+.notification-list .information-list,
+.notification-list .information-list > li:only-child > div {
+  border-radius: 10px;
+}
+
+/* news component */
+#news-component {
+  /* round tabs at the bottom */
+  & .tabs {
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  /* round the news cards */
+  & ul.information-list {
+    background: none !important;
+    & > li {
+      background-color: hsl(var(--ctp-surface0)) !important;
+      /* round the bottom of the last card */
+      &:last-child {
+        border-radius: 0px 0px 10px 10px !important;
+      }
+    }
+  }
+}
+
+/* empty component */
+.Schoolbox_Calendar_Component_Dashboard_Controller.component-container .empty-state {
+  border-radius: 10px;
+}
+
+/* upcoming work component */
+.Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list,
+.Schoolbox_Learning_Component_Dashboard_UpcomingWorkController .information-list .card {
+  border-radius: 10px !important;
+}
+
+/* calendar */
+.calendar-15403,
+.fc {
+  border-radius: 10px;
+}
+
+/* slideshow */
+.Component_Dashboard_SlideshowController.component-container .swiper {
+  border-radius: 10px !important;
+}
+
+/* ----- calendar page ----- */
+/* url:/calendar */
+
+/* buttons */
+.fc-button-group > button:first-child {
+  border-radius: 10px 0px 0px 10px;
+}
+.fc-button-group > button:last-child {
+  border-radius: 0px 10px 10px 0px;
+}
+
+/* ----- classes page ----- */
+/* url:/learning/classes */
+
+.v-card {
+  border-radius: 10px;
+}
+.card-class-image {
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* ----- homepage (class pages) ----- */
+/* url:/homepage/code/:id */
+
+div.columns .component-titlebar {
+  border-radius: 10px;
+}
+
+/* social stream */
+.Component_Homepage_SocialStreamController section,
+.Component_Homepage_SocialStreamController .information-list {
+  border-radius: 10px;
+}
+
+/* news */
+.component-action > section {
+  background-color: var(--left-bg-primary) !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+.component-action {
+  background: var(--left-bg-primary) !important;
+  border-radius: 0px 0px 10px 10px;
+}
+.Schoolbox_Comms_News_Component_Homepage_Controller.component-container .island > section,
+.Component_Homepage_ImageController.component-container .island > section,
+.Component_Homepage_ClassListController.component-container .island > section {
+  background: none !important;
+}
+
+.Component_Homepage_CountdownController.component-container,
+.Schoolbox_Resource_Textbox_Component_Homepage_Controller.component-container,
+.Component_Homepage_SocialStreamController.component-container,
+.Component_Homepage_SlideshowController.component-container,
+.Component_Homepage_AudioController.component-container,
+.Component_Homepage_TeachersController.component-container,
+.Component_Homepage_ClassListController.component-container,
+.Schoolbox_Comms_News_Component_Homepage_Controller.component-container,
+.Component_Homepage_LinkListController.component-container,
+.Component_Homepage_FileListController.component-container,
+.Schoolbox_Learning_Assessment_Component_Homepage_Outline_Controller.component-container,
+.Schoolbox_Learning_Assessment_DueWork_Component_Homepage_Controller.component-container,
+.Schoolbox_Learning_Assessment_Task_Component_Homepage_Controller.component-container,
+.Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container,
+.Component_Homepage_ImageController.component-container,
+.Schoolbox_Tile_Component_HomepageTileController {
+  background: hsl(var(--ctp-accent));
+  border-radius: 10px;
+}
+
+.Component_Homepage_ImageController.component-container img {
+  border-radius: 0px 0px 10px 10px !important;
+}
+
+/* round some other components and clip overflow */
+
+.Schoolbox_Fixtures_Component_Dashboard_Controller section,
+.Component_Dashboard_TextboxController section {
+  border-radius: 10px !important;
+  overflow: clip !important;
+}
