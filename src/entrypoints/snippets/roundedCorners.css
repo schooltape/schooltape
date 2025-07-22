@@ -16,7 +16,7 @@ section.content, */
 }
 
 .small-12.island > section {
-  border-radius: 0px 0px 10px 10px !important;
+  border-radius: 0px 0px 10px 10px;
   overflow: clip;
 }
 
@@ -53,12 +53,6 @@ section.content, */
 .notification-list .information-list,
 .notification-list .information-list > li:only-child > div {
   border-radius: 10px;
-}
-
-/* fixtures component */
-.Schoolbox_Fixtures_Component_Dashboard_Controller section {
-  border-radius: 10px;
-  overflow: clip;
 }
 
 /* news component */
@@ -167,11 +161,20 @@ div.columns .component-titlebar {
 .Schoolbox_Learning_Assessment_DueWork_Component_Homepage_Controller.component-container,
 .Schoolbox_Learning_Assessment_Task_Component_Homepage_Controller.component-container,
 .Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container,
-.Component_Homepage_ImageController.component-container {
+.Component_Homepage_ImageController.component-container,
+.Schoolbox_Tile_Component_HomepageTileController {
   background: hsl(var(--ctp-accent));
   border-radius: 10px;
 }
 
 .Component_Homepage_ImageController.component-container img {
   border-radius: 0px 0px 10px 10px !important;
+}
+
+/* round some other components and clip overflow */
+
+.Schoolbox_Fixtures_Component_Dashboard_Controller section,
+.Component_Dashboard_TextboxController section {
+  border-radius: 10px !important;
+  overflow: clip !important;
 }
