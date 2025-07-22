@@ -2,12 +2,28 @@ export default function init() {
   defineStPlugin(
     "rearrange",
     async (_id, data) => {
-      // const components = document.querySelectorAll('[id^="component"]:not(:has([id^="component"])'); // only top level components
-      const components = document.querySelectorAll('[id^="component"]');
+      // Select only top-level components (not nested inside another component)
+      const components = document.querySelectorAll('#content > .row > .columns > [id^="component"]');
 
-      document.querySelectorAll("#content > .row > .columns").forEach((x) => {
-        x.style.border = "2px solid red";
+      document.querySelectorAll("#content > .row > .columns").forEach((container) => {
+        container.style.border = "2px solid red";
+
+        // Attach dragover only to the container, not to each component
+        container.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          const dragging = document.querySelector(".dragging");
+          // Only allow drop if dragging is a direct child of this container
+          if (dragging && dragging.parentElement === container) {
+            const afterElement = getDragAfterElement(container, e.clientY);
+            if (afterElement == null) {
+              container.appendChild(dragging);
+            } else {
+              container.insertBefore(dragging, afterElement);
+            }
+          }
+        });
       });
+
       document.querySelectorAll("#content > .row").forEach((x) => {
         x.style.border = "4px solid green";
       });
@@ -19,7 +35,6 @@ export default function init() {
 
         // add a handle
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical-icon lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>`;
-        // Create a handle element and insert it at the start of the component
         const handle = document.createElement("span");
         handle.innerHTML = svg;
         handle.style.cursor = "grab";
@@ -29,32 +44,20 @@ export default function init() {
         handle.classList.add("drag-handle");
         component.insertBefore(handle, component.firstChild);
 
-        component.setAttribute("draggable", "true"); // Make the elements draggable
+        component.setAttribute("draggable", "true");
         component.addEventListener("dragstart", () => {
           component.classList.add("dragging");
+          component.style.visibility = "hidden";
         });
         component.addEventListener("dragend", () => {
           component.classList.remove("dragging");
-        });
-        // Add dragover event listener to the parent container
-        component.parentElement.addEventListener("dragover", (e) => {
-          e.preventDefault();
-          const afterElement = getDragAfterElement(component.parentElement, e.clientY);
-          const dragging = document.querySelector(".dragging");
-          // Only append or insert if the dragging element is not already a child of the parent
-          if (afterElement == null) {
-            if (dragging.parentElement !== component.parentElement) {
-              component.parentElement.appendChild(dragging);
-            }
-          } else {
-            if (dragging.parentElement !== afterElement.parentElement) {
-              afterElement.parentElement.insertBefore(dragging, afterElement);
-            }
-          }
+          component.style.visibility = "visible";
         });
       });
+
       function getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('[id^="component"]:not(.dragging)')];
+        // Only consider direct children of the container, not nested components
+        const draggableElements = [...container.querySelectorAll(':scope > [id^="component"]:not(.dragging)')];
         return draggableElements.reduce(
           (closest, child) => {
             const box = child.getBoundingClientRect();
