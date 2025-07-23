@@ -10,6 +10,7 @@
   import { flavors } from "@catppuccin/palette";
   import { needsRefresh } from "@/utils/storage";
   import { globalSettings } from "#imports";
+  import { RotateCw } from "@lucide/svelte";
 
   const routes = {
     "/": Home,
@@ -47,11 +48,14 @@
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
     <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
   </nav>
+
   <Banner
+    message="Click here to apply changes"
     visible={needsRefresh.state}
     onclick={() => {
       needsRefresh.storage.setValue(false);
       refreshSchoolboxURLs();
-    }} />
+    }}><RotateCw /></Banner>
+
   <Router {routes} />
 </main>

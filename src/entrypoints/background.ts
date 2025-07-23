@@ -9,13 +9,11 @@ export default defineBackground(() => {
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
       }
     } else if (reason === "update") {
-      logger.info("[background] Notifying user about the update");
-      browser.notifications.create("updated", {
-        title: "Schooltape updated",
-        type: "basic",
-        iconUrl: browser.runtime.getURL("/icon/128.png"),
-        message: "Click here to look at the release notes.",
-      });
+      logger.info("[background] Showing update badge");
+
+      await globalSettings.set({ updated: true });
+      updateIcon();
+
       if (import.meta.env.DEV) {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html"), active: false });
@@ -23,26 +21,9 @@ export default defineBackground(() => {
     }
   });
 
-  browser.notifications.onClicked.addListener(function (notifID) {
-    if (notifID === "update") {
-      browser.tabs.create({
-        url: "https://github.com/schooltape/schooltape/releases/latest",
-      });
-    }
-    if (notifID === "updated") {
-      browser.tabs.create({
-        url: `https://github.com/schooltape/schooltape/releases/tag/v${browser.runtime.getManifest().version}`,
-      });
-    }
-  });
-
-  // watch for global toggle
-  globalSettings.storage.watch(async (newSettings, oldSettings) => {
-    if (newSettings.global !== oldSettings.global) {
-      logger.info(`[background] Global toggle changed to ${newSettings.global}`);
-      // update icon
-      updateIcon();
-    }
+  // update icon when toggle or update is changed
+  globalSettings.storage.watch(() => {
+    updateIcon();
   });
 
   // listen for messages
@@ -50,23 +31,29 @@ export default defineBackground(() => {
     resetSettings?: boolean;
     inject?: string;
     toTab?: string;
+    updateIcon?: boolean;
   }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   browser.runtime.onMessage.addListener(async (msg: any, sender: any) => {
     const message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
+
     if (message.resetSettings) {
       resetSettings();
-    }
-    if (message.toTab) {
+    } else if (message.toTab) {
       const tabs = await browser.tabs.query({ url: message.toTab });
       if (tabs.length > 0) {
+        // @ts-expect-error - tab will exist
         browser.tabs.update(tabs[0].id, { active: true });
       } else if (sender.tab?.id) {
         browser.tabs.update(sender.tab.id, { url: message.toTab });
       }
+    } else if (message.updateIcon) {
+      updateIcon();
     }
-    return true;
+
+    return true; // return success
   });
 
   // context menus
@@ -120,11 +107,22 @@ async function resetSettings(): Promise<void> {
 }
 
 async function updateIcon() {
-  const global = (await globalSettings.storage.getValue()).global;
-  let iconSuffix = "-disabled";
-  if (global) {
-    iconSuffix = "";
+  logger.info("[background] Updating icon...");
+  const settingsValue = await globalSettings.storage.getValue();
+
+  let iconSuffix = "";
+
+  // if it's june
+  if (new Date().getMonth() === 5) {
+    iconSuffix += "-ctp";
   }
+  if (settingsValue.global === false) {
+    iconSuffix += "-disabled";
+  }
+  if (settingsValue.updated === true) {
+    iconSuffix += "-badge";
+  }
+
   if (import.meta.env.MANIFEST_VERSION === 2) {
     browser.browserAction.setIcon({
       path: {

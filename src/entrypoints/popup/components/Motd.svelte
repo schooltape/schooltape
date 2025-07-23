@@ -1,23 +1,18 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
 
-  let motd = $state();
-
   onMount(async () => {
-    // fetch MOTD from website
-    try {
-      const response = await fetch("https://schooltape.github.io/motd.txt");
-      if (response.ok) {
-        motd = await response.text();
-      }
-    } catch (e) {
-      motd = "";
+    // update MOTD
+    const response = await fetch("https://schooltape.github.io/motd.txt");
+    if (response.ok) {
+      globalSettings.set({ motd: await response.text() });
     }
   });
 </script>
 
 <!-- MOTD -->
 <div class="text-ctp-subtext0 text-center italic">
-  <p>{@html motd}</p>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  <p>{@html globalSettings.state.motd}</p>
   <!-- Free and <a href='https://github.com/schooltape/schooltape' class='text-(--ctp-accent)'> open source</a>! -->
 </div>

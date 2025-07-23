@@ -11,12 +11,14 @@ export const globalSettings = new StorageState<Types.Settings>(
       themes: true,
       snippets: true,
 
+      updated: false,
+      motd: "Free and <a href='https://github.com/schooltape/schooltape' class='text-(--ctp-accent)'> open source</a>!",
+      userSnippets: {},
+
       themeFlavour: "mocha",
       themeAccent: "mauve",
       themeLogo: "schooltape-rainbow",
       themeLogoAsFavicon: false,
-
-      userSnippets: {},
     },
   }),
 );

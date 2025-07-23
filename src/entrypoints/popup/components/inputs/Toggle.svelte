@@ -14,7 +14,7 @@
   let { update, checked, id, size = "big", text = "", description = "", children }: Props = $props();
 </script>
 
-<label class="group text-ctp-text relative flex items-center justify-between py-2">
+<label class="group text-ctp-text relative flex items-center justify-between py-2 cursor-pointer">
   <h4 class="text-ctp-text">{text}</h4>
   <input
     {id}
