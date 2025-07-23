@@ -2,17 +2,17 @@
   import Footer from "../components/Footer.svelte";
   import Motd from "../components/Motd.svelte";
   import { globalSettings } from "#imports";
+
+  let isJune = new Date().getMonth() === 5;
 </script>
 
 <div id="card" class="flex flex-col gap-4">
-  <h1>Schooltape</h1>
+  <h1 class={isJune ? "ctp" : ""}>Schooltape</h1>
 
   <Motd />
 
   <button
-    class={globalSettings.state.global
-      ? "bg-ctp-green hover:bg-(--ctp-accent) active:bg-ctp-red/75"
-      : "bg-ctp-red hover:bg-(--ctp-accent) active:bg-ctp-green/75"}
+    class="hover:opacity-75 bg-(--ctp-accent) {globalSettings.state.global ? '' : 'opacity-60'}"
     id="toggle"
     onclick={() => {
       globalSettings.set({ global: !globalSettings.get().global });
