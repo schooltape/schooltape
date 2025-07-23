@@ -23,6 +23,9 @@ export default defineContentScript({
       if (settings.snippets) {
         injectUserSnippets(settings.userSnippets);
       }
+
+      // update icon
+      browser.runtime.sendMessage({ updateIcon: true });
     }
   },
 });

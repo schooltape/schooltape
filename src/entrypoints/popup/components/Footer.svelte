@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import IconBtn from "./inputs/IconBtn.svelte";
-  import { MessageCircleMore, RotateCcw, BookText } from "@lucide/svelte";
+  import { MessageCircleMore, RotateCcw, BookText, GitBranch } from "@lucide/svelte";
 
   let version = $state();
-  onMount(async () => {
-    // Set version number
-    // Uses manifest.version_name when available (on mv3)
+
+  onMount(() => {
+    // set version number
+    // uses manifest.version_name when available (on mv3)
     let manifest = browser.runtime.getManifest();
     version = manifest.version_name || manifest.version;
   });
@@ -28,12 +29,26 @@
 </script>
 
 <footer class="flex min-w-full justify-around p-4 mt-4">
-  <p class="mb-0 flex items-center text-ctp-text">
-    <a
-      class="version ml-2 text-ctp-subtext0 hover:underline"
-      target="_blank"
-      href="https://github.com/schooltape/schooltape/releases/tag/v{version}">Version: v{version}</a>
-  </p>
+  <span class="relative inline-flex">
+    <button
+      onclick={async () => {
+        await globalSettings.set({ updated: false });
+
+        browser.tabs.create({
+          url: `https://github.com/schooltape/schooltape/releases/tag/v${version}`,
+        });
+      }}
+      class="rounded-lg px-2 text-ctp-subtext0 hover:bg-ctp-surface1">
+      <span class="flex gap-2 items-center"><GitBranch size={18} />v{version}</span>
+      <!-- show ripple badge if the extension has been updated (unread release notes) -->
+      {#if globalSettings.state.updated}
+        <span class="absolute top-0 right-0 -mt-1 -mr-1 flex size-3">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-ctp-blue opacity-75"></span>
+          <span class="relative inline-flex size-3 rounded-full bg-ctp-blue"></span>
+        </span>
+      {/if}
+    </button>
+  </span>
   <div class="flex">
     <IconBtn title="Wiki" id="wiki" onclick={handleWikiClick}><BookText /></IconBtn>
     <IconBtn title="Discord" id="discord" onclick={handleDiscordClick}><MessageCircleMore /></IconBtn>
