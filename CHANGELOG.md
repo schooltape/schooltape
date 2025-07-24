@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/schooltape/schooltape/compare/v4.0.1...v4.0.2) (2025-07-24)
+
+
+### Miscellaneous Chores
+
+* release 4.0.2 ([8ce9b39](https://github.com/schooltape/schooltape/commit/8ce9b391824cd051b891dba5e58e13cd5f237056))
+
 ## [4.0.1](https://github.com/schooltape/schooltape/compare/v4.0.0...v4.0.1) (2025-07-24)
 
 
