@@ -1,5 +1,29 @@
 # Changelog
 
+## [4.0.0](https://github.com/schooltape/schooltape/compare/v3.4.0...v4.0.0) (2025-07-24)
+
+
+### Features
+
+* **plugins/modernIcons:** update to material symbols and add fill ([bd9ace5](https://github.com/schooltape/schooltape/commit/bd9ace5a5b607c494bc3aed513586b074b3ae0bf))
+* **popup:** motd ([8f5163f](https://github.com/schooltape/schooltape/commit/8f5163f31cd480cd515120f5b0839eb350cc13aa))
+* **popup:** styling improvements ([7ce23b2](https://github.com/schooltape/schooltape/commit/7ce23b2f63cc3eef98ac26493cd3f3f30d7dbc6c))
+* **snippets:** rounded corners ([#238](https://github.com/schooltape/schooltape/issues/238)) ([0d028f6](https://github.com/schooltape/schooltape/commit/0d028f6b296c386bc904cddaf948e805b07b118d))
+* update badge icons and update notification badge ([04bae75](https://github.com/schooltape/schooltape/commit/04bae75e1217d2a1cbb95ae0f3b9a293e3427d83))
+* update notification badge ([f6bb898](https://github.com/schooltape/schooltape/commit/f6bb898ddce93c3187945443492f1899060150b5))
+* v4 storage migrations ([#255](https://github.com/schooltape/schooltape/issues/255)) ([1c988ba](https://github.com/schooltape/schooltape/commit/1c988bae9d05797ff4520c9b085de62b72da3824))
+
+
+### Bug Fixes
+
+* misc styling issues ([5fb0b1d](https://github.com/schooltape/schooltape/commit/5fb0b1d1d2dcbc6b880a43c0467e706e8c309912))
+* **plugins/modernIcons:** update icons to material symbols ([b2b56a7](https://github.com/schooltape/schooltape/commit/b2b56a7a12db66ab01753ee941c28916aca19a7a))
+
+
+### Miscellaneous Chores
+
+* release 4.0.0 ([e2937b7](https://github.com/schooltape/schooltape/commit/e2937b7cd412a0271b7280b25632baf5b3686778))
+
 ## [3.4.0](https://github.com/schooltape/schooltape/compare/v3.3.2...v3.4.0) (2025-06-13)
 
 
