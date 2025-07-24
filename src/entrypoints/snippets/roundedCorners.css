@@ -28,6 +28,11 @@ section.content, */
   overflow: clip;
 }
 
+/* timetable on homepage */
+.scrollable.show-for-medium-up:has(.timetable) {
+  border-radius: 10px !important;
+}
+
 /* account and action dropdown */
 #account-content,
 .f-dropdown {
