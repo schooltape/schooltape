@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.1](https://github.com/schooltape/schooltape/compare/v4.0.0...v4.0.1) (2025-07-24)
+
+
+### Bug Fixes
+
+* **snippets/roundedCorners:** timetable on homepage ([374e3fe](https://github.com/schooltape/schooltape/commit/374e3fef50e70394ce2d55743999d3383ce014da))
+* v4 migrations ([1c24864](https://github.com/schooltape/schooltape/commit/1c2486493962270efb3add102ee94653d9f340b3))
+
 ## [4.0.0](https://github.com/schooltape/schooltape/compare/v3.4.0...v4.0.0) (2025-07-24)
 
 
