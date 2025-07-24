@@ -4,7 +4,7 @@ import { StorageState } from "./state.svelte";
 // Global
 export const globalSettings = new StorageState<Types.Settings>(
   storage.defineItem<Types.Settings>("local:globalSettings", {
-    version: 1,
+    version: 2,
     fallback: {
       global: true,
       plugins: true,
@@ -20,13 +20,24 @@ export const globalSettings = new StorageState<Types.Settings>(
       themeLogo: "schooltape-rainbow",
       themeLogoAsFavicon: false,
     },
+    migrations: {
+      1: (oldData) => {
+        needsRefresh.set(oldData.needsRefresh);
+        schoolboxUrls.set(oldData.schoolboxUrls);
+        return {
+          global: oldData.global,
+        };
+      },
+    },
   }),
 );
+
 export const needsRefresh = new StorageState(
   storage.defineItem<boolean>("local:needsRefresh", {
     fallback: false,
   }),
 );
+
 export const schoolboxUrls = new StorageState(
   storage.defineItem<string[]>("local:urls", {
     fallback: ["https://help.schoolbox.com.au"],
@@ -221,3 +232,43 @@ export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
     false,
   ),
 };
+
+// Legacy storage items from v3 used for migration
+storage.defineItem("local:themeSettings", {
+  version: 2,
+  migrations: {
+    1: (oldData) => {
+      globalSettings.set({
+        themes: oldData.themeToggle,
+        themeFlavour: oldData.flavour,
+        themeAccent: oldData.accent,
+      });
+    },
+  },
+});
+
+storage.defineItem("local:pluginSettings", {
+  version: 2,
+  migrations: {
+    1: (oldData) => {
+      globalSettings.set({ plugins: oldData.toggle });
+      plugins.subheader.toggle.set({ toggle: oldData.plugins.subheader.toggle });
+      plugins.scrollSegments.toggle.set({ toggle: oldData.plugins.scrollSegments.toggle });
+      plugins.scrollPeriod.toggle.set({ toggle: oldData.plugins.scrollPeriod.toggle });
+      plugins.modernIcons.toggle.set({ toggle: oldData.plugins.modernIcons.toggle });
+      plugins.tabTitle.toggle.set({ toggle: oldData.plugins.tabTitle.toggle });
+      plugins.homepageSwitcher.toggle.set({ toggle: oldData.plugins.homepageSwitcher.toggle });
+    },
+  },
+});
+
+storage.defineItem("local:snippetSettings", {
+  version: 2,
+  migrations: {
+    1: (oldData) => {
+      globalSettings.set({ snippets: oldData.toggle, userSnippets: oldData.user });
+      snippets.hidePfp.toggle.set({ toggle: oldData.snippets.hidePfp.toggle });
+      snippets.censor.toggle.set({ toggle: oldData.snippets.censor.toggle });
+    },
+  },
+});
