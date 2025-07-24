@@ -388,6 +388,11 @@ label {
   border: none;
 }
 
+/* profile accordion on small viewport */
+.left-off-canvas-menu .account-menu-mobile .accordion-navigation .profile-drop {
+  background-color: var(--accounts-menu-background) !important;
+}
+
 /* submissions text input */
 .ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover,
 a.ck.ck-button:not(.ck-disabled, .ck-color-grid__tile):hover {
@@ -689,7 +694,7 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   --off-canvas-background: hsl(var(--ctp-mantle));
   --off-canvas-hover: hsl(var(--ctp-surface0));
   --accounts-menu-foreground: hsl(var(--ctp-text));
-  --accounts-menu-background: hsl(var(--ctp-surface2));
+  --accounts-menu-background: hsl(var(--ctp-crust));
   --accounts-menu-hover: hsl(var(--ctp-overlay1));
   --content-ui-foreground: hsl(var(--ctp-accent));
   --content-ui-foreground-contrast: hsl(var(--ctp-mantle));

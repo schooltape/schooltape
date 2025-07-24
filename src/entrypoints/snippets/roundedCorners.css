@@ -10,9 +10,17 @@
 .scrollable,
 section.content, */
 .tile,
-.button {
+.button:not(.icon-search) {
   border-radius: 10px !important;
   overflow: clip;
+}
+
+/* advanced search button */
+.icon-search.button {
+  border-radius: 0px 0px 10px 10px !important;
+}
+.c-header-search__results {
+  border: none !important;
 }
 
 .small-12.island > section {

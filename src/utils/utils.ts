@@ -52,7 +52,7 @@ export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
       });
     });
   } else {
-    style.textContent = `a.logo { padding-bottom: 1rem !important; } a.logo > img { content: url("${url}"); max-width: 30%; width: 100px; }`;
+    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; width: 100px; }`;
   }
   document.head.appendChild(style);
 
