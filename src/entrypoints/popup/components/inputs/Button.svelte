@@ -9,13 +9,9 @@
     classList?: string;
   }
 
-  let { children, title, id, onclick, classList = "text-ctp-text" }: Props = $props();
+  let { children, title, id, onclick, classList = "text-ctp-text hover:bg-ctp-surface1" }: Props = $props();
 </script>
 
-<button
-  {title}
-  {id}
-  class="flex gap-3 items-center cursor-pointer h-8 small bg-ctp-surface0 hover:bg-ctp-surface1 {classList}"
-  {onclick}>
+<button {title} {id} class="flex gap-3 items-center cursor-pointer h-8 bg-ctp-surface0 small {classList}" {onclick}>
   {@render children()}
 </button>
