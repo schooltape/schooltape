@@ -66,18 +66,18 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   subheader: createPlugin(
     "subheader",
     "Subheader Revamp",
-    "Adds a clock and current period info to the subheader",
+    "Adds a clock and current period info to the subheader.",
     true,
   ),
 
   scrollSegments: createPlugin(
     "scrollSegments",
     "Scroll Segments",
-    "Segments the Schoolbox page into scrollable sections",
+    "Segments the Schoolbox page into scrollable sections.",
     true,
   ),
 
-  scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable", true, {
+  scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable.", true, {
     toggle: {
       resetCooldownOnMouseMove: {
         toggle: new StorageState(
@@ -89,7 +89,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
         ),
         info: {
           name: "Reset on mouse move",
-          description: "Whether to reset the scrolling cooldown when you move your mouse",
+          description: "Whether to reset the scrolling cooldown when you move your mouse.",
         },
       },
     },
@@ -106,7 +106,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
         ),
         info: {
           name: "Cooldown duration (s)",
-          description: "How long to wait before scrolling",
+          description: "How long to wait before scrolling.",
         },
       },
     },
@@ -115,11 +115,11 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   progressBar: createPlugin(
     "progressBar",
     "Progress Bar",
-    "Displays a progress bar below the timetable to show the time of the day",
+    "Displays a progress bar below the timetable to show the time of the day.",
     true,
   ),
 
-  modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox", true, {
+  modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox.", true, {
     toggle: {
       filled: {
         toggle: new StorageState(
@@ -131,13 +131,13 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
         ),
         info: {
           name: "Filled Icons",
-          description: "Whether the icons should be filled or outlined",
+          description: "Whether the icons should be filled or outlined.",
         },
       },
     },
   }),
 
-  tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation", true, {
+  tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation.", true, {
     toggle: {
       showSubjectPrefix: {
         toggle: new StorageState(
@@ -158,7 +158,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   homepageSwitcher: createPlugin(
     "homepageSwitcher",
     "Homepage Switcher",
-    "The logo will switch to existing Schoolbox homepage when available",
+    "The logo will switch to existing Schoolbox homepage when available.",
     true,
     {
       toggle: {
@@ -172,7 +172,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
           ),
           info: {
             name: "Close current tab",
-            description: "When switching to another tab, close the current one",
+            description: "When switching to another tab, close the current one.",
           },
         },
       },

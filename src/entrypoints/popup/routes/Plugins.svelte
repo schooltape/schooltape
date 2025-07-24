@@ -1,7 +1,7 @@
 <script lang="ts">
   import Title from "../components/Title.svelte";
   import { globalSettings } from "#imports";
-  import IconBtn from "../components/inputs/IconBtn.svelte";
+  import Button from "../components/inputs/Button.svelte";
   import { Settings } from "@lucide/svelte";
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
@@ -37,13 +37,13 @@
           description={plugin.info.description}
           size="small">
           {#if plugin.settings !== undefined}
-            <IconBtn
-              title="Wiki"
-              id="wiki"
+            <Button
+              title={plugin.info.name + " Settings"}
+              {id}
               onclick={() => {
                 selectedPluginId = id as PluginId;
                 showModal = true;
-              }}><Settings /></IconBtn>
+              }}><Settings size={22} /></Button>
           {/if}
         </Toggle>
       </div>

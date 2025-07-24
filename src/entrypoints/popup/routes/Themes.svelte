@@ -1,7 +1,7 @@
 <script lang="ts">
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
-  import IconBtn from "../components/inputs/IconBtn.svelte";
+  import Button from "../components/inputs/Button.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import { Layers3 } from "@lucide/svelte";
   import { globalSettings } from "#imports";
@@ -106,6 +106,6 @@
     {/each}
   </div>
 
-  <IconBtn title="Choose icon" id="choose-icon" onclick={() => (showModal = true)} label="Choose an icon"
-    ><Layers3 /></IconBtn>
+  <Button title="Choose icon" id="choose-icon" onclick={() => (showModal = true)}
+    ><Layers3 size={22} /> Choose an icon</Button>
 </div>
