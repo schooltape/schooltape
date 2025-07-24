@@ -1,0 +1,43 @@
+/* hides schoolbox's current period indicator */
+.timetable-subject-active {
+  border: none !important;
+}
+.timetable-subject-active:before {
+  display: none;
+}
+.timetable .timetable-period-active {
+  color: inherit !important;
+  background: unset;
+}
+.timetable-subject {
+  height: 130px !important;
+}
+
+/* progress bar styling */
+.timetable > thead > tr:nth-child(1) > th {
+  padding-bottom: 0px;
+}
+.progress-container > td {
+  line-height: 0px;
+}
+progress.progress-bar {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 7px;
+  border: none;
+}
+
+/* can't put other selectors with this */
+/* see https://issues.chromium.org/issues/40564916 */
+progress::-webkit-progress-value {
+  background: var(--content-ui-foreground) !important;
+}
+progress::-webkit-progress-bar {
+  background: inherit;
+}
+progress {
+  background-color: inherit;
+}
+progress::-moz-progress-bar {
+  background: var(--content-ui-foreground) !important;
+}

@@ -1,5 +1,3 @@
-import { Menus } from "wxt/browser";
-
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async ({ reason }) => {
     if (reason === "install") {
@@ -11,13 +9,11 @@ export default defineBackground(() => {
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
       }
     } else if (reason === "update") {
-      logger.info("[background] Notifying user about the update");
-      browser.notifications.create("updated", {
-        title: "Schooltape updated",
-        type: "basic",
-        iconUrl: browser.runtime.getURL("/icon/128.png"),
-        message: "Click here to look at the release notes.",
-      });
+      logger.info("[background] Showing update badge");
+
+      await globalSettings.set({ updated: true });
+      updateIcon();
+
       if (import.meta.env.DEV) {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html"), active: false });
@@ -25,55 +21,43 @@ export default defineBackground(() => {
     }
   });
 
-  browser.notifications.onClicked.addListener(function (notifID) {
-    if (notifID === "update") {
-      browser.tabs.create({
-        url: "https://github.com/schooltape/schooltape/releases/latest",
-      });
-    }
-    if (notifID === "updated") {
-      browser.tabs.create({
-        url: `https://github.com/schooltape/schooltape/releases/tag/v${browser.runtime.getManifest().version}`,
-      });
-    }
-  });
-
-  // watch for global toggle
-  globalSettings.watch(async (newSettings, oldSettings) => {
-    if (newSettings.global !== oldSettings.global) {
-      logger.info(`[background] Global toggle changed to ${newSettings.global}`);
-      // update icon
-      updateIcon();
-    }
+  // update icon when toggle or update is changed
+  globalSettings.storage.watch(() => {
+    updateIcon();
   });
 
   // listen for messages
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  interface Message {
+    resetSettings?: boolean;
+    inject?: string;
+    toTab?: string;
+    updateIcon?: boolean;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  browser.runtime.onMessage.addListener(async (msg: any, sender: any) => {
+    const message = msg as Message;
     logger.child({ message, sender }).info("[background] Received message");
+
     if (message.resetSettings) {
       resetSettings();
-    }
-    if (message.inject && sender.tab?.id) {
-      logger.info(`[background] Injecting ${message.inject}`);
-      // https://wxt.dev/guide/extension-apis/scripting.html
-      const res = await browser.scripting.executeScript({
-        target: { tabId: sender.tab.id },
-        files: [message.inject],
-      });
-    }
-    if (message.toTab) {
+    } else if (message.toTab) {
       const tabs = await browser.tabs.query({ url: message.toTab });
       if (tabs.length > 0) {
+        // @ts-expect-error - tab will exist
         browser.tabs.update(tabs[0].id, { active: true });
       } else if (sender.tab?.id) {
         browser.tabs.update(sender.tab.id, { url: message.toTab });
       }
+    } else if (message.updateIcon) {
+      updateIcon();
     }
-    return true;
+
+    return true; // return success
   });
 
   // context menus
-  let contexts: Menus.ContextType[];
+  let contexts: Browser.contextMenus.CreateProperties["contexts"];
   logger.info(`[background] Manifest version: ${import.meta.env.MANIFEST_VERSION}`);
   if (import.meta.env.MANIFEST_VERSION === 2) {
     contexts = ["browser_action"];
@@ -95,16 +79,19 @@ export default defineBackground(() => {
     title: "GitHub",
     contexts: contexts,
   });
-  browser.contextMenus.onClicked.addListener((info, tab) => {
+  browser.contextMenus.onClicked.addListener((info) => {
+    const manifest = browser.runtime.getManifest();
+    const version = manifest.version_name || manifest.version;
+
     switch (info.menuItemId) {
       case "report-bug":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=bug&projects=&template=bug-report.yml",
+          url: `https://github.com/schooltape/schooltape/issues/new?template=bug.yml&version=v${version}`,
         });
         break;
       case "feature-request":
         browser.tabs.create({
-          url: "https://github.com/schooltape/schooltape/issues/new?assignees=42willow&labels=enhancement&projects=&template=feature_request.yml",
+          url: "https://github.com/schooltape/schooltape/issues/new?template=feature.yml",
         });
         break;
       case "github":
@@ -115,21 +102,27 @@ export default defineBackground(() => {
 });
 
 async function resetSettings(): Promise<void> {
-  logger.info("[background] Resetting settings");
-  await storage.removeItems([
-    "local:globalSettings",
-    "local:snippetSettings",
-    "local:pluginSettings",
-    "local:themeSettings",
-  ]);
+  logger.info("[background] Clearing local storage");
+  await storage.clear("local");
 }
 
 async function updateIcon() {
-  const global = (await globalSettings.getValue()).global;
-  let iconSuffix = "-disabled";
-  if (global) {
-    iconSuffix = "";
+  logger.info("[background] Updating icon...");
+  const settingsValue = await globalSettings.storage.getValue();
+
+  let iconSuffix = "";
+
+  // if it's june
+  if (new Date().getMonth() === 5) {
+    iconSuffix += "-ctp";
   }
+  if (settingsValue.global === false) {
+    iconSuffix += "-disabled";
+  }
+  if (settingsValue.updated === true) {
+    iconSuffix += "-badge";
+  }
+
   if (import.meta.env.MANIFEST_VERSION === 2) {
     browser.browserAction.setIcon({
       path: {

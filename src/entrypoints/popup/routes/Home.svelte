@@ -1,31 +1,23 @@
 <script lang="ts">
   import Footer from "../components/Footer.svelte";
-  import { onMount } from "svelte";
+  import Motd from "../components/Motd.svelte";
+  import { globalSettings } from "#imports";
 
-  let settings = globalSettings.defaultValue;
-
-  onMount(async () => {
-    settings = await globalSettings.getValue();
-    console.log("settings", settings);
-  });
-
-  async function globalToggle() {
-    settings.global = !settings.global;
-    // console.log("settings", settings);
-    await globalSettings.setValue(settings);
-  }
+  let isJune = new Date().getMonth() === 5;
 </script>
 
-<div id="card">
-  <h1 class="mb-6">Schooltape</h1>
+<div id="card" class="flex flex-col gap-4">
+  <h1 class={isJune ? "ctp" : ""}>Schooltape</h1>
+
+  <Motd />
 
   <button
-    class={settings.global
-      ? "bg-ctp-green hover:bg-ctp-accent active:bg-ctp-red/75"
-      : "bg-ctp-red hover:bg-ctp-accent active:bg-ctp-green/75"}
+    class="hover:opacity-75 bg-(--ctp-accent) {globalSettings.state.global ? '' : 'opacity-60'}"
     id="toggle"
-    on:click={globalToggle}
-    >{settings.global ? "enabled" : "disabled"}
+    onclick={() => {
+      globalSettings.set({ global: !globalSettings.get().global });
+    }}
+    >{globalSettings.state.global ? "enabled" : "disabled"}
   </button>
 </div>
 

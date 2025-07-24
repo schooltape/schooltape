@@ -1,8 +1,3 @@
-.material-icons-round,
-::placeholder {
-  color: hsl(var(--ctp-text)) !important;
-}
-
 body,
 p,
 h1,
@@ -14,7 +9,8 @@ h4,
   color: hsl(var(--ctp-text));
 }
 
-.title-section > h1 {
+.title-section > h1,
+::placeholder {
   color: hsl(var(--ctp-text)) !important;
 }
 
@@ -40,11 +36,22 @@ h4,
   color: hsl(var(--ctp-red));
 }
 
+/* empty state */
+/* applies to empty calendar widget on homepage */
+.empty-state p,
+.empty-state [class^="icon-"] {
+  color: hsl(var(--ctp-subtext0));
+}
+
 /* blockquotes */
 blockquote {
   background-color: hsl(var(--ctp-surface1));
-  color: hsl(var(--ctp-text));
+  color: hsl(var(--ctp-text)) !important;
   border-left: 6px solid hsl(var(--ctp-accent)) !important;
+}
+blockquote p,
+blockquote::before {
+  color: hsl(var(--ctp-text)) !important;
 }
 
 /* checkboxes */
@@ -225,15 +232,20 @@ table * {
 .right-off-canvas-menu ul.off-canvas-list label,
 .right-small a[data-unread]:not([data-unread="0"]),
 #msgs[data-unread]:not([data-unread="0"]) #right-menu-dock,
-.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full,
-ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
+.right-off-canvas-menu ul.off-canvas-list #notification-toggle-full {
   background-color: hsl(var(--ctp-red));
   color: hsl(var(--ctp-mantle));
 }
+ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]):active {
+  background: none;
+}
+#msg-content .list-item > div:active {
+  background: hsl(var(--ctp-overlay0));
+}
 
 /* notification settings button */
-ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
-  padding: 0.5rem;
+a.settings-button {
+  padding: 0.5rem !important;
 }
 .right-off-canvas-menu[data-unread="0"] .settings-button {
   color: hsl(var(--ctp-text));
@@ -264,6 +276,12 @@ ul.off-canvas-list li a:not([data-pwa-action="retryNotifPrompt"]) {
 /* three dot menu */
 #tab-control .separator {
   background-color: hsl(var(--ctp-surface1));
+}
+
+/* highlights in search menu */
+mark {
+  background-color: hsl(var(--ctp-accent));
+  color: hsl(var(--ctp-mantle));
 }
 
 /* form borders */
@@ -368,6 +386,11 @@ label {
 .profile-tabs .classes-groups .v-card {
   background-color: hsl(var(--ctp-surface0));
   border: none;
+}
+
+/* profile accordion on small viewport */
+.left-off-canvas-menu .account-menu-mobile .accordion-navigation .profile-drop {
+  background-color: var(--accounts-menu-background) !important;
 }
 
 /* submissions text input */
@@ -595,6 +618,15 @@ li > article > div#x_Signature {
   color: hsl(var(--ctp-text));
 }
 
+/* class list */
+
+.Component_Homepage_ClassListController.component-container ul.grid {
+  background: hsl(var(--ctp-surface0)) !important;
+}
+.Component_Homepage_ClassListController.component-container ul.grid li {
+  box-shadow: none !important;
+}
+
 /* text inputs */
 input:not([type]),
 input[type="text"],
@@ -617,6 +649,7 @@ textarea:hover,
 select:hover {
   background-color: hsl(var(--ctp-base));
   color: hsl(var(--ctp-text));
+  border: none;
 }
 
 /* error messages */
@@ -648,6 +681,7 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
 
   /* search box */
   --foreground-colour: hsl(var(--ctp-surface0)) !important;
+  --alt-foreground-colour: hsl(var(--ctp-surface0)) !important;
   --primary-text-colour: hsl(var(--ctp-text)) !important;
   --navigation-foreground: hsl(var(--ctp-text));
   --navigation-foreground-contrast: hsl(var(--ctp-crust));
@@ -655,12 +689,12 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   --navigation-background-contrast: hsl(var(--ctp-crust));
   --navigation-hover: hsl(var(--ctp-surface0));
   --navigation-hover-contrast: hsl(var(--ctp-crust));
+  --border-colour: hsl(var(--ctp-accent));
   --off-canvas-foreground: hsl(var(--ctp-text));
-
   --off-canvas-background: hsl(var(--ctp-mantle));
   --off-canvas-hover: hsl(var(--ctp-surface0));
   --accounts-menu-foreground: hsl(var(--ctp-text));
-  --accounts-menu-background: hsl(var(--ctp-surface2));
+  --accounts-menu-background: hsl(var(--ctp-crust));
   --accounts-menu-hover: hsl(var(--ctp-overlay1));
   --content-ui-foreground: hsl(var(--ctp-accent));
   --content-ui-foreground-contrast: hsl(var(--ctp-mantle));

@@ -1,4 +1,4 @@
-import { flavors, flavorEntries } from "@catppuccin/palette";
+import { flavorEntries } from "@catppuccin/palette";
 
 export function injectStyles(styleText: string) {
   logger.info(`[content-utils] Injecting styles: ${styleText}`);
@@ -24,20 +24,21 @@ export function injectCatppuccin(flavour: string, accent: string) {
   injectStyles(styleText);
 }
 
-export function injectLogo(logo: LogoDetails) {
+export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
   let url = logo.url;
   if (!url.startsWith("http")) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     url = browser.runtime.getURL(url as any);
   }
   logger.info(`[content-utils] Injecting Logo: ${logo.name}`);
   if (logo.disable) {
     return;
   }
-  let style = document.createElement("style");
+  const style = document.createElement("style");
   style.classList.add("schooltape");
   if (logo.adaptive) {
     style.textContent = `a.logo > img { display: none !important; } a.logo { display: flex; align-items: center; justify-content: center; }`;
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.style.mask = `url("${url}") no-repeat center`;
     span.style.maskSize = "100% 100%";
     span.style.backgroundColor = "hsl(var(--ctp-accent))";
@@ -51,77 +52,46 @@ export function injectLogo(logo: LogoDetails) {
       });
     });
   } else {
-    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; }`;
+    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; width: 100px; }`;
   }
   document.head.appendChild(style);
+
+  // inject favicon
+  if (setAsFavicon) {
+    let favicon = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+    if (!favicon) {
+      favicon = document.createElement("link") as HTMLLinkElement;
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+    favicon.href = url;
+  }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function injectStylesheet(url: any) {
   logger.info(`[content-utils] Injecting stylesheet: ${url}`);
-  let link = document.createElement("link");
+  const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = browser.runtime.getURL(url);
   link.classList.add("schooltape");
   document.head.appendChild(link);
 }
 
-export async function injectSnippets() {
+export async function injectUserSnippets(userSnippets: Record<string, UserSnippet>) {
   logger.info("[content-utils] Injecting snippets");
-  // inbuilt snippets
-  const snippets = await snippetSettings.getValue();
-  const populatedSnippets = populateItems(snippets.snippets, SNIPPET_INFO, "snippet");
-  populatedSnippets.forEach((snippet) => {
-    if (snippet.toggle) {
-      injectStylesheet(`/snippets/${snippet.id}.css`);
-    }
-  });
   // user snippets
-  for (let snippetID in snippets.user) {
-    let userSnippet = snippets.user[snippetID];
+  Object.keys(userSnippets).forEach((snippetId) => {
+    const userSnippet = userSnippets[snippetId];
     if (userSnippet.toggle) {
-      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetID}/raw`)
+      fetch(`https://gist.githubusercontent.com/${userSnippet.author}/${snippetId}/raw`)
         .then((response) => response.text())
         .then((css) => {
-          let style = document.createElement("style");
+          const style = document.createElement("style");
           style.textContent = css;
           style.classList.add("schooltape");
           document.head.appendChild(style);
         });
     }
-  }
-}
-
-// This is used in Plugins.svelte and Snippets.svelte to populate the items in the list
-type ItemType = "plugin" | "snippet";
-// Define a generic function with a conditional return type
-export function populateItems<T extends ItemType>(
-  data: Record<string, PluginData> | Record<string, SnippetData>,
-  info: Record<string, PluginInfo> | Record<string, SnippetInfo>,
-  type: T,
-): T extends "plugin" ? PopulatedPlugin[] : PopulatedSnippet[] {
-  // console.log(data, info, type);
-  return Object.entries(info)
-    .sort((a, b) => a[1].order - b[1].order)
-    .map(([key, value]) => {
-      // console.log(key, value);
-      // console.log(data[key]);
-      if (type === "plugin") {
-        const populatedItem: PopulatedPlugin = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        if (data.settings) {
-          populatedItem.settings = data.settings;
-        }
-        return populatedItem;
-      } else {
-        const populatedItem: PopulatedSnippet = {
-          id: key,
-          ...value,
-          ...data[key],
-        };
-        return populatedItem;
-      }
-    });
+  });
 }

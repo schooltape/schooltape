@@ -1,104 +1,111 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
-  import IconBtn from "../components/inputs/IconBtn.svelte";
-  import { Icon, Layers3 } from "lucide-svelte";
+  import Button from "../components/inputs/Button.svelte";
+  import Toggle from "../components/inputs/Toggle.svelte";
+  import { Layers3 } from "@lucide/svelte";
+  import { globalSettings } from "#imports";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
-    "rosewater",
-    "flamingo",
-    "pink",
-    "mauve",
-    "red",
-    "maroon",
-    "peach",
-    "yellow",
-    "green",
-    "teal",
-    "sky",
-    "sapphire",
-    "blue",
-    "lavender",
+    "bg-ctp-rosewater",
+    "bg-ctp-flamingo",
+    "bg-ctp-pink",
+    "bg-ctp-mauve",
+    "bg-ctp-red",
+    "bg-ctp-maroon",
+    "bg-ctp-peach",
+    "bg-ctp-yellow",
+    "bg-ctp-green",
+    "bg-ctp-teal",
+    "bg-ctp-sky",
+    "bg-ctp-sapphire",
+    "bg-ctp-blue",
+    "bg-ctp-lavender",
   ];
-  const logos = LOGOS;
 
-  let themes = themeSettings.defaultValue;
-  let showModal = false;
+  const logos = LOGO_INFO;
+  let showModal = $state(false);
 
-  onMount(async () => {
-    themes = await themeSettings.getValue();
-    console.log("themes", themes);
-  });
-
-  function flavourClicked(flavour: string) {
-    themes.flavour = flavour;
-    themeSettings.setValue(themes);
-  }
-
-  function accentClicked(accent: string) {
-    themes.accent = accent;
-    themeSettings.setValue(themes);
-  }
-  function logoClicked(logo: LogoDetails) {
-    console.log(logo);
-    themes.logo = logo;
-    console.log(themes);
-    themeSettings.setValue(themes);
+  function cleanAccent(accent: string) {
+    return accent.replace("bg-ctp-", "");
   }
 </script>
 
 <Modal bind:showModal>
-  <h2 slot="header" class="mb-4 text-xl">Choose an icon</h2>
+  {#snippet header()}
+    <h2 class="mb-4 text-xl">Choose an icon</h2>
+  {/snippet}
 
   <div class="grid grid-cols-3 gap-4">
-    {#each logos as logo (logo)}
+    {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
-        on:click={() => logoClicked(logo)}
-        class:highlight={themes.logo.id === logo.id}
-        class="border border-ctp-accent p-2 flex flex-col items-center justify-between rounded-lg">
+        onclick={() => {
+          globalSettings.set({ themeLogo: logoId as LogoId });
+        }}
+        class:highlight={globalSettings.state.themeLogo === logoId}
+        class="border border-(--ctp-accent) p-2 flex flex-col rounded-lg">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
-          {#if logo.adaptive}
-            <span class="logo-picker" style="--icon: url({logo.url})"></span>
-          {:else}
-            <img src={logo.url} alt="Logo" class="h-16 mt-2" />
-          {/if}
+          <div class="flex items-center justify-center w-full h-full">
+            {#if logo.adaptive}
+              <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
+              <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
+            {:else}
+              <img src={logo.url} alt="Logo" class="w-16 mt-2" />
+            {/if}
+          </div>
         {/if}
       </button>
     {/each}
   </div>
+
+  <div class="mt-4">
+    <Toggle
+      update={(toggled) => {
+        globalSettings.set({ themeLogoAsFavicon: toggled });
+      }}
+      checked={globalSettings.state.themeLogoAsFavicon}
+      id="setAsFavicon"
+      size="small"
+      text="Set icon as tab favicon" />
+  </div>
 </Modal>
 
 <div id="card">
-  <Title title="Themes" data={themes} key="themes" />
+  <Title
+    title="Themes"
+    checked={globalSettings.state.themes}
+    update={(toggled: boolean) => {
+      globalSettings.set({ themes: toggled });
+    }} />
 
   <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
-    {#each flavours as flavour}
+    {#each flavours as flavour (flavour)}
       <button
-        class:active={themes.flavour === flavour}
+        class:active={globalSettings.state.themeFlavour === flavour}
         class:navbutton-left={flavour === "latte"}
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
-        on:click={() => flavourClicked(flavour)}>{flavour}</button>
+        onclick={() => {
+          globalSettings.set({ themeFlavour: flavour });
+        }}>{flavour}</button>
     {/each}
   </div>
 
   <div id="palette">
-    {#each accents as accent}
+    {#each accents as accent (accent)}
       <button
-        class="bg-ctp-{accent}"
-        class:current={themes.accent === accent}
-        title={accent}
-        on:click={() => accentClicked(accent)}></button>
+        class={accent}
+        class:current={globalSettings.state.themeAccent === cleanAccent(accent)}
+        aria-label={cleanAccent(accent)}
+        title={cleanAccent(accent)}
+        onclick={() => {
+          globalSettings.set({ themeAccent: cleanAccent(accent) });
+        }}></button>
     {/each}
   </div>
 
-  <IconBtn
-    title="Choose icon"
-    id="choose-icon"
-    onClick={() => (showModal = true)}
-    icon={Layers3}
-    label="Choose an icon" />
+  <Button title="Choose icon" id="choose-icon" onclick={() => (showModal = true)}
+    ><Layers3 size={22} /> Choose an icon</Button>
 </div>

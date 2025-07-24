@@ -1,0 +1,17 @@
+/* hide old icons */
+#top-menu > li > a::before,
+#overflow-nav > li > a::before {
+  display: none !important;
+}
+
+/* prevent icons from changing colour on hover */
+#top-menu > li > a {
+  color: var(--body-foreground) !important;
+}
+
+/* center icons in the sidebar */
+#overflow-nav > li > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
