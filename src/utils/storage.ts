@@ -21,7 +21,7 @@ export const globalSettings = new StorageState<Types.Settings>(
       themeLogoAsFavicon: false,
     },
     migrations: {
-      1: (oldData) => {
+      2: (oldData) => {
         needsRefresh.set(oldData.needsRefresh);
         schoolboxUrls.set(oldData.schoolboxUrls);
         return {
@@ -237,7 +237,7 @@ export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
 storage.defineItem("local:themeSettings", {
   version: 2,
   migrations: {
-    1: (oldData) => {
+    2: (oldData) => {
       globalSettings.set({
         themes: oldData.themeToggle,
         themeFlavour: oldData.flavour,
@@ -250,7 +250,7 @@ storage.defineItem("local:themeSettings", {
 storage.defineItem("local:pluginSettings", {
   version: 2,
   migrations: {
-    1: (oldData) => {
+    2: (oldData) => {
       globalSettings.set({ plugins: oldData.toggle });
       plugins.subheader.toggle.set({ toggle: oldData.plugins.subheader.toggle });
       plugins.scrollSegments.toggle.set({ toggle: oldData.plugins.scrollSegments.toggle });
@@ -265,7 +265,7 @@ storage.defineItem("local:pluginSettings", {
 storage.defineItem("local:snippetSettings", {
   version: 2,
   migrations: {
-    1: (oldData) => {
+    2: (oldData) => {
       globalSettings.set({ snippets: oldData.toggle, userSnippets: oldData.user });
       snippets.hidePfp.toggle.set({ toggle: oldData.snippets.hidePfp.toggle });
       snippets.censor.toggle.set({ toggle: oldData.snippets.censor.toggle });
