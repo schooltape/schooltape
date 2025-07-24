@@ -31,7 +31,7 @@ export default function init() {
           subheader.removeChild(subheader.firstChild);
         }
         const span = document.createElement("span");
-        span.classList = "schooltape";
+        span.classList.add("schooltape");
         subheader.appendChild(span);
 
         updatePeriodSpan();
