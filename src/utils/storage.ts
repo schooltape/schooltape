@@ -2,9 +2,9 @@ import * as Types from "./types";
 import { StorageState } from "./state.svelte";
 
 // Global
-export const globalSettings = new StorageState<Types.Settings>(
+export const globalSettings: StorageState<Types.Settings> = new StorageState<Types.Settings>(
   storage.defineItem<Types.Settings>("local:globalSettings", {
-    version: 2,
+    version: 3,
     fallback: {
       global: true,
       plugins: true,
@@ -25,7 +25,14 @@ export const globalSettings = new StorageState<Types.Settings>(
         needsRefresh.set(oldData.needsRefresh);
         schoolboxUrls.set(oldData.schoolboxUrls);
         return {
+          ...globalSettings.storage.fallback,
           global: oldData.global,
+        };
+      },
+      3: (oldData) => {
+        return {
+          ...oldData,
+          ...globalSettings.storage.fallback,
         };
       },
     },
@@ -39,8 +46,16 @@ export const needsRefresh = new StorageState(
 );
 
 export const schoolboxUrls = new StorageState(
-  storage.defineItem<string[]>("local:urls", {
-    fallback: ["https://help.schoolbox.com.au"],
+  storage.defineItem<Types.SchoolboxUrls>("local:urls", {
+    version: 2,
+    fallback: {
+      urls: ["https://help.schoolbox.com.au"],
+    },
+    migrations: {
+      2: () => {
+        return { urls: ["https://help.schoolbox.com.au"] };
+      },
+    },
   }),
 );
 

@@ -4,7 +4,7 @@ export async function defineStSnippet(snippetId: SnippetId, styleText: string) {
   logger.info(`${snippets[snippetId].info.name}: ${snippet.toggle ? "enabled" : "disabled"}`);
 
   const settings = await globalSettings.storage.getValue();
-  const urls = await schoolboxUrls.storage.getValue();
+  const urls = (await schoolboxUrls.storage.getValue()).urls;
 
   if (snippet && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.snippets && snippet.toggle) {

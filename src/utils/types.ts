@@ -15,6 +15,10 @@ export interface Settings {
   themeLogoAsFavicon: boolean;
 }
 
+export interface SchoolboxUrls {
+  urls: string[];
+}
+
 export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";
 
 export interface LogoInfo {

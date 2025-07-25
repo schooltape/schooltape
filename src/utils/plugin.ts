@@ -8,7 +8,7 @@ export async function defineStPlugin(
   logger.info(`${plugins[pluginId].info.name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
   const settings = await globalSettings.storage.getValue();
-  const urls = await schoolboxUrls.storage.getValue();
+  const urls = (await schoolboxUrls.storage.getValue()).urls;
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.plugins && plugin.toggle) {

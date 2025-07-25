@@ -21,7 +21,7 @@
 
   async function refreshSchoolboxURLs() {
     logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    const urls = (await schoolboxUrls.storage.getValue()).map((url) => url.replace(/^https:\/\//, "*://") + "/*");
+    const urls = (await schoolboxUrls.storage.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
     const tabs = await browser.tabs.query({ url: urls });
     tabs.forEach((tab) => {
       if (tab.id) {

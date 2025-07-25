@@ -7,7 +7,7 @@ export default defineContentScript({
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
     const settings = await globalSettings.storage.getValue();
-    const urls = await schoolboxUrls.storage.getValue();
+    const urls = (await schoolboxUrls.storage.getValue()).urls;
 
     if (settings.global && urls.includes(window.location.origin)) {
       // inject themes
