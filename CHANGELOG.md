@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.3](https://github.com/schooltape/schooltape/compare/v4.0.2...v4.0.3) (2025-07-25)
+
+
+### Bug Fixes
+
+* v4 storage migration not including fallback ([c5a7b60](https://github.com/schooltape/schooltape/commit/c5a7b60d3bf051c09915f3fde70462b75c15b921))
+
 ## [4.0.2](https://github.com/schooltape/schooltape/compare/v4.0.1...v4.0.2) (2025-07-24)
 
 
