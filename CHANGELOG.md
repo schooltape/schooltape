@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.4](https://github.com/schooltape/schooltape/compare/v4.0.3...v4.0.4) (2025-07-28)
+
+
+### Bug Fixes
+
+* **snippets/roundedCorners:** don't round mark all read button ([c15c27e](https://github.com/schooltape/schooltape/commit/c15c27ede6efc60c92687aeb5722657adcc659c6))
+
 ## [4.0.3](https://github.com/schooltape/schooltape/compare/v4.0.2...v4.0.3) (2025-07-25)
 
 
