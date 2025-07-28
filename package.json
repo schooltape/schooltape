@@ -4,7 +4,7 @@
   "author": "42willow",
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
-    "@catppuccin/tailwindcss": "1.0.0-beta.2",
+    "@catppuccin/tailwindcss": "1.0.0",
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.27.0",
     "@lucide/svelte": "^0.523.0",
