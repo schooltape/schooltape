@@ -39,7 +39,7 @@ section.content, */
   border-radius: 0px 0px 10px 10px !important;
 }
 /* see all notifications button */
-#message-list > li > a.button {
+#message-list > li > a.button:not(.mark-all-read) {
   border-radius: 0px 0px 10px 10px !important;
 }
 
