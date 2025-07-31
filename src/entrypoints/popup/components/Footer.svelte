@@ -17,7 +17,7 @@
   <span class="relative inline-flex">
     <Button
       onclick={async () => {
-        await globalSettings.set({ updated: false });
+        await updated.set(false);
 
         browser.tabs.create({
           url: `https://github.com/schooltape/schooltape/releases/tag/v${version}`,

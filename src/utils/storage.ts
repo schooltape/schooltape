@@ -11,14 +11,12 @@ export const globalSettings: StorageState<Types.Settings> = new StorageState<Typ
       themes: true,
       snippets: true,
 
-      updated: false,
-      motd: "Free and <a href='https://github.com/schooltape/schooltape' class='text-(--ctp-accent)'> open source</a>!",
-      userSnippets: {},
-
       themeFlavour: "mocha",
       themeAccent: "mauve",
       themeLogo: "schooltape-rainbow",
       themeLogoAsFavicon: false,
+
+      userSnippets: {},
     },
     migrations: {
       2: (oldData) => {
@@ -42,6 +40,22 @@ export const globalSettings: StorageState<Types.Settings> = new StorageState<Typ
 export const needsRefresh = new StorageState(
   storage.defineItem<boolean>("local:needsRefresh", {
     fallback: false,
+  }),
+);
+
+// whether schooltape was recently updated, displays a badge on the icon and renders an info box
+export const updated = new StorageState(
+  storage.defineItem<boolean>("local:updated", {
+    fallback: false,
+  }),
+);
+
+// message of the day
+export const motd = new StorageState(
+  storage.defineItem<Types.Motd>("local:motd", {
+    fallback: {
+      motd: "Free and <a href='https://github.com/schooltape/schooltape' class='text-(--ctp-accent)'> open source</a>!",
+    },
   }),
 );
 

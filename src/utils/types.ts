@@ -5,14 +5,16 @@ export interface Settings {
   themes: boolean;
   snippets: boolean;
 
-  updated: boolean; // whether schooltape was recently updated, displays a badge on the icon and renders an info box
-  motd: string; // message of the day
-  userSnippets: Record<string, UserSnippet>;
-
   themeFlavour: string;
   themeAccent: string;
   themeLogo: LogoId;
   themeLogoAsFavicon: boolean;
+
+  userSnippets: Record<string, UserSnippet>;
+}
+
+export interface Motd {
+  motd: string;
 }
 
 export interface SchoolboxUrls {

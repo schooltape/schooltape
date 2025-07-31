@@ -11,7 +11,7 @@ export default defineBackground(() => {
     } else if (reason === "update") {
       logger.info("[background] Showing update badge");
 
-      await globalSettings.set({ updated: true });
+      await updated.set(true);
       updateIcon();
 
       if (import.meta.env.DEV) {
@@ -108,7 +108,6 @@ async function resetSettings(): Promise<void> {
 
 async function updateIcon() {
   logger.info("[background] Updating icon...");
-  const settingsValue = await globalSettings.storage.getValue();
 
   let iconSuffix = "";
 
@@ -116,10 +115,10 @@ async function updateIcon() {
   if (new Date().getMonth() === 5) {
     iconSuffix += "-ctp";
   }
-  if (settingsValue.global === false) {
+  if ((await globalSettings.storage.getValue()).global === false) {
     iconSuffix += "-disabled";
   }
-  if (settingsValue.updated === true) {
+  if ((await updated.storage.getValue()) === true) {
     iconSuffix += "-badge";
   }
 
