@@ -11,8 +11,15 @@ export default defineBackground(() => {
     } else if (reason === "update") {
       logger.info("[background] Showing update badge");
 
-      await updated.set(true);
+      await updated.storage.setValue(true);
       updateIcon();
+
+      // hacky way of resetting the extension to fix migration issues
+      const manifest = browser.runtime.getManifest();
+      const version = manifest.version_name || manifest.version;
+      if (version === "4.0.5") {
+        await storage.clear("local");
+      }
 
       if (import.meta.env.DEV) {
         logger.info("[background] Opening development URLs");

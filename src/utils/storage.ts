@@ -4,7 +4,6 @@ import { StorageState } from "./state.svelte";
 // Global
 export const globalSettings: StorageState<Types.Settings> = new StorageState<Types.Settings>(
   storage.defineItem<Types.Settings>("local:globalSettings", {
-    version: 4,
     fallback: {
       global: true,
       plugins: true,
@@ -17,11 +16,6 @@ export const globalSettings: StorageState<Types.Settings> = new StorageState<Typ
       themeLogoAsFavicon: false,
 
       userSnippets: {},
-    },
-    migrations: {
-      4: async () => {
-        await storage.clear("local");
-      },
     },
   }),
 );
