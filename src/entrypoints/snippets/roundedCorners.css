@@ -10,7 +10,7 @@
 .scrollable,
 section.content, */
 .tile,
-.button:not(.icon-search) {
+.button:not(.icon-search):not(.mark-all-read) {
   border-radius: 10px !important;
   overflow: clip;
 }
