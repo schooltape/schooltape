@@ -58,7 +58,7 @@
     <Button
       title="Reset"
       id="reset"
-      classList="hover:text-ctp-base hover:bg-ctp-red"
+      classList="text-ctp-text hover:text-ctp-base hover:bg-ctp-red"
       onclick={() => {
         if (confirm("Are you sure you want to reset all settings?")) {
           browser.runtime.sendMessage({ resetSettings: true });
