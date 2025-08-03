@@ -6,7 +6,7 @@
 
 /* prevent icons from changing colour on hover */
 #top-menu > li > a {
-  color: var(--body-foreground) !important;
+  color: var(--navigation-foreground) !important;
 }
 
 /* center icons in the sidebar */
