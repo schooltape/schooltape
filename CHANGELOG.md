@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.6](https://github.com/schooltape/schooltape/compare/v4.0.5...v4.0.6) (2025-08-08)
+
+
+### Bug Fixes
+
+* **themes:** modern icons colour ([055ce38](https://github.com/schooltape/schooltape/commit/055ce38622d3818d93c5d44e4f158096f9de4f19))
+
 ## [4.0.5](https://github.com/schooltape/schooltape/compare/v4.0.4...v4.0.5) (2025-07-31)
 
 
