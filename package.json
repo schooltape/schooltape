@@ -7,7 +7,7 @@
     "@catppuccin/tailwindcss": "1.0.0",
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.27.0",
-    "@lucide/svelte": "^0.523.0",
+    "@lucide/svelte": "^0.539.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/vite": "^4.1.7",
     "@tsconfig/svelte": "^5.0.4",
