@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.5](https://github.com/schooltape/schooltape/compare/v4.0.4...v4.0.5) (2025-07-31)
+
+
+### Bug Fixes
+
+* **popup:** reset button colour on latte ([f0b4a34](https://github.com/schooltape/schooltape/commit/f0b4a3452c13837bfe6bb24cb34910234cc03f6a))
+* **popup:** updated badge ([e1ff524](https://github.com/schooltape/schooltape/commit/e1ff524e746de2ffde917924dbf195d8ec5c4105))
+* reset local storage the hacky way on v4.0.5 ([baa8dc1](https://github.com/schooltape/schooltape/commit/baa8dc1664d398b6c57c202f7c0f7ae4f6989e1e))
+* separate motd and updated into separate storage items ([0f874eb](https://github.com/schooltape/schooltape/commit/0f874eb4e25a79ef08e0e67cce2486302b452b8d))
+* **snippets/roundedCorners:** mark all read button ([d193dfe](https://github.com/schooltape/schooltape/commit/d193dfe44fcd241d87ee1956f9f53ddd9fb66164))
+* **storage:** remove troublesome migrations and perform a final full ([bef1910](https://github.com/schooltape/schooltape/commit/bef1910757e52b31e2bb50cf487711da3c3a810a))
+
 ## [4.0.4](https://github.com/schooltape/schooltape/compare/v4.0.3...v4.0.4) (2025-07-28)
 
 
