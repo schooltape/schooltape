@@ -8,7 +8,7 @@
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.27.0",
     "@lucide/svelte": "^0.539.0",
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
     "@tailwindcss/vite": "^4.1.7",
     "@tsconfig/svelte": "^5.0.4",
     "@types/semver": "^7.7.0",
