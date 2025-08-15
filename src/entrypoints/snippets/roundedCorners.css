@@ -29,8 +29,9 @@ section.content, */
 }
 
 /* timetable on homepage */
-.scrollable.show-for-medium-up:has(.timetable) {
+div[data-timetable-container] > section:has(.timetable) {
   border-radius: 10px !important;
+  overflow: clip;
 }
 
 /* account and action dropdown */
