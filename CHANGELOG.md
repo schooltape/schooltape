@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/schooltape/schooltape/compare/v4.0.5...v4.1.0) (2025-08-15)
+
+
+### Features
+
+* disable settings reset for those that have reset already ([623d654](https://github.com/schooltape/schooltape/commit/623d6540a2ac4d1e4b9d8dd0d7bb8bd9b2d1918f))
+
+
+### Bug Fixes
+
+* **themes:** modern icons colour ([055ce38](https://github.com/schooltape/schooltape/commit/055ce38622d3818d93c5d44e4f158096f9de4f19))
+* timetable rounded corners when theme is disabled ([280a2b8](https://github.com/schooltape/schooltape/commit/280a2b8aca4c499408baf8dad2e0113158ae6884))
+
 ## [4.0.5](https://github.com/schooltape/schooltape/compare/v4.0.4...v4.0.5) (2025-07-31)
 
 
