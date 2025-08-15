@@ -1,5 +1,7 @@
+import semver from "semver";
+
 export default defineBackground(() => {
-  browser.runtime.onInstalled.addListener(async ({ reason }) => {
+  browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
     if (reason === "install") {
       logger.info("[background] Opening wiki page after install");
       browser.tabs.create({ url: "https://schooltape.github.io/installed" });
@@ -14,10 +16,12 @@ export default defineBackground(() => {
       await updated.storage.setValue(true);
       updateIcon();
 
-      // hacky way of resetting the extension to fix migration issues
       const manifest = browser.runtime.getManifest();
-      const version = manifest.version_name || manifest.version;
-      if (version === "4.0.5") {
+      const newVersion = manifest.version_name || manifest.version;
+
+      // hacky way of resetting the extension to fix migration issues
+      // new version is greater than or equal to v4.0.5 AND previous version was less than v4.0.5
+      if (previousVersion && semver.gte(newVersion, "4.0.5") && semver.lt(previousVersion, "4.0.5")) {
         await storage.clear("local");
       }
 
