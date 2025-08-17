@@ -20,7 +20,7 @@ export class StorageState<T> {
 
   async set(updates: Partial<T>) {
     const newState = {
-      ...($state.snapshot(this.state) as T),
+      ...(await this.storage.getValue()),
       ...updates,
     };
 
