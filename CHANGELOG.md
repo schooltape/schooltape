@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.1.0](https://github.com/schooltape/schooltape/compare/v4.0.5...v4.1.0) (2025-08-17)
+
+
+### Features
+
+* disable settings reset for those that have reset already ([623d654](https://github.com/schooltape/schooltape/commit/623d6540a2ac4d1e4b9d8dd0d7bb8bd9b2d1918f))
+* remove update badge after opening popup ([aca4eb3](https://github.com/schooltape/schooltape/commit/aca4eb38e5adcc35814e4eaef2a06112de2db317))
+
+
+### Bug Fixes
+
+* disable logging in production ([6d7d492](https://github.com/schooltape/schooltape/commit/6d7d49294ce6577c48cc12784dfb59f6a570f20a))
+* refresh banner appearing when unnecessary ([cf41209](https://github.com/schooltape/schooltape/commit/cf41209876cc47b9609ac1124661afee22cddb24))
+* **snippets:** hide pwa prompt not working ([a9a524d](https://github.com/schooltape/schooltape/commit/a9a524d78985975394d90e25d31b575be8e75456))
+* state wrapper not using latest storage value ([0a551c6](https://github.com/schooltape/schooltape/commit/0a551c6b2d1485e01afb99d79605caf2b379e4c6))
+* **themes:** modern icons colour ([055ce38](https://github.com/schooltape/schooltape/commit/055ce38622d3818d93c5d44e4f158096f9de4f19))
+* timetable rounded corners when theme is disabled ([280a2b8](https://github.com/schooltape/schooltape/commit/280a2b8aca4c499408baf8dad2e0113158ae6884))
+
 ## [4.0.5](https://github.com/schooltape/schooltape/compare/v4.0.4...v4.0.5) (2025-07-31)
 
 
