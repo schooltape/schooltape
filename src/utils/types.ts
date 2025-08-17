@@ -13,6 +13,11 @@ export interface Settings {
   userSnippets: Record<string, UserSnippet>;
 }
 
+export interface UpdatedBadges {
+  icon: boolean;
+  changelog: boolean;
+}
+
 export interface Motd {
   motd: string;
 }

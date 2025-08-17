@@ -37,6 +37,11 @@
   }
 
   let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
+
+  onMount(() => {
+    updated.set({ icon: false });
+    browser.runtime.sendMessage({ updateIcon: true });
+  });
 </script>
 
 <main

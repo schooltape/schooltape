@@ -17,7 +17,7 @@
   <span class="relative inline-flex">
     <Button
       onclick={async () => {
-        await updated.storage.setValue(false);
+        await updated.set({ changelog: false });
 
         browser.tabs.create({
           url: `https://github.com/schooltape/schooltape/releases/tag/v${version}`,
@@ -28,7 +28,7 @@
       classList="text-ctp-subtext0 hover:bg-ctp-surface1">
       <GitBranch size={18} /> v{version}
       <!-- show ripple badge if the extension has been updated (unread release notes) -->
-      {#if updated.state}
+      {#if updated.state.changelog}
         <span class="absolute top-0 right-0 -mt-1 -mr-1 flex size-3">
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-ctp-blue opacity-75"></span>
           <span class="relative inline-flex size-3 rounded-full bg-ctp-blue"></span>

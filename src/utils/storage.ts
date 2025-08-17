@@ -26,10 +26,20 @@ export const needsRefresh = new StorageState(
   }),
 );
 
-// whether schooltape was recently updated, displays a badge on the icon and renders an info box
+// whether schooltape was recently updated
 export const updated = new StorageState(
-  storage.defineItem<boolean>("local:updated", {
-    fallback: false,
+  storage.defineItem<Types.UpdatedBadges>("local:updated", {
+    version: 2,
+    fallback: {
+      icon: false,
+      changelog: false,
+    },
+    migrations: {
+      2: async () => {
+        // reset to fallback
+        await storage.removeItem("local:updated");
+      },
+    },
   }),
 );
 

@@ -13,7 +13,7 @@ export default defineBackground(() => {
     } else if (reason === "update") {
       logger.info("[background] Showing update badge");
 
-      await updated.storage.setValue(true);
+      await updated.set({ icon: true, changelog: true });
       updateIcon();
 
       const manifest = browser.runtime.getManifest();
@@ -22,6 +22,7 @@ export default defineBackground(() => {
       // hacky way of resetting the extension to fix migration issues
       // new version is greater than or equal to v4.0.5 AND previous version was less than v4.0.5
       if (previousVersion && semver.gte(newVersion, "4.0.5") && semver.lt(previousVersion, "4.0.5")) {
+        logger.info("[background] Clearing storage (v4.0.5 migration)");
         await storage.clear("local");
       }
 
@@ -129,7 +130,7 @@ async function updateIcon() {
   if ((await globalSettings.storage.getValue()).global === false) {
     iconSuffix += "-disabled";
   }
-  if ((await updated.storage.getValue()) === true) {
+  if ((await updated.storage.getValue()).icon === true) {
     iconSuffix += "-badge";
   }
 
