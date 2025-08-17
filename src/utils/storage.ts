@@ -18,6 +18,7 @@ export const globalSettings: StorageState<Types.Settings> = new StorageState<Typ
       userSnippets: {},
     },
   }),
+  true,
 );
 
 export const needsRefresh = new StorageState(
@@ -76,6 +77,7 @@ function createPlugin(
           toggle: fallbackToggle,
         },
       }),
+      true,
     ),
     info: {
       name,
@@ -217,6 +219,7 @@ function createSnippet(id: string, name: string, description: string, fallbackTo
           toggle: fallbackToggle,
         },
       }),
+      true,
     ),
     info: {
       name,

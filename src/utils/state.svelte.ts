@@ -3,12 +3,15 @@ import { WxtStorageItem } from "#imports";
 export class StorageState<T> {
   public state;
 
-  constructor(public storage: WxtStorageItem<T, {}>) {
+  constructor(
+    public storage: WxtStorageItem<T, {}>,
+    refresh: boolean = false,
+  ) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
 
     this.storage.getValue().then(this.update);
-    this.storage.watch((newState) => this.update(newState, true));
+    this.storage.watch((newState) => this.update(newState, refresh));
   }
 
   private update = (newState: T | null, refresh?: boolean) => {
