@@ -191,6 +191,7 @@ table thead {
 .fc .fc-col-header-cell a {
   color: hsl(var(--ctp-text)) !important;
 }
+/* table *:not(.fc-list-event-dot) */
 table * {
   border: none !important;
 }
