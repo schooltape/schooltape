@@ -6,7 +6,7 @@ export default defineContentScript({
     const settings = await globalSettings.storage.getValue();
     const urls = (await schoolboxUrls.storage.getValue()).urls;
 
-    console.log((await schoolboxUrls.storage.getValue()).urls);
+    logger.info((await schoolboxUrls.storage.getValue()).urls);
 
     if (!settings.global) return;
     const footer = document.querySelector("#footer > ul");

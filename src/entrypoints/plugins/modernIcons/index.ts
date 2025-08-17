@@ -46,7 +46,7 @@ export default function init() {
           const icon = document.querySelector(selector);
           // Check if the icon already exists
           if (icon && !icon.querySelector(".material-symbols-rounded")) {
-            // console.log(`Inserting icon for ${className} at ${selector}`);
+            // logger.info(`Inserting icon for ${className} at ${selector}`);
             const iconElement = document.createElement("i");
             iconElement.innerHTML = iconName;
             iconElement.classList.add("material-symbols-rounded");
@@ -65,7 +65,7 @@ export default function init() {
 
       const iconNames = [...new Set(Object.values(icons))].sort();
       const fontUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1&icon_names=${iconNames.join(",")}`;
-      // console.log(fontUrl);
+      // logger.info(fontUrl);
 
       // inject font face
       const style = document.createElement("link");
