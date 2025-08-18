@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.3](https://github.com/schooltape/schooltape/compare/v4.1.2...v4.1.3) (2025-08-18)
+
+
+### Bug Fixes
+
+* **manifest:** remove notifications permission ([af37cea](https://github.com/schooltape/schooltape/commit/af37cea109fc7a597d26553ecb6f1634f5f76728))
+
 ## [4.1.2](https://github.com/schooltape/schooltape/compare/v4.1.1...v4.1.2) (2025-08-18)
 
 
