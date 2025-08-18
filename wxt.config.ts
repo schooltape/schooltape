@@ -13,12 +13,11 @@ export default defineConfig({
       },
     ],
     host_permissions: ["http://*/*", "https://*/*"],
-    permissions: ["storage", "contextMenus", "activeTab", "scripting", "notifications"],
+    permissions: ["storage", "contextMenus", "activeTab", "scripting"],
   },
   srcDir: "src",
   outDir: "dist",
   modules: ["@wxt-dev/module-svelte"],
-  // @ts-expect-error type mismatch
   vite: () => ({
     plugins: [tailwindcss()],
   }),
