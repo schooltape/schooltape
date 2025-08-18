@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2](https://github.com/schooltape/schooltape/compare/v4.1.1...v4.1.2) (2025-08-18)
+
+
+### Bug Fixes
+
+* **popup:** horizontal scrollbar ([fd2d3dc](https://github.com/schooltape/schooltape/commit/fd2d3dc8108293dcf83017a447f3d7cdae668e56)), closes [#267](https://github.com/schooltape/schooltape/issues/267)
+
 ## [4.1.1](https://github.com/schooltape/schooltape/compare/v4.1.0...v4.1.1) (2025-08-17)
 
 
