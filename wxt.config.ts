@@ -13,7 +13,7 @@ export default defineConfig({
       },
     ],
     host_permissions: ["http://*/*", "https://*/*"],
-    permissions: ["storage", "contextMenus", "activeTab", "scripting"],
+    permissions: ["storage", "contextMenus", "activeTab"],
   },
   srcDir: "src",
   outDir: "dist",
