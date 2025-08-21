@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.4](https://github.com/schooltape/schooltape/compare/v4.1.3...v4.1.4) (2025-08-21)
+
+
+### Bug Fixes
+
+* **manifest:** remove scripting permission ([1bc1be6](https://github.com/schooltape/schooltape/commit/1bc1be645850fd9199248621ee243b89618475f2))
+
 ## [4.1.3](https://github.com/schooltape/schooltape/compare/v4.1.2...v4.1.3) (2025-08-18)
 
 
