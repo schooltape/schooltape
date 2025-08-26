@@ -44,6 +44,8 @@ export default defineBackground(() => {
     inject?: string;
     toTab?: string;
     updateIcon?: boolean;
+    washiAuth?: boolean;
+    closeTab?: boolean;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,6 +65,15 @@ export default defineBackground(() => {
       }
     } else if (message.updateIcon) {
       updateIcon();
+    } else if (message.closeTab) {
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const tabId = tabs[0]?.id;
+        if (typeof tabId === "number") {
+          chrome.tabs.remove(tabId);
+        }
+      });
+    } else if (message.washiAuth) {
+      browser.tabs.create({ url: browser.runtime.getURL("/washi.html") });
     }
 
     return true; // return success

@@ -4,7 +4,6 @@
 @import "@catppuccin/tailwindcss/mocha.css";
 
 body {
-  width: 450px; /* max: 1000px */
   @apply bg-ctp-base text-ctp-text font-lexend text-base;
 }
 

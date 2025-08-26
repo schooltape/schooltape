@@ -10,7 +10,7 @@ export default function init() {
           const tab = logos[0].href;
           const closeCurrentTab = await data.settings?.toggle?.closeCurrentTab?.toggle?.storage?.getValue();
           if (closeCurrentTab?.toggle === true) {
-            window.close();
+            browser.runtime.sendMessage({ closeTab: true });
           }
           browser.runtime.sendMessage({ toTab: tab });
         });

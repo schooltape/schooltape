@@ -8,7 +8,6 @@ export default defineContentScript({
   async main() {
     const settings = await globalSettings.storage.getValue();
     const urls = (await schoolboxUrls.storage.getValue()).urls;
-
     if (settings.global && urls.includes(window.location.origin)) {
       // inject themes
       if (settings.themes) {
@@ -26,6 +25,15 @@ export default defineContentScript({
 
       // update icon
       browser.runtime.sendMessage({ updateIcon: true });
+    }
+
+    // washi auth
+    if (window.location.href === "https://schooltape.github.io/washi-auth") {
+      // close current tab
+      browser.runtime.sendMessage({ closeTab: true });
+
+      // open washi auth page
+      browser.runtime.sendMessage({ washiAuth: true });
     }
   },
 });
