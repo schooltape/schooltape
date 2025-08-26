@@ -44,7 +44,7 @@
 
   <div class="snippets-container w-full">
     {#each Object.entries(snippets) as [id, snippet] (id)}
-      <div class="my-4 group w-full">
+      <div class="group my-4 w-full">
         <Toggle
           {id}
           checked={snippet.toggle.state.toggle}
@@ -73,7 +73,7 @@
 
   <div class="user-snippets-container w-full">
     {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
-      <div class="my-4 group w-full">
+      <div class="group my-4 w-full">
         <Toggle
           {id}
           checked={snippet.toggle}

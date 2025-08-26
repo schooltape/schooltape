@@ -26,7 +26,7 @@
 
   <div class="plugins-container">
     {#each Object.entries(plugins) as [id, plugin] (id)}
-      <div class="my-4 group">
+      <div class="group my-4">
         <Toggle
           {id}
           checked={plugin.toggle.state.toggle}

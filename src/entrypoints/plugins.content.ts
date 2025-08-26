@@ -1,10 +1,10 @@
-import subheader from "./plugins/subheader";
-import scrollSegments from "./plugins/scrollSegments";
-import scrollPeriod from "./plugins/scrollPeriod";
-import progressBar from "./plugins/progressBar";
-import modernIcons from "./plugins/modernIcons";
-import tabTitle from "./plugins/tabTitle";
 import homepageSwitcher from "./plugins/homepageSwitcher";
+import modernIcons from "./plugins/modernIcons";
+import progressBar from "./plugins/progressBar";
+import scrollPeriod from "./plugins/scrollPeriod";
+import scrollSegments from "./plugins/scrollSegments";
+import subheader from "./plugins/subheader";
+import tabTitle from "./plugins/tabTitle";
 
 export default defineContentScript({
   matches: ["<all_urls>"],

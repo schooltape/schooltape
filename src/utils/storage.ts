@@ -1,5 +1,5 @@
-import * as Types from "./types";
 import { StorageState } from "./state.svelte";
+import * as Types from "./types";
 
 // Global
 export const globalSettings: StorageState<Types.Settings> = new StorageState<Types.Settings>(

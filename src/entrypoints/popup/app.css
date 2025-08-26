@@ -27,11 +27,11 @@ body {
     mask: var(--icon) no-repeat;
     mask-size: 100% 100%;
     background-color: currentColor;
-    @apply h-16 w-20 text-(--ctp-accent);
+    @apply text-(--ctp-accent) h-16 w-20;
   }
 
   .slider {
-    @apply bg-ctp-surface1 after:bg-ctp-text peer-checked:after:bg-ctp-mantle ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg p-1 duration-500 ease-in-out peer-checked:bg-(--ctp-accent) after:rounded-lg after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6;
+    @apply bg-ctp-surface1 after:bg-ctp-text peer-checked:after:bg-ctp-mantle peer-checked:bg-(--ctp-accent) ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg p-1 duration-500 ease-in-out after:rounded-lg after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6;
   }
 
   .slider.big {
@@ -59,7 +59,7 @@ body {
   }
 
   #card {
-    @apply bg-ctp-mantle flex w-full flex-col items-center justify-center rounded-3xl bg-linear-to-b p-6 shadow-xl outline-2 outline-(--ctp-accent) outline-solid;
+    @apply bg-ctp-mantle bg-linear-to-b outline-(--ctp-accent) outline-solid flex w-full flex-col items-center justify-center rounded-3xl p-6 shadow-xl outline-2;
   }
 
   #card h1 {
@@ -79,7 +79,7 @@ body {
   }
 
   #card h2 {
-    @apply text-4xl font-semibold text-(--ctp-accent);
+    @apply text-(--ctp-accent) text-4xl font-semibold;
   }
 
   #card h3 {
@@ -123,15 +123,15 @@ body {
   }
 
   .navbutton-left {
-    @apply outline-ctp-overlay2/10 rounded-l-xl py-2 pr-2 pl-4 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 rounded-l-xl py-2 pl-4 pr-2 outline-1;
   }
 
   .navbutton-center {
-    @apply outline-ctp-overlay2/10 p-2 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 p-2 outline-1;
   }
 
   .navbutton-right {
-    @apply outline-ctp-overlay2/10 rounded-r-xl py-2 pr-4 pl-2 outline-1 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
+    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 rounded-r-xl py-2 pl-2 pr-4 outline-1;
   }
 
   div[title] {

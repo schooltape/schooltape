@@ -15,9 +15,9 @@
   onclick={(e) => {
     if (e.target === dialog) dialog.close();
   }}
-  class="bg-ctp-base text-ctp-text relative m-auto open:animate-zoom-in backdrop:backdrop-blur-md rounded-lg">
+  class="bg-ctp-base text-ctp-text open:animate-zoom-in relative m-auto rounded-lg backdrop:backdrop-blur-md">
   <!-- svelte-ignore a11y_autofocus -->
-  <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
+  <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute right-0 top-0 m-2"
     ><X /></button>
 
   <div class="p-4">

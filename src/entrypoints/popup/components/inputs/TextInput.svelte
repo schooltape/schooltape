@@ -10,7 +10,7 @@
   let { onclick, id, placeholder, value = $bindable(), label }: Props = $props();
 </script>
 
-<div class="flex justify-center items-center w-full">
-  <input {id} class="w-full p-2 rounded-l-xl bg-ctp-surface0 text-ctp-text" bind:value {placeholder} type="text" />
-  <button class="p-2 rounded-r-xl bg-(--ctp-accent) text-ctp-crust" type="submit" {onclick}>{label}</button>
+<div class="flex w-full items-center justify-center">
+  <input {id} class="bg-ctp-surface0 text-ctp-text w-full rounded-l-xl p-2" bind:value {placeholder} type="text" />
+  <button class="bg-(--ctp-accent) text-ctp-crust rounded-r-xl p-2" type="submit" {onclick}>{label}</button>
 </div>

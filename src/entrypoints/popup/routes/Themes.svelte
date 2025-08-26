@@ -44,15 +44,15 @@
           globalSettings.set({ themeLogo: logoId as LogoId });
         }}
         class:highlight={globalSettings.state.themeLogo === logoId}
-        class="border border-(--ctp-accent) p-2 flex flex-col rounded-lg">
+        class="border-(--ctp-accent) flex flex-col rounded-lg border p-2">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
-          <div class="flex items-center justify-center w-full h-full">
+          <div class="flex h-full w-full items-center justify-center">
             {#if logo.adaptive}
               <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
               <span class="logo-picker" style="--icon: url({browser.runtime.getURL(logo.url as any)})"></span>
             {:else}
-              <img src={logo.url} alt="Logo" class="w-16 mt-2" />
+              <img src={logo.url} alt="Logo" class="mt-2 w-16" />
             {/if}
           </div>
         {/if}
@@ -80,7 +80,7 @@
       globalSettings.set({ themes: toggled });
     }} />
 
-  <div id="flavours" class="flex my-6 py-2 rounded-xl text-ctp-text">
+  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
     {#each flavours as flavour (flavour)}
       <button
         class:active={globalSettings.state.themeFlavour === flavour}

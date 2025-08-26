@@ -12,7 +12,7 @@
   <Motd />
 
   <button
-    class="hover:opacity-75 bg-(--ctp-accent) {globalSettings.state.global ? '' : 'opacity-60'}"
+    class="bg-(--ctp-accent) hover:opacity-75 {globalSettings.state.global ? '' : 'opacity-60'}"
     id="toggle"
     onclick={() => {
       globalSettings.set({ global: !globalSettings.get().global });

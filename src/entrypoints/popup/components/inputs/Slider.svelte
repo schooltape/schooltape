@@ -13,9 +13,9 @@
   let currentValue = $state(value);
 </script>
 
-<div class="space-y-2 mt-4">
+<div class="mt-4 space-y-2">
   {#if name}
-    <label for={id} class="block text-ctp-text">{name}</label>
+    <label for={id} class="text-ctp-text block">{name}</label>
   {/if}
   <div class="flex items-center gap-4">
     <input
@@ -34,7 +34,7 @@
       {max}
       {value}
       class="styled-slider slider-progress" />
-    <span id={id + "-value"} class="text-sm font-medium text-ctp-text">{currentValue}</span>
+    <span id={id + "-value"} class="text-ctp-text text-sm font-medium">{currentValue}</span>
   </div>
   {#if description}
     <p class="text-ctp-overlay1">{description}</p>
