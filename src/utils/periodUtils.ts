@@ -113,7 +113,7 @@ function getPeriodData(index: number): Period {
 
 function extractTimes(periodTime: string): { start: Date; end: Date } {
   try {
-    const times = periodTime.split("–"); // en dash
+    const times = periodTime.split("–"); // em dash
 
     const [start, end] = times.map((time, index) => {
       const [hourStr, minuteStr] = time.split(":");
