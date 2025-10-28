@@ -1,7 +1,7 @@
 export default function init() {
   defineStPlugin(
     "subheader",
-    () => {
+    (_id, data) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `
@@ -39,7 +39,7 @@ export default function init() {
         updateDateSpan();
       }
 
-      function updatePeriodSpan() {
+      async function updatePeriodSpan() {
         let periodSpan = document.querySelector(".subheader .period");
         if (!periodSpan) {
           const subheader = document.querySelector(".subheader .schooltape");
@@ -59,7 +59,9 @@ export default function init() {
             // if there's period data
             if (!periodLink) {
               periodLink = document.createElement("a");
-              periodLink.target = "_blank";
+
+              const openInNewTab = (await data.settings?.toggle?.openInNewTab?.toggle.storage.getValue())?.toggle;
+              periodLink.target = openInNewTab ? "_blank" : "_self";
               periodSpan.appendChild(periodLink);
             }
             periodLink.href = period.data.link;
