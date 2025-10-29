@@ -98,6 +98,23 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     "Subheader Revamp",
     "Adds a clock and current period info to the subheader.",
     true,
+    {
+      toggle: {
+        openInNewTab: {
+          toggle: new StorageState(
+            storage.defineItem<Types.ToggleSetting>("local:plugin-subheaderRevamp-openInNewTab", {
+              fallback: {
+                toggle: true,
+              },
+            }),
+          ),
+          info: {
+            name: "Open links in new tab",
+            description: "Whether to open the class link in a new tab."
+          }
+        },
+      },
+    },
   ),
 
   scrollSegments: createPlugin(
