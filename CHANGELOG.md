@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/schooltape/schooltape/compare/v4.1.4...v4.2.0) (2025-10-29)
+
+
+### Features
+
+* **plugins/subheader:** open in new tab option ([#294](https://github.com/schooltape/schooltape/issues/294)) ([a257ff2](https://github.com/schooltape/schooltape/commit/a257ff2be0089950c937a40598f878172393e911))
+
 ## [4.1.4](https://github.com/schooltape/schooltape/compare/v4.1.3...v4.1.4) (2025-08-21)
 
 
