@@ -3,8 +3,7 @@
   import Modal from "../components/Modal.svelte";
   import Button from "../components/inputs/Button.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import { Layers3 } from "@lucide/svelte";
-  import { globalSettings } from "#imports";
+  import { Palette } from "@lucide/svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [
@@ -107,5 +106,5 @@
   </div>
 
   <Button title="Choose icon" id="choose-icon" onclick={() => (showModal = true)}
-    ><Layers3 size={22} /> Choose an icon</Button>
+    ><Palette size={22} /> Choose an icon</Button>
 </div>
