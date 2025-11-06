@@ -1,4 +1,4 @@
-import { createSnippet } from "./helpers";
+import { StorageState } from "./state.svelte";
 import * as Types from "./types";
 
 export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
@@ -25,3 +25,20 @@ export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
     false,
   ),
 };
+
+function createSnippet(id: string, name: string, description: string, fallbackToggle: boolean) {
+  return {
+    toggle: new StorageState(
+      storage.defineItem<Types.ToggleState>(`local:snippet-${id}`, {
+        fallback: {
+          toggle: fallbackToggle,
+        },
+      }),
+      true,
+    ),
+    info: {
+      name,
+      description,
+    },
+  };
+}

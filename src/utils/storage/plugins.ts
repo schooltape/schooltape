@@ -1,4 +1,4 @@
-import { createPlugin, pluginSlider, pluginToggle } from "./helpers";
+import { StorageState } from "./state.svelte";
 import * as Types from "./types";
 
 export const plugins: Record<Types.PluginId, Types.PluginData> = {
@@ -8,12 +8,13 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     "Adds a clock and current period info to the subheader.",
     true,
     {
-      openInNewTab: pluginToggle(
+      openInNewTab: pluginSetting(
+        "toggle",
         "subheader",
         "openInNewTab",
         "Open links in new tab",
         "Whether to open the class link in a new tab.",
-        true,
+        { toggle: true },
       ),
     },
   ),
@@ -26,21 +27,21 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   ),
 
   scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable.", true, {
-    resetCooldownOnMouseMove: pluginToggle(
+    resetCooldownOnMouseMove: pluginSetting(
+      "toggle",
       "scrollPeriod",
       "resetCooldownOnMouseMove",
       "Reset on mouse move",
       "Whether to reset the scrolling cooldown when you move your mouse.",
-      true,
+      { toggle: true },
     ),
-    cooldownDuration: pluginSlider(
+    cooldownDuration: pluginSetting(
+      "slider",
       "scrollPeriod",
       "cooldownDuration",
       "Cooldown duration (s)",
       "How long to wait before scrolling.",
-      1,
-      60,
-      10,
+      { min: 1, max: 60, value: 10 },
     ),
   }),
 
@@ -52,22 +53,24 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   ),
 
   modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox.", true, {
-    filled: pluginToggle(
+    filled: pluginSetting(
+      "toggle",
       "modernIcons",
       "filled",
       "Filled Icons",
       "Whether the icons should be filled or outlined.",
-      true,
+      { toggle: true },
     ),
   }),
 
   tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation.", true, {
-    showSubjectPrefix: pluginToggle(
+    showSubjectPrefix: pluginSetting(
+      "toggle",
       "tabTitle",
       "showSubjectPrefix",
       "Show subject prefix",
       `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
-      true,
+      { toggle: true },
     ),
   }),
 
@@ -77,13 +80,74 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     "The logo will switch to existing Schoolbox homepage when available.",
     true,
     {
-      closeCurrentTab: pluginToggle(
+      closeCurrentTab: pluginSetting(
+        "toggle",
         "homepageSwitcher",
         "closeCurrentTab",
         "Close current tab",
         "When switching to another tab, close the current one.",
-        false,
+        { toggle: true },
       ),
     },
   ),
 };
+
+function createPlugin(
+  id: string,
+  name: string,
+  description: string,
+  fallbackToggle: boolean,
+  settings?: Record<string, Types.PluginSetting>,
+) {
+  const plugin: Types.PluginData = {
+    toggle: new StorageState(
+      storage.defineItem<Types.ToggleState>(`local:plugin-${id}`, {
+        fallback: {
+          toggle: fallbackToggle,
+        },
+      }),
+      true,
+    ),
+    info: {
+      name,
+      description,
+    },
+  };
+
+  if (settings) {
+    plugin.settings = settings;
+  }
+
+  return plugin;
+}
+
+export function pluginSetting(
+  type: "toggle" | "slider",
+  pluginId: Types.PluginId,
+  settingId: string,
+  name: string,
+  description: string,
+  fallback: Types.ToggleState | Types.SliderState,
+): Types.PluginSetting {
+  if (type === "toggle") {
+    return {
+      type: "toggle",
+      state: new StorageState(
+        storage.defineItem<Types.ToggleState>(`local:${pluginId}-${settingId}`, {
+          fallback: fallback as Types.ToggleState,
+        }),
+      ),
+      info: { name, description },
+    };
+  } else {
+    return {
+      type: "slider",
+      state: new StorageState(
+        storage.defineItem<Types.SliderState>(`local:${pluginId}-${settingId}`, {
+          fallback: fallback as Types.SliderState,
+        }),
+      ),
+      info: { name, description },
+    };
+  }
+}
