@@ -1,7 +1,7 @@
 import styleText from "./styles.css?inline";
 
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "modernIcons",
     async (_id, data) => {
       // [className, iconName] (material icons)

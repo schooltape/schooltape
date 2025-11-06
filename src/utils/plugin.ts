@@ -1,4 +1,4 @@
-export async function defineStPlugin(
+export async function definePlugin(
   pluginId: PluginId,
   injectLogic: (id: PluginId, data: PluginData) => void,
   elementsToWaitFor: string[] = [],

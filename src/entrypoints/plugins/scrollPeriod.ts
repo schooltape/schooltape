@@ -1,5 +1,5 @@
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "scrollPeriod",
     async (_id, data) => {
       const timetable = document.querySelector("[data-timetable-container] div.scrollable");

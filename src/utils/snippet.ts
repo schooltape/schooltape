@@ -1,4 +1,4 @@
-export async function defineStSnippet(snippetId: SnippetId, styleText: string) {
+export async function defineSnippet(snippetId: SnippetId, styleText: string) {
   const snippet = await snippets[snippetId].toggle.storage.getValue();
 
   logger.info(`${snippets[snippetId].info.name}: ${snippet.toggle ? "enabled" : "disabled"}`);

@@ -1,5 +1,5 @@
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "tabTitle",
     async (_id, data) => {
       const path = window.location.pathname;

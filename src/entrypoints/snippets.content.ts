@@ -8,9 +8,9 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    defineStSnippet("roundedCorners", roundedCorners);
-    defineStSnippet("hidePfp", hidePfp);
-    defineStSnippet("hidePwaPrompt", hidePwaPrompt);
-    defineStSnippet("censor", censor);
+    defineSnippet("roundedCorners", roundedCorners);
+    defineSnippet("hidePfp", hidePfp);
+    defineSnippet("hidePwaPrompt", hidePwaPrompt);
+    defineSnippet("censor", censor);
   },
 });

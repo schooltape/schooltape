@@ -1,5 +1,5 @@
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "homepageSwitcher",
     (_id, data) => {
       const logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];

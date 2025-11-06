@@ -1,5 +1,5 @@
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "subheader",
     (_id, data) => {
       const style = document.createElement("style");
