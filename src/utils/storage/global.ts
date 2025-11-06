@@ -1,6 +1,7 @@
-import * as Types from "../types";
+import { StorageState } from "./state.svelte";
+import * as Types from "./types";
 
-export const globalSettings: StorageState<Types.Settings> = new StorageState<Types.Settings>(
+export const globalSettings = new StorageState<Types.Settings>(
   storage.defineItem<Types.Settings>("local:globalSettings", {
     fallback: {
       global: true,

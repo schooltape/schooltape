@@ -1,5 +1,5 @@
-import * as Types from "../types";
 import { createSnippet } from "./helpers";
+import * as Types from "./types";
 
 export const snippets: Record<Types.SnippetId, Types.SnippetData> = {
   roundedCorners: createSnippet(

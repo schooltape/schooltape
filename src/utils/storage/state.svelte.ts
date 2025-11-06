@@ -1,5 +1,3 @@
-import { WxtStorageItem } from "#imports";
-
 export class StorageState<T> {
   public state;
 

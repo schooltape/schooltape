@@ -1,3 +1,5 @@
+import { StorageState } from "./state.svelte";
+
 // Global
 export interface Settings {
   global: boolean;

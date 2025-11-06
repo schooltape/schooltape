@@ -2,7 +2,6 @@
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
-  import { globalSettings } from "#imports";
 
   let snippetURL = $state("");
 

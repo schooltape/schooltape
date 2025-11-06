@@ -1,7 +1,6 @@
 <script lang="ts">
   import Footer from "../components/Footer.svelte";
   import Motd from "../components/Motd.svelte";
-  import { globalSettings } from "#imports";
 
   let isJune = new Date().getMonth() === 5;
 </script>

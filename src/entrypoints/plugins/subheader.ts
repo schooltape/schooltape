@@ -1,7 +1,7 @@
 export default function init() {
   defineStPlugin(
     "subheader",
-    (_id, data, settings) => {
+    (_id, data) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `

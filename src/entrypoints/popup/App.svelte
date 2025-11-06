@@ -9,7 +9,6 @@
 
   import { flavors } from "@catppuccin/palette";
   import { needsRefresh } from "@/utils/storage";
-  import { globalSettings } from "#imports";
   import { RotateCw } from "@lucide/svelte";
 
   const routes = {

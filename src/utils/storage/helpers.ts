@@ -1,4 +1,5 @@
-import * as Types from "../types";
+import { StorageState } from "./state.svelte";
+import * as Types from "./types";
 
 export function createPlugin(
   id: string,
@@ -30,7 +31,7 @@ export function createPlugin(
 }
 
 export function pluginToggle(
-  pluginId: string,
+  pluginId: Types.PluginId,
   settingId: string,
   name: string,
   description: string,
@@ -48,7 +49,7 @@ export function pluginToggle(
 }
 
 export function pluginSlider(
-  pluginId: string,
+  pluginId: Types.PluginId,
   settingId: string,
   name: string,
   description: string,

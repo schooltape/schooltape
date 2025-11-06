@@ -1,5 +1,5 @@
-import * as Types from "../types";
 import { createPlugin, pluginSlider, pluginToggle } from "./helpers";
+import * as Types from "./types";
 
 export const plugins: Record<Types.PluginId, Types.PluginData> = {
   subheader: createPlugin(
@@ -9,7 +9,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     true,
     {
       openInNewTab: pluginToggle(
-        "subheaderRevamp",
+        "subheader",
         "openInNewTab",
         "Open links in new tab",
         "Whether to open the class link in a new tab.",
