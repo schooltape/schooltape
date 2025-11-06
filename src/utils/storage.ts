@@ -68,11 +68,11 @@ function createPlugin(
   name: string,
   description: string,
   fallbackToggle: boolean,
-  settings?: Types.PluginSettings,
+  settings?: Record<string, Types.PluginSetting>,
 ) {
   const plugin: Types.PluginData = {
     toggle: new StorageState(
-      storage.defineItem<Types.ItemGeneric>(`local:plugin-${id}`, {
+      storage.defineItem<Types.ToggleState>(`local:plugin-${id}`, {
         fallback: {
           toggle: fallbackToggle,
         },
@@ -92,6 +92,44 @@ function createPlugin(
   return plugin;
 }
 
+function pluginToggle(
+  pluginId: string,
+  settingId: string,
+  name: string,
+  description: string,
+  fallback: boolean,
+): Types.PluginSetting {
+  return {
+    type: "toggle",
+    state: new StorageState(
+      storage.defineItem<Types.ToggleState>(`local:${pluginId}-${settingId}`, {
+        fallback: { toggle: fallback },
+      }),
+    ),
+    info: { name, description },
+  };
+}
+
+export function pluginSlider(
+  pluginId: string,
+  settingId: string,
+  name: string,
+  description: string,
+  min: number,
+  max: number,
+  fallback: number,
+): Types.PluginSetting {
+  return {
+    type: "slider",
+    state: new StorageState(
+      storage.defineItem<Types.SliderState>(`local:${pluginId}-${settingId}`, {
+        fallback: { value: fallback, min, max },
+      }),
+    ),
+    info: { name, description },
+  };
+}
+
 export const plugins: Record<Types.PluginId, Types.PluginData> = {
   subheader: createPlugin(
     "subheader",
@@ -99,21 +137,13 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     "Adds a clock and current period info to the subheader.",
     true,
     {
-      toggle: {
-        openInNewTab: {
-          toggle: new StorageState(
-            storage.defineItem<Types.ToggleSetting>("local:plugin-subheaderRevamp-openInNewTab", {
-              fallback: {
-                toggle: true,
-              },
-            }),
-          ),
-          info: {
-            name: "Open links in new tab",
-            description: "Whether to open the class link in a new tab."
-          }
-        },
-      },
+      openInNewTab: pluginToggle(
+        "subheaderRevamp",
+        "openInNewTab",
+        "Open links in new tab",
+        "Whether to open the class link in a new tab.",
+        true,
+      ),
     },
   ),
 
@@ -125,38 +155,22 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   ),
 
   scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable.", true, {
-    toggle: {
-      resetCooldownOnMouseMove: {
-        toggle: new StorageState(
-          storage.defineItem<Types.ToggleSetting>("local:plugin-scrollPeriod-resetCooldownOnMouseMove", {
-            fallback: {
-              toggle: true,
-            },
-          }),
-        ),
-        info: {
-          name: "Reset on mouse move",
-          description: "Whether to reset the scrolling cooldown when you move your mouse.",
-        },
-      },
-    },
-    slider: {
-      cooldownDuration: {
-        slider: new StorageState(
-          storage.defineItem<Types.SliderSetting>("local:plugin-scrollPeriod-cooldownDuration", {
-            fallback: {
-              min: 1,
-              max: 60,
-              value: 10,
-            },
-          }),
-        ),
-        info: {
-          name: "Cooldown duration (s)",
-          description: "How long to wait before scrolling.",
-        },
-      },
-    },
+    resetCooldownOnMouseMove: pluginToggle(
+      "scrollPeriod",
+      "resetCooldownOnMouseMove",
+      "Reset on mouse move",
+      "Whether to reset the scrolling cooldown when you move your mouse.",
+      true,
+    ),
+    cooldownDuration: pluginSlider(
+      "scrollPeriod",
+      "cooldownDuration",
+      "Cooldown duration (s)",
+      "How long to wait before scrolling.",
+      1,
+      60,
+      10,
+    ),
   }),
 
   progressBar: createPlugin(
@@ -167,39 +181,23 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
   ),
 
   modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox.", true, {
-    toggle: {
-      filled: {
-        toggle: new StorageState(
-          storage.defineItem<Types.ToggleSetting>("local:plugin-modernIcons-filled", {
-            fallback: {
-              toggle: true,
-            },
-          }),
-        ),
-        info: {
-          name: "Filled Icons",
-          description: "Whether the icons should be filled or outlined.",
-        },
-      },
-    },
+    filled: pluginToggle(
+      "modernIcons",
+      "filled",
+      "Filled Icons",
+      "Whether the icons should be filled or outlined.",
+      true,
+    ),
   }),
 
   tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation.", true, {
-    toggle: {
-      showSubjectPrefix: {
-        toggle: new StorageState(
-          storage.defineItem<Types.ToggleSetting>("local:plugin-tabTitle-showSubjectPrefix", {
-            fallback: {
-              toggle: true,
-            },
-          }),
-        ),
-        info: {
-          name: "Show subject prefix",
-          description: `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
-        },
-      },
-    },
+    showSubjectPrefix: pluginToggle(
+      "tabTitle",
+      "showSubjectPrefix",
+      "Show subject prefix",
+      `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
+      true,
+    ),
   }),
 
   homepageSwitcher: createPlugin(
@@ -208,21 +206,13 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
     "The logo will switch to existing Schoolbox homepage when available.",
     true,
     {
-      toggle: {
-        closeCurrentTab: {
-          toggle: new StorageState(
-            storage.defineItem<Types.ToggleSetting>("local:plugin-homepageSwitcher-closeCurrentTab", {
-              fallback: {
-                toggle: false,
-              },
-            }),
-          ),
-          info: {
-            name: "Close current tab",
-            description: "When switching to another tab, close the current one.",
-          },
-        },
-      },
+      closeCurrentTab: pluginToggle(
+        "homepageSwitcher",
+        "closeCurrentTab",
+        "Close current tab",
+        "When switching to another tab, close the current one.",
+        false,
+      ),
     },
   ),
 };
@@ -231,7 +221,7 @@ export const plugins: Record<Types.PluginId, Types.PluginData> = {
 function createSnippet(id: string, name: string, description: string, fallbackToggle: boolean) {
   return {
     toggle: new StorageState(
-      storage.defineItem<Types.ItemGeneric>(`local:snippet-${id}`, {
+      storage.defineItem<Types.ToggleState>(`local:snippet-${id}`, {
         fallback: {
           toggle: fallbackToggle,
         },

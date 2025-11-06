@@ -44,16 +44,9 @@ export interface UserSnippet {
 }
 
 // Common for plugins and snippets
-export interface ItemGeneric {
-  toggle: boolean;
-}
 export interface ItemInfo {
   name: string;
   description: string;
-}
-export type ItemId = PluginId | SnippetId;
-export interface PopulatedItem<T> extends ItemGeneric, ItemInfo {
-  id: T;
 }
 
 // Plugins
@@ -66,38 +59,35 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher";
 
-type ToggleData = {
-  toggle: StorageState<ToggleSetting>;
-  info: ItemInfo;
-};
-type SliderData = {
-  slider: StorageState<SliderSetting>;
+export type ToggleState = { toggle: boolean };
+type Toggle = {
+  type: "toggle";
+  state: StorageState<ToggleState>;
   info: ItemInfo;
 };
 
-export type PluginSettings = {
-  toggle?: Record<string, ToggleData>;
-  slider?: Record<string, SliderData>;
+export type SliderState = {
+  value: number;
+  min: number;
+  max: number;
 };
-export type PluginData = {
-  toggle: StorageState<ToggleSetting>;
+type Slider = {
+  type: "slider";
+  state: StorageState<SliderState>;
   info: ItemInfo;
-  settings?: PluginSettings;
+};
+export type PluginSetting = Toggle | Slider;
+
+export type PluginData = {
+  toggle: StorageState<ToggleState>;
+  info: ItemInfo;
+  settings?: Record<string, PluginSetting>;
 };
 
 // Snippets
 export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
 export type SnippetData = {
-  toggle: StorageState<ToggleSetting>;
+  toggle: StorageState<ToggleState>;
   info: ItemInfo;
 };
-
-export interface ToggleSetting {
-  toggle: boolean;
-}
-export interface SliderSetting {
-  min: number;
-  max: number;
-  value: number;
-}

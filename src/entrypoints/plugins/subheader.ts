@@ -1,7 +1,7 @@
 export default function init() {
   defineStPlugin(
     "subheader",
-    (_id, data) => {
+    (_id, data, settings) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `
@@ -60,7 +60,7 @@ export default function init() {
             if (!periodLink) {
               periodLink = document.createElement("a");
 
-              const openInNewTab = (await data.settings?.toggle?.openInNewTab?.toggle.storage.getValue())?.toggle;
+              const openInNewTab = settings.openInNewTab.state.storage.getValue().toggle;
               periodLink.target = openInNewTab ? "_blank" : "_self";
               periodSpan.appendChild(periodLink);
             }
