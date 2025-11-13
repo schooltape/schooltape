@@ -61,35 +61,51 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher";
 
-export type ToggleState = { toggle: boolean };
-type Toggle = {
-  type: "toggle";
-  state: StorageState<ToggleState>;
-  info: ItemInfo;
-};
+export type Toggle = { toggle: boolean };
 
-export type SliderState = {
+export type Slider = {
   value: number;
   min: number;
   max: number;
 };
-type Slider = {
-  type: "slider";
-  state: StorageState<SliderState>;
-  info: ItemInfo;
-};
-export type PluginSetting = Toggle | Slider;
 
-export type PluginData = {
-  toggle: StorageState<ToggleState>;
-  info: ItemInfo;
+export type Plugin = {
+  toggle: StorageState<Toggle>;
   settings?: Record<string, PluginSetting>;
-};
+} & ItemInfo;
+
+export type PluginConfig = {
+  default: boolean;
+  settings?: Record<string, PluginSettingConfig>;
+} & ItemInfo;
+
+export type PluginSetting =
+  | ({
+      type: "toggle";
+      state: StorageState<Toggle>;
+    } & ItemInfo)
+  | ({
+      type: "slider";
+      state: StorageState<Slider>;
+    } & ItemInfo);
+
+export type PluginSettingConfig =
+  | ({
+      type: "toggle";
+      default: Toggle;
+    } & ItemInfo)
+  | ({
+      type: "slider";
+      default: Slider;
+    } & ItemInfo);
 
 // Snippets
 export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
-export type SnippetData = {
-  toggle: StorageState<ToggleState>;
-  info: ItemInfo;
-};
+export type Snippet = {
+  toggle: StorageState<Toggle>;
+} & ItemInfo;
+
+export type SnippetConfig = {
+  default: boolean;
+} & ItemInfo;

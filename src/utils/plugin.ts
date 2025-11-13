@@ -1,6 +1,6 @@
 export async function definePlugin(
   pluginId: PluginId,
-  injectLogic: (id: PluginId, data: PluginData) => void,
+  injectLogic: (id: PluginId, data: PluginData, settings?: Record<string, PluginSetting>) => void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
@@ -20,7 +20,7 @@ export async function definePlugin(
             if (allElementsPresent) {
               observer.disconnect();
               logger.info(`all elements present, injecting plugin: ${plugins[pluginId].info.name}`);
-              injectLogic(pluginId, plugins[pluginId]);
+              injectLogic(pluginId, plugins[pluginId], plugins[pluginId]?.settings);
             }
           });
 

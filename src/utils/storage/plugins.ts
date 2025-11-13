@@ -1,153 +1,138 @@
 import { StorageState } from "./state.svelte";
 import * as Types from "./types";
 
-export const plugins: Record<Types.PluginId, Types.PluginData> = {
-  subheader: createPlugin(
-    "subheader",
-    "Subheader Revamp",
-    "Adds a clock and current period info to the subheader.",
-    true,
-    {
-      openInNewTab: pluginSetting(
-        "toggle",
-        "subheader",
-        "openInNewTab",
-        "Open links in new tab",
-        "Whether to open the class link in a new tab.",
-        { toggle: true },
-      ),
+const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
+  subheader: {
+    name: "Subheader Revamp",
+    description: "Adds a clock and current period info to the subheader.",
+    default: true,
+    settings: {
+      openInNewTab: {
+        type: "toggle",
+        name: "Open links in new tab",
+        description: "Whether to open the class link in a new tab.",
+        default: { toggle: true },
+      },
     },
-  ),
-
-  scrollSegments: createPlugin(
-    "scrollSegments",
-    "Scroll Segments",
-    "Segments the Schoolbox page into scrollable sections.",
-    true,
-  ),
-
-  scrollPeriod: createPlugin("scrollPeriod", "Scroll Period", "Scrolls to the current period on the timetable.", true, {
-    resetCooldownOnMouseMove: pluginSetting(
-      "toggle",
-      "scrollPeriod",
-      "resetCooldownOnMouseMove",
-      "Reset on mouse move",
-      "Whether to reset the scrolling cooldown when you move your mouse.",
-      { toggle: true },
-    ),
-    cooldownDuration: pluginSetting(
-      "slider",
-      "scrollPeriod",
-      "cooldownDuration",
-      "Cooldown duration (s)",
-      "How long to wait before scrolling.",
-      { min: 1, max: 60, value: 10 },
-    ),
-  }),
-
-  progressBar: createPlugin(
-    "progressBar",
-    "Progress Bar",
-    "Displays a progress bar below the timetable to show the time of the day.",
-    true,
-  ),
-
-  modernIcons: createPlugin("modernIcons", "Modern Icons", "Modernise the icons across Schoolbox.", true, {
-    filled: pluginSetting(
-      "toggle",
-      "modernIcons",
-      "filled",
-      "Filled Icons",
-      "Whether the icons should be filled or outlined.",
-      { toggle: true },
-    ),
-  }),
-
-  tabTitle: createPlugin("tabTitle", "Better Tab Titles", "Improves the tab titles for easier navigation.", true, {
-    showSubjectPrefix: pluginSetting(
-      "toggle",
-      "tabTitle",
-      "showSubjectPrefix",
-      "Show subject prefix",
-      `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
-      { toggle: true },
-    ),
-  }),
-
-  homepageSwitcher: createPlugin(
-    "homepageSwitcher",
-    "Homepage Switcher",
-    "The logo will switch to existing Schoolbox homepage when available.",
-    true,
-    {
-      closeCurrentTab: pluginSetting(
-        "toggle",
-        "homepageSwitcher",
-        "closeCurrentTab",
-        "Close current tab",
-        "When switching to another tab, close the current one.",
-        { toggle: true },
-      ),
+  },
+  scrollSegments: {
+    name: "Scroll Segments",
+    description: "Segments the Schoolbox page into scrollable sections.",
+    default: true,
+  },
+  scrollPeriod: {
+    name: "Scroll Period",
+    description: "Scrolls to the current period on the timetable.",
+    default: true,
+    settings: {
+      resetCooldownOnMouseMove: {
+        type: "toggle",
+        name: "Reset on mouse move",
+        description: "Whether to reset the scrolling cooldown when you move your mouse.",
+        default: { toggle: true },
+      },
+      cooldownDuration: {
+        type: "slider",
+        name: "Cooldown duration (s)",
+        description: "How long to wait before scrolling.",
+        default: { min: 1, max: 60, value: 10 },
+      },
     },
-  ),
+  },
+  progressBar: {
+    name: "Progress Bar",
+    description: "Displays a progress bar below the timetable to show the time of the day.",
+    default: true,
+  },
+  modernIcons: {
+    name: "Modern Icons",
+    description: "Modernise the icons across Schoolbox.",
+    default: true,
+    settings: {
+      filled: {
+        type: "toggle",
+        name: "Filled Icons",
+        description: "Whether the icons should be filled or outlined.",
+        default: { toggle: true },
+      },
+    },
+  },
+  tabTitle: {
+    name: "Better Tab Titles",
+    description: "Improves the tab titles for easier navigation.",
+    default: true,
+    settings: {
+      showSubjectPrefix: {
+        type: "toggle",
+        name: "Show subject prefix",
+        description: `e.g. "ENG - VCE English 1 & 2" becomes "VCE English 1 & 2"`,
+        default: { toggle: true },
+      },
+    },
+  },
+  homepageSwitcher: {
+    name: "Homepage Switcher",
+    description: "The logo will switch to existing Schoolbox homepage when available.",
+    default: true,
+    settings: {
+      closeCurrentTab: {
+        type: "toggle",
+        name: "Close current tab",
+        description: "When switching to another tab, close the current one.",
+        default: { toggle: true },
+      },
+    },
+  },
 };
 
-function createPlugin(
-  id: string,
-  name: string,
-  description: string,
-  fallbackToggle: boolean,
-  settings?: Record<string, Types.PluginSetting>,
-) {
-  const plugin: Types.PluginData = {
-    toggle: new StorageState(
-      storage.defineItem<Types.ToggleState>(`local:plugin-${id}`, {
-        fallback: {
-          toggle: fallbackToggle,
-        },
-      }),
-      true,
-    ),
-    info: {
-      name,
-      description,
-    },
-  };
+export const plugins = buildPluginsFromConfig(pluginConfig);
 
-  if (settings) {
-    plugin.settings = settings;
+function buildPluginsFromConfig(config: Record<PluginId, Types.PluginConfig>): Record<Types.PluginId, Types.Plugin> {
+  const plugins: Partial<Record<Types.PluginId, Types.Plugin>> = {};
+
+  for (const [pluginId, pluginConfig] of Object.entries(config)) {
+    const plugin: Types.Plugin = {
+      name: pluginConfig.name,
+      description: pluginConfig.description,
+      toggle: new StorageState(
+        storage.defineItem<Types.Toggle>(`local:plugin-${pluginId}`, {
+          fallback: { toggle: pluginConfig.default },
+        }),
+        true,
+      ),
+    };
+
+    // define settings
+    if (pluginConfig.settings) {
+      plugin.settings = {};
+
+      // iterate over each setting and create state
+      for (const [settingId, settingConfig] of Object.entries(pluginConfig.settings)) {
+        let state;
+        if (settingConfig.type === "toggle") {
+          state = new StorageState(
+            storage.defineItem<Types.Toggle>(`local:plugin-${pluginId}-${settingId}`, {
+              fallback: settingConfig.default,
+            }),
+          );
+        } else {
+          state = new StorageState(
+            storage.defineItem<Types.Slider>(`local:plugin-${pluginId}-${settingId}`, {
+              fallback: settingConfig.default,
+            }),
+          );
+        }
+        plugin.settings[settingId] = {
+          state,
+          type: settingConfig.type,
+          name: settingConfig.name,
+          description: settingConfig.description,
+        } as Types.PluginSetting;
+      }
+    }
+
+    plugins[pluginId as Types.PluginId] = plugin;
   }
 
-  return plugin;
-}
-
-export function pluginSetting(
-  type: "toggle" | "slider",
-  pluginId: Types.PluginId,
-  settingId: string,
-  name: string,
-  description: string,
-  fallback: Types.ToggleState | Types.SliderState,
-): Types.PluginSetting {
-  if (type === "toggle") {
-    return {
-      type: "toggle",
-      state: new StorageState(
-        storage.defineItem<Types.ToggleState>(`local:${pluginId}-${settingId}`, {
-          fallback: fallback as Types.ToggleState,
-        }),
-      ),
-      info: { name, description },
-    };
-  } else {
-    return {
-      type: "slider",
-      state: new StorageState(
-        storage.defineItem<Types.SliderState>(`local:${pluginId}-${settingId}`, {
-          fallback: fallback as Types.SliderState,
-        }),
-      ),
-      info: { name, description },
-    };
-  }
+  return plugins as Record<Types.PluginId, Types.Plugin>;
 }
