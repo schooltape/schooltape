@@ -87,11 +87,13 @@ const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
 
 export const plugins = buildPluginsFromConfig(pluginConfig);
 
-function buildPluginsFromConfig(config: Record<PluginId, Types.PluginConfig>): Record<Types.PluginId, Types.Plugin> {
-  const plugins: Partial<Record<Types.PluginId, Types.Plugin>> = {};
+function buildPluginsFromConfig(
+  config: Record<Types.PluginId, Types.PluginConfig>,
+): Record<Types.PluginId, Types.PluginData> {
+  const plugins: Partial<Record<Types.PluginId, Types.PluginData>> = {};
 
   for (const [pluginId, pluginConfig] of Object.entries(config)) {
-    const plugin: Types.Plugin = {
+    const plugin: Types.PluginData = {
       name: pluginConfig.name,
       description: pluginConfig.description,
       toggle: new StorageState(
@@ -134,5 +136,5 @@ function buildPluginsFromConfig(config: Record<PluginId, Types.PluginConfig>): R
     plugins[pluginId as Types.PluginId] = plugin;
   }
 
-  return plugins as Record<Types.PluginId, Types.Plugin>;
+  return plugins as Record<Types.PluginId, Types.PluginData>;
 }

@@ -30,12 +30,12 @@ export const snippetConfig: Record<Types.SnippetId, Types.SnippetConfig> = {
 export const snippets = buildSnippetsFromConfig(snippetConfig);
 
 function buildSnippetsFromConfig(
-  config: Record<SnippetId, Types.SnippetConfig>,
-): Record<Types.SnippetId, Types.Snippet> {
-  const snippets: Partial<Record<Types.SnippetId, Types.Snippet>> = {};
+  config: Record<Types.SnippetId, Types.SnippetConfig>,
+): Record<Types.SnippetId, Types.SnippetData> {
+  const snippets: Partial<Record<Types.SnippetId, Types.SnippetData>> = {};
 
   for (const [snippetId, snippetConfig] of Object.entries(config)) {
-    const snippet: Types.Snippet = {
+    const snippet: Types.SnippetData = {
       name: snippetConfig.name,
       description: snippetConfig.description,
       toggle: new StorageState(
@@ -49,5 +49,5 @@ function buildSnippetsFromConfig(
     snippets[snippetId as Types.SnippetId] = snippet;
   }
 
-  return snippets as Record<Types.SnippetId, Types.Snippet>;
+  return snippets as Record<Types.SnippetId, Types.SnippetData>;
 }

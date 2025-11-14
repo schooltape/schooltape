@@ -32,12 +32,12 @@
           update={(toggled: boolean) => {
             plugin.toggle.set({ toggle: toggled });
           }}
-          text={plugin.info.name}
-          description={plugin.info.description}
+          text={plugin.name}
+          description={plugin.description}
           size="small">
           {#if plugin.settings !== undefined}
             <Button
-              title={plugin.info.name + " Settings"}
+              title={plugin.name + " Settings"}
               {id}
               onclick={() => {
                 selectedPluginId = id as PluginId;
@@ -53,32 +53,28 @@
 {#if selectedPlugin}
   <Modal bind:showModal>
     {#snippet header()}
-      <h2 class="mb-4 text-xl">{selectedPlugin.info.name}</h2>
+      <h2 class="mb-4 text-xl">{selectedPlugin.name}</h2>
     {/snippet}
-    <!-- toggles -->
-    {#if selectedPlugin.settings?.toggle !== undefined}
-      {#each Object.entries(selectedPlugin.settings.toggle) as [id, setting] (id)}
-        <Toggle
-          text={setting.info.name}
-          description={setting.info.description}
-          size="small"
-          checked={setting.toggle.state.toggle}
-          update={async (toggled) => {
-            setting.toggle.set({ toggle: toggled });
-          }}
-          {id} />
-      {/each}
-    {/if}
-
-    <!-- sliders -->
-    {#if selectedPlugin.settings?.slider !== undefined}
-      {#each Object.entries(selectedPlugin.settings.slider) as [id, setting] (id)}
-        <Slider
-          {id}
-          update={async (newValue) => {
-            setting.slider.set({ value: newValue });
-          }}
-          {...setting.slider.state} />
+    {#if selectedPlugin.settings !== undefined}
+      {#each Object.entries(selectedPlugin.settings) as [id, setting] (id)}
+        {#if setting.type === "toggle"}
+          <Toggle
+            text={setting.name}
+            description={setting.description}
+            size="small"
+            checked={setting.state.state.toggle}
+            update={async (toggled) => {
+              setting.state.set({ toggle: toggled });
+            }}
+            {id} />
+        {:else if setting.type === "slider"}
+          <Slider
+            {id}
+            update={async (newValue) => {
+              setting.state.set({ value: newValue });
+            }}
+            {...setting.state.state} />
+        {/if}
       {/each}
     {/if}
   </Modal>

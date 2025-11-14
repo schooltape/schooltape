@@ -50,8 +50,8 @@
           update={(toggled: boolean) => {
             snippet.toggle.set({ toggle: toggled });
           }}
-          text={snippet.info.name}
-          description={snippet.info.description}
+          text={snippet.name}
+          description={snippet.description}
           size="small" />
       </div>
     {/each}

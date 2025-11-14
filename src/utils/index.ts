@@ -1,5 +1,3 @@
-export * from "./storage";
-
 import { flavorEntries } from "@catppuccin/palette";
 
 export function injectStyles(styleText: string) {

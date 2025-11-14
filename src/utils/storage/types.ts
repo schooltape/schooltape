@@ -69,7 +69,7 @@ export type Slider = {
   max: number;
 };
 
-export type Plugin = {
+export type PluginData = {
   toggle: StorageState<Toggle>;
   settings?: Record<string, PluginSetting>;
 } & ItemInfo;
@@ -102,7 +102,7 @@ export type PluginSettingConfig =
 // Snippets
 export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
-export type Snippet = {
+export type SnippetData = {
   toggle: StorageState<Toggle>;
 } & ItemInfo;
 

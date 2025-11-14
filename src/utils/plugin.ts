@@ -5,7 +5,7 @@ export async function definePlugin(
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
 
-  logger.info(`${plugins[pluginId].info.name}: ${plugin.toggle ? "enabled" : "disabled"}`);
+  logger.info(`${plugins[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
   const settings = await globalSettings.storage.getValue();
   const urls = (await schoolboxUrls.storage.getValue()).urls;
@@ -19,7 +19,7 @@ export async function definePlugin(
             const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
             if (allElementsPresent) {
               observer.disconnect();
-              logger.info(`all elements present, injecting plugin: ${plugins[pluginId].info.name}`);
+              logger.info(`all elements present, injecting plugin: ${plugins[pluginId].name}`);
               injectLogic(pluginId, plugins[pluginId], plugins[pluginId]?.settings);
             }
           });
@@ -30,12 +30,12 @@ export async function definePlugin(
           const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
           if (allElementsPresent) {
             observer.disconnect();
-            logger.info(`all elements already present, injecting plugin: ${plugins[pluginId].info.name}`);
+            logger.info(`all elements already present, injecting plugin: ${plugins[pluginId].name}`);
             injectLogic(pluginId, plugins[pluginId]);
           }
         } else {
           // no elements to wait for
-          logger.info(`injecting plugin: ${plugins[pluginId].info.name}`);
+          logger.info(`injecting plugin: ${plugins[pluginId].name}`);
           injectLogic(pluginId, plugins[pluginId]);
         }
       };
