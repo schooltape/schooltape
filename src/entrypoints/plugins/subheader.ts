@@ -4,7 +4,7 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "subheader",
-    (_id, data) => {
+    (_id, _data, settings) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `
@@ -16,6 +16,7 @@ export default function init() {
         color: inherit;
       }
     `;
+
       document.head.appendChild(style);
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
@@ -63,8 +64,7 @@ export default function init() {
             if (!periodLink) {
               periodLink = document.createElement("a");
 
-              const openInNewTab = settings.openInNewTab.state.storage.getValue().toggle;
-              periodLink.target = openInNewTab ? "_blank" : "_self";
+              periodLink.target = settings?.toggle.openInNewTab ? "_blank" : "_self";
               periodSpan.appendChild(periodLink);
             }
             periodLink.href = period.data.link;

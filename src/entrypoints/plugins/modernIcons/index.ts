@@ -5,7 +5,7 @@ import styleText from "./styles.css?inline";
 export default function init() {
   definePlugin(
     "modernIcons",
-    async (_id, data) => {
+    async (_id, _data, settings) => {
       // [className, iconName] (material icons)
       const icons = {
         "icon-teacher": "school",
@@ -72,7 +72,7 @@ export default function init() {
       injectStyles(styleText);
 
       for (const [className, iconName] of Object.entries(icons)) {
-        insertIcon(className, iconName, settings.toggle.filled);
+        insertIcon(className, iconName, settings?.toggle.filled ?? false);
       }
     },
     ["nav.tab-bar .top-menu", "#overflow-nav"],

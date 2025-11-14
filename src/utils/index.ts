@@ -4,7 +4,7 @@ import { logger } from "./logger";
 import type { LogoInfo, UserSnippet } from "./storage";
 
 export function injectStyles(styleText: string) {
-  logger.info(`[content-utils] Injecting styles: ${styleText}`);
+  logger.info(`[content-utils] Injecting styles`);
   const style = document.createElement("style");
   style.textContent = styleText;
   style.classList.add("schooltape");

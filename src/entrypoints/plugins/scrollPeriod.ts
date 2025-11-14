@@ -4,15 +4,14 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "scrollPeriod",
-    async (_id, data) => {
+    async (_id, _data, settings) => {
       const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
         updateScrollbar();
 
-        const cooldownDuration = await data.settings?.slider?.cooldownDuration?.slider?.storage?.getValue();
-        const resetCooldownOnMouseMove =
-          await data.settings?.toggle?.resetCooldownOnMouseMove?.toggle?.storage?.getValue();
+        const cooldownDuration = settings?.slider.cooldownDuration;
+        const resetCooldownOnMouseMove = settings?.toggle.resetCooldownOnMouseMove;
 
         let interval: string | number | NodeJS.Timeout | undefined;
         function start() {
@@ -27,7 +26,7 @@ export default function init() {
 
         start();
 
-        if (resetCooldownOnMouseMove?.toggle === true) {
+        if (resetCooldownOnMouseMove === true) {
           document.addEventListener("mousemove", reset);
         }
       }

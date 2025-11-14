@@ -2,7 +2,7 @@ import { storage } from "#imports";
 import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 
-const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
+export const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
   subheader: {
     name: "Subheader Revamp",
     description: "Adds a clock and current period info to the subheader.",
@@ -84,7 +84,7 @@ const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
       },
     },
   },
-};
+} as const;
 
 export const plugins = buildPluginsFromConfig(pluginConfig);
 

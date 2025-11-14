@@ -1,10 +1,17 @@
 import { logger } from "./logger";
-import type { PluginData, PluginId, PluginSetting } from "./storage";
+import type { PluginData, PluginId, PluginSetting, Slider } from "./storage";
 import { globalSettings, plugins, schoolboxUrls } from "./storage";
 
 export async function definePlugin(
   pluginId: PluginId,
-  injectLogic: (id: PluginId, data: PluginData, settings?: Record<string, PluginSetting>) => Promise<void> | void,
+  injectLogic: (
+    id: PluginId,
+    data: PluginData,
+    settings?: {
+      toggle: Record<string, boolean>;
+      slider: Record<string, Slider>;
+    },
+  ) => Promise<void> | void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
@@ -17,6 +24,10 @@ export async function definePlugin(
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.plugins && plugin.toggle) {
       const injectPlugin = () => {
+        injectLogic(pluginId, plugins[pluginId], getSettingsValues(plugins[pluginId].settings!));
+      };
+
+      const loadPlugin = () => {
         // wait for elements to be loaded
         if (elementsToWaitFor.length > 0) {
           const observer = new MutationObserver((_mutations, observer) => {
@@ -24,31 +35,49 @@ export async function definePlugin(
             if (allElementsPresent) {
               observer.disconnect();
               logger.info(`all elements present, injecting plugin: ${plugins[pluginId].name}`);
-              injectLogic(pluginId, plugins[pluginId], plugins[pluginId]?.settings);
+              injectPlugin();
             }
           });
 
           observer.observe(document.body, { childList: true, subtree: true });
 
-          // Check if elements are already present
+          // check if elements are already present
           const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
           if (allElementsPresent) {
             observer.disconnect();
             logger.info(`all elements already present, injecting plugin: ${plugins[pluginId].name}`);
-            injectLogic(pluginId, plugins[pluginId]);
+            injectPlugin();
           }
         } else {
           // no elements to wait for
           logger.info(`injecting plugin: ${plugins[pluginId].name}`);
-          injectLogic(pluginId, plugins[pluginId]);
+          injectPlugin();
         }
       };
 
       if (document.body) {
-        injectPlugin();
+        loadPlugin();
       } else {
-        document.addEventListener("DOMContentLoaded", injectPlugin);
+        document.addEventListener("DOMContentLoaded", loadPlugin);
       }
     }
   }
+}
+
+function getSettingsValues(settings: Record<string, PluginSetting>) {
+  logger.info("Getting settings values for settings:", settings);
+  const result: {
+    toggle: Record<string, boolean>;
+    slider: Record<string, Slider>;
+  } = { toggle: {}, slider: {} };
+  for (const [key, setting] of Object.entries(settings)) {
+    if (setting.type === "toggle") {
+      const value = setting.state.get();
+      result.toggle[key] = value.toggle;
+    } else if (setting.type === "slider") {
+      const value = setting.state.get();
+      result.slider[key] = value;
+    }
+  }
+  return result;
 }
