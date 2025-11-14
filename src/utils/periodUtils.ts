@@ -1,5 +1,7 @@
 // these utility functions are intended to be used on the dashboard, as that is where the timetable is displayed
 
+import { logger } from "./logger";
+
 interface PeriodHeader {
   name: string;
   time: {

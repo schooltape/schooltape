@@ -1,6 +1,10 @@
+import { logger } from "./logger";
+import type { PluginData, PluginId, PluginSetting } from "./storage";
+import { globalSettings, plugins, schoolboxUrls } from "./storage";
+
 export async function definePlugin(
   pluginId: PluginId,
-  injectLogic: (id: PluginId, data: PluginData, settings?: Record<string, PluginSetting>) => void,
+  injectLogic: (id: PluginId, data: PluginData, settings?: Record<string, PluginSetting>) => Promise<void> | void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();

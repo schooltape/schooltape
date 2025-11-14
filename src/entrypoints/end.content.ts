@@ -1,3 +1,8 @@
+import { browser, defineContentScript } from "#imports";
+import { EXCLUDE_MATCHES } from "@/utils/constants";
+import { logger } from "@/utils/logger";
+import { globalSettings, schoolboxUrls } from "@/utils/storage";
+
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_end",

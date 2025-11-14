@@ -1,5 +1,6 @@
+import { storage } from "#imports";
 import { StorageState } from "./state.svelte";
-import * as Types from "./types";
+import type * as Types from "./types";
 
 export const snippetConfig: Record<Types.SnippetId, Types.SnippetConfig> = {
   roundedCorners: {

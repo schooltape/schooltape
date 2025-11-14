@@ -1,3 +1,6 @@
+import { defineContentScript } from "#imports";
+import { EXCLUDE_MATCHES } from "@/utils/constants";
+import { defineSnippet } from "@/utils/snippet";
 import censor from "./snippets/censor.css?inline";
 import hidePfp from "./snippets/hidePfp/styles.css?inline";
 import hidePwaPrompt from "./snippets/hidePwaPrompt.css?inline";

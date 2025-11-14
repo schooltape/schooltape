@@ -1,3 +1,7 @@
+import { injectStyles } from "@/utils";
+import type { Period } from "@/utils/periodUtils";
+import { getListOfPeriods } from "@/utils/periodUtils";
+import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
 export default function init() {
