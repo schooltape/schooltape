@@ -46,7 +46,7 @@
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
-    "lint": "eslint && eslint .",
+    "lint": "eslint .",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "format": "prettier --write .",
     "postinstall": "wxt prepare"
