@@ -1,5 +1,6 @@
 import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
+import importPlugin from "eslint-plugin-import";
 import svelte from "eslint-plugin-svelte";
 import globals from "globals";
 import path from "node:path";
@@ -23,6 +24,9 @@ export default ts.config(
   //   extends: [ts.configs.disableTypeChecked],
   // },
   {
+    plugins: {
+      import: importPlugin,
+    },
     languageOptions: {
       parserOptions: {
         // projectService: {
@@ -34,8 +38,11 @@ export default ts.config(
       globals: globals.browser,
     },
     rules: {
+      ...importPlugin.configs.recommended.rules,
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+      "import/no-cycle": "error",
+      "import/no-unresolved": "off",
     },
   },
 );
