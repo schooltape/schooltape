@@ -80,7 +80,7 @@ export const pluginConfig: Record<Types.PluginId, Types.PluginConfig> = {
         type: "toggle",
         name: "Close current tab",
         description: "When switching to another tab, close the current one.",
-        default: { toggle: true },
+        default: { toggle: false },
       },
     },
   },
