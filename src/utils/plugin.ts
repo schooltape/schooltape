@@ -1,17 +1,10 @@
 import { logger } from "./logger";
-import type { PluginData, PluginId, PluginSetting, Slider } from "./storage";
+import type { PluginId, PluginSetting, Slider } from "./storage";
 import { globalSettings, plugins, schoolboxUrls } from "./storage";
 
 export async function definePlugin(
   pluginId: PluginId,
-  injectLogic: (
-    id: PluginId,
-    data: PluginData,
-    settings?: {
-      toggle: Record<string, boolean>;
-      slider: Record<string, Slider>;
-    },
-  ) => Promise<void> | void,
+  callback: (settings?: { toggle: Record<string, boolean>; slider: Record<string, Slider> }) => Promise<void> | void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
@@ -24,7 +17,7 @@ export async function definePlugin(
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.plugins && plugin.toggle) {
       const injectPlugin = () => {
-        injectLogic(pluginId, plugins[pluginId], getSettingsValues(plugins[pluginId].settings!));
+        callback(getSettingsValues(plugins[pluginId]?.settings));
       };
 
       const loadPlugin = () => {
@@ -64,8 +57,10 @@ export async function definePlugin(
   }
 }
 
-function getSettingsValues(settings: Record<string, PluginSetting>) {
+function getSettingsValues(settings?: Record<string, PluginSetting>) {
   logger.info("Getting settings values for settings:", settings);
+  if (!settings) return undefined;
+
   const result: {
     toggle: Record<string, boolean>;
     slider: Record<string, Slider>;

@@ -4,7 +4,7 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "subheader",
-    (_id, _data, settings) => {
+    (settings) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `

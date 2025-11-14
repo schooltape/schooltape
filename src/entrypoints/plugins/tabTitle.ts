@@ -3,7 +3,7 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "tabTitle",
-    async (_id, _data, settings) => {
+    async (settings) => {
       const path = window.location.pathname;
       const titleMap: { [key: string]: string } = {
         "/": "Homepage",

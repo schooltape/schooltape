@@ -5,7 +5,7 @@ import styleText from "./styles.css?inline";
 export default function init() {
   definePlugin(
     "modernIcons",
-    async (_id, _data, settings) => {
+    async (settings) => {
       // [className, iconName] (material icons)
       const icons = {
         "icon-teacher": "school",

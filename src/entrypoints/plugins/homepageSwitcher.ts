@@ -4,7 +4,7 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "homepageSwitcher",
-    (_id, _data, settings) => {
+    (settings) => {
       const logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
       logos.forEach((logo) => {
         logo.addEventListener("click", async function (e) {

@@ -4,7 +4,7 @@ import { definePlugin } from "@/utils/plugin";
 export default function init() {
   definePlugin(
     "scrollPeriod",
-    async (_id, _data, settings) => {
+    async (settings) => {
       const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
