@@ -1,5 +1,3 @@
-import { injectStyles } from "@/utils";
-import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
 export default function init() {

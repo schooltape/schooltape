@@ -1,6 +1,3 @@
-import { browser } from "#imports";
-import { definePlugin } from "@/utils/plugin";
-
 export default function init() {
   definePlugin(
     "homepageSwitcher",

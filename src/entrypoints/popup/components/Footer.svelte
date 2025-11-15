@@ -1,7 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { browser } from "#imports";
-  import { updated } from "@/utils/storage";
   import Button from "./inputs/Button.svelte";
   import { RotateCcw, Globe, GitBranch } from "@lucide/svelte";
 

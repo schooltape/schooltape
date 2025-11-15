@@ -1,7 +1,5 @@
-import { browser } from "#imports";
+export * from "./storage";
 import { flavorEntries } from "@catppuccin/palette";
-import { logger } from "./logger";
-import type { LogoInfo, UserSnippet } from "./storage";
 
 export function injectStyles(styleText: string) {
   logger.info(`[content-utils] Injecting styles`);

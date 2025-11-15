@@ -1,7 +1,3 @@
-import { logger } from "./logger";
-import type { PluginId, PluginSetting, Slider } from "./storage";
-import { globalSettings, plugins, schoolboxUrls } from "./storage";
-
 export async function definePlugin(
   pluginId: PluginId,
   callback: (settings?: { toggle: Record<string, boolean>; slider: Record<string, Slider> }) => Promise<void> | void,
@@ -58,7 +54,6 @@ export async function definePlugin(
 }
 
 function getSettingsValues(settings?: Record<string, PluginSetting>) {
-  logger.info("Getting settings values for settings:", settings);
   if (!settings) return undefined;
 
   const result: {

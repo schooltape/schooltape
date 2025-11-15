@@ -1,9 +1,7 @@
 <script lang="ts">
-  import type { PluginId } from "@/utils/storage";
-  import { globalSettings, plugins } from "@/utils/storage";
-  import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
+  import { Settings } from "@lucide/svelte";
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import Slider from "../components/inputs/Slider.svelte";

@@ -1,4 +1,3 @@
-import { storage } from "#imports";
 import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 

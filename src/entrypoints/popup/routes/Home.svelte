@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
   import Footer from "../components/Footer.svelte";
   import Motd from "../components/Motd.svelte";
 

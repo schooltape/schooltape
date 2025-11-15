@@ -1,8 +1,3 @@
-import { browser, defineContentScript } from "#imports";
-import { injectCatppuccin, injectLogo, injectStylesheet, injectUserSnippets } from "@/utils";
-import { EXCLUDE_MATCHES, LOGO_INFO } from "@/utils/constants";
-import type { LogoId } from "@/utils/storage";
-import { globalSettings, schoolboxUrls } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({

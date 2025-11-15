@@ -1,6 +1,3 @@
-import type { WxtStorageItem } from "#imports";
-import { needsRefresh } from "./global";
-
 export class StorageState<T> {
   public state;
 

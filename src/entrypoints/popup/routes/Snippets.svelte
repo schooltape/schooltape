@@ -1,7 +1,4 @@
 <script lang="ts">
-  import type { SnippetId, UserSnippet } from "@/utils/storage";
-  import { globalSettings, snippets } from "@/utils/storage";
-
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
@@ -74,7 +71,7 @@
   </div>
 
   <div class="user-snippets-container w-full">
-    {#each Object.entries(globalSettings.state.userSnippets as Record<SnippetId, UserSnippet>) as [id, snippet] (id)}
+    {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
       <div class="group my-4 w-full">
         <Toggle
           {id}

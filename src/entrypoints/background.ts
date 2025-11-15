@@ -1,7 +1,3 @@
-import type { Browser } from "#imports";
-import { browser, defineBackground, storage } from "#imports";
-import { logger } from "@/utils/logger";
-import { globalSettings, updated } from "@/utils/storage";
 import semver from "semver";
 
 export default defineBackground(() => {
