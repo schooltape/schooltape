@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { SnippetId, UserSnippet } from "@/utils/storage";
+  import { globalSettings, snippets } from "@/utils/storage";
+
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";

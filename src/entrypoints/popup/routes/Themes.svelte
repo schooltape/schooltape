@@ -1,9 +1,14 @@
 <script lang="ts">
+  import { browser } from "#imports";
+  import type { LogoId } from "@/utils/storage";
+  import { globalSettings } from "@/utils/storage";
+  import { LOGO_INFO } from "@/utils/constants";
+  import { Palette } from "@lucide/svelte";
+
   import Title from "../components/Title.svelte";
   import Modal from "../components/Modal.svelte";
   import Button from "../components/inputs/Button.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import { Palette } from "@lucide/svelte";
 
   const flavours = ["latte", "frappe", "macchiato", "mocha"];
   const accents = [

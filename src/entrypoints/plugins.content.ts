@@ -1,3 +1,5 @@
+import { defineContentScript } from "#imports";
+import { EXCLUDE_MATCHES } from "@/utils/constants";
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";

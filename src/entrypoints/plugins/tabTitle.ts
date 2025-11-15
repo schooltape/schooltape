@@ -1,3 +1,5 @@
+import { definePlugin } from "@/utils/plugin";
+
 export default function init() {
   definePlugin(
     "tabTitle",

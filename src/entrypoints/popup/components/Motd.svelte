@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { motd } from "@/utils/storage";
   import { onMount } from "svelte";
 
   onMount(async () => {

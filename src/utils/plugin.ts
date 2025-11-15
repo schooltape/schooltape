@@ -1,3 +1,7 @@
+import { logger } from "./logger";
+import type { PluginId, PluginSetting, Slider } from "./storage";
+import { globalSettings, plugins, schoolboxUrls } from "./storage";
+
 export async function definePlugin(
   pluginId: PluginId,
   callback: (settings?: { toggle: Record<string, boolean>; slider: Record<string, Slider> }) => Promise<void> | void,

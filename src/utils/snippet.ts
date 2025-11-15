@@ -1,3 +1,8 @@
+import { injectStyles } from ".";
+import { logger } from "./logger";
+import type { SnippetId } from "./storage";
+import { globalSettings, schoolboxUrls, snippets } from "./storage";
+
 export async function defineSnippet(snippetId: SnippetId, styleText: string) {
   const snippet = await snippets[snippetId].toggle.storage.getValue();
 

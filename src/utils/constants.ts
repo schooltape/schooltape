@@ -1,3 +1,5 @@
+import type { LogoId, LogoInfo } from "./storage";
+
 export const EXCLUDE_MATCHES: string[] = ["*://*/learning/quiz/*"];
 export const LOGO_INFO: Record<LogoId, LogoInfo> = {
   default: {
