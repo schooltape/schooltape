@@ -5,7 +5,7 @@
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
-    "@eslint/compat": "^1.4.1",
+    "@eslint/compat": "^2.0.0",
     "@eslint/js": "^9.39.1",
     "@lucide/svelte": "^0.544.0",
     "@sveltejs/vite-plugin-svelte": "^5.1.1",
