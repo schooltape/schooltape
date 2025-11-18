@@ -1,9 +1,11 @@
+import { injectStyles } from "@/utils";
+import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "modernIcons",
-    async (_id, data) => {
+    async (settings) => {
       // [className, iconName] (material icons)
       const icons = {
         "icon-teacher": "school",
@@ -56,13 +58,6 @@ export default function init() {
         });
       }
 
-      let fontFill = true;
-
-      const filled = await data.settings?.toggle?.filled?.toggle?.storage?.getValue();
-      if (filled?.toggle !== undefined) {
-        fontFill = filled.toggle;
-      }
-
       const iconNames = [...new Set(Object.values(icons))].sort();
       const fontUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1&icon_names=${iconNames.join(",")}`;
       // logger.info(fontUrl);
@@ -77,7 +72,7 @@ export default function init() {
       injectStyles(styleText);
 
       for (const [className, iconName] of Object.entries(icons)) {
-        insertIcon(className, iconName, fontFill);
+        insertIcon(className, iconName, settings?.toggle.filled ?? false);
       }
     },
     ["nav.tab-bar .top-menu", "#overflow-nav"],

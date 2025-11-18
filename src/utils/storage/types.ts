@@ -1,3 +1,5 @@
+import type { StorageState } from "./state.svelte";
+
 // Global
 export interface Settings {
   global: boolean;
@@ -44,16 +46,9 @@ export interface UserSnippet {
 }
 
 // Common for plugins and snippets
-export interface ItemGeneric {
-  toggle: boolean;
-}
 export interface ItemInfo {
   name: string;
   description: string;
-}
-export type ItemId = PluginId | SnippetId;
-export interface PopulatedItem<T> extends ItemGeneric, ItemInfo {
-  id: T;
 }
 
 // Plugins
@@ -66,38 +61,51 @@ export type PluginId =
   | "tabTitle"
   | "homepageSwitcher";
 
-type ToggleData = {
-  toggle: StorageState<ToggleSetting>;
-  info: ItemInfo;
-};
-type SliderData = {
-  slider: StorageState<SliderSetting>;
-  info: ItemInfo;
+export type Toggle = { toggle: boolean };
+
+export type Slider = {
+  value: number;
+  min: number;
+  max: number;
 };
 
-export type PluginSettings = {
-  toggle?: Record<string, ToggleData>;
-  slider?: Record<string, SliderData>;
-};
 export type PluginData = {
-  toggle: StorageState<ToggleSetting>;
-  info: ItemInfo;
-  settings?: PluginSettings;
-};
+  toggle: StorageState<Toggle>;
+  settings?: Record<string, PluginSetting>;
+} & ItemInfo;
+
+export type PluginConfig = {
+  default: boolean;
+  settings?: Record<string, PluginSettingConfig>;
+} & ItemInfo;
+
+export type PluginSetting =
+  | ({
+      type: "toggle";
+      state: StorageState<Toggle>;
+    } & ItemInfo)
+  | ({
+      type: "slider";
+      state: StorageState<Slider>;
+    } & ItemInfo);
+
+export type PluginSettingConfig =
+  | ({
+      type: "toggle";
+      default: Toggle;
+    } & ItemInfo)
+  | ({
+      type: "slider";
+      default: Slider;
+    } & ItemInfo);
 
 // Snippets
 export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
 
 export type SnippetData = {
-  toggle: StorageState<ToggleSetting>;
-  info: ItemInfo;
-};
+  toggle: StorageState<Toggle>;
+} & ItemInfo;
 
-export interface ToggleSetting {
-  toggle: boolean;
-}
-export interface SliderSetting {
-  min: number;
-  max: number;
-  value: number;
-}
+export type SnippetConfig = {
+  default: boolean;
+} & ItemInfo;

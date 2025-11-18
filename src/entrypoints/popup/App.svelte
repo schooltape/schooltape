@@ -1,4 +1,10 @@
 <script lang="ts">
+  import { flavors } from "@catppuccin/palette";
+  import { globalSettings, needsRefresh, schoolboxUrls, updated } from "@/utils/storage";
+  import { RotateCw } from "@lucide/svelte";
+  import { logger } from "@/utils/logger";
+  import { browser, onMount } from "#imports";
+
   import Router from "svelte-spa-router";
   import active from "svelte-spa-router/active";
   import Home from "./routes/Home.svelte";
@@ -6,11 +12,6 @@
   import Themes from "./routes/Themes.svelte";
   import Snippets from "./routes/Snippets.svelte";
   import Banner from "./components/Banner.svelte";
-
-  import { flavors } from "@catppuccin/palette";
-  import { needsRefresh } from "@/utils/storage";
-  import { globalSettings } from "#imports";
-  import { RotateCw } from "@lucide/svelte";
 
   const routes = {
     "/": Home,

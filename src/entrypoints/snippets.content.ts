@@ -1,3 +1,6 @@
+import { defineContentScript } from "#imports";
+import { EXCLUDE_MATCHES } from "@/utils/constants";
+import { defineSnippet } from "@/utils/snippet";
 import censor from "./snippets/censor.css?inline";
 import hidePfp from "./snippets/hidePfp/styles.css?inline";
 import hidePwaPrompt from "./snippets/hidePwaPrompt.css?inline";
@@ -8,9 +11,9 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    defineStSnippet("roundedCorners", roundedCorners);
-    defineStSnippet("hidePfp", hidePfp);
-    defineStSnippet("hidePwaPrompt", hidePwaPrompt);
-    defineStSnippet("censor", censor);
+    defineSnippet("roundedCorners", roundedCorners);
+    defineSnippet("hidePfp", hidePfp);
+    defineSnippet("hidePwaPrompt", hidePwaPrompt);
+    defineSnippet("censor", censor);
   },
 });

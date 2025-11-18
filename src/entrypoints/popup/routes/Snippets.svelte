@@ -1,8 +1,10 @@
 <script lang="ts">
+  import type { SnippetId, UserSnippet } from "@/utils/storage";
+  import { globalSettings, snippets } from "@/utils/storage";
+
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import TextInput from "../components/inputs/TextInput.svelte";
-  import { globalSettings } from "#imports";
 
   let snippetURL = $state("");
 
@@ -51,8 +53,8 @@
           update={(toggled: boolean) => {
             snippet.toggle.set({ toggle: toggled });
           }}
-          text={snippet.info.name}
-          description={snippet.info.description}
+          text={snippet.name}
+          description={snippet.description}
           size="small" />
       </div>
     {/each}

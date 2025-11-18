@@ -1,7 +1,9 @@
+import { definePlugin } from "@/utils/plugin";
+
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "tabTitle",
-    async (_id, data) => {
+    async (settings) => {
       const path = window.location.pathname;
       const titleMap: { [key: string]: string } = {
         "/": "Homepage",
@@ -35,8 +37,7 @@ export default function init() {
       } else if (path.includes("/learning/due/")) {
         document.title = "Due Work";
       } else if (path.includes("/homepage/")) {
-        const showPrefix = (await data.settings?.toggle?.showSubjectPrefix?.toggle?.storage?.getValue())?.toggle;
-        if (showPrefix === false) {
+        if (settings?.toggle.showSubjectPrefix === false) {
           document.title = document.getElementsByTagName("h1")[0].innerText.replace(/^.*- /, "");
         } else {
           document.title = document.getElementsByTagName("h1")[0].innerText;

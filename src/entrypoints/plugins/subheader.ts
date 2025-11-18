@@ -1,7 +1,10 @@
+import { getCurrentPeriod } from "@/utils/periodUtils";
+import { definePlugin } from "@/utils/plugin";
+
 export default function init() {
-  defineStPlugin(
+  definePlugin(
     "subheader",
-    (_id, data) => {
+    (settings) => {
       const style = document.createElement("style");
       style.classList = "schooltape";
       style.innerHTML = `
@@ -13,6 +16,7 @@ export default function init() {
         color: inherit;
       }
     `;
+
       document.head.appendChild(style);
 
       if (window.location.pathname === "/" && document.getElementsByClassName("timetable")[0]) {
@@ -60,8 +64,7 @@ export default function init() {
             if (!periodLink) {
               periodLink = document.createElement("a");
 
-              const openInNewTab = (await data.settings?.toggle?.openInNewTab?.toggle.storage.getValue())?.toggle;
-              periodLink.target = openInNewTab ? "_blank" : "_self";
+              periodLink.target = settings?.toggle.openInNewTab ? "_blank" : "_self";
               periodSpan.appendChild(periodLink);
             }
             periodLink.href = period.data.link;
