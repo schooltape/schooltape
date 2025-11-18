@@ -60,7 +60,6 @@ export default defineBackground(() => {
     } else if (message.toTab) {
       const tabs = await browser.tabs.query({ url: message.toTab });
       if (tabs.length > 0) {
-        // @ts-expect-error - tab will exist
         browser.tabs.update(tabs[0].id, { active: true });
       } else if (sender.tab?.id) {
         browser.tabs.update(sender.tab.id, { url: message.toTab });

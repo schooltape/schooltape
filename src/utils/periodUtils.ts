@@ -1,7 +1,5 @@
 // these utility functions are intended to be used on the dashboard, as that is where the timetable is displayed
 
-import { logger } from "./logger";
-
 interface PeriodHeader {
   name: string;
   time: {
@@ -138,8 +136,7 @@ function extractTimes(periodTime: string): { start: Date; end: Date } {
       return date;
     });
     return { start, end };
-  } catch (error) {
-    logger.error("Error extracting times:", error);
-    throw new Error("Failed to extract times");
+  } catch (e) {
+    throw new Error("Failed to extract times", e as Error);
   }
 }

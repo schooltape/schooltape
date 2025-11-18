@@ -16,7 +16,6 @@
     if (e.target === dialog) dialog.close();
   }}
   class="bg-ctp-base text-ctp-text open:animate-zoom-in relative m-auto rounded-lg backdrop:backdrop-blur-md">
-  <!-- svelte-ignore a11y_autofocus -->
   <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute right-0 top-0 m-2"
     ><X /></button>
 
