@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.1](https://github.com/schooltape/schooltape/compare/v4.2.0...v4.2.1) (2025-11-21)
+
+
+### Bug Fixes
+
+* remove unused ignores and error handling ([687950a](https://github.com/schooltape/schooltape/commit/687950a40518dab92c9682d9f3bd70e1d9103311))
+* **storage:** closeCurrentTab fallback regression ([0f55e81](https://github.com/schooltape/schooltape/commit/0f55e81e66d23f1d73ccadbc982ce13130b38e0d))
+
 ## [4.2.0](https://github.com/schooltape/schooltape/compare/v4.1.4...v4.2.0) (2025-10-29)
 
 
