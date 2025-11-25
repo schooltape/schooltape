@@ -2,7 +2,7 @@ import { storage } from "#imports";
 import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 
-export const snippetConfig: Record<Types.SnippetId, Types.SnippetConfig> = {
+export const snippetConfig: Record<string, Types.SnippetConfig> = {
   roundedCorners: {
     name: "Rounded Corners",
     description: "Adds rounded corners to all elements across Schoolbox.",
@@ -31,7 +31,7 @@ export const snippetConfig: Record<Types.SnippetId, Types.SnippetConfig> = {
 export const snippets = buildSnippetsFromConfig(snippetConfig);
 
 function buildSnippetsFromConfig(
-  config: Record<Types.SnippetId, Types.SnippetConfig>,
+  config: Record<string, Types.SnippetConfig>,
 ): Record<Types.SnippetId, Types.SnippetData> {
   const snippets: Partial<Record<Types.SnippetId, Types.SnippetData>> = {};
 

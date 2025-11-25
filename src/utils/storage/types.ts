@@ -1,3 +1,5 @@
+import type { pluginConfig } from "./plugins";
+import type { snippetConfig } from "./snippets";
 import type { StorageState } from "./state.svelte";
 
 // Global
@@ -52,14 +54,7 @@ export interface ItemInfo {
 }
 
 // Plugins
-export type PluginId =
-  | "subheader"
-  | "scrollSegments"
-  | "scrollPeriod"
-  | "progressBar"
-  | "modernIcons"
-  | "tabTitle"
-  | "homepageSwitcher";
+export type PluginId = keyof typeof pluginConfig;
 
 export type Toggle = { toggle: boolean };
 
@@ -100,7 +95,7 @@ export type PluginSettingConfig =
     } & ItemInfo);
 
 // Snippets
-export type SnippetId = "roundedCorners" | "hidePfp" | "hidePwaPrompt" | "censor";
+export type SnippetId = keyof typeof snippetConfig;
 
 export type SnippetData = {
   toggle: StorageState<Toggle>;
