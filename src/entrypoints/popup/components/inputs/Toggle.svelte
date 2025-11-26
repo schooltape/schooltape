@@ -14,7 +14,7 @@
   let { update, checked, id, size = "big", text = "", description = "", children }: Props = $props();
 </script>
 
-<label class="text-ctp-text group relative flex cursor-pointer items-center justify-between py-2">
+<label class="group relative flex cursor-pointer items-center justify-between py-2 text-ctp-text">
   <h4 class="text-ctp-text">{text}</h4>
   <input
     {id}
@@ -29,7 +29,7 @@
 </label>
 
 <div
-  class="text-ctp-overlay1 group-hover:text-ctp-subtext0 flex items-center justify-between transition-colors duration-500 ease-in-out">
+  class="flex items-center justify-between text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0">
   <div>{description}</div>
   <div>{@render children?.()}</div>
 </div>

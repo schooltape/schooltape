@@ -48,7 +48,7 @@
           globalSettings.set({ themeLogo: logoId as LogoId });
         }}
         class:highlight={globalSettings.state.themeLogo === logoId}
-        class="border-(--ctp-accent) flex flex-col rounded-lg border p-2">
+        class="flex flex-col rounded-lg border border-(--ctp-accent) p-2">
         <span>{logo.name}</span>
         {#if logo.disable !== true}
           <div class="flex h-full w-full items-center justify-center">
@@ -84,7 +84,7 @@
       globalSettings.set({ themes: toggled });
     }} />
 
-  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
+  <div id="flavours" class="my-6 flex rounded-xl py-2 text-ctp-text">
     {#each flavours as flavour (flavour)}
       <button
         class:active={globalSettings.state.themeFlavour === flavour}

@@ -5,7 +5,7 @@
 
 body {
   width: 450px; /* max: 1000px */
-  @apply bg-ctp-base text-ctp-text font-lexend text-base;
+  @apply bg-ctp-base font-lexend text-base text-ctp-text;
 }
 
 @theme {
@@ -27,11 +27,11 @@ body {
     mask: var(--icon) no-repeat;
     mask-size: 100% 100%;
     background-color: currentColor;
-    @apply text-(--ctp-accent) h-16 w-20;
+    @apply h-16 w-20 text-(--ctp-accent);
   }
 
   .slider {
-    @apply bg-ctp-surface1 after:bg-ctp-text peer-checked:after:bg-ctp-mantle peer-checked:bg-(--ctp-accent) ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg p-1 duration-500 ease-in-out after:rounded-lg after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6;
+    @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-surface1 p-1 duration-500 ease-in-out peer-checked:bg-(--ctp-accent) after:rounded-lg after:bg-ctp-text after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6 peer-checked:after:bg-ctp-mantle;
   }
 
   .slider.big {
@@ -59,11 +59,11 @@ body {
   }
 
   #card {
-    @apply bg-ctp-mantle bg-linear-to-b outline-(--ctp-accent) outline-solid flex w-full flex-col items-center justify-center rounded-3xl p-6 shadow-xl outline-2;
+    @apply flex w-full flex-col items-center justify-center rounded-3xl bg-ctp-mantle bg-linear-to-b p-6 shadow-xl outline-2 outline-(--ctp-accent) outline-solid;
   }
 
   #card h1 {
-    @apply from-ctp-blue to-ctp-teal bg-linear-to-r bg-clip-text text-5xl font-bold text-transparent;
+    @apply bg-linear-to-r from-ctp-blue to-ctp-teal bg-clip-text text-5xl font-bold text-transparent;
 
     &.ctp {
       background-image: linear-gradient(
@@ -79,7 +79,7 @@ body {
   }
 
   #card h2 {
-    @apply text-(--ctp-accent) text-4xl font-semibold;
+    @apply text-4xl font-semibold text-(--ctp-accent);
   }
 
   #card h3 {
@@ -95,7 +95,7 @@ body {
   }
 
   button#toggle {
-    @apply text-ctp-base rounded-xl px-4 py-2 text-xl font-bold;
+    @apply rounded-xl px-4 py-2 text-xl font-bold text-ctp-base;
   }
 
   button.small {
@@ -123,15 +123,15 @@ body {
   }
 
   .navbutton-left {
-    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 rounded-l-xl py-2 pl-4 pr-2 outline-1;
+    @apply rounded-l-xl py-2 pr-2 pl-4 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
   }
 
   .navbutton-center {
-    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 p-2 outline-1;
+    @apply p-2 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
   }
 
   .navbutton-right {
-    @apply outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80 rounded-r-xl py-2 pl-2 pr-4 outline-1;
+    @apply rounded-r-xl py-2 pr-4 pl-2 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
   }
 
   div[title] {
@@ -139,7 +139,7 @@ body {
   }
 
   div[title]:hover::after {
-    @apply bg-ctp-surface0 text-ctp-text absolute bottom-full left-1/2 whitespace-nowrap;
+    @apply absolute bottom-full left-1/2 bg-ctp-surface0 whitespace-nowrap text-ctp-text;
     content: attr(title);
     transform: translateX(-50%);
     padding: 0.5rem;

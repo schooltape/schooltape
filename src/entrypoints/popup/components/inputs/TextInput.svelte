@@ -11,6 +11,6 @@
 </script>
 
 <div class="flex w-full items-center justify-center">
-  <input {id} class="bg-ctp-surface0 text-ctp-text w-full rounded-l-xl p-2" bind:value {placeholder} type="text" />
-  <button class="text-ctp-crust bg-(--ctp-accent) rounded-r-xl p-2" type="submit" {onclick}>{label}</button>
+  <input {id} class="w-full rounded-l-xl bg-ctp-surface0 p-2 text-ctp-text" bind:value {placeholder} type="text" />
+  <button class="rounded-r-xl bg-(--ctp-accent) p-2 text-ctp-crust" type="submit" {onclick}>{label}</button>
 </div>

@@ -46,9 +46,9 @@
 </script>
 
 <main
-  class="bg-ctp-base flex flex-col items-center p-6 {globalSettings.state.themeFlavour}"
+  class="flex flex-col items-center bg-ctp-base p-6 {globalSettings.state.themeFlavour}"
   style="--ctp-accent: {accentRgb}">
-  <nav class="text-ctp-text mb-4 flex rounded-xl px-4 py-2" id="navbar">
+  <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>

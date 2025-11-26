@@ -3,5 +3,5 @@
   "bracketSameLine": true,
   "plugins": ["prettier-plugin-svelte", "prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
   "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
-  "tailwindStylesheet": "./src/entrypoints/app.css"
+  "tailwindStylesheet": "./src/entrypoints/popup/app.css"
 }

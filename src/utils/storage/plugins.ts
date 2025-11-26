@@ -88,9 +88,7 @@ export const pluginConfig: Record<string, Types.PluginConfig> = {
 
 export const plugins = buildPluginsFromConfig(pluginConfig);
 
-function buildPluginsFromConfig(
-  config: Record<string, Types.PluginConfig>,
-): Record<Types.PluginId, Types.PluginData> {
+function buildPluginsFromConfig(config: Record<string, Types.PluginConfig>): Record<Types.PluginId, Types.PluginData> {
   const plugins: Partial<Record<Types.PluginId, Types.PluginData>> = {};
 
   for (const [pluginId, pluginConfig] of Object.entries(config)) {
