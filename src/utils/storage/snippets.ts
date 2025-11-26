@@ -10,14 +10,14 @@ export const snippetConfig: Record<string, Types.SnippetConfig> = {
   },
 
   hidePfp: {
-    name: "Hide PFP",
+    name: "Hide Profile Picture",
     description: "Hide your profile picture across Schoolbox.",
     default: true,
   },
 
   hidePwaPrompt: {
     name: "Hide PWA Prompt",
-    description: "Hides the prompt in the notifications menu to install Schoolbox as a PWA and enable notifications.",
+    description: "Hide the prompt in the notifications menu to install Schoolbox as a PWA and enable notifications.",
     default: true,
   },
 

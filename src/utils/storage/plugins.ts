@@ -52,7 +52,7 @@ export const pluginConfig: Record<string, Types.PluginConfig> = {
     settings: {
       filled: {
         type: "toggle",
-        name: "Filled Icons",
+        name: "Filled icons",
         description: "Whether the icons should be filled or outlined.",
         default: { toggle: true },
       },
