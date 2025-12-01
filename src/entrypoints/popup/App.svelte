@@ -1,7 +1,6 @@
 <script lang="ts">
   import { flavors } from "@catppuccin/palette";
-  import { globalSettings, needsRefresh, schoolboxUrls, updated } from "@/utils/storage";
-  import { RotateCw } from "@lucide/svelte";
+  import { globalSettings, schoolboxUrls, updated } from "@/utils/storage";
   import { logger } from "@/utils/logger";
   import { browser, onMount } from "#imports";
 
@@ -11,7 +10,6 @@
   import Plugins from "./routes/Plugins.svelte";
   import Themes from "./routes/Themes.svelte";
   import Snippets from "./routes/Snippets.svelte";
-  import Banner from "./components/Banner.svelte";
 
   const routes = {
     "/": Home,
@@ -46,22 +44,14 @@
 </script>
 
 <main
-  class="flex flex-col items-center bg-ctp-base p-6 {globalSettings.state.themeFlavour}"
+  class="bg-ctp-base flex flex-col items-center p-6 {globalSettings.state.themeFlavour}"
   style="--ctp-accent: {accentRgb}">
-  <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
+  <nav class="text-ctp-text mb-4 flex rounded-xl px-4 py-2" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
     <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
   </nav>
-
-  <Banner
-    message="Click here to apply changes"
-    visible={needsRefresh.state}
-    onclick={() => {
-      needsRefresh.storage.setValue(false);
-      refreshSchoolboxURLs();
-    }}><RotateCw /></Banner>
 
   <Router {routes} />
 </main>

@@ -18,13 +18,6 @@ export const globalSettings = new StorageState<Types.Settings>(
       userSnippets: {},
     },
   }),
-  true,
-);
-
-export const needsRefresh = new StorageState(
-  storage.defineItem<boolean>("local:needsRefresh", {
-    fallback: false,
-  }),
 );
 
 // whether schooltape was recently updated

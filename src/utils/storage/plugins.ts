@@ -99,7 +99,6 @@ function buildPluginsFromConfig(config: Record<string, Types.PluginConfig>): Rec
         storage.defineItem<Types.Toggle>(`local:plugin-${pluginId}`, {
           fallback: { toggle: pluginConfig.default },
         }),
-        true,
       ),
     };
 
