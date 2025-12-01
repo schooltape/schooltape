@@ -135,25 +135,28 @@ export function injectUserSnippet(id: string) {
     return;
   }
 
-  if (snippet.toggle === true) {
-    // check not already injected
-    const style = document.querySelector(`userSnippet-${id}`);
-    if (style) {
-      logger.info(`user snippet with id ${id} already injected, aborting`);
-      return;
-    }
-
-    // inject user snippet
-    fetch(`https://gist.githubusercontent.com/${snippet.author}/${id}/raw`)
-      .then((response) => response.text())
-      .then((css) => {
-        const style = document.createElement("style");
-        style.textContent = css;
-        style.dataset.schooltape = `userSnippet-${id}`;
-        document.head.appendChild(style);
-        logger.info(`injected user snippet with id ${id}`);
-      });
+  if (!snippet.toggle) {
+    logger.error(`trying to inject user snippet with id ${id} which is disabled, aborting`);
+    return;
   }
+
+  // check not already injected
+  const style = document.querySelector(`userSnippet-${id}`);
+  if (style) {
+    logger.info(`user snippet with id ${id} already injected, aborting`);
+    return;
+  }
+
+  // inject user snippet
+  fetch(`https://gist.githubusercontent.com/${snippet.author}/${id}/raw`)
+    .then((response) => response.text())
+    .then((css) => {
+      const style = document.createElement("style");
+      style.textContent = css;
+      style.dataset.schooltape = `userSnippet-${id}`;
+      document.head.appendChild(style);
+      logger.info(`injected user snippet with id ${id}`);
+    });
 }
 
 export function uninjectUserSnippet(id: string) {
