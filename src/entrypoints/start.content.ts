@@ -7,6 +7,7 @@ import {
   injectUserSnippet,
   uninjectUserSnippet,
   hasChanged,
+  uninjectCatppuccin,
 } from "@/utils";
 import { EXCLUDE_MATCHES, LOGO_INFO } from "@/utils/constants";
 import type { LogoId, Settings } from "@/utils/storage";
@@ -25,11 +26,13 @@ export default defineContentScript({
 
     const updateThemes: WatchCallback<Settings> = (newValue, oldValue) => {
       // if global or themes was changed
-      if (hasChanged(newValue, oldValue, ["global", "themes"])) {
+      if (hasChanged(newValue, oldValue, ["global", "themes", "themeFlavour", "themeAccent"])) {
         if (newValue.global && newValue.themes) {
           injectThemes();
+          injectCatppuccin();
         } else {
           uninjectThemes();
+          uninjectCatppuccin();
         }
       }
     };
@@ -54,9 +57,7 @@ export default defineContentScript({
       // inject themes
       if (settings.themes) {
         injectThemes();
-
-        // inject CSS variables
-        injectCatppuccin(settings.themeFlavour, settings.themeAccent);
+        injectCatppuccin();
       }
 
       // inject logo
@@ -65,8 +66,10 @@ export default defineContentScript({
       // inject user snippets
       if (settings.snippets) {
         const userSnippets = globalSettings.get().userSnippets;
-        for (const id of Object.keys(userSnippets)) {
-          injectUserSnippet(id);
+        for (const [id, snippet] of Object.entries(userSnippets)) {
+          if (snippet.toggle) {
+            injectUserSnippet(id);
+          }
         }
       }
 

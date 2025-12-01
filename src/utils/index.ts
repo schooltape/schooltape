@@ -4,16 +4,35 @@ import { logger } from "./logger";
 import { globalSettings } from "./storage";
 import type { LogoInfo } from "./storage";
 
-// TODO: uninjectStyles
-export function injectStyles(styleText: string) {
-  logger.info(`injecting styles`);
-  const style = document.createElement("style");
-  style.textContent = styleText;
-  style.classList.add("schooltape");
-  document.head.append(style);
+function schooltapeQuerySelector(id: string) {
+  return document.querySelector(`[data-schooltape="${id}"]`);
 }
 
-export function injectCatppuccin(flavour: string, accent: string) {
+export function injectStyles(styleText: string, id: string) {
+  logger.info(`injecting styles with id ${id}`);
+  const style = document.createElement("style");
+  style.textContent = styleText;
+  style.dataset.schooltape = `inline-${id}`;
+  document.head.append(style);
+  // logger.info(`injected styles with id ${id}`);
+}
+
+export function uninjectStyles(id: string) {
+  logger.info(`uninjecting styles with id ${id}`);
+  const style = schooltapeQuerySelector(`inline-${id}`);
+  if (style) {
+    document.head.removeChild(style);
+    // logger.info(`uninjected styles with id ${id}`);
+  } else {
+    // logger.warn(`styles with id ${id} not found, aborting`)
+  }
+}
+
+export function injectCatppuccin() {
+  const settings = globalSettings.get();
+  const flavour = settings.themeFlavour;
+  const accent = settings.themeAccent;
+
   logger.info(`injecting catppuccin: ${flavour} ${accent}`);
   let styleText = ":root {";
   const flavourArray = flavorEntries.find((entry) => entry[0] === flavour);
@@ -26,7 +45,11 @@ export function injectCatppuccin(flavour: string, accent: string) {
     });
   }
   styleText += "}";
-  injectStyles(styleText);
+  injectStyles(styleText, "catppuccin");
+}
+
+export function uninjectCatppuccin() {
+  uninjectStyles("catppuccin");
 }
 
 export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
@@ -76,7 +99,7 @@ export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function injectStylesheet(url: any, id: string) {
   // check if stylesheet has already been injected
-  const existingLink = document.querySelector(`link[data-schooltape="${id}"]`);
+  const existingLink = schooltapeQuerySelector(`stylesheet-${id}`);
   if (existingLink) {
     logger.info(`stylesheet with id ${id} already injected, aborting`);
     return;
@@ -87,13 +110,13 @@ export function injectStylesheet(url: any, id: string) {
   const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = browser.runtime.getURL(url);
-  link.dataset.schooltape = id;
+  link.dataset.schooltape = `stylesheet-${id}`;
   document.head.appendChild(link);
 }
 
 export function uninjectStylesheet(id: string) {
   logger.info(`uninjecting stylesheet with id ${id}`);
-  const link = document.querySelector(`link[data-schooltape="${id}"]`);
+  const link = schooltapeQuerySelector(`stylesheet-${id}`);
   if (link) {
     document.head.removeChild(link);
   } else {
@@ -114,7 +137,7 @@ export function injectUserSnippet(id: string) {
 
   if (snippet.toggle === true) {
     // check not already injected
-    const style = document.querySelector(`style[data-schooltape="userSnippet-${id}"]`);
+    const style = document.querySelector(`userSnippet-${id}`);
     if (style) {
       logger.info(`user snippet with id ${id} already injected, aborting`);
       return;
@@ -135,7 +158,7 @@ export function injectUserSnippet(id: string) {
 
 export function uninjectUserSnippet(id: string) {
   logger.info(`uninjecting user snippet with id ${id}`);
-  const style = document.querySelector(`style[data-schooltape="userSnippet-${id}"]`);
+  const style = document.querySelector(`userSnippet-${id}`);
   if (style) {
     document.head.removeChild(style);
     logger.info(`uninjected user snippet with id ${id}`);
@@ -144,23 +167,14 @@ export function uninjectUserSnippet(id: string) {
   }
 }
 
-function getChangedValues<T extends Record<string, any>>(newValue: T, oldValue: T) {
-  const changedKeys = [];
+export function hasChanged<T extends Record<string, any>>(newValue: T, oldValue: T, keys: (keyof T)[]) {
+  const changed: (keyof T)[] = [];
 
   for (const key in newValue) {
     if (newValue.hasOwnProperty(key) && oldValue[key] !== newValue[key]) {
-      changedKeys.push(key);
+      changed.push(key);
     }
   }
 
-  return changedKeys;
-}
-
-function includesSome(array: string[], items: string[]) {
-  return items.some((item) => array.includes(item));
-}
-
-export function hasChanged<T extends Record<string, any>>(newValue: T, oldValue: T, keys: string[]) {
-  const changed = getChangedValues(newValue, oldValue);
-  return includesSome(changed, keys);
+  return keys.some((item) => changed.includes(item));
 }
