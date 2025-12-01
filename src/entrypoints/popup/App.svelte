@@ -1,7 +1,6 @@
 <script lang="ts">
   import { flavors } from "@catppuccin/palette";
-  import { globalSettings, schoolboxUrls, updated } from "@/utils/storage";
-  import { logger } from "@/utils/logger";
+  import { globalSettings, updated } from "@/utils/storage";
   import { browser, onMount } from "#imports";
 
   import Router from "svelte-spa-router";
@@ -17,17 +16,6 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-
-  async function refreshSchoolboxURLs() {
-    logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    const urls = (await schoolboxUrls.storage.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
-    const tabs = await browser.tabs.query({ url: urls });
-    tabs.forEach((tab) => {
-      if (tab.id) {
-        browser.tabs.reload(tab.id);
-      }
-    });
-  }
 
   function getAccentRgb(accent: string, flavour: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
