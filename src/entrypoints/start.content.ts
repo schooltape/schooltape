@@ -1,19 +1,19 @@
 import { browser, defineContentScript } from "#imports";
 import {
+  hasChanged,
   injectCatppuccin,
   injectLogo,
   injectStylesheet,
-  uninjectStylesheet,
   injectUserSnippet,
-  uninjectUserSnippet,
-  hasChanged,
   uninjectCatppuccin,
+  uninjectStylesheet,
+  uninjectUserSnippet,
 } from "@/utils";
 import { EXCLUDE_MATCHES, LOGO_INFO } from "@/utils/constants";
 import type { LogoId, Settings } from "@/utils/storage";
 import { globalSettings, schoolboxUrls } from "@/utils/storage";
+import type { WatchCallback } from "wxt/utils/storage";
 import cssUrl from "./catppuccin.css?url";
-import { WatchCallback } from "wxt/utils/storage";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -50,7 +50,7 @@ export default defineContentScript({
       }
     };
 
-    const injectThemes = () => injectStylesheet(cssUrl, "themes");
+    const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
     const uninjectThemes = () => uninjectStylesheet("themes");
 
     if (settings.global && urls.includes(window.location.origin)) {

@@ -1,4 +1,4 @@
-import { injectStyles } from "@/utils";
+import { injectInlineStyles } from "@/utils";
 import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
@@ -11,8 +11,9 @@ export default function init() {
       if (content && footer) {
         content.appendChild(footer);
       }
-      injectStyles(styleText);
+      injectInlineStyles(styleText, "plugin-scrollSegments");
     },
+    () => {},
     ["#content", "#footer"],
   );
 }

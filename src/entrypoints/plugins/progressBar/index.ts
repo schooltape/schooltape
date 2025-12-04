@@ -1,12 +1,15 @@
-import { injectStyles } from "@/utils";
+import { injectInlineStyles, schooltapeQuerySelectorAll, uninjectInlineStyles } from "@/utils";
 import type { Period } from "@/utils/periodUtils";
 import { getListOfPeriods } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
+const ID = "progressBar";
+const PLUGIN_ID = `plugin-${ID}`;
+
 export default function init() {
   definePlugin(
-    "progressBar",
+    ID,
     () => {
       if (window.location.pathname === "/" && document.querySelector(".timetable")) {
         const periodList = getListOfPeriods();
@@ -15,15 +18,25 @@ export default function init() {
         progressRow.classList.add("progress-container");
         document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
 
-        injectStyles(styleText);
-        insertProgressBars(periodList, progressRow);
+        injectInlineStyles(styleText, PLUGIN_ID);
+        injectProgressBars(periodList, progressRow);
       }
+    },
+    () => {
+      uninjectInlineStyles(PLUGIN_ID);
+      uninjectProgressBars();
     },
     [".timetable"],
   );
 }
 
-function insertProgressBars(periodList: Period[], container: HTMLElement) {
+function getProgressBars() {
+  return schooltapeQuerySelectorAll(PLUGIN_ID);
+}
+
+function injectProgressBars(periodList: Period[], container: HTMLElement) {
+  if (getProgressBars().length > 0) return;
+
   periodList.forEach((period) => {
     const td = document.createElement("td");
     const progressBar = document.createElement("progress");
@@ -32,6 +45,7 @@ function insertProgressBars(periodList: Period[], container: HTMLElement) {
     progressBar.max = 100;
     progressBar.style.width = "100%";
     progressBar.value = progress;
+    progressBar.dataset.schooltape = PLUGIN_ID;
 
     if (progress < 100) {
       const intervalId = setInterval(() => {
@@ -45,4 +59,8 @@ function insertProgressBars(periodList: Period[], container: HTMLElement) {
     td.appendChild(progressBar);
     container.appendChild(td);
   });
+}
+
+function uninjectProgressBars() {
+  getProgressBars().forEach((progressBar) => document.removeChild(progressBar));
 }

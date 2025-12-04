@@ -1,14 +1,17 @@
 import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
-import { globalSettings } from "./storage";
 import type { LogoInfo } from "./storage";
+import { globalSettings } from "./storage";
 
-function schooltapeQuerySelector(id: string) {
+export function schooltapeQuerySelector(id: string) {
   return document.querySelector(`[data-schooltape="${id}"]`);
 }
+export function schooltapeQuerySelectorAll(id: string) {
+  return document.querySelectorAll(`[data-schooltape="${id}"]`);
+}
 
-export function injectStyles(styleText: string, id: string) {
+export function injectInlineStyles(styleText: string, id: string) {
   logger.info(`injecting styles with id ${id}`);
   const style = document.createElement("style");
   style.textContent = styleText;
@@ -17,7 +20,7 @@ export function injectStyles(styleText: string, id: string) {
   // logger.info(`injected styles with id ${id}`);
 }
 
-export function uninjectStyles(id: string) {
+export function uninjectInlineStyles(id: string) {
   logger.info(`uninjecting styles with id ${id}`);
   const style = schooltapeQuerySelector(`inline-${id}`);
   if (style) {
@@ -45,11 +48,11 @@ export function injectCatppuccin() {
     });
   }
   styleText += "}";
-  injectStyles(styleText, "catppuccin");
+  injectInlineStyles(styleText, "catppuccin");
 }
 
 export function uninjectCatppuccin() {
-  uninjectStyles("catppuccin");
+  uninjectInlineStyles("catppuccin");
 }
 
 export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
@@ -109,7 +112,7 @@ export function injectStylesheet(url: any, id: string) {
   logger.info(`injecting stylesheet with id ${id}: ${url}`);
   const link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = browser.runtime.getURL(url);
+  link.href = url;
   link.dataset.schooltape = `stylesheet-${id}`;
   document.head.appendChild(link);
 }

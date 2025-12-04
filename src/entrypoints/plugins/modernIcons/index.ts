@@ -1,6 +1,7 @@
-import { injectStyles } from "@/utils";
+import { injectInlineStyles, injectStylesheet, uninjectInlineStyles, uninjectStylesheet } from "@/utils";
 import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
+import { logger } from "@/utils/logger";
 
 export default function init() {
   definePlugin(
@@ -63,17 +64,19 @@ export default function init() {
       // logger.info(fontUrl);
 
       // inject font face
-      const style = document.createElement("link");
-      style.rel = "stylesheet";
-      style.href = fontUrl;
-      style.type = "text/css";
-      document.head.appendChild(style);
+      injectStylesheet(fontUrl, "plugin-modernIcons");
 
-      injectStyles(styleText);
+      // inject icon styling
+      injectInlineStyles(styleText, "plugin-modernIcons");
 
       for (const [className, iconName] of Object.entries(icons)) {
         insertIcon(className, iconName, settings?.toggle.filled ?? false);
       }
+    },
+    () => {
+      uninjectStylesheet("plugin-modernIcons");
+      uninjectInlineStyles("plugin-modernIcons");
+      logger.warn("not implemented!");
     },
     ["nav.tab-bar .top-menu", "#overflow-nav"],
   );
