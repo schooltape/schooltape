@@ -4,11 +4,18 @@ import { logger } from "./logger";
 import type { LogoInfo } from "./storage";
 import { globalSettings } from "./storage";
 
+export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
+export function setDataAttr(el: HTMLElement, id: string) {
+  el.dataset.schooltape = id;
+}
+
 export function schooltapeQuerySelector(id: string) {
-  return document.querySelector(`[data-schooltape="${id}"]`);
+  // TODO: deprecate
+  return document.querySelector(dataAttr(id));
 }
 export function schooltapeQuerySelectorAll(id: string) {
-  return document.querySelectorAll(`[data-schooltape="${id}"]`);
+  // TODO: deprecate
+  return document.querySelectorAll(dataAttr(id));
 }
 
 export function injectInlineStyles(styleText: string, id: string) {

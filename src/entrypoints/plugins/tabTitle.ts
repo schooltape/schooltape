@@ -1,9 +1,23 @@
+import { dataAttr, setDataAttr } from "@/utils";
 import { definePlugin } from "@/utils/plugin";
+
+const ID = "tabTitle";
+const PLUGIN_ID = `plugin-${ID}`;
 
 export default function init() {
   definePlugin(
-    "tabTitle",
+    ID,
     async (settings) => {
+      // if already injected, skip
+      if (document.querySelector(`meta${dataAttr(PLUGIN_ID)}`)) return;
+
+      // backup original title (used for uninjection)
+      const meta = document.createElement("meta");
+      setDataAttr(meta, PLUGIN_ID);
+      meta.name = "original-title"; // not needed but good label
+      meta.content = document.title;
+      document.head.appendChild(meta);
+
       const path = window.location.pathname;
       const titleMap: { [key: string]: string } = {
         "/": "Homepage",
@@ -42,6 +56,13 @@ export default function init() {
         } else {
           document.title = document.getElementsByTagName("h1")[0].innerText;
         }
+      }
+    },
+    () => {
+      const meta = document.querySelector<HTMLMetaElement>(`meta${dataAttr(PLUGIN_ID)}`);
+      if (meta) {
+        document.title = meta.content;
+        document.head.removeChild(meta);
       }
     },
     ["h1"],
