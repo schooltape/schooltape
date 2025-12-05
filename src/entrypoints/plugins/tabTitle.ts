@@ -1,22 +1,17 @@
-import { dataAttr, setDataAttr } from "@/utils";
 import { definePlugin } from "@/utils/plugin";
 
 const ID = "tabTitle";
-const PLUGIN_ID = `plugin-${ID}`;
+let originalTitle: string | null = null;
 
 export default function init() {
   definePlugin(
     ID,
     async (settings) => {
-      // if already injected, skip
-      if (document.querySelector(`meta${dataAttr(PLUGIN_ID)}`)) return;
+      // if already injected, abort
+      if (originalTitle) return;
 
       // backup original title (used for uninjection)
-      const meta = document.createElement("meta");
-      setDataAttr(meta, PLUGIN_ID);
-      meta.name = "original-title"; // not needed but good label
-      meta.content = document.title;
-      document.head.appendChild(meta);
+      originalTitle = document.title;
 
       const path = window.location.pathname;
       const titleMap: { [key: string]: string } = {
@@ -59,11 +54,11 @@ export default function init() {
       }
     },
     () => {
-      const meta = document.querySelector<HTMLMetaElement>(`meta${dataAttr(PLUGIN_ID)}`);
-      if (meta) {
-        document.title = meta.content;
-        document.head.removeChild(meta);
-      }
+      // if not injected, abort
+      if (!originalTitle) return;
+
+      document.title = originalTitle;
+      originalTitle = null;
     },
     ["h1"],
   );
