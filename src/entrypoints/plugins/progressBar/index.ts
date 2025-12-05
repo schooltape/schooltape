@@ -1,4 +1,4 @@
-import { injectInlineStyles, schooltapeQuerySelectorAll, uninjectInlineStyles } from "@/utils";
+import { dataAttr, injectInlineStyles, uninjectInlineStyles } from "@/utils";
 import type { Period } from "@/utils/periodUtils";
 import { getListOfPeriods } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
@@ -30,12 +30,11 @@ export default function init() {
   );
 }
 
-function getProgressBars() {
-  return schooltapeQuerySelectorAll(PLUGIN_ID);
-}
+const getProgressBars = () => document.querySelectorAll(dataAttr(PLUGIN_ID));
 
 function injectProgressBars(periodList: Period[], container: HTMLElement) {
-  if (getProgressBars().length > 0) return;
+  const progressBars = getProgressBars();
+  if (progressBars && progressBars.length > 0) return;
 
   periodList.forEach((period) => {
     const td = document.createElement("td");
@@ -62,5 +61,10 @@ function injectProgressBars(periodList: Period[], container: HTMLElement) {
 }
 
 function uninjectProgressBars() {
-  getProgressBars().forEach((progressBar) => document.removeChild(progressBar));
+  const progressBars = getProgressBars();
+  if (progressBars && progressBars.length === 0) return;
+
+  for (const bar of progressBars) {
+    document.removeChild(bar);
+  }
 }

@@ -9,15 +9,6 @@ export function setDataAttr(el: HTMLElement, id: string) {
   el.dataset.schooltape = id;
 }
 
-export function schooltapeQuerySelector(id: string) {
-  // TODO: deprecate
-  return document.querySelector(dataAttr(id));
-}
-export function schooltapeQuerySelectorAll(id: string) {
-  // TODO: deprecate
-  return document.querySelectorAll(dataAttr(id));
-}
-
 export function injectInlineStyles(styleText: string, id: string) {
   logger.info(`injecting styles with id ${id}`);
   const style = document.createElement("style");
@@ -29,13 +20,8 @@ export function injectInlineStyles(styleText: string, id: string) {
 
 export function uninjectInlineStyles(id: string) {
   logger.info(`uninjecting styles with id ${id}`);
-  const style = schooltapeQuerySelector(`inline-${id}`);
-  if (style) {
-    document.head.removeChild(style);
-    // logger.info(`uninjected styles with id ${id}`);
-  } else {
-    // logger.warn(`styles with id ${id} not found, aborting`)
-  }
+  const style = document.querySelector(dataAttr(`inline-${id}`));
+  if (style) document.head.removeChild(style);
 }
 
 export function injectCatppuccin() {
@@ -109,11 +95,8 @@ export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function injectStylesheet(url: any, id: string) {
   // check if stylesheet has already been injected
-  const existingLink = schooltapeQuerySelector(`stylesheet-${id}`);
-  if (existingLink) {
-    logger.info(`stylesheet with id ${id} already injected, aborting`);
-    return;
-  }
+  const existingLink = document.querySelector(dataAttr(`stylesheet-${id}`));
+  if (existingLink) return;
 
   // inject stylesheet
   logger.info(`injecting stylesheet with id ${id}: ${url}`);
@@ -126,12 +109,9 @@ export function injectStylesheet(url: any, id: string) {
 
 export function uninjectStylesheet(id: string) {
   logger.info(`uninjecting stylesheet with id ${id}`);
-  const link = schooltapeQuerySelector(`stylesheet-${id}`);
-  if (link) {
-    document.head.removeChild(link);
-  } else {
-    // logger.warn(`stylesheet with id ${id} not found, aborting`);
-  }
+
+  const link = document.querySelector(dataAttr(`stylesheet-${id}`));
+  if (link) document.head.removeChild(link);
 }
 
 export function injectUserSnippet(id: string) {
