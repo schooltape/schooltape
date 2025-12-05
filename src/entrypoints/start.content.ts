@@ -53,6 +53,12 @@ export default defineContentScript({
     const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
     const uninjectThemes = () => uninjectStylesheet("themes");
 
+    // storage listeners for hot reload
+    globalSettings.storage.watch((newValue, oldValue) => {
+      updateThemes(newValue, oldValue);
+      updateUserSnippets(newValue, oldValue);
+    });
+
     if (settings.global && urls.includes(window.location.origin)) {
       // inject themes
       if (settings.themes) {
@@ -75,13 +81,6 @@ export default defineContentScript({
 
       // update icon
       browser.runtime.sendMessage({ updateIcon: true });
-
-      // storage listeners for hot reload
-      // if global is toggled, inject or uninject theme and snippets
-      globalSettings.storage.watch((newValue, oldValue) => {
-        updateThemes(newValue, oldValue);
-        updateUserSnippets(newValue, oldValue);
-      });
     }
   },
 });
