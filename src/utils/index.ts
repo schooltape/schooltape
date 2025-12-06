@@ -160,11 +160,11 @@ export function uninjectUserSnippet(id: string) {
   }
 }
 
-export function hasChanged<T extends Record<string, any>>(newValue: T, oldValue: T, keys: (keyof T)[]) {
+export function hasChanged<T extends Record<string, unknown>>(newValue: T, oldValue: T, keys: (keyof T)[]) {
   const changed: (keyof T)[] = [];
 
   for (const key in newValue) {
-    if (newValue.hasOwnProperty(key) && oldValue[key] !== newValue[key]) {
+    if (Object.prototype.hasOwnProperty.call(newValue, key) && oldValue[key] !== newValue[key]) {
       changed.push(key);
     }
   }

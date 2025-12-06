@@ -1,5 +1,4 @@
-import { browser, defineContentScript } from "#imports";
-import { dataAttr, hasChanged, setDataAttr } from "@/utils";
+import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
 import { logger } from "@/utils/logger";
 import { globalSettings, schoolboxUrls } from "@/utils/storage";
