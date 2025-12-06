@@ -9,7 +9,10 @@ export async function definePlugin(
     toggle: Record<string, boolean>;
     slider: Record<string, Slider>;
   }) => Promise<void> | void,
-  uninjectCallback: () => void,
+  uninjectCallback: (settings?: {
+    toggle: Record<string, boolean>;
+    slider: Record<string, Slider>;
+  }) => Promise<void> | void,
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
@@ -27,7 +30,7 @@ export async function definePlugin(
 
     const uninject = () => {
       logger.info(`uninjecting plugin: ${plugins[pluginId].name}`);
-      uninjectCallback();
+      uninjectCallback(getSettingsValues(plugins[pluginId]?.settings));
     };
 
     const initWatchers = () => {
