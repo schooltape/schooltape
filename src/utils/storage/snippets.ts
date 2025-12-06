@@ -43,7 +43,6 @@ function buildSnippetsFromConfig(
         storage.defineItem<Types.Toggle>(`local:snippet-${snippetId}`, {
           fallback: { toggle: snippetConfig.default },
         }),
-        true,
       ),
     };
 

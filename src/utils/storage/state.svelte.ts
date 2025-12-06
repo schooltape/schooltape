@@ -1,25 +1,18 @@
 import type { WxtStorageItem } from "#imports";
-import { needsRefresh } from "./global";
 
 export class StorageState<T> {
   public state;
 
-  constructor(
-    public storage: WxtStorageItem<T, {}>,
-    refresh: boolean = false,
-  ) {
+  constructor(public storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
 
     this.storage.getValue().then(this.update);
-    this.storage.watch((newState) => this.update(newState, refresh));
+    this.storage.watch((newState) => this.update(newState));
   }
 
-  private update = (newState: T | null, refresh?: boolean) => {
+  private update = (newState: T | null) => {
     this.state = newState ?? this.storage.fallback;
-    if (refresh && this.storage.key !== "local:needsRefresh") {
-      needsRefresh.storage.setValue(true);
-    }
   };
 
   async set(updates: Partial<T>) {
