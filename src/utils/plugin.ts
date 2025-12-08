@@ -16,6 +16,7 @@ export async function definePlugin(
   elementsToWaitFor: string[] = [],
 ) {
   const plugin = await plugins[pluginId].toggle.storage.getValue();
+  let injected = false;
 
   logger.info(`${plugins[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
@@ -24,13 +25,17 @@ export async function definePlugin(
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     const inject = () => {
+      if (injected) return;
       logger.info(`injecting plugin: ${plugins[pluginId].name}`);
       injectCallback(getSettingsValues(plugins[pluginId]?.settings));
+      injected = true;
     };
 
     const uninject = () => {
+      if (!injected) return;
       logger.info(`uninjecting plugin: ${plugins[pluginId].name}`);
       uninjectCallback(getSettingsValues(plugins[pluginId]?.settings));
+      injected = false;
     };
 
     const initWatchers = () => {

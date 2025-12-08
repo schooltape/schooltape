@@ -13,7 +13,7 @@ export function injectInlineStyles(styleText: string, id: string) {
   logger.info(`injecting styles with id ${id}`);
   const style = document.createElement("style");
   style.textContent = styleText;
-  style.dataset.schooltape = `inline-${id}`;
+  setDataAttr(style, `inline-${id}`);
   document.head.append(style);
   // logger.info(`injected styles with id ${id}`);
 }
@@ -102,7 +102,7 @@ export function injectStylesheet(url: string, id: string) {
   const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = url;
-  link.dataset.schooltape = `stylesheet-${id}`;
+  setDataAttr(link, `stylesheet-${id}`);
   document.head.appendChild(link);
 }
 
@@ -142,7 +142,7 @@ export function injectUserSnippet(id: string) {
     .then((css) => {
       const style = document.createElement("style");
       style.textContent = css;
-      style.dataset.schooltape = `userSnippet-${id}`;
+      setDataAttr(style, `userSnippet-${id}`);
       document.head.appendChild(style);
       logger.info(`injected user snippet with id ${id}`);
     });
