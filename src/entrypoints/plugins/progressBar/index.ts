@@ -1,4 +1,4 @@
-import { dataAttr, injectInlineStyles, uninjectInlineStyles } from "@/utils";
+import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
 import type { Period } from "@/utils/periodUtils";
 import { getListOfPeriods } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
@@ -16,6 +16,7 @@ export default function init() {
 
         const progressRow = document.createElement("tr");
         progressRow.classList.add("progress-container");
+        setDataAttr(progressRow, `${PLUGIN_ID}-row`);
         document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
 
         injectInlineStyles(styleText, PLUGIN_ID);
@@ -30,13 +31,8 @@ export default function init() {
   );
 }
 
-const getProgressBars = () => document.querySelectorAll(dataAttr(PLUGIN_ID));
-
 function injectProgressBars(periodList: Period[], container: HTMLElement) {
-  const progressBars = getProgressBars();
-  if (progressBars && progressBars.length > 0) return;
-
-  periodList.forEach((period) => {
+  for (const period of periodList) {
     const td = document.createElement("td");
     const progressBar = document.createElement("progress");
     const progress = period.getProgress();
@@ -44,7 +40,6 @@ function injectProgressBars(periodList: Period[], container: HTMLElement) {
     progressBar.max = 100;
     progressBar.style.width = "100%";
     progressBar.value = progress;
-    progressBar.dataset.schooltape = PLUGIN_ID;
 
     if (progress < 100) {
       const intervalId = setInterval(() => {
@@ -57,14 +52,10 @@ function injectProgressBars(periodList: Period[], container: HTMLElement) {
 
     td.appendChild(progressBar);
     container.appendChild(td);
-  });
+  }
 }
 
 function uninjectProgressBars() {
-  const progressBars = getProgressBars();
-  if (progressBars && progressBars.length === 0) return;
-
-  for (const bar of progressBars) {
-    document.removeChild(bar);
-  }
+  const row = document.querySelector(dataAttr(`${PLUGIN_ID}-row`));
+  row?.parentElement?.removeChild(row);
 }
