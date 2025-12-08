@@ -50,6 +50,7 @@ export default defineContentScript({
       }
     };
 
+    // @ts-expect-error unlisted CSS not a PublicPath
     const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
     const uninjectThemes = () => uninjectStylesheet("themes");
 

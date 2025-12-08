@@ -1,8 +1,8 @@
 import { getCurrentPeriod } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
 
-let controller = new AbortController();
 let interval: number | null = null;
+const controller = new AbortController();
 
 export default function init() {
   definePlugin(

@@ -2,7 +2,7 @@ import { browser } from "#imports";
 import { definePlugin } from "@/utils/plugin";
 
 let logos: HTMLAnchorElement[] | null = null;
-let controller = new AbortController();
+const controller = new AbortController();
 
 export default function init() {
   definePlugin(

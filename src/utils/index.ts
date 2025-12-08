@@ -92,8 +92,7 @@ export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function injectStylesheet(url: any, id: string) {
+export function injectStylesheet(url: string, id: string) {
   // check if stylesheet has already been injected
   const existingLink = document.querySelector(dataAttr(`stylesheet-${id}`));
   if (existingLink) return;
@@ -160,7 +159,7 @@ export function uninjectUserSnippet(id: string) {
   }
 }
 
-export function hasChanged<T extends Record<string, unknown>>(newValue: T, oldValue: T, keys: (keyof T)[]) {
+export function hasChanged<T>(newValue: T, oldValue: T, keys: (keyof T)[]) {
   const changed: (keyof T)[] = [];
 
   for (const key in newValue) {
