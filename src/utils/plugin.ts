@@ -24,8 +24,11 @@ export async function definePlugin(
   const urls = (await schoolboxUrls.storage.getValue()).urls;
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
+    const allElementsPresent = () => elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
+
     const inject = () => {
       if (injected) return;
+      if (!allElementsPresent) return;
       logger.info(`injecting plugin: ${plugins[pluginId].name}`);
       injectCallback(getSettingsValues(plugins[pluginId]?.settings));
       injected = true;
@@ -77,8 +80,7 @@ export async function definePlugin(
         if (elementsToWaitFor.length > 0) {
           // create an observer to wait for all elements to be loaded
           const observer = new MutationObserver((_mutations, observer) => {
-            const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
-            if (allElementsPresent) {
+            if (allElementsPresent()) {
               observer.disconnect();
               inject();
             }
@@ -86,8 +88,7 @@ export async function definePlugin(
           observer.observe(document.body, { childList: true, subtree: true });
 
           // check if elements are already present
-          const allElementsPresent = elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
-          if (allElementsPresent) {
+          if (allElementsPresent()) {
             observer.disconnect();
             inject();
           }
