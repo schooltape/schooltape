@@ -24,7 +24,6 @@ export default function init() {
 
             if (logos) {
               const tab = logos[0].href;
-              console.log("closeCurrentTab", closeCurrentTab);
               if (closeCurrentTab) window.close(); // TODO:  Scripts may only close windows that were opened by a script.
               browser.runtime.sendMessage({ toTab: tab });
             }
