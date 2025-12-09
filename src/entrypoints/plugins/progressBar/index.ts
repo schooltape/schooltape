@@ -16,11 +16,12 @@ export default function init() {
 
         const progressRow = document.createElement("tr");
         progressRow.classList.add("progress-container");
-        setDataAttr(progressRow, `${PLUGIN_ID}-row`);
         document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
 
         injectInlineStyles(styleText, PLUGIN_ID);
         injectProgressBars(periodList, progressRow);
+
+        setDataAttr(progressRow, `${PLUGIN_ID}-row`);
       }
     },
     () => {
@@ -32,6 +33,8 @@ export default function init() {
 }
 
 function injectProgressBars(periodList: Period[], container: HTMLElement) {
+  if (document.querySelector(dataAttr(`${PLUGIN_ID}-row`))) return;
+
   for (const period of periodList) {
     const td = document.createElement("td");
     const progressBar = document.createElement("progress");
