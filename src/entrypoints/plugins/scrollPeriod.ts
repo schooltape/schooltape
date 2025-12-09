@@ -1,7 +1,7 @@
 import { getCurrentPeriod } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
 
-let interval: number | null = null;
+let interval: NodeJS.Timeout | null = null;
 const controller = new AbortController();
 
 export default function init() {
@@ -17,7 +17,7 @@ export default function init() {
         const resetCooldownOnMouseMove = settings?.toggle.resetCooldownOnMouseMove;
 
         const setUpdateInterval = () => {
-          interval = setInterval(updateScrollbar, (cooldownDuration?.value || 10) * 1000);
+          interval = setInterval(() => updateScrollbar(timetable), (cooldownDuration?.value || 10) * 1000);
         };
 
         setUpdateInterval();
