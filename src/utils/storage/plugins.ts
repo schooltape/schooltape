@@ -45,23 +45,6 @@ export const pluginConfig: Record<string, Types.PluginConfig> = {
     description: "Displays a progress bar below the timetable to show the time of the day.",
     default: true,
   },
-  changeLogo: {
-    name: "Change Logo",
-    description: "Changes the Schoolbox logo to a logo of your choice",
-    default: true,
-    settings: {
-      // logo: {
-      //   type: "logos",
-      //   default: { logo: "schooltape" },
-      // },
-      setAsFavicon: {
-        type: "toggle",
-        name: "Set as favicon",
-        description: "Whether to set the logo as the tab favicon.",
-        default: { toggle: true },
-      },
-    },
-  },
   modernIcons: {
     name: "Modern Icons",
     description: "Modernise the icons across Schoolbox.",

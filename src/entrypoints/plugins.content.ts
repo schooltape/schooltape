@@ -1,6 +1,5 @@
 import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import changeLogo from "./plugins/changeLogo";
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
@@ -14,13 +13,12 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    changeLogo();
-    homepageSwitcher();
-    modernIcons();
-    progressBar();
-    scrollPeriod();
-    scrollSegments();
     subheader();
+    scrollSegments();
+    scrollPeriod();
+    progressBar();
+    modernIcons();
     tabTitle();
+    homepageSwitcher();
   },
 });

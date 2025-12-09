@@ -2,6 +2,7 @@ import { browser, defineContentScript } from "#imports";
 import {
   hasChanged,
   injectCatppuccin,
+  injectLogo,
   injectStylesheet,
   injectUserSnippet,
   uninjectCatppuccin,
@@ -9,7 +10,7 @@ import {
   uninjectUserSnippet,
 } from "@/utils";
 import { EXCLUDE_MATCHES, LOGO_INFO } from "@/utils/constants";
-import type { Settings } from "@/utils/storage";
+import type { LogoId, Settings } from "@/utils/storage";
 import { globalSettings, schoolboxUrls } from "@/utils/storage";
 import type { WatchCallback } from "wxt/utils/storage";
 import cssUrl from "./catppuccin.css?url";
@@ -37,7 +38,7 @@ export default defineContentScript({
     };
 
     const updateUserSnippets: WatchCallback<Settings> = (newValue, oldValue) => {
-      // if global or userSnippets was changed
+      // if global or userSnippets were changed
       if (hasChanged(newValue, oldValue, ["global", "userSnippets"])) {
         for (const [id, userSnippet] of Object.entries(newValue.userSnippets)) {
           if (newValue.global && newValue.snippets && userSnippet.toggle) {
@@ -55,8 +56,6 @@ export default defineContentScript({
 
     // storage listeners for hot reload
     globalSettings.storage.watch((newValue, oldValue) => {
-      if (!urls.includes(window.location.origin)) return;
-
       updateThemes(newValue, oldValue);
       updateUserSnippets(newValue, oldValue);
     });
@@ -67,6 +66,9 @@ export default defineContentScript({
         injectThemes();
         injectCatppuccin();
       }
+
+      // inject logo
+      injectLogo(LOGO_INFO[settings.themeLogo as LogoId], settings.themeLogoAsFavicon);
 
       // inject user snippets
       if (settings.snippets) {
