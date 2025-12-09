@@ -130,7 +130,7 @@ export function injectUserSnippet(id: string) {
   }
 
   // check not already injected
-  const style = document.querySelector(`userSnippet-${id}`);
+  const style = document.querySelector(dataAttr(`userSnippet-${id}`));
   if (style) {
     logger.info(`user snippet with id ${id} already injected, aborting`);
     return;
@@ -150,13 +150,12 @@ export function injectUserSnippet(id: string) {
 
 export function uninjectUserSnippet(id: string) {
   logger.info(`uninjecting user snippet with id ${id}`);
-  const style = document.querySelector(`userSnippet-${id}`);
-  if (style) {
-    document.head.removeChild(style);
-    logger.info(`uninjected user snippet with id ${id}`);
-  } else {
-    // logger.warn(`user snippet with id ${id} not found, aborting`)
-  }
+
+  const style = document.querySelector(dataAttr(`userSnippet-${id}`));
+  if (!style) return;
+
+  document.head.removeChild(style);
+  logger.info(`uninjected user snippet with id ${id}`);
 }
 
 export function hasChanged<T>(newValue: T, oldValue: T, keys: (keyof T)[]) {
