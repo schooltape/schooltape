@@ -1,5 +1,43 @@
 # Changelog
 
+## [4.3.0](https://github.com/schooltape/schooltape/compare/v4.2.0...v4.3.0) (2025-12-10)
+
+
+### Features
+
+* hot reload ([830b724](https://github.com/schooltape/schooltape/commit/830b7247119a8e4c79b4fcd7c66d64e3ef305363))
+* partial user snippet and theme hot reload ([c7ed1d7](https://github.com/schooltape/schooltape/commit/c7ed1d745326f66d86f0d7ed1b74400cd562fa71))
+* **plugins/changeIcon:** init ([46001a2](https://github.com/schooltape/schooltape/commit/46001a2c3eacd73d596966e8fa7373fe00ef30fb))
+* **plugins/homepageSwitcher:** hot reload ([134e092](https://github.com/schooltape/schooltape/commit/134e0920717b8d326f00ebf84e22402f9c44d012))
+* **plugins/modernIcons:** hot reload ([1ca8ac9](https://github.com/schooltape/schooltape/commit/1ca8ac9c6be9b1a68852f79bc555245ff7ec1660))
+* **plugins/progressBar:** hot reload ([7528f35](https://github.com/schooltape/schooltape/commit/7528f353bc35332a6b737bc9bc2401d94def8e47))
+* **plugins/scrollPeriod:** hot reload ([094ff68](https://github.com/schooltape/schooltape/commit/094ff682b4cc1995e4b68c582539f84961c96fc4))
+* **plugins/scrollSegments:** hot reload ([5881f37](https://github.com/schooltape/schooltape/commit/5881f37931ce3ac56f1bd56f29ddecd8e6582cd6))
+* **plugins/subheader:** hot reload ([d0a8e39](https://github.com/schooltape/schooltape/commit/d0a8e392c12a899afe34c3a3f7d54bc92934941f))
+* **plugins/tabTitle:** hot reload ([0cc6515](https://github.com/schooltape/schooltape/commit/0cc6515f1c3ac6b56ab6714e72a88878c77b85c7))
+* **plugins:** partial hot reload ([2853012](https://github.com/schooltape/schooltape/commit/28530125676550606659eebf29f68eff2091aadd))
+* remove reload banner ([e209046](https://github.com/schooltape/schooltape/commit/e20904617de8252905de636036758185d2776110))
+* remove schooltape from footer ([9187293](https://github.com/schooltape/schooltape/commit/918729375f7d0a5d117ffd29a5821324d44697d4))
+* **themes:** hot reload ([bd13a9f](https://github.com/schooltape/schooltape/commit/bd13a9fb2a3d41a46dc1c71e3c62095e18858641))
+
+
+### Bug Fixes
+
+* allElementsPresent fn call and watchers ([dcef77c](https://github.com/schooltape/schooltape/commit/dcef77c711c706e9799348f143f40e8be6b4186e))
+* **hot reload:** don't inject plugins if required elements are not ([9036ba9](https://github.com/schooltape/schooltape/commit/9036ba9298dc0e481d48f048ebeec34734ff83c1))
+* **plugins/progressBar:** hot reload ([c745024](https://github.com/schooltape/schooltape/commit/c745024c63e9e5ba31e4afaf57b851ec8088509a))
+* **plugins/scrollPeriod:** updateScrollbar fn call ([066654d](https://github.com/schooltape/schooltape/commit/066654d5e91e4050ebaeb0f63417f012f894d2b0))
+* **popup:** grammar of plugins and snippets ([5f2720f](https://github.com/schooltape/schooltape/commit/5f2720f107312ffec289e55f67d255dfe060cc29))
+* remove unused ignores and error handling ([687950a](https://github.com/schooltape/schooltape/commit/687950a40518dab92c9682d9f3bd70e1d9103311))
+* **storage:** closeCurrentTab fallback regression ([0f55e81](https://github.com/schooltape/schooltape/commit/0f55e81e66d23f1d73ccadbc982ce13130b38e0d))
+* **themes:** hot reload not working when disabled -&gt; enabled ([73dc66d](https://github.com/schooltape/schooltape/commit/73dc66df365ebe993d7d85de327981419a5a7e0e))
+* **utils:** add `dataAttr` in query selectors ([267ce51](https://github.com/schooltape/schooltape/commit/267ce511e5bf23dd81fd53e966ee22f9940b07b7))
+
+
+### Reverts
+
+* "feat(plugins/changeIcon): init" ([bf5d50a](https://github.com/schooltape/schooltape/commit/bf5d50a218e8da7db78c9849ab88506c9fadfe26))
+
 ## [4.2.0](https://github.com/schooltape/schooltape/compare/v4.1.4...v4.2.0) (2025-10-29)
 
 
