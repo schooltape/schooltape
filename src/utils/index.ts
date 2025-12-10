@@ -130,22 +130,21 @@ export async function injectUserSnippet(id: string) {
   }
 
   // check not already injected
-  const style = document.querySelector(dataAttr(`userSnippet-${id}`));
-  if (style) {
+  if (document.querySelector(dataAttr(`userSnippet-${id}`))) {
     logger.info(`user snippet with id ${id} already injected, aborting`);
     return;
   }
 
   // inject user snippet
-  fetch(`https://gist.githubusercontent.com/${snippet.author}/${id}/raw`)
-    .then((response) => response.text())
-    .then((css) => {
-      const style = document.createElement("style");
-      style.textContent = css;
-      setDataAttr(style, `userSnippet-${id}`);
-      document.head.appendChild(style);
-      logger.info(`injected user snippet with id ${id}`);
-    });
+  const response = await fetch(`https://gist.githubusercontent.com/${snippet.author}/${id}/raw`);
+  const css = await response.text();
+  const style = document.createElement("style");
+
+  style.textContent = css;
+  setDataAttr(style, `userSnippet-${id}`);
+  document.head.appendChild(style);
+
+  logger.info(`injected user snippet with id ${id}`);
 }
 
 export function uninjectUserSnippet(id: string) {

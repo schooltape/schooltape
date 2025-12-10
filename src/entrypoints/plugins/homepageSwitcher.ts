@@ -2,7 +2,7 @@ import { browser } from "#imports";
 import { definePlugin } from "@/utils/plugin";
 
 let logos: HTMLAnchorElement[] | null = null;
-const controller = new AbortController();
+let controller: AbortController | null = null;
 
 export default function init() {
   definePlugin(
@@ -14,6 +14,8 @@ export default function init() {
 
       // add event listeners
       const closeCurrentTab = settings?.toggle.closeCurrentTab === true;
+      controller = new AbortController();
+
       for (const logo of logos) {
         logo.addEventListener(
           "click",
@@ -35,10 +37,11 @@ export default function init() {
       }
     },
     () => {
-      if (logos === null) return;
-
       // remove event listeners
-      controller.abort();
+      if (controller) {
+        controller.abort();
+        controller = null;
+      }
 
       logos = null;
     },

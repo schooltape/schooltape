@@ -40,6 +40,16 @@ export default defineContentScript({
     const updateUserSnippets: WatchCallback<Settings> = (newValue, oldValue) => {
       // if global or userSnippets were changed
       if (hasChanged(newValue, oldValue, ["global", "userSnippets"])) {
+        // uninject removed snippets
+        if (oldValue) {
+          for (const id of Object.keys(oldValue.userSnippets)) {
+            if (!newValue.userSnippets[id]) {
+              uninjectUserSnippet(id);
+            }
+          }
+        }
+
+        // inject/uninject current snippets
         for (const [id, userSnippet] of Object.entries(newValue.userSnippets)) {
           if (newValue.global && newValue.snippets && userSnippet.toggle) {
             injectUserSnippet(id);

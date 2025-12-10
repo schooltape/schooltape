@@ -2,7 +2,7 @@ import { getCurrentPeriod } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
 
 let interval: NodeJS.Timeout | null = null;
-const controller = new AbortController();
+let controller: AbortController | null = null;
 
 export default function init() {
   definePlugin(
@@ -23,6 +23,7 @@ export default function init() {
         setUpdateInterval();
 
         if (resetCooldownOnMouseMove === true) {
+          controller = new AbortController();
           document.addEventListener(
             "mousemove",
             () => {
@@ -37,9 +38,14 @@ export default function init() {
       }
     },
     () => {
-      controller.abort();
-      if (interval) clearInterval(interval);
-      interval = null;
+      if (controller) {
+        controller.abort();
+        controller = null;
+      }
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
     },
     [".timetable"],
   );

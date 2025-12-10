@@ -1,5 +1,5 @@
 import type { WxtStorageItem } from "#imports";
-import { WatchCallback } from "wxt/utils/storage";
+import type { WatchCallback } from "wxt/utils/storage";
 
 export class StorageState<T> {
   public state;
@@ -28,7 +28,7 @@ export class StorageState<T> {
   }
 
   async update(updates: Partial<T>) {
-    this.set({
+    await this.set({
       ...(await this.get()),
       ...updates,
     });

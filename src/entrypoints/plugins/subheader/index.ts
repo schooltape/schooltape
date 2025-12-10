@@ -61,13 +61,13 @@ function uninjectSubheader() {
   // stop updating the subheader
   intervals.forEach((interval) => clearInterval(interval));
 
-  for (const child of oldChildren) {
-    // remove new children
-    while (subheader.firstChild) {
-      subheader.removeChild(subheader.firstChild);
-    }
+  // remove new children
+  while (subheader.firstChild) {
+    subheader.removeChild(subheader.firstChild);
+  }
 
-    // restore old children
+  // restore old children
+  for (const child of oldChildren) {
     subheader.appendChild(child);
   }
 

@@ -53,8 +53,9 @@ export async function definePlugin(
           }
         }
       });
-      plugins[pluginId].toggle.watch((newValue) => {
-        if (newValue.toggle) {
+      plugins[pluginId].toggle.watch(async (newValue) => {
+        const settings = await globalSettings.get();
+        if (newValue.toggle && settings.global && settings.plugins) {
           inject();
         } else {
           uninject();
@@ -66,7 +67,11 @@ export async function definePlugin(
         for (const setting of Object.values(plugins[pluginId].settings)) {
           setting.state.watch(async () => {
             uninject();
-            if ((await plugins[pluginId].toggle.get()).toggle) inject();
+            const settings = await globalSettings.get();
+            const toggle = await plugins[pluginId].toggle.get();
+            if (toggle && settings.global && settings.plugins) {
+              inject();
+            }
           });
         }
       }

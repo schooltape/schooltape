@@ -37,8 +37,9 @@ export async function defineSnippet(snippetId: SnippetId, styleText: string) {
       }
     }
   });
-  snippets[snippetId].toggle.watch((newValue, oldValue) => {
+  snippets[snippetId].toggle.watch(async (newValue, oldValue) => {
     if (hasChanged(newValue, oldValue, ["toggle"])) {
+      const settings = await globalSettings.get();
       if (newValue.toggle && settings.global && settings.snippets) {
         inject();
       } else {
