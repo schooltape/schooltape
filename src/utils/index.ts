@@ -24,8 +24,8 @@ export function uninjectInlineStyles(id: string) {
   if (style) document.head.removeChild(style);
 }
 
-export function injectCatppuccin() {
-  const settings = globalSettings.get();
+export async function injectCatppuccin() {
+  const settings = await globalSettings.get();
   const flavour = settings.themeFlavour;
   const accent = settings.themeAccent;
 
@@ -113,10 +113,10 @@ export function uninjectStylesheet(id: string) {
   if (link) document.head.removeChild(link);
 }
 
-export function injectUserSnippet(id: string) {
+export async function injectUserSnippet(id: string) {
   logger.info(`injecting user snippet with id ${id}`);
 
-  const userSnippets = globalSettings.get().userSnippets;
+  const userSnippets = (await globalSettings.get()).userSnippets;
   const snippet = userSnippets[id];
 
   if (!snippet) {

@@ -8,10 +8,10 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.storage.getValue();
-    const urls = (await schoolboxUrls.storage.getValue()).urls;
+    const settings = await globalSettings.get();
+    const urls = (await schoolboxUrls.get()).urls;
 
-    logger.info((await schoolboxUrls.storage.getValue()).urls);
+    logger.info(urls);
 
     if (!settings.global) return;
 
@@ -21,7 +21,7 @@ export default defineContentScript({
       if (!urls.includes(window.location.origin)) {
         logger.info(`URL ${window.location.origin} not in storage, adding...`);
         urls.push(window.location.origin);
-        await schoolboxUrls.storage.setValue({ urls });
+        await schoolboxUrls.set({ urls });
         // TODO: hot reload
         window.location.reload();
       }

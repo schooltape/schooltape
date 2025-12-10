@@ -1,31 +1,36 @@
 import type { WxtStorageItem } from "#imports";
+import { WatchCallback } from "wxt/utils/storage";
 
 export class StorageState<T> {
   public state;
+  private storage;
 
-  constructor(public storage: WxtStorageItem<T, {}>) {
+  constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
 
-    this.storage.getValue().then(this.update);
-    this.storage.watch((newState) => this.update(newState));
+    this.storage.getValue().then(this.updateState);
+    this.storage.watch((newState) => this.updateState(newState));
   }
 
-  private update = (newState: T | null) => {
+  private updateState = (newState: T | null) => {
     this.state = newState ?? this.storage.fallback;
   };
 
-  async set(updates: Partial<T>) {
-    const newState = {
-      ...(await this.storage.getValue()),
-      ...updates,
-    };
-
-    await this.storage.setValue(newState);
-  }
+  watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
 
   get() {
-    this.storage.getValue().then(this.update);
-    return $state.snapshot(this.state) as T;
+    return this.storage.getValue();
+  }
+
+  set(newValue: T) {
+    return this.storage.setValue(newValue);
+  }
+
+  async update(updates: Partial<T>) {
+    this.set({
+      ...(await this.get()),
+      ...updates,
+    });
   }
 }

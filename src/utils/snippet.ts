@@ -4,7 +4,7 @@ import type { SnippetId } from "./storage";
 import { globalSettings, schoolboxUrls, snippets } from "./storage";
 
 export async function defineSnippet(snippetId: SnippetId, styleText: string) {
-  const snippet = await snippets[snippetId].toggle.storage.getValue();
+  const snippet = await snippets[snippetId].toggle.get();
   const inject = () => {
     logger.info(`injecting snippet: ${snippets[snippetId].name}`);
     injectInlineStyles(styleText, `snippet-${snippetId}`);
@@ -16,8 +16,8 @@ export async function defineSnippet(snippetId: SnippetId, styleText: string) {
 
   logger.info(`${snippets[snippetId].name}: ${snippet.toggle ? "enabled" : "disabled"}`);
 
-  const settings = await globalSettings.storage.getValue();
-  const urls = (await schoolboxUrls.storage.getValue()).urls;
+  const settings = await globalSettings.get();
+  const urls = (await schoolboxUrls.get()).urls;
 
   if (snippet && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     if (settings.global && settings.snippets && snippet.toggle) {
@@ -27,7 +27,7 @@ export async function defineSnippet(snippetId: SnippetId, styleText: string) {
   }
 
   // settings watcher for uninjection/injection
-  globalSettings.storage.watch((newValue, oldValue) => {
+  globalSettings.watch((newValue, oldValue) => {
     if (hasChanged(newValue, oldValue, ["global", "snippets"])) {
       if (newValue.global && newValue.snippets && snippet.toggle) {
         inject();
@@ -36,7 +36,7 @@ export async function defineSnippet(snippetId: SnippetId, styleText: string) {
       }
     }
   });
-  snippets[snippetId].toggle.storage.watch((newValue, oldValue) => {
+  snippets[snippetId].toggle.watch((newValue, oldValue) => {
     if (hasChanged(newValue, oldValue, ["toggle"])) {
       if (newValue.toggle && settings.global && settings.snippets) {
         inject();

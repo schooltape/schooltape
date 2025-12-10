@@ -15,35 +15,35 @@ export async function definePlugin(
   }) => Promise<void> | void,
   elementsToWaitFor: string[] = [],
 ) {
-  const plugin = await plugins[pluginId].toggle.storage.getValue();
+  const plugin = await plugins[pluginId].toggle.get();
   let injected = false;
 
   logger.info(`${plugins[pluginId].name}: ${plugin.toggle ? "enabled" : "disabled"}`);
 
-  const settings = await globalSettings.storage.getValue();
-  const urls = (await schoolboxUrls.storage.getValue()).urls;
+  const settings = await globalSettings.get();
+  const urls = (await schoolboxUrls.get()).urls;
 
   if (plugin && typeof window !== "undefined" && urls.includes(window.location.origin)) {
     const allElementsPresent = () => elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
 
-    const inject = () => {
+    const inject = async () => {
       if (injected) return;
       if (!allElementsPresent) return;
       logger.info(`injecting plugin: ${plugins[pluginId].name}`);
-      injectCallback(getSettingsValues(plugins[pluginId]?.settings));
+      injectCallback(await getSettingsValues(plugins[pluginId]?.settings));
       injected = true;
     };
 
-    const uninject = () => {
+    const uninject = async () => {
       if (!injected) return;
       logger.info(`uninjecting plugin: ${plugins[pluginId].name}`);
-      uninjectCallback(getSettingsValues(plugins[pluginId]?.settings));
+      uninjectCallback(await getSettingsValues(plugins[pluginId]?.settings));
       injected = false;
     };
 
     const initWatchers = () => {
       // add watchers for injecting plugin
-      globalSettings.storage.watch((newValue, oldValue) => {
+      globalSettings.watch((newValue, oldValue) => {
         if (hasChanged(newValue, oldValue, ["global", "plugins"])) {
           if (newValue.global && newValue.plugins && plugin.toggle) {
             inject();
@@ -52,7 +52,7 @@ export async function definePlugin(
           }
         }
       });
-      plugins[pluginId].toggle.storage.watch((newValue) => {
+      plugins[pluginId].toggle.watch((newValue) => {
         if (newValue.toggle) {
           inject();
         } else {
@@ -63,9 +63,9 @@ export async function definePlugin(
       // reload plugin if settings have been updated
       if (plugins[pluginId].settings) {
         for (const setting of Object.values(plugins[pluginId].settings)) {
-          setting.state.storage.watch(() => {
+          setting.state.watch(async () => {
             uninject();
-            if (plugins[pluginId].toggle.get().toggle) inject();
+            if ((await plugins[pluginId].toggle.get()).toggle) inject();
           });
         }
       }
@@ -107,7 +107,7 @@ export async function definePlugin(
   }
 }
 
-function getSettingsValues(settings?: Record<string, PluginSetting>) {
+async function getSettingsValues(settings?: Record<string, PluginSetting>) {
   if (!settings) return undefined;
 
   const result: {
@@ -116,11 +116,9 @@ function getSettingsValues(settings?: Record<string, PluginSetting>) {
   } = { toggle: {}, slider: {} };
   for (const [key, setting] of Object.entries(settings)) {
     if (setting.type === "toggle") {
-      const value = setting.state.get();
-      result.toggle[key] = value.toggle;
+      result.toggle[key] = (await setting.state.get()).toggle;
     } else if (setting.type === "slider") {
-      const value = setting.state.get();
-      result.slider[key] = value;
+      result.slider[key] = await setting.state.get();
     }
   }
   return result;

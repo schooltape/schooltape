@@ -21,8 +21,8 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.storage.getValue();
-    const urls = (await schoolboxUrls.storage.getValue()).urls;
+    const settings = await globalSettings.get();
+    const urls = (await schoolboxUrls.get()).urls;
 
     const updateThemes: WatchCallback<Settings> = (newValue, oldValue) => {
       // if global or themes was changed
@@ -55,7 +55,7 @@ export default defineContentScript({
     const uninjectThemes = () => uninjectStylesheet("themes");
 
     // storage listeners for hot reload
-    globalSettings.storage.watch((newValue, oldValue) => {
+    globalSettings.watch((newValue, oldValue) => {
       updateThemes(newValue, oldValue);
       updateUserSnippets(newValue, oldValue);
     });
@@ -72,7 +72,7 @@ export default defineContentScript({
 
       // inject user snippets
       if (settings.snippets) {
-        const userSnippets = globalSettings.get().userSnippets;
+        const userSnippets = (await globalSettings.get()).userSnippets;
         for (const [id, snippet] of Object.entries(userSnippets)) {
           if (snippet.toggle) {
             injectUserSnippet(id);

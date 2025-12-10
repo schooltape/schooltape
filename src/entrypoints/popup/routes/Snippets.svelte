@@ -24,7 +24,7 @@
     let sections = snippetURL.split("/");
     let key = sections[sections.length - 1].split(".")[0];
 
-    let settings = await globalSettings.storage.getValue();
+    let settings = await globalSettings.get();
     settings.userSnippets[key] = {
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
@@ -32,7 +32,7 @@
       url: snippetURL,
       toggle: true,
     };
-    await globalSettings.storage.setValue(settings);
+    await globalSettings.set(settings);
   }
 </script>
 
@@ -41,7 +41,7 @@
     title="Snippets"
     checked={globalSettings.state.snippets}
     update={(toggled: boolean) => {
-      globalSettings.set({ snippets: toggled });
+      globalSettings.update({ snippets: toggled });
     }} />
 
   <div class="snippets-container w-full">
@@ -60,8 +60,8 @@
     {/each}
   </div>
   <div class="w-full">
-    <h3 class="my-4 text-ctp-text">User Snippets</h3>
-    <p class="mb-4 text-ctp-overlay2">
+    <h3 class="text-ctp-text my-4">User Snippets</h3>
+    <p class="text-ctp-overlay2 mb-4">
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
@@ -80,9 +80,9 @@
           {id}
           checked={snippet.toggle}
           update={async (toggled: boolean) => {
-            let settings = await globalSettings.storage.getValue();
+            let settings = await globalSettings.get();
             settings.userSnippets[id].toggle = toggled;
-            await globalSettings.storage.setValue(settings);
+            await globalSettings.set(settings);
           }}
           text={snippet.name}
           description={snippet.description}
@@ -90,12 +90,12 @@
         <button
           class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
           onclick={async () => {
-            let settings = await globalSettings.storage.getValue();
+            let settings = await globalSettings.get();
             delete settings.userSnippets[id];
-            await globalSettings.storage.setValue(settings);
+            await globalSettings.set(settings);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
+          ><button class="xsmall hover:text-ctp-mantle hover:bg-(--ctp-accent)">Gist</button></a>
       </div>
     {/each}
   </div>

@@ -14,8 +14,8 @@
   <button
     class="bg-(--ctp-accent) hover:opacity-75 {globalSettings.state.global ? '' : 'opacity-60'}"
     id="toggle"
-    onclick={() => {
-      globalSettings.set({ global: !globalSettings.get().global });
+    onclick={async () => {
+      globalSettings.update({ global: !(await globalSettings.get()).global });
     }}
     >{globalSettings.state.global ? "enabled" : "disabled"}
   </button>
