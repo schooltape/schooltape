@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.1](https://github.com/schooltape/schooltape/compare/v4.3.0...v4.3.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **hot reload:** misc. bugs and race conditions ([dd89b3c](https://github.com/schooltape/schooltape/commit/dd89b3cc2dce2d524ce0885e28fdf38c8c6903ad))
+
 ## [4.3.0](https://github.com/schooltape/schooltape/compare/v4.2.0...v4.3.0) (2025-12-10)
 
 
