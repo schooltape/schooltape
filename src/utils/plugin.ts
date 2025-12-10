@@ -28,7 +28,7 @@ export async function definePlugin(
 
     const inject = async () => {
       if (injected) return;
-      if (!allElementsPresent) return;
+      if (!allElementsPresent()) return;
       logger.info(`injecting plugin: ${plugins[pluginId].name}`);
       injectCallback(await getSettingsValues(plugins[pluginId]?.settings));
       injected = true;
@@ -43,8 +43,9 @@ export async function definePlugin(
 
     const initWatchers = () => {
       // add watchers for injecting plugin
-      globalSettings.watch((newValue, oldValue) => {
+      globalSettings.watch(async (newValue, oldValue) => {
         if (hasChanged(newValue, oldValue, ["global", "plugins"])) {
+          const plugin = await plugins[pluginId].toggle.get();
           if (newValue.global && newValue.plugins && plugin.toggle) {
             inject();
           } else {

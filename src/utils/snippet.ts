@@ -27,8 +27,9 @@ export async function defineSnippet(snippetId: SnippetId, styleText: string) {
   }
 
   // settings watcher for uninjection/injection
-  globalSettings.watch((newValue, oldValue) => {
+  globalSettings.watch(async (newValue, oldValue) => {
     if (hasChanged(newValue, oldValue, ["global", "snippets"])) {
+      const snippet = await snippets[snippetId].toggle.get();
       if (newValue.global && newValue.snippets && snippet.toggle) {
         inject();
       } else {
