@@ -1,9 +1,18 @@
 import { definePlugin } from "@/utils/plugin";
 
+const ID = "tabTitle";
+let originalTitle: string | null = null;
+
 export default function init() {
   definePlugin(
-    "tabTitle",
+    ID,
     async (settings) => {
+      // if already injected, abort
+      if (originalTitle) return;
+
+      // backup original title (used for uninjection)
+      originalTitle = document.title;
+
       const path = window.location.pathname;
       const titleMap: { [key: string]: string } = {
         "/": "Homepage",
@@ -43,6 +52,13 @@ export default function init() {
           document.title = document.getElementsByTagName("h1")[0].innerText;
         }
       }
+    },
+    () => {
+      // if not injected, abort
+      if (!originalTitle) return;
+
+      document.title = originalTitle;
+      originalTitle = null;
     },
     ["h1"],
   );

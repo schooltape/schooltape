@@ -46,9 +46,7 @@ export default defineBackground(() => {
   });
 
   // update icon when toggle or update is changed
-  globalSettings.storage.watch(() => {
-    updateIcon();
-  });
+  globalSettings.watch(updateIcon);
 
   // listen for messages
   interface Message {
@@ -138,10 +136,10 @@ async function updateIcon() {
   if (new Date().getMonth() === 5) {
     iconSuffix += "-ctp";
   }
-  if ((await globalSettings.storage.getValue()).global === false) {
+  if ((await globalSettings.get()).global === false) {
     iconSuffix += "-disabled";
   }
-  if ((await updated.storage.getValue()).icon === true) {
+  if ((await updated.get()).icon === true) {
     iconSuffix += "-badge";
   }
 

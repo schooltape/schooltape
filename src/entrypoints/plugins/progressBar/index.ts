@@ -1,12 +1,15 @@
-import { injectStyles } from "@/utils";
+import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
 import type { Period } from "@/utils/periodUtils";
 import { getListOfPeriods } from "@/utils/periodUtils";
 import { definePlugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
+const ID = "progressBar";
+const PLUGIN_ID = `plugin-${ID}`;
+
 export default function init() {
   definePlugin(
-    "progressBar",
+    ID,
     () => {
       if (window.location.pathname === "/" && document.querySelector(".timetable")) {
         const periodList = getListOfPeriods();
@@ -15,16 +18,24 @@ export default function init() {
         progressRow.classList.add("progress-container");
         document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
 
-        injectStyles(styleText);
-        insertProgressBars(periodList, progressRow);
+        injectInlineStyles(styleText, PLUGIN_ID);
+        injectProgressBars(periodList, progressRow);
+
+        setDataAttr(progressRow, `${PLUGIN_ID}-row`);
       }
+    },
+    () => {
+      uninjectInlineStyles(PLUGIN_ID);
+      uninjectProgressBars();
     },
     [".timetable"],
   );
 }
 
-function insertProgressBars(periodList: Period[], container: HTMLElement) {
-  periodList.forEach((period) => {
+function injectProgressBars(periodList: Period[], container: HTMLElement) {
+  if (document.querySelector(dataAttr(`${PLUGIN_ID}-row`))) return;
+
+  for (const period of periodList) {
     const td = document.createElement("td");
     const progressBar = document.createElement("progress");
     const progress = period.getProgress();
@@ -44,5 +55,10 @@ function insertProgressBars(periodList: Period[], container: HTMLElement) {
 
     td.appendChild(progressBar);
     container.appendChild(td);
-  });
+  }
+}
+
+function uninjectProgressBars() {
+  const row = document.querySelector(dataAttr(`${PLUGIN_ID}-row`));
+  row?.parentElement?.removeChild(row);
 }

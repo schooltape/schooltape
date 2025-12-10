@@ -1,0 +1,7 @@
+.subheader span:not(:last-child):not([data-schooltape="plugin-subheader-period"]:empty)::after {
+  content: " | ";
+  font-weight: bold;
+}
+.subheader a {
+  color: inherit;
+}

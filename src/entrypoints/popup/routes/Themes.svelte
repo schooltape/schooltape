@@ -45,7 +45,7 @@
     {#each Object.entries(logos) as [logoId, logo] (logoId)}
       <button
         onclick={() => {
-          globalSettings.set({ themeLogo: logoId as LogoId });
+          globalSettings.update({ themeLogo: logoId as LogoId });
         }}
         class:highlight={globalSettings.state.themeLogo === logoId}
         class="flex flex-col rounded-lg border border-(--ctp-accent) p-2">
@@ -67,7 +67,7 @@
   <div class="mt-4">
     <Toggle
       update={(toggled) => {
-        globalSettings.set({ themeLogoAsFavicon: toggled });
+        globalSettings.update({ themeLogoAsFavicon: toggled });
       }}
       checked={globalSettings.state.themeLogoAsFavicon}
       id="setAsFavicon"
@@ -81,10 +81,10 @@
     title="Themes"
     checked={globalSettings.state.themes}
     update={(toggled: boolean) => {
-      globalSettings.set({ themes: toggled });
+      globalSettings.update({ themes: toggled });
     }} />
 
-  <div id="flavours" class="my-6 flex rounded-xl py-2 text-ctp-text">
+  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
     {#each flavours as flavour (flavour)}
       <button
         class:active={globalSettings.state.themeFlavour === flavour}
@@ -92,7 +92,7 @@
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
         onclick={() => {
-          globalSettings.set({ themeFlavour: flavour });
+          globalSettings.update({ themeFlavour: flavour });
         }}>{flavour}</button>
     {/each}
   </div>
@@ -105,7 +105,7 @@
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
         onclick={() => {
-          globalSettings.set({ themeAccent: cleanAccent(accent) });
+          globalSettings.update({ themeAccent: cleanAccent(accent) });
         }}></button>
     {/each}
   </div>

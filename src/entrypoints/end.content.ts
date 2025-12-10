@@ -1,4 +1,4 @@
-import { browser, defineContentScript } from "#imports";
+import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
 import { logger } from "@/utils/logger";
 import { globalSettings, schoolboxUrls } from "@/utils/storage";
@@ -8,29 +8,22 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.storage.getValue();
-    const urls = (await schoolboxUrls.storage.getValue()).urls;
+    const settings = await globalSettings.get();
+    const urls = (await schoolboxUrls.get()).urls;
 
-    logger.info((await schoolboxUrls.storage.getValue()).urls);
+    logger.info(urls);
 
     if (!settings.global) return;
-    const footer = document.querySelector("#footer > ul");
-    if (footer && footer.innerHTML.includes("Schoolbox")) {
-      const footerListItem = document.createElement("li");
-      const footerLink = document.createElement("a");
-      footerLink.href = "https://github.com/schooltape/schooltape";
-      footerLink.textContent = `Schooltape v${browser.runtime.getManifest().version}`;
-      footerListItem.appendChild(footerLink);
-      footer.appendChild(footerListItem);
 
+    const footer = document.querySelector("#footer > ul");
+
+    if (footer && footer.innerHTML.includes("Schoolbox")) {
       if (!urls.includes(window.location.origin)) {
-        logger.info("[end.content.ts] URL not in settings, adding...");
-        if (!urls.includes(window.location.origin)) {
-          urls.push(window.location.origin);
-          await schoolboxUrls.storage.setValue({ urls });
-          // TODO: hot reload
-          window.location.reload();
-        }
+        logger.info(`URL ${window.location.origin} not in storage, adding...`);
+        urls.push(window.location.origin);
+        await schoolboxUrls.set({ urls });
+        // TODO: hot reload
+        window.location.reload();
       }
     }
   },

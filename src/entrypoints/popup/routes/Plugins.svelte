@@ -22,7 +22,7 @@
     title="Plugins"
     checked={globalSettings.state.plugins}
     update={(toggled: boolean) => {
-      globalSettings.set({ plugins: toggled });
+      globalSettings.update({ plugins: toggled });
     }} />
 
   <div class="plugins-container">
@@ -72,8 +72,8 @@
         {:else if setting.type === "slider"}
           <Slider
             {id}
-            update={async (newValue) => {
-              setting.state.set({ value: newValue });
+            update={(newValue) => {
+              setting.state.update({ value: newValue });
             }}
             {...setting.state.state} />
         {/if}

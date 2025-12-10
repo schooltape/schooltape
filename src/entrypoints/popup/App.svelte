@@ -1,8 +1,6 @@
 <script lang="ts">
   import { flavors } from "@catppuccin/palette";
-  import { globalSettings, needsRefresh, schoolboxUrls, updated } from "@/utils/storage";
-  import { RotateCw } from "@lucide/svelte";
-  import { logger } from "@/utils/logger";
+  import { globalSettings, updated } from "@/utils/storage";
   import { browser, onMount } from "#imports";
 
   import Router from "svelte-spa-router";
@@ -11,7 +9,6 @@
   import Plugins from "./routes/Plugins.svelte";
   import Themes from "./routes/Themes.svelte";
   import Snippets from "./routes/Snippets.svelte";
-  import Banner from "./components/Banner.svelte";
 
   const routes = {
     "/": Home,
@@ -19,17 +16,6 @@
     "/themes": Themes,
     "/snippets": Snippets,
   };
-
-  async function refreshSchoolboxURLs() {
-    logger.info("[App.svelte] Refreshing all Schoolbox URLs");
-    const urls = (await schoolboxUrls.storage.getValue()).urls.map((url) => url.replace(/^https:\/\//, "*://") + "/*");
-    const tabs = await browser.tabs.query({ url: urls });
-    tabs.forEach((tab) => {
-      if (tab.id) {
-        browser.tabs.reload(tab.id);
-      }
-    });
-  }
 
   function getAccentRgb(accent: string, flavour: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,28 +26,20 @@
   let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
 
   onMount(() => {
-    updated.set({ icon: false });
+    updated.update({ icon: false });
     browser.runtime.sendMessage({ updateIcon: true });
   });
 </script>
 
 <main
-  class="flex flex-col items-center bg-ctp-base p-6 {globalSettings.state.themeFlavour}"
+  class="bg-ctp-base flex flex-col items-center p-6 {globalSettings.state.themeFlavour}"
   style="--ctp-accent: {accentRgb}">
-  <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
+  <nav class="text-ctp-text mb-4 flex rounded-xl px-4 py-2" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
     <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
     <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
     <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
   </nav>
-
-  <Banner
-    message="Click here to apply changes"
-    visible={needsRefresh.state}
-    onclick={() => {
-      needsRefresh.storage.setValue(false);
-      refreshSchoolboxURLs();
-    }}><RotateCw /></Banner>
 
   <Router {routes} />
 </main>
