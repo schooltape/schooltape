@@ -13,12 +13,14 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    subheader();
-    scrollSegments();
-    scrollPeriod();
-    progressBar();
-    modernIcons();
-    tabTitle();
-    homepageSwitcher();
+    document.addEventListener("DOMContentLoaded", () => {
+      subheader.init();
+      scrollSegments.init();
+      scrollPeriod.init();
+      progressBar.init();
+      modernIcons.init();
+      tabTitle.init();
+      homepageSwitcher.init();
+    });
   },
 });

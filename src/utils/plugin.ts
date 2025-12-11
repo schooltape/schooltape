@@ -50,7 +50,30 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
   }
 
   async init() {
-    if (await this.isEnabled()) this.initObserver();
+    logger.info(`init plugin: ${this.meta.name}`);
+
+    if (await this.isEnabled()) {
+      // wait for elements to be loaded
+      if (this.elementsToWaitFor.length > 0) {
+        // create an observer to wait for all elements to be loaded
+        const observer = new MutationObserver((_mutations, observer) => {
+          if (this.allElementsPresent()) {
+            observer.disconnect();
+            this.inject();
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // check if elements are already present
+        if (this.allElementsPresent()) {
+          observer.disconnect();
+          this.inject();
+        }
+      } else {
+        // no elements to wait for
+        this.inject();
+      }
+    }
 
     // init watchers
     globalSettings.watch((newValue, oldValue) => {
@@ -69,32 +92,8 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     if (await this.isEnabled()) this.inject();
   }
 
-  private initObserver() {
-    // wait for elements to be loaded
-    if (this.elementsToWaitFor.length > 0) {
-      // create an observer to wait for all elements to be loaded
-      const observer = new MutationObserver((_mutations, observer) => {
-        if (this.allElementsPresent()) {
-          observer.disconnect();
-          this.inject();
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-
-      // check if elements are already present
-      if (this.allElementsPresent()) {
-        observer.disconnect();
-        this.inject();
-      }
-    } else {
-      // no elements to wait for
-      this.inject();
-    }
-  }
-
   private inject() {
     if (this.injected) return;
-    if (!this.allElementsPresent()) return;
     logger.info(`injecting plugin: ${this.meta.name}`);
     this.injectCallback(this.settings);
     this.injected = true;

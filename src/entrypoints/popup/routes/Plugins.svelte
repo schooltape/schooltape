@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type { PluginId } from "@/utils/storage";
-  import { globalSettings, plugins } from "@/utils/storage";
+  import { globalSettings } from "@/utils/storage";
   import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
@@ -9,12 +8,12 @@
   import Slider from "../components/inputs/Slider.svelte";
 
   let showModal = $state(false);
-  let selectedPluginId: PluginId | undefined = $state();
-  let selectedPlugin = $derived.by(() => {
-    if (selectedPluginId !== undefined) {
-      return plugins[selectedPluginId];
-    }
-  });
+  // let selectedPluginId: PluginId | undefined = $state();
+  // let selectedPlugin = $derived.by(() => {
+  //   if (selectedPluginId !== undefined) {
+  //     return plugins[selectedPluginId];
+  //   }
+  // });
 </script>
 
 <div id="card">
@@ -52,6 +51,7 @@
   </div>
 </div>
 
+<!--
 {#if selectedPlugin}
   <Modal bind:showModal>
     {#snippet header()}
@@ -81,3 +81,4 @@
     {/if}
   </Modal>
 {/if}
+-->
