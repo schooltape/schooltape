@@ -1,4 +1,3 @@
-import type { pluginConfig } from "./plugins";
 import type { snippetConfig } from "./snippets";
 import type { StorageState } from "./state.svelte";
 
@@ -47,15 +46,13 @@ export interface UserSnippet {
   toggle: boolean;
 }
 
-// Common for plugins and snippets
+// common for plugins and snippets
 export interface ItemInfo {
   name: string;
   description: string;
 }
 
-// Plugins
-export type PluginId = keyof typeof pluginConfig;
-
+// plugins
 export type Toggle = { toggle: boolean };
 
 export type Slider = {
@@ -64,37 +61,7 @@ export type Slider = {
   max: number;
 };
 
-export type PluginData = {
-  toggle: StorageState<Toggle>;
-  settings?: Record<string, PluginSetting>;
-} & ItemInfo;
-
-export type PluginConfig = {
-  default: boolean;
-  settings?: Record<string, PluginSettingConfig>;
-} & ItemInfo;
-
-export type PluginSetting =
-  | ({
-      type: "toggle";
-      state: StorageState<Toggle>;
-    } & ItemInfo)
-  | ({
-      type: "slider";
-      state: StorageState<Slider>;
-    } & ItemInfo);
-
-export type PluginSettingConfig =
-  | ({
-      type: "toggle";
-      default: Toggle;
-    } & ItemInfo)
-  | ({
-      type: "slider";
-      default: Slider;
-    } & ItemInfo);
-
-// Snippets
+// snippets
 export type SnippetId = keyof typeof snippetConfig;
 
 export type SnippetData = {

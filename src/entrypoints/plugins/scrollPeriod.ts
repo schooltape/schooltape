@@ -1,55 +1,71 @@
 import { getCurrentPeriod } from "@/utils/periodUtils";
-import { definePlugin } from "@/utils/plugin";
+import { Plugin } from "@/utils/plugin";
+import { Slider, Toggle } from "@/utils/storage";
+import { StorageState } from "@/utils/storage/state.svelte";
 
 let interval: NodeJS.Timeout | null = null;
 let controller: AbortController | null = null;
 
-export default function init() {
-  definePlugin(
-    "scrollPeriod",
-    async (settings) => {
-      const timetable = document.querySelector("[data-timetable-container] div.scrollable");
+type Settings = {
+  resetCooldownOnMouseMove: StorageState<Toggle>;
+  cooldownDuration: StorageState<Slider>;
+};
 
-      if (window.location.pathname === "/" && timetable) {
-        updateScrollbar(timetable);
-
-        const cooldownDuration = settings?.slider.cooldownDuration;
-        const resetCooldownOnMouseMove = settings?.toggle.resetCooldownOnMouseMove;
-
-        const setUpdateInterval = () => {
-          interval = setInterval(() => updateScrollbar(timetable), (cooldownDuration?.value || 10) * 1000);
-        };
-
-        setUpdateInterval();
-
-        if (resetCooldownOnMouseMove === true) {
-          controller = new AbortController();
-          document.addEventListener(
-            "mousemove",
-            () => {
-              if (interval) {
-                clearInterval(interval);
-                setUpdateInterval();
-              }
-            },
-            { signal: controller.signal },
-          );
-        }
-      }
+export default new Plugin<Settings>(
+  {
+    id: "scrollPeriod",
+    name: "Scroll Period",
+    description: "Scrolls to the current period on the timetable.",
+  },
+  {
+    toggle: true,
+    settings: {
+      resetCooldownOnMouseMove: { toggle: true },
+      cooldownDuration: { min: 1, max: 60, value: 10 },
     },
-    () => {
-      if (controller) {
-        controller.abort();
-        controller = null;
+  },
+  async (settings) => {
+    const timetable = document.querySelector("[data-timetable-container] div.scrollable");
+
+    if (window.location.pathname === "/" && timetable) {
+      updateScrollbar(timetable);
+
+      const cooldownDuration = await settings.cooldownDuration.get();
+      const resetCooldownOnMouseMove = await settings.resetCooldownOnMouseMove.get();
+
+      const setUpdateInterval = () => {
+        interval = setInterval(() => updateScrollbar(timetable), (cooldownDuration?.value || 10) * 1000);
+      };
+
+      setUpdateInterval();
+
+      if (resetCooldownOnMouseMove.toggle === true) {
+        controller = new AbortController();
+        document.addEventListener(
+          "mousemove",
+          () => {
+            if (interval) {
+              clearInterval(interval);
+              setUpdateInterval();
+            }
+          },
+          { signal: controller.signal },
+        );
       }
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
-      }
-    },
-    [".timetable"],
-  );
-}
+    }
+  },
+  () => {
+    if (controller) {
+      controller.abort();
+      controller = null;
+    }
+    if (interval) {
+      clearInterval(interval);
+      interval = null;
+    }
+  },
+  [".timetable"],
+);
 
 function updateScrollbar(timetable: Element) {
   const currentPeriod = getCurrentPeriod();

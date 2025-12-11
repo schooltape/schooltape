@@ -6,37 +6,52 @@ import {
   uninjectInlineStyles,
   uninjectStylesheet,
 } from "@/utils";
-import { definePlugin } from "@/utils/plugin";
+import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
+import { Toggle } from "@/utils/storage";
+import { StorageState } from "@/utils/storage/state.svelte";
 
 const ID = "modernIcons";
 const PLUGIN_ID = `plugin-${ID}`;
 
-export default function init() {
-  definePlugin(
-    ID,
-    async (settings) => {
-      const iconNames = [...new Set(Object.values(icons))].sort();
-      const fontUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1&icon_names=${iconNames.join(",")}`;
+type Settings = {
+  filled: StorageState<Toggle>;
+};
 
-      // inject font face
-      injectStylesheet(fontUrl, PLUGIN_ID);
-
-      // inject icon styling
-      injectInlineStyles(styleText, PLUGIN_ID);
-
-      // inject icons
-      const filled = settings?.toggle.filled ?? false;
-      injectIcons(icons, filled);
+export default new Plugin<Settings>(
+  {
+    id: ID,
+    name: "Modern Icons",
+    description: "Modernise the icons across Schoolbox.",
+  },
+  {
+    toggle: true,
+    settings: {
+      filled: { toggle: true },
     },
-    () => {
-      uninjectStylesheet(PLUGIN_ID);
-      uninjectInlineStyles(PLUGIN_ID);
-      uninjectIcons();
-    },
-    ["nav.tab-bar .top-menu", "#overflow-nav"],
-  );
-}
+  },
+
+  async (settings) => {
+    const iconNames = [...new Set(Object.values(icons))].sort();
+    const fontUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1&icon_names=${iconNames.join(",")}`;
+
+    // inject font face
+    injectStylesheet(fontUrl, PLUGIN_ID);
+
+    // inject icon styling
+    injectInlineStyles(styleText, PLUGIN_ID);
+
+    // inject icons
+    const filled = await settings.filled.get();
+    injectIcons(icons, filled.toggle);
+  },
+  () => {
+    uninjectStylesheet(PLUGIN_ID);
+    uninjectInlineStyles(PLUGIN_ID);
+    uninjectIcons();
+  },
+  ["nav.tab-bar .top-menu", "#overflow-nav"],
+);
 
 // [className, iconName] (material icons)
 const icons = {
