@@ -87,13 +87,9 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     }
   }
 
-  async reload() {
-    if (this.injected) this.uninject();
-    if (await this.isEnabled()) this.inject();
-  }
-
   private inject() {
     if (this.injected) return;
+    if (!this.allElementsPresent()) return;
     logger.info(`injecting plugin: ${this.meta.name}`);
     this.injectCallback(this.settings);
     this.injected = true;
@@ -104,6 +100,11 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     logger.info(`uninjecting plugin: ${this.meta.name}`);
     this.uninjectCallback(this.settings);
     this.injected = false;
+  }
+
+  private async reload() {
+    if (this.injected) this.uninject();
+    if (await this.isEnabled()) this.inject();
   }
 
   private async isEnabled(): Promise<boolean> {
