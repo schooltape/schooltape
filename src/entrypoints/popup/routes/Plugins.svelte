@@ -6,6 +6,7 @@
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import Slider from "../components/inputs/Slider.svelte";
+  import { plugins } from "@/entrypoints/plugins.content";
 
   let showModal = $state(false);
   // let selectedPluginId: PluginId | undefined = $state();
@@ -25,23 +26,23 @@
     }} />
 
   <div class="plugins-container">
-    {#each Object.entries(plugins) as [id, plugin] (id)}
+    {#each plugins as plugin (plugin.meta.id)}
       <div class="group my-4">
         <Toggle
-          {id}
+          id={plugin.meta.id}
+          text={plugin.meta.name}
+          description={plugin.meta.description}
           checked={plugin.toggle.state.toggle}
           update={(toggled: boolean) => {
             plugin.toggle.set({ toggle: toggled });
           }}
-          text={plugin.name}
-          description={plugin.description}
           size="small">
           {#if plugin.settings !== undefined}
             <Button
-              title={plugin.name + " Settings"}
-              {id}
+              title={plugin.meta.name + " Settings"}
+              id={plugin.meta.id}
               onclick={() => {
-                selectedPluginId = id as PluginId;
+                // selectedPluginId = id as PluginId; TODO
                 showModal = true;
               }}><Settings size={22} /></Button>
           {/if}

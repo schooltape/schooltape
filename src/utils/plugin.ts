@@ -79,7 +79,7 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     globalSettings.watch((newValue, oldValue) => {
       if (hasChanged(newValue, oldValue, ["global", "plugins"])) this.reload();
     });
-    this.toggle.watch(this.reload);
+    this.toggle.watch(this.reload.bind(this));
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
         setting.watch(this.reload);

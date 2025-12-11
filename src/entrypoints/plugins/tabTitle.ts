@@ -1,6 +1,6 @@
 import { Plugin } from "@/utils/plugin";
-import { Toggle } from "@/utils/storage";
-import { StorageState } from "@/utils/storage/state.svelte";
+import type { Toggle } from "@/utils/storage";
+import type { StorageState } from "@/utils/storage/state.svelte";
 
 const ID = "tabTitle";
 let originalTitle: string | null = null;

@@ -1,7 +1,7 @@
 import { browser } from "#imports";
 import { Plugin } from "@/utils/plugin";
-import { Toggle } from "@/utils/storage";
-import { StorageState } from "@/utils/storage/state.svelte";
+import type { Toggle } from "@/utils/storage";
+import type { StorageState } from "@/utils/storage/state.svelte";
 
 let logos: HTMLAnchorElement[] | null = null;
 let controller: AbortController | null = null;

@@ -1,7 +1,7 @@
 import { getCurrentPeriod } from "@/utils/periodUtils";
 import { Plugin } from "@/utils/plugin";
-import { Slider, Toggle } from "@/utils/storage";
-import { StorageState } from "@/utils/storage/state.svelte";
+import type { Slider, Toggle } from "@/utils/storage";
+import type { StorageState } from "@/utils/storage/state.svelte";
 
 let interval: NodeJS.Timeout | null = null;
 let controller: AbortController | null = null;

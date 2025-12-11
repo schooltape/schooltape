@@ -8,8 +8,8 @@ import {
 } from "@/utils";
 import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
-import { Toggle } from "@/utils/storage";
-import { StorageState } from "@/utils/storage/state.svelte";
+import type { Toggle } from "@/utils/storage";
+import type { StorageState } from "@/utils/storage/state.svelte";
 
 const ID = "modernIcons";
 const PLUGIN_ID = `plugin-${ID}`;

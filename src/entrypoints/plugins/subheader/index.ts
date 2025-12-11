@@ -2,8 +2,8 @@ import { getCurrentPeriod } from "@/utils/periodUtils";
 import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
-import { StorageState } from "@/utils/storage/state.svelte";
-import { Toggle } from "@/utils/storage";
+import type { StorageState } from "@/utils/storage/state.svelte";
+import type { Toggle } from "@/utils/storage";
 
 const ID = "subheader";
 const PLUGIN_ID = `plugin-${ID}`;
