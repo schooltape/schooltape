@@ -7,6 +7,7 @@
 
 <Toggle
   text="Open links in new tab"
+  description="Whether to open class links in a new tab."
   size="small"
   id="openInNewTab"
   checked={settings.openInNewTab.state.toggle}
