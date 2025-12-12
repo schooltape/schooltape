@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.3.2](https://github.com/schooltape/schooltape/compare/v4.3.1...v4.3.2) (2025-12-12)
+
+
+### Bug Fixes
+
+* **hot reload:** injecting on external sites ([9bca599](https://github.com/schooltape/schooltape/commit/9bca5997e13289957abbd2b718a43ed97831d473))
+* **popup:** make modal full width ([4737a36](https://github.com/schooltape/schooltape/commit/4737a368d757068b7fa66af9d54e574831891444))
+* **subheader:** add missing description to toggle ([3ab0081](https://github.com/schooltape/schooltape/commit/3ab0081a5aad91e3c9322ef62e85ff8fdcdfedf8))
+
 ## [4.3.1](https://github.com/schooltape/schooltape/compare/v4.3.0...v4.3.1) (2025-12-10)
 
 
