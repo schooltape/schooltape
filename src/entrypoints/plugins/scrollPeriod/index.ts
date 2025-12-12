@@ -2,7 +2,6 @@ import { getCurrentPeriod } from "@/utils/periodUtils";
 import { Plugin } from "@/utils/plugin";
 import type { Slider, Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
-import menu from "./Menu.svelte?url";
 
 let interval: NodeJS.Timeout | null = null;
 let controller: AbortController | null = null;
@@ -20,11 +19,8 @@ export default new Plugin<Settings>(
   },
   true,
   {
-    config: {
-      resetCooldownOnMouseMove: { toggle: true },
-      cooldownDuration: { min: 1, max: 60, value: 10 },
-    },
-    menu,
+    resetCooldownOnMouseMove: { toggle: true },
+    cooldownDuration: { min: 1, max: 60, value: 10 },
   },
   async (settings) => {
     const timetable = document.querySelector("[data-timetable-container] div.scrollable");

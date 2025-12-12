@@ -17,8 +17,8 @@
 
   onMount(async () => {
     for (const plugin of plugins) {
-      if (!plugin.menu) continue;
-      components[plugin.meta.id] = (await import(/* @vite-ignore */ plugin.menu)).default;
+      if (!plugin.settings) continue;
+      components[plugin.meta.id] = (await import(`@/entrypoints/plugins/${plugin.meta.id}/Menu.svelte`)).default;
     }
   });
 </script>

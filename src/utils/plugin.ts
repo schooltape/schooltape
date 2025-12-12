@@ -18,25 +18,20 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
       description: string;
     },
     defaultToggle: boolean,
-    settings: {
-      config: Record<string, object>;
-      menu: string;
-    } | null,
+    settings: Record<string, object> | null,
     private injectCallback: (settings: T) => Promise<void> | void,
     private uninjectCallback: (settings: T) => Promise<void> | void,
     private elementsToWaitFor: string[] = [],
   ) {
-    if (settings && settings.menu) this.menu = settings.menu;
-
     // init plugin storage
     this.toggle = new StorageState(
       storage.defineItem(`local:plugin-${meta.id}`, {
         fallback: { toggle: defaultToggle },
       }),
     );
-    if (settings && settings.config) {
+    if (settings) {
       this.settings = Object.fromEntries(
-        Object.entries(settings.config).map(([key, value]) => [
+        Object.entries(settings).map(([key, value]) => [
           key,
           new StorageState(
             storage.defineItem(`local:plugin-${meta.id}-${key}`, {

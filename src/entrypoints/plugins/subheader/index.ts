@@ -3,7 +3,6 @@ import { getCurrentPeriod } from "@/utils/periodUtils";
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
-import menu from "./Menu.svelte?url";
 import styleText from "./styles.css?inline";
 
 const ID = "subheader";
@@ -25,10 +24,7 @@ export default new Plugin<Settings>(
   },
   true,
   {
-    config: {
-      openInNewTab: { toggle: true },
-    },
-    menu,
+    openInNewTab: { toggle: true },
   },
   async (settings) => {
     const openInNewTab = await settings.openInNewTab.get();

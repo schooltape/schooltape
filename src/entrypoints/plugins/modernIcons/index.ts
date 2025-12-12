@@ -9,7 +9,6 @@ import {
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
-import menu from "./Menu.svelte?url";
 import styleText from "./styles.css?inline";
 
 const ID = "modernIcons";
@@ -27,10 +26,7 @@ export default new Plugin<Settings>(
   },
   true,
   {
-    config: {
-      filled: { toggle: true },
-    },
-    menu,
+    filled: { toggle: true },
   },
 
   async (settings) => {
