@@ -1,19 +1,19 @@
 import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import { defineSnippet } from "@/utils/snippet";
-import censor from "./snippets/censor.css?inline";
-import hidePfp from "./snippets/hidePfp/styles.css?inline";
-import hidePwaPrompt from "./snippets/hidePwaPrompt.css?inline";
-import roundedCorners from "./snippets/roundedCorners.css?inline";
+import censor from "./snippets/censor";
+import hidePfp from "./snippets/hidePfp";
+import hidePwaPrompt from "./snippets/hidePwaPrompt";
+import roundedCorners from "./snippets/roundedCorners";
+
+export const snippets = [roundedCorners, hidePfp, hidePwaPrompt, censor];
 
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    defineSnippet("roundedCorners", roundedCorners);
-    defineSnippet("hidePfp", hidePfp);
-    defineSnippet("hidePwaPrompt", hidePwaPrompt);
-    defineSnippet("censor", censor);
+    for (const snippet of snippets) {
+      snippet.init();
+    }
   },
 });

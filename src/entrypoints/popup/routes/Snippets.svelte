@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { UserSnippet } from "@/utils/storage";
-  import { globalSettings, snippets } from "@/utils/storage";
+  import { globalSettings } from "@/utils/storage";
+  import { snippets } from "@/entrypoints/snippets.content";
 
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
@@ -45,16 +46,14 @@
     }} />
 
   <div class="snippets-container w-full">
-    {#each Object.entries(snippets) as [id, snippet] (id)}
+    {#each snippets as snippet (snippet.meta.id)}
       <div class="group my-4 w-full">
         <Toggle
-          {id}
+          id={snippet.meta.id}
           checked={snippet.toggle.state.toggle}
-          update={(toggled: boolean) => {
-            snippet.toggle.set({ toggle: toggled });
-          }}
-          text={snippet.name}
-          description={snippet.description}
+          update={(toggle) => snippet.toggle.set({ toggle })}
+          text={snippet.meta.name}
+          description={snippet.meta.description}
           size="small" />
       </div>
     {/each}

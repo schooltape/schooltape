@@ -1,7 +1,4 @@
-import type { snippetConfig } from "./snippets";
-import type { StorageState } from "./state.svelte";
-
-// Global
+// global
 export interface Settings {
   global: boolean;
   plugins: boolean;
@@ -46,13 +43,6 @@ export interface UserSnippet {
   toggle: boolean;
 }
 
-// common for plugins and snippets
-export interface ItemInfo {
-  name: string;
-  description: string;
-}
-
-// plugins
 export type Toggle = { toggle: boolean };
 
 export type Slider = {
@@ -60,14 +50,3 @@ export type Slider = {
   min: number;
   max: number;
 };
-
-// snippets
-export type SnippetId = keyof typeof snippetConfig;
-
-export type SnippetData = {
-  toggle: StorageState<Toggle>;
-} & ItemInfo;
-
-export type SnippetConfig = {
-  default: boolean;
-} & ItemInfo;
