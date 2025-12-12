@@ -1,5 +1,5 @@
 import { storage } from "#imports";
-import { hasChanged, injectInlineStyles, uninjectInlineStyles } from ".";
+import { hasChanged, injectInlineStyles, onSchoolboxPage, uninjectInlineStyles } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
 import { globalSettings } from "./storage";
@@ -27,6 +27,9 @@ export class Snippet {
   }
 
   async init() {
+    // if not on Schoolbox page
+    if (!(await onSchoolboxPage())) return;
+
     logger.info(`init snippet: ${this.meta.name}`);
 
     if (await this.isEnabled()) this.inject();

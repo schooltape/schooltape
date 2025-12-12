@@ -5,13 +5,14 @@ import {
   injectLogo,
   injectStylesheet,
   injectUserSnippet,
+  onSchoolboxPage,
   uninjectCatppuccin,
   uninjectStylesheet,
   uninjectUserSnippet,
 } from "@/utils";
 import { EXCLUDE_MATCHES, LOGO_INFO } from "@/utils/constants";
 import type { LogoId, Settings } from "@/utils/storage";
-import { globalSettings, schoolboxUrls } from "@/utils/storage";
+import { globalSettings } from "@/utils/storage";
 import type { WatchCallback } from "wxt/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
@@ -21,10 +22,10 @@ export default defineContentScript({
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.get();
-    const urls = (await schoolboxUrls.get()).urls;
+    // if not on Schoolbox page
+    if (!(await onSchoolboxPage())) return;
 
-    const updateThemes: WatchCallback<Settings> = (newValue, oldValue) => {
+    const updateThemes: WatchCallback<Settings> = async (newValue, oldValue) => {
       // if global or themes was changed
       if (hasChanged(newValue, oldValue, ["global", "themes", "themeFlavour", "themeAccent"])) {
         if (newValue.global && newValue.themes) {
@@ -37,7 +38,7 @@ export default defineContentScript({
       }
     };
 
-    const updateUserSnippets: WatchCallback<Settings> = (newValue, oldValue) => {
+    const updateUserSnippets: WatchCallback<Settings> = async (newValue, oldValue) => {
       // if global or userSnippets were changed
       if (hasChanged(newValue, oldValue, ["global", "userSnippets"])) {
         // uninject removed snippets
@@ -70,7 +71,8 @@ export default defineContentScript({
       updateUserSnippets(newValue, oldValue);
     });
 
-    if (settings.global && urls.includes(window.location.origin)) {
+    const settings = await globalSettings.get();
+    if (settings.global && (await onSchoolboxPage())) {
       // inject themes
       if (settings.themes) {
         injectThemes();

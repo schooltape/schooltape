@@ -1,5 +1,5 @@
 import { storage } from "#imports";
-import { hasChanged } from ".";
+import { hasChanged, onSchoolboxPage } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
 import { globalSettings } from "./storage";
@@ -49,6 +49,9 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   }
 
   async init() {
+    // if not on Schoolbox page
+    if (!(await onSchoolboxPage())) return;
+
     logger.info(`init plugin: ${this.meta.name}`);
 
     if (await this.isEnabled()) {

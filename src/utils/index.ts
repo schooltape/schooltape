@@ -2,11 +2,15 @@ import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
 import type { LogoInfo } from "./storage";
-import { globalSettings } from "./storage";
+import { globalSettings, schoolboxUrls } from "./storage";
 
 export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
 export function setDataAttr(el: HTMLElement, id: string) {
   el.dataset.schooltape = id;
+}
+
+export async function onSchoolboxPage(): Promise<boolean> {
+  return (await schoolboxUrls.get()).urls.includes(window.location.origin);
 }
 
 export function injectInlineStyles(styleText: string, id: string) {
