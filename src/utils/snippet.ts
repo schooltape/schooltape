@@ -18,9 +18,6 @@ export class Snippet {
     defaultToggle: boolean,
     private styleText: string,
   ) {
-    this.meta = meta;
-    this.styleText = styleText; // TODO: check if can remove this
-
     // init snippet storage
     this.toggle = new StorageState(
       storage.defineItem(`local:snippet-${meta.id}`, {

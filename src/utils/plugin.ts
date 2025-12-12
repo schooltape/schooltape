@@ -26,10 +26,6 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     private uninjectCallback: (settings: T) => Promise<void> | void,
     private elementsToWaitFor: string[] = [],
   ) {
-    this.meta = meta;
-    this.elementsToWaitFor = elementsToWaitFor;
-    this.injectCallback = injectCallback;
-    this.uninjectCallback = uninjectCallback;
     if (settings && settings.menu) this.menu = settings.menu;
 
     // init plugin storage
