@@ -15,8 +15,8 @@
   onclick={(e) => {
     if (e.target === dialog) dialog.close();
   }}
-  class="bg-ctp-base text-ctp-text open:animate-zoom-in relative m-auto w-screen rounded-lg backdrop:backdrop-blur-md">
-  <button autofocus onclick={() => dialog?.close()} class="small bg-ctp-surface1 absolute top-0 right-0 m-2"
+  class="relative m-auto w-screen rounded-lg bg-ctp-base text-ctp-text backdrop:backdrop-blur-md open:animate-zoom-in">
+  <button autofocus onclick={() => dialog?.close()} class="small absolute top-0 right-0 m-2 bg-ctp-surface1"
     ><X /></button>
 
   <div class="p-4">

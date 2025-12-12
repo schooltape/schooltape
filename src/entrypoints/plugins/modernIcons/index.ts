@@ -7,10 +7,10 @@ import {
   uninjectStylesheet,
 } from "@/utils";
 import { Plugin } from "@/utils/plugin";
-import styleText from "./styles.css?inline";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
 import menu from "./Menu.svelte?url";
+import styleText from "./styles.css?inline";
 
 const ID = "modernIcons";
 const PLUGIN_ID = `plugin-${ID}`;

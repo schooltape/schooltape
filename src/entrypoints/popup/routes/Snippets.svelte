@@ -59,8 +59,8 @@
     {/each}
   </div>
   <div class="w-full">
-    <h3 class="text-ctp-text my-4">User Snippets</h3>
-    <p class="text-ctp-overlay2 mb-4">
+    <h3 class="my-4 text-ctp-text">User Snippets</h3>
+    <p class="mb-4 text-ctp-overlay2">
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
@@ -94,7 +94,7 @@
             await globalSettings.set(settings);
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:text-ctp-mantle hover:bg-(--ctp-accent)">Gist</button></a>
+          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
       </div>
     {/each}
   </div>
