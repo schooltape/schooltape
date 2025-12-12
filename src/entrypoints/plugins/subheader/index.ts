@@ -1,7 +1,10 @@
 import { getCurrentPeriod } from "@/utils/periodUtils";
-import { definePlugin } from "@/utils/plugin";
+import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
+import type { StorageState } from "@/utils/storage/state.svelte";
+import type { Toggle } from "@/utils/storage";
+import menu from "./Menu.svelte?url";
 
 const ID = "subheader";
 const PLUGIN_ID = `plugin-${ID}`;
@@ -10,17 +13,30 @@ let intervals: NodeJS.Timeout[] = [];
 let oldChildren: ChildNode[] = [];
 let subheader: HTMLHeadingElement | null = null;
 
-export default function init() {
-  definePlugin(
-    "subheader",
-    (settings) => {
-      const openInNewTab = settings?.toggle.openInNewTab ?? false;
-      injectSubheader(openInNewTab);
+export type Settings = {
+  openInNewTab: StorageState<Toggle>;
+};
+
+export default new Plugin<Settings>(
+  {
+    id: ID,
+    name: "Subheader Revamp",
+    description: "Adds a clock and current period info to the subheader.",
+  },
+  true,
+  {
+    config: {
+      openInNewTab: { toggle: true },
     },
-    uninjectSubheader,
-    [".subheader", ".timetable"],
-  );
-}
+    menu,
+  },
+  async (settings) => {
+    const openInNewTab = await settings.openInNewTab.get();
+    injectSubheader(openInNewTab.toggle);
+  },
+  uninjectSubheader,
+  [".subheader", ".timetable"],
+);
 
 function injectSubheader(openInNewTab: boolean) {
   // abort if plugin is injected

@@ -1,18 +1,24 @@
 <script lang="ts">
-  import type { PluginId } from "@/utils/storage";
-  import { globalSettings, plugins } from "@/utils/storage";
+  import { globalSettings } from "@/utils/storage";
   import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import Slider from "../components/inputs/Slider.svelte";
+  import { plugins } from "@/entrypoints/plugins.content";
+  import type { PluginInstance } from "@/entrypoints/plugins.content";
+  import { onMount } from "svelte";
+  import type { Component } from "svelte";
 
   let showModal = $state(false);
-  let selectedPluginId: PluginId | undefined = $state();
-  let selectedPlugin = $derived.by(() => {
-    if (selectedPluginId !== undefined) {
-      return plugins[selectedPluginId];
+  let components: Record<string, Component> = $state({});
+  let selectedPlugin: PluginInstance | undefined = $state();
+  let Menu = $derived(selectedPlugin ? components[selectedPlugin.meta.id] : undefined);
+
+  onMount(async () => {
+    for (const plugin of plugins) {
+      if (!plugin.menu) continue;
+      components[plugin.meta.id] = (await import(/* @vite-ignore */ plugin.menu)).default;
     }
   });
 </script>
@@ -26,23 +32,23 @@
     }} />
 
   <div class="plugins-container">
-    {#each Object.entries(plugins) as [id, plugin] (id)}
+    {#each plugins as plugin (plugin.meta.id)}
       <div class="group my-4">
         <Toggle
-          {id}
+          id={plugin.meta.id}
+          text={plugin.meta.name}
+          description={plugin.meta.description}
           checked={plugin.toggle.state.toggle}
           update={(toggled: boolean) => {
             plugin.toggle.set({ toggle: toggled });
           }}
-          text={plugin.name}
-          description={plugin.description}
           size="small">
-          {#if plugin.settings !== undefined}
+          {#if plugin.settings}
             <Button
-              title={plugin.name + " Settings"}
-              {id}
+              title={plugin.meta.name + " Settings"}
+              id={plugin.meta.id}
               onclick={() => {
-                selectedPluginId = id as PluginId;
+                selectedPlugin = plugin;
                 showModal = true;
               }}><Settings size={22} /></Button>
           {/if}
@@ -55,29 +61,10 @@
 {#if selectedPlugin}
   <Modal bind:showModal>
     {#snippet header()}
-      <h2 class="mb-4 text-xl">{selectedPlugin.name}</h2>
+      {#if selectedPlugin}
+        <h2 class="mb-4 text-xl">{selectedPlugin.meta.name}</h2>
+      {/if}
     {/snippet}
-    {#if selectedPlugin.settings !== undefined}
-      {#each Object.entries(selectedPlugin.settings) as [id, setting] (id)}
-        {#if setting.type === "toggle"}
-          <Toggle
-            text={setting.name}
-            description={setting.description}
-            size="small"
-            checked={setting.state.state.toggle}
-            update={async (toggled) => {
-              setting.state.set({ toggle: toggled });
-            }}
-            {id} />
-        {:else if setting.type === "slider"}
-          <Slider
-            {id}
-            update={(newValue) => {
-              setting.state.update({ value: newValue });
-            }}
-            {...setting.state.state} />
-        {/if}
-      {/each}
-    {/if}
+    <Menu settings={selectedPlugin.settings} />
   </Modal>
 {/if}

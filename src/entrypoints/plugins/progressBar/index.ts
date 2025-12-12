@@ -1,36 +1,40 @@
 import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
 import type { Period } from "@/utils/periodUtils";
 import { getListOfPeriods } from "@/utils/periodUtils";
-import { definePlugin } from "@/utils/plugin";
+import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 
 const ID = "progressBar";
 const PLUGIN_ID = `plugin-${ID}`;
 
-export default function init() {
-  definePlugin(
-    ID,
-    () => {
-      if (window.location.pathname === "/" && document.querySelector(".timetable")) {
-        const periodList = getListOfPeriods();
+export default new Plugin(
+  {
+    id: ID,
+    name: "Progress Bar",
+    description: "Displays a progress bar below the timetable to show the time of the day.",
+  },
+  true,
+  null,
+  () => {
+    if (window.location.pathname === "/" && document.querySelector(".timetable")) {
+      const periodList = getListOfPeriods();
 
-        const progressRow = document.createElement("tr");
-        progressRow.classList.add("progress-container");
-        document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
+      const progressRow = document.createElement("tr");
+      progressRow.classList.add("progress-container");
+      document.querySelector(".timetable > thead")?.insertAdjacentElement("beforeend", progressRow);
 
-        injectInlineStyles(styleText, PLUGIN_ID);
-        injectProgressBars(periodList, progressRow);
+      injectInlineStyles(styleText, PLUGIN_ID);
+      injectProgressBars(periodList, progressRow);
 
-        setDataAttr(progressRow, `${PLUGIN_ID}-row`);
-      }
-    },
-    () => {
-      uninjectInlineStyles(PLUGIN_ID);
-      uninjectProgressBars();
-    },
-    [".timetable"],
-  );
-}
+      setDataAttr(progressRow, `${PLUGIN_ID}-row`);
+    }
+  },
+  () => {
+    uninjectInlineStyles(PLUGIN_ID);
+    uninjectProgressBars();
+  },
+  [".timetable"],
+);
 
 function injectProgressBars(periodList: Period[], container: HTMLElement) {
   if (document.querySelector(dataAttr(`${PLUGIN_ID}-row`))) return;
