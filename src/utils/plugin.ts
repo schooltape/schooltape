@@ -5,7 +5,7 @@ import type { Toggle } from "./storage";
 import { globalSettings } from "./storage";
 import { StorageState } from "./storage/state.svelte";
 
-export class Plugin<T extends Record<string, StorageState<any>> | undefined = undefined> {
+export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   private injected = false;
   public toggle: StorageState<Toggle>;
   public settings!: T;
@@ -85,6 +85,7 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     this.toggle.watch(this.reload.bind(this));
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
+        if (!(setting instanceof StorageState)) continue;
         setting.watch(this.reload.bind(this));
       }
     }

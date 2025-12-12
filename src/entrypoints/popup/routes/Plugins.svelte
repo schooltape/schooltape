@@ -1,17 +1,18 @@
 <script lang="ts">
   import { globalSettings } from "@/utils/storage";
-  import { Plugin } from "@/utils/plugin";
   import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
   import { plugins } from "@/entrypoints/plugins.content";
+  import type { PluginInstance } from "@/entrypoints/plugins.content";
   import { onMount } from "svelte";
+  import type { Component } from "svelte";
 
   let showModal = $state(false);
-  let components: Record<string, any> = $state({});
-  let selectedPlugin: Plugin | undefined = $state();
+  let components: Record<string, Component> = $state({});
+  let selectedPlugin: PluginInstance | undefined = $state();
   let Menu = $derived(selectedPlugin ? components[selectedPlugin.meta.id] : undefined);
 
   onMount(async () => {

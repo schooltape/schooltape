@@ -1,7 +1,5 @@
 import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import type { Plugin } from "@/utils/plugin";
-
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
@@ -10,15 +8,9 @@ import scrollSegments from "./plugins/scrollSegments";
 import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
 
-export const plugins: Plugin<any>[] = [
-  subheader,
-  scrollSegments,
-  scrollPeriod,
-  progressBar,
-  modernIcons,
-  tabTitle,
-  homepageSwitcher,
-];
+export const plugins = [subheader, scrollSegments, scrollPeriod, progressBar, modernIcons, tabTitle, homepageSwitcher];
+
+export type PluginInstance = (typeof plugins)[number];
 
 export default defineContentScript({
   matches: ["<all_urls>"],
