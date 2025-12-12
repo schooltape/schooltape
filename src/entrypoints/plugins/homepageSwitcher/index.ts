@@ -2,11 +2,12 @@ import { browser } from "#imports";
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
+import menu from "./Menu.svelte?url";
 
 let logos: HTMLAnchorElement[] | null = null;
 let controller: AbortController | null = null;
 
-type Settings = {
+export type Settings = {
   closeCurrentTab: StorageState<Toggle>;
 };
 
@@ -16,13 +17,14 @@ export default new Plugin<Settings>(
     name: "Homepage Switcher",
     description: "The logo will switch to existing Schoolbox homepage when available.",
   },
+  false,
   {
-    toggle: true,
-    settings: {
+    config: {
       closeCurrentTab: {
         toggle: false,
       },
     },
+    menu,
   },
   async (settings) => {
     if (logos !== null) return;

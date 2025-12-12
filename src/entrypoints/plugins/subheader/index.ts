@@ -4,6 +4,7 @@ import styleText from "./styles.css?inline";
 import { dataAttr, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
 import type { StorageState } from "@/utils/storage/state.svelte";
 import type { Toggle } from "@/utils/storage";
+import menu from "./Menu.svelte?url";
 
 const ID = "subheader";
 const PLUGIN_ID = `plugin-${ID}`;
@@ -12,7 +13,7 @@ let intervals: NodeJS.Timeout[] = [];
 let oldChildren: ChildNode[] = [];
 let subheader: HTMLHeadingElement | null = null;
 
-type Settings = {
+export type Settings = {
   openInNewTab: StorageState<Toggle>;
 };
 
@@ -22,11 +23,12 @@ export default new Plugin<Settings>(
     name: "Subheader Revamp",
     description: "Adds a clock and current period info to the subheader.",
   },
+  true,
   {
-    toggle: true,
-    settings: {
+    config: {
       openInNewTab: { toggle: true },
     },
+    menu,
   },
   async (settings) => {
     const openInNewTab = await settings.openInNewTab.get();

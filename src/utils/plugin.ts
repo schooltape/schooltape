@@ -9,6 +9,7 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
   private injected = false;
   public toggle: StorageState<Toggle>;
   public settings!: T;
+  public menu: string | undefined;
 
   constructor(
     public meta: {
@@ -16,10 +17,11 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
       name: string;
       description: string;
     },
-    defaultConfig: {
-      toggle: boolean;
-      settings?: Record<string, object>;
-    },
+    defaultToggle: boolean,
+    settings: {
+      config: Record<string, object>;
+      menu: string;
+    } | null,
     private injectCallback: (settings: T) => Promise<void> | void,
     private uninjectCallback: (settings: T) => Promise<void> | void,
     private elementsToWaitFor: string[] = [],
@@ -28,16 +30,17 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     this.elementsToWaitFor = elementsToWaitFor;
     this.injectCallback = injectCallback;
     this.uninjectCallback = uninjectCallback;
+    if (settings && settings.menu) this.menu = settings.menu;
 
     // init plugin storage
     this.toggle = new StorageState(
       storage.defineItem(`local:plugin-${meta.id}`, {
-        fallback: { toggle: defaultConfig.toggle },
+        fallback: { toggle: defaultToggle },
       }),
     );
-    if (defaultConfig.settings) {
+    if (settings && settings.config) {
       this.settings = Object.fromEntries(
-        Object.entries(defaultConfig.settings).map(([key, value]) => [
+        Object.entries(settings.config).map(([key, value]) => [
           key,
           new StorageState(
             storage.defineItem(`local:plugin-${meta.id}-${key}`, {
@@ -82,7 +85,7 @@ export class Plugin<T extends Record<string, StorageState<any>> | undefined = un
     this.toggle.watch(this.reload.bind(this));
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
-        setting.watch(this.reload);
+        setting.watch(this.reload.bind(this));
       }
     }
   }

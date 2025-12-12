@@ -13,9 +13,8 @@ export default new Plugin(
     name: "Progress Bar",
     description: "Displays a progress bar below the timetable to show the time of the day.",
   },
-  {
-    toggle: true,
-  },
+  true,
+  null,
   () => {
     if (window.location.pathname === "/" && document.querySelector(".timetable")) {
       const periodList = getListOfPeriods();

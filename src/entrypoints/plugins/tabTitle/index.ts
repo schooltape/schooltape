@@ -1,11 +1,12 @@
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
+import menu from "./Menu.svelte?url";
 
 const ID = "tabTitle";
 let originalTitle: string | null = null;
 
-type Settings = {
+export type Settings = {
   showSubjectPrefix: StorageState<Toggle>;
 };
 
@@ -15,11 +16,12 @@ export default new Plugin<Settings>(
     name: "Better Tab Titles",
     description: "Improves the tab titles for easier navigation.",
   },
+  true,
   {
-    toggle: true,
-    settings: {
+    config: {
       showSubjectPrefix: { toggle: true },
     },
+    menu,
   },
   async (settings) => {
     // if already injected, abort

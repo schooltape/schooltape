@@ -11,13 +11,13 @@ import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
 
 export const plugins: Plugin<any>[] = [
-  homepageSwitcher,
-  modernIcons,
-  progressBar,
-  scrollPeriod,
-  scrollSegments,
   subheader,
+  scrollSegments,
+  scrollPeriod,
+  progressBar,
+  modernIcons,
   tabTitle,
+  homepageSwitcher,
 ];
 
 export default defineContentScript({

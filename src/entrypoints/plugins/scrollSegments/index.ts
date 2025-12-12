@@ -11,9 +11,8 @@ export default new Plugin(
     name: "Scroll Segments",
     description: "Segments the Schoolbox page into scrollable sections.",
   },
-  {
-    toggle: true,
-  },
+  true,
+  null,
   () => {
     const footerCopy = document.querySelector(dataAttr(PLUGIN_ID));
     if (footerCopy) return;

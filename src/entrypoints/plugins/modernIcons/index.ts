@@ -10,11 +10,12 @@ import { Plugin } from "@/utils/plugin";
 import styleText from "./styles.css?inline";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
+import menu from "./Menu.svelte?url";
 
 const ID = "modernIcons";
 const PLUGIN_ID = `plugin-${ID}`;
 
-type Settings = {
+export type Settings = {
   filled: StorageState<Toggle>;
 };
 
@@ -24,11 +25,12 @@ export default new Plugin<Settings>(
     name: "Modern Icons",
     description: "Modernise the icons across Schoolbox.",
   },
+  true,
   {
-    toggle: true,
-    settings: {
+    config: {
       filled: { toggle: true },
     },
+    menu,
   },
 
   async (settings) => {
