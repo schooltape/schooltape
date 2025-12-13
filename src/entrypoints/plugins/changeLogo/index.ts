@@ -52,7 +52,7 @@ export default new Plugin<Settings>(
   },
   true,
   {
-    setAsFavicon: { toggle: true },
+    setAsFavicon: { toggle: false },
     logo: { id: "schooltape-rainbow" },
   },
   async (settings) => {
