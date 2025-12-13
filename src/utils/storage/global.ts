@@ -26,12 +26,11 @@ export const globalSettings = new StorageState(
         const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
 
         if (changeLogo) {
-          const { logos } = await import("@/entrypoints/plugins/changeLogo");
           const s = changeLogo.settings as LogoSettings;
-          if (Object.keys(logos).includes(themeLogo)) s.logo.set({ id: themeLogo });
+          if (["schooltape", "schooltape-rainbow", "schooltape-legacy", "catppuccin", "schoolbox"].includes(themeLogo))
+            s.logo.set({ id: themeLogo });
           s.setAsFavicon.set({ toggle: themeLogoAsFavicon });
         }
-
         return rest;
       },
     },
