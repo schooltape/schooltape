@@ -1,5 +1,3 @@
-import type { logos } from "@/entrypoints/plugins/changeLogo";
-
 // global
 export interface SettingsV1 {
   global: boolean;
@@ -9,7 +7,7 @@ export interface SettingsV1 {
 
   themeFlavour: Flavour;
   themeAccent: Accent;
-  themeLogo: keyof Awaited<typeof logos>;
+  themeLogo: "default" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy" | "catppuccin" | "schoolbox";
   themeLogoAsFavicon: boolean;
 
   userSnippets: Record<string, UserSnippet>;

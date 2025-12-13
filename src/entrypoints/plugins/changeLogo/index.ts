@@ -56,10 +56,10 @@ export default new Plugin<Settings>(
     logo: { id: "schooltape-rainbow" },
   },
   async (settings) => {
-    const x = await logos;
+    const resolvedLogos = await logos;
     const logoId = (await settings.logo.get()).id;
-    injectLogo(x[logoId]);
-    if ((await settings.setAsFavicon.get()).toggle) injectFavicon(x[logoId]);
+    injectLogo(resolvedLogos[logoId]);
+    if ((await settings.setAsFavicon.get()).toggle) injectFavicon(resolvedLogos[logoId]);
   },
   () => {
     uninjectLogo();
@@ -106,10 +106,10 @@ function uninjectFavicon() {
   if (favicon && originalFavicon) favicon.href = originalFavicon;
 }
 
-async function buildLogos(logos: Record<string, ImageSource>): Promise<Record<string, LogoInfo>> {
-  const output: Record<string, LogoInfo> = {};
+async function buildLogos<T extends Record<string, ImageSource>>(logos: T): Promise<Record<keyof T, LogoInfo>> {
+  const output: Record<keyof T, LogoInfo> = {} as Record<keyof T, LogoInfo>;
 
-  for (const [key, value] of Object.entries(logos)) {
+  for (const [key, value] of Object.entries(logos) as [keyof T, ImageSource][]) {
     let url;
 
     if (value.url) {
@@ -127,7 +127,7 @@ async function buildLogos(logos: Record<string, ImageSource>): Promise<Record<st
       url = `data:image/svg+xml;utf8,${encodeURIComponent(value.raw.replaceAll("currentColor", accentHex))}`;
     }
 
-    if (!url) throw new Error(`error getting URL for logo: ${key}`);
+    if (!url) throw new Error("error getting URL for logo");
 
     output[key] = {
       name: value.name,

@@ -27,8 +27,13 @@ export const globalSettings = new StorageState(
 
         if (changeLogo) {
           const s = changeLogo.settings as LogoSettings;
-          if (["schooltape", "schooltape-rainbow", "schooltape-legacy", "catppuccin", "schoolbox"].includes(themeLogo))
+          if (themeLogo !== "default") {
+            // update logo
             s.logo.set({ id: themeLogo });
+          } else {
+            // disable changeLogo
+            changeLogo.toggle.set({ toggle: false });
+          }
           s.setAsFavicon.set({ toggle: themeLogoAsFavicon });
         }
         return rest;

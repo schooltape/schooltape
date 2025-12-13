@@ -10,7 +10,7 @@
   {#await logos then logos}
     {#each Object.entries(logos) as [id, logo] (id)}
       <button
-        onclick={() => settings.logo.set({ id })}
+        onclick={() => settings.logo.set({ id: id as keyof typeof logos })}
         class:highlight={settings.logo.state.id === id}
         class="flex flex-col rounded-lg border border-(--ctp-accent) p-2">
         <span>{logo.name}</span>
