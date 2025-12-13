@@ -1,17 +1,48 @@
+import type { logos } from "@/entrypoints/plugins/changeLogo";
+
 // global
-export interface Settings {
+export interface SettingsV1 {
   global: boolean;
   plugins: boolean;
   themes: boolean;
   snippets: boolean;
 
-  themeFlavour: string;
-  themeAccent: string;
-  themeLogo: LogoId;
+  themeFlavour: Flavour;
+  themeAccent: Accent;
+  themeLogo: keyof Awaited<typeof logos>;
   themeLogoAsFavicon: boolean;
 
   userSnippets: Record<string, UserSnippet>;
 }
+
+export interface SettingsV2 {
+  global: boolean;
+  plugins: boolean;
+  themes: boolean;
+  snippets: boolean;
+
+  themeFlavour: Flavour;
+  themeAccent: Accent;
+
+  userSnippets: Record<string, UserSnippet>;
+}
+
+export type Flavour = "latte" | "frappe" | "macchiato" | "mocha";
+export type Accent =
+  | "rosewater"
+  | "flamingo"
+  | "pink"
+  | "mauve"
+  | "red"
+  | "maroon"
+  | "peach"
+  | "yellow"
+  | "green"
+  | "teal"
+  | "sky"
+  | "sapphire"
+  | "blue"
+  | "lavender";
 
 export interface UpdatedBadges {
   icon: boolean;
@@ -24,15 +55,6 @@ export interface Motd {
 
 export interface SchoolboxUrls {
   urls: string[];
-}
-
-export type LogoId = "default" | "catppuccin" | "schoolbox" | "schooltape" | "schooltape-rainbow" | "schooltape-legacy";
-
-export interface LogoInfo {
-  name: string;
-  url: string;
-  disable?: boolean; // whether the icon should be injected or not
-  adaptive?: boolean; // whether the icon should follow the accent colour
 }
 
 export interface UserSnippet {
