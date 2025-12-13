@@ -22,11 +22,13 @@
   {/await}
 </div>
 
-<Toggle
-  text="Set icon as tab favicon"
-  update={(toggle) => {
-    settings.setAsFavicon.set({ toggle });
-  }}
-  checked={settings.setAsFavicon.state.toggle}
-  size="small"
-  id="setAsFavicon" />
+<div class="mt-2">
+  <Toggle
+    text="Set as tab favicon"
+    update={(toggle) => {
+      settings.setAsFavicon.set({ toggle });
+    }}
+    checked={settings.setAsFavicon.state.toggle}
+    size="small"
+    id="setAsFavicon" />
+</div>
