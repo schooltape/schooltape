@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.3](https://github.com/schooltape/schooltape/compare/v4.3.2...v4.3.3) (2025-12-12)
+
+
+### Bug Fixes
+
+* **plugins:** settings menus not resolving ([6378de9](https://github.com/schooltape/schooltape/commit/6378de946052ae2c927e8ed9dbfeb6d384f61ec3))
+
 ## [4.3.2](https://github.com/schooltape/schooltape/compare/v4.3.1...v4.3.2) (2025-12-12)
 
 
