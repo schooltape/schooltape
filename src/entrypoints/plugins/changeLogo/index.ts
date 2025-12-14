@@ -1,15 +1,20 @@
 import { browser } from "#imports";
-import { dataAttr, setDataAttr } from "@/utils";
+import { dataAttr, hasChanged, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
 import { logger } from "@/utils/logger";
 import { Plugin } from "@/utils/plugin";
 import { globalSettings } from "@/utils/storage";
-import type { Toggle } from "@/utils/storage";
+import type { SettingsV2, Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
 import schoolbox from "/schoolbox.svg?raw";
 import { flavors } from "@catppuccin/palette";
+import type { Unwatch } from "wxt/utils/storage";
 
 const ID = "changeLogo";
-let originalFavicon: string | undefined;
+const PLUGIN_ID = `plugin-${ID}`;
+
+let originalFavicon: string | null = null;
+let unwatch: Unwatch | null = null;
+
 export const logos = buildLogos({
   schooltape: {
     name: "Schooltape",
@@ -56,40 +61,63 @@ export default new Plugin<Settings>(
     logo: { id: "schooltape-rainbow" },
   },
   async (settings) => {
-    const resolvedLogos = await logos;
-    const logoId = (await settings.logo.get()).id;
-    injectLogo(resolvedLogos[logoId]);
-    if ((await settings.setAsFavicon.get()).toggle) injectFavicon(resolvedLogos[logoId]);
+    await inject(settings);
+
+    // add watcher to reload logo
+    unwatch = globalSettings.watch((newValue, oldValue) => {
+      if (hasChanged(newValue, oldValue, ["themeFlavour", "themeAccent"])) {
+        uninject();
+        inject(settings);
+      }
+    });
   },
   () => {
-    uninjectLogo();
-    uninjectFavicon();
+    uninject();
+
+    // remove watcher
+    if (unwatch) {
+      unwatch();
+      unwatch = null;
+    }
   },
   [".logo"],
 );
 
+async function inject(settings: Settings) {
+  const resolvedLogos = await logos;
+  const logoId = (await settings.logo.get()).id;
+
+  injectLogo(resolvedLogos[logoId]);
+
+  if ((await settings.setAsFavicon.get()).toggle) {
+    injectFavicon(resolvedLogos[logoId]);
+  }
+}
+
+function uninject() {
+  uninjectLogo();
+  uninjectFavicon();
+}
+
 function injectLogo(logo: LogoInfo): void {
   logger.info(`injecting logo: ${logo.name}`);
 
-  const style = document.createElement("style");
-  setDataAttr(style, "logo");
-
-  style.textContent = `a.logo > img { content: url("${logo.url}"); max-width: 30%; width: 100px; }`;
-  document.head.appendChild(style);
+  injectInlineStyles(
+    `a.logo > img { content: url("${logo.url}"); max-width: 30%; width: 100px; }`,
+    `${PLUGIN_ID}-logo`,
+  );
 }
 
 function uninjectLogo() {
   logger.info("uninjecting logo...");
-  for (const el of document.querySelectorAll(dataAttr("logo"))) {
-    el.parentElement?.removeChild(el);
-  }
+
+  uninjectInlineStyles(`${PLUGIN_ID}-logo`);
 }
 
 function injectFavicon(logo: LogoInfo) {
   logger.info(`injecting favicon: ${logo.name}`);
 
   let favicon = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
-
   if (!favicon) {
     favicon = document.createElement("link") as HTMLLinkElement;
     favicon.rel = "icon";
@@ -102,8 +130,12 @@ function injectFavicon(logo: LogoInfo) {
 
 function uninjectFavicon() {
   logger.info("uninjecting favicon...");
+
   const favicon = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
-  if (favicon && originalFavicon) favicon.href = originalFavicon;
+  if (favicon && originalFavicon) {
+    favicon.href = originalFavicon;
+    originalFavicon = null;
+  }
 }
 
 async function buildLogos<T extends Record<string, ImageSource>>(logos: T): Promise<Record<keyof T, LogoInfo>> {

@@ -16,8 +16,7 @@ export function injectInlineStyles(styleText: string, id: string) {
   const style = document.createElement("style");
   style.textContent = styleText;
   setDataAttr(style, `inline-${id}`);
-  document.head.append(style);
-  // logger.info(`injected styles with id ${id}`);
+  document.head.appendChild(style);
 }
 
 export function uninjectInlineStyles(id: string) {

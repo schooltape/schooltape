@@ -3,6 +3,10 @@ import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 
+function isSettingsV1(settings: Types.SettingsV1 | Types.SettingsV2): settings is Types.SettingsV1 {
+  return (settings as Types.SettingsV1).themeLogoAsFavicon !== undefined;
+}
+
 export const globalSettings = new StorageState(
   storage.defineItem<Types.SettingsV2>("local:globalSettings", {
     version: 2,
@@ -18,7 +22,9 @@ export const globalSettings = new StorageState(
       userSnippets: {},
     },
     migrations: {
-      2: async (settings: Types.SettingsV1): Promise<Types.SettingsV2> => {
+      2: async (settings: Types.SettingsV1 | Types.SettingsV2 | undefined) => {
+        if (!settings || !isSettingsV1(settings)) return;
+
         const { themeLogo, themeLogoAsFavicon, ...rest } = settings;
 
         // dynamic import to avoid TDZ error
@@ -36,6 +42,7 @@ export const globalSettings = new StorageState(
           }
           s.setAsFavicon.set({ toggle: themeLogoAsFavicon });
         }
+
         return rest;
       },
     },
