@@ -1,6 +1,7 @@
 import type { Browser } from "#imports";
 import { browser, defineBackground, storage } from "#imports";
 import { logger } from "@/utils/logger";
+import type { BackgroundMessage } from "@/utils/storage";
 import { globalSettings, updated } from "@/utils/storage";
 import semver from "semver";
 
@@ -48,30 +49,26 @@ export default defineBackground(() => {
   // update icon when toggle or update is changed
   globalSettings.watch(updateIcon);
 
-  // listen for messages
-  interface Message {
-    resetSettings?: boolean;
-    inject?: string;
-    toTab?: string;
-    updateIcon?: boolean;
-  }
+  browser.runtime.onMessage.addListener(async (msg: BackgroundMessage, sender: Browser.runtime.MessageSender) => {
+    logger.child({ message: msg, sender }).info("[background] received message");
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  browser.runtime.onMessage.addListener(async (msg: any, sender: any) => {
-    const message = msg as Message;
-    logger.child({ message, sender }).info("[background] Received message");
-
-    if (message.resetSettings) {
-      resetSettings();
-    } else if (message.toTab) {
-      const tabs = await browser.tabs.query({ url: message.toTab });
-      if (tabs.length > 0) {
-        browser.tabs.update(tabs[0].id, { active: true });
-      } else if (sender.tab?.id) {
-        browser.tabs.update(sender.tab.id, { url: message.toTab });
-      }
-    } else if (message.updateIcon) {
-      updateIcon();
+    switch (msg.type) {
+      case "resetSettings":
+        resetSettings();
+        break;
+      case "updateIcon":
+        updateIcon();
+        break;
+      case "closeTab":
+        if (!sender.tab?.id) break;
+        browser.tabs.remove(sender.tab.id);
+        break;
+      case "updateTabUrl":
+        if (!sender.tab?.id) break;
+        browser.tabs.update(sender.tab.id, { url: msg.url });
+        break;
+      default:
+        logger.error(`[background] unknown message received: ${msg}`);
     }
 
     return true; // return success

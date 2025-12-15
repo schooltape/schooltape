@@ -1,4 +1,4 @@
-import { browser } from "#imports";
+import { sendMessage } from "@/utils";
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
@@ -40,9 +40,9 @@ export default new Plugin<Settings>(
           e.preventDefault();
 
           if (logos) {
-            const tab = logos[0].href;
-            if (closeCurrentTab.toggle) window.close(); // TODO:  Scripts may only close windows that were opened by a script.
-            browser.runtime.sendMessage({ toTab: tab });
+            const tabUrl = logos[0].href;
+            if (closeCurrentTab.toggle) sendMessage({ type: "closeTab" });
+            sendMessage({ type: "updateTabUrl", url: tabUrl });
           }
         },
         {

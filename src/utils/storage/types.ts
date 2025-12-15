@@ -1,3 +1,9 @@
+export type BackgroundMessage =
+  | { type: "resetSettings" }
+  | { type: "updateIcon" }
+  | { type: "closeTab" }
+  | { type: "updateTabUrl"; url: string };
+
 // global
 export interface Settings {
   global: boolean;

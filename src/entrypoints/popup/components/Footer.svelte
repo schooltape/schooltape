@@ -4,6 +4,7 @@
   import { updated } from "@/utils/storage";
   import Button from "./inputs/Button.svelte";
   import { RotateCcw, Globe, GitBranch } from "@lucide/svelte";
+  import { sendMessage } from "@/utils";
 
   let version = $state();
 
@@ -63,7 +64,7 @@
       classList="text-ctp-text hover:text-ctp-base hover:bg-ctp-red"
       onclick={() => {
         if (confirm("Are you sure you want to reset all settings?")) {
-          browser.runtime.sendMessage({ resetSettings: true });
+          sendMessage({ type: "resetSettings" });
           location.reload();
         }
       }}><RotateCcw size={22} /></Button>

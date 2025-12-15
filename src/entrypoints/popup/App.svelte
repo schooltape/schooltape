@@ -1,7 +1,7 @@
 <script lang="ts">
   import { flavors } from "@catppuccin/palette";
   import { globalSettings, updated } from "@/utils/storage";
-  import { browser, onMount } from "#imports";
+  import { onMount } from "#imports";
 
   import Router from "svelte-spa-router";
   import active from "svelte-spa-router/active";
@@ -9,6 +9,7 @@
   import Plugins from "./routes/Plugins.svelte";
   import Themes from "./routes/Themes.svelte";
   import Snippets from "./routes/Snippets.svelte";
+  import { sendMessage } from "@/utils";
 
   const routes = {
     "/": Home,
@@ -27,7 +28,7 @@
 
   onMount(() => {
     updated.update({ icon: false });
-    browser.runtime.sendMessage({ updateIcon: true });
+    sendMessage({ type: "updateIcon" });
   });
 </script>
 
