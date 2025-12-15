@@ -1,9 +1,9 @@
 import { browser } from "#imports";
-import { dataAttr, hasChanged, injectInlineStyles, setDataAttr, uninjectInlineStyles } from "@/utils";
+import { hasChanged, injectInlineStyles, uninjectInlineStyles } from "@/utils";
 import { logger } from "@/utils/logger";
 import { Plugin } from "@/utils/plugin";
 import { globalSettings } from "@/utils/storage";
-import type { SettingsV2, Toggle } from "@/utils/storage";
+import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
 import schoolbox from "/schoolbox.svg?raw";
 import { flavors } from "@catppuccin/palette";
