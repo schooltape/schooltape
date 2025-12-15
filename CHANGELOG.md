@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.4](https://github.com/schooltape/schooltape/compare/v4.3.3...v4.3.4) (2025-12-15)
+
+
+### Bug Fixes
+
+* **plugins/homepageSwitcher:** closing tabs ([3db3c02](https://github.com/schooltape/schooltape/commit/3db3c021a51f8e2401c2c6f0f838b3065a723876))
+
 ## [4.3.3](https://github.com/schooltape/schooltape/compare/v4.3.2...v4.3.3) (2025-12-12)
 
 
