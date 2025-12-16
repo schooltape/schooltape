@@ -50,7 +50,7 @@ export default defineBackground(() => {
   globalSettings.watch(updateIcon);
 
   browser.runtime.onMessage.addListener(async (msg: BackgroundMessage, sender: Browser.runtime.MessageSender) => {
-    logger.child({ message: msg, sender }).info("[background] received message");
+    logger.info("[background] received message", { message: msg, sender });
 
     switch (msg.type) {
       case "resetSettings":
