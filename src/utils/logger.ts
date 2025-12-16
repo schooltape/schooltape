@@ -1,4 +1,4 @@
-function print(method: (...args: any[]) => void, ...args: any[]) {
+function print(method: (...args: unknown[]) => void, ...args: unknown[]) {
   if (import.meta.env.MODE === "production") return;
 
   const css = "background: #7fd4fa; color: #051d29; border-radius:10px";
@@ -7,7 +7,7 @@ function print(method: (...args: any[]) => void, ...args: any[]) {
 }
 
 export const logger = {
-  info: (...args: any[]) => print(console.log, ...args),
-  warn: (...args: any[]) => print(console.warn, ...args),
-  error: (...args: any[]) => print(console.error, ...args),
+  info: (...args: unknown[]) => print(console.log, ...args),
+  warn: (...args: unknown[]) => print(console.warn, ...args),
+  error: (...args: unknown[]) => print(console.error, ...args),
 };
