@@ -5,6 +5,7 @@ import {
   injectStylesheet,
   injectUserSnippet,
   onSchoolboxPage,
+  sendMessage,
   uninjectCatppuccin,
   uninjectStylesheet,
   uninjectUserSnippet,
@@ -89,7 +90,7 @@ export default defineContentScript({
       }
 
       // update icon
-      browser.runtime.sendMessage({ updateIcon: true });
+      sendMessage({ type: "updateIcon" });
     }
   },
 });

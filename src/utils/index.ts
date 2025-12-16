@@ -1,5 +1,6 @@
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
+import type { BackgroundMessage } from "./storage";
 import { globalSettings, schoolboxUrls } from "./storage";
 
 export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
@@ -10,6 +11,8 @@ export function setDataAttr(el: HTMLElement, id: string) {
 export async function onSchoolboxPage(): Promise<boolean> {
   return (await schoolboxUrls.get()).urls.includes(window.location.origin);
 }
+
+export const sendMessage = (msg: BackgroundMessage) => browser.runtime.sendMessage(msg);
 
 export function injectInlineStyles(styleText: string, id: string) {
   logger.info(`injecting styles with id ${id}`);
