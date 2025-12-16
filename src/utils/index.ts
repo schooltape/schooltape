@@ -1,3 +1,4 @@
+import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
 import type { BackgroundMessage } from "./storage";
