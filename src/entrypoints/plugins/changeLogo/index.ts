@@ -2,12 +2,12 @@ import { browser } from "#imports";
 import { hasChanged, injectInlineStyles, uninjectInlineStyles } from "@/utils";
 import { logger } from "@/utils/logger";
 import { Plugin } from "@/utils/plugin";
-import { globalSettings } from "@/utils/storage";
 import type { Toggle } from "@/utils/storage";
+import { globalSettings } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
-import schoolbox from "/schoolbox.svg?raw";
 import { flavors } from "@catppuccin/palette";
 import type { Unwatch } from "wxt/utils/storage";
+import schoolbox from "/schoolbox.svg?raw";
 
 const ID = "changeLogo";
 const PLUGIN_ID = `plugin-${ID}`;

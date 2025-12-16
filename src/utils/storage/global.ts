@@ -1,7 +1,7 @@
 import { storage } from "#imports";
+import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
-import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 
 export const globalSettings = new StorageState(
   storage.defineItem<Types.SettingsV2>("local:globalSettings", {
