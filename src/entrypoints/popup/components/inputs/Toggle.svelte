@@ -29,7 +29,7 @@
 </label>
 
 <div
-  class="flex items-center justify-between text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0">
+  class="flex items-center justify-between gap-2 text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0">
   <div>{description}</div>
-  <div>{@render children?.()}</div>
+  {@render children?.()}
 </div>

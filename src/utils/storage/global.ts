@@ -1,9 +1,11 @@
 import { storage } from "#imports";
+import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 
-export const globalSettings = new StorageState<Types.Settings>(
-  storage.defineItem<Types.Settings>("local:globalSettings", {
+export const globalSettings = new StorageState(
+  storage.defineItem<Types.SettingsV2>("local:globalSettings", {
+    version: 2,
     fallback: {
       global: true,
       plugins: true,
@@ -12,10 +14,31 @@ export const globalSettings = new StorageState<Types.Settings>(
 
       themeFlavour: "mocha",
       themeAccent: "mauve",
-      themeLogo: "schooltape-rainbow",
-      themeLogoAsFavicon: false,
 
       userSnippets: {},
+    },
+    migrations: {
+      2: async (settings: Types.SettingsV1) => {
+        const { themeLogo, themeLogoAsFavicon, ...rest } = settings;
+
+        // dynamic import to avoid TDZ error
+        const { plugins } = await import("@/entrypoints/plugins.content");
+        const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
+
+        if (changeLogo) {
+          const s = changeLogo.settings as LogoSettings;
+          if (themeLogo !== "default") {
+            // update logo
+            s.logo.set({ id: themeLogo });
+          } else {
+            // disable changeLogo
+            changeLogo.toggle.set({ toggle: false });
+          }
+          s.setAsFavicon.set({ toggle: themeLogoAsFavicon });
+        }
+
+        return rest;
+      },
     },
   }),
 );

@@ -1,7 +1,7 @@
 import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
-import type { BackgroundMessage, LogoInfo } from "./storage";
+import type { BackgroundMessage } from "./storage";
 import { globalSettings, schoolboxUrls } from "./storage";
 
 export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
@@ -20,8 +20,7 @@ export function injectInlineStyles(styleText: string, id: string) {
   const style = document.createElement("style");
   style.textContent = styleText;
   setDataAttr(style, `inline-${id}`);
-  document.head.append(style);
-  // logger.info(`injected styles with id ${id}`);
+  document.head.appendChild(style);
 }
 
 export function uninjectInlineStyles(id: string) {
@@ -52,50 +51,6 @@ export async function injectCatppuccin() {
 
 export function uninjectCatppuccin() {
   uninjectInlineStyles("catppuccin");
-}
-
-export function injectLogo(logo: LogoInfo, setAsFavicon: boolean) {
-  let url = logo.url;
-  if (!url.startsWith("http")) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    url = browser.runtime.getURL(url as any);
-  }
-  logger.info(`injecting logo: ${logo.name}`);
-  if (logo.disable) {
-    return;
-  }
-  const style = document.createElement("style");
-  style.classList.add("schooltape");
-  if (logo.adaptive) {
-    style.textContent = `a.logo > img { display: none !important; } a.logo { display: flex; align-items: center; justify-content: center; }`;
-    const span = document.createElement("span");
-    span.style.mask = `url("${url}") no-repeat center`;
-    span.style.maskSize = "100% 100%";
-    span.style.backgroundColor = "hsl(var(--ctp-accent))";
-    span.style.width = "100%";
-    span.style.height = "60px";
-    span.style.display = "block";
-    window.addEventListener("load", () => {
-      document.querySelectorAll("a.logo").forEach((logo) => {
-        const clonedSpan = span.cloneNode(true);
-        logo.append(clonedSpan);
-      });
-    });
-  } else {
-    style.textContent = `a.logo > img { content: url("${url}"); max-width: 30%; width: 100px; }`;
-  }
-  document.head.appendChild(style);
-
-  // inject favicon
-  if (setAsFavicon) {
-    let favicon = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
-    if (!favicon) {
-      favicon = document.createElement("link") as HTMLLinkElement;
-      favicon.rel = "icon";
-      document.head.appendChild(favicon);
-    }
-    favicon.href = url;
-  }
 }
 
 export function injectStylesheet(url: string, id: string) {
