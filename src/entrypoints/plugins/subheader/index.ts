@@ -26,7 +26,7 @@ export default new Plugin<Settings>(
   {
     openInNewTab: { toggle: true },
   },
-  async (settings) => {
+  async (_ctx, settings) => {
     const openInNewTab = await settings.openInNewTab.get();
     injectSubheader(openInNewTab.toggle);
   },

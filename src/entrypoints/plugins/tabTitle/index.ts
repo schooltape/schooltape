@@ -19,7 +19,7 @@ export default new Plugin<Settings>(
   {
     showSubjectPrefix: { toggle: true },
   },
-  async (settings) => {
+  async (_ctx, settings) => {
     // if already injected, abort
     if (originalTitle) return;
 

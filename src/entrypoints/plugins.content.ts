@@ -3,12 +3,22 @@ import { EXCLUDE_MATCHES } from "@/utils/constants";
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
+import quickSwitcher from "./plugins/quickSwitcher";
 import scrollPeriod from "./plugins/scrollPeriod";
 import scrollSegments from "./plugins/scrollSegments";
 import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
 
-export const plugins = [subheader, scrollSegments, scrollPeriod, progressBar, modernIcons, tabTitle, homepageSwitcher];
+export const plugins = [
+  subheader,
+  quickSwitcher,
+  scrollSegments,
+  scrollPeriod,
+  progressBar,
+  modernIcons,
+  tabTitle,
+  homepageSwitcher,
+];
 
 export type PluginInstance = (typeof plugins)[number];
 
@@ -16,10 +26,12 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
   excludeMatches: EXCLUDE_MATCHES,
-  async main() {
+  cssInjectionMode: "ui",
+
+  async main(ctx) {
     document.addEventListener("DOMContentLoaded", () => {
       for (const plugin of plugins) {
-        plugin.init();
+        plugin.init(ctx);
       }
     });
   },

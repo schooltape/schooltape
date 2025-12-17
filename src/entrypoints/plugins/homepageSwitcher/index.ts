@@ -22,7 +22,7 @@ export default new Plugin<Settings>(
       toggle: false,
     },
   },
-  async (settings) => {
+  async (_ctx, settings) => {
     if (logos !== null) return;
 
     logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
