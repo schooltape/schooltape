@@ -29,7 +29,7 @@ export default new Plugin<Settings>(
     filled: { toggle: true },
   },
 
-  async (settings) => {
+  async (_ctx, settings) => {
     const iconNames = [...new Set(Object.values(icons))].sort();
     const fontUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1&icon_names=${iconNames.join(",")}`;
 

@@ -1,4 +1,5 @@
 import { storage } from "#imports";
+import type { ContentScriptContext } from "#imports";
 import { hasChanged, onSchoolboxPage } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
@@ -19,8 +20,8 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     },
     defaultToggle: boolean,
     settings: Record<string, object> | null,
-    private injectCallback: (settings: T) => Promise<void> | void,
-    private uninjectCallback: (settings: T) => Promise<void> | void,
+    private injectCallback: (ctx: ContentScriptContext, settings: T) => Promise<void> | void,
+    private uninjectCallback: (ctx: ContentScriptContext, settings: T) => Promise<void> | void,
     private elementsToWaitFor: string[] = [],
   ) {
     // init plugin storage
@@ -43,7 +44,7 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     }
   }
 
-  async init() {
+  async init(ctx: ContentScriptContext) {
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
 
@@ -56,7 +57,7 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
         const observer = new MutationObserver((_mutations, observer) => {
           if (this.allElementsPresent()) {
             observer.disconnect();
-            this.inject();
+            this.inject(ctx);
           }
         });
         observer.observe(document.body, { childList: true, subtree: true });
@@ -64,45 +65,45 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
         // check if elements are already present
         if (this.allElementsPresent()) {
           observer.disconnect();
-          this.inject();
+          this.inject(ctx);
         }
       } else {
         // no elements to wait for
-        this.inject();
+        this.inject(ctx);
       }
     }
 
     // init watchers
     globalSettings.watch((newValue, oldValue) => {
-      if (hasChanged(newValue, oldValue, ["global", "plugins"])) this.reload();
+      if (hasChanged(newValue, oldValue, ["global", "plugins"])) this.reload(ctx);
     });
-    this.toggle.watch(this.reload.bind(this));
+    this.toggle.watch(() => this.reload(ctx));
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
         if (!(setting instanceof StorageState)) continue;
-        setting.watch(this.reload.bind(this));
+        setting.watch(() => this.reload(ctx));
       }
     }
   }
 
-  private inject() {
+  private inject(ctx: ContentScriptContext) {
     if (this.injected) return;
     if (!this.allElementsPresent()) return;
     logger.info(`injecting plugin: ${this.meta.name}`);
-    this.injectCallback(this.settings);
+    this.injectCallback(ctx, this.settings);
     this.injected = true;
   }
 
-  private uninject() {
+  private uninject(ctx: ContentScriptContext) {
     if (!this.injected) return;
     logger.info(`uninjecting plugin: ${this.meta.name}`);
-    this.uninjectCallback(this.settings);
+    this.uninjectCallback(ctx, this.settings);
     this.injected = false;
   }
 
-  private async reload() {
-    if (this.injected) this.uninject();
-    if (await this.isEnabled()) this.inject();
+  private async reload(ctx: ContentScriptContext) {
+    if (this.injected) this.uninject(ctx);
+    if (await this.isEnabled()) this.inject(ctx);
   }
 
   private async isEnabled(): Promise<boolean> {

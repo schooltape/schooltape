@@ -22,7 +22,7 @@ export default new Plugin<Settings>(
     resetCooldownOnMouseMove: { toggle: true },
     cooldownDuration: { min: 1, max: 60, value: 10 },
   },
-  async (settings) => {
+  async (_ctx, settings) => {
     const timetable = document.querySelector("[data-timetable-container] div.scrollable");
 
     if (window.location.pathname === "/" && timetable) {
