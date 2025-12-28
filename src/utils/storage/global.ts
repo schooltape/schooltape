@@ -50,7 +50,10 @@ export const schoolboxUrls = new StorageState(
   storage.defineItem<Types.SchoolboxUrls>("local:urls", {
     version: 1,
     fallback: {
-      urls: ["https://help.schoolbox.com.au"],
+      urls: ["help.schoolbox.com.au"],
+    },
+    migrations: {
+      2: (oldValue) => oldValue.urls.map((url: string) => url.replace(/^https?:\/\//, "")),
     },
   }),
 );
