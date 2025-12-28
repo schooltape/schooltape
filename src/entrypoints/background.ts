@@ -15,12 +15,12 @@ export default defineBackground(() => {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: "https://help.schoolbox.com.au/account/anonymous.php?" });
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html") });
-        const schoolbox = {
-          url: import.meta.env.WXT_SCHOOLBOX_URL,
+        const env = {
+          domain: import.meta.env.WXT_SCHOOLBOX_DOMAIN,
           jwt: import.meta.env.WXT_SCHOOLBOX_JWT,
         };
-        if (schoolbox.url && schoolbox.jwt) {
-          browser.tabs.create({ url: `${schoolbox.url}/api/session?jwt=${schoolbox.jwt}` });
+        if (env.domain && env.jwt) {
+          browser.tabs.create({ url: `${env.domain}/api/session?jwt=${env.jwt}` });
         }
       }
     } else if (reason === "update") {

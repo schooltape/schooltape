@@ -3,7 +3,7 @@ import type { WatchCallback } from "wxt/utils/storage";
 
 export class StorageState<T> {
   public state;
-  private storage;
+  protected storage;
 
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
@@ -13,9 +13,9 @@ export class StorageState<T> {
     this.storage.watch((newState) => this.updateState(newState));
   }
 
-  private updateState = (newState: T | null) => {
+  protected updateState(newState: T) {
     this.state = newState ?? this.storage.fallback;
-  };
+  }
 
   watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
 
@@ -28,9 +28,15 @@ export class StorageState<T> {
   }
 
   async update(updates: Partial<T>) {
-    await this.set({
-      ...(await this.get()),
-      ...updates,
-    });
+    const currentState = await this.get();
+
+    const baseState = currentState ?? this.storage.fallback;
+
+    if (baseState) {
+      await this.set({
+        ...baseState,
+        ...updates,
+      });
+    }
   }
 }
