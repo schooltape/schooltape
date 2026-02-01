@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.5](https://github.com/schooltape/schooltape/compare/v4.3.4...v4.3.5) (2026-02-01)
+
+
+### Bug Fixes
+
+* **plugins/modernIcons:** add missing icons ([083b0fc](https://github.com/schooltape/schooltape/commit/083b0fcbc7f40fbbaaf1ebdf773d6a88d646139d))
+
 ## [4.3.4](https://github.com/schooltape/schooltape/compare/v4.3.3...v4.3.4) (2025-12-15)
 
 
