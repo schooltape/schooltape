@@ -13,6 +13,7 @@
     "@tsconfig/svelte": "^5.0.6",
     "@types/node": "^24.10.4",
     "@types/semver": "^7.7.1",
+    "@wxt-dev/analytics": "^0.5.1",
     "@wxt-dev/module-svelte": "^2.0.4",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",

@@ -1,4 +1,4 @@
-import { browser, defineContentScript } from "#imports";
+import { analytics, browser, defineContentScript } from "#imports";
 import {
   hasChanged,
   injectCatppuccin,
@@ -25,6 +25,8 @@ export default defineContentScript({
   async main() {
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
+
+    analytics.track("injection");
 
     const updateThemes: WatchCallback<Settings> = async (newValue, oldValue) => {
       // if global or themes was changed

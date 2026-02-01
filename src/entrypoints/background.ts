@@ -1,5 +1,5 @@
 import type { Browser } from "#imports";
-import { browser, defineBackground, storage } from "#imports";
+import { analytics, browser, defineBackground, storage } from "#imports";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
 import { globalSettings, updated } from "@/utils/storage";
@@ -8,6 +8,7 @@ import semver from "semver";
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
     if (reason === "install") {
+      analytics.track("installed");
       logger.info("[background] Opening wiki page after install");
       browser.tabs.create({ url: "https://schooltape.github.io/installed" });
 
@@ -24,6 +25,7 @@ export default defineBackground(() => {
         }
       }
     } else if (reason === "update") {
+      analytics.track("updated");
       logger.info("[background] Showing update badge");
 
       await updated.set({ icon: true, changelog: true });
@@ -118,6 +120,10 @@ export default defineBackground(() => {
     }
   });
 });
+
+export type AnalyticsEvents = "installed" | "uninstalled" | "injected";
+
+function analyticsTrack() {}
 
 async function resetSettings(): Promise<void> {
   logger.info("[background] Clearing local storage");

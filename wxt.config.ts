@@ -17,7 +17,7 @@ export default defineConfig({
   },
   srcDir: "src",
   outDir: "dist",
-  modules: ["@wxt-dev/module-svelte"],
+  modules: ["@wxt-dev/module-svelte", "@wxt-dev/analytics/module"],
   imports: false,
   vite: () => ({
     plugins: [tailwindcss()],
