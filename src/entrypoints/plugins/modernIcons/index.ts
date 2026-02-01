@@ -85,6 +85,8 @@ const icons = {
   "icon-cloudy": "cloud",
   "icon-eportfolio": "work",
   "icon-open": "door_open",
+  "icon-lesson-plan": "history_edu",
+  "icon-add": "add",
 };
 
 function injectIcons(icons: Record<string, string>, filled: boolean) {
