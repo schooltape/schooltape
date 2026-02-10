@@ -192,3 +192,8 @@ div.columns .component-titlebar {
   border-radius: 10px !important;
   overflow: clip !important;
 }
+
+/* generic islands */
+.island section {
+  border-radius: 10px !important;
+}
