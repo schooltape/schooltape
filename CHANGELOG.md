@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.4.0](https://github.com/schooltape/schooltape/compare/v4.3.5...v4.4.0) (2026-02-11)
+
+
+### Features
+
+* **plugins/changeLogo:** init ([#324](https://github.com/schooltape/schooltape/issues/324)) ([d78f36a](https://github.com/schooltape/schooltape/commit/d78f36a94d5d2a882fae0ac5d2df27f957d49886))
+
+
+### Bug Fixes
+
+* **snippets:** correct rounded corners description ([#335](https://github.com/schooltape/schooltape/issues/335)) ([2071007](https://github.com/schooltape/schooltape/commit/20710079ed5c3bd879cca5122891a7042f4c4e5e))
+
 ## [4.3.5](https://github.com/schooltape/schooltape/compare/v4.3.4...v4.3.5) (2026-02-01)
 
 
