@@ -5,27 +5,12 @@
 */
 
 /* ----- global ----- */
-
-/* div#calendar-15403, TODO)) not sure if I need this
-.scrollable,
-section.content, */
-.tile,
-.button:not(.icon-search):not(.mark-all-read) {
-  border-radius: 10px !important;
-  overflow: clip;
-}
-
 /* advanced search button */
 .icon-search.button {
   border-radius: 0px 0px 10px 10px !important;
 }
 .c-header-search__results {
   border: none !important;
-}
-
-.small-12.island > section {
-  border-radius: 0px 0px 10px 10px;
-  overflow: clip;
 }
 
 /* timetable on homepage */
@@ -37,10 +22,6 @@ div[data-timetable-container] > section:has(.timetable) {
 /* account and action dropdown */
 #account-content,
 .f-dropdown {
-  border-radius: 0px 0px 10px 10px !important;
-}
-/* see all notifications button */
-#message-list > li > a.button:not(.mark-all-read) {
   border-radius: 0px 0px 10px 10px !important;
 }
 
@@ -80,7 +61,7 @@ div[data-timetable-container] > section:has(.timetable) {
   & ul.information-list {
     background: none !important;
     & > li {
-      background-color: hsl(var(--ctp-surface0)) !important;
+      background-color: var(--left-bg-primary) !important;
       /* round the bottom of the last card */
       &:last-child {
         border-radius: 0px 0px 10px 10px !important;
@@ -135,16 +116,6 @@ div[data-timetable-container] > section:has(.timetable) {
 /* ----- homepage (class pages) ----- */
 /* url:/homepage/code/:id */
 
-div.columns .component-titlebar {
-  border-radius: 10px;
-}
-
-/* social stream */
-.Component_Homepage_SocialStreamController section,
-.Component_Homepage_SocialStreamController .information-list {
-  border-radius: 10px;
-}
-
 /* news */
 .component-action > section {
   background-color: var(--left-bg-primary) !important;
@@ -155,45 +126,16 @@ div.columns .component-titlebar {
   background: var(--left-bg-primary) !important;
   border-radius: 0px 0px 10px 10px;
 }
-.Schoolbox_Comms_News_Component_Homepage_Controller.component-container .island > section,
-.Component_Homepage_ImageController.component-container .island > section,
-.Component_Homepage_ClassListController.component-container .island > section {
-  background: none !important;
+
+.component-container .component-titlebar {
+  border-radius: 10px 10px 0px 0px;
+  background: var(--top-head-bg);
 }
 
-.Component_Homepage_CountdownController.component-container,
-.Schoolbox_Resource_Textbox_Component_Homepage_Controller.component-container,
-.Component_Homepage_SocialStreamController.component-container,
-.Component_Homepage_SlideshowController.component-container,
-.Component_Homepage_AudioController.component-container,
-.Component_Homepage_TeachersController.component-container,
-.Component_Homepage_ClassListController.component-container,
-.Schoolbox_Comms_News_Component_Homepage_Controller.component-container,
-.Component_Homepage_LinkListController.component-container,
-.Component_Homepage_FileListController.component-container,
-.Schoolbox_Learning_Assessment_Component_Homepage_Outline_Controller.component-container,
-.Schoolbox_Learning_Assessment_DueWork_Component_Homepage_Controller.component-container,
-.Schoolbox_Learning_Assessment_Task_Component_Homepage_Controller.component-container,
-.Schoolbox_Learning_Assessment_Quiz_Component_Homepage_Controller.component-container,
-.Component_Homepage_ImageController.component-container,
-.Schoolbox_Tile_Component_HomepageTileController {
-  background: hsl(var(--ctp-accent));
+.tile,
+.button:not(.icon-search, .mark-all-read, #message-list *),
+.component-container,
+.small-12.island > section:not(.component-container *) /* section that is not a child of .component-container */ {
   border-radius: 10px;
-}
-
-.Component_Homepage_ImageController.component-container img {
-  border-radius: 0px 0px 10px 10px !important;
-}
-
-/* round some other components and clip overflow */
-
-.Schoolbox_Fixtures_Component_Dashboard_Controller section,
-.Component_Dashboard_TextboxController section {
-  border-radius: 10px !important;
-  overflow: clip !important;
-}
-
-/* generic islands */
-.island section {
-  border-radius: 10px !important;
+  overflow: clip;
 }
