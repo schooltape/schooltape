@@ -103,19 +103,6 @@ div[data-timetable-container] > section:has(.timetable) {
   border-radius: 0px 10px 10px 0px;
 }
 
-/* ----- classes page ----- */
-/* url:/learning/classes */
-
-.v-card {
-  border-radius: 10px;
-}
-.card-class-image {
-  border-radius: 10px 10px 0px 0px;
-}
-
-/* ----- homepage (class pages) ----- */
-/* url:/homepage/code/:id */
-
 /* news */
 .component-action > section {
   background-color: var(--left-bg-primary) !important;
@@ -127,15 +114,11 @@ div[data-timetable-container] > section:has(.timetable) {
   border-radius: 0px 0px 10px 10px;
 }
 
-.component-container .component-titlebar {
-  border-radius: 10px 10px 0px 0px;
-  background: var(--top-head-bg);
-}
-
 .tile,
 .button:not(.icon-search, .mark-all-read, #message-list *),
 .component-container,
-.small-12.island > section:not(.component-container *) /* section that is not a child of .component-container */ {
+.small-12.island > section:not(.component-container *), /* avoid children of .component-container */
+#news-component section {
   border-radius: 10px;
   overflow: clip;
 }
