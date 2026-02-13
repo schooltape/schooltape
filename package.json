@@ -28,7 +28,7 @@
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@tailwindcss/vite": "^4.1.18",
     "@tsconfig/svelte": "^5.0.7",
-    "@types/node": "^24.10.13",
+    "@types/node": "^25.0.0",
     "@types/semver": "^7.7.1",
     "@wxt-dev/module-svelte": "^2.0.4",
     "eslint": "^9.39.2",
