@@ -1,7 +1,24 @@
 {
   "name": "schooltape",
   "version": "4.4.0",
+  "private": true,
+  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
+  "homepage": "https://schooltape.github.io",
+  "license": "MIT",
   "author": "42willow",
+  "type": "module",
+  "scripts": {
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "format": "prettier --write .",
+    "postinstall": "wxt prepare",
+    "lint": "eslint .",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox"
+  },
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
@@ -30,23 +47,5 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0",
     "wxt": "^0.20.15"
-  },
-  "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
-  "homepage": "https://schooltape.github.io",
-  "homepage_url": "https://github.com/schooltape/schooltape",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "dev": "wxt",
-    "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
-    "lint": "eslint .",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write .",
-    "postinstall": "wxt prepare"
-  },
-  "type": "module"
+  }
 }
