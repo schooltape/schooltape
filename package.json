@@ -19,6 +19,9 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox"
   },
+  "overrides": {
+    "@wxt-dev/storage": "^1.2.7"
+  },
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
