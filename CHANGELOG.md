@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.1](https://github.com/schooltape/schooltape/compare/v4.4.0...v4.4.1) (2026-02-15)
+
+
+### Reverts
+
+* "chore(deps): update" ([79862c2](https://github.com/schooltape/schooltape/commit/79862c2727e485b5d2cf1a519b89700a957f28e5))
+
 ## [4.4.0](https://github.com/schooltape/schooltape/compare/v4.3.5...v4.4.0) (2026-02-11)
 
 
