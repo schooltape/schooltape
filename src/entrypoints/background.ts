@@ -3,6 +3,7 @@ import { browser, defineBackground, storage } from "#imports";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
 import { globalSettings, updated } from "@/utils/storage";
+import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import semver from "semver";
 
 export default defineBackground(() => {
@@ -37,6 +38,29 @@ export default defineBackground(() => {
       if (previousVersion && semver.gte(newVersion, "4.0.5") && semver.lt(previousVersion, "4.0.5")) {
         logger.info("[background] Clearing storage (v4.0.5 migration)");
         await storage.clear("local");
+      }
+
+      // https://github.com/wxt-dev/wxt/pull/2130
+      if (previousVersion && semver.gte(newVersion, "4.4.1") && semver.lt(previousVersion, "4.4.1")) {
+        logger.info("[background] Patching change logo storage (v4.4.1 migration)");
+
+        const { plugins } = await import("@/entrypoints/plugins.content");
+        const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
+        console.log(changeLogo);
+
+        if (changeLogo) {
+          const settings = changeLogo.settings as LogoSettings | undefined;
+
+          if ((await settings?.logo.get())?.id == null) {
+            storage.removeItem("local:plugin-changeLogo-logo");
+          }
+          if ((await settings?.setAsFavicon.get())?.toggle == null) {
+            storage.removeItem("local:plugin-changeLogo-setAsFavicon");
+          }
+          if ((await changeLogo.toggle.get()).toggle == null) {
+            storage.removeItem("local:plugin-changeLogo-toggle");
+          }
+        }
       }
 
       if (import.meta.env.DEV) {
