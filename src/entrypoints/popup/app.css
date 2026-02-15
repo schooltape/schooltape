@@ -5,7 +5,7 @@
 
 body {
   width: 450px; /* max: 1000px */
-  @apply bg-ctp-base font-lexend text-base text-ctp-text;
+  @apply bg-ctp-base font-lexend text-ctp-text text-base;
 }
 
 @theme {
@@ -31,7 +31,7 @@ body {
   }
 
   .slider {
-    @apply ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg bg-ctp-surface1 p-1 duration-500 ease-in-out peer-checked:bg-(--ctp-accent) after:rounded-lg after:bg-ctp-text after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6 peer-checked:after:bg-ctp-mantle;
+    @apply bg-ctp-surface1 after:bg-ctp-text peer-checked:after:bg-ctp-mantle ml-4 flex h-5 w-11 flex-shrink-0 items-center rounded-lg p-1 duration-500 ease-in-out peer-checked:bg-(--ctp-accent) after:rounded-lg after:shadow-md after:duration-300 group-hover:after:translate-x-1 peer-checked:after:translate-x-6;
   }
 
   .slider.big {
@@ -42,28 +42,12 @@ body {
     @apply after:h-3 after:w-3;
   }
 
-  #flavours button {
-    @apply bg-ctp-surface0;
-  }
-
-  #flavours button.active {
-    @apply bg-(--ctp-accent)/40;
-  }
-
-  #navbar a.active {
-    @apply bg-(--ctp-accent)/40;
-  }
-
-  #navbar a {
-    @apply bg-ctp-surface0;
-  }
-
   #card {
-    @apply flex w-full flex-col items-center justify-center rounded-3xl bg-ctp-mantle bg-linear-to-b p-6 shadow-xl outline-2 outline-(--ctp-accent) outline-solid;
+    @apply bg-ctp-mantle flex w-full flex-col items-center justify-center rounded-3xl bg-linear-to-b p-6 shadow-xl outline-2 outline-(--ctp-accent) outline-solid;
   }
 
   #card h1 {
-    @apply bg-linear-to-r from-ctp-blue to-ctp-teal bg-clip-text text-5xl font-bold text-transparent;
+    @apply from-ctp-blue to-ctp-teal bg-linear-to-r bg-clip-text text-5xl font-bold text-transparent;
 
     &.ctp {
       background-image: linear-gradient(
@@ -95,7 +79,7 @@ body {
   }
 
   button#toggle {
-    @apply rounded-xl px-4 py-2 text-xl font-bold text-ctp-base;
+    @apply text-ctp-base rounded-xl px-4 py-2 text-xl font-bold;
   }
 
   button.small {
@@ -122,24 +106,12 @@ body {
     @apply outline-ctp-overlay0 outline-solid;
   }
 
-  .navbutton-left {
-    @apply rounded-l-xl py-2 pr-2 pl-4 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
-  }
-
-  .navbutton-center {
-    @apply p-2 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
-  }
-
-  .navbutton-right {
-    @apply rounded-r-xl py-2 pr-4 pl-2 outline-1 outline-ctp-overlay2/10 outline-solid hover:bg-(--ctp-accent)/50 active:bg-(--ctp-accent)/80;
-  }
-
   div[title] {
     @apply relative;
   }
 
   div[title]:hover::after {
-    @apply absolute bottom-full left-1/2 bg-ctp-surface0 whitespace-nowrap text-ctp-text;
+    @apply bg-ctp-surface0 text-ctp-text absolute bottom-full left-1/2 whitespace-nowrap;
     content: attr(title);
     transform: translateX(-50%);
     padding: 0.5rem;

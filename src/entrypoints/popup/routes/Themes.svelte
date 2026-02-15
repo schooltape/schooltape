@@ -35,13 +35,14 @@
       globalSettings.update({ themes: toggled });
     }} />
 
-  <div id="flavours" class="my-6 flex rounded-xl py-2 text-ctp-text">
+  <div
+    id="flavours"
+    class="text-ctp-text bg-ctp-surface0 outline-ctp-overlay2/20 my-6 flex overflow-clip rounded-xl outline-1 outline-solid">
     {#each flavours as flavour (flavour)}
       <button
-        class:active={globalSettings.state.themeFlavour === flavour}
-        class:navbutton-left={flavour === "latte"}
-        class:navbutton-right={flavour === "mocha"}
-        class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
+        class="{globalSettings.state.themeFlavour === flavour
+          ? 'bg-(--ctp-accent)/30'
+          : 'hover:bg-(--ctp-accent)/10'} flex items-center p-2 transition-colors duration-300"
         onclick={() => {
           globalSettings.update({ themeFlavour: flavour });
         }}>{flavour}</button>
