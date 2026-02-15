@@ -26,15 +26,15 @@ export const globalSettings = new StorageState(
         const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
 
         if (changeLogo) {
-          const s = changeLogo.settings as LogoSettings;
+          const changeLogoSettings = changeLogo.settings as LogoSettings;
           if (themeLogo !== "default") {
             // update logo
-            s.logo.set({ id: themeLogo });
+            changeLogoSettings.logo.set({ id: themeLogo });
           } else {
             // disable changeLogo
             changeLogo.toggle.set({ toggle: false });
           }
-          s.setAsFavicon.set({ toggle: themeLogoAsFavicon });
+          changeLogoSettings.setAsFavicon.set({ toggle: themeLogoAsFavicon });
         }
 
         return rest;
