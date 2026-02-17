@@ -51,13 +51,13 @@ export default defineBackground(() => {
           const settings = changeLogo.settings as LogoSettings | undefined;
 
           if ((await settings?.logo.get())?.id == null) {
-            storage.removeItem("local:plugin-changeLogo-logo");
+            await storage.removeItem("local:plugin-changeLogo-logo");
           }
           if ((await settings?.setAsFavicon.get())?.toggle == null) {
-            storage.removeItem("local:plugin-changeLogo-setAsFavicon");
+            await storage.removeItem("local:plugin-changeLogo-setAsFavicon");
           }
-          if ((await changeLogo.toggle.get())?.toggle == null) {
-            storage.removeItem("local:plugin-changeLogo");
+          if ((await changeLogo.toggle.get()).toggle == null) {
+            await storage.removeItem("local:plugin-changeLogo");
           }
         }
       }
