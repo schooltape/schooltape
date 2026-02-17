@@ -46,7 +46,6 @@ export default defineBackground(() => {
 
         const { plugins } = await import("@/entrypoints/plugins.content");
         const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
-        console.log(changeLogo);
 
         if (changeLogo) {
           const settings = changeLogo.settings as LogoSettings | undefined;
