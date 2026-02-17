@@ -20,7 +20,7 @@
     "zip:firefox": "wxt zip -b firefox"
   },
   "overrides": {
-    "@wxt-dev/storage": "^1.2.7"
+    "@wxt-dev/storage": "npm:@schooltape/wxt-storage@^1.2.8"
   },
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
