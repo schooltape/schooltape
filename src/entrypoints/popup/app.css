@@ -8,6 +8,10 @@ body {
   @apply bg-ctp-base font-lexend text-ctp-text text-base;
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-ctp-overlay0);
+}
+
 @theme {
   --font-lexend: "Lexend", sans-serif;
   --animate-zoom-in: zoom-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
