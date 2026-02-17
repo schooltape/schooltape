@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.4.2](https://github.com/schooltape/schooltape/compare/v4.4.1...v4.4.2) (2026-02-17)
+
+
+### Miscellaneous Chores
+
+* release 4.4.2 ([65542c0](https://github.com/schooltape/schooltape/commit/65542c087719f58e33a36ac13c0230d16ab4c366))
+
+## [4.4.1](https://github.com/schooltape/schooltape/compare/v4.4.0...v4.4.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* **plugins/changeLogo:** patch migration ([#347](https://github.com/schooltape/schooltape/issues/347)) ([33c6339](https://github.com/schooltape/schooltape/commit/33c63391508ce0b75aee19b9d17e13af6a11d65d))
+
 ## [4.4.0](https://github.com/schooltape/schooltape/compare/v4.3.5...v4.4.0) (2026-02-11)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "schooltape",
-  "version": "4.4.0",
+  "version": "4.4.2",
   "private": true,
   "description": "Schooltape is a free, open-source, web extension that allows you to customise the look, feel, and functionality of Schoolbox!",
   "homepage": "https://schooltape.github.io",
@@ -20,7 +20,7 @@
     "zip:firefox": "wxt zip -b firefox"
   },
   "overrides": {
-    "@wxt-dev/storage": "^1.2.7"
+    "@wxt-dev/storage": "npm:@schooltape/wxt-storage@^1.2.8"
   },
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
