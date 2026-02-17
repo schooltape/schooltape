@@ -57,7 +57,7 @@ export default defineBackground(() => {
           if ((await settings?.setAsFavicon.get())?.toggle == null) {
             storage.removeItem("local:plugin-changeLogo-setAsFavicon");
           }
-          if ((await changeLogo.toggle.get()).toggle == null) {
+          if ((await changeLogo.toggle.get())?.toggle == null) {
             storage.removeItem("local:plugin-changeLogo");
           }
         }
