@@ -1,40 +1,12 @@
 <script lang="ts">
-  import type { UserSnippet } from "@/utils/storage";
   import { globalSettings } from "@/utils/storage";
   import { snippets } from "@/entrypoints/snippets.content";
 
   import Title from "../components/Title.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import TextInput from "../components/inputs/TextInput.svelte";
-
-  let snippetURL = $state("");
-
-  async function addUserSnippet() {
-    if (!snippetURL.startsWith("http") && !snippetURL.includes("gist.github.com")) {
-      alert("Invalid URL. Please enter a valid Gist URL.");
-      return;
-    }
-    // create new user snippet from URL (snippetURL)
-    // eg. https://gist.github.com/42Willow/e89e76ef3853e83a6439ffba42f7d273
-    const response = await fetch(snippetURL + "/raw");
-    const data = await response.text();
-    const getMatch = (snippet: string, regex: RegExp) => {
-      const match = snippet.match(regex);
-      return match ? match[1] : null;
-    };
-    let sections = snippetURL.split("/");
-    let key = sections[sections.length - 1].split(".")[0];
-
-    let settings = await globalSettings.get();
-    settings.userSnippets[key] = {
-      author: sections[3],
-      name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
-      description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
-      url: snippetURL,
-      toggle: true,
-    };
-    await globalSettings.set(settings);
-  }
+  import { SquarePen } from "@lucide/svelte";
+  import Button from "../components/inputs/Button.svelte";
+  import { navigate } from "../router";
 </script>
 
 <div id="card">
@@ -43,59 +15,29 @@
     checked={globalSettings.state.snippets}
     update={(toggled: boolean) => {
       globalSettings.update({ snippets: toggled });
-    }} />
+    }}>
+  </Title>
 
-  <div class="snippets-container w-full">
+  <div class="my-4 flex w-full flex-col gap-4">
+    <Toggle
+      id="quick-css"
+      description="Make local CSS changes."
+      checked={true}
+      text="Quick CSS"
+      size="small"
+      update={(toggle) => console.log(toggle)}>
+      <Button onclick={() => navigate("/snippets/quick")} title="Edit Quick CSS" id="edit-quick-css"
+        ><SquarePen size={20} /></Button>
+    </Toggle>
+
     {#each snippets as snippet (snippet.meta.id)}
-      <div class="group my-4 w-full">
-        <Toggle
-          id={snippet.meta.id}
-          checked={snippet.toggle.state.toggle}
-          update={(toggle) => snippet.toggle.set({ toggle })}
-          text={snippet.meta.name}
-          description={snippet.meta.description}
-          size="small" />
-      </div>
-    {/each}
-  </div>
-  <div class="w-full">
-    <h3 class="my-4 text-ctp-text">User Snippets</h3>
-    <p class="mb-4 text-ctp-overlay2">
-      To learn how to make your own snippets, please read the
-      <a
-        class="text-ctp-blue hover:underline"
-        href="https://schooltape.github.io/contributing/snippets.html#user-snippets"
-        target="_blank">wiki</a
-      >.
-    </p>
-    <!-- input box to make new snippet -->
-    <TextInput id="snippet-input" bind:value={snippetURL} placeholder="Gist URL" label="Add" onclick={addUserSnippet} />
-  </div>
-
-  <div class="user-snippets-container w-full">
-    {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
-      <div class="group my-4 w-full">
-        <Toggle
-          {id}
-          checked={snippet.toggle}
-          update={async (toggled: boolean) => {
-            let settings = await globalSettings.get();
-            settings.userSnippets[id].toggle = toggled;
-            await globalSettings.set(settings);
-          }}
-          text={snippet.name}
-          description={snippet.description}
-          size="small" />
-        <button
-          class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
-          onclick={async () => {
-            let settings = await globalSettings.get();
-            delete settings.userSnippets[id];
-            await globalSettings.set(settings);
-          }}>Remove</button>
-        <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
-      </div>
+      <Toggle
+        id={snippet.meta.id}
+        checked={snippet.toggle.state.toggle}
+        update={(toggle) => snippet.toggle.set({ toggle })}
+        text={snippet.meta.name}
+        description={snippet.meta.description}
+        size="small" />
     {/each}
   </div>
 </div>

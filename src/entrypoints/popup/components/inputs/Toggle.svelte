@@ -14,22 +14,24 @@
   let { update, checked, id, size = "big", text = "", description = "", children }: Props = $props();
 </script>
 
-<label class="group relative flex cursor-pointer items-center justify-between py-2 text-ctp-text">
-  <h4 class="text-ctp-text">{text}</h4>
-  <input
-    {id}
-    type="checkbox"
-    class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md"
-    {checked}
-    onchange={(event: Event) => {
-      const target = event.target as HTMLInputElement;
-      update(target.checked);
-    }} />
-  <span class="slider {size}"></span>
-</label>
+<div>
+  <label class="group text-ctp-text relative flex cursor-pointer items-center justify-between py-2">
+    <h4 class="text-ctp-text">{text}</h4>
+    <input
+      {id}
+      type="checkbox"
+      class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md"
+      {checked}
+      onchange={(event: Event) => {
+        const target = event.target as HTMLInputElement;
+        update(target.checked);
+      }} />
+    <span class="slider {size}"></span>
+  </label>
 
-<div
-  class="flex items-center justify-between gap-2 text-ctp-overlay1 transition-colors duration-500 ease-in-out group-hover:text-ctp-subtext0">
-  <div>{description}</div>
-  {@render children?.()}
+  <div
+    class="text-ctp-overlay1 group-hover:text-ctp-subtext0 flex items-center justify-between gap-2 transition-colors duration-500 ease-in-out">
+    <div>{description}</div>
+    {@render children?.()}
+  </div>
 </div>

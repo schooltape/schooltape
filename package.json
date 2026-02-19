@@ -23,8 +23,10 @@
     "@wxt-dev/storage": "npm:@schooltape/wxt-storage@^1.2.8"
   },
   "devDependencies": {
+    "@catppuccin/codemirror": "^1.0.1",
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
+    "@codemirror/lang-css": "^6.3.1",
     "@eslint/compat": "^2.0.2",
     "@eslint/js": "^10.0.1",
     "@lucide/svelte": "^0.564.0",
@@ -43,10 +45,11 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-svelte": "^3.4.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "sv-router": "^0.13.0",
     "semver": "^7.7.4",
+    "sv-router": "^0.13.0",
     "svelte": "^5.51.2",
     "svelte-check": "^4.4.0",
+    "svelte-codemirror-editor": "^2.1.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0",

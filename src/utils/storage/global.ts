@@ -4,7 +4,7 @@ import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 
 export const globalSettings = new StorageState(
-  storage.defineItem<Types.SettingsV2>("local:globalSettings", {
+  storage.defineItem<Types.SettingsV3>("local:globalSettings", {
     version: 2,
     fallback: {
       global: true,
@@ -14,8 +14,6 @@ export const globalSettings = new StorageState(
 
       themeFlavour: "mocha",
       themeAccent: "mauve",
-
-      userSnippets: {},
     },
     migrations: {
       2: async (settings: Types.SettingsV1) => {
@@ -74,6 +72,16 @@ export const schoolboxUrls = new StorageState(
     version: 1,
     fallback: {
       urls: ["https://help.schoolbox.com.au"],
+    },
+  }),
+);
+
+export const quickCSS = new StorageState(
+  storage.defineItem<Types.QuickCSS>("local:quickCSS", {
+    version: 1,
+    fallback: {
+      toggle: true,
+      value: "",
     },
   }),
 );
