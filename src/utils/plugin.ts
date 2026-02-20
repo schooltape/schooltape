@@ -105,10 +105,9 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   }
 
   private async isEnabled(): Promise<boolean> {
-    const settings = await globalSettings.get();
-    const toggle = await this.toggle.get();
+    const settings = globalSettings.state;
 
-    return settings.global && settings.plugins && toggle.toggle;
+    return settings.global && settings.plugins && this.toggle.state.toggle;
   }
 
   private allElementsPresent() {

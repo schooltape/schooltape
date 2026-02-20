@@ -28,7 +28,6 @@ export default new Plugin<Settings>(
     logos = Array.from(document.getElementsByClassName("logo")) as HTMLAnchorElement[];
 
     // add event listeners
-    const closeCurrentTab = await settings.closeCurrentTab.get();
     controller = new AbortController();
 
     for (const logo of logos) {
@@ -41,7 +40,7 @@ export default new Plugin<Settings>(
 
           if (logos) {
             const tabUrl = logos[0].href;
-            if (closeCurrentTab.toggle) sendMessage({ type: "closeTab" });
+            if (settings.closeCurrentTab.state.toggle) sendMessage({ type: "closeTab" });
             sendMessage({ type: "updateTabUrl", url: tabUrl });
           }
         },

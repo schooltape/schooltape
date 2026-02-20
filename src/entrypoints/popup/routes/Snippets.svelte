@@ -25,33 +25,25 @@
     let sections = snippetURL.split("/");
     let key = sections[sections.length - 1].split(".")[0];
 
-    let settings = await globalSettings.get();
-    settings.userSnippets[key] = {
+    globalSettings.state.userSnippets[key] = {
       author: sections[3],
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
       description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
       url: snippetURL,
       toggle: true,
     };
-    await globalSettings.set(settings);
   }
 </script>
 
 <div id="card">
-  <Title
-    title="Snippets"
-    checked={globalSettings.state.snippets}
-    update={(toggled: boolean) => {
-      globalSettings.update({ snippets: toggled });
-    }} />
+  <Title title="Snippets" bind:checked={globalSettings.state.snippets} />
 
   <div class="snippets-container w-full">
     {#each snippets as snippet (snippet.meta.id)}
       <div class="group my-4 w-full">
         <Toggle
           id={snippet.meta.id}
-          checked={snippet.toggle.state.toggle}
-          update={(toggle) => snippet.toggle.set({ toggle })}
+          bind:checked={snippet.toggle.state.toggle}
           text={snippet.meta.name}
           description={snippet.meta.description}
           size="small" />
@@ -59,8 +51,8 @@
     {/each}
   </div>
   <div class="w-full">
-    <h3 class="my-4 text-ctp-text">User Snippets</h3>
-    <p class="mb-4 text-ctp-overlay2">
+    <h3 class="text-ctp-text my-4">User Snippets</h3>
+    <p class="text-ctp-overlay2 mb-4">
       To learn how to make your own snippets, please read the
       <a
         class="text-ctp-blue hover:underline"
@@ -75,26 +67,14 @@
   <div class="user-snippets-container w-full">
     {#each Object.entries(globalSettings.state.userSnippets as Record<string, UserSnippet>) as [id, snippet] (id)}
       <div class="group my-4 w-full">
-        <Toggle
-          {id}
-          checked={snippet.toggle}
-          update={async (toggled: boolean) => {
-            let settings = await globalSettings.get();
-            settings.userSnippets[id].toggle = toggled;
-            await globalSettings.set(settings);
-          }}
-          text={snippet.name}
-          description={snippet.description}
-          size="small" />
+        <Toggle {id} bind:checked={snippet.toggle} text={snippet.name} description={snippet.description} size="small" />
         <button
           class="xsmall hover:bg-ctp-red hover:text-ctp-mantle"
-          onclick={async () => {
-            let settings = await globalSettings.get();
-            delete settings.userSnippets[id];
-            await globalSettings.set(settings);
+          onclick={() => {
+            delete globalSettings.state.userSnippets[id];
           }}>Remove</button>
         <a href={snippet.url} target="_blank"
-          ><button class="xsmall hover:bg-(--ctp-accent) hover:text-ctp-mantle">Gist</button></a>
+          ><button class="xsmall hover:text-ctp-mantle hover:bg-(--ctp-accent)">Gist</button></a>
       </div>
     {/each}
   </div>

@@ -27,8 +27,7 @@ export default new Plugin<Settings>(
     openInNewTab: { toggle: true },
   },
   async (settings) => {
-    const openInNewTab = await settings.openInNewTab.get();
-    injectSubheader(openInNewTab.toggle);
+    injectSubheader(settings.openInNewTab.state.toggle);
   },
   uninjectSubheader,
   [".subheader", ".timetable"],

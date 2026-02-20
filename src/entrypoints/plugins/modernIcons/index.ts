@@ -40,8 +40,7 @@ export default new Plugin<Settings>(
     injectInlineStyles(styleText, PLUGIN_ID);
 
     // inject icons
-    const filled = await settings.filled.get();
-    injectIcons(icons, filled.toggle);
+    injectIcons(icons, settings.filled.state.toggle);
   },
   () => {
     uninjectStylesheet(PLUGIN_ID);

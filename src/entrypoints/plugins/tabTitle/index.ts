@@ -59,7 +59,7 @@ export default new Plugin<Settings>(
     } else if (path.includes("/learning/due/")) {
       document.title = "Due Work";
     } else if (path.includes("/homepage/")) {
-      if (!(await settings.showSubjectPrefix.get()).toggle) {
+      if (settings.showSubjectPrefix.state.toggle) {
         document.title = document.getElementsByTagName("h1")[0].innerText.replace(/^.*- /, "");
       } else {
         document.title = document.getElementsByTagName("h1")[0].innerText;

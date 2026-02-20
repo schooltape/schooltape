@@ -10,7 +10,4 @@
   description="e.g. 'ENG - VCE English 1 & 2' becomes 'VCE English 1 & 2'"
   size="small"
   id="showSubjectPrefix"
-  checked={settings.showSubjectPrefix.state.toggle}
-  update={async (toggle) => {
-    settings.showSubjectPrefix.set({ toggle });
-  }} />
+  bind:checked={settings.showSubjectPrefix.state.toggle} />

@@ -4,18 +4,19 @@
     min: number;
     max: number;
     value: number;
-    update: (value: number) => void;
     name?: string;
     description?: string;
   }
 
-  let { update, id, min, max, value, name = "", description = "" }: Props = $props();
+  let { id, min, max, value, name = "", description = "" }: Props = $props();
+
+  // svelte-ignore state_referenced_locally
   let currentValue = $state(value);
 </script>
 
 <div class="mt-4 space-y-2">
   {#if name}
-    <label for={id} class="block text-ctp-text">{name}</label>
+    <label for={id} class="text-ctp-text block">{name}</label>
   {/if}
   <div class="flex items-center gap-4">
     <input
@@ -23,7 +24,7 @@
       type="range"
       onchange={(event: Event) => {
         const target = event.target as HTMLInputElement;
-        update(parseInt(target.value));
+        value = parseInt(target.value);
       }}
       oninput={(event: Event) => {
         const target = event.target as HTMLInputElement;
@@ -34,7 +35,7 @@
       {max}
       {value}
       class="styled-slider slider-progress" />
-    <span id={id + "-value"} class="text-sm font-medium text-ctp-text">{currentValue}</span>
+    <span id={id + "-value"} class="text-ctp-text text-sm font-medium">{currentValue}</span>
   </div>
   {#if description}
     <p class="text-ctp-overlay1">{description}</p>

@@ -29,12 +29,12 @@ export const globalSettings = new StorageState(
           const changeLogoSettings = changeLogo.settings as LogoSettings;
           if (themeLogo !== "default") {
             // update logo
-            changeLogoSettings.logo.set({ id: themeLogo });
+            changeLogoSettings.logo.state.id = themeLogo;
           } else {
             // disable changeLogo
-            changeLogo.toggle.set({ toggle: false });
+            changeLogo.toggle.state.toggle = false;
           }
-          changeLogoSettings.setAsFavicon.set({ toggle: themeLogoAsFavicon });
+          changeLogoSettings.setAsFavicon.state.toggle = themeLogoAsFavicon;
         }
 
         return rest;

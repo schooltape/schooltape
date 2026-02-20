@@ -61,9 +61,9 @@ export class Snippet {
   }
 
   private async isEnabled(): Promise<boolean> {
-    const settings = await globalSettings.get();
-    const toggle = await this.toggle.get();
+    const settings = globalSettings.state;
+    const toggle = this.toggle.state.toggle;
 
-    return settings.global && settings.snippets && toggle.toggle;
+    return settings.global && settings.snippets && toggle;
   }
 }

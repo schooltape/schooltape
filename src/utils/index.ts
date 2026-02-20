@@ -10,7 +10,7 @@ export function setDataAttr(el: HTMLElement, id: string) {
 }
 
 export async function onSchoolboxPage(): Promise<boolean> {
-  return (await schoolboxUrls.get()).urls.includes(window.location.origin);
+  return schoolboxUrls.state.urls.includes(window.location.origin);
 }
 
 export const sendMessage = (msg: BackgroundMessage) => browser.runtime.sendMessage(msg);
@@ -30,9 +30,8 @@ export function uninjectInlineStyles(id: string) {
 }
 
 export async function injectCatppuccin() {
-  const settings = await globalSettings.get();
-  const flavour = settings.themeFlavour;
-  const accent = settings.themeAccent;
+  const flavour = globalSettings.state.themeFlavour;
+  const accent = globalSettings.state.themeAccent;
 
   logger.info(`injecting catppuccin: ${flavour} ${accent}`);
   let styleText = ":root {";
@@ -77,7 +76,7 @@ export function uninjectStylesheet(id: string) {
 export async function injectUserSnippet(id: string) {
   logger.info(`injecting user snippet with id ${id}`);
 
-  const userSnippets = (await globalSettings.get()).userSnippets;
+  const userSnippets = globalSettings.state.userSnippets;
   const snippet = userSnippets[id];
 
   if (!snippet) {

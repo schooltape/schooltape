@@ -28,14 +28,9 @@
 </script>
 
 <div id="card">
-  <Title
-    title="Themes"
-    checked={globalSettings.state.themes}
-    update={(toggled: boolean) => {
-      globalSettings.update({ themes: toggled });
-    }} />
+  <Title title="Themes" bind:checked={globalSettings.state.themes} />
 
-  <div id="flavours" class="my-6 flex rounded-xl py-2 text-ctp-text">
+  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
     {#each flavours as flavour (flavour)}
       <button
         class:active={globalSettings.state.themeFlavour === flavour}
@@ -43,7 +38,7 @@
         class:navbutton-right={flavour === "mocha"}
         class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
         onclick={() => {
-          globalSettings.update({ themeFlavour: flavour });
+          globalSettings.state.themeFlavour = flavour;
         }}>{flavour}</button>
     {/each}
   </div>
@@ -56,7 +51,7 @@
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
         onclick={() => {
-          globalSettings.update({ themeAccent: cleanAccent(accent) as Accent });
+          globalSettings.state.themeAccent = cleanAccent(accent) as Accent;
         }}></button>
     {/each}
   </div>

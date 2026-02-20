@@ -85,11 +85,11 @@ export default new Plugin<Settings>(
 
 async function inject(settings: Settings) {
   const resolvedLogos = await logos;
-  const logoId = (await settings.logo.get()).id;
+  const logoId = settings.logo.state.id;
 
   injectLogo(resolvedLogos[logoId]);
 
-  if ((await settings.setAsFavicon.get()).toggle) {
+  if (settings.setAsFavicon.state.toggle) {
     injectFavicon(resolvedLogos[logoId]);
   }
 }
@@ -152,7 +152,7 @@ async function buildLogos<T extends Record<string, ImageSource>>(logos: T): Prom
         url = browser.runtime.getURL(value.url);
       }
     } else if (value.raw) {
-      const settings = await globalSettings.get();
+      const settings = globalSettings.state;
       const flavour = settings.themeFlavour;
       const accent = settings.themeAccent;
       const accentHex = flavors[flavour].colors[accent].hex;

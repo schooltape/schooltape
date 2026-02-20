@@ -27,7 +27,8 @@ export default defineBackground(() => {
     } else if (reason === "update") {
       logger.info("[background] Showing update badge");
 
-      await updated.set({ icon: true, changelog: true });
+      updated.state.icon = true;
+      updated.state.changelog = true;
       updateIcon();
 
       const manifest = browser.runtime.getManifest();
@@ -49,15 +50,16 @@ export default defineBackground(() => {
 
         if (changeLogo) {
           const settings = changeLogo.settings as LogoSettings | undefined;
-
-          if ((await settings?.logo.get())?.id == null) {
-            await storage.removeItem("local:plugin-changeLogo-logo");
-          }
-          if ((await settings?.setAsFavicon.get())?.toggle == null) {
-            await storage.removeItem("local:plugin-changeLogo-setAsFavicon");
-          }
-          if ((await changeLogo.toggle.get()).toggle == null) {
-            await storage.removeItem("local:plugin-changeLogo");
+          if (settings) {
+            if (settings.logo.state.id == null) {
+              await storage.removeItem("local:plugin-changeLogo-logo");
+            }
+            if (settings.setAsFavicon.state.toggle == null) {
+              await storage.removeItem("local:plugin-changeLogo-setAsFavicon");
+            }
+            if (changeLogo.toggle == null) {
+              await storage.removeItem("local:plugin-changeLogo");
+            }
           }
         }
       }
@@ -156,10 +158,10 @@ async function updateIcon() {
   if (new Date().getMonth() === 5) {
     iconSuffix += "-ctp";
   }
-  if ((await globalSettings.get()).global === false) {
+  if (globalSettings.state.global === false) {
     iconSuffix += "-disabled";
   }
-  if ((await updated.get()).icon === true) {
+  if (updated.state.icon === true) {
     iconSuffix += "-badge";
   }
 

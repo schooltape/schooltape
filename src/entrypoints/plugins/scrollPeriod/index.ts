@@ -28,11 +28,11 @@ export default new Plugin<Settings>(
     if (window.location.pathname === "/" && timetable) {
       updateScrollbar(timetable);
 
-      const cooldownDuration = await settings.cooldownDuration.get();
-      const resetCooldownOnMouseMove = await settings.resetCooldownOnMouseMove.get();
+      const cooldownDuration = settings.cooldownDuration.state;
+      const resetCooldownOnMouseMove = settings.resetCooldownOnMouseMove.state;
 
       const setUpdateInterval = () => {
-        interval = setInterval(() => updateScrollbar(timetable), (cooldownDuration?.value || 10) * 1000);
+        interval = setInterval(() => updateScrollbar(timetable), (cooldownDuration.value || 10) * 1000);
       };
 
       setUpdateInterval();

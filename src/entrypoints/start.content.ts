@@ -81,8 +81,7 @@ export default defineContentScript({
 
       // inject user snippets
       if (settings.snippets) {
-        const userSnippets = (await globalSettings.get()).userSnippets;
-        for (const [id, snippet] of Object.entries(userSnippets)) {
+        for (const [id, snippet] of Object.entries(globalSettings.state.userSnippets)) {
           if (snippet.toggle) {
             injectUserSnippet(id);
           }
