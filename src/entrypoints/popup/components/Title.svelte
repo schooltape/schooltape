@@ -11,5 +11,5 @@
 
 <label for="theme-toggle" class="group text-ctp-text relative flex items-center justify-between p-2 text-xl">
   <h2>{title}</h2>
-  <Toggle id="theme-toggle" size="big" {checked} />
+  <Toggle id="theme-toggle" size="big" bind:checked />
 </label>

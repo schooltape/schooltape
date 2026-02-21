@@ -19,7 +19,7 @@
     {id}
     type="checkbox"
     class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md"
-    {checked} />
+    bind:checked />
   <span class="slider {size}"></span>
 </label>
 
