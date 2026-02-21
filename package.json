@@ -23,7 +23,7 @@
     "@wxt-dev/storage": "npm:@schooltape/wxt-storage@^1.2.8"
   },
   "devDependencies": {
-    "@catppuccin/codemirror": "^1.0.1",
+    "@catppuccin/codemirror": "^1.0.3",
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
     "@codemirror/lang-css": "^6.3.1",
