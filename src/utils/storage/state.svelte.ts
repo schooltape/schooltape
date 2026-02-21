@@ -4,43 +4,35 @@ import type { WatchCallback } from "wxt/utils/storage";
 export class StorageState<T> {
   public state;
   private storage;
-  private init;
-  private initPromise: Promise<void>;
-  private initResolve?: () => void;
+  private cleanupRoot = () => {}; // TODO: cleanup?
 
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
-    this.init = false;
 
-    this.initPromise = new Promise((resolve) => {
-      this.initResolve = resolve;
-    });
+    this.init();
+  }
 
-    this.storage.getValue().then((value) => {
-      this.updateState(value);
+  private async init() {
+    this.state = await this.storage.getValue();
 
-      $effect.root(() => {
-        if (!this.init) return;
-        $effect(() => {
-          this.storage.setValue($state.snapshot(this.state) as T);
-        });
+    this.cleanupRoot = $effect.root(() => {
+      let initialised = false;
+
+      $effect(() => {
+        const currentSnapshot = $state.snapshot(this.state);
+
+        if (!initialised) {
+          initialised = true;
+          return;
+        }
+
+        this.storage.setValue(currentSnapshot as T);
       });
     });
   }
 
   get = () => this.storage.getValue();
-
-  waitForInit = () => this.initPromise;
-
-  private updateState = (newState: T | null) => {
-    this.state = newState ?? this.storage.fallback;
-
-    this.init = true;
-    if (this.initResolve) {
-      this.initResolve();
-    }
-  };
-
   watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
+  destroy = () => this.cleanupRoot();
 }
