@@ -74,50 +74,6 @@ export function uninjectStylesheet(id: string) {
   if (link) document.head.removeChild(link);
 }
 
-export async function injectUserSnippet(id: string) {
-  logger.info(`injecting user snippet with id ${id}`);
-
-  const userSnippets = (await globalSettings.get()).userSnippets;
-  const snippet = userSnippets[id];
-
-  if (!snippet) {
-    logger.error(`user snippet with id ${id} not found, aborting`);
-    return;
-  }
-
-  if (!snippet.toggle) {
-    logger.error(`trying to inject user snippet with id ${id} which is disabled, aborting`);
-    return;
-  }
-
-  // check not already injected
-  if (document.querySelector(dataAttr(`userSnippet-${id}`))) {
-    logger.info(`user snippet with id ${id} already injected, aborting`);
-    return;
-  }
-
-  // inject user snippet
-  const response = await fetch(`https://gist.githubusercontent.com/${snippet.author}/${id}/raw`);
-  const css = await response.text();
-  const style = document.createElement("style");
-
-  style.textContent = css;
-  setDataAttr(style, `userSnippet-${id}`);
-  document.head.appendChild(style);
-
-  logger.info(`injected user snippet with id ${id}`);
-}
-
-export function uninjectUserSnippet(id: string) {
-  logger.info(`uninjecting user snippet with id ${id}`);
-
-  const style = document.querySelector(dataAttr(`userSnippet-${id}`));
-  if (!style) return;
-
-  document.head.removeChild(style);
-  logger.info(`uninjected user snippet with id ${id}`);
-}
-
 export function hasChanged<T>(newValue: T, oldValue: T, keys: (keyof T)[]) {
   const changed: (keyof T)[] = [];
 
