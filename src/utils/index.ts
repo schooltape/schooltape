@@ -1,7 +1,7 @@
 import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
-import type { BackgroundMessage } from "./storage";
+import type { Accent, BackgroundMessage, Flavour } from "./storage";
 import { globalSettings, schoolboxUrls } from "./storage";
 
 export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
@@ -30,10 +30,7 @@ export function uninjectInlineStyles(id: string) {
   if (style) document.head.removeChild(style);
 }
 
-export async function injectCatppuccin() {
-  const flavour = globalSettings.state.themeFlavour;
-  const accent = globalSettings.state.themeAccent;
-
+export async function injectCatppuccin(flavour: Flavour, accent: Accent) {
   logger.info(`injecting catppuccin: ${flavour} ${accent}`);
   let styleText = ":root {";
   const flavourArray = flavorEntries.find((entry) => entry[0] === flavour);

@@ -30,7 +30,7 @@ export default defineContentScript({
       if (hasChanged(newValue, oldValue, ["global", "themes", "themeFlavour", "themeAccent"])) {
         if (newValue.global && newValue.themes) {
           injectThemes();
-          injectCatppuccin();
+          injectCatppuccin(newValue.themeFlavour, newValue.themeAccent);
         } else {
           uninjectThemes();
           uninjectCatppuccin();
@@ -76,7 +76,7 @@ export default defineContentScript({
       // inject themes
       if (globalSettings.state.themes) {
         injectThemes();
-        injectCatppuccin();
+        injectCatppuccin(globalSettings.state.themeFlavour, globalSettings.state.themeAccent);
       }
 
       // inject user snippets
