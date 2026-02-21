@@ -4,13 +4,14 @@ import type { WatchCallback } from "wxt/utils/storage";
 export class StorageState<T> {
   public state;
   private storage;
+  public ready: Promise<void>;
   private cleanupRoot = () => {}; // TODO: cleanup?
 
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
 
-    this.init();
+    this.ready = this.init();
   }
 
   private async init() {
@@ -32,6 +33,10 @@ export class StorageState<T> {
     });
   }
 
+  save = async () => {
+    const currentSnapshot = $state.snapshot(this.state);
+    await this.storage.setValue(currentSnapshot as T);
+  };
   get = () => this.storage.getValue();
   watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
   destroy = () => this.cleanupRoot();

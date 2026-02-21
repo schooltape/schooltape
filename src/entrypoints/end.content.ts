@@ -8,19 +8,21 @@ export default defineContentScript({
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
+    await globalSettings.ready;
+    await schoolboxUrls.ready;
+
     if (!globalSettings.state.global) return;
 
     const footer = document.querySelector("#footer > ul");
 
     if (footer && footer.innerHTML.includes("Schoolbox")) {
-      await schoolboxUrls.waitForInit();
       const urls = schoolboxUrls.state.urls;
-      logger.info(urls);
 
       if (!urls.includes(window.location.origin)) {
         logger.info(`URL ${window.location.origin} not in storage, adding...`);
         urls.push(window.location.origin);
         // TODO: hot reload
+        await schoolboxUrls.save();
         window.location.reload();
       }
     }

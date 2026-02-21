@@ -10,6 +10,7 @@ export function setDataAttr(el: HTMLElement, id: string) {
 }
 
 export async function onSchoolboxPage(): Promise<boolean> {
+  await schoolboxUrls.ready;
   return schoolboxUrls.state.urls.includes(window.location.origin);
 }
 

@@ -71,16 +71,16 @@ export default defineContentScript({
       updateUserSnippets(newValue, oldValue);
     });
 
-    const settings = await globalSettings.get();
-    if (settings.global && (await onSchoolboxPage())) {
+    await globalSettings.ready;
+    if (globalSettings.state.global && (await onSchoolboxPage())) {
       // inject themes
-      if (settings.themes) {
+      if (globalSettings.state.themes) {
         injectThemes();
         injectCatppuccin();
       }
 
       // inject user snippets
-      if (settings.snippets) {
+      if (globalSettings.state.snippets) {
         for (const [id, snippet] of Object.entries(globalSettings.state.userSnippets)) {
           if (snippet.toggle) {
             injectUserSnippet(id);
