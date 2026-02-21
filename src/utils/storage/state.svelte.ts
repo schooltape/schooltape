@@ -5,7 +5,6 @@ export class StorageState<T> {
   public state;
   private storage;
   public ready: Promise<void>;
-  private cleanupRoot = () => {}; // TODO: cleanup?
 
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
@@ -17,7 +16,7 @@ export class StorageState<T> {
   private async init() {
     this.state = await this.storage.getValue();
 
-    this.cleanupRoot = $effect.root(() => {
+    $effect.root(() => {
       let initialised = false;
 
       $effect(() => {
@@ -37,7 +36,5 @@ export class StorageState<T> {
     const currentSnapshot = $state.snapshot(this.state);
     await this.storage.setValue(currentSnapshot as T);
   };
-  get = () => this.storage.getValue();
   watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
-  destroy = () => this.cleanupRoot();
 }
