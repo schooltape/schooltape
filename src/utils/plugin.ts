@@ -45,10 +45,12 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   async init() {
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
+    await globalSettings.ready;
+    await this.toggle.ready;
 
     logger.info(`init plugin: ${this.meta.name}`);
 
-    if (await this.isEnabled()) {
+    if (this.isEnabled()) {
       // wait for elements to be loaded
       if (this.elementsToWaitFor.length > 0) {
         // create an observer to wait for all elements to be loaded
@@ -101,15 +103,12 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
 
   private async reload() {
     if (this.injected) this.uninject();
-    if (await this.isEnabled()) this.inject();
+    if (this.isEnabled()) this.inject();
   }
 
-  private async isEnabled(): Promise<boolean> {
-    const settings = globalSettings.state;
-
-    return settings.global && settings.plugins && this.toggle.state.toggle;
+  private isEnabled() {
+    return globalSettings.state.global && globalSettings.state.plugins && this.toggle.state.toggle;
   }
-
   private allElementsPresent() {
     return this.elementsToWaitFor.every((selector) => document.querySelector(selector) !== null);
   }

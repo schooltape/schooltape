@@ -29,6 +29,8 @@ export class Snippet {
   async init() {
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
+    await globalSettings.ready;
+    await this.toggle.ready;
 
     logger.info(`init snippet: ${this.meta.name}`);
 
@@ -60,10 +62,7 @@ export class Snippet {
     if (await this.isEnabled()) this.inject();
   }
 
-  private async isEnabled(): Promise<boolean> {
-    const settings = globalSettings.state;
-    const toggle = this.toggle.state.toggle;
-
-    return settings.global && settings.snippets && toggle;
+  private async isEnabled() {
+    return globalSettings.state.global && globalSettings.state.snippets && this.toggle.state.toggle;
   }
 }
