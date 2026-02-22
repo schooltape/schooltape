@@ -2,7 +2,6 @@
   import type { Snippet } from "svelte";
 
   interface Props {
-    update: (toggled: boolean) => void;
     checked: boolean;
     id: string;
     size?: "big" | "small";
@@ -11,7 +10,7 @@
     children?: Snippet;
   }
 
-  let { update, checked, id, size = "big", text = "", description = "", children }: Props = $props();
+  let { checked = $bindable(), id, size = "big", text = "", description = "", children }: Props = $props();
 </script>
 
 <div>
@@ -21,11 +20,7 @@
       {id}
       type="checkbox"
       class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md"
-      {checked}
-      onchange={(event: Event) => {
-        const target = event.target as HTMLInputElement;
-        update(target.checked);
-      }} />
+      bind:checked />
     <span class="slider {size}"></span>
   </label>
 

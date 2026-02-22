@@ -10,7 +10,4 @@
   description="Whether the icons should be filled or outlined."
   size="small"
   id="filled"
-  checked={settings.filled.state.toggle}
-  update={async (toggle) => {
-    settings.filled.set({ toggle });
-  }} />
+  bind:checked={settings.filled.state.toggle} />

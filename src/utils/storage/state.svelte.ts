@@ -9,29 +9,52 @@ export class StorageState<T> {
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
     this.state = $state(this.storage.fallback);
-
-    this.storage.getValue().then(this.updateState);
-    this.storage.watch((newState) => this.updateState(newState));
+    this.init();
   }
 
-  private updateState = (newState: T | null) => {
-    this.state = newState ?? this.storage.fallback;
-  };
+  private async init() {
+    this.state = (await this.storage.getValue()) ?? this.storage.fallback;
 
-  watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
+    let isExternalUpdate = false;
 
-  get() {
-    return this.storage.getValue();
+    // inbound sync: storage -> state
+    this.storage.watch((newValue) => {
+      isExternalUpdate = true; // lock outbound
+      this.state = newValue ?? this.storage.fallback;
+    });
+
+    $effect.root(() => {
+      let initialised = false;
+
+      $effect(() => {
+        // must read state to establish dependency
+        const currentSnapshot = $state.snapshot(this.state);
+
+        if (!initialised) {
+          initialised = true;
+          return;
+        }
+
+        if (isExternalUpdate) {
+          isExternalUpdate = false;
+          return;
+        }
+
+        // outbound sync: state -> storage
+        this.storage.setValue(currentSnapshot as T);
+      });
+    });
   }
 
-  set(newValue: T) {
-    return this.storage.setValue(newValue);
-  }
+  get = () => this.storage.getValue();
 
-  async update(updates: Partial<T>) {
-    await this.set({
+  set = (newValue: T) => this.storage.setValue(newValue);
+
+  update = async (updates: Partial<T>) =>
+    this.set({
       ...(await this.get()),
       ...updates,
     });
-  }
+
+  watch = (cb: WatchCallback<T>) => this.storage.watch(cb);
 }

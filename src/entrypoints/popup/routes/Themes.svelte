@@ -28,12 +28,7 @@
 </script>
 
 <div id="card">
-  <Title
-    title="Themes"
-    checked={globalSettings.state.themes}
-    update={(toggled: boolean) => {
-      globalSettings.update({ themes: toggled });
-    }} />
+  <Title title="Themes" bind:checked={globalSettings.state.themes} />
 
   <div
     id="flavours"
@@ -44,7 +39,7 @@
           ? 'bg-(--ctp-accent)/30'
           : 'hover:bg-(--ctp-accent)/10'} flex items-center p-2 transition-colors duration-300"
         onclick={() => {
-          globalSettings.update({ themeFlavour: flavour });
+          globalSettings.state.themeFlavour = flavour;
         }}>{flavour}</button>
     {/each}
   </div>
@@ -57,7 +52,7 @@
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
         onclick={() => {
-          globalSettings.update({ themeAccent: cleanAccent(accent) as Accent });
+          globalSettings.state.themeAccent = cleanAccent(accent) as Accent;
         }}></button>
     {/each}
   </div>

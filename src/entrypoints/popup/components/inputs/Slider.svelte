@@ -4,37 +4,27 @@
     min: number;
     max: number;
     value: number;
-    update: (value: number) => void;
     name?: string;
     description?: string;
   }
 
-  let { update, id, min, max, value, name = "", description = "" }: Props = $props();
-  let currentValue = $state(value);
+  let { id, min, max, value = $bindable(), name = "", description = "" }: Props = $props();
 </script>
 
 <div class="mt-4 space-y-2">
   {#if name}
-    <label for={id} class="block text-ctp-text">{name}</label>
+    <label for={id} class="text-ctp-text block">{name}</label>
   {/if}
   <div class="flex items-center gap-4">
     <input
-      style="--min: {min}; --max: {max}; --value: {currentValue};"
+      style="--min: {min}; --max: {max}; --value: {value};"
       type="range"
-      onchange={(event: Event) => {
-        const target = event.target as HTMLInputElement;
-        update(parseInt(target.value));
-      }}
-      oninput={(event: Event) => {
-        const target = event.target as HTMLInputElement;
-        currentValue = parseInt(target.value);
-      }}
       {id}
       {min}
       {max}
-      {value}
+      bind:value
       class="styled-slider slider-progress" />
-    <span id={id + "-value"} class="text-sm font-medium text-ctp-text">{currentValue}</span>
+    <span id={id + "-value"} class="text-ctp-text text-sm font-medium">{value}</span>
   </div>
   {#if description}
     <p class="text-ctp-overlay1">{description}</p>

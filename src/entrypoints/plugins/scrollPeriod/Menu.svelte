@@ -11,13 +11,10 @@
   description="Whether to reset the scrolling cooldown when you move your mouse."
   size="small"
   id="resetCooldownOnMouseMove"
-  checked={settings.resetCooldownOnMouseMove.state.toggle}
-  update={async (toggle) => {
-    settings.resetCooldownOnMouseMove.set({ toggle });
-  }} />
+  bind:checked={settings.resetCooldownOnMouseMove.state.toggle} />
 
 <Slider
   name="Cooldown duration"
   id="cooldownDuration"
-  update={(value) => settings.cooldownDuration.update({ value })}
-  {...settings.cooldownDuration.state} />
+  {...settings.cooldownDuration.state}
+  bind:value={settings.cooldownDuration.state.value} />
