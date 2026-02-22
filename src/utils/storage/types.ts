@@ -31,6 +31,8 @@ export interface SettingsV2 {
   userSnippets: Record<string, UserSnippet>;
 }
 
+export interface SettingsV3 extends Omit<SettingsV2, "userSnippets"> {}
+
 export type Flavour = "latte" | "frappe" | "macchiato" | "mocha";
 export type Accent =
   | "rosewater"
@@ -61,12 +63,21 @@ export interface SchoolboxUrls {
   urls: string[];
 }
 
-export interface UserSnippet {
+interface UserSnippet {
   author: string;
   name: string;
   description: string;
   url: string;
   toggle: boolean;
+}
+
+export interface QuickCSS {
+  toggle: boolean;
+  value: string;
+}
+
+export interface Auth {
+  loggedIn: boolean;
 }
 
 export type Toggle = { toggle: boolean };
