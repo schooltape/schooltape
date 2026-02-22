@@ -10,7 +10,6 @@
 
   let { id, min, max, value = $bindable(), name = "", description = "" }: Props = $props();
 
-  // svelte-ignore state_referenced_locally
   let currentValue = $state(value);
 </script>
 
