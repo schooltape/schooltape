@@ -1,37 +1,18 @@
 import type { WxtStorageItem } from "#imports";
 import type { WatchCallback } from "wxt/utils/storage";
-import { logger } from "../logger";
 
 export class StorageState<T> {
-  private _state;
-  private _isReady = false;
+  public state;
   private storage;
-  public ready: Promise<void>;
 
   constructor(storage: WxtStorageItem<T, {}>) {
     this.storage = storage;
-    this._state = $state(this.storage.fallback);
-
-    this.ready = this.init();
-  }
-
-  get state() {
-    if (!$effect.tracking()) {
-      throw new Error("[storage state] procedural code accessing state");
-    }
-    if (!this._isReady) {
-      logger.warn(`[storage state] race condition detected! you accessed state before storage loaded.`);
-    }
-    return this._state;
-  }
-
-  set state(value) {
-    this._state = value;
+    this.state = $state(this.storage.fallback);
+    this.init();
   }
 
   private async init() {
-    this._state = (await this.storage.getValue()) ?? this.storage.fallback;
-    this._isReady = true; // safe to read
+    this.state = (await this.storage.getValue()) ?? this.storage.fallback;
 
     let isExternalUpdate = false;
 
