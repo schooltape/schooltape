@@ -13,4 +13,8 @@
   id="resetCooldownOnMouseMove"
   bind:checked={settings.resetCooldownOnMouseMove.state.toggle} />
 
-<Slider name="Cooldown duration" id="cooldownDuration" {...settings.cooldownDuration.state} />
+<Slider
+  name="Cooldown duration"
+  id="cooldownDuration"
+  {...settings.cooldownDuration.state}
+  bind:value={settings.cooldownDuration.state.value} />

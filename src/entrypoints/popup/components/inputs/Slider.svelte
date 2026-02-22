@@ -8,7 +8,7 @@
     description?: string;
   }
 
-  let { id, min, max, value, name = "", description = "" }: Props = $props();
+  let { id, min, max, value = $bindable(), name = "", description = "" }: Props = $props();
 
   // svelte-ignore state_referenced_locally
   let currentValue = $state(value);
@@ -33,7 +33,7 @@
       {id}
       {min}
       {max}
-      {value}
+      bind:value
       class="styled-slider slider-progress" />
     <span id={id + "-value"} class="text-ctp-text text-sm font-medium">{currentValue}</span>
   </div>
