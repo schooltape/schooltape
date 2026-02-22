@@ -10,7 +10,4 @@
   description="When switching to another tab, close the current one."
   size="small"
   id="closeCurrentTab"
-  checked={settings.closeCurrentTab.state.toggle}
-  update={async (toggle) => {
-    settings.closeCurrentTab.set({ toggle });
-  }} />
+  bind:checked={settings.closeCurrentTab.state.toggle} />
