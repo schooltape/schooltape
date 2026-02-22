@@ -1,6 +1,5 @@
 import type { WxtStorageItem } from "#imports";
 import type { WatchCallback } from "wxt/utils/storage";
-import { logger } from "../logger";
 
 export class StorageState<T> {
   public state;

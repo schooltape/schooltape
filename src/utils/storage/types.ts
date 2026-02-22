@@ -76,6 +76,10 @@ export interface QuickCSS {
   value: string;
 }
 
+export interface Auth {
+  loggedIn: boolean;
+}
+
 export type Toggle = { toggle: boolean };
 
 export type Slider = {

@@ -2,7 +2,6 @@
   import { account } from "@/utils/appwrite";
   import { ID } from "appwrite";
   import TextInput from "../components/inputs/TextInput.svelte";
-  import Button from "../components/inputs/Button.svelte";
 
   let email = $state("");
   let password = $state("");

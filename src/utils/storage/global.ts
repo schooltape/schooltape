@@ -85,3 +85,12 @@ export const quickCSS = new StorageState(
     },
   }),
 );
+
+export const auth = new StorageState(
+  storage.defineItem<Types.Auth>("local:auth", {
+    version: 1,
+    fallback: {
+      loggedIn: false,
+    },
+  }),
+);
