@@ -16,7 +16,13 @@ export async function onSchoolboxPage(): Promise<boolean> {
 export const sendMessage = (msg: BackgroundMessage) => browser.runtime.sendMessage(msg);
 
 export function injectInlineStyles(styleText: string, id: string) {
-  logger.info(`injecting styles with id ${id}`);
+  // check if inline styles have already been injected
+  if (document.querySelector(dataAttr(`inline-${id}`))) {
+    // logger.warn(`existing inline styles with ID: ${id}, aborting...`);
+    return;
+  }
+
+  logger.info(`injecting inline styles with ID: ${id}`);
   const style = document.createElement("style");
   style.textContent = styleText;
   setDataAttr(style, `inline-${id}`);
@@ -24,7 +30,7 @@ export function injectInlineStyles(styleText: string, id: string) {
 }
 
 export function uninjectInlineStyles(id: string) {
-  logger.info(`uninjecting styles with id ${id}`);
+  logger.info(`uninjecting inline styles with ID: ${id}`);
   const style = document.querySelector(dataAttr(`inline-${id}`));
   if (style) document.head.removeChild(style);
 }
@@ -55,11 +61,12 @@ export function uninjectCatppuccin() {
 
 export function injectStylesheet(url: string, id: string) {
   // check if stylesheet has already been injected
-  const existingLink = document.querySelector(dataAttr(`stylesheet-${id}`));
-  if (existingLink) return;
+  if (document.querySelector(dataAttr(`stylesheet-${id}`))) {
+    // logger.warn(`existing stylesheet with ID: ${id}, aborting...`);
+    return;
+  }
 
-  // inject stylesheet
-  logger.info(`injecting stylesheet with id ${id}: ${url}`);
+  logger.info(`injecting stylesheet with ID: ${id}`);
   const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = url;
@@ -68,8 +75,7 @@ export function injectStylesheet(url: string, id: string) {
 }
 
 export function uninjectStylesheet(id: string) {
-  logger.info(`uninjecting stylesheet with id ${id}`);
-
+  logger.info(`uninjecting stylesheet with ID: ${id}`);
   const link = document.querySelector(dataAttr(`stylesheet-${id}`));
   if (link) document.head.removeChild(link);
 }

@@ -1,17 +1,16 @@
 import { browser, defineContentScript } from "#imports";
 import {
-  hasChanged,
   injectCatppuccin,
+  injectInlineStyles,
   injectStylesheet,
   onSchoolboxPage,
   sendMessage,
   uninjectCatppuccin,
+  uninjectInlineStyles,
   uninjectStylesheet,
 } from "@/utils";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import type { SettingsV3 } from "@/utils/storage";
-import { globalSettings } from "@/utils/storage";
-import type { WatchCallback } from "wxt/utils/storage";
+import { globalSettings, quickCSS } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({
@@ -23,38 +22,51 @@ export default defineContentScript({
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
 
-    const updateThemes: WatchCallback<SettingsV3> = async (newValue, oldValue) => {
-      // if global or themes was changed
-      if (hasChanged(newValue, oldValue, ["global", "themes", "themeFlavour", "themeAccent"])) {
-        if (newValue.global && newValue.themes) {
-          injectThemes();
-          injectCatppuccin();
-        } else {
-          uninjectThemes();
-          uninjectCatppuccin();
-        }
+    const updateThemes = async () => {
+      // @ts-expect-error unlisted CSS not a PublicPath
+      const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
+      const uninjectThemes = () => uninjectStylesheet("themes");
+
+      const settings = await globalSettings.get();
+
+      uninjectCatppuccin();
+
+      if (settings.global && settings.themes) {
+        injectCatppuccin();
+        injectThemes();
+      } else {
+        uninjectThemes();
       }
     };
 
-    // @ts-expect-error unlisted CSS not a PublicPath
-    const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
-    const uninjectThemes = () => uninjectStylesheet("themes");
+    const updateQuickCSS = async () => {
+      const injectQuickCSS = async () => injectInlineStyles((await quickCSS.get()).value, "quick-css");
+      const uninjectQuickCSS = () => uninjectInlineStyles("quick-css");
 
-    // storage listeners for hot reload
-    globalSettings.watch((newValue, oldValue) => {
-      updateThemes(newValue, oldValue);
-    });
+      const settings = await globalSettings.get();
+      const toggle = (await quickCSS.get()).toggle;
 
-    const settings = await globalSettings.get();
-    if (settings.global && (await onSchoolboxPage())) {
-      // inject themes
-      if (settings.themes) {
-        injectThemes();
-        injectCatppuccin();
+      uninjectQuickCSS();
+
+      if (settings.global && settings.snippets && toggle) {
+        injectQuickCSS();
       }
+    };
+
+    onSchoolboxPage().then((onSchoolboxPage) => {
+      if (!onSchoolboxPage) return;
+
+      updateThemes();
+      updateQuickCSS();
+
+      globalSettings.watch(() => {
+        updateThemes();
+        updateQuickCSS();
+      });
+      quickCSS.watch(updateQuickCSS);
 
       // update icon
       sendMessage({ type: "updateIcon" });
-    }
+    });
   },
 });
