@@ -1,26 +1,17 @@
 import { createRouter } from "sv-router";
-import Layout from "./routes/Layout.svelte";
-import Account from "./routes/Account.svelte";
-import Home from "./routes/Home.svelte";
-import Login from "./routes/Login.svelte";
-import Plugins from "./routes/Plugins.svelte";
-import Signup from "./routes/Signup.svelte";
-import Snippets from "./routes/Snippets.svelte";
-import QuickCSS from "./routes/QuickCSS.svelte";
-import Themes from "./routes/Themes.svelte";
 
 export const { p, navigate, isActive, route } = createRouter({
-  "/": Home,
-  "/plugins": Plugins,
-  "/themes": Themes,
+  "/": () => import("./routes/Home.svelte"),
+  "/plugins": () => import("./routes/Plugins.svelte"),
+  "/themes": () => import("./routes/Themes.svelte"),
   "/snippets": {
-    "/": Snippets,
-    "/(quick)": QuickCSS,
+    "/": () => import("./routes/Snippets.svelte"),
+    "/(quick)": () => import("./routes/QuickCSS.svelte"),
   },
   "/account": {
-    "/": Account,
-    "/login": Login,
-    "/signup": Signup,
+    "/": () => import("./routes/Account.svelte"),
+    "/login": () => import("./routes/Login.svelte"),
+    "/signup": () => import("./routes/Signup.svelte"),
   },
-  layout: Layout,
+  layout: () => import("./routes/Layout.svelte"),
 });
