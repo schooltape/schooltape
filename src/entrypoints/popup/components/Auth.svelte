@@ -65,6 +65,7 @@
     <p class="text-ctp-subtext0 text-xs">
       By signing up, you agree to our <a
         class="text-(--ctp-accent) hover:underline"
+        target="_blank"
         href="https://github.com/schooltape/.github/blob/main/PRIVACY_POLICY.md">Privacy Policy</a>
     </p>
   {/if}
