@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.3](https://github.com/schooltape/schooltape/compare/v4.4.2...v4.4.3) (2026-02-26)
+
+
+### Bug Fixes
+
+* **plugins/scrollSegments:** scroll to top ([acdece5](https://github.com/schooltape/schooltape/commit/acdece5c2d5269f4c8153f2ca9f60f7e5ae7756f))
+
 ## [4.4.2](https://github.com/schooltape/schooltape/compare/v4.4.1...v4.4.2) (2026-02-17)
 
 
