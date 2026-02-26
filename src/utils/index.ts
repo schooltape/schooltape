@@ -2,7 +2,7 @@ import { browser } from "#imports";
 import { flavorEntries } from "@catppuccin/palette";
 import { logger } from "./logger";
 import type { BackgroundMessage } from "./storage";
-import { globalSettings, schoolboxUrls } from "./storage";
+import { schoolboxUrls, themes } from "./storage";
 
 export const dataAttr = (id: string) => `[data-schooltape="${id}"]`;
 export function setDataAttr(el: HTMLElement, id: string) {
@@ -36,9 +36,7 @@ export function uninjectInlineStyles(id: string) {
 }
 
 export async function injectCatppuccin() {
-  const settings = await globalSettings.get();
-  const flavour = settings.themeFlavour;
-  const accent = settings.themeAccent;
+  const { flavour, accent } = await themes.get();
 
   logger.info(`injecting catppuccin: ${flavour} ${accent}`);
   let styleText = ":root {";
@@ -78,16 +76,4 @@ export function uninjectStylesheet(id: string) {
   logger.info(`uninjecting stylesheet with ID: ${id}`);
   const link = document.querySelector(dataAttr(`stylesheet-${id}`));
   if (link) document.head.removeChild(link);
-}
-
-export function hasChanged<T>(newValue: T, oldValue: T, keys: (keyof T)[]) {
-  const changed: (keyof T)[] = [];
-
-  for (const key in newValue) {
-    if (Object.prototype.hasOwnProperty.call(newValue, key) && oldValue[key] !== newValue[key]) {
-      changed.push(key);
-    }
-  }
-
-  return keys.some((item) => changed.includes(item));
 }

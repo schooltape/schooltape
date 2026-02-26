@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./router.ts";
   import { onMount } from "#imports";
-  import { globalSettings, updated } from "@/utils/storage";
+  import { themes, updated } from "@/utils/storage";
   import { sendMessage } from "@/utils";
   import { flavors } from "@catppuccin/palette";
   import { Router } from "sv-router";
@@ -12,7 +12,7 @@
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
 
-  let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
+  let accentRgb = $derived(getAccentRgb(themes.state.accent, themes.state.flavour));
 
   onMount(async () => {
     await updated.update({ icon: false });
@@ -20,8 +20,6 @@
   });
 </script>
 
-<main
-  class="bg-ctp-base flex flex-col items-center {globalSettings.state.themeFlavour}"
-  style="--ctp-accent: {accentRgb}">
+<main class="bg-ctp-base flex flex-col items-center {themes.state.flavour}" style="--ctp-accent: {accentRgb}">
   <Router base="#" />
 </main>

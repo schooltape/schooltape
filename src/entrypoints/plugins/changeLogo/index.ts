@@ -1,9 +1,9 @@
 import { browser } from "#imports";
-import { hasChanged, injectInlineStyles, uninjectInlineStyles } from "@/utils";
+import { injectInlineStyles, uninjectInlineStyles } from "@/utils";
 import { logger } from "@/utils/logger";
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
-import { globalSettings } from "@/utils/storage";
+import { themes } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
 import { flavors } from "@catppuccin/palette";
 import type { Unwatch } from "wxt/utils/storage";
@@ -64,11 +64,9 @@ export default new Plugin<Settings>(
     await inject(settings);
 
     // add watcher to reload logo
-    unwatch = globalSettings.watch((newValue, oldValue) => {
-      if (hasChanged(newValue, oldValue, ["themeFlavour", "themeAccent"])) {
-        uninject();
-        inject(settings);
-      }
+    unwatch = themes.watch(() => {
+      uninject();
+      inject(settings);
     });
   },
   () => {
@@ -152,9 +150,7 @@ async function buildLogos<T extends Record<string, ImageSource>>(logos: T): Prom
         url = browser.runtime.getURL(value.url);
       }
     } else if (value.raw) {
-      const settings = await globalSettings.get();
-      const flavour = settings.themeFlavour;
-      const accent = settings.themeAccent;
+      const { flavour, accent } = await themes.get();
       const accentHex = flavors[flavour].colors[accent].hex;
       url = `data:image/svg+xml;utf8,${encodeURIComponent(value.raw.replaceAll("currentColor", accentHex))}`;
     }

@@ -2,7 +2,7 @@ import type { Browser } from "#imports";
 import { browser, defineBackground, storage } from "#imports";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
-import { globalSettings, updated } from "@/utils/storage";
+import { global, updated } from "@/utils/storage";
 import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import semver from "semver";
 
@@ -44,7 +44,7 @@ export default defineBackground(() => {
       if (previousVersion && semver.gte(newVersion, "4.4.1") && semver.lt(previousVersion, "4.4.1")) {
         logger.info("[background] Patching change logo storage (v4.4.1 migration)");
 
-        const { plugins } = await import("@/entrypoints/plugins.content");
+        const { pluginInstances: plugins } = await import("@/entrypoints/plugins.content");
         const changeLogo = plugins.find((plugin) => plugin.meta.id === "changeLogo");
 
         if (changeLogo) {
@@ -70,7 +70,7 @@ export default defineBackground(() => {
   });
 
   // update icon when toggle or update is changed
-  globalSettings.watch(updateIcon);
+  global.watch(updateIcon);
 
   browser.runtime.onMessage.addListener(async (msg: BackgroundMessage, sender: Browser.runtime.MessageSender) => {
     logger.info("[background] received message", { message: msg, sender });
@@ -156,10 +156,10 @@ async function updateIcon() {
   if (new Date().getMonth() === 5) {
     iconSuffix += "-ctp";
   }
-  if ((await globalSettings.get()).global === false) {
+  if (!(await global.get())) {
     iconSuffix += "-disabled";
   }
-  if ((await updated.get()).icon === true) {
+  if ((await updated.get()).icon) {
     iconSuffix += "-badge";
   }
 

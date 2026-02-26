@@ -10,7 +10,7 @@ import {
   uninjectStylesheet,
 } from "@/utils";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import { globalSettings, quickCSS } from "@/utils/storage";
+import { global, quickCSS, snippets, themes } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({
@@ -27,11 +27,9 @@ export default defineContentScript({
       const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
       const uninjectThemes = () => uninjectStylesheet("themes");
 
-      const settings = await globalSettings.get();
-
       uninjectCatppuccin();
 
-      if (settings.global && settings.themes) {
+      if ((await global.get()) && (await themes.get()).toggle) {
         injectCatppuccin();
         injectThemes();
       } else {
@@ -43,12 +41,9 @@ export default defineContentScript({
       const injectQuickCSS = async () => injectInlineStyles((await quickCSS.get()).value, "quick-css");
       const uninjectQuickCSS = () => uninjectInlineStyles("quick-css");
 
-      const settings = await globalSettings.get();
-      const toggle = (await quickCSS.get()).toggle;
-
       uninjectQuickCSS();
 
-      if (settings.global && settings.snippets && toggle) {
+      if ((await global.get()) && (await snippets.get()).toggle && (await quickCSS.get()).toggle) {
         injectQuickCSS();
       }
     };
@@ -59,11 +54,13 @@ export default defineContentScript({
       updateThemes();
       updateQuickCSS();
 
-      globalSettings.watch(() => {
+      global.watch(() => {
         updateThemes();
         updateQuickCSS();
       });
+      themes.watch(updateThemes);
       quickCSS.watch(updateQuickCSS);
+      snippets.watch(updateQuickCSS);
 
       // update icon
       sendMessage({ type: "updateIcon" });

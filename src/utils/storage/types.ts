@@ -4,7 +4,24 @@ export type BackgroundMessage =
   | { type: "closeTab" }
   | { type: "updateTabUrl"; url: string };
 
-// global
+export interface SnippetsV1 {
+  toggle: boolean;
+  snippets: Record<
+    string,
+    {
+      toggle: boolean;
+      autoUpdate: boolean;
+      css: string;
+    }
+  >;
+}
+
+export interface ThemesV1 {
+  toggle: boolean;
+  flavour: Flavour;
+  accent: Accent;
+}
+
 export interface SettingsV1 {
   global: boolean;
   plugins: boolean;
@@ -30,8 +47,6 @@ export interface SettingsV2 {
 
   userSnippets: Record<string, UserSnippet>;
 }
-
-export interface SettingsV3 extends Omit<SettingsV2, "userSnippets"> {}
 
 export type Flavour = "latte" | "frappe" | "macchiato" | "mocha";
 export type Accent =

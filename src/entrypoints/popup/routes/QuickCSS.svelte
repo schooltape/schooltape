@@ -2,7 +2,7 @@
   import CodeMirror from "svelte-codemirror-editor";
   import { catppuccinFrappe, catppuccinLatte, catppuccinMacchiato, catppuccinMocha } from "@catppuccin/codemirror";
   import { css } from "@codemirror/lang-css";
-  import { globalSettings, quickCSS } from "@/utils/storage";
+  import { quickCSS, themes } from "@/utils/storage";
   import { ArrowLeft } from "@lucide/svelte";
 
   const map = {
@@ -11,7 +11,7 @@
     macchiato: catppuccinMacchiato,
     mocha: catppuccinMocha,
   };
-  let theme = $derived(map[globalSettings.state.themeFlavour]);
+  let theme = $derived(map[themes.state.flavour]);
 </script>
 
 <div class="bg-ctp-mantle min-h-64 w-full p-6">

@@ -1,19 +1,18 @@
 import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
 import { logger } from "@/utils/logger";
-import { globalSettings, schoolboxUrls } from "@/utils/storage";
+import { global, schoolboxUrls } from "@/utils/storage";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_end",
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
-    const settings = await globalSettings.get();
     const urls = (await schoolboxUrls.get()).urls;
 
     logger.info(urls);
 
-    if (!settings.global) return;
+    if (!(await global.get())) return;
 
     const footer = document.querySelector("#footer > ul");
 
