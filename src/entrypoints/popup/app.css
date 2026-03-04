@@ -68,12 +68,12 @@ body {
     &.ctp {
       background-image: linear-gradient(
         to right,
-        var(--color-ctp-red),
-        var(--color-ctp-peach),
-        var(--color-ctp-yellow),
-        var(--color-ctp-green),
-        var(--color-ctp-blue),
-        var(--color-ctp-mauve)
+        var(--catppuccin-color-red),
+        var(--catppuccin-color-peach),
+        var(--catppuccin-color-yellow),
+        var(--catppuccin-color-green),
+        var(--catppuccin-color-blue),
+        var(--catppuccin-color-mauve)
       );
     }
   }
