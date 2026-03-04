@@ -115,11 +115,11 @@ body {
   }
 
   #palette > * {
-    @apply h-6 w-6 rounded-full;
+    @apply size-6 rounded-full;
   }
 
   .current {
-    @apply outline-ctp-overlay0 outline-solid;
+    @apply outline-ctp-surface1 outline-solid outline-4 transition-none;
   }
 
   .navbutton-left {
