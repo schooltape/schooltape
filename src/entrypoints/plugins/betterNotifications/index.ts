@@ -19,21 +19,16 @@ export default new Plugin<Settings>(
   {
     scrapeNotifications: { toggle: true },
   },
-  async (_settings) => {
-    console.log("Better Notifications plugin initialized", _settings);
-
+  async () => {
     const messageList = document.getElementById("msg-content");
 
     if (messageList) {
-      console.log("Found message list element:", messageList);
-
       const phpSessionId = await getPhpSessionId();
 
       messageList.parentElement!.innerHTML = "<p>it works!!!</p><p>PHPSESSID: " + phpSessionId + "</p>";
     }
   },
-  (_settings) => {
-    console.log("Better Notifications plugin stopped", _settings);
+  () => {
   },
 );
 
