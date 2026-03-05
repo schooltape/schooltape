@@ -20,6 +20,14 @@ export default new Plugin<Settings>(
   },
   async (_settings) => {
     console.log("Better Notifications plugin initialized", _settings);
+
+    const messageList = document.getElementById("msg-content");
+
+    if (messageList) {
+      console.log("Found message list element:", messageList);
+
+      messageList.parentElement!.innerHTML = "<p>it works!!!</p>";
+    }
   },
   (_settings) => {
     console.log("Better Notifications plugin stopped", _settings);
