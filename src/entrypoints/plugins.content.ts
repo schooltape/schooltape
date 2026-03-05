@@ -1,5 +1,6 @@
 import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
+import betterNotifications from "./plugins/betterNotifications";
 import changeLogo from "./plugins/changeLogo";
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import modernIcons from "./plugins/modernIcons";
@@ -18,6 +19,7 @@ export const plugins = [
   tabTitle,
   changeLogo,
   homepageSwitcher,
+  betterNotifications,
 ];
 
 export type PluginInstance = (typeof plugins)[number];
