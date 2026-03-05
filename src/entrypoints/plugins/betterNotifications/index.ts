@@ -1,3 +1,4 @@
+import { browser } from "#imports";
 import { Plugin } from "@/utils/plugin";
 import type { Toggle } from "@/utils/storage";
 import type { StorageState } from "@/utils/storage/state.svelte";
@@ -26,10 +27,22 @@ export default new Plugin<Settings>(
     if (messageList) {
       console.log("Found message list element:", messageList);
 
-      messageList.parentElement!.innerHTML = "<p>it works!!!</p>";
+      const phpSessionId = await getPhpSessionId();
+
+      messageList.parentElement!.innerHTML = "<p>it works!!!</p><p>PHPSESSID: " + phpSessionId + "</p>";
     }
   },
   (_settings) => {
     console.log("Better Notifications plugin stopped", _settings);
   },
 );
+
+async function getPhpSessionId(): Promise<string> {
+  const response = await browser.runtime.sendMessage({
+    type: "getCookie",
+    name: "PHPSESSID",
+    url: document.location.origin,
+  });
+  console.log("getPHPSESSID response:", response);
+  return response ?? "not found";
+}

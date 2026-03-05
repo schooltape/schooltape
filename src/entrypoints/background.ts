@@ -1,9 +1,9 @@
 import type { Browser } from "#imports";
 import { browser, defineBackground, storage } from "#imports";
+import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
 import { globalSettings, updated } from "@/utils/storage";
-import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import semver from "semver";
 
 export default defineBackground(() => {
@@ -72,30 +72,44 @@ export default defineBackground(() => {
   // update icon when toggle or update is changed
   globalSettings.watch(updateIcon);
 
-  browser.runtime.onMessage.addListener(async (msg: BackgroundMessage, sender: Browser.runtime.MessageSender) => {
-    logger.info("[background] received message", { message: msg, sender });
+  browser.runtime.onMessage.addListener(
+    (msg: BackgroundMessage, sender: Browser.runtime.MessageSender, sendResponse) => {
+      logger.info("[background] received message", { message: msg, sender });
 
-    switch (msg.type) {
-      case "resetSettings":
-        resetSettings();
-        break;
-      case "updateIcon":
-        updateIcon();
-        break;
-      case "closeTab":
-        if (!sender.tab?.id) break;
-        browser.tabs.remove(sender.tab.id);
-        break;
-      case "updateTabUrl":
-        if (!sender.tab?.id) break;
-        browser.tabs.update(sender.tab.id, { url: msg.url });
-        break;
-      default:
-        logger.error(`[background] unknown message received: ${msg}`);
-    }
+      switch (msg.type) {
+        case "resetSettings":
+          resetSettings();
+          break;
+        case "updateIcon":
+          updateIcon();
+          break;
+        case "closeTab":
+          if (!sender.tab?.id) break;
+          browser.tabs.remove(sender.tab.id);
+          break;
+        case "updateTabUrl":
+          if (!sender.tab?.id) break;
+          browser.tabs.update(sender.tab.id, { url: msg.url });
+          break;
+        case "getCookie":
+          browser.cookies
+            .get({ name: msg.name, url: msg.url })
+            .then((cookie) => {
+              logger.info("[background] getCookie result", { cookie });
+              sendResponse(cookie?.value ?? null);
+            })
+            .catch((error) => {
+              logger.error("[background] Error getting cookie", { error, name: msg.name, url: msg.url });
+              sendResponse(null);
+            });
+          return true;
+        default:
+          logger.error(`[background] unknown message received: ${msg}`);
+      }
 
-    return true; // return success
-  });
+      return true; // return success
+    },
+  );
 
   // context menus
   let contexts: Browser.contextMenus.CreateProperties["contexts"];

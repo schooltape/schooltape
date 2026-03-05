@@ -2,7 +2,8 @@ export type BackgroundMessage =
   | { type: "resetSettings" }
   | { type: "updateIcon" }
   | { type: "closeTab" }
-  | { type: "updateTabUrl"; url: string };
+  | { type: "updateTabUrl"; url: string }
+  | { type: "getCookie"; name: string; url: string };
 
 // global
 export interface SettingsV1 {
