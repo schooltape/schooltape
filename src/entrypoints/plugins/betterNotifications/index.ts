@@ -20,16 +20,19 @@ export default new Plugin<Settings>(
     scrapeNotifications: { toggle: true },
   },
   async () => {
-    const messageList = document.getElementById("msg-content");
+    // need to replace entire container becuase it gets reset when the websocket updates
+    const messageList = document.getElementById("msg-content")?.parentElement;
+
+    // clear existing notifications
+    messageList?.replaceChildren();
 
     if (messageList) {
-      const phpSessionId = await getPhpSessionId();
-
-      messageList.parentElement!.innerHTML = "<p>it works!!!</p><p>PHPSESSID: " + phpSessionId + "</p>";
+      parseNotificationsPage(await getNotificationsPage()).forEach((notification) => {
+        messageList.appendChild(notification);
+      });
     }
   },
-  () => {
-  },
+  () => {},
 );
 
 async function getPhpSessionId(): Promise<string> {
@@ -40,4 +43,26 @@ async function getPhpSessionId(): Promise<string> {
   });
   console.log("getPHPSESSID response:", response);
   return response ?? "not found";
+}
+
+async function getNotificationsPage() {
+  const response = await fetch("/notifications", {
+    headers: {
+      Cookie: `PHPSESSID=${await getPhpSessionId()}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch notifications page");
+  }
+
+  return await response.text();
+}
+
+function parseNotificationsPage(html: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const notifications = doc.querySelectorAll(".information-list > .row");
+
+  return notifications;
 }
