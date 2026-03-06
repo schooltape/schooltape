@@ -1,19 +1,16 @@
 import { browser, defineContentScript } from "#imports";
 import {
-  hasChanged,
   injectCatppuccin,
+  injectInlineStyles,
   injectStylesheet,
-  injectUserSnippet,
   onSchoolboxPage,
   sendMessage,
   uninjectCatppuccin,
+  uninjectInlineStyles,
   uninjectStylesheet,
-  uninjectUserSnippet,
 } from "@/utils";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import type { SettingsV2 } from "@/utils/storage";
-import { globalSettings } from "@/utils/storage";
-import type { WatchCallback } from "wxt/utils/storage";
+import { global, quickCSS, snippets, themes } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({
@@ -25,72 +22,48 @@ export default defineContentScript({
     // if not on Schoolbox page
     if (!(await onSchoolboxPage())) return;
 
-    const updateThemes: WatchCallback<SettingsV2> = async (newValue, oldValue) => {
-      // if global or themes was changed
-      if (hasChanged(newValue, oldValue, ["global", "themes", "themeFlavour", "themeAccent"])) {
-        if (newValue.global && newValue.themes) {
-          injectThemes();
-          injectCatppuccin();
-        } else {
-          uninjectThemes();
-          uninjectCatppuccin();
-        }
-      }
-    };
+    const updateThemes = async () => {
+      // @ts-expect-error unlisted CSS not a PublicPath
+      const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
+      const uninjectThemes = () => uninjectStylesheet("themes");
 
-    const updateUserSnippets: WatchCallback<SettingsV2> = async (newValue, oldValue) => {
-      // if global or userSnippets were changed
-      if (hasChanged(newValue, oldValue, ["global", "userSnippets"])) {
-        // uninject removed snippets
-        if (oldValue) {
-          for (const id of Object.keys(oldValue.userSnippets)) {
-            if (!newValue.userSnippets[id]) {
-              uninjectUserSnippet(id);
-            }
-          }
-        }
+      uninjectCatppuccin();
 
-        // inject/uninject current snippets
-        for (const [id, userSnippet] of Object.entries(newValue.userSnippets)) {
-          if (newValue.global && newValue.snippets && userSnippet.toggle) {
-            injectUserSnippet(id);
-          } else {
-            uninjectUserSnippet(id);
-          }
-        }
-      }
-    };
-
-    // @ts-expect-error unlisted CSS not a PublicPath
-    const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
-    const uninjectThemes = () => uninjectStylesheet("themes");
-
-    // storage listeners for hot reload
-    globalSettings.watch((newValue, oldValue) => {
-      updateThemes(newValue, oldValue);
-      updateUserSnippets(newValue, oldValue);
-    });
-
-    const settings = await globalSettings.get();
-    if (settings.global && (await onSchoolboxPage())) {
-      // inject themes
-      if (settings.themes) {
-        injectThemes();
+      if ((await global.get()) && (await themes.get()).toggle) {
         injectCatppuccin();
+        injectThemes();
+      } else {
+        uninjectThemes();
       }
+    };
 
-      // inject user snippets
-      if (settings.snippets) {
-        const userSnippets = (await globalSettings.get()).userSnippets;
-        for (const [id, snippet] of Object.entries(userSnippets)) {
-          if (snippet.toggle) {
-            injectUserSnippet(id);
-          }
-        }
+    const updateQuickCSS = async () => {
+      const injectQuickCSS = async () => injectInlineStyles((await quickCSS.get()).value, "quick-css");
+      const uninjectQuickCSS = () => uninjectInlineStyles("quick-css");
+
+      uninjectQuickCSS();
+
+      if ((await global.get()) && (await snippets.get()).toggle && (await quickCSS.get()).toggle) {
+        injectQuickCSS();
       }
+    };
+
+    onSchoolboxPage().then((onSchoolboxPage) => {
+      if (!onSchoolboxPage) return;
+
+      updateThemes();
+      updateQuickCSS();
+
+      global.watch(() => {
+        updateThemes();
+        updateQuickCSS();
+      });
+      themes.watch(updateThemes);
+      quickCSS.watch(updateQuickCSS);
+      snippets.watch(updateQuickCSS);
 
       // update icon
       sendMessage({ type: "updateIcon" });
-    }
+    });
   },
 });

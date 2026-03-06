@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
+  import { global } from "@/utils/storage";
   import Footer from "../components/Footer.svelte";
   import Motd from "../components/Motd.svelte";
 
@@ -12,12 +12,12 @@
   <Motd />
 
   <button
-    class="bg-(--ctp-accent) hover:opacity-75 {globalSettings.state.global ? '' : 'opacity-60'}"
+    class="bg-(--ctp-accent) hover:opacity-75 {global.state ? '' : 'opacity-60'}"
     id="toggle"
     onclick={async () => {
-      globalSettings.state.global = !globalSettings.state.global;
+      global.state = !global.state;
     }}
-    >{globalSettings.state.global ? "enabled" : "disabled"}
+    >{global.state ? "enabled" : "disabled"}
   </button>
 </div>
 

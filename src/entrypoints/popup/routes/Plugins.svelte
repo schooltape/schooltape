@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
   import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
   import Modal from "../components/Modal.svelte";
   import Toggle from "../components/inputs/Toggle.svelte";
-  import { plugins } from "@/entrypoints/plugins.content";
+  import { pluginInstances } from "@/entrypoints/plugins.content";
   import type { PluginInstance } from "@/entrypoints/plugins.content";
   import { onMount } from "svelte";
   import type { Component } from "svelte";
+  import { plugins } from "@/utils/storage";
 
   let showModal = $state(false);
   let components: Record<string, Component> = $state({});
@@ -16,7 +16,7 @@
   let Menu = $derived(selectedPlugin ? components[selectedPlugin.meta.id] : undefined);
 
   onMount(async () => {
-    for (const plugin of plugins) {
+    for (const plugin of pluginInstances) {
       if (!plugin.settings) continue;
       components[plugin.meta.id] = (await import(`@/entrypoints/plugins/${plugin.meta.id}/Menu.svelte`)).default;
     }
@@ -24,10 +24,10 @@
 </script>
 
 <div id="card">
-  <Title title="Plugins" bind:checked={globalSettings.state.plugins} />
+  <Title title="Plugins" bind:checked={plugins.state} />
 
   <div class="plugins-container">
-    {#each plugins as plugin (plugin.meta.id)}
+    {#each pluginInstances as plugin (plugin.meta.id)}
       <div class="group my-4">
         <Toggle
           id={plugin.meta.id}

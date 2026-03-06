@@ -9,7 +9,7 @@ import scrollSegments from "./plugins/scrollSegments";
 import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
 
-export const plugins = [
+export const pluginInstances = [
   subheader,
   scrollSegments,
   scrollPeriod,
@@ -20,7 +20,7 @@ export const plugins = [
   homepageSwitcher,
 ];
 
-export type PluginInstance = (typeof plugins)[number];
+export type PluginInstance = (typeof pluginInstances)[number];
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -28,7 +28,7 @@ export default defineContentScript({
   excludeMatches: EXCLUDE_MATCHES,
   async main() {
     document.addEventListener("DOMContentLoaded", () => {
-      for (const plugin of plugins) {
+      for (const plugin of pluginInstances) {
         plugin.init();
       }
     });

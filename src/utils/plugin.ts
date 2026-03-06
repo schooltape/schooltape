@@ -1,8 +1,8 @@
 import { storage } from "#imports";
-import { hasChanged, onSchoolboxPage } from ".";
+import { onSchoolboxPage } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
-import { globalSettings } from "./storage";
+import { global, plugins } from "./storage";
 import { StorageState } from "./storage/state.svelte";
 
 export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
@@ -72,9 +72,9 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     }
 
     // init watchers
-    globalSettings.watch((newValue, oldValue) => {
-      if (hasChanged(newValue, oldValue, ["global", "plugins"])) this.reload();
-    });
+    global.watch(this.reload.bind(this));
+    plugins.watch(this.reload.bind(this));
+
     this.toggle.watch(this.reload.bind(this));
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
@@ -105,10 +105,7 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   }
 
   private async isEnabled(): Promise<boolean> {
-    const settings = await globalSettings.get();
-    const toggle = await this.toggle.get();
-
-    return settings.global && settings.plugins && toggle.toggle;
+    return (await global.get()) && (await plugins.get()) && (await this.toggle.get()).toggle;
   }
 
   private allElementsPresent() {

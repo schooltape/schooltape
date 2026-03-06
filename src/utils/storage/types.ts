@@ -4,7 +4,24 @@ export type BackgroundMessage =
   | { type: "closeTab" }
   | { type: "updateTabUrl"; url: string };
 
-// global
+export interface SnippetsV1 {
+  toggle: boolean;
+  snippets: Record<
+    string,
+    {
+      toggle: boolean;
+      autoUpdate: boolean;
+      css: string;
+    }
+  >;
+}
+
+export interface ThemesV1 {
+  toggle: boolean;
+  flavour: Flavour;
+  accent: Accent;
+}
+
 export interface SettingsV1 {
   global: boolean;
   plugins: boolean;
@@ -61,12 +78,21 @@ export interface SchoolboxUrls {
   urls: string[];
 }
 
-export interface UserSnippet {
+interface UserSnippet {
   author: string;
   name: string;
   description: string;
   url: string;
   toggle: boolean;
+}
+
+export interface QuickCSS {
+  toggle: boolean;
+  value: string;
+}
+
+export interface Auth {
+  loggedIn: boolean;
 }
 
 export type Toggle = { toggle: boolean };

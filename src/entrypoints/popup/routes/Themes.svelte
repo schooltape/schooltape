@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
-  import type { Accent, Flavour } from "@/utils/storage";
+  import { themes, type Accent, type Flavour } from "@/utils/storage";
 
   import Title from "../components/Title.svelte";
 
@@ -28,17 +27,18 @@
 </script>
 
 <div id="card">
-  <Title title="Themes" bind:checked={globalSettings.state.themes} />
+  <Title title="Themes" bind:checked={themes.state.toggle} />
 
-  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
+  <div
+    id="flavours"
+    class="text-ctp-text bg-ctp-surface0 outline-ctp-overlay2/20 my-6 flex overflow-clip rounded-xl outline-1 outline-solid">
     {#each flavours as flavour (flavour)}
       <button
-        class:active={globalSettings.state.themeFlavour === flavour}
-        class:navbutton-left={flavour === "latte"}
-        class:navbutton-right={flavour === "mocha"}
-        class:navbutton-center={flavour === "macchiato" || flavour === "frappe"}
+        class="{themes.state.flavour === flavour
+          ? 'bg-(--ctp-accent)/30'
+          : 'hover:bg-(--ctp-accent)/10'} flex items-center p-2 transition-colors duration-300"
         onclick={() => {
-          globalSettings.state.themeFlavour = flavour;
+          themes.state.flavour = flavour;
         }}>{flavour}</button>
     {/each}
   </div>
@@ -47,11 +47,11 @@
     {#each accents as accent (accent)}
       <button
         class={accent}
-        class:current={globalSettings.state.themeAccent === cleanAccent(accent)}
+        class:current={themes.state.accent === cleanAccent(accent)}
         aria-label={cleanAccent(accent)}
         title={cleanAccent(accent)}
         onclick={() => {
-          globalSettings.state.themeAccent = cleanAccent(accent) as Accent;
+          themes.state.accent = cleanAccent(accent) as Accent;
         }}></button>
     {/each}
   </div>
