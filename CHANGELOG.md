@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.4](https://github.com/schooltape/schooltape/compare/v4.4.3...v4.4.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* **popup:** improve visibility of accent selector ([b619e29](https://github.com/schooltape/schooltape/commit/b619e29df8ed1e2eab8bfeb3ad9d3a91a6b126a9))
+* **popup:** reactivity of gradient ([a28bc16](https://github.com/schooltape/schooltape/commit/a28bc168231cadeeddd7a44861e0ebb4bbd3a2c8))
+
 ## [4.4.3](https://github.com/schooltape/schooltape/compare/v4.4.2...v4.4.3) (2026-02-26)
 
 
