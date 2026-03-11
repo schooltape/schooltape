@@ -3,6 +3,7 @@ import { EXCLUDE_MATCHES } from "@/utils/constants";
 import betterNotifications from "./plugins/betterNotifications";
 import changeLogo from "./plugins/changeLogo";
 import homepageSwitcher from "./plugins/homepageSwitcher";
+import iframeNewTab from "./plugins/iframeNewTab";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
 import scrollPeriod from "./plugins/scrollPeriod";
@@ -20,6 +21,7 @@ export const plugins = [
   changeLogo,
   homepageSwitcher,
   betterNotifications,
+  iframeNewTab,
 ];
 
 export type PluginInstance = (typeof plugins)[number];
