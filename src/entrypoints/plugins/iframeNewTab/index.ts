@@ -65,5 +65,10 @@ export default new Plugin(
       iframeHeader.appendChild(createIframeShortcut(iframe.src));
     });
   },
-  () => {},
+  async () => {
+    document.querySelectorAll(`a[title="Open in new tab"]`).forEach((shortcut) => {
+      shortcut.remove();
+    });
+  },
+  ["iframe"]
 );
