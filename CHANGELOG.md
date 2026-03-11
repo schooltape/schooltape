@@ -1,5 +1,53 @@
 # Changelog
 
+## [4.4.4](https://github.com/schooltape/schooltape/compare/v4.4.3...v4.4.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* **popup:** improve visibility of accent selector ([b619e29](https://github.com/schooltape/schooltape/commit/b619e29df8ed1e2eab8bfeb3ad9d3a91a6b126a9))
+* **popup:** reactivity of gradient ([a28bc16](https://github.com/schooltape/schooltape/commit/a28bc168231cadeeddd7a44861e0ebb4bbd3a2c8))
+
+## [4.4.3](https://github.com/schooltape/schooltape/compare/v4.4.2...v4.4.3) (2026-02-26)
+
+
+### Bug Fixes
+
+* **plugins/scrollSegments:** scroll to top ([acdece5](https://github.com/schooltape/schooltape/commit/acdece5c2d5269f4c8153f2ca9f60f7e5ae7756f))
+
+## [4.4.2](https://github.com/schooltape/schooltape/compare/v4.4.1...v4.4.2) (2026-02-17)
+
+
+### Miscellaneous Chores
+
+* release 4.4.2 ([65542c0](https://github.com/schooltape/schooltape/commit/65542c087719f58e33a36ac13c0230d16ab4c366))
+
+## [4.4.1](https://github.com/schooltape/schooltape/compare/v4.4.0...v4.4.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* **plugins/changeLogo:** patch migration ([#347](https://github.com/schooltape/schooltape/issues/347)) ([33c6339](https://github.com/schooltape/schooltape/commit/33c63391508ce0b75aee19b9d17e13af6a11d65d))
+
+## [4.4.0](https://github.com/schooltape/schooltape/compare/v4.3.5...v4.4.0) (2026-02-11)
+
+
+### Features
+
+* **plugins/changeLogo:** init ([#324](https://github.com/schooltape/schooltape/issues/324)) ([d78f36a](https://github.com/schooltape/schooltape/commit/d78f36a94d5d2a882fae0ac5d2df27f957d49886))
+
+
+### Bug Fixes
+
+* **snippets:** correct rounded corners description ([#335](https://github.com/schooltape/schooltape/issues/335)) ([2071007](https://github.com/schooltape/schooltape/commit/20710079ed5c3bd879cca5122891a7042f4c4e5e))
+
+## [4.3.5](https://github.com/schooltape/schooltape/compare/v4.3.4...v4.3.5) (2026-02-01)
+
+
+### Bug Fixes
+
+* **plugins/modernIcons:** add missing icons ([083b0fc](https://github.com/schooltape/schooltape/commit/083b0fcbc7f40fbbaaf1ebdf773d6a88d646139d))
+
 ## [4.3.4](https://github.com/schooltape/schooltape/compare/v4.3.3...v4.3.4) (2025-12-15)
 
 

@@ -10,7 +10,4 @@
   description="Whether to open class links in a new tab."
   size="small"
   id="openInNewTab"
-  checked={settings.openInNewTab.state.toggle}
-  update={async (toggle) => {
-    settings.openInNewTab.set({ toggle });
-  }} />
+  bind:checked={settings.openInNewTab.state.toggle} />

@@ -17,12 +17,6 @@ export default new Plugin(
     const footerCopy = document.querySelector(dataAttr(PLUGIN_ID));
     if (footerCopy) return;
 
-    // scroll to top to avoid hot reload bug
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
-
     const content = document.querySelector("#content");
     const footer = document.querySelector<HTMLDivElement>("#footer");
 
@@ -34,6 +28,16 @@ export default new Plugin(
     }
 
     injectInlineStyles(styleText, PLUGIN_ID);
+
+    const scrollToTop = () =>
+      window.scrollTo({
+        top: 0,
+        behavior: "instant",
+      });
+
+    // scroll to top to avoid hot reload bug
+    scrollToTop();
+    setTimeout(scrollToTop, 100);
   },
   () => {
     const footerCopy = document.querySelector(dataAttr(PLUGIN_ID));

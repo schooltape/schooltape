@@ -9,7 +9,6 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
   private injected = false;
   public toggle: StorageState<Toggle>;
   public settings!: T;
-  public menu: string | undefined;
 
   constructor(
     public meta: {

@@ -24,12 +24,7 @@
 </script>
 
 <div id="card">
-  <Title
-    title="Plugins"
-    checked={globalSettings.state.plugins}
-    update={(toggled: boolean) => {
-      globalSettings.update({ plugins: toggled });
-    }} />
+  <Title title="Plugins" bind:checked={globalSettings.state.plugins} />
 
   <div class="plugins-container">
     {#each plugins as plugin (plugin.meta.id)}
@@ -38,10 +33,7 @@
           id={plugin.meta.id}
           text={plugin.meta.name}
           description={plugin.meta.description}
-          checked={plugin.toggle.state.toggle}
-          update={(toggled: boolean) => {
-            plugin.toggle.set({ toggle: toggled });
-          }}
+          bind:checked={plugin.toggle.state.toggle}
           size="small">
           {#if plugin.settings}
             <Button

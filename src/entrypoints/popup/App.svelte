@@ -26,7 +26,7 @@
 
   let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
 
-  onMount(() => {
+  onMount(async () => {
     updated.update({ icon: false });
     sendMessage({ type: "updateIcon" });
   });

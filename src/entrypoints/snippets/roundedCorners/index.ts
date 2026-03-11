@@ -5,7 +5,7 @@ export default new Snippet(
   {
     id: "roundedCorners",
     name: "Rounded Corners",
-    description: "Hide your profile picture across Schoolbox.",
+    description: "Rounds most corners in the UI.",
   },
   true,
   styles,

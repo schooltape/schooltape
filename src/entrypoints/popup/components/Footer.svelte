@@ -20,7 +20,7 @@
   <span class="relative inline-flex">
     <Button
       onclick={() => {
-        updated.update({ changelog: false });
+        updated.state.changelog = false;
 
         browser.tabs.create({
           url: `https://github.com/schooltape/schooltape/releases/tag/v${version}`,

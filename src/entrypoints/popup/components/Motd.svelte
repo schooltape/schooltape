@@ -6,7 +6,7 @@
     // update MOTD
     const response = await fetch("https://schooltape.github.io/motd.txt");
     if (response.ok) {
-      motd.set({ motd: await response.text() });
+      motd.state.motd = await response.text();
     }
   });
 </script>
