@@ -3,12 +3,12 @@ import { Plugin } from "@/utils/plugin";
 const ID = "iframeNewTab";
 const ICON_HTML = `
   <svg
-    width="16"
-    height="16"
+    width="18"
+    height="18"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-width="2.5"
     stroke-linecap="round"
     stroke-linejoin="round"
   >
@@ -25,25 +25,34 @@ function createIframeShortcut(src: string) {
     title: "Open in new tab",
   });
 
-  shortcut.innerHTML = ICON_HTML;
-  const icon = shortcut.firstElementChild as SVGElement | null;
-  if (!icon) return shortcut;
-
-  icon.style.cssText = `
+  shortcut.style.cssText = `
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: hsl(var(--ctp-accent));
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-    vertical-align: middle;
-    margin-left: 0.5rem;
-    margin-top: -0.25rem;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.15s ease;
+    z-index: 10;
   `;
 
+  shortcut.innerHTML = ICON_HTML;
+
   shortcut.addEventListener("mouseenter", () => {
-    icon.style.opacity = "0.7";
+    shortcut.style.background = "rgba(0, 0, 0, 0.75) !important";
   });
 
   shortcut.addEventListener("mouseleave", () => {
-    icon.style.opacity = "1";
+    shortcut.style.background = "rgba(0, 0, 0, 0.5) !important";
   });
 
   return shortcut;
@@ -59,10 +68,20 @@ export default new Plugin(
   null,
   async () => {
     document.querySelectorAll("iframe").forEach((iframe) => {
-      const iframeHeader = iframe.parentElement?.parentElement?.parentElement?.parentElement?.querySelector("h2"); // abomination
-      if (!iframeHeader) return;
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      iframe.parentNode?.insertBefore(wrapper, iframe);
+      wrapper.appendChild(iframe);
 
-      iframeHeader.appendChild(createIframeShortcut(iframe.src));
+      const shortcut = createIframeShortcut(iframe.src);
+      wrapper.appendChild(shortcut);
+
+      wrapper.addEventListener("mouseenter", () => {
+        shortcut.style.opacity = "1";
+      });
+      wrapper.addEventListener("mouseleave", () => {
+        shortcut.style.opacity = "0";
+      });
     });
   },
   async () => {
