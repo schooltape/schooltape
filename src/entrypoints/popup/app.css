@@ -119,7 +119,7 @@ body {
   }
 
   .current {
-    @apply outline-ctp-surface1 outline-solid outline-4 transition-none;
+    @apply outline-4 outline-ctp-surface1 transition-none outline-solid;
   }
 
   .navbutton-left {
