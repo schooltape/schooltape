@@ -40,6 +40,7 @@
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "semver": "^7.7.4",
+    "serrator": "github:schooltape/serrator",
     "svelte": "^5.53.9",
     "svelte-check": "^4.4.5",
     "svelte-spa-router": "^4.0.1",
