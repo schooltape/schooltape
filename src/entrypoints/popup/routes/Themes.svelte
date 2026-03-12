@@ -30,7 +30,7 @@
 <div id="card">
   <Title title="Themes" bind:checked={globalSettings.state.themes} />
 
-  <div id="flavours" class="text-ctp-text my-6 flex rounded-xl py-2">
+  <div id="flavours" class="my-6 flex rounded-xl py-2 text-ctp-text">
     {#each flavours as flavour (flavour)}
       <button
         class:active={globalSettings.state.themeFlavour === flavour}

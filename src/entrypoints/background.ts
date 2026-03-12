@@ -1,9 +1,9 @@
 import type { Browser } from "#imports";
 import { browser, defineBackground, storage } from "#imports";
+import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
 import { globalSettings, updated } from "@/utils/storage";
-import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import semver from "semver";
 
 export default defineBackground(() => {
