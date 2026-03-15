@@ -1,4 +1,7 @@
+import { createShadowRootUi } from "#imports";
+import { logger } from "@/utils/logger";
 import { Plugin } from "@/utils/plugin";
+import { mount, unmount } from "svelte";
 
 const ID = "iframeNewTab";
 const ICON_HTML = `
@@ -66,28 +69,58 @@ export default new Plugin(
   },
   true,
   null,
-  async () => {
-    document.querySelectorAll("iframe").forEach((iframe) => {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-      iframe.parentNode?.insertBefore(wrapper, iframe);
-      wrapper.appendChild(iframe);
+  async (_settings, ctx, app) => {
+    if (!app) {
+      logger.error("iframe new tab expected app");
+      return;
+    }
 
-      const shortcut = createIframeShortcut(iframe.src);
-      wrapper.appendChild(shortcut);
+    for (const iframe of document.querySelectorAll("iframe")) {
+      const ui = await createShadowRootUi(ctx, {
+        name: "schooltape-iframe-new-tab",
+        position: "overlay",
+        anchor: iframe.parentElement,
+        zIndex: 1000,
+        alignment: "top-right", // TODO
+        onMount: (container) => {
+          return mount(app as any, {
+            // TODO: figure out typing
+            target: container,
+            props: { href: iframe.src },
+          });
+        },
+        onRemove: (app) => {
+          if (app) unmount(app);
+        },
+      });
 
-      wrapper.addEventListener("mouseenter", () => {
-        shortcut.style.opacity = "1";
-      });
-      wrapper.addEventListener("mouseleave", () => {
-        shortcut.style.opacity = "0";
-      });
-    });
+      ui.mount();
+
+      console.log(ui.shadowHost);
+    }
+
+    // document.querySelectorAll("iframe").forEach((iframe) => {
+    //   const wrapper = document.createElement("div");
+    //   wrapper.style.position = "relative";
+    //   iframe.parentNode?.insertBefore(wrapper, iframe);
+    //   wrapper.appendChild(iframe);
+
+    //   const shortcut = createIframeShortcut(iframe.src);
+    //   wrapper.appendChild(shortcut);
+
+    //   wrapper.addEventListener("mouseenter", () => {
+    //     shortcut.style.opacity = "1";
+    //   });
+    //   wrapper.addEventListener("mouseleave", () => {
+    //     shortcut.style.opacity = "0";
+    //   });
+    // });
   },
   async () => {
-    document.querySelectorAll(`a[title="Open in new tab"]`).forEach((shortcut) => {
-      shortcut.remove();
-    });
+    // document.querySelectorAll(`a[title="Open in new tab"]`).forEach((shortcut) => {
+    //   shortcut.remove();
+    // });
+    // TODO: unmount
   },
-  ["iframe"]
+  ["iframe"],
 );
