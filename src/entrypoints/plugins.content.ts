@@ -2,6 +2,7 @@ import { defineContentScript } from "#imports";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
 import changeLogo from "./plugins/changeLogo";
 import homepageSwitcher from "./plugins/homepageSwitcher";
+import iframeNewTab from "./plugins/iframeNewTab";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
 import scrollPeriod from "./plugins/scrollPeriod";
@@ -18,6 +19,7 @@ export const plugins = [
   tabTitle,
   changeLogo,
   homepageSwitcher,
+  iframeNewTab,
 ];
 
 export type PluginInstance = (typeof plugins)[number];
