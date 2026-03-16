@@ -23,5 +23,5 @@ jobs:
       - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
-      - name: run lint
+      - name: Run lint
         run: bun --bun lint
