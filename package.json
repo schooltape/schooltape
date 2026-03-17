@@ -15,15 +15,13 @@
     "dev:firefox": "wxt -b firefox",
     "format": "prettier --write .",
     "postinstall": "wxt prepare",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox"
   },
   "devDependencies": {
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "1.0.0",
-    "@eslint/compat": "^2.0.3",
-    "@eslint/js": "^10.0.1",
     "@lucide/svelte": "^0.577.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/vite": "^4.2.1",
@@ -31,10 +29,9 @@
     "@types/node": "^25.5.0",
     "@types/semver": "^7.7.1",
     "@wxt-dev/module-svelte": "^2.0.4",
-    "eslint": "^10.0.3",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-svelte": "^3.15.2",
     "globals": "^17.4.0",
+    "oxlint": "^1.55.0",
+    "oxlint-tsgolint": "^0.17.0",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-svelte": "^3.5.1",
@@ -45,7 +42,6 @@
     "svelte-spa-router": "^4.0.2",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0",
     "wxt": "^0.20.19"
   }
 }
