@@ -19,7 +19,6 @@
   };
 
   function getAccentRgb(accent: string, flavour: string) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let x = (flavors as any)[flavour].colors[accent].rgb;
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
