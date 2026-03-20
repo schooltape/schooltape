@@ -1,0 +1,24 @@
+.schooltape-PLUGIN_ID-shortcut {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--ctp-accent)) !important;
+  background: hsla(var(--ctp-surface0), 0.7) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 6px;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background 0.15s ease;
+  z-index: 10;
+}
+
+article:has(iframe) {
+  position: relative !important;
+}

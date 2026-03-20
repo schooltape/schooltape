@@ -1,6 +1,11 @@
+import { injectInlineStyles, uninjectInlineStyles } from "@/utils";
 import { Plugin } from "@/utils/plugin";
+import styleText from "./styles.css?inline";
+import { logger } from "@/utils/logger";
 
 const ID = "iframeNewTab";
+const PLUGIN_ID = `plugin-${ID}`;
+const SHORTCUT_SELECTOR = `schooltape-${PLUGIN_ID}-shortcut`;
 const ICON_HTML = `
   <svg
     width="18"
@@ -18,42 +23,15 @@ const ICON_HTML = `
   </svg>
 `;
 
-function createIframeShortcut(src: string) {
+function createIframeShortcut(href: string) {
   const shortcut = Object.assign(document.createElement("a"), {
-    href: src,
+    href,
     target: "_blank",
     title: "Open in new tab",
   });
 
-  shortcut.style.cssText = `
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: hsl(var(--ctp-accent));
-    background: rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    opacity: 0;
-    transition: opacity 0.2s ease, background 0.15s ease;
-    z-index: 10;
-  `;
-
+  shortcut.className = SHORTCUT_SELECTOR;
   shortcut.innerHTML = ICON_HTML;
-
-  shortcut.addEventListener("mouseenter", () => {
-    shortcut.style.background = "rgba(0, 0, 0, 0.75) !important";
-  });
-
-  shortcut.addEventListener("mouseleave", () => {
-    shortcut.style.background = "rgba(0, 0, 0, 0.5) !important";
-  });
 
   return shortcut;
 }
@@ -67,27 +45,32 @@ export default new Plugin(
   true,
   null,
   async () => {
+    injectInlineStyles(styleText.replaceAll("PLUGIN_ID", PLUGIN_ID), PLUGIN_ID);
+
     document.querySelectorAll("iframe").forEach((iframe) => {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-      iframe.parentNode?.insertBefore(wrapper, iframe);
-      wrapper.appendChild(iframe);
+      const article = iframe.closest("article");
+      if (!article) {
+        logger.warn(`[${PLUGIN_ID}$] no article found to mount shortcut`);
+        return;
+      }
 
       const shortcut = createIframeShortcut(iframe.src);
-      wrapper.appendChild(shortcut);
+      article.appendChild(shortcut);
 
-      wrapper.addEventListener("mouseenter", () => {
+      article.addEventListener("mouseenter", () => {
         shortcut.style.opacity = "1";
       });
-      wrapper.addEventListener("mouseleave", () => {
+      article.addEventListener("mouseleave", () => {
         shortcut.style.opacity = "0";
       });
     });
   },
   async () => {
-    document.querySelectorAll(`a[title="Open in new tab"]`).forEach((shortcut) => {
+    uninjectInlineStyles(PLUGIN_ID);
+
+    document.querySelectorAll(SHORTCUT_SELECTOR).forEach((shortcut) => {
       shortcut.remove();
     });
   },
-  ["iframe"]
+  ["iframe"],
 );
