@@ -12,8 +12,7 @@
 </script>
 
 <!-- MOTD -->
-<div class="text-ctp-subtext0 text-center italic">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+<div class="text-center text-ctp-subtext0 italic">
   <p>{@html motd.state.motd}</p>
   <!-- Free and <a href='https://github.com/schooltape/schooltape' class='text-(--ctp-accent)'> open source</a>! -->
 </div>
