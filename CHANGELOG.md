@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/schooltape/schooltape/compare/v4.4.4...v4.5.0) (2026-03-20)
+
+
+### Features
+
+* **plugins:** init iframeNewTab ([#365](https://github.com/schooltape/schooltape/issues/365)) ([a06bfff](https://github.com/schooltape/schooltape/commit/a06bfff6cc319baada57fe16e2d0b427b12593c5))
+
 ## [4.4.4](https://github.com/schooltape/schooltape/compare/v4.4.3...v4.4.4) (2026-03-10)
 
 
