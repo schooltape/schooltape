@@ -3,15 +3,15 @@ import { EXCLUDE_MATCHES } from "@/utils/constants";
 import changeLogo from "./plugins/changeLogo";
 import homepageSwitcher from "./plugins/homepageSwitcher";
 import iframeNewTab from "./plugins/iframeNewTab";
+import IframeNewTabShortcut from "./plugins/iframeNewTab/App.svelte";
 import modernIcons from "./plugins/modernIcons";
 import progressBar from "./plugins/progressBar";
 import scrollPeriod from "./plugins/scrollPeriod";
 import scrollSegments from "./plugins/scrollSegments";
 import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
-import App from "./plugins/iframeNewTab/App.svelte";
 
-export const plugins = [
+export const plugins = {
   subheader,
   scrollSegments,
   scrollPeriod,
@@ -19,10 +19,9 @@ export const plugins = [
   modernIcons,
   tabTitle,
   changeLogo,
+  iframeNewTab,
   homepageSwitcher,
-];
-
-export type PluginInstance = (typeof plugins)[number];
+};
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -31,10 +30,15 @@ export default defineContentScript({
 
   async main(ctx) {
     document.addEventListener("DOMContentLoaded", () => {
-      for (const plugin of plugins) {
-        plugin.init(ctx);
-      }
-      iframeNewTab.init(ctx, App as any);
+      changeLogo.init(ctx);
+      homepageSwitcher.init(ctx);
+      iframeNewTab.init(ctx, { Shortcut: IframeNewTabShortcut });
+      modernIcons.init(ctx);
+      progressBar.init(ctx);
+      scrollPeriod.init(ctx);
+      scrollSegments.init(ctx);
+      subheader.init(ctx);
+      tabTitle.init(ctx);
     });
   },
 });

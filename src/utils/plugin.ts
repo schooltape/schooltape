@@ -1,15 +1,22 @@
-import { ContentScriptContext, storage } from "#imports";
-import { SvelteComponent } from "svelte";
+import { ContentScriptContext as Ctx, storage } from "#imports";
+import { Component } from "svelte";
 import { hasChanged, onSchoolboxPage } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
 import { globalSettings } from "./storage";
 import { StorageState } from "./storage/state.svelte";
 
-export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
+// TODO: ComponentType is deprecated
+
+export class Plugin<
+  Settings extends Record<string, unknown> | null = null,
+  Apps extends Record<string, Component> | null = null,
+> {
   private injected = false;
   public toggle: StorageState<Toggle>;
-  public settings!: T;
+  public settings!: Settings;
+
+  private apps?: Apps;
 
   constructor(
     public meta: {
@@ -19,8 +26,8 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     },
     defaultToggle: boolean,
     settings: Record<string, object> | null,
-    private injectCallback: (settings: T, ctx: ContentScriptContext, app?: SvelteComponent) => Promise<void> | void,
-    private uninjectCallback: (settings: T, ctx: ContentScriptContext) => Promise<void> | void,
+    private injectCallback: (settings: Settings, ctx: Ctx, apps?: Apps) => Promise<void> | void,
+    private uninjectCallback: (settings: Settings, ctx: Ctx) => Promise<void> | void,
     private elementsToWaitFor: string[] = [],
   ) {
     // init plugin storage
@@ -39,44 +46,77 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
             }),
           ),
         ]),
-      ) as T;
+      ) as Settings;
     }
   }
 
-  async init(ctx: ContentScriptContext, app?: SvelteComponent) {
-    // if not on Schoolbox page
+  /*
+   * initialises the plugin by checking if it is enabled, and if the current page is a Schoolbox page.
+   * waits for specific elements to load before injecting.
+   *
+   * enforces apps is to be passed if the Apps type generic is not null
+   */
+  async init(ctx: Ctx, ...args: Apps extends Record<string, Component> ? [apps: Apps] : []) {
     if (!(await onSchoolboxPage())) return;
+
+    const apps = args[0] as Apps | undefined;
+    this.apps = apps;
 
     logger.info(`init plugin: ${this.meta.name}`);
 
     if (await this.isEnabled()) {
-      // wait for elements to be loaded
-      if (this.elementsToWaitFor.length > 0) {
-        // create an observer to wait for all elements to be loaded
-        const observer = new MutationObserver((_mutations, observer) => {
-          if (this.allElementsPresent()) {
-            observer.disconnect();
-            this.inject(ctx, app);
-          }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-
-        // check if elements are already present
-        if (this.allElementsPresent()) {
-          observer.disconnect();
-          this.inject(ctx, app);
-        }
-      } else {
-        // no elements to wait for
-        this.inject(ctx, app);
-      }
+      this.waitForElementsThenInject(ctx);
     }
 
-    // init watchers
+    this.registerWatchers(ctx);
+  }
+
+  private inject(ctx: Ctx) {
+    if (this.injected) return;
+    if (!this.allElementsPresent()) return;
+    logger.info(`injecting plugin: ${this.meta.name}`);
+    this.injectCallback(this.settings, ctx, this.apps);
+    this.injected = true;
+  }
+
+  private uninject(ctx: Ctx) {
+    if (!this.injected) return;
+    logger.info(`uninjecting plugin: ${this.meta.name}`);
+    this.uninjectCallback(this.settings, ctx);
+    this.injected = false;
+  }
+
+  private waitForElementsThenInject(ctx: Ctx) {
+    if (this.elementsToWaitFor.length === 0) {
+      this.inject(ctx);
+      return;
+    }
+
+    const observer = new MutationObserver((_mutations, observer) => {
+      if (this.allElementsPresent()) {
+        observer.disconnect();
+        this.inject(ctx);
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    if (this.allElementsPresent()) {
+      observer.disconnect();
+      this.inject(ctx);
+    }
+  }
+
+  /*
+   * reload plugin if toggle or settings are changed
+   */
+  private registerWatchers(ctx: Ctx) {
     globalSettings.watch((newValue, oldValue) => {
       if (hasChanged(newValue, oldValue, ["global", "plugins"])) this.reload(ctx);
     });
+
     this.toggle.watch(() => this.reload(ctx));
+
     if (this.settings) {
       for (const setting of Object.values(this.settings)) {
         if (!(setting instanceof StorageState)) continue;
@@ -85,22 +125,7 @@ export class Plugin<T extends Record<string, unknown> | undefined = undefined> {
     }
   }
 
-  private inject(ctx: ContentScriptContext, app?: SvelteComponent) {
-    if (this.injected) return;
-    if (!this.allElementsPresent()) return;
-    logger.info(`injecting plugin: ${this.meta.name}`);
-    this.injectCallback(this.settings, ctx, app);
-    this.injected = true;
-  }
-
-  private uninject(ctx: ContentScriptContext) {
-    if (!this.injected) return;
-    logger.info(`uninjecting plugin: ${this.meta.name}`);
-    this.uninjectCallback(this.settings, ctx);
-    this.injected = false;
-  }
-
-  private async reload(ctx: ContentScriptContext) {
+  private async reload(ctx: Ctx) {
     if (this.injected) this.uninject(ctx);
     if (await this.isEnabled()) this.inject(ctx);
   }
