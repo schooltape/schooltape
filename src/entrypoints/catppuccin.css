@@ -505,6 +505,11 @@ article *:not(a):not(a *) {
   color: hsl(var(--ctp-text)) !important;
 }
 
+/* news title separator */
+.news-post .detail > .meta {
+  border-bottom: 1px solid hsl(var(--ctp-overlay0));
+}
+
 /* home -> news */
 .tabs {
   background: hsl(var(--ctp-surface1));
