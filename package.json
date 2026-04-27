@@ -31,7 +31,7 @@
     "@wxt-dev/module-svelte": "^2.0.4",
     "globals": "^17.4.0",
     "oxlint": "^1.55.0",
-    "oxlint-tsgolint": "^0.17.0",
+    "oxlint-tsgolint": "^0.22.0",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-svelte": "^3.5.1",
