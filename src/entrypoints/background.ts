@@ -91,10 +91,9 @@ export default defineBackground(() => {
         browser.tabs.update(sender.tab.id, { url: msg.url });
         break;
       case "toTab": {
-        console.log(msg.url);
-        const temp = await browser.tabs.query({ url: msg.url });
-        if (temp.length > 0) {
-          browser.tabs.update(temp[0].id, { active: true });
+        const toTab = await browser.tabs.query({ url: msg.url });
+        if (toTab.length > 0) {
+          browser.tabs.update(toTab[0].id, { active: true });
         } else if (sender.tab?.id) {
           browser.tabs.update(sender.tab.id, { url: msg.url });
         }
