@@ -90,6 +90,16 @@ export default defineBackground(() => {
         if (!sender.tab?.id) break;
         browser.tabs.update(sender.tab.id, { url: msg.url });
         break;
+      case "toTab": {
+        console.log(msg.url);
+        const temp = await browser.tabs.query({ url: msg.url });
+        if (temp.length > 0) {
+          browser.tabs.update(temp[0].id, { active: true });
+        } else if (sender.tab?.id) {
+          browser.tabs.update(sender.tab.id, { url: msg.url });
+        }
+        break;
+      }
       default:
         logger.error(`[background] unknown message received: ${msg}`);
     }

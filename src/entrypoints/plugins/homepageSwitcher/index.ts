@@ -42,7 +42,7 @@ export default new Plugin<Settings>(
           if (logos) {
             const tabUrl = logos[0].href;
             if (closeCurrentTab.toggle) sendMessage({ type: "closeTab" });
-            sendMessage({ type: "updateTabUrl", url: tabUrl });
+            sendMessage({ type: "toTab", url: tabUrl });
           }
         },
         {
