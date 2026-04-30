@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.2](https://github.com/schooltape/schooltape/compare/v4.5.1...v4.5.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* **plugins/homepageSwitcher:** switching tab regression ([#382](https://github.com/schooltape/schooltape/issues/382)) ([9063adf](https://github.com/schooltape/schooltape/commit/9063adf0862b789eaff559dd1d738472cd830ae1))
+
 ## [4.5.1](https://github.com/schooltape/schooltape/compare/v4.5.0...v4.5.1) (2026-04-30)
 
 
