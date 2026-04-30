@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.1](https://github.com/schooltape/schooltape/compare/v4.5.0...v4.5.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* **theme:** breadcrumb colours ([#380](https://github.com/schooltape/schooltape/issues/380)) ([41e4b9e](https://github.com/schooltape/schooltape/commit/41e4b9e1d269dcdfe35e343c6bc0ada5f2af3a60))
+* **themes:** style news title separator ([f397964](https://github.com/schooltape/schooltape/commit/f397964166da9b083fceecc06e5fa4163187451e))
+
 ## [4.5.0](https://github.com/schooltape/schooltape/compare/v4.4.4...v4.5.0) (2026-03-20)
 
 
