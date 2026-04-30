@@ -578,13 +578,18 @@ li > article > div#x_Signature {
 }
 
 /* breadcrumbs */
-.breadcrumb li.active span:not([href]) {
-  color: hsl(var(--ctp-accent));
-}
-
-.breadcrumb li a:before,
-.breadcrumb li span:before {
-  border-left-color: hsl(var(--ctp-overlay0));
+.breadcrumb li {
+  &.active span:not([href]) {
+    color: hsl(var(--ctp-accent));
+    background: hsl(var(--ctp-surface1));
+  }
+  a,
+  span {
+    color: hsl(var(--ctp-subtext0));
+    &:before {
+      border-left-color: hsl(var(--ctp-surface1));
+    }
+  }
 }
 
 /* scrollbars */
