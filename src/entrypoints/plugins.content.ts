@@ -18,8 +18,8 @@ export const plugins = [
   modernIcons,
   tabTitle,
   changeLogo,
-  homepageSwitcher,
   iframeNewTab,
+  homepageSwitcher,
 ];
 
 export type PluginInstance = (typeof plugins)[number];
