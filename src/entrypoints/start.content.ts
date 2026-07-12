@@ -61,9 +61,21 @@ export default defineContentScript({
       }
     };
 
-    // @ts-expect-error unlisted CSS not a PublicPath
-    const injectThemes = () => injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
-    const uninjectThemes = () => uninjectStylesheet("themes");
+    const injectThemes = () => {
+      // @ts-expect-error unlisted CSS not a PublicPath
+      injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
+
+      // disable Sonar UI
+      document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]')!.disabled = true;
+      document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]')!.disabled = true;
+    };
+    const uninjectThemes = () => {
+      uninjectStylesheet("themes");
+
+      // enable Sonar UI
+      document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]')!.disabled = false;
+      document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]')!.disabled = false;
+    };
 
     // storage listeners for hot reload
     globalSettings.watch((newValue, oldValue) => {
