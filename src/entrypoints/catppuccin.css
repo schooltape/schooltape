@@ -675,6 +675,14 @@ label .left-off-canvas-menu ul.off-canvas-list li .unit-heading,
   color: hsl(var(--ctp-text));
 }
 
+/* progress bar plugin */
+progress::-webkit-progress-value {
+  background: hsl(var(--ctp-accent)) !important;
+}
+progress::-moz-progress-bar {
+  background: hsl(var(--ctp-accent)) !important;
+}
+
 /* CKEditor */
 :root {
   --sb-ck-active: hsl(var(--ctp-accent));
