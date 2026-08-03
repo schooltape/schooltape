@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.5.4](https://github.com/schooltape/schooltape/compare/v4.5.3...v4.5.4) (2026-08-03)
+
+
+### Bug Fixes
+
+* blog post redirect ([cc556a7](https://github.com/schooltape/schooltape/commit/cc556a70ff34a4ddea78f57e2cc9cbb25ed10883))
+* **plugins/modernIcons:** selectors for v26 ([6fe456d](https://github.com/schooltape/schooltape/commit/6fe456d183d94cad1d97e2f508702947ff8116f3))
+* **plugins/progressBar:** styling with Sonar UI ([5c8c4aa](https://github.com/schooltape/schooltape/commit/5c8c4aa23992666be3403071a1511e02b1316a7f))
+* **themes:** disable Sonar UI when themes are enabled ([bd789f7](https://github.com/schooltape/schooltape/commit/bd789f7ecce791f9f1e7a68fb10ed368c987e9cf))
+* **themes:** Sonar UI notice in popup ([e4a21b7](https://github.com/schooltape/schooltape/commit/e4a21b7a75c3b93618b7efc40b739d6af02a8f7a))
+
 ## [4.5.3](https://github.com/schooltape/schooltape/compare/v4.5.2...v4.5.3) (2026-05-05)
 
 
