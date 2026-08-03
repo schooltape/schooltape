@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.5](https://github.com/schooltape/schooltape/compare/v4.5.4...v4.5.5) (2026-08-03)
+
+
+### Bug Fixes
+
+* disable sonar UI patch when it is not enabled ([bd4c8d7](https://github.com/schooltape/schooltape/commit/bd4c8d79601b5a4a047bf7ae6d3f5b77c7f9256a))
+
 ## [4.5.4](https://github.com/schooltape/schooltape/compare/v4.5.3...v4.5.4) (2026-08-03)
 
 
