@@ -9,6 +9,7 @@ import scrollPeriod from "./plugins/scrollPeriod";
 import scrollSegments from "./plugins/scrollSegments";
 import subheader from "./plugins/subheader";
 import tabTitle from "./plugins/tabTitle";
+import oldTheme from "./plugins/oldTheme";
 
 export const plugins = [
   subheader,
@@ -20,6 +21,7 @@ export const plugins = [
   changeLogo,
   iframeNewTab,
   homepageSwitcher,
+  oldTheme
 ];
 
 export type PluginInstance = (typeof plugins)[number];
