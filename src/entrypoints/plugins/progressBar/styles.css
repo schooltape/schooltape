@@ -30,7 +30,7 @@ progress.progress-bar {
 /* can't put other selectors with this */
 /* see https://issues.chromium.org/issues/40564916 */
 progress::-webkit-progress-value {
-  background: var(--sbx-config-color-accent);
+  background: var(--sbx-config-color-accent, --content-ui-foreground);
 }
 progress::-webkit-progress-bar {
   background: inherit;
@@ -39,5 +39,5 @@ progress {
   background-color: inherit;
 }
 progress::-moz-progress-bar {
-  background: var(--sbx-config-color-accent);
+  background: var(--sbx-config-color-accent, --content-ui-foreground);
 }
