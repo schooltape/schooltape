@@ -62,6 +62,11 @@ export default defineBackground(() => {
         }
       }
 
+      // open sonar UI blogpost
+      if (previousVersion && semver.gte(newVersion, "4.5.4") && semver.lt(previousVersion, "4.5.4")) {
+        browser.tabs.create({ url: "https://schooltape.github.io/blog/sonar-ui" });
+      }
+
       if (import.meta.env.DEV) {
         logger.info("[background] Opening development URLs");
         browser.tabs.create({ url: browser.runtime.getURL("/popup.html"), active: false });
