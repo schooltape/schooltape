@@ -1,7 +1,6 @@
 export type BackgroundMessage =
   | { type: "resetSettings" }
   | { type: "updateIcon" }
-  | { type: "closeTab" }
   | { type: "toTab"; url: string, closeIfFound: boolean };
 
 // global
