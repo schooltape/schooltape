@@ -55,4 +55,13 @@
         }}></button>
     {/each}
   </div>
+
+  <p class="text-sm font-normal text-ctp-subtext0">
+    note: enabling themes disables Sonar UI
+    <br/>
+    to track progress on the Sonar UI implementation please
+    see <a href="https://github.com/schooltape/schooltape/issues/393" class="text-(--ctp-accent) hover:underline" target="_blank">issue #393</a>
+    <br />
+    read the <a href="https://schooltape.github.io/blog/sonar-ui" class="text-(--ctp-accent) hover:underline" target="_blank">blog post</a> for more information
+  </p>
 </div>
