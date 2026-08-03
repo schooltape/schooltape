@@ -17,5 +17,5 @@ export default new Plugin(
   () => {
     document.body.classList.add("sbx-body");
   },
-  [".timetable"],
+  ["body"],
 );
