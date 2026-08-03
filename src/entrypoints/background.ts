@@ -79,8 +79,6 @@ export default defineBackground(() => {
       resetSettings();
     } else if (msg.type === "updateIcon") {
       updateIcon();
-    } else if (msg.type === "closeTab" && sender.tab?.id) {
-      browser.tabs.remove(sender.tab.id);
     } else if (msg.type === "toTab") {
       const toTab = await browser.tabs.query({ url: msg.url });
       if (toTab.length > 0) {

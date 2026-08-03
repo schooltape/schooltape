@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.3](https://github.com/schooltape/schooltape/compare/v4.5.2...v4.5.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **plugins/homepageSwitcher:** closing current tab if none found ([#385](https://github.com/schooltape/schooltape/issues/385)) ([c1f2abc](https://github.com/schooltape/schooltape/commit/c1f2abcaf7b6dd339199f9a5d67dc6edbdc4d038))
+
 ## [4.5.2](https://github.com/schooltape/schooltape/compare/v4.5.1...v4.5.2) (2026-04-30)
 
 
