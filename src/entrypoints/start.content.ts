@@ -66,15 +66,23 @@ export default defineContentScript({
       injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
 
       // disable Sonar UI
-      document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]')!.disabled = true;
-      document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]')!.disabled = true;
+      let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
+      let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
+      if (sbxCore && sbxSkin) {
+        sbxCore.disabled = true;
+        sbxSkin.disabled = true;
+      }
     };
     const uninjectThemes = () => {
       uninjectStylesheet("themes");
 
       // enable Sonar UI
-      document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]')!.disabled = false;
-      document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]')!.disabled = false;
+      let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
+      let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
+      if (sbxCore && sbxSkin) {
+        sbxCore.disabled = false;
+        sbxSkin.disabled = false;
+      }
     };
 
     // storage listeners for hot reload
