@@ -61,6 +61,7 @@ export default defineContentScript({
       }
     };
 
+    const sbxStylesheets: HTMLLinkElement[] = [];
     const injectThemes = () => {
       // @ts-expect-error unlisted CSS not a PublicPath
       injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
@@ -69,19 +70,19 @@ export default defineContentScript({
       let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
       let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
       if (sbxCore && sbxSkin) {
-        sbxCore.disabled = true;
-        sbxSkin.disabled = true;
+        // it is important these are in this order
+        sbxStylesheets.push(sbxSkin, sbxCore);
+        sbxSkin.remove();
+        sbxCore.remove();
       }
     };
     const uninjectThemes = () => {
       uninjectStylesheet("themes");
 
       // enable Sonar UI
-      let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
-      let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
-      if (sbxCore && sbxSkin) {
-        sbxCore.disabled = false;
-        sbxSkin.disabled = false;
+      while (sbxStylesheets.length > 0) {
+        let link = sbxStylesheets.pop();
+        if (link) document.head.appendChild(link);
       }
     };
 
