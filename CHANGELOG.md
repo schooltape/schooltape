@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.5.6](https://github.com/schooltape/schooltape/compare/v4.5.5...v4.5.6) (2026-08-04)
+
+
+### Bug Fixes
+
+* **plugins/progressBar:** fallback for old sbx skin ([8461320](https://github.com/schooltape/schooltape/commit/8461320202ddfada438ce1677d9531d387afe573)), closes [#393](https://github.com/schooltape/schooltape/issues/393)
+* **themes:** chromium quirks when disabling "Sonar UI" ([e3263e7](https://github.com/schooltape/schooltape/commit/e3263e75fd177290c6cfcb9da8177be24ab2e532)), closes [#393](https://github.com/schooltape/schooltape/issues/393)
+* **themes:** notifications button colour ([fcf3f97](https://github.com/schooltape/schooltape/commit/fcf3f9783f93e11522c91bfd94d0f34a8c799213)), closes [#393](https://github.com/schooltape/schooltape/issues/393)
+* **themes:** transparent search bar ([663072c](https://github.com/schooltape/schooltape/commit/663072c9cb127f941cdb9ab87928d5b00c2b4923))
+
 ## [4.5.5](https://github.com/schooltape/schooltape/compare/v4.5.4...v4.5.5) (2026-08-03)
 
 
