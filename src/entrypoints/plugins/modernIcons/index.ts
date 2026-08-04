@@ -19,7 +19,7 @@ export default new Plugin<Settings>(
   {
     id: ID,
     name: "Modern Icons",
-    description: "Modernise the icons across Schoolbox.",
+    description: "Modernises the icons in the navigation bar and menu.",
   },
   true,
   {
