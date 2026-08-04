@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.5.7](https://github.com/schooltape/schooltape/compare/v4.5.6...v4.5.7) (2026-08-04)
+
+
+### Bug Fixes
+
+* **plugins/modernIcons:** update description ([6020acb](https://github.com/schooltape/schooltape/commit/6020acbe62cfec352e30c815e956c0fa1dcb5c5d))
+* **popup:** disable cache for MOTD ([66760d4](https://github.com/schooltape/schooltape/commit/66760d4c8fa5006e9e778665f8839c38f1ff4fe0))
+* remove discord links ([72b36eb](https://github.com/schooltape/schooltape/commit/72b36ebd9a231011491ba37aa5c2e9b7e98f2f3e))
+
 ## [4.5.6](https://github.com/schooltape/schooltape/compare/v4.5.5...v4.5.6) (2026-08-04)
 
 
