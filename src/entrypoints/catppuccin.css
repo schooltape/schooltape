@@ -683,6 +683,11 @@ progress::-moz-progress-bar {
   background: hsl(var(--ctp-accent)) !important;
 }
 
+/* fix transparent search bar (#397) */
+input[type="text"]:focus {
+  background: hsl(var(--ctp-surface0));
+}
+
 /* CKEditor */
 :root {
   --sb-ck-active: hsl(var(--ctp-accent));
