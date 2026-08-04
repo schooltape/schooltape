@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Schooltape Discord Community
-    url: https://discord.gg/rZxtGJ98BE
-    about: Announcements and support is available here.
+  - name: GitHub Community Support
+    url: https://github.com/schooltape/schooltape/discussions/categories/support
+    about: Please ask and answer questions here.
