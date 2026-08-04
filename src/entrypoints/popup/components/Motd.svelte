@@ -4,7 +4,7 @@
 
   onMount(async () => {
     // update MOTD
-    const response = await fetch("https://schooltape.github.io/motd.txt");
+    const response = await fetch("https://schooltape.github.io/motd.txt", {cache: "no-store"});
     if (response.ok) {
       motd.state.motd = await response.text();
     }
