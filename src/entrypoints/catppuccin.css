@@ -688,6 +688,12 @@ input[type="text"]:focus {
   background: hsl(var(--ctp-surface0));
 }
 
+/* fix notifications button colours */
+.right-small a[data-unread]:not([data-unread="0"]):not([data-unread=""]) {
+  color: hsl(var(--ctp-base));
+  background-color: hsl(var(--ctp-red));
+}
+
 /* CKEditor */
 :root {
   --sb-ck-active: hsl(var(--ctp-accent));
