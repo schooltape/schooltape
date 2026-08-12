@@ -42,6 +42,6 @@
     "svelte-spa-router": "^4.0.2",
     "tailwindcss": "^4.2.1",
     "typescript": "^6.0.0",
-    "wxt": "^0.20.19"
+    "wxt": "^0.21.0"
   }
 }
