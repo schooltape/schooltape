@@ -26,7 +26,7 @@
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "@tsconfig/svelte": "^5.0.8",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.4.0",
     "@types/semver": "^7.8.0",
     "@wxt-dev/module-svelte": "^2.0.5",
     "globals": "^17.4.0",
@@ -37,11 +37,14 @@
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "semver": "^7.8.5",
-    "svelte": "^5.56.9",
+    "svelte": "^5.56.10",
     "svelte-check": "^4.7.6",
     "svelte-spa-router": "^4.0.2",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.0",
-    "wxt": "^0.20.19"
+    "typescript": "^7.0.2",
+    "wxt": "^0.21.4"
+  },
+  "patchedDependencies": {
+    "vite@8.0.0": "patches/vite@8.0.0.patch"
   }
 }

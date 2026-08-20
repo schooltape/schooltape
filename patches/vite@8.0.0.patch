@@ -1,0 +1,13 @@
+diff --git a/dist/node/chunks/node.js b/dist/node/chunks/node.js
+index 8901df3f57811a64059f371941ac35300326d05d..12afa0268952a3bd22b4eabebc02a56a52d192cf 100644
+--- a/dist/node/chunks/node.js
++++ b/dist/node/chunks/node.js
+@@ -20406,7 +20406,7 @@ function cssPostPlugin(config) {
+ 					return `export default ''`;
+ 				}
+ 				const inlined = inlineRE$2.test(id);
+-				const modules = cssModulesCache.get(config).get(id);
++				const modules = cssModulesCache.get(config)?.get(id);
+ 				const modulesCode = modules && !inlined && dataToEsm(modules, {
+ 					namedExports: true,
+ 					preferConst: true
