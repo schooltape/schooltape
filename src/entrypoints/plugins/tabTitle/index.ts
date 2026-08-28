@@ -49,20 +49,20 @@ export default new Plugin<Settings>(
     } else if (path.includes("/grades/")) {
       document.title = "Grades";
     } else if (path.includes("/news/")) {
-      document.title = `News (${document.getElementsByTagName("h1")[0].innerText})`;
+      document.title = `News (${document.getElementsByTagName("h1")[0]?.innerText})`;
     } else if (path.includes("/assessments/")) {
-      document.title = `Assessments - ${document.getElementsByTagName("h1")[0].innerText})`;
+      document.title = `Assessments - ${document.getElementsByTagName("h1")[0]?.innerText})`;
     } else if (path.includes("/mail/create")) {
       document.title = "Compose Email";
     } else if (path.includes("/search/user")) {
-      document.title = `Profile - ${document.getElementsByTagName("h1")[0].innerText}`;
+      document.title = `Profile - ${document.getElementsByTagName("h1")[0]?.innerText}`;
     } else if (path.includes("/learning/due/")) {
       document.title = "Due Work";
     } else if (path.includes("/homepage/")) {
       if (!(await settings.showSubjectPrefix.get()).toggle) {
-        document.title = document.getElementsByTagName("h1")[0].innerText.replace(/^.*- /, "");
+        document.title = document.getElementsByTagName("h1")[0]!.innerText.replace(/^.*- /, "");
       } else {
-        document.title = document.getElementsByTagName("h1")[0].innerText;
+        document.title = document.getElementsByTagName("h1")[0]!.innerText;
       }
     }
   },

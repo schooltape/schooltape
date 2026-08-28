@@ -23,10 +23,10 @@
       return match ? match[1] : null;
     };
     let sections = snippetURL.split("/");
-    let key = sections[sections.length - 1].split(".")[0];
+    let key = sections[sections.length - 1]!.split(".")[0]!;
 
     globalSettings.state.userSnippets[key] = {
-      author: sections[3],
+      author: sections[3]!,
       name: getMatch(data, /\/\*\s*name:\s*(.*?)\s*\*\//) || key,
       description: getMatch(data, /\/\*\s*description:\s*(.*?)\s*\*\//) || "",
       url: snippetURL,

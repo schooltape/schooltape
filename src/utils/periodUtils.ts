@@ -117,8 +117,8 @@ function extractTimes(periodTime: string): { start: Date; end: Date } {
 
     const [start, end] = times.map((time, index) => {
       const [hourStr, minuteStr] = time.split(":");
-      let hour = parseInt(hourStr);
-      const minute = parseInt(minuteStr.substring(0, 2));
+      let hour = parseInt(hourStr!);
+      const minute = parseInt(minuteStr!.substring(0, 2));
 
       const isAM = time.includes("am");
 
@@ -134,7 +134,7 @@ function extractTimes(periodTime: string): { start: Date; end: Date } {
       }
 
       return date;
-    });
+    }) as [Date, Date];
     return { start, end };
   } catch (e) {
     throw new Error("Failed to extract times", e as Error);
