@@ -4,8 +4,8 @@ import { StorageState } from "./state.svelte";
 import type * as Types from "./types";
 
 export const globalSettings = new StorageState(
-  storage.defineItem<Types.SettingsV2>("local:globalSettings", {
-    version: 2,
+  storage.defineItem<Types.SettingsV3>("local:globalSettings", {
+    version: 3,
     fallback: {
       global: true,
       plugins: true,
@@ -14,8 +14,6 @@ export const globalSettings = new StorageState(
 
       themeFlavour: "mocha",
       themeAccent: "mauve",
-
-      userSnippets: {},
     },
     migrations: {
       2: async (settings: Types.SettingsV1) => {
@@ -38,6 +36,10 @@ export const globalSettings = new StorageState(
         }
 
         return rest;
+      },
+      3: (settings: Types.SettingsV2) => {
+        const { userSnippets, ...rest } = settings;
+        return { rest };
       },
     },
   }),

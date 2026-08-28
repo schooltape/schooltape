@@ -1,7 +1,7 @@
 export type BackgroundMessage =
   | { type: "resetSettings" }
   | { type: "updateIcon" }
-  | { type: "toTab"; url: string, closeIfFound: boolean };
+  | { type: "toTab"; url: string; closeIfFound: boolean };
 
 // global
 export interface SettingsV1 {
@@ -28,6 +28,16 @@ export interface SettingsV2 {
   themeAccent: Accent;
 
   userSnippets: Record<string, UserSnippet>;
+}
+
+export interface SettingsV3 {
+  global: boolean;
+  plugins: boolean;
+  themes: boolean;
+  snippets: boolean;
+
+  themeFlavour: Flavour;
+  themeAccent: Accent;
 }
 
 export type Flavour = "latte" | "frappe" | "macchiato" | "mocha";
