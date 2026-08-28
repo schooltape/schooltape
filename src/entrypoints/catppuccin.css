@@ -512,8 +512,8 @@ article *:not(a):not(a *) {
 
 /* home -> news */
 .tabs {
-  background: hsl(var(--ctp-surface1));
-  border-bottom: none;
+  background: hsl(var(--ctp-surface1)) !important;
+  border-bottom: none !important;
 }
 .tabs dd > a,
 .tabs .tab-title > a {
@@ -696,60 +696,15 @@ input[type="text"]:focus {
 
 /* CKEditor */
 :root {
-  --sb-ck-active: hsl(var(--ctp-accent));
-  --sb-ck-active-grey: hsl(var(--ctp-base));
-  --sb-ck-active-highlight: #daedff;
-  --sb-ck-button-grid-border: #bbbbbb;
-  --sb-ck-disabled: #dddddd;
-  --sb-ck-icon-colour: rgb(51, 51, 51);
-
-  /* Overrides of default CK colours */
-  --ck-color-base-background: hsl(var(--ctp-surface0)) !important;
-  --ck-color-text: hsl(var(--ctp-text)) !important;
-
-  /* skin.css.php */
-
-  /* search box */
-  --foreground-colour: hsl(var(--ctp-surface0)) !important;
-  --alt-foreground-colour: hsl(var(--ctp-surface0)) !important;
-  --primary-text-colour: hsl(var(--ctp-text)) !important;
-  --navigation-foreground: hsl(var(--ctp-text));
-  --navigation-foreground-contrast: hsl(var(--ctp-crust));
-  --navigation-background: hsl(var(--ctp-mantle));
-  --navigation-background-contrast: hsl(var(--ctp-crust));
-  --navigation-hover: hsl(var(--ctp-surface0));
-  --navigation-hover-contrast: hsl(var(--ctp-crust));
-  --border-colour: hsl(var(--ctp-accent));
-  --off-canvas-foreground: hsl(var(--ctp-text));
-  --off-canvas-background: hsl(var(--ctp-mantle));
-  --off-canvas-hover: hsl(var(--ctp-surface0));
-  --accounts-menu-foreground: hsl(var(--ctp-text));
-  --accounts-menu-background: hsl(var(--ctp-crust));
-  --accounts-menu-hover: hsl(var(--ctp-overlay1));
-  --content-ui-foreground: hsl(var(--ctp-accent));
-  --content-ui-foreground-contrast: hsl(var(--ctp-mantle));
-  --content-ui-background: hsl(var(--ctp-surface0));
-  --content-ui-hover: hsl(var(--ctp-surface1));
-  --content-ui-selected: hsl(var(--ctp-surface0));
-  --content-ui-submit-foreground: hsl(var(--ctp-base));
-  --content-ui-submit-background: hsl(var(--ctp-accent));
-  /* highlighting */
-  --accent-foreground: hsl(var(--ctp-accent));
-  /* NOTE: THIS NEEDS TO BE ACCENT FOR HIGHLIGHTING */
-  --accent-background: hsl(var(--ctp-base));
-  /* NOTE: THIS NEEDS TO BE BASE FOR HIGHLIGHTING */
-  --logo-background: hsl(var(--ctp-mantle));
-  --body-background: hsl(var(--ctp-base));
-  --form-border-color: color: hsl(var(--ctp-accent), 0.4);
-  --form-bg-hover-color: color: hsl(var(--ctp-accent), 0.3);
-  --form-bg-hover-color-contrast: hsl(var(--ctp-text));
-  --body-foreground: hsl(var(--ctp-text));
-  --body-foreground-h1: hsl(var(--ctp-text));
-  --navigation-foreground-highlight: hsl(var(--ctp-text));
-
-  /* core.css (v24.0.7 at time of writing) */
-  --color-foreground-primary: hsl(var(--ctp-surface0)) !important;
-  --color-foreground-secondary: hsl(var(--ctp-surface1)) !important;
-  --color-text-primary: hsl(var(--ctp-text)) !important;
-  --color-text-secondary: hsl(var(--ctp-subtext0)) !important;
+  --sbx-color-foreground-primary: hsl(var(--ctp-surface0)) !important;
+  --sbx-color-foreground-primary-alt: hsl(var(--ctp-surface0)) !important;
+  --sbx-color-text-primary: hsl(var(--ctp-text)) !important;
+  --sbx-config-color-menu-foreground: hsl(var(--ctp-text));
+  --sbx-config-color-menu-background: hsl(var(--ctp-mantle)) !important;
+  --sbx-config-color-accent: hsl(var(--ctp-accent));
+  --sbx-config-color-body-background: hsl(var(--ctp-base));
+  --sbx-color-text-primary: hsl(var(--ctp-text)) !important;
+  --sbx-color-text-secondary: hsl(var(--ctp-subtext0)) !important;
+  --sbx-color-border: hsl(var(--ctp-base)) !important;
+  --sbx-color-gradient-10: hsl(var(--ctp-green)) !important;
 }

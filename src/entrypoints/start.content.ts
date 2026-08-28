@@ -66,15 +66,14 @@ export default defineContentScript({
       // @ts-expect-error unlisted CSS not a PublicPath
       injectStylesheet(browser.runtime.getURL(cssUrl), "themes");
 
-      // disable Sonar UI
-      let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
-      let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
-      if (sbxCore && sbxSkin) {
-        // it is important these are in this order
-        sbxStylesheets.push(sbxSkin, sbxCore);
-        sbxSkin.remove();
-        sbxCore.remove();
-      }
+      // let sbxCore = document.querySelector<HTMLLinkElement>('head > link[href*="sbx-core.css"]');
+      // let sbxSkin = document.querySelector<HTMLLinkElement>('head > link[href*="skin.css.php"]');
+      // if (sbxCore && sbxSkin) {
+      //   // it is important these are in this order
+      //   sbxStylesheets.push(sbxSkin, sbxCore);
+      //   sbxSkin.remove();
+      //   sbxCore.remove();
+      // }
     };
     const uninjectThemes = () => {
       uninjectStylesheet("themes");
