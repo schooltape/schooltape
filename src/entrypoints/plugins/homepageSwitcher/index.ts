@@ -40,7 +40,7 @@ export default new Plugin<Settings>(
           e.preventDefault();
 
           if (logos) {
-            const tabUrl = logos[0].href;
+            const tabUrl = logos[0]!.href;
             sendMessage({ type: "toTab", url: tabUrl, closeIfFound: closeCurrentTab.toggle });
           }
         },
