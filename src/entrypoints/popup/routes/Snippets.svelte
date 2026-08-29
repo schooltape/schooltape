@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
+  import { snippets as settings } from "@/utils/storage";
   import { snippets } from "@/entrypoints/snippets.content";
 
   import Title from "../components/Title.svelte";
@@ -7,7 +7,7 @@
 </script>
 
 <div id="card">
-  <Title title="Snippets" bind:checked={globalSettings.state.snippets} />
+  <Title title="Snippets" bind:checked={settings.state.toggle} />
 
   <div class="snippets-container w-full">
     {#each snippets as snippet (snippet.meta.id)}

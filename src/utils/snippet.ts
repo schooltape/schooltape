@@ -1,8 +1,8 @@
 import { storage } from "#imports";
-import { hasChanged, injectInlineStyles, onSchoolboxPage, uninjectInlineStyles } from ".";
+import { injectInlineStyles, onSchoolboxPage, uninjectInlineStyles } from ".";
 import { logger } from "./logger";
 import type { Toggle } from "./storage";
-import { globalSettings } from "./storage";
+import { global, snippets } from "./storage";
 import { StorageState } from "./storage/state.svelte";
 
 export class Snippet {
@@ -35,9 +35,10 @@ export class Snippet {
     if (await this.isEnabled()) this.inject();
 
     // init watchers
-    globalSettings.watch((newValue, oldValue) => {
-      if (hasChanged(newValue, oldValue, ["global", "snippets"])) this.reload();
-    });
+    // global.watch((newValue, oldValue) => {
+    //   if (hasChanged(newValue, oldValue, ["global", "snippets"])) this.reload();
+    // });
+    // TODO: this file is getting removed before next release
     this.toggle.watch(this.reload.bind(this));
   }
 
@@ -61,9 +62,6 @@ export class Snippet {
   }
 
   private async isEnabled(): Promise<boolean> {
-    const settings = await globalSettings.get();
-    const toggle = await this.toggle.get();
-
-    return settings.global && settings.snippets && toggle.toggle;
+    return (await global.get()) && (await snippets.get()) && (await this.toggle.get()).toggle;
   }
 }

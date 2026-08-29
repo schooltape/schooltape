@@ -3,7 +3,7 @@ import { browser, defineBackground, storage } from "#imports";
 import type { Settings as LogoSettings } from "@/entrypoints/plugins/changeLogo";
 import { logger } from "@/utils/logger";
 import type { BackgroundMessage } from "@/utils/storage";
-import { globalSettings, updated } from "@/utils/storage";
+import { global, updated } from "@/utils/storage";
 import semver from "semver";
 
 export default defineBackground(() => {
@@ -75,7 +75,7 @@ export default defineBackground(() => {
   });
 
   // update icon when toggle or update is changed
-  globalSettings.watch(updateIcon);
+  global.watch(updateIcon);
 
   browser.runtime.onMessage.addListener(async (msg: BackgroundMessage, sender: Browser.runtime.MessageSender) => {
     logger.info("[background] received message", { message: msg, sender });
@@ -160,7 +160,7 @@ async function updateIcon() {
   if (new Date().getMonth() === 5) {
     iconSuffix += "-ctp";
   }
-  if ((await globalSettings.get()).global === false) {
+  if ((await global.get()) === false) {
     iconSuffix += "-disabled";
   }
   if ((await updated.get()).icon === true) {
