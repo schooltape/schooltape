@@ -1,6 +1,6 @@
 <script lang="ts">
   import { flavors } from "@catppuccin/palette";
-  import { globalSettings, updated } from "@/utils/storage";
+  import { themes, updated } from "@/utils/storage";
   import { onMount } from "#imports";
 
   import Router from "svelte-spa-router";
@@ -23,7 +23,7 @@
     return `rgb(${x.r}, ${x.g}, ${x.b})`;
   }
 
-  let accentRgb = $derived(getAccentRgb(globalSettings.state.themeAccent, globalSettings.state.themeFlavour));
+  let accentRgb = $derived(getAccentRgb(themes.state.accent, themes.state.flavour));
 
   onMount(async () => {
     updated.update({ icon: false });
@@ -32,7 +32,7 @@
 </script>
 
 <main
-  class="flex flex-col items-center bg-ctp-base p-6 {globalSettings.state.themeFlavour}"
+  class="flex flex-col items-center bg-ctp-base p-6 {themes.state.flavour}"
   style="--ctp-accent: {accentRgb}">
   <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
     <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>

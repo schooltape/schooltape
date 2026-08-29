@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalSettings } from "@/utils/storage";
+  import { plugins as pluginsToggle } from "@/utils/storage";
   import { Settings } from "@lucide/svelte";
   import Title from "../components/Title.svelte";
   import Button from "../components/inputs/Button.svelte";
@@ -24,7 +24,7 @@
 </script>
 
 <div id="card">
-  <Title title="Plugins" bind:checked={globalSettings.state.plugins} />
+  <Title title="Plugins" bind:checked={pluginsToggle.state} />
 
   <div class="plugins-container">
     {#each plugins as plugin (plugin.meta.id)}

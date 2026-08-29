@@ -20,8 +20,10 @@
     "zip:firefox": "wxt zip -b firefox"
   },
   "devDependencies": {
+    "@catppuccin/codemirror": "^1.0.3",
     "@catppuccin/palette": "^1.8.0",
     "@catppuccin/tailwindcss": "1.0.0",
+    "@codemirror/lang-css": "^6.3.1",
     "@lucide/svelte": "^1.35.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/vite": "^4.3.3",
@@ -40,6 +42,7 @@
     "semver": "^7.8.5",
     "svelte": "^5.56.10",
     "svelte-check": "^4.7.6",
+    "svelte-codemirror-editor": "^2.1.0",
     "svelte-spa-router": "^5.1.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6",

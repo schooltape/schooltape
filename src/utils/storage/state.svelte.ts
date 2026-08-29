@@ -14,14 +14,6 @@ export class StorageState<T> {
   private async init() {
     this.state = (await this.storage.getValue()) ?? this.storage.fallback;
 
-    let isExternalUpdate = false;
-
-    // inbound sync: storage -> state
-    this.storage.watch((newValue) => {
-      isExternalUpdate = true; // lock outbound
-      this.state = newValue ?? this.storage.fallback;
-    });
-
     $effect.root(() => {
       let initialised = false;
 
@@ -34,12 +26,7 @@ export class StorageState<T> {
           return;
         }
 
-        if (isExternalUpdate) {
-          isExternalUpdate = false;
-          return;
-        }
-
-        // outbound sync: state -> storage
+        // state -> storage
         this.storage.setValue(currentSnapshot as T);
       });
     });

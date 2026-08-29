@@ -3,7 +3,29 @@ export type BackgroundMessage =
   | { type: "updateIcon" }
   | { type: "toTab"; url: string; closeIfFound: boolean };
 
-// global
+export interface SnippetsV1 {
+  toggle: boolean;
+  snippets: Record<
+    string,
+    {
+      toggle: boolean;
+      autoUpdate: boolean;
+      css: string;
+    }
+  >;
+}
+
+export interface ThemesV1 {
+  toggle: boolean;
+  flavour: Flavour;
+  accent: Accent;
+}
+
+export interface QuickCssV1 {
+  toggle: boolean;
+  value: string;
+}
+
 export interface SettingsV1 {
   global: boolean;
   plugins: boolean;
@@ -28,16 +50,6 @@ export interface SettingsV2 {
   themeAccent: Accent;
 
   userSnippets: Record<string, UserSnippet>;
-}
-
-export interface SettingsV3 {
-  global: boolean;
-  plugins: boolean;
-  themes: boolean;
-  snippets: boolean;
-
-  themeFlavour: Flavour;
-  themeAccent: Accent;
 }
 
 export type Flavour = "latte" | "frappe" | "macchiato" | "mocha";
@@ -70,7 +82,7 @@ export interface SchoolboxUrls {
   urls: string[];
 }
 
-export interface UserSnippet {
+interface UserSnippet {
   author: string;
   name: string;
   description: string;
