@@ -10,7 +10,7 @@ import {
   uninjectStylesheet,
 } from "@/utils";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import { global, quickCss, snippets, themes } from "@/utils/storage";
+import { global, quickCss, themes } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({
@@ -64,7 +64,7 @@ export default defineContentScript({
 
       uninjectQuickCSS();
 
-      if ((await global.get()) && (await snippets.get()).toggle && (await quickCss.get()).toggle) {
+      if ((await global.get()) && (await quickCss.get()).toggle) {
         injectQuickCss();
       }
     };
@@ -81,7 +81,6 @@ export default defineContentScript({
       });
       themes.watch(updateThemes);
       quickCss.watch(updateQuickCss);
-      snippets.watch(updateQuickCss);
 
       // update icon
       sendMessage({ type: "updateIcon" });

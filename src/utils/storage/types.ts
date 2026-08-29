@@ -3,18 +3,6 @@ export type BackgroundMessage =
   | { type: "updateIcon" }
   | { type: "toTab"; url: string; closeIfFound: boolean };
 
-export interface SnippetsV1 {
-  toggle: boolean;
-  snippets: Record<
-    string,
-    {
-      toggle: boolean;
-      autoUpdate: boolean;
-      css: string;
-    }
-  >;
-}
-
 export interface ThemesV1 {
   toggle: boolean;
   flavour: Flavour;
