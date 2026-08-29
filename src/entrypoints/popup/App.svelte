@@ -1,22 +1,10 @@
 <script lang="ts">
-  import { flavors } from "@catppuccin/palette";
-  import { themes, updated } from "@/utils/storage";
   import { onMount } from "#imports";
-
-  import Router from "svelte-spa-router";
-  import active from "svelte-spa-router/active";
-  import Home from "./routes/Home.svelte";
-  import Plugins from "./routes/Plugins.svelte";
-  import Themes from "./routes/Themes.svelte";
-  import Snippets from "./routes/Snippets.svelte";
   import { sendMessage } from "@/utils";
-
-  const routes = {
-    "/": Home,
-    "/plugins": Plugins,
-    "/themes": Themes,
-    "/snippets": Snippets,
-  };
+  import { themes, updated } from "@/utils/storage";
+  import { flavors } from "@catppuccin/palette";
+  import { Router } from "sv-router"
+  import "./router.ts";
 
   function getAccentRgb(accent: string, flavour: string) {
     let x = (flavors as any)[flavour].colors[accent].rgb;
@@ -26,7 +14,7 @@
   let accentRgb = $derived(getAccentRgb(themes.state.accent, themes.state.flavour));
 
   onMount(async () => {
-    updated.update({ icon: false });
+    await updated.update({ icon: false });
     sendMessage({ type: "updateIcon" });
   });
 </script>
@@ -34,12 +22,6 @@
 <main
   class="flex flex-col items-center bg-ctp-base p-6 {themes.state.flavour}"
   style="--ctp-accent: {accentRgb}">
-  <nav class="mb-4 flex rounded-xl px-4 py-2 text-ctp-text" id="navbar">
-    <a href="#/" class="navbutton-left" use:active={{ className: "active" }}>Settings</a>
-    <a href="#/plugins" class="navbutton-center" use:active={{ className: "active" }}>Plugins</a>
-    <a href="#/themes" class="navbutton-center" use:active={{ className: "active" }}>Themes</a>
-    <a href="#/snippets" class="navbutton-right" use:active={{ className: "active" }}>Snippets</a>
-  </nav>
-
-  <Router {routes} />
+  <Router base="#" />
 </main>
+

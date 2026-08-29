@@ -25,16 +25,6 @@ export const themes = new StorageState(
   }),
 );
 
-// TODO: planned for future deprecation (before next release)
-export const snippets = new StorageState(
-  storage.defineItem<Types.SnippetsV1>("local:snippets", {
-    fallback: {
-      toggle: true,
-      snippets: {},
-    },
-  }),
-);
-
 export const quickCSS = new StorageState(
   storage.defineItem<Types.QuickCssV1>("local:quickCSS", {
     version: 1,
@@ -112,7 +102,6 @@ storage.defineItem<null>("local:globalSettings", {
         accent: settings.themeAccent,
         flavour: settings.themeFlavour,
       });
-      snippets.update({ toggle: settings.snippets });
 
       quickCSS.set({
         toggle: settings.snippets,

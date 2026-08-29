@@ -40,10 +40,10 @@
     "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "semver": "^7.8.5",
+    "sv-router": "^0.18.1",
     "svelte": "^5.56.10",
     "svelte-check": "^4.7.6",
     "svelte-codemirror-editor": "^2.1.0",
-    "svelte-spa-router": "^5.1.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6",
     "wxt": "^0.21.4"
