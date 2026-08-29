@@ -4,6 +4,11 @@ export type BackgroundMessage =
   | { type: "toTab"; url: string; closeIfFound: boolean };
 
 // global
+export interface QuickCssV1 {
+  toggle: boolean;
+  value: string;
+}
+
 export interface SettingsV1 {
   global: boolean;
   plugins: boolean;

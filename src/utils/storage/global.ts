@@ -79,3 +79,13 @@ export const schoolboxUrls = new StorageState(
     },
   }),
 );
+      quickCSS.set({
+        toggle: settings.snippets,
+        value: Object.values(settings.userSnippets)
+          .map(
+            (snippet) => `/* ${snippet.name} */
+${snippet.toggle ? "" : "/* "}@import url("${snippet.url}");${snippet.toggle ? "" : " */"}`,
+          )
+          .join("\n\n"),
+      });
+

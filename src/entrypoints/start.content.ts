@@ -9,9 +9,7 @@ import {
   uninjectStylesheet,
 } from "@/utils";
 import { EXCLUDE_MATCHES } from "@/utils/constants";
-import type { SettingsV3 } from "@/utils/storage";
-import { globalSettings } from "@/utils/storage";
-import type { WatchCallback } from "wxt/utils/storage";
+import { global, quickCSS, snippets, themes } from "@/utils/storage";
 import cssUrl from "./catppuccin.css?url";
 
 export default defineContentScript({
@@ -73,6 +71,21 @@ export default defineContentScript({
         injectThemes();
         injectCatppuccin();
       }
+    const updateQuickCSS = async () => {
+      const injectQuickCSS = async () => injectInlineStyles((await quickCSS.get()).value, "quick-css");
+      const uninjectQuickCSS = () => uninjectInlineStyles("quick-css");
+
+      uninjectQuickCSS();
+
+      if ((await global.get()) && (await snippets.get()).toggle && (await quickCSS.get()).toggle) {
+        injectQuickCSS();
+      }
+    };
+
+      updateQuickCSS();
+        updateQuickCSS();
+      quickCSS.watch(updateQuickCSS);
+      snippets.watch(updateQuickCSS);
 
       // update icon
       sendMessage({ type: "updateIcon" });
