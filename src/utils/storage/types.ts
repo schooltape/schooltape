@@ -1,9 +1,19 @@
 export type BackgroundMessage =
   | { type: "resetSettings" }
   | { type: "updateIcon" }
-  | { type: "toTab"; url: string, closeIfFound: boolean };
+  | { type: "toTab"; url: string; closeIfFound: boolean };
 
-// global
+export interface ThemesV1 {
+  toggle: boolean;
+  flavour: Flavour;
+  accent: Accent;
+}
+
+export interface QuickCssV1 {
+  toggle: boolean;
+  value: string;
+}
+
 export interface SettingsV1 {
   global: boolean;
   plugins: boolean;
@@ -60,7 +70,7 @@ export interface SchoolboxUrls {
   urls: string[];
 }
 
-export interface UserSnippet {
+interface UserSnippet {
   author: string;
   name: string;
   description: string;
